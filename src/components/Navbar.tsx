@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ClipboardList, MessageSquare, ClipboardList as ClipboardIcon, HelpCircle } from "lucide-react";
+import { ClipboardList, HelpCircle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -12,6 +12,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { QueueIcon, AppointmentsIcon, AnalyticsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
 
 interface NavbarProps {
   onRestartTour?: () => void;
@@ -82,22 +83,22 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
           {user && (
             <>
               {isStaff && (
-                <a href="/staff" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1">
-                  <ClipboardList className="h-4 w-4" />
+                <a href="/staff" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
+                  <QueueIcon size="sm" />
                   Staff Dashboard
                 </a>
               )}
-              <a href="/appointments" className="text-sm font-medium hover:text-primary transition-colors">
+              <a href="/appointments" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
+                <AppointmentsIcon size="sm" />
                 My Appointments
               </a>
-              <a href="/chatbot" className="text-sm font-medium hover:text-primary transition-colors">
+              <a href="/chatbot" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
+                <ChatbotIcon size="sm" />
                 Health Assistant
               </a>
-              <a href="/analytics" className="text-sm font-medium hover:text-primary transition-colors">
+              <a href="/analytics" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
+                <AnalyticsIcon size="sm" />
                 Analytics
-              </a>
-              <a href="/dashboard" className="text-sm font-medium hover:text-primary transition-colors">
-                Dashboard
               </a>
             </>
           )}
@@ -129,9 +130,9 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
                 variant="ghost"
                 size="sm"
                 onClick={() => navigate("/chatbot")}
-                className="md:hidden"
+                className="md:hidden p-2"
               >
-                <MessageSquare className="h-5 w-5" />
+                <ChatbotIcon size="sm" />
               </Button>
               <Button variant="ghost" size="sm" onClick={signOut}>
                 Sign Out
