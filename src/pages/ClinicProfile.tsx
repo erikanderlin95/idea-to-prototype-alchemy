@@ -125,30 +125,36 @@ const ClinicProfile = () => {
 
           {/* Contact & Queue Info */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="p-6">
+            <Card className="p-6 border-2 border-primary/30 shadow-lg">
               <div className="flex items-center gap-4">
-                <Phone className="h-6 w-6 text-primary" />
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <Phone className="h-6 w-6 text-primary" />
+                </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Phone</p>
-                  <p className="font-semibold text-base">{clinic.phone}</p>
+                  <p className="text-sm font-semibold text-foreground mb-1">Phone</p>
+                  <p className="font-black text-lg text-foreground">{clinic.phone}</p>
                 </div>
               </div>
             </Card>
-            <Card className="p-6">
+            <Card className="p-6 border-2 border-primary/30 shadow-lg">
               <div className="flex items-center gap-4">
-                <Mail className="h-6 w-6 text-primary" />
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <Mail className="h-6 w-6 text-primary" />
+                </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="font-semibold text-base">{clinic.email || "Not available"}</p>
+                  <p className="text-sm font-semibold text-foreground mb-1">Email</p>
+                  <p className="font-black text-lg text-foreground">{clinic.email || "Not available"}</p>
                 </div>
               </div>
             </Card>
-            <Card className="p-6">
+            <Card className="p-6 border-2 border-primary/30 shadow-lg">
               <div className="flex items-center gap-4">
-                <Users className="h-6 w-6 text-primary" />
+                <div className="p-3 bg-primary/10 rounded-lg">
+                  <Users className="h-6 w-6 text-primary" />
+                </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Current Queue</p>
-                  <p className="font-semibold text-base">{queue.length} waiting</p>
+                  <p className="text-sm font-semibold text-foreground mb-1">Current Queue</p>
+                  <p className="font-black text-lg text-foreground">{queue.length} waiting</p>
                 </div>
               </div>
             </Card>
@@ -157,10 +163,10 @@ const ClinicProfile = () => {
           {/* Tabs */}
           <Tabs defaultValue="doctors" className="w-full">
             <TabsList className="grid w-full grid-cols-4 p-2 bg-muted/50">
-              <TabsTrigger value="doctors" className="text-base font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Doctors</TabsTrigger>
-              <TabsTrigger value="awards" className="text-base font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Awards</TabsTrigger>
-              <TabsTrigger value="hours" className="text-base font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Operating Hours</TabsTrigger>
-              <TabsTrigger value="reviews" className="text-base font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Reviews</TabsTrigger>
+              <TabsTrigger value="doctors" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Doctors</TabsTrigger>
+              <TabsTrigger value="awards" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Awards</TabsTrigger>
+              <TabsTrigger value="hours" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Operating Hours</TabsTrigger>
+              <TabsTrigger value="reviews" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Reviews</TabsTrigger>
             </TabsList>
 
             <TabsContent value="doctors" className="space-y-6">
