@@ -236,29 +236,29 @@ export const ClinicCard = ({
 
         {myQueueEntry ? (
           <div className="space-y-3 pt-2">
-            <div className="relative p-5 bg-gradient-to-br from-primary/10 via-accent/10 to-background rounded-xl border border-primary/20 shadow-md">
-              <div className="flex items-start justify-between mb-3">
+            <div className="relative p-5 bg-card rounded-xl border-2 border-primary/30 shadow-lg">
+              <div className="flex items-center justify-between p-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg border-2 border-primary/20 mb-3">
                 <div className="flex items-center gap-4">
-                  <div className="relative">
-                    <div className="h-16 w-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg">
-                      #{myQueueEntry.queue_number}
-                    </div>
-                    <div className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-accent" />
+                  <div className="h-16 w-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg">
+                    #{myQueueEntry.queue_number}
                   </div>
                   <div>
                     <p className="text-sm font-medium text-muted-foreground mb-1">You're in the Queue</p>
-                    <p className="text-sm font-semibold text-foreground">Position <span className="text-3xl font-black text-primary">#{myQueueEntry.queue_number}</span> <span className="text-sm font-medium text-muted-foreground">of {queueCount}</span></p>
+                    <p className="text-lg font-bold text-foreground">
+                      Position <span className="text-2xl font-black text-primary">#{myQueueEntry.queue_number}</span>
+                      <span className="text-sm font-medium text-muted-foreground ml-2">of {queueCount}</span>
+                    </p>
                   </div>
                 </div>
-                <Badge variant="secondary" className="text-xs font-semibold">
+                <Badge variant="secondary" className="text-xs font-semibold px-3 py-1">
                   Waiting
                 </Badge>
               </div>
               
-              <div className="flex items-center gap-3 mt-3 p-4 bg-accent/20 rounded-lg border-2 border-accent/40">
-                <Clock className="h-6 w-6 text-accent" strokeWidth={3} />
-                <p className="text-sm font-semibold text-foreground">
-                  Est. Wait: <span className="text-accent text-2xl font-black">{myQueueEntry.queue_number * 15} mins</span>
+              <div className="flex items-center justify-center gap-3 p-4 bg-accent/10 rounded-lg border-2 border-accent/30">
+                <Clock className="h-6 w-6 text-accent" strokeWidth={2.5} />
+                <p className="text-base font-bold text-foreground">
+                  Estimated Wait: <span className="text-accent text-xl font-black ml-1">{myQueueEntry.queue_number * 15} mins</span>
                 </p>
               </div>
             </div>
