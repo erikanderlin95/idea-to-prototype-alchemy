@@ -236,36 +236,36 @@ export const ClinicCard = ({
 
         {myQueueEntry ? (
           <div className="space-y-3 pt-2">
-            <div className="relative p-5 bg-gradient-to-br from-primary/20 via-accent/20 to-primary/10 rounded-xl border-2 border-primary shadow-lg shadow-primary/20">
+            <div className="relative p-5 bg-gradient-to-br from-primary/10 via-accent/10 to-background rounded-xl border border-primary/20 shadow-md">
               <div className="flex items-start justify-between mb-3">
                 <div className="flex items-center gap-4">
                   <div className="relative">
-                    <div className="h-16 w-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg animate-pulse">
+                    <div className="h-16 w-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg">
                       #{myQueueEntry.queue_number}
                     </div>
-                    <div className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-accent animate-ping" />
+                    <div className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-accent" />
                   </div>
                   <div>
-                    <p className="text-base font-black text-foreground mb-1">🎉 You're in the Queue!</p>
-                    <p className="text-sm font-bold text-primary">Position <span className="text-lg">#{myQueueEntry.queue_number}</span> of {queueCount}</p>
+                    <p className="text-sm font-semibold text-muted-foreground mb-1">You're in the Queue</p>
+                    <p className="text-base font-black text-foreground">Position <span className="text-xl text-primary">#{myQueueEntry.queue_number}</span> <span className="text-sm font-normal text-muted-foreground">of {queueCount}</span></p>
                   </div>
                 </div>
-                <Badge variant="secondary" className="text-xs font-bold">
+                <Badge variant="secondary" className="text-xs font-semibold">
                   Waiting
                 </Badge>
               </div>
               
-              <div className="flex items-center gap-2 mt-3 p-3 bg-background/50 rounded-lg backdrop-blur-sm">
-                <Clock className="h-4 w-4 text-accent" />
+              <div className="flex items-center gap-2 mt-3 p-3 bg-accent/10 rounded-lg border border-accent/20">
+                <Clock className="h-5 w-5 text-accent" strokeWidth={2.5} />
                 <p className="text-sm font-bold text-foreground">
-                  Est. Wait: <span className="text-accent">{myQueueEntry.queue_number * 15} mins</span>
+                  Est. Wait: <span className="text-accent text-base">{myQueueEntry.queue_number * 15} mins</span>
                 </p>
               </div>
             </div>
             
             <div className="flex gap-3">
               <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-lg shadow-emerald-500/30 border-0" 
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-md border-0 h-11" 
                 disabled={isLoading}
                 onClick={handleCheckIn}
               >
@@ -274,7 +274,7 @@ export const ClinicCard = ({
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 bg-gradient-to-r from-destructive/10 to-red-500/10 hover:from-destructive/20 hover:to-red-500/20 border-2 border-destructive text-destructive font-bold" 
+                className="flex-1 border-2 border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive font-bold h-11" 
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
