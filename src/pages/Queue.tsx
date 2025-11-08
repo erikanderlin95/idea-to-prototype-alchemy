@@ -2,13 +2,14 @@ import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useQueueNotifications } from "@/hooks/useQueueNotifications";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Clock, Users, AlertCircle, CheckCircle2, LogOut, LogIn } from "lucide-react";
+import { Clock, Users, AlertCircle, CheckCircle2, LogOut, LogIn, Bell, BellOff } from "lucide-react";
 
 export default function Queue() {
   const [searchParams] = useSearchParams();
@@ -20,6 +21,13 @@ export default function Queue() {
   const [queueData, setQueueData] = useState<any[]>([]);
   const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+
+  // Initialize queue notifications
+  const { notificationPermission, requestNotificationPermission } = useQueueNotifications({
+    clinicId,
+    userId: user?.id || null,
+    clinicName: clinic?.name,
+  });
 
   useEffect(() => {
     if (!user) {
@@ -179,28 +187,72 @@ export default function Queue() {
       <Navbar />
       
       <div className="container mx-auto px-4 py-8 max-w-4xl">
-        <Card className="mb-6">
+        <Card className="mb-6 bg-gradient-to-r from-card to-primary/5">
           <CardHeader>
-            <CardTitle>{clinic?.name}</CardTitle>
-            <CardDescription>{clinic?.address}</CardDescription>
+            <div className="flex items-start justify-between">
+              <div>
+                <CardTitle className="text-2xl">{clinic?.name}</CardTitle>
+                <CardDescription className="mt-1">{clinic?.address}</CardDescription>
+              </div>
+              {myQueueEntry && (
+                <Button
+                  variant={notificationPermission === "granted" ? "outline" : "default"}
+                  size="sm"
+                  onClick={requestNotificationPermission}
+                  className={notificationPermission === "granted" ? "border-accent text-accent" : ""}
+                >
+                  {notificationPermission === "granted" ? (
+                    <>
+                      <Bell className="h-4 w-4 mr-2" />
+                      Notifications On
+                    </>
+                  ) : (
+                    <>
+                      <BellOff className="h-4 w-4 mr-2" />
+                      Enable Alerts
+                    </>
+                  )}
+                </Button>
+              )}
+            </div>
           </CardHeader>
           <CardContent>
             <div className="grid grid-cols-2 gap-4">
-              <div className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-primary" />
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-background/50">
+                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Users className="h-6 w-6 text-primary" />
+                </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">People in Queue</p>
+                  <p className="text-xs text-muted-foreground font-medium">In Queue</p>
                   <p className="text-2xl font-bold">{queueData.length}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-2">
-                <Clock className="h-5 w-5 text-primary" />
+              <div className="flex items-center gap-3 p-4 rounded-xl bg-background/50">
+                <div className="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center">
+                  <Clock className="h-6 w-6 text-accent" />
+                </div>
                 <div>
-                  <p className="text-sm text-muted-foreground">Est. Wait Time</p>
+                  <p className="text-xs text-muted-foreground font-medium">Est. Wait</p>
                   <p className="text-2xl font-bold">{queueData.length * 15} min</p>
                 </div>
               </div>
             </div>
+            
+            {myQueueEntry && notificationPermission !== "granted" && (
+              <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-xl">
+                <div className="flex items-start gap-3">
+                  <Bell className="h-5 w-5 text-amber-600 dark:text-amber-400 mt-0.5" />
+                  <div className="flex-1">
+                    <p className="text-sm font-semibold text-amber-900 dark:text-amber-100">
+                      Enable notifications for queue updates
+                    </p>
+                    <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
+                      Get notified when it's almost your turn so you don't miss your spot
+                    </p>
+                  </div>
+                </div>
+              </div>
+            )}
           </CardContent>
         </Card>
 
