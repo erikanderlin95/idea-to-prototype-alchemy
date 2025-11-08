@@ -29,6 +29,9 @@ export const Navbar = () => {
               <a href="/chatbot" className="text-sm font-medium hover:text-primary transition-colors">
                 Health Assistant
               </a>
+              <a href="/analytics" className="text-sm font-medium hover:text-primary transition-colors">
+                Analytics
+              </a>
               <a href="/dashboard" className="text-sm font-medium hover:text-primary transition-colors">
                 Dashboard
               </a>

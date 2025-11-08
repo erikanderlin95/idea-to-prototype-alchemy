@@ -18,6 +18,8 @@ export type Database = {
         Row: {
           appointment_date: string
           appointment_time: string
+          cancellation_reason: string | null
+          cancelled_at: string | null
           clinic_id: string
           created_at: string | null
           doctor_id: string | null
@@ -25,12 +27,15 @@ export type Database = {
           notes: string | null
           reason: string | null
           status: string
+          treatment_category_id: string | null
           updated_at: string | null
           user_id: string
         }
         Insert: {
           appointment_date: string
           appointment_time: string
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
           clinic_id: string
           created_at?: string | null
           doctor_id?: string | null
@@ -38,12 +43,15 @@ export type Database = {
           notes?: string | null
           reason?: string | null
           status?: string
+          treatment_category_id?: string | null
           updated_at?: string | null
           user_id: string
         }
         Update: {
           appointment_date?: string
           appointment_time?: string
+          cancellation_reason?: string | null
+          cancelled_at?: string | null
           clinic_id?: string
           created_at?: string | null
           doctor_id?: string | null
@@ -51,6 +59,7 @@ export type Database = {
           notes?: string | null
           reason?: string | null
           status?: string
+          treatment_category_id?: string | null
           updated_at?: string | null
           user_id?: string
         }
@@ -67,6 +76,57 @@ export type Database = {
             columns: ["doctor_id"]
             isOneToOne: false
             referencedRelation: "doctors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_treatment_category_id_fkey"
+            columns: ["treatment_category_id"]
+            isOneToOne: false
+            referencedRelation: "treatment_categories"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      booking_analytics: {
+        Row: {
+          appointment_date: string
+          booking_date: string
+          booking_window_days: number | null
+          clinic_id: string
+          created_at: string | null
+          id: string
+          is_return_patient: boolean | null
+          time_slot: string | null
+          user_id: string | null
+        }
+        Insert: {
+          appointment_date: string
+          booking_date: string
+          booking_window_days?: number | null
+          clinic_id: string
+          created_at?: string | null
+          id?: string
+          is_return_patient?: boolean | null
+          time_slot?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          appointment_date?: string
+          booking_date?: string
+          booking_window_days?: number | null
+          clinic_id?: string
+          created_at?: string | null
+          id?: string
+          is_return_patient?: boolean | null
+          time_slot?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "booking_analytics_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
             referencedColumns: ["id"]
           },
         ]
@@ -142,37 +202,49 @@ export type Database = {
       }
       doctors: {
         Row: {
+          availability: Json | null
           bio: string | null
           clinic_id: string | null
           created_at: string | null
           id: string
+          is_verified: boolean | null
           languages: string[] | null
           name: string
           photo_url: string | null
           qualifications: string | null
+          registration_no: string | null
           specialty: string | null
+          years_of_practice: number | null
         }
         Insert: {
+          availability?: Json | null
           bio?: string | null
           clinic_id?: string | null
           created_at?: string | null
           id?: string
+          is_verified?: boolean | null
           languages?: string[] | null
           name: string
           photo_url?: string | null
           qualifications?: string | null
+          registration_no?: string | null
           specialty?: string | null
+          years_of_practice?: number | null
         }
         Update: {
+          availability?: Json | null
           bio?: string | null
           clinic_id?: string | null
           created_at?: string | null
           id?: string
+          is_verified?: boolean | null
           languages?: string[] | null
           name?: string
           photo_url?: string | null
           qualifications?: string | null
+          registration_no?: string | null
           specialty?: string | null
+          years_of_practice?: number | null
         }
         Relationships: [
           {
@@ -255,6 +327,53 @@ export type Database = {
           },
         ]
       }
+      queue_statistics: {
+        Row: {
+          average_wait_time: number | null
+          clinic_id: string
+          created_at: string | null
+          date: string
+          id: string
+          no_show_count: number | null
+          peak_hour: number | null
+          total_appointments: number | null
+          total_patients: number | null
+          updated_at: string | null
+        }
+        Insert: {
+          average_wait_time?: number | null
+          clinic_id: string
+          created_at?: string | null
+          date: string
+          id?: string
+          no_show_count?: number | null
+          peak_hour?: number | null
+          total_appointments?: number | null
+          total_patients?: number | null
+          updated_at?: string | null
+        }
+        Update: {
+          average_wait_time?: number | null
+          clinic_id?: string
+          created_at?: string | null
+          date?: string
+          id?: string
+          no_show_count?: number | null
+          peak_hour?: number | null
+          total_appointments?: number | null
+          total_patients?: number | null
+          updated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "queue_statistics_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reviews: {
         Row: {
           clinic_id: string
@@ -289,6 +408,27 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      treatment_categories: {
+        Row: {
+          category_type: string
+          created_at: string | null
+          id: string
+          name: string
+        }
+        Insert: {
+          category_type: string
+          created_at?: string | null
+          id?: string
+          name: string
+        }
+        Update: {
+          category_type?: string
+          created_at?: string | null
+          id?: string
+          name?: string
+        }
+        Relationships: []
       }
       user_roles: {
         Row: {

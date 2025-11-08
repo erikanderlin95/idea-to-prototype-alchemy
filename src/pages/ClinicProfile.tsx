@@ -88,6 +88,14 @@ const ClinicProfile = () => {
                 <Calendar className="mr-2 h-5 w-5" />
                 Book Appointment
               </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={() => navigate(`/queue?clinic=${id}`)}
+              >
+                <Users className="mr-2 h-5 w-5" />
+                Join Queue
+              </Button>
             </div>
 
             <p className="text-muted-foreground">{clinic.description}</p>
@@ -136,14 +144,28 @@ const ClinicProfile = () => {
               {doctors.length > 0 ? (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {doctors.map((doctor) => (
-                    <Card key={doctor.id} className="p-6">
+                    <Card 
+                      key={doctor.id} 
+                      className="p-6 cursor-pointer hover:border-primary transition-colors"
+                      onClick={() => navigate(`/doctor/${doctor.id}`)}
+                    >
                       <div className="space-y-3">
                         <div>
-                          <h3 className="text-lg font-semibold">{doctor.name}</h3>
+                          <div className="flex items-center gap-2">
+                            <h3 className="text-lg font-semibold">{doctor.name}</h3>
+                            {doctor.is_verified && (
+                              <Badge variant="default" className="text-xs">Verified</Badge>
+                            )}
+                          </div>
                           <p className="text-sm text-muted-foreground">{doctor.specialty}</p>
+                          {doctor.years_of_practice && (
+                            <p className="text-xs text-muted-foreground mt-1">
+                              {doctor.years_of_practice} years experience
+                            </p>
+                          )}
                         </div>
                         {doctor.qualifications && (
-                          <p className="text-sm">{doctor.qualifications}</p>
+                          <p className="text-sm line-clamp-2">{doctor.qualifications}</p>
                         )}
                         {doctor.languages && doctor.languages.length > 0 && (
                           <div className="flex gap-2 flex-wrap">

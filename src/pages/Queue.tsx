@@ -1,0 +1,266 @@
+import { useState, useEffect } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { Navbar } from "@/components/Navbar";
+import { Footer } from "@/components/Footer";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
+import { Clock, Users, AlertCircle, CheckCircle2 } from "lucide-react";
+
+export default function Queue() {
+  const [searchParams] = useSearchParams();
+  const clinicId = searchParams.get("clinic");
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  
+  const [clinic, setClinic] = useState<any>(null);
+  const [queueData, setQueueData] = useState<any[]>([]);
+  const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!user) {
+      navigate("/auth");
+      return;
+    }
+
+    if (!clinicId) {
+      toast.error("No clinic selected");
+      navigate("/");
+      return;
+    }
+
+    loadQueueData();
+    subscribeToQueue();
+  }, [clinicId, user]);
+
+  const loadQueueData = async () => {
+    try {
+      // Load clinic details
+      const { data: clinicData, error: clinicError } = await supabase
+        .from("clinics")
+        .select("*")
+        .eq("id", clinicId)
+        .single();
+
+      if (clinicError) throw clinicError;
+      setClinic(clinicData);
+
+      // Load queue entries
+      const { data: queueEntries, error: queueError } = await supabase
+        .from("queue_entries")
+        .select("*")
+        .eq("clinic_id", clinicId)
+        .eq("status", "waiting")
+        .order("queue_number", { ascending: true });
+
+      if (queueError) throw queueError;
+      setQueueData(queueEntries || []);
+
+      // Check if user is in queue
+      if (user) {
+        const { data: userQueue } = await supabase
+          .from("queue_entries")
+          .select("*")
+          .eq("clinic_id", clinicId)
+          .eq("user_id", user.id)
+          .eq("status", "waiting")
+          .maybeSingle();
+
+        setMyQueueEntry(userQueue);
+      }
+    } catch (error: any) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const subscribeToQueue = () => {
+    const channel = supabase
+      .channel(`queue-${clinicId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "queue_entries",
+          filter: `clinic_id=eq.${clinicId}`,
+        },
+        () => {
+          loadQueueData();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  };
+
+  const joinQueue = async () => {
+    if (!user || !clinicId) return;
+
+    try {
+      const nextQueueNumber = queueData.length > 0 
+        ? Math.max(...queueData.map(q => q.queue_number)) + 1 
+        : 1;
+
+      const { error } = await supabase.from("queue_entries").insert({
+        clinic_id: clinicId,
+        user_id: user.id,
+        queue_number: nextQueueNumber,
+        status: "waiting",
+        estimated_wait_time: queueData.length * 15, // 15 min per person estimate
+      });
+
+      if (error) throw error;
+      toast.success("Successfully joined the queue!");
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="container mx-auto px-4 py-8">
+          <p>Loading queue information...</p>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+
+  const myPosition = myQueueEntry 
+    ? queueData.findIndex(q => q.id === myQueueEntry.id) + 1 
+    : null;
+
+  return (
+    <div className="min-h-screen bg-background">
+      <Navbar />
+      
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
+        <Card className="mb-6">
+          <CardHeader>
+            <CardTitle>{clinic?.name}</CardTitle>
+            <CardDescription>{clinic?.address}</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="grid grid-cols-2 gap-4">
+              <div className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-primary" />
+                <div>
+                  <p className="text-sm text-muted-foreground">People in Queue</p>
+                  <p className="text-2xl font-bold">{queueData.length}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <Clock className="h-5 w-5 text-primary" />
+                <div>
+                  <p className="text-sm text-muted-foreground">Est. Wait Time</p>
+                  <p className="text-2xl font-bold">{queueData.length * 15} min</p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {myQueueEntry ? (
+          <Card className="mb-6 border-primary">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-primary" />
+                You're in Queue
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div>
+                  <p className="text-sm text-muted-foreground">Your Queue Number</p>
+                  <p className="text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Your Position</p>
+                  <p className="text-2xl font-semibold">
+                    {myPosition} of {queueData.length}
+                  </p>
+                </div>
+                <div>
+                  <p className="text-sm text-muted-foreground">Estimated Wait</p>
+                  <p className="text-xl font-medium">
+                    {myPosition ? (myPosition - 1) * 15 : 0} minutes
+                  </p>
+                </div>
+                <Badge variant="secondary" className="w-full justify-center py-2">
+                  We'll notify you when it's almost your turn
+                </Badge>
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
+          <Card>
+            <CardHeader>
+              <CardTitle>Join the Queue</CardTitle>
+              <CardDescription>
+                Get in line and we'll notify you when it's your turn
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Button onClick={joinQueue} className="w-full" size="lg">
+                Join Queue Now
+              </Button>
+            </CardContent>
+          </Card>
+        )}
+
+        <Card className="mt-6">
+          <CardHeader>
+            <CardTitle>Current Queue Status</CardTitle>
+            <CardDescription>Real-time queue updates</CardDescription>
+          </CardHeader>
+          <CardContent>
+            {queueData.length === 0 ? (
+              <div className="text-center py-8 text-muted-foreground">
+                <AlertCircle className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                <p>No one in queue right now</p>
+                <p className="text-sm">Be the first to join!</p>
+              </div>
+            ) : (
+              <div className="space-y-2">
+                {queueData.slice(0, 10).map((entry, index) => (
+                  <div
+                    key={entry.id}
+                    className={`flex items-center justify-between p-3 rounded-lg ${
+                      entry.id === myQueueEntry?.id
+                        ? "bg-primary/10 border-2 border-primary"
+                        : "bg-muted"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <Badge variant={index === 0 ? "default" : "secondary"}>
+                        #{entry.queue_number}
+                      </Badge>
+                      {entry.id === myQueueEntry?.id && (
+                        <span className="text-sm font-medium text-primary">You</span>
+                      )}
+                    </div>
+                    <span className="text-sm text-muted-foreground">
+                      {index === 0 ? "Now serving" : `~${index * 15} min wait`}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </div>
+
+      <Footer />
+    </div>
+  );
+}
