@@ -43,7 +43,11 @@ export default function Queue() {
     }
 
     loadQueueData();
-    subscribeToQueue();
+    const unsubscribe = subscribeToQueue();
+    
+    return () => {
+      if (unsubscribe) unsubscribe();
+    };
   }, [clinicId, user]);
 
   const loadQueueData = async () => {
@@ -69,14 +73,14 @@ export default function Queue() {
       if (queueError) throw queueError;
       setQueueData(queueEntries || []);
 
-      // Check if user is in queue
+      // Check if user is in queue (any active status)
       if (user) {
         const { data: userQueue } = await supabase
           .from("queue_entries")
           .select("*")
           .eq("clinic_id", clinicId)
           .eq("user_id", user.id)
-          .eq("status", "waiting")
+          .in("status", ["waiting", "checked_in", "serving"])
           .maybeSingle();
 
         setMyQueueEntry(userQueue);
@@ -99,8 +103,18 @@ export default function Queue() {
           table: "queue_entries",
           filter: `clinic_id=eq.${clinicId}`,
         },
-        () => {
+        (payload: any) => {
+          console.log("Queue update:", payload);
           loadQueueData();
+          
+          // Check if this update affects current user
+          if (payload.new && user && payload.new.user_id === user.id) {
+            if (payload.new.status === "served") {
+              toast.success("You've been marked as served! Thank you for visiting.");
+            } else if (payload.new.status === "serving") {
+              toast.success("You're being called! Please proceed to the counter.");
+            }
+          }
         }
       )
       .subscribe();
@@ -160,8 +174,8 @@ export default function Queue() {
         .eq("id", myQueueEntry.id);
 
       if (error) throw error;
-      toast.success("Checked in successfully! Please proceed to the counter");
-      navigate("/");
+      toast.success("Checked in successfully! Please wait to be called.");
+      loadQueueData(); // Reload to show updated status
     } catch (error: any) {
       toast.error(error.message || "Failed to check in");
     }
@@ -262,7 +276,121 @@ export default function Queue() {
           </CardContent>
         </Card>
 
-        {myQueueEntry ? (
+        {myQueueEntry?.status === "served" ? (
+          <Card className="mb-6 border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-green-700 dark:text-green-400">
+                <CheckCircle2 className="h-6 w-6" />
+                Thank You for Visiting!
+              </CardTitle>
+              <CardDescription className="text-green-600 dark:text-green-500">
+                You've been successfully served at {clinic?.name}
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="p-6 bg-white dark:bg-background rounded-xl border border-green-200 dark:border-green-800">
+                <p className="text-center text-lg mb-4">How was your experience today?</p>
+                <div className="flex gap-2 justify-center mb-4">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <button
+                      key={star}
+                      className="text-3xl hover:scale-110 transition-transform"
+                    >
+                      ⭐
+                    </button>
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground text-center">
+                  Your feedback helps us improve our service
+                </p>
+              </div>
+              <Button 
+                onClick={() => navigate("/")} 
+                className="w-full bg-gradient-to-r from-primary to-accent"
+                size="lg"
+              >
+                Back to Home
+              </Button>
+            </CardContent>
+          </Card>
+        ) : myQueueEntry?.status === "serving" ? (
+          <Card className="mb-6 border-accent bg-gradient-to-br from-accent/20 to-primary/10">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-accent">
+                <CheckCircle2 className="h-6 w-6" />
+                You're Being Served
+              </CardTitle>
+              <CardDescription>
+                Please proceed to the consultation area
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                <div className="p-6 bg-white dark:bg-background rounded-xl border-2 border-accent">
+                  <div className="text-center">
+                    <p className="text-6xl font-bold text-accent mb-2">#{myQueueEntry.queue_number}</p>
+                    <p className="text-lg font-medium">Your Queue Number</p>
+                  </div>
+                </div>
+                <div className="p-4 bg-accent/10 rounded-lg">
+                  <p className="text-sm text-center">
+                    <strong>Visit Type:</strong> {myQueueEntry.visit_type || "General Consultation"}
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ) : myQueueEntry?.status === "checked_in" ? (
+          <Card className="mb-6 border-primary bg-gradient-to-br from-primary/10 to-accent/5">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-primary">
+                <CheckCircle2 className="h-6 w-6" />
+                You're Checked In at {clinic?.name}
+              </CardTitle>
+              <CardDescription>
+                Please wait to be called for your turn
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-6">
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <p className="text-sm text-muted-foreground mb-1">Queue Number</p>
+                    <p className="text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-sm text-muted-foreground mb-1">Status</p>
+                    <Badge variant="default" className="text-base px-4 py-2">
+                      Checked In
+                    </Badge>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-sm text-muted-foreground mb-1">Est. Wait</p>
+                    <p className="text-2xl font-medium">
+                      {myPosition ? (myPosition - 1) * 15 : 0}m
+                    </p>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-primary/10 rounded-xl border border-primary/20">
+                  <p className="text-sm text-center font-medium">
+                    🔔 You'll be notified when it's your turn
+                  </p>
+                </div>
+
+                <Button 
+                  onClick={cancelQueue} 
+                  variant="outline"
+                  className="w-full border-destructive text-destructive hover:bg-destructive/10"
+                  size="lg"
+                >
+                  <LogOut className="mr-2 h-5 w-5" />
+                  Leave Queue
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ) : myQueueEntry ? (
           <Card className="mb-6 border-primary bg-gradient-to-br from-primary/5 to-accent/5">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -325,7 +453,7 @@ export default function Queue() {
                     size="lg"
                   >
                     <LogOut className="mr-2 h-5 w-5" />
-                    Cancel Queue
+                    Leave Queue
                   </Button>
                 </div>
               </div>

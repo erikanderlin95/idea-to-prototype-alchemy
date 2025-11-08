@@ -19,7 +19,9 @@ import {
   TrendingUp,
   Activity,
   PhoneCall,
-  MessageSquare
+  MessageSquare,
+  XCircle,
+  Trash2
 } from "lucide-react";
 
 interface QueueEntry {
@@ -215,6 +217,48 @@ export default function StaffDashboard() {
     }
   };
 
+  const markAsServing = async (entryId: string, queueNumber: number) => {
+    try {
+      const { error } = await supabase
+        .from("queue_entries")
+        .update({ status: "serving" })
+        .eq("id", entryId);
+
+      if (error) throw error;
+      toast.success(`Now serving patient #${queueNumber}`);
+    } catch (error: any) {
+      toast.error(error.message || "Failed to update status");
+    }
+  };
+
+  const markAsCancelled = async (entryId: string, queueNumber: number) => {
+    try {
+      const { error } = await supabase
+        .from("queue_entries")
+        .update({ status: "cancelled" })
+        .eq("id", entryId);
+
+      if (error) throw error;
+      toast.success(`Patient #${queueNumber} marked as cancelled`);
+    } catch (error: any) {
+      toast.error(error.message || "Failed to cancel");
+    }
+  };
+
+  const markAsNoShow = async (entryId: string, queueNumber: number) => {
+    try {
+      const { error } = await supabase
+        .from("queue_entries")
+        .delete()
+        .eq("id", entryId);
+
+      if (error) throw error;
+      toast.success(`Patient #${queueNumber} marked as no-show and removed`);
+    } catch (error: any) {
+      toast.error(error.message || "Failed to mark as no-show");
+    }
+  };
+
   const sendCustomNotification = async () => {
     if (!selectedPatient || !notificationMessage.trim()) {
       toast.error("Please enter a message");
@@ -373,6 +417,30 @@ export default function StaffDashboard() {
                       </div>
 
                       <div className="flex items-center gap-2">
+                        {index === 0 && entry.status === "waiting" && (
+                          <Button
+                            onClick={() => markAsServing(entry.id, entry.queue_number)}
+                            variant="default"
+                            size="sm"
+                            className="bg-accent hover:bg-accent/90"
+                          >
+                            <PhoneCall className="h-4 w-4 mr-2" />
+                            Call Patient
+                          </Button>
+                        )}
+
+                        {(entry.status === "checked_in" || entry.status === "serving") && (
+                          <Button
+                            onClick={() => markAsServed(entry.id, entry.queue_number)}
+                            variant="outline"
+                            size="sm"
+                            className="border-green-500 text-green-600 hover:bg-green-50 dark:hover:bg-green-950"
+                          >
+                            <CheckCircle2 className="h-4 w-4 mr-2" />
+                            Mark Served
+                          </Button>
+                        )}
+
                         <Dialog>
                           <DialogTrigger asChild>
                             <Button
@@ -410,13 +478,21 @@ export default function StaffDashboard() {
                         </Dialog>
 
                         <Button
-                          onClick={() => markAsServed(entry.id, entry.queue_number)}
+                          onClick={() => markAsCancelled(entry.id, entry.queue_number)}
                           variant="outline"
                           size="sm"
-                          className="border-green-500 text-green-600 hover:bg-green-50 dark:hover:bg-green-950"
+                          className="border-orange-500 text-orange-600 hover:bg-orange-50 dark:hover:bg-orange-950"
                         >
-                          <CheckCircle2 className="h-4 w-4 mr-2" />
-                          Mark Served
+                          <XCircle className="h-4 w-4" />
+                        </Button>
+
+                        <Button
+                          onClick={() => markAsNoShow(entry.id, entry.queue_number)}
+                          variant="outline"
+                          size="sm"
+                          className="border-red-500 text-red-600 hover:bg-red-50 dark:hover:bg-red-950"
+                        >
+                          <Trash2 className="h-4 w-4" />
                         </Button>
                       </div>
                     </div>
