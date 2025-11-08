@@ -296,6 +296,7 @@ export type Database = {
           status: string
           updated_at: string | null
           user_id: string | null
+          visit_type: string | null
         }
         Insert: {
           clinic_id: string
@@ -306,6 +307,7 @@ export type Database = {
           status?: string
           updated_at?: string | null
           user_id?: string | null
+          visit_type?: string | null
         }
         Update: {
           clinic_id?: string
@@ -316,6 +318,7 @@ export type Database = {
           status?: string
           updated_at?: string | null
           user_id?: string | null
+          visit_type?: string | null
         }
         Relationships: [
           {

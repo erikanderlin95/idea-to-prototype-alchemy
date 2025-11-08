@@ -29,6 +29,10 @@ interface QueueEntry {
   estimated_wait_time: number;
   created_at: string;
   user_id: string;
+  visit_type?: string;
+  profiles?: {
+    full_name: string;
+  };
 }
 
 interface QueueStats {
@@ -88,10 +92,10 @@ export default function StaffDashboard() {
 
   const loadQueueData = async (clinicId: string) => {
     try {
-      // Load queue entries
+      // Load queue entries with patient names
       const { data: queueEntries, error: queueError } = await supabase
         .from("queue_entries")
-        .select("*")
+        .select("*, profiles(full_name)")
         .eq("clinic_id", clinicId)
         .eq("status", "waiting")
         .order("queue_number", { ascending: true });
@@ -340,11 +344,14 @@ export default function StaffDashboard() {
                         >
                           #{entry.queue_number}
                         </Badge>
-                        <div>
-                          <p className="font-semibold">
-                            {index === 0 ? "Next Patient" : `Position ${index + 1}`}
+                        <div className="flex-1">
+                          <p className="font-semibold text-base">
+                            {entry.profiles?.full_name || "Patient"}
                           </p>
                           <p className="text-sm text-muted-foreground">
+                            {entry.visit_type || "General Consultation"}
+                          </p>
+                          <p className="text-xs text-muted-foreground mt-1">
                             Waiting: {Math.floor((Date.now() - new Date(entry.created_at).getTime()) / 60000)} minutes
                           </p>
                         </div>

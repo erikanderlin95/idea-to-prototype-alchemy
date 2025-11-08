@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { MapPin, Clock, Users, Star, CheckCircle, XCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -34,6 +35,7 @@ export const ClinicCard = ({
   const [isJoining, setIsJoining] = useState(false);
   const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [visitType, setVisitType] = useState("General Consultation");
 
   useEffect(() => {
     if (user && id) {
@@ -168,6 +170,7 @@ export const ClinicCard = ({
         queue_number: nextQueueNumber,
         status: "waiting",
         estimated_wait_time: queueCount * 15,
+        visit_type: visitType,
       });
 
       if (error) throw error;
@@ -316,14 +319,14 @@ export const ClinicCard = ({
             </div>
           </div>
         ) : (
-          <div className="space-y-3 pt-2">
+            <div className="space-y-3 pt-2">
             <div className="p-5 rounded-xl border-2 shadow-lg"
               style={{ 
                 background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.05))',
                 borderColor: 'hsl(var(--ai-purple)/0.4)'
               }}
             >
-              <div className="flex items-center gap-4 mb-3">
+              <div className="flex items-center gap-4 mb-4">
                 <div className="h-14 w-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/40">
                   <Users className="h-7 w-7 text-primary-foreground" strokeWidth={3} />
                 </div>
@@ -331,6 +334,22 @@ export const ClinicCard = ({
                   <p className="text-lg font-semibold text-foreground">Ready to Skip the Wait?</p>
                   <p className="text-base font-bold text-foreground/80">Join the virtual queue now</p>
                 </div>
+              </div>
+              
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Visit Type</label>
+                <Select value={visitType} onValueChange={setVisitType}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="General Consultation">General Consultation</SelectItem>
+                    <SelectItem value="Follow-up">Follow-up</SelectItem>
+                    <SelectItem value="Emergency">Emergency</SelectItem>
+                    <SelectItem value="Vaccination">Vaccination</SelectItem>
+                    <SelectItem value="Health Screening">Health Screening</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
             
