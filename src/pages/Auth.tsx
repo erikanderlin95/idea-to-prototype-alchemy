@@ -104,7 +104,7 @@ const Auth = () => {
             <span className="text-3xl font-poppins font-bold tracking-tight leading-none bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text">
               Clynic<span className="text-primary">Q</span>
             </span>
-            <span className="text-xs font-semibold text-muted-foreground tracking-wider uppercase">Digital Queue System</span>
+            <span className="text-xs font-semibold text-muted-foreground tracking-wider uppercase">Queue • Book • Connect</span>
           </div>
         </div>
 
