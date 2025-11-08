@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { MyClynicQStaffPanel } from "@/components/MyClynicQStaffPanel";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -190,6 +191,7 @@ const Dashboard = () => {
             <TabsList>
               <TabsTrigger value="appointments">Appointments</TabsTrigger>
               <TabsTrigger value="queue">Queue</TabsTrigger>
+              <TabsTrigger value="plugins">Plugins</TabsTrigger>
             </TabsList>
 
             <TabsContent value="appointments" className="space-y-4">
@@ -270,6 +272,10 @@ const Dashboard = () => {
                   No one in queue
                 </Card>
               )}
+            </TabsContent>
+
+            <TabsContent value="plugins" className="space-y-4">
+              <MyClynicQStaffPanel />
             </TabsContent>
           </Tabs>
         </div>

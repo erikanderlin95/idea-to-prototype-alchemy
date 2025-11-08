@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Calendar, Bell, BarChart3, MessageCircle, Zap } from "lucide-react";
+import { MessageSquare, Calendar, Bell, CheckCircle, MessageCircle } from "lucide-react";
 
 export const MyClynicQPlugin = () => {
   return (
@@ -9,73 +9,67 @@ export const MyClynicQPlugin = () => {
       <div className="container px-4 md:px-6">
         <div className="space-y-10">
           <div className="text-center space-y-4">
-            <Badge variant="secondary" className="mb-2">Phase 2 Plugin</Badge>
+            <Badge variant="secondary" className="mb-2">Coming Soon</Badge>
             <h2 className="text-3xl md:text-5xl font-bold">MyClynicQ Chatbot</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Automated patient engagement through WhatsApp, SMS, and embedded chat
+              Never miss an appointment with automated reminders and instant support on WhatsApp
             </p>
           </div>
 
-          <div className="max-w-5xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <Card className="p-8 md:p-12 bg-gradient-to-br from-background to-secondary/30 border-2 border-primary/20">
               <div className="grid md:grid-cols-2 gap-8">
-                {/* Left side - Features */}
+                {/* Left side - Benefits */}
                 <div className="space-y-6">
                   <div className="flex items-center gap-3">
-                    <div className="h-12 w-12 rounded-full bg-primary/10 flex items-center justify-center">
-                      <MessageCircle className="h-6 w-6 text-primary" />
+                    <div className="h-12 w-12 rounded-full bg-[#25D366]/10 flex items-center justify-center">
+                      <MessageCircle className="h-6 w-6 text-[#25D366]" />
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold">Conversational AI</h3>
-                      <p className="text-sm text-muted-foreground">Powered by intelligent automation</p>
+                      <h3 className="text-2xl font-bold">Chat on WhatsApp</h3>
+                      <p className="text-sm text-muted-foreground">Your health assistant, always available</p>
                     </div>
                   </div>
 
                   <div className="space-y-4">
-                    <FeatureItem
+                    <BenefitItem
                       icon={<Calendar className="h-5 w-5" />}
-                      title="Smart Booking"
-                      description="Handle appointments, rescheduling, and FAQs through chat"
+                      title="Easy Booking"
+                      description="Book, reschedule, or cancel appointments via chat"
                     />
-                    <FeatureItem
+                    <BenefitItem
                       icon={<Bell className="h-5 w-5" />}
-                      title="Automated Reminders"
-                      description="Send appointment reminders and follow-up surveys"
+                      title="Smart Reminders"
+                      description="Get timely reminders so you never miss a visit"
                     />
-                    <FeatureItem
+                    <BenefitItem
                       icon={<MessageSquare className="h-5 w-5" />}
-                      title="24/7 Support"
-                      description="Instant responses to patient queries anytime"
+                      title="Instant Answers"
+                      description="Ask questions about your appointment or clinic anytime"
                     />
-                    <FeatureItem
-                      icon={<BarChart3 className="h-5 w-5" />}
-                      title="Queue Status"
-                      description="Real-time queue updates via WhatsApp"
+                    <BenefitItem
+                      icon={<CheckCircle className="h-5 w-5" />}
+                      title="Queue Updates"
+                      description="Know your queue position without calling the clinic"
                     />
                   </div>
                 </div>
 
-                {/* Right side - Integration Info */}
+                {/* Right side - How it works */}
                 <div className="space-y-6">
                   <div className="p-6 rounded-lg bg-background/80 border border-border space-y-4">
-                    <div className="flex items-center justify-between">
-                      <h4 className="font-semibold text-lg">Integration Points</h4>
-                      <Badge variant="outline" className="bg-accent/10">
-                        <Zap className="h-3 w-3 mr-1" />
-                        Seamless
-                      </Badge>
-                    </div>
+                    <h4 className="font-semibold text-lg">How It Works</h4>
                     
-                    <div className="space-y-3 text-sm">
-                      <IntegrationPoint module="Queue Module" status="Connected" />
-                      <IntegrationPoint module="Booking Module" status="Connected" />
-                      <IntegrationPoint module="Connect Module" status="Connected" />
-                      <IntegrationPoint module="Appointment Sync" status="Via Webhooks" />
+                    <div className="space-y-4">
+                      <StepItem number="1" text="Book an appointment on ClynicQ" />
+                      <StepItem number="2" text="Get a confirmation message on WhatsApp" />
+                      <StepItem number="3" text="Receive reminders before your visit" />
+                      <StepItem number="4" text="Chat with MyClynicQ anytime for help" />
                     </div>
                   </div>
 
                   <div className="p-6 rounded-lg bg-primary/5 border border-primary/20 space-y-3">
-                    <h4 className="font-semibold">Channel Support</h4>
+                    <h4 className="font-semibold">Available Channels</h4>
                     <div className="flex flex-wrap gap-2">
                       <Badge variant="secondary" className="bg-[#25D366]/10 text-[#25D366] border-[#25D366]/20">
                         <MessageCircle className="h-3 w-3 mr-1" />
@@ -84,13 +78,6 @@ export const MyClynicQPlugin = () => {
                       <Badge variant="secondary">SMS</Badge>
                       <Badge variant="secondary">Web Chat</Badge>
                     </div>
-                  </div>
-
-                  <div className="p-6 rounded-lg bg-muted/50 border border-border">
-                    <h4 className="font-semibold mb-2">Data Compliance</h4>
-                    <p className="text-sm text-muted-foreground">
-                      PDPA-compliant storage: name, mobile, visit type, and appointment date only
-                    </p>
                   </div>
 
                   <Button className="w-full" variant="outline" disabled>
@@ -104,8 +91,7 @@ export const MyClynicQPlugin = () => {
 
           <div className="text-center max-w-2xl mx-auto">
             <p className="text-sm text-muted-foreground">
-              MyClynicQ extends ClynicQ's patient engagement capabilities through conversational AI, 
-              enabling automated post-booking care and reducing no-shows through smart reminders.
+              Stay connected with your healthcare journey. MyClynicQ keeps you informed and makes managing appointments effortless.
             </p>
           </div>
         </div>
@@ -114,7 +100,7 @@ export const MyClynicQPlugin = () => {
   );
 };
 
-const FeatureItem = ({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) => (
+const BenefitItem = ({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) => (
   <div className="flex gap-3">
     <div className="h-8 w-8 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
       {icon}
@@ -126,9 +112,11 @@ const FeatureItem = ({ icon, title, description }: { icon: React.ReactNode; titl
   </div>
 );
 
-const IntegrationPoint = ({ module, status }: { module: string; status: string }) => (
-  <div className="flex justify-between items-center">
-    <span className="text-muted-foreground">{module}</span>
-    <span className="text-xs font-medium text-primary">{status}</span>
+const StepItem = ({ number, text }: { number: string; text: string }) => (
+  <div className="flex items-center gap-3">
+    <div className="h-6 w-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0">
+      {number}
+    </div>
+    <p className="text-sm">{text}</p>
   </div>
 );
