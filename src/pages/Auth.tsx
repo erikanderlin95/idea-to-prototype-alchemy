@@ -82,7 +82,13 @@ const Auth = () => {
           <div className="relative h-12 w-12 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 blur-md group-hover:blur-lg transition-all" />
             <Heart className="h-7 w-7 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" fill="currentColor" />
-            <div className="absolute -top-1 -right-1 h-3.5 w-3.5 rounded-full bg-accent animate-pulse shadow-lg" />
+            {/* Queue Indicator Badge */}
+            <div className="absolute -top-2 -right-2 z-20">
+              <div className="relative flex items-center justify-center h-6 w-6 rounded-full bg-accent shadow-lg animate-pulse">
+                <span className="text-xs font-bold text-accent-foreground">Q</span>
+                <div className="absolute inset-0 rounded-full bg-accent/40 animate-ping" />
+              </div>
+            </div>
           </div>
           <div className="flex flex-col">
             <span className="text-3xl font-poppins font-bold tracking-tight leading-none bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text">

@@ -37,7 +37,13 @@ export const Navbar = () => {
           <div className="relative h-11 w-11 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 blur-md group-hover:blur-lg transition-all" />
             <Heart className="h-6 w-6 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" fill="currentColor" />
-            <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-accent animate-pulse shadow-md" />
+            {/* Queue Indicator Badge */}
+            <div className="absolute -top-1.5 -right-1.5 z-20">
+              <div className="relative flex items-center justify-center h-5 w-5 rounded-full bg-accent shadow-lg animate-pulse">
+                <span className="text-[10px] font-bold text-accent-foreground">Q</span>
+                <div className="absolute inset-0 rounded-full bg-accent/40 animate-ping" />
+              </div>
+            </div>
           </div>
           <div className="flex flex-col -space-y-1">
             <span className="text-2xl font-poppins font-bold tracking-tight leading-none">
