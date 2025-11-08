@@ -16,35 +16,21 @@ const tourSteps: TourStep[] = [
   {
     target: ".onboarding-logo",
     title: "Welcome to ClynicQ! 👋",
-    description: "Your digital queue management system for clinics. The clipboard icon represents our queue system, the 'Q' badge shows active queues, and the medical cross indicates healthcare services!",
+    description: "Queue • Book • Connect with healthcare services across Singapore.",
     position: "bottom",
     spotlight: true,
   },
   {
     target: ".onboarding-clinics",
-    title: "Browse Clinics 🏥",
-    description: "Find GP, TCM, and wellness clinics near you. See real-time queue information and make informed decisions about when to visit.",
-    position: "top",
-    spotlight: true,
-  },
-  {
-    target: ".onboarding-join-queue",
-    title: "Join Virtual Queues 🎫",
-    description: "Skip the physical wait! Join queues remotely and get notified when it's almost your turn. No more sitting in crowded waiting rooms.",
-    position: "top",
-    spotlight: true,
-  },
-  {
-    target: ".onboarding-stats",
-    title: "Real-Time Updates ⚡",
-    description: "Track live queue positions, estimated wait times, and clinic availability. Everything updates in real-time so you're always informed.",
+    title: "Browse & Join Queues 🏥",
+    description: "Find clinics, check real-time queues, and join virtually from anywhere.",
     position: "top",
     spotlight: true,
   },
   {
     target: ".onboarding-nav",
-    title: "Quick Navigation 🧭",
-    description: "Access your appointments, health assistant chatbot, analytics, and more from the navigation menu.",
+    title: "Quick Access 🧭",
+    description: "Use the menu to access appointments, health assistant, and analytics.",
     position: "bottom",
     spotlight: true,
   },
@@ -117,8 +103,8 @@ export const OnboardingTour = ({ onComplete }: OnboardingTourProps) => {
 
   // Calculate tooltip position
   const getTooltipPosition = () => {
-    const tooltipWidth = 320;
-    const tooltipOffset = 20;
+    const tooltipWidth = 280;
+    const tooltipOffset = 16;
     
     switch (step.position) {
       case "bottom":
@@ -151,7 +137,7 @@ export const OnboardingTour = ({ onComplete }: OnboardingTourProps) => {
   return (
     <div className="fixed inset-0 z-[100] animate-fade-in">
       {/* Overlay with spotlight effect */}
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm transition-all duration-300">
+      <div className="absolute inset-0 bg-background/50 backdrop-blur-[2px] transition-all duration-300">
         {step.spotlight && (
           <>
             {/* Spotlight circle */}
@@ -162,8 +148,8 @@ export const OnboardingTour = ({ onComplete }: OnboardingTourProps) => {
                 left: targetRect.left - spotlightPadding,
                 width: targetRect.width + spotlightPadding * 2,
                 height: targetRect.height + spotlightPadding * 2,
-                borderRadius: "1rem",
-                boxShadow: "0 0 0 9999px rgba(0, 0, 0, 0.7), 0 0 40px rgba(79, 209, 197, 0.4) inset",
+                borderRadius: "0.75rem",
+                boxShadow: "0 0 0 9999px rgba(0, 0, 0, 0.5), 0 0 30px rgba(79, 209, 197, 0.3) inset",
                 pointerEvents: "none",
               }}
             />
@@ -171,12 +157,12 @@ export const OnboardingTour = ({ onComplete }: OnboardingTourProps) => {
             <div
               className="absolute transition-all duration-500 ease-out animate-pulse"
               style={{
-                top: targetRect.top - spotlightPadding - 4,
-                left: targetRect.left - spotlightPadding - 4,
-                width: targetRect.width + spotlightPadding * 2 + 8,
-                height: targetRect.height + spotlightPadding * 2 + 8,
-                borderRadius: "1rem",
-                border: "3px solid hsl(var(--accent))",
+                top: targetRect.top - spotlightPadding - 3,
+                left: targetRect.left - spotlightPadding - 3,
+                width: targetRect.width + spotlightPadding * 2 + 6,
+                height: targetRect.height + spotlightPadding * 2 + 6,
+                borderRadius: "0.75rem",
+                border: "2px solid hsl(var(--primary))",
                 pointerEvents: "none",
               }}
             />
@@ -187,7 +173,7 @@ export const OnboardingTour = ({ onComplete }: OnboardingTourProps) => {
       {/* Tooltip Card */}
       <Card
         className={cn(
-          "fixed w-80 shadow-2xl border-2 animate-scale-in",
+          "fixed w-72 shadow-2xl border-2 animate-scale-in",
           "bg-card/95 backdrop-blur-md"
         )}
         style={{
@@ -195,26 +181,26 @@ export const OnboardingTour = ({ onComplete }: OnboardingTourProps) => {
           maxWidth: "calc(100vw - 32px)",
         }}
       >
-        <CardHeader className="pb-3">
+        <CardHeader className="pb-2">
           <div className="flex items-start justify-between gap-2">
             <div className="flex-1">
-              <CardTitle className="text-lg">{step.title}</CardTitle>
-              <CardDescription className="mt-1.5 text-sm leading-relaxed">
+              <CardTitle className="text-base">{step.title}</CardTitle>
+              <CardDescription className="mt-1 text-xs leading-relaxed">
                 {step.description}
               </CardDescription>
             </div>
             <Button
               variant="ghost"
               size="icon"
-              className="h-6 w-6 -mt-1 -mr-1"
+              className="h-5 w-5 -mt-1 -mr-1"
               onClick={handleSkip}
             >
-              <X className="h-4 w-4" />
+              <X className="h-3 w-3" />
             </Button>
           </div>
         </CardHeader>
         
-        <CardContent className="space-y-3">
+        <CardContent className="space-y-2 pt-2">
           {/* Progress dots */}
           <div className="flex items-center justify-center gap-1.5">
             {tourSteps.map((_, index) => (
@@ -223,7 +209,7 @@ export const OnboardingTour = ({ onComplete }: OnboardingTourProps) => {
                 className={cn(
                   "h-1.5 rounded-full transition-all duration-300",
                   index === currentStep
-                    ? "w-8 bg-primary"
+                    ? "w-6 bg-primary"
                     : index < currentStep
                     ? "w-1.5 bg-primary/50"
                     : "w-1.5 bg-muted"
@@ -234,38 +220,39 @@ export const OnboardingTour = ({ onComplete }: OnboardingTourProps) => {
 
           {/* Navigation buttons */}
           <div className="flex items-center gap-2">
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={handlePrevious}
-              disabled={currentStep === 0}
-              className="flex-1"
-            >
-              <ChevronLeft className="h-4 w-4 mr-1" />
-              Back
-            </Button>
+            {currentStep > 0 && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={handlePrevious}
+                className="flex-1 h-8 text-xs"
+              >
+                <ChevronLeft className="h-3 w-3 mr-1" />
+                Back
+              </Button>
+            )}
             
             <Button
               variant="ghost"
               size="sm"
               onClick={handleSkip}
-              className="flex-1"
+              className="flex-1 h-8 text-xs"
             >
-              Skip Tour
+              Skip
             </Button>
 
             <Button
               size="sm"
               onClick={handleNext}
-              className="flex-1 bg-primary hover:bg-primary/90"
+              className="flex-1 h-8 text-xs bg-primary hover:bg-primary/90"
             >
-              {currentStep === tourSteps.length - 1 ? "Finish" : "Next"}
-              <ChevronRight className="h-4 w-4 ml-1" />
+              {currentStep === tourSteps.length - 1 ? "Got it!" : "Next"}
+              <ChevronRight className="h-3 w-3 ml-1" />
             </Button>
           </div>
 
-          <p className="text-xs text-center text-muted-foreground">
-            Step {currentStep + 1} of {tourSteps.length}
+          <p className="text-[10px] text-center text-muted-foreground pt-1">
+            {currentStep + 1} of {tourSteps.length}
           </p>
         </CardContent>
       </Card>
