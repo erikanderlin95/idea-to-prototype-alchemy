@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Search, Clock, Calendar, Users } from "lucide-react";
+import { Search } from "lucide-react";
+import { QueueIcon, AppointmentsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
 
 export const Hero = () => {
   return (
@@ -12,9 +13,8 @@ export const Hero = () => {
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
           <div className="space-y-6 animate-fade-in">
             <div className="inline-block">
-              <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm">
-                <Clock className="mr-2 h-4 w-4 inline" />
-                Real-time Queue Updates
+              <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-semibold">
+                Queue • Book • Connect
               </Badge>
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
@@ -24,7 +24,7 @@ export const Hero = () => {
               </span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Join virtual queues, track wait times, and book appointments across GP, TCM, and wellness centers in Singapore
+              Join virtual queues, book appointments instantly, and connect with healthcare professionals across Singapore
             </p>
           </div>
 
@@ -47,34 +47,21 @@ export const Hero = () => {
             </Button>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full max-w-3xl mt-12 pt-12 border-t border-border/50">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-3xl mt-12 pt-12 border-t border-border/50">
             <div className="flex flex-col items-center gap-3 group cursor-default">
-              <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Clock className="h-7 w-7 text-primary" />
-              </div>
-              <p className="text-sm font-semibold">Real-time Queues</p>
-              <p className="text-xs text-muted-foreground">Live updates</p>
+              <QueueIcon size="md" className="group-hover:scale-110 transition-transform" />
+              <p className="text-base font-bold">Queue</p>
+              <p className="text-sm text-muted-foreground text-center">Real-time virtual queues & wait times</p>
             </div>
             <div className="flex flex-col items-center gap-3 group cursor-default">
-              <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-accent/20 to-accent/5 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Calendar className="h-7 w-7 text-accent" />
-              </div>
-              <p className="text-sm font-semibold">Easy Booking</p>
-              <p className="text-xs text-muted-foreground">Instant appointments</p>
+              <AppointmentsIcon size="md" className="group-hover:scale-110 transition-transform" />
+              <p className="text-base font-bold">Book</p>
+              <p className="text-sm text-muted-foreground text-center">Instant appointments across all clinics</p>
             </div>
             <div className="flex flex-col items-center gap-3 group cursor-default">
-              <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Users className="h-7 w-7 text-primary" />
-              </div>
-              <p className="text-sm font-semibold">Multi-sector</p>
-              <p className="text-xs text-muted-foreground">GP, TCM & Wellness</p>
-            </div>
-            <div className="flex flex-col items-center gap-3 group cursor-default">
-              <div className="h-14 w-14 rounded-2xl bg-gradient-to-br from-accent/20 to-primary/5 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <Search className="h-7 w-7 text-accent" />
-              </div>
-              <p className="text-sm font-semibold">Find Doctors</p>
-              <p className="text-xs text-muted-foreground">Verified profiles</p>
+              <ChatbotIcon size="md" className="group-hover:scale-110 transition-transform" />
+              <p className="text-base font-bold">Connect</p>
+              <p className="text-sm text-muted-foreground text-center">AI health assistant & support</p>
             </div>
           </div>
         </div>
