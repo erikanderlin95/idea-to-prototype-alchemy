@@ -243,7 +243,7 @@ export const ClinicCard = ({
         </div>
 
         {myQueueEntry ? (
-          <div className="space-y-3 pt-2">
+          <div className="space-y-3 pt-2" onClick={(e) => e.stopPropagation()}>
             <div className="relative p-5 bg-card rounded-xl border-2 shadow-lg"
               style={{ borderColor: 'hsl(var(--ai-purple)/0.4)' }}
             >
@@ -325,6 +325,7 @@ export const ClinicCard = ({
                 background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.05))',
                 borderColor: 'hsl(var(--ai-purple)/0.4)'
               }}
+              onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className="h-14 w-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/40">
@@ -336,7 +337,7 @@ export const ClinicCard = ({
                 </div>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
                 <label className="text-sm font-medium text-foreground">Visit Type</label>
                 <Select value={visitType} onValueChange={setVisitType}>
                   <SelectTrigger className="w-full">
