@@ -285,20 +285,20 @@ export const ClinicCard = ({
             
             <div className="flex gap-3">
               <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-md border-0 h-14 text-base"
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-black shadow-md border-0 h-16 text-lg" 
                 disabled={isLoading}
                 onClick={handleCheckIn}
               >
-                <CheckCircle className="mr-2 h-5 w-5" strokeWidth={2.5} />
+                <CheckCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
                 Check In
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 border-2 border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive font-bold h-14 text-base"
+                className="flex-1 border-2 border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive font-black h-16 text-lg" 
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
-                <XCircle className="mr-2 h-5 w-5" strokeWidth={2.5} />
+                <XCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
                 Leave Queue
               </Button>
             </div>
