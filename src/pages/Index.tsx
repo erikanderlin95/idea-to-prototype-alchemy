@@ -4,7 +4,7 @@ import { Features } from "@/components/Features";
 import { MarketplaceSection } from "@/components/MarketplaceSection";
 import { Footer } from "@/components/Footer";
 import { OnboardingTour } from "@/components/OnboardingTour";
-import { VirtualGuide } from "@/components/VirtualGuide";
+import { QuickGuide } from "@/components/QuickGuide";
 import { useOnboarding } from "@/hooks/useOnboarding";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -25,8 +25,8 @@ const Index = () => {
       {/* Onboarding Tour */}
       {showOnboarding && <OnboardingTour onComplete={completeOnboarding} />}
       
-      {/* Virtual Guide - Only show when logged in */}
-      {user && <VirtualGuide />}
+      {/* Quick Guide - Only show when logged in */}
+      {user && <QuickGuide />}
     </div>
   );
 };
