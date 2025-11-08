@@ -45,12 +45,12 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-        <div className="flex items-center gap-3 cursor-pointer group onboarding-logo" onClick={() => navigate("/")}>
-          <div className="relative h-11 w-11 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
+      <div className="container flex h-16 items-center justify-between gap-4 px-4 md:px-6">
+        <div className="flex items-center gap-2 md:gap-3 cursor-pointer group onboarding-logo shrink-0" onClick={() => navigate("/")}>
+          <div className="relative h-10 w-10 md:h-11 md:w-11 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 blur-md group-hover:blur-lg transition-all" />
             {/* Clinic Queue Icon - ClipboardList representing digital queue */}
-            <ClipboardList className="h-6 w-6 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" />
+            <ClipboardList className="h-5 w-5 md:h-6 md:w-6 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" />
             {/* Queue Indicator Badge - Active queue count */}
             <div className="absolute -top-1.5 -right-1.5 z-20">
               <div className="relative flex items-center justify-center h-5 w-5 rounded-full bg-accent shadow-lg animate-pulse">
@@ -68,48 +68,48 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col -space-y-1">
-            <span className="text-2xl font-poppins font-bold tracking-tight leading-none">
+          <div className="flex flex-col -space-y-1 min-w-0">
+            <span className="text-xl md:text-2xl font-poppins font-bold tracking-tight leading-none whitespace-nowrap">
               Clynic<span className="text-primary">Q</span>
             </span>
-            <span className="text-[9px] font-semibold text-muted-foreground tracking-widest uppercase">Digital Queue System</span>
+            <span className="text-[8px] md:text-[9px] font-semibold text-muted-foreground tracking-widest uppercase whitespace-nowrap">Digital Queue System</span>
           </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-6 onboarding-nav">
-          <a href="/" className="text-sm font-medium hover:text-primary transition-colors">
+        <div className="hidden lg:flex items-center gap-4 xl:gap-6 onboarding-nav">
+          <a href="/" className="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
             Find Clinics
           </a>
           {user && (
             <>
               {isStaff && (
-                <a href="/staff" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
+                <a href="/staff" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
                   <QueueIcon size="sm" />
-                  Staff Dashboard
+                  <span className="hidden xl:inline">Staff Dashboard</span>
                 </a>
               )}
-              <a href="/appointments" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
+              <a href="/appointments" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
                 <AppointmentsIcon size="sm" />
-                My Appointments
+                <span className="hidden xl:inline">My Appointments</span>
               </a>
-              <a href="/chatbot" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
+              <a href="/chatbot" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
                 <ChatbotIcon size="sm" />
-                Health Assistant
+                <span className="hidden xl:inline">Health Assistant</span>
               </a>
-              <a href="/analytics" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2">
+              <a href="/analytics" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
                 <AnalyticsIcon size="sm" />
-                Analytics
+                <span className="hidden xl:inline">Analytics</span>
               </a>
             </>
           )}
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-2 md:gap-4 shrink-0">
           {/* Help Menu */}
           {onRestartTour && (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <Button variant="ghost" size="icon" className="rounded-full">
+                <Button variant="ghost" size="icon" className="rounded-full h-9 w-9">
                   <HelpCircle className="h-5 w-5" />
                 </Button>
               </DropdownMenuTrigger>
