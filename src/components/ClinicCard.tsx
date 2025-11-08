@@ -236,38 +236,49 @@ export const ClinicCard = ({
 
         {myQueueEntry ? (
           <div className="space-y-3 pt-2">
-            <div className="flex items-center justify-between p-4 bg-gradient-to-r from-accent/20 to-primary/20 rounded-xl border-2 border-primary/30">
-              <div className="flex items-center gap-3">
-                <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center text-xl font-bold text-primary-foreground">
-                  #{myQueueEntry.queue_number}
+            <div className="relative p-5 bg-gradient-to-br from-primary/20 via-accent/20 to-primary/10 rounded-xl border-2 border-primary shadow-lg shadow-primary/20">
+              <div className="flex items-start justify-between mb-3">
+                <div className="flex items-center gap-4">
+                  <div className="relative">
+                    <div className="h-16 w-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg animate-pulse">
+                      #{myQueueEntry.queue_number}
+                    </div>
+                    <div className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-accent animate-ping" />
+                  </div>
+                  <div>
+                    <p className="text-base font-black text-foreground mb-1">🎉 You're in the Queue!</p>
+                    <p className="text-sm font-bold text-primary">Position <span className="text-lg">#{myQueueEntry.queue_number}</span> of {queueCount}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">You're in the queue!</p>
-                  <p className="text-xs text-muted-foreground">Position #{myQueueEntry.queue_number}</p>
-                </div>
+                <Badge variant="secondary" className="text-xs font-bold">
+                  Waiting
+                </Badge>
               </div>
-              <Badge variant="secondary" className="text-xs">
-                Waiting
-              </Badge>
+              
+              <div className="flex items-center gap-2 mt-3 p-3 bg-background/50 rounded-lg backdrop-blur-sm">
+                <Clock className="h-4 w-4 text-accent" />
+                <p className="text-sm font-bold text-foreground">
+                  Est. Wait: <span className="text-accent">{myQueueEntry.queue_number * 15} mins</span>
+                </p>
+              </div>
             </div>
             
-            <div className="flex gap-2">
+            <div className="flex gap-3">
               <Button 
-                variant="outline"
-                className="flex-1 hover:bg-accent/10 hover:border-accent" 
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-lg shadow-emerald-500/30 border-0" 
                 disabled={isLoading}
                 onClick={handleCheckIn}
               >
-                <CheckCircle className="mr-2 h-4 w-4" />
+                <CheckCircle className="mr-2 h-5 w-5" strokeWidth={2.5} />
                 Check In
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 hover:bg-destructive/10 hover:border-destructive hover:text-destructive" 
+                className="flex-1 bg-gradient-to-r from-destructive/10 to-red-500/10 hover:from-destructive/20 hover:to-red-500/20 border-2 border-destructive text-destructive font-bold" 
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
-                <XCircle className="mr-2 h-4 w-4" />
+                <XCircle className="mr-2 h-5 w-5" strokeWidth={2.5} />
                 Leave Queue
               </Button>
             </div>
