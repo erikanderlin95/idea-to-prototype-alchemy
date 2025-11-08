@@ -69,10 +69,10 @@ const ClinicProfile = () => {
           {/* Header */}
           <div className="space-y-4">
             <div className="flex items-start justify-between">
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
-                  <h1 className="text-3xl font-bold">{clinic.name}</h1>
-                  <Badge variant="secondary">{clinic.type}</Badge>
+              <div className="space-y-3">
+                <div className="flex items-center gap-3">
+                  <h1 className="text-4xl font-bold">{clinic.name}</h1>
+                  <Badge variant="secondary" className="text-base px-3 py-1">{clinic.type}</Badge>
                 </div>
                 <div className="flex items-center gap-4">
                   <div className="flex items-center gap-2">
@@ -85,49 +85,70 @@ const ClinicProfile = () => {
                   </div>
                 </div>
               </div>
-              <Button size="lg" onClick={handleBookAppointment}>
-                <Calendar className="mr-2 h-5 w-5" />
-                Book Appointment
-              </Button>
-              <Button 
-                size="lg" 
-                variant="outline"
-                onClick={() => navigate(`/queue?clinic=${id}`)}
-              >
-                <Users className="mr-2 h-5 w-5" />
-                Join Queue
-              </Button>
+              <div className="flex gap-3">
+                <Button size="lg" className="text-base px-6 py-6" onClick={handleBookAppointment}>
+                  <Calendar className="mr-2 h-6 w-6" />
+                  Book Appointment
+                </Button>
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="text-base px-6 py-6"
+                  onClick={() => navigate(`/queue?clinic=${id}`)}
+                >
+                  <Users className="mr-2 h-6 w-6" />
+                  Join Queue
+                </Button>
+              </div>
             </div>
 
             <p className="text-base text-foreground/90 font-medium">{clinic.description}</p>
           </div>
 
+          {/* Photo Gallery */}
+          <Card className="p-6">
+            <h2 className="text-2xl font-bold mb-4">Clinic Photos</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              {clinic.photos && clinic.photos.length > 0 ? (
+                clinic.photos.map((photo: string, index: number) => (
+                  <div key={index} className="aspect-square rounded-lg overflow-hidden bg-muted">
+                    <img src={photo} alt={`${clinic.name} photo ${index + 1}`} className="w-full h-full object-cover" />
+                  </div>
+                ))
+              ) : (
+                <div className="col-span-full text-center py-8 text-muted-foreground">
+                  <p className="text-base">Photo gallery coming soon</p>
+                </div>
+              )}
+            </div>
+          </Card>
+
           {/* Contact & Queue Info */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="p-4">
-              <div className="flex items-center gap-3">
-                <Phone className="h-5 w-5 text-primary" />
+            <Card className="p-6">
+              <div className="flex items-center gap-4">
+                <Phone className="h-6 w-6 text-primary" />
                 <div>
-                  <p className="text-xs text-muted-foreground">Phone</p>
-                  <p className="font-medium">{clinic.phone}</p>
+                  <p className="text-sm text-muted-foreground">Phone</p>
+                  <p className="font-semibold text-base">{clinic.phone}</p>
                 </div>
               </div>
             </Card>
-            <Card className="p-4">
-              <div className="flex items-center gap-3">
-                <Mail className="h-5 w-5 text-primary" />
+            <Card className="p-6">
+              <div className="flex items-center gap-4">
+                <Mail className="h-6 w-6 text-primary" />
                 <div>
-                  <p className="text-xs text-muted-foreground">Email</p>
-                  <p className="font-medium">{clinic.email || "Not available"}</p>
+                  <p className="text-sm text-muted-foreground">Email</p>
+                  <p className="font-semibold text-base">{clinic.email || "Not available"}</p>
                 </div>
               </div>
             </Card>
-            <Card className="p-4">
-              <div className="flex items-center gap-3">
-                <Users className="h-5 w-5 text-primary" />
+            <Card className="p-6">
+              <div className="flex items-center gap-4">
+                <Users className="h-6 w-6 text-primary" />
                 <div>
-                  <p className="text-xs text-muted-foreground">Current Queue</p>
-                  <p className="font-medium">{queue.length} waiting</p>
+                  <p className="text-sm text-muted-foreground">Current Queue</p>
+                  <p className="font-semibold text-base">{queue.length} waiting</p>
                 </div>
               </div>
             </Card>
@@ -135,10 +156,11 @@ const ClinicProfile = () => {
 
           {/* Tabs */}
           <Tabs defaultValue="doctors" className="w-full">
-            <TabsList>
-              <TabsTrigger value="doctors">Doctors</TabsTrigger>
-              <TabsTrigger value="hours">Operating Hours</TabsTrigger>
-              <TabsTrigger value="reviews">Reviews</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4">
+              <TabsTrigger value="doctors" className="text-base">Doctors</TabsTrigger>
+              <TabsTrigger value="awards" className="text-base">Awards</TabsTrigger>
+              <TabsTrigger value="hours" className="text-base">Operating Hours</TabsTrigger>
+              <TabsTrigger value="reviews" className="text-base">Reviews</TabsTrigger>
             </TabsList>
 
             <TabsContent value="doctors" className="space-y-6">
@@ -197,44 +219,69 @@ const ClinicProfile = () => {
               )}
             </TabsContent>
 
+            <TabsContent value="awards" className="space-y-6">
+              <Card className="p-8">
+                <h3 className="text-2xl font-bold mb-6">Awards & Recognition</h3>
+                {clinic.awards && clinic.awards.length > 0 ? (
+                  <div className="space-y-6">
+                    {clinic.awards.map((award: any, index: number) => (
+                      <div key={index} className="flex items-start gap-4 p-4 bg-gradient-to-r from-amber-50 to-amber-100 dark:from-amber-950/20 dark:to-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
+                        <Star className="h-8 w-8 text-amber-500 mt-1 flex-shrink-0" />
+                        <div>
+                          <h4 className="text-lg font-bold text-foreground">{award.title}</h4>
+                          <p className="text-base text-foreground/80 mt-1">{award.description}</p>
+                          {award.year && <p className="text-sm text-muted-foreground mt-2">Awarded in {award.year}</p>}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-12">
+                    <Star className="h-16 w-16 text-muted mx-auto mb-4" />
+                    <p className="text-base text-muted-foreground">Awards and recognition will be displayed here</p>
+                  </div>
+                )}
+              </Card>
+            </TabsContent>
+
             <TabsContent value="hours">
-              <Card className="p-6">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Clock className="h-5 w-5 text-primary" />
-                    <h3 className="text-lg font-semibold">Operating Hours</h3>
+              <Card className="p-8">
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 mb-6">
+                    <Clock className="h-7 w-7 text-primary" />
+                    <h3 className="text-2xl font-bold">Operating Hours</h3>
                   </div>
                   {clinic.operating_hours && Object.entries(clinic.operating_hours).map(([day, hours]) => (
-                    <div key={day} className="flex justify-between items-center py-2 border-b last:border-0">
-                      <span className="capitalize font-medium">{day}</span>
-                      <span className="text-muted-foreground">{hours as string}</span>
+                    <div key={day} className="flex justify-between items-center py-3 border-b last:border-0">
+                      <span className="capitalize font-semibold text-lg">{day}</span>
+                      <span className="text-foreground/80 font-medium text-base">{hours as string}</span>
                     </div>
                   ))}
                 </div>
               </Card>
             </TabsContent>
 
-            <TabsContent value="reviews" className="space-y-4">
+            <TabsContent value="reviews" className="space-y-6">
               {reviews.length > 0 ? (
                 reviews.map((review) => (
-                  <Card key={review.id} className="p-6">
-                    <div className="space-y-3">
+                  <Card key={review.id} className="p-8">
+                    <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <p className="font-medium">{review.profiles?.full_name || "Anonymous"}</p>
-                        <div className="flex items-center gap-1">
-                          <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                          <span className="text-sm">{review.rating}</span>
+                        <p className="font-bold text-lg">{review.profiles?.full_name || "Anonymous"}</p>
+                        <div className="flex items-center gap-2">
+                          <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
+                          <span className="text-base font-semibold">{review.rating}</span>
                         </div>
                       </div>
                       {review.comment && (
-                        <p className="text-sm text-muted-foreground">{review.comment}</p>
+                        <p className="text-base text-foreground/80">{review.comment}</p>
                       )}
                     </div>
                   </Card>
                 ))
               ) : (
-                <Card className="p-6 text-center text-muted-foreground">
-                  No reviews yet
+                <Card className="p-8 text-center">
+                  <p className="text-base text-muted-foreground">No reviews yet</p>
                 </Card>
               )}
             </TabsContent>
