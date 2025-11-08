@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { ClipboardList, HelpCircle } from "lucide-react";
+import { ClipboardList, HelpCircle, Menu } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -12,6 +12,13 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { QueueIcon, AppointmentsIcon, AnalyticsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
 
 interface NavbarProps {
@@ -22,6 +29,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const [isStaff, setIsStaff] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     if (!user) {
@@ -76,7 +84,8 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
           </div>
         </div>
 
-        <div className="hidden lg:flex items-center gap-4 xl:gap-6 onboarding-nav">
+        {/* Desktop Navigation - Only show on xl screens when signed in */}
+        <div className={`hidden ${user ? 'xl:flex' : 'lg:flex'} items-center gap-4 xl:gap-6 onboarding-nav`}>
           <a href="/" className="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
             Find Clinics
           </a>
@@ -85,26 +94,85 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
               {isStaff && (
                 <a href="/staff" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
                   <QueueIcon size="sm" />
-                  <span className="hidden xl:inline">Staff Dashboard</span>
+                  Staff Dashboard
                 </a>
               )}
               <a href="/appointments" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
                 <AppointmentsIcon size="sm" />
-                <span className="hidden xl:inline">My Appointments</span>
+                My Appointments
               </a>
               <a href="/chatbot" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
                 <ChatbotIcon size="sm" />
-                <span className="hidden xl:inline">Health Assistant</span>
+                Health Assistant
               </a>
               <a href="/analytics" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
                 <AnalyticsIcon size="sm" />
-                <span className="hidden xl:inline">Analytics</span>
+                Analytics
               </a>
             </>
           )}
         </div>
 
         <div className="flex items-center gap-2 md:gap-4 shrink-0">
+          {/* Mobile Menu - Show when signed in on smaller screens */}
+          {user && (
+            <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="xl:hidden h-9 w-9">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-72">
+                <SheetHeader>
+                  <SheetTitle>Menu</SheetTitle>
+                </SheetHeader>
+                <div className="flex flex-col gap-4 mt-6">
+                  <a 
+                    href="/" 
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="text-sm font-medium">Find Clinics</span>
+                  </a>
+                  {isStaff && (
+                    <a 
+                      href="/staff" 
+                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
+                      <QueueIcon size="sm" />
+                      <span className="text-sm font-medium">Staff Dashboard</span>
+                    </a>
+                  )}
+                  <a 
+                    href="/appointments" 
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <AppointmentsIcon size="sm" />
+                    <span className="text-sm font-medium">My Appointments</span>
+                  </a>
+                  <a 
+                    href="/chatbot" 
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <ChatbotIcon size="sm" />
+                    <span className="text-sm font-medium">Health Assistant</span>
+                  </a>
+                  <a 
+                    href="/analytics" 
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <AnalyticsIcon size="sm" />
+                    <span className="text-sm font-medium">Analytics</span>
+                  </a>
+                </div>
+              </SheetContent>
+            </Sheet>
+          )}
+
           {/* Help Menu */}
           {onRestartTour && (
             <DropdownMenu>
@@ -125,19 +193,9 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
           )}
 
           {user ? (
-            <>
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={() => navigate("/chatbot")}
-                className="md:hidden p-2"
-              >
-                <ChatbotIcon size="sm" />
-              </Button>
-              <Button variant="ghost" size="sm" onClick={signOut}>
-                Sign Out
-              </Button>
-            </>
+            <Button variant="ghost" size="sm" onClick={signOut}>
+              Sign Out
+            </Button>
           ) : (
             <>
               <Button variant="ghost" size="sm" onClick={() => navigate("/auth")}>
