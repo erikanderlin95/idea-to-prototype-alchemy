@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Clock, Users, Star } from "lucide-react";
+import { MapPin, Clock, Users, Star, CheckCircle, XCircle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface ClinicCardProps {
   id?: string;
@@ -32,6 +32,93 @@ export const ClinicCard = ({
   const navigate = useNavigate();
   const { user } = useAuth();
   const [isJoining, setIsJoining] = useState(false);
+  const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (user && id) {
+      checkQueueStatus();
+      
+      // Subscribe to queue changes
+      const channel = supabase
+        .channel(`queue-${id}`)
+        .on(
+          'postgres_changes',
+          {
+            event: '*',
+            schema: 'public',
+            table: 'queue_entries',
+            filter: `clinic_id=eq.${id}`,
+          },
+          () => {
+            checkQueueStatus();
+          }
+        )
+        .subscribe();
+
+      return () => {
+        supabase.removeChannel(channel);
+      };
+    }
+  }, [user, id]);
+
+  const checkQueueStatus = async () => {
+    if (!user || !id) return;
+    
+    const { data } = await supabase
+      .from("queue_entries")
+      .select("*")
+      .eq("clinic_id", id)
+      .eq("user_id", user.id)
+      .eq("status", "waiting")
+      .maybeSingle();
+    
+    setMyQueueEntry(data);
+  };
+
+  const handleCancelQueue = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!myQueueEntry) return;
+
+    setIsLoading(true);
+    try {
+      const { error } = await supabase
+        .from("queue_entries")
+        .delete()
+        .eq("id", myQueueEntry.id);
+
+      if (error) throw error;
+
+      toast.success("Left the queue successfully");
+      setMyQueueEntry(null);
+    } catch (error: any) {
+      toast.error(error.message || "Failed to leave queue");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCheckIn = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!myQueueEntry) return;
+
+    setIsLoading(true);
+    try {
+      const { error } = await supabase
+        .from("queue_entries")
+        .update({ status: "checked_in" })
+        .eq("id", myQueueEntry.id);
+
+      if (error) throw error;
+
+      toast.success("Checked in successfully!");
+      navigate(`/queue?clinic=${id}`);
+    } catch (error: any) {
+      toast.error(error.message || "Failed to check in");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const handleJoinQueue = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -147,27 +234,67 @@ export const ClinicCard = ({
           </div>
         </div>
 
-        <div className="flex gap-3 pt-2">
-          <Button 
-            variant="outline"
-            className="flex-1 hover:bg-primary/10 hover:border-primary" 
-            disabled={!isOpen || isJoining}
-            onClick={handleJoinQueue}
-          >
-            <Users className="mr-2 h-4 w-4" />
-            {isJoining ? "Joining..." : "Join Queue"}
-          </Button>
-          <Button 
-            className="flex-1 bg-primary hover:bg-primary/90" 
-            disabled={!isOpen}
-            onClick={(e) => {
-              e.stopPropagation();
-              id && navigate(`/clinic/${id}`);
-            }}
-          >
-            View Details
-          </Button>
-        </div>
+        {myQueueEntry ? (
+          <div className="space-y-3 pt-2">
+            <div className="flex items-center justify-between p-4 bg-gradient-to-r from-accent/20 to-primary/20 rounded-xl border-2 border-primary/30">
+              <div className="flex items-center gap-3">
+                <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center text-xl font-bold text-primary-foreground">
+                  #{myQueueEntry.queue_number}
+                </div>
+                <div>
+                  <p className="text-sm font-semibold text-foreground">You're in the queue!</p>
+                  <p className="text-xs text-muted-foreground">Position #{myQueueEntry.queue_number}</p>
+                </div>
+              </div>
+              <Badge variant="secondary" className="text-xs">
+                Waiting
+              </Badge>
+            </div>
+            
+            <div className="flex gap-2">
+              <Button 
+                variant="outline"
+                className="flex-1 hover:bg-accent/10 hover:border-accent" 
+                disabled={isLoading}
+                onClick={handleCheckIn}
+              >
+                <CheckCircle className="mr-2 h-4 w-4" />
+                Check In
+              </Button>
+              <Button 
+                variant="outline"
+                className="flex-1 hover:bg-destructive/10 hover:border-destructive hover:text-destructive" 
+                disabled={isLoading}
+                onClick={handleCancelQueue}
+              >
+                <XCircle className="mr-2 h-4 w-4" />
+                Leave Queue
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className="flex gap-3 pt-2">
+            <Button 
+              variant="outline"
+              className="flex-1 hover:bg-primary/10 hover:border-primary" 
+              disabled={!isOpen || isJoining}
+              onClick={handleJoinQueue}
+            >
+              <Users className="mr-2 h-4 w-4" />
+              {isJoining ? "Joining..." : "Join Queue"}
+            </Button>
+            <Button 
+              className="flex-1 bg-primary hover:bg-primary/90" 
+              disabled={!isOpen}
+              onClick={(e) => {
+                e.stopPropagation();
+                id && navigate(`/clinic/${id}`);
+              }}
+            >
+              View Details
+            </Button>
+          </div>
+        )}
       </div>
     </Card>
   );
