@@ -1,4 +1,4 @@
-import { Heart } from "lucide-react";
+import { ClipboardList } from "lucide-react";
 
 export const Footer = () => {
   return (
@@ -7,10 +7,12 @@ export const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                <Heart className="h-5 w-5 text-primary-foreground" fill="currentColor" />
+              <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md">
+                <ClipboardList className="h-5 w-5 text-primary-foreground" strokeWidth={2.5} />
               </div>
-              <span className="text-xl font-bold">ClynicQ</span>
+              <span className="text-xl font-bold">
+                Clynic<span className="text-primary">Q</span>
+              </span>
             </div>
             <p className="text-sm text-muted-foreground">
               Simplifying healthcare access across Singapore
