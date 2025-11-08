@@ -64,7 +64,7 @@ export const MarketplaceSection = () => {
   }
 
   return (
-    <section id="marketplace" className="py-24 bg-background">
+    <section id="marketplace" className="py-24 bg-background onboarding-clinics">
       <div className="container px-4 md:px-6">
         <div className="space-y-10">
           <div className="text-center space-y-4">

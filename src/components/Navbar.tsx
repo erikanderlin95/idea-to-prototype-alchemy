@@ -1,11 +1,23 @@
 import { Button } from "@/components/ui/button";
-import { Heart, MessageSquare, ClipboardList } from "lucide-react";
+import { Heart, MessageSquare, ClipboardList, HelpCircle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-export const Navbar = () => {
+interface NavbarProps {
+  onRestartTour?: () => void;
+}
+
+export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const [isStaff, setIsStaff] = useState(false);
@@ -33,7 +45,7 @@ export const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-        <div className="flex items-center gap-3 cursor-pointer group" onClick={() => navigate("/")}>
+        <div className="flex items-center gap-3 cursor-pointer group onboarding-logo" onClick={() => navigate("/")}>
           <div className="relative h-11 w-11 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 blur-md group-hover:blur-lg transition-all" />
             <Heart className="h-6 w-6 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" fill="currentColor" />
@@ -53,7 +65,7 @@ export const Navbar = () => {
           </div>
         </div>
 
-        <div className="hidden md:flex items-center gap-6">
+        <div className="hidden md:flex items-center gap-6 onboarding-nav">
           <a href="/" className="text-sm font-medium hover:text-primary transition-colors">
             Find Clinics
           </a>
@@ -82,6 +94,25 @@ export const Navbar = () => {
         </div>
 
         <div className="flex items-center gap-4">
+          {/* Help Menu */}
+          {onRestartTour && (
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" size="icon" className="rounded-full">
+                  <HelpCircle className="h-5 w-5" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuLabel>Help & Support</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={onRestartTour}>
+                  <HelpCircle className="mr-2 h-4 w-4" />
+                  Restart Tour
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          )}
+
           {user ? (
             <>
               <Button

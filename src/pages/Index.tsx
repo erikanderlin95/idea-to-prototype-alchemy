@@ -3,17 +3,24 @@ import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { MarketplaceSection } from "@/components/MarketplaceSection";
 import { Footer } from "@/components/Footer";
+import { OnboardingTour } from "@/components/OnboardingTour";
+import { useOnboarding } from "@/hooks/useOnboarding";
 
 const Index = () => {
+  const { showOnboarding, completeOnboarding, startOnboarding } = useOnboarding();
+
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar onRestartTour={startOnboarding} />
       <main>
         <Hero />
         <Features />
         <MarketplaceSection />
       </main>
       <Footer />
+      
+      {/* Onboarding Tour */}
+      {showOnboarding && <OnboardingTour onComplete={completeOnboarding} />}
     </div>
   );
 };

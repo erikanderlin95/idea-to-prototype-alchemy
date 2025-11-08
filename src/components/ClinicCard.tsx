@@ -95,7 +95,7 @@ export const ClinicCard = ({
   };
 
   return (
-    <Card className="group p-6 hover:shadow-xl transition-all duration-300 border-border/50 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-card/50" onClick={() => id && navigate(`/clinic/${id}`)}>
+    <Card className="group p-6 hover:shadow-xl transition-all duration-300 border-border/50 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-card/50 onboarding-join-queue" onClick={() => id && navigate(`/clinic/${id}`)}>
       <div className="space-y-5">
         <div className="flex items-start justify-between">
           <div className="space-y-3 flex-1">
@@ -125,7 +125,7 @@ export const ClinicCard = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-3 py-4 px-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20">
+        <div className="flex items-center gap-3 py-4 px-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20 onboarding-stats">
           <div className="flex items-center gap-3 flex-1">
             <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
               <Users className="h-5 w-5 text-primary" />
