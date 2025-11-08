@@ -16,7 +16,7 @@ const tourSteps: TourStep[] = [
   {
     target: ".onboarding-logo",
     title: "Welcome to ClynicQ! 👋",
-    description: "Queue • Book • Connect with healthcare services across Singapore.",
+    description: "Queue • Book • Connect with healthcare services. The 'Q' badge shows active queues on selected clinics.",
     position: "bottom",
     spotlight: true,
   },
