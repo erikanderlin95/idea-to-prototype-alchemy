@@ -6,9 +6,9 @@ export const Features = () => {
   const mainFeatures = [
     {
       icon: "queue",
-      title: "Queue",
+      title: "Digital Queue",
       subtitle: "Real-time Updates",
-      description: "See live queue status and wait times before you go. Join virtual queues from anywhere.",
+      description: "Join virtual queues from anywhere and see live queue status and wait times before you go.",
     },
     {
       icon: "book",
@@ -47,7 +47,7 @@ export const Features = () => {
       <div className="container px-4 md:px-6">
         <div className="text-center space-y-4 mb-16">
           <Badge variant="secondary" className="mb-2">Features</Badge>
-          <h2 className="text-3xl md:text-5xl font-bold">Queue • Book • Connect</h2>
+          <h2 className="text-3xl md:text-5xl font-bold">Digital Queue • Book • Connect</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             A complete healthcare platform designed for Singapore's diverse medical ecosystem
           </p>
