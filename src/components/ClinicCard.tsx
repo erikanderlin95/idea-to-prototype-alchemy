@@ -246,8 +246,8 @@ export const ClinicCard = ({
                     <div className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-accent" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground/60 mb-1">You're in the Queue</p>
-                    <p className="text-sm font-medium text-muted-foreground">Position <span className="text-3xl font-black text-primary">#{myQueueEntry.queue_number}</span> <span className="text-xs font-normal text-muted-foreground/60">of {queueCount}</span></p>
+                    <p className="text-sm font-medium text-muted-foreground mb-1">You're in the Queue</p>
+                    <p className="text-sm font-semibold text-foreground">Position <span className="text-3xl font-black text-primary">#{myQueueEntry.queue_number}</span> <span className="text-sm font-medium text-muted-foreground">of {queueCount}</span></p>
                   </div>
                 </div>
                 <Badge variant="secondary" className="text-xs font-semibold">
@@ -257,7 +257,7 @@ export const ClinicCard = ({
               
               <div className="flex items-center gap-3 mt-3 p-4 bg-accent/20 rounded-lg border-2 border-accent/40">
                 <Clock className="h-6 w-6 text-accent" strokeWidth={3} />
-                <p className="text-base font-medium text-muted-foreground">
+                <p className="text-sm font-semibold text-foreground">
                   Est. Wait: <span className="text-accent text-2xl font-black">{myQueueEntry.queue_number * 15} mins</span>
                 </p>
               </div>
