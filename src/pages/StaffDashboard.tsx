@@ -30,9 +30,7 @@ interface QueueEntry {
   created_at: string;
   user_id: string;
   visit_type?: string;
-  profiles?: {
-    full_name: string;
-  };
+  patient_name?: string;
 }
 
 interface QueueStats {
@@ -92,16 +90,33 @@ export default function StaffDashboard() {
 
   const loadQueueData = async (clinicId: string) => {
     try {
-      // Load queue entries with patient names
+      // Load queue entries
       const { data: queueEntries, error: queueError } = await supabase
         .from("queue_entries")
-        .select("*, profiles(full_name)")
+        .select("*")
         .eq("clinic_id", clinicId)
         .eq("status", "waiting")
         .order("queue_number", { ascending: true });
 
       if (queueError) throw queueError;
-      setQueueData(queueEntries || []);
+
+      // Fetch patient names separately
+      const enrichedEntries = await Promise.all(
+        (queueEntries || []).map(async (entry) => {
+          const { data: profile } = await supabase
+            .from("profiles")
+            .select("full_name")
+            .eq("id", entry.user_id)
+            .maybeSingle();
+          
+          return {
+            ...entry,
+            patient_name: profile?.full_name || "Patient"
+          };
+        })
+      );
+
+      setQueueData(enrichedEntries);
 
       // Calculate statistics
       const { data: todayStats } = await supabase
@@ -346,7 +361,7 @@ export default function StaffDashboard() {
                         </Badge>
                         <div className="flex-1">
                           <p className="font-semibold text-base">
-                            {entry.profiles?.full_name || "Patient"}
+                            {entry.patient_name || "Patient"}
                           </p>
                           <p className="text-sm text-muted-foreground">
                             {entry.visit_type || "General Consultation"}
