@@ -60,6 +60,14 @@ export default {
           border: "hsl(var(--sidebar-border))",
           ring: "hsl(var(--sidebar-ring))",
         },
+        ai: {
+          purple: "hsl(var(--ai-purple))",
+          "purple-light": "hsl(var(--ai-purple-light))",
+          blue: "hsl(var(--ai-blue))",
+          cyan: "hsl(var(--ai-cyan))",
+          violet: "hsl(var(--ai-violet))",
+          indigo: "hsl(var(--ai-indigo))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

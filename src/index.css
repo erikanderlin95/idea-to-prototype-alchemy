@@ -38,11 +38,26 @@ All colors MUST be HSL.
 
     --radius: 0.75rem;
     
+    /* AI-themed colors */
+    --ai-purple: 270 85% 60%;
+    --ai-purple-light: 270 70% 75%;
+    --ai-blue: 220 90% 55%;
+    --ai-cyan: 190 85% 50%;
+    --ai-violet: 260 75% 65%;
+    --ai-indigo: 240 70% 60%;
+    
+    /* Gradients */
     --gradient-primary: linear-gradient(135deg, hsl(184 85% 45%), hsl(158 70% 50%));
     --gradient-hero: linear-gradient(180deg, hsl(184 65% 98%), hsl(0 0% 100%));
+    --gradient-ai: linear-gradient(135deg, hsl(270 85% 60%), hsl(220 90% 55%));
+    --gradient-tech: linear-gradient(135deg, hsl(190 85% 50%), hsl(240 70% 60%));
+    --gradient-cyber: linear-gradient(135deg, hsl(260 75% 65%), hsl(184 85% 45%));
     
+    /* Shadows */
     --shadow-soft: 0 2px 12px hsl(184 85% 45% / 0.08);
     --shadow-card: 0 4px 20px hsl(184 85% 45% / 0.12);
+    --shadow-ai-glow: 0 0 20px hsl(270 85% 60% / 0.3);
+    --shadow-tech-glow: 0 0 30px hsl(220 90% 55% / 0.25);
 
     --sidebar-background: 0 0% 98%;
 
@@ -90,8 +105,24 @@ All colors MUST be HSL.
     --input: 215 25% 20%;
     --ring: 184 85% 55%;
     
+    /* AI-themed colors - dark mode */
+    --ai-purple: 270 85% 65%;
+    --ai-purple-light: 270 70% 80%;
+    --ai-blue: 220 90% 60%;
+    --ai-cyan: 190 85% 55%;
+    --ai-violet: 260 75% 70%;
+    --ai-indigo: 240 70% 65%;
+    
+    /* Gradients - dark mode */
     --gradient-primary: linear-gradient(135deg, hsl(184 85% 55%), hsl(158 70% 55%));
     --gradient-hero: linear-gradient(180deg, hsl(215 25% 12%), hsl(215 30% 8%));
+    --gradient-ai: linear-gradient(135deg, hsl(270 85% 65%), hsl(220 90% 60%));
+    --gradient-tech: linear-gradient(135deg, hsl(190 85% 55%), hsl(240 70% 65%));
+    --gradient-cyber: linear-gradient(135deg, hsl(260 75% 70%), hsl(184 85% 55%));
+    
+    /* Shadows - dark mode */
+    --shadow-ai-glow: 0 0 25px hsl(270 85% 65% / 0.4);
+    --shadow-tech-glow: 0 0 35px hsl(220 90% 60% / 0.35);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
