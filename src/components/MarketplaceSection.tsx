@@ -1,63 +1,67 @@
 import { SearchFilters } from "./SearchFilters";
 import { ClinicCard } from "./ClinicCard";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const MarketplaceSection = () => {
-  const clinics = [
-    {
-      name: "Unity Health Clinic",
-      type: "GP" as const,
-      address: "123 Orchard Road, #01-45",
-      queueCount: 4,
-      waitTime: "15-20 min",
-      rating: 4.8,
-      isOpen: true,
-    },
-    {
-      name: "Harmony TCM Centre",
-      type: "TCM" as const,
-      address: "456 Tanjong Pagar Road, #02-12",
-      queueCount: 2,
-      waitTime: "10-15 min",
-      rating: 4.9,
-      isOpen: true,
-    },
-    {
-      name: "Wellness Plus Clinic",
-      type: "Wellness" as const,
-      address: "789 Jurong East Street 21",
-      queueCount: 12,
-      waitTime: "45-60 min",
-      rating: 4.6,
-      isOpen: true,
-    },
-    {
-      name: "Care+ Medical",
-      type: "GP" as const,
-      address: "321 Hougang Avenue 3, #01-89",
-      queueCount: 7,
-      waitTime: "25-30 min",
-      rating: 4.7,
-      isOpen: true,
-    },
-    {
-      name: "East Coast TCM",
-      type: "TCM" as const,
-      address: "654 East Coast Road, #03-05",
-      queueCount: 0,
-      waitTime: "Walk-in",
-      rating: 4.5,
-      isOpen: false,
-    },
-    {
-      name: "Peak Wellness Center",
-      type: "Wellness" as const,
-      address: "987 Bukit Timah Road, #02-34",
-      queueCount: 5,
-      waitTime: "20-25 min",
-      rating: 4.8,
-      isOpen: true,
-    },
-  ];
+  const [clinics, setClinics] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchClinics();
+  }, []);
+
+  const fetchClinics = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("clinics")
+        .select("*")
+        .order("rating", { ascending: false });
+
+      if (error) throw error;
+      
+      // Calculate queue stats for each clinic
+      const clinicsWithQueue = await Promise.all(
+        (data || []).map(async (clinic) => {
+          const { data: queueData } = await supabase
+            .from("queue_entries")
+            .select("*")
+            .eq("clinic_id", clinic.id)
+            .eq("status", "waiting");
+
+          const queueCount = queueData?.length || 0;
+          const estimatedWait = queueCount * 15; // 15 min per person
+
+          return {
+            name: clinic.name,
+            type: clinic.type,
+            address: clinic.address,
+            queueCount,
+            waitTime: queueCount === 0 ? "Walk-in" : `${estimatedWait}-${estimatedWait + 15} min`,
+            rating: clinic.rating,
+            isOpen: clinic.is_open,
+            id: clinic.id,
+          };
+        })
+      );
+
+      setClinics(clinicsWithQueue);
+    } catch (error) {
+      console.error("Error fetching clinics:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <section className="py-20">
+        <div className="container px-4 md:px-6">
+          <div className="text-center">Loading clinics...</div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-20">
@@ -74,7 +78,7 @@ export const MarketplaceSection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {clinics.map((clinic, index) => (
-              <ClinicCard key={index} {...clinic} />
+              <ClinicCard key={clinic.id || index} {...clinic} />
             ))}
           </div>
         </div>

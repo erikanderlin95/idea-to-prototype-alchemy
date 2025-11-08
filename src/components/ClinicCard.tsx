@@ -2,8 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Users, Star } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface ClinicCardProps {
+  id?: string;
   name: string;
   type: "GP" | "TCM" | "Wellness";
   address: string;
@@ -14,6 +16,7 @@ interface ClinicCardProps {
 }
 
 export const ClinicCard = ({
+  id,
   name,
   type,
   address,
@@ -22,10 +25,10 @@ export const ClinicCard = ({
   rating,
   isOpen,
 }: ClinicCardProps) => {
-  const queueStatus = queueCount < 5 ? "low" : queueCount < 10 ? "medium" : "high";
+  const navigate = useNavigate();
 
   return (
-    <Card className="p-6 hover:shadow-lg transition-all duration-300 border-border/50">
+    <Card className="p-6 hover:shadow-lg transition-all duration-300 border-border/50 cursor-pointer" onClick={() => id && navigate(`/clinic/${id}`)}>
       <div className="space-y-4">
         <div className="flex items-start justify-between">
           <div className="space-y-2 flex-1">
@@ -64,11 +67,15 @@ export const ClinicCard = ({
         </div>
 
         <div className="flex gap-2">
-          <Button className="flex-1" disabled={!isOpen}>
-            {isOpen ? "Join Queue" : "Closed"}
-          </Button>
-          <Button variant="outline" className="flex-1">
-            Book Appointment
+          <Button 
+            className="flex-1" 
+            disabled={!isOpen}
+            onClick={(e) => {
+              e.stopPropagation();
+              id && navigate(`/clinic/${id}`);
+            }}
+          >
+            {isOpen ? "View Details" : "Closed"}
           </Button>
         </div>
       </div>
