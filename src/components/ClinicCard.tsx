@@ -284,26 +284,40 @@ export const ClinicCard = ({
             </div>
           </div>
         ) : (
-          <div className="flex gap-3 pt-2">
-            <Button 
-              variant="outline"
-              className="flex-1 hover:bg-primary/10 hover:border-primary" 
-              disabled={!isOpen || isJoining}
-              onClick={handleJoinQueue}
-            >
-              <Users className="mr-2 h-4 w-4" />
-              {isJoining ? "Joining..." : "Join Queue"}
-            </Button>
-            <Button 
-              className="flex-1 bg-primary hover:bg-primary/90" 
-              disabled={!isOpen}
-              onClick={(e) => {
-                e.stopPropagation();
-                id && navigate(`/clinic/${id}`);
-              }}
-            >
-              View Details
-            </Button>
+          <div className="space-y-3 pt-2">
+            <div className="p-4 bg-gradient-to-br from-primary/10 via-accent/10 to-primary/5 rounded-xl border border-primary/30">
+              <div className="flex items-center gap-3 mb-2">
+                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
+                  <Users className="h-5 w-5 text-primary-foreground" strokeWidth={2.5} />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-foreground">Ready to skip the wait?</p>
+                  <p className="text-xs text-muted-foreground">Join the virtual queue now</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="flex gap-3">
+              <Button 
+                className="flex-1 bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-primary/90 hover:to-accent/90 text-primary-foreground font-bold shadow-lg shadow-primary/30 border-0" 
+                disabled={!isOpen || isJoining}
+                onClick={handleJoinQueue}
+              >
+                <Users className="mr-2 h-5 w-5" strokeWidth={2.5} />
+                {isJoining ? "Joining..." : "Join Queue"}
+              </Button>
+              <Button 
+                variant="outline"
+                className="flex-1 font-bold hover:bg-primary/10 hover:border-primary border-2" 
+                disabled={!isOpen}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  id && navigate(`/clinic/${id}`);
+                }}
+              >
+                View Details
+              </Button>
+            </div>
           </div>
         )}
       </div>
