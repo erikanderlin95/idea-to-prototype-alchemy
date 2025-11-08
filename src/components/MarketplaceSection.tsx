@@ -64,19 +64,19 @@ export const MarketplaceSection = () => {
   }
 
   return (
-    <section className="py-20">
+    <section id="marketplace" className="py-24 bg-background">
       <div className="container px-4 md:px-6">
-        <div className="space-y-8">
-          <div className="space-y-4">
-            <h2 className="text-3xl md:text-4xl font-bold">Find Your Clinic</h2>
-            <p className="text-muted-foreground">
-              Browse clinics near you with real-time queue information
+        <div className="space-y-10">
+          <div className="text-center space-y-4">
+            <h2 className="text-3xl md:text-5xl font-bold">Find Your Clinic</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              Browse clinics near you with real-time queue information and join virtual queues instantly
             </p>
           </div>
 
           <SearchFilters />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             {clinics.map((clinic, index) => (
               <ClinicCard key={clinic.id || index} {...clinic} />
             ))}

@@ -95,48 +95,62 @@ export const ClinicCard = ({
   };
 
   return (
-    <Card className="p-6 hover:shadow-lg transition-all duration-300 border-border/50 cursor-pointer" onClick={() => id && navigate(`/clinic/${id}`)}>
-      <div className="space-y-4">
+    <Card className="group p-6 hover:shadow-xl transition-all duration-300 border-border/50 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-card/50" onClick={() => id && navigate(`/clinic/${id}`)}>
+      <div className="space-y-5">
         <div className="flex items-start justify-between">
-          <div className="space-y-2 flex-1">
-            <div className="flex items-center gap-2">
-              <h3 className="text-lg font-semibold">{name}</h3>
-              <Badge variant="secondary" className="text-xs">
+          <div className="space-y-3 flex-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <h3 className="text-lg font-bold group-hover:text-primary transition-colors">{name}</h3>
+              <Badge variant="secondary" className="text-xs font-medium">
                 {type}
               </Badge>
+              {isOpen ? (
+                <Badge variant="outline" className="text-xs border-accent text-accent">
+                  Open
+                </Badge>
+              ) : (
+                <Badge variant="outline" className="text-xs border-muted text-muted-foreground">
+                  Closed
+                </Badge>
+              )}
             </div>
             <div className="flex items-center gap-1 text-sm text-muted-foreground">
-              <MapPin className="h-4 w-4" />
-              <span>{address}</span>
+              <MapPin className="h-4 w-4 flex-shrink-0" />
+              <span className="line-clamp-1">{address}</span>
             </div>
           </div>
-          <div className="flex items-center gap-1">
+          <div className="flex items-center gap-1 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 rounded-lg">
             <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-            <span className="text-sm font-medium">{rating}</span>
+            <span className="text-sm font-bold">{rating}</span>
           </div>
         </div>
 
-        <div className="flex items-center gap-4 py-3 px-4 bg-secondary/50 rounded-lg">
-          <div className="flex items-center gap-2 flex-1">
-            <Users className="h-5 w-5 text-primary" />
+        <div className="flex items-center gap-3 py-4 px-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20">
+          <div className="flex items-center gap-3 flex-1">
+            <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
+              <Users className="h-5 w-5 text-primary" />
+            </div>
             <div>
-              <p className="text-xs text-muted-foreground">Queue</p>
-              <p className="text-sm font-semibold">{queueCount} waiting</p>
+              <p className="text-xs text-muted-foreground font-medium">In Queue</p>
+              <p className="text-base font-bold">{queueCount} people</p>
             </div>
           </div>
-          <div className="flex items-center gap-2 flex-1">
-            <Clock className="h-5 w-5 text-primary" />
+          <div className="h-8 w-px bg-border" />
+          <div className="flex items-center gap-3 flex-1">
+            <div className="h-10 w-10 rounded-lg bg-accent/20 flex items-center justify-center">
+              <Clock className="h-5 w-5 text-accent" />
+            </div>
             <div>
-              <p className="text-xs text-muted-foreground">Wait Time</p>
-              <p className="text-sm font-semibold">{waitTime}</p>
+              <p className="text-xs text-muted-foreground font-medium">Est. Wait</p>
+              <p className="text-base font-bold">{waitTime}</p>
             </div>
           </div>
         </div>
 
-        <div className="flex gap-2">
+        <div className="flex gap-3 pt-2">
           <Button 
             variant="outline"
-            className="flex-1" 
+            className="flex-1 hover:bg-primary/10 hover:border-primary" 
             disabled={!isOpen || isJoining}
             onClick={handleJoinQueue}
           >
@@ -144,7 +158,7 @@ export const ClinicCard = ({
             {isJoining ? "Joining..." : "Join Queue"}
           </Button>
           <Button 
-            className="flex-1" 
+            className="flex-1 bg-primary hover:bg-primary/90" 
             disabled={!isOpen}
             onClick={(e) => {
               e.stopPropagation();

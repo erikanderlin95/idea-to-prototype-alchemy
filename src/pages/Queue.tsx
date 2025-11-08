@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Clock, Users, AlertCircle, CheckCircle2 } from "lucide-react";
+import { Clock, Users, AlertCircle, CheckCircle2, LogOut, LogIn } from "lucide-react";
 
 export default function Queue() {
   const [searchParams] = useSearchParams();
@@ -124,6 +124,40 @@ export default function Queue() {
     }
   };
 
+  const cancelQueue = async () => {
+    if (!myQueueEntry) return;
+
+    try {
+      const { error } = await supabase
+        .from("queue_entries")
+        .delete()
+        .eq("id", myQueueEntry.id);
+
+      if (error) throw error;
+      toast.success("You've left the queue");
+      setMyQueueEntry(null);
+    } catch (error: any) {
+      toast.error(error.message || "Failed to cancel queue");
+    }
+  };
+
+  const checkIn = async () => {
+    if (!myQueueEntry) return;
+
+    try {
+      const { error } = await supabase
+        .from("queue_entries")
+        .update({ status: "checked_in" })
+        .eq("id", myQueueEntry.id);
+
+      if (error) throw error;
+      toast.success("Checked in successfully! Please proceed to the counter");
+      navigate("/");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to check in");
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
@@ -171,7 +205,7 @@ export default function Queue() {
         </Card>
 
         {myQueueEntry ? (
-          <Card className="mb-6 border-primary">
+          <Card className="mb-6 border-primary bg-gradient-to-br from-primary/5 to-accent/5">
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-primary" />
@@ -179,26 +213,63 @@ export default function Queue() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="space-y-4">
-                <div>
-                  <p className="text-sm text-muted-foreground">Your Queue Number</p>
-                  <p className="text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
+              <div className="space-y-6">
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="text-center">
+                    <p className="text-sm text-muted-foreground mb-1">Queue Number</p>
+                    <p className="text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-sm text-muted-foreground mb-1">Position</p>
+                    <p className="text-3xl font-semibold">
+                      {myPosition}/{queueData.length}
+                    </p>
+                  </div>
+                  <div className="text-center">
+                    <p className="text-sm text-muted-foreground mb-1">Est. Wait</p>
+                    <p className="text-2xl font-medium">
+                      {myPosition ? (myPosition - 1) * 15 : 0}m
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Your Position</p>
-                  <p className="text-2xl font-semibold">
-                    {myPosition} of {queueData.length}
-                  </p>
+
+                {myPosition === 1 && (
+                  <Badge variant="default" className="w-full justify-center py-3 text-sm bg-accent">
+                    🎉 You're next! Please check in when you arrive
+                  </Badge>
+                )}
+
+                {myPosition && myPosition > 1 && myPosition <= 3 && (
+                  <Badge variant="secondary" className="w-full justify-center py-3 text-sm">
+                    ⏰ Almost your turn! Get ready to head to the clinic
+                  </Badge>
+                )}
+
+                {myPosition && myPosition > 3 && (
+                  <Badge variant="outline" className="w-full justify-center py-3 text-sm">
+                    📱 We'll notify you when it's almost your turn
+                  </Badge>
+                )}
+
+                <div className="flex gap-3 pt-2">
+                  <Button 
+                    onClick={checkIn} 
+                    className="flex-1 bg-accent hover:bg-accent/90"
+                    size="lg"
+                  >
+                    <LogIn className="mr-2 h-5 w-5" />
+                    Check In at Clinic
+                  </Button>
+                  <Button 
+                    onClick={cancelQueue} 
+                    variant="outline"
+                    className="flex-1 border-destructive text-destructive hover:bg-destructive/10"
+                    size="lg"
+                  >
+                    <LogOut className="mr-2 h-5 w-5" />
+                    Cancel Queue
+                  </Button>
                 </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">Estimated Wait</p>
-                  <p className="text-xl font-medium">
-                    {myPosition ? (myPosition - 1) * 15 : 0} minutes
-                  </p>
-                </div>
-                <Badge variant="secondary" className="w-full justify-center py-2">
-                  We'll notify you when it's almost your turn
-                </Badge>
               </div>
             </CardContent>
           </Card>
