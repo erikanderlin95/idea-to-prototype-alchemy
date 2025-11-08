@@ -239,8 +239,35 @@ export const ClinicCard = ({
             <div className="relative p-5 bg-card rounded-xl border-2 border-primary/30 shadow-lg">
               <div className="flex items-center justify-between p-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg border-2 border-primary/20 mb-3">
                 <div className="flex items-center gap-4">
-                  <div className="h-16 w-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg">
-                    #{myQueueEntry.queue_number}
+                  <div className="relative h-16 w-16">
+                    <svg className="absolute inset-0 -rotate-90" viewBox="0 0 64 64">
+                      {/* Background circle */}
+                      <circle
+                        cx="32"
+                        cy="32"
+                        r="28"
+                        fill="none"
+                        stroke="hsl(var(--muted))"
+                        strokeWidth="4"
+                        opacity="0.3"
+                      />
+                      {/* Progress circle */}
+                      <circle
+                        cx="32"
+                        cy="32"
+                        r="28"
+                        fill="none"
+                        stroke="hsl(var(--accent))"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        strokeDasharray={`${2 * Math.PI * 28}`}
+                        strokeDashoffset={`${2 * Math.PI * 28 * (1 - ((queueCount - myQueueEntry.queue_number) / queueCount))}`}
+                        className="transition-all duration-1000 ease-out"
+                      />
+                    </svg>
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg">
+                      #{myQueueEntry.queue_number}
+                    </div>
                   </div>
                   <div>
                     <p className="text-sm font-medium text-muted-foreground mb-1">You're in the Queue</p>
