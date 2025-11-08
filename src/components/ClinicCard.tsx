@@ -281,18 +281,11 @@ export const ClinicCard = ({
                   Waiting
                 </Badge>
               </div>
-              
-              <div className="flex items-center justify-center gap-3 p-4 bg-accent/10 rounded-lg border-2 border-accent/30">
-                <Clock className="h-6 w-6 text-accent" strokeWidth={2.5} />
-                <p className="text-base font-bold text-foreground">
-                  Estimated Wait: <span className="text-accent text-xl font-black ml-1">{myQueueEntry.queue_number * 15} mins</span>
-                </p>
-              </div>
             </div>
             
             <div className="flex gap-3">
               <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-md border-0 h-11" 
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-md border-0 h-14 text-base"
                 disabled={isLoading}
                 onClick={handleCheckIn}
               >
@@ -301,7 +294,7 @@ export const ClinicCard = ({
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 border-2 border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive font-bold h-11" 
+                className="flex-1 border-2 border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive font-bold h-14 text-base"
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
