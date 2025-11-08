@@ -106,8 +106,8 @@ const ClinicProfile = () => {
           </div>
 
           {/* Photo Gallery */}
-          <Card className="p-6">
-            <h2 className="text-2xl font-bold mb-4">Clinic Photos</h2>
+          <Card className="p-4">
+            <h2 className="text-2xl font-bold mb-3">Clinic Photos</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {clinic.photos && clinic.photos.length > 0 ? (
                 clinic.photos.map((photo: string, index: number) => (
@@ -116,7 +116,7 @@ const ClinicProfile = () => {
                   </div>
                 ))
               ) : (
-                <div className="col-span-full text-center py-8 text-muted-foreground">
+                <div className="col-span-full text-center py-6 text-muted-foreground">
                   <p className="text-base">Photo gallery coming soon</p>
                 </div>
               )}
