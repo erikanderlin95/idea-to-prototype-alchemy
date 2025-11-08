@@ -182,7 +182,7 @@ export const ClinicCard = ({
   };
 
   return (
-    <Card className="group p-6 hover:shadow-xl transition-all duration-300 border-border/50 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-card/50 onboarding-join-queue" onClick={() => id && navigate(`/clinic/${id}`)}>
+    <Card className="group p-6 hover:shadow-xl transition-all duration-300 border-ai-indigo/30 hover:border-ai-purple/50 cursor-pointer bg-gradient-to-br from-card to-ai-purple/5 onboarding-join-queue hover:shadow-ai-purple/10" onClick={() => id && navigate(`/clinic/${id}`)}>
       <div className="space-y-5">
         <div className="flex items-start justify-between">
           <div className="space-y-3 flex-1">
@@ -212,7 +212,12 @@ export const ClinicCard = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-3 py-4 px-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-xl border border-primary/20 onboarding-stats">
+        <div className="flex items-center gap-3 py-4 px-4 rounded-xl border onboarding-stats"
+          style={{ 
+            background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
+            borderColor: 'hsl(var(--ai-cyan)/0.3)'
+          }}
+        >
           <div className="flex items-center gap-3 flex-1">
             <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
               <Users className="h-5 w-5 text-primary" />
@@ -236,8 +241,15 @@ export const ClinicCard = ({
 
         {myQueueEntry ? (
           <div className="space-y-3 pt-2">
-            <div className="relative p-5 bg-card rounded-xl border-2 border-primary/30 shadow-lg">
-              <div className="flex items-center justify-between p-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg border-2 border-primary/20 mb-3">
+            <div className="relative p-5 bg-card rounded-xl border-2 shadow-lg"
+              style={{ borderColor: 'hsl(var(--ai-purple)/0.4)' }}
+            >
+              <div className="flex items-center justify-between p-4 rounded-lg border-2 mb-3"
+                style={{ 
+                  background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.1))',
+                  borderColor: 'hsl(var(--ai-purple)/0.3)'
+                }}
+              >
                 <div className="flex items-center gap-4">
                   <div className="relative h-16 w-16">
                     <svg className="absolute inset-0 -rotate-90" viewBox="0 0 64 64">
@@ -305,7 +317,12 @@ export const ClinicCard = ({
           </div>
         ) : (
           <div className="space-y-3 pt-2">
-            <div className="p-5 bg-gradient-to-br from-primary/10 via-accent/10 to-primary/5 rounded-xl border-2 border-primary/30 shadow-lg">
+            <div className="p-5 rounded-xl border-2 shadow-lg"
+              style={{ 
+                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.05))',
+                borderColor: 'hsl(var(--ai-purple)/0.4)'
+              }}
+            >
               <div className="flex items-center gap-4 mb-3">
                 <div className="h-14 w-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/40">
                   <Users className="h-7 w-7 text-primary-foreground" strokeWidth={3} />

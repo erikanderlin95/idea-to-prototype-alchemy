@@ -58,7 +58,12 @@ export const Features = () => {
           {mainFeatures.map((feature, index) => (
             <div
               key={index}
-              className="group bg-card p-10 rounded-2xl border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 hover:shadow-2xl hover:scale-105"
+              className="group relative overflow-hidden bg-gradient-to-br from-ai-purple/5 via-ai-blue/5 to-ai-cyan/5 p-10 rounded-2xl border-2 border-ai-purple/20 hover:border-ai-blue/50 transition-all duration-300 hover:shadow-2xl hover:scale-105 backdrop-blur-sm"
+              style={{ 
+                background: index === 0 ? 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-blue)/0.05))' :
+                           index === 1 ? 'linear-gradient(135deg, hsl(var(--ai-blue)/0.08), hsl(var(--ai-cyan)/0.05))' :
+                           'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-violet)/0.05))'
+              }}
             >
               <div className="flex justify-center mb-6">
                 {feature.icon === "queue" && <QueueIcon size="lg" />}
@@ -77,10 +82,12 @@ export const Features = () => {
           {additionalFeatures.map((feature, index) => (
             <div
               key={index}
-              className="group bg-card p-6 rounded-xl border border-border/50 hover:border-primary/30 transition-all duration-300 hover:shadow-lg"
+              className="group bg-card p-6 rounded-xl border border-ai-indigo/20 hover:border-ai-purple/40 transition-all duration-300 hover:shadow-lg hover:shadow-ai-purple/10"
             >
-              <div className="h-12 w-12 rounded-lg bg-gradient-to-br from-primary/20 to-accent/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                <feature.icon className="h-6 w-6 text-primary" />
+              <div className="h-12 w-12 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform"
+                style={{ background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.25), hsl(var(--ai-blue)/0.15))' }}
+              >
+                <feature.icon className="h-6 w-6 text-ai-purple" />
               </div>
               <h3 className="text-lg font-bold mb-2">{feature.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
