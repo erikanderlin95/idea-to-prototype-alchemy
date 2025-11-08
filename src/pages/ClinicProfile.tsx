@@ -74,14 +74,14 @@ const ClinicProfile = () => {
                   <h1 className="text-3xl font-bold">{clinic.name}</h1>
                   <Badge variant="secondary">{clinic.type}</Badge>
                 </div>
-                <div className="flex items-center gap-4 text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <MapPin className="h-4 w-4" />
-                    <span className="text-sm">{clinic.address}</span>
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <MapPin className="h-5 w-5 text-foreground" />
+                    <span className="text-base font-medium text-foreground">{clinic.address}</span>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-                    <span className="text-sm font-medium">{clinic.rating}</span>
+                  <div className="flex items-center gap-2">
+                    <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
+                    <span className="text-base font-bold text-foreground">{clinic.rating}</span>
                   </div>
                 </div>
               </div>
@@ -99,7 +99,7 @@ const ClinicProfile = () => {
               </Button>
             </div>
 
-            <p className="text-muted-foreground">{clinic.description}</p>
+            <p className="text-base text-foreground/90 font-medium">{clinic.description}</p>
           </div>
 
           {/* Contact & Queue Info */}
@@ -173,7 +173,10 @@ const ClinicProfile = () => {
                             )}
                           </div>
                           {doctor.qualifications && (
-                            <p className="text-base line-clamp-3">{doctor.qualifications}</p>
+                            <div className="space-y-2">
+                              <h4 className="text-sm font-semibold text-foreground">Qualifications & Certificates</h4>
+                              <p className="text-base line-clamp-3 text-foreground/90">{doctor.qualifications}</p>
+                            </div>
                           )}
                           {doctor.languages && doctor.languages.length > 0 && (
                             <div className="flex gap-2 flex-wrap">
