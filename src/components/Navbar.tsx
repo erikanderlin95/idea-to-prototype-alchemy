@@ -33,11 +33,18 @@ export const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate("/")}>
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <Heart className="h-5 w-5 text-primary-foreground" fill="currentColor" />
+        <div className="flex items-center gap-3 cursor-pointer group" onClick={() => navigate("/")}>
+          <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 blur-sm group-hover:blur-md transition-all" />
+            <Heart className="h-6 w-6 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" fill="currentColor" />
+            <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-accent animate-pulse" />
           </div>
-          <span className="text-xl font-bold">ClynicQ</span>
+          <div className="flex flex-col">
+            <span className="text-2xl font-poppins font-bold tracking-tight leading-none bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">
+              Clynic<span className="text-primary">Q</span>
+            </span>
+            <span className="text-[10px] font-medium text-muted-foreground tracking-wider uppercase">Healthcare Simplified</span>
+          </div>
         </div>
 
         <div className="hidden md:flex items-center gap-6">
