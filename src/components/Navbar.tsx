@@ -76,11 +76,11 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col -space-y-1 min-w-0">
+          <div className="flex flex-col -space-y-0.5 min-w-0">
             <span className="text-xl md:text-2xl font-poppins font-bold tracking-tight leading-none whitespace-nowrap">
               Clynic<span className="text-primary">Q</span>
             </span>
-            <span className="text-[8px] md:text-[9px] font-semibold text-muted-foreground tracking-wider uppercase whitespace-nowrap">Queue • Book • Connect</span>
+            <span className="text-[7px] md:text-[8px] font-semibold text-muted-foreground tracking-wide uppercase whitespace-nowrap">Digital Queue • Book • Connect</span>
           </div>
         </div>
 
