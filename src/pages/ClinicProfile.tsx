@@ -131,8 +131,8 @@ const ClinicProfile = () => {
                   <Phone className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-foreground mb-1">Phone</p>
-                  <p className="font-black text-lg text-foreground">{clinic.phone}</p>
+                  <p className="text-base font-bold text-foreground mb-1">Phone</p>
+                  <p className="text-lg text-foreground">{clinic.phone}</p>
                 </div>
               </div>
             </Card>
@@ -142,19 +142,19 @@ const ClinicProfile = () => {
                   <Mail className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-foreground mb-1">Email</p>
-                  <p className="font-black text-lg text-foreground">{clinic.email || "Not available"}</p>
+                  <p className="text-base font-bold text-foreground mb-1">Email</p>
+                  <p className="text-lg text-foreground">{clinic.email || "Not available"}</p>
                 </div>
               </div>
             </Card>
-            <Card className="p-6 border-2 border-primary/30 shadow-lg">
+            <Card className="p-6 border-4 border-primary/50 shadow-xl bg-gradient-to-br from-primary/5 to-accent/5">
               <div className="flex items-center gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <Users className="h-6 w-6 text-primary" />
+                <div className="p-3 bg-gradient-to-br from-primary to-accent rounded-lg shadow-lg">
+                  <Users className="h-6 w-6 text-primary-foreground" />
                 </div>
                 <div>
-                  <p className="text-sm font-semibold text-foreground mb-1">Current Queue</p>
-                  <p className="font-black text-lg text-foreground">{queue.length} waiting</p>
+                  <p className="text-base font-bold text-foreground mb-1">Current Queue</p>
+                  <p className="font-black text-2xl text-primary">{queue.length} waiting</p>
                 </div>
               </div>
             </Card>
