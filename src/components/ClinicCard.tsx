@@ -305,14 +305,14 @@ export const ClinicCard = ({
           </div>
         ) : (
           <div className="space-y-3 pt-2">
-            <div className="p-5 bg-gradient-to-br from-primary/30 via-accent/30 to-primary/20 rounded-xl border-2 border-primary/50 shadow-lg">
+            <div className="p-5 bg-gradient-to-br from-primary/10 via-accent/10 to-primary/5 rounded-xl border-2 border-primary/30 shadow-lg">
               <div className="flex items-center gap-4 mb-3">
                 <div className="h-14 w-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/40">
                   <Users className="h-7 w-7 text-primary-foreground" strokeWidth={3} />
                 </div>
                 <div>
-                  <p className="text-base font-black text-foreground">Ready to Skip the Wait?</p>
-                  <p className="text-sm font-bold text-foreground/80">Join the virtual queue now</p>
+                  <p className="text-lg font-black text-foreground">Ready to Skip the Wait?</p>
+                  <p className="text-base font-bold text-foreground/80">Join the virtual queue now</p>
                 </div>
               </div>
             </div>
