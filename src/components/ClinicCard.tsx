@@ -3,6 +3,10 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Users, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
+import { toast } from "sonner";
+import { useState } from "react";
 
 interface ClinicCardProps {
   id?: string;
@@ -26,6 +30,69 @@ export const ClinicCard = ({
   isOpen,
 }: ClinicCardProps) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const [isJoining, setIsJoining] = useState(false);
+
+  const handleJoinQueue = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    if (!user) {
+      toast.error("Please sign in to join the queue");
+      navigate("/auth");
+      return;
+    }
+
+    if (!id) return;
+
+    setIsJoining(true);
+    try {
+      // Check if user is already in queue
+      const { data: existingQueue } = await supabase
+        .from("queue_entries")
+        .select("*")
+        .eq("clinic_id", id)
+        .eq("user_id", user.id)
+        .eq("status", "waiting")
+        .maybeSingle();
+
+      if (existingQueue) {
+        toast.info("You're already in this queue!");
+        navigate(`/queue?clinic=${id}`);
+        return;
+      }
+
+      // Get the next queue number
+      const { data: queueData } = await supabase
+        .from("queue_entries")
+        .select("queue_number")
+        .eq("clinic_id", id)
+        .eq("status", "waiting")
+        .order("queue_number", { ascending: false })
+        .limit(1);
+
+      const nextQueueNumber = queueData && queueData.length > 0 
+        ? queueData[0].queue_number + 1 
+        : 1;
+
+      // Join the queue
+      const { error } = await supabase.from("queue_entries").insert({
+        clinic_id: id,
+        user_id: user.id,
+        queue_number: nextQueueNumber,
+        status: "waiting",
+        estimated_wait_time: queueCount * 15,
+      });
+
+      if (error) throw error;
+
+      toast.success(`You're #${nextQueueNumber} in the queue!`);
+      navigate(`/queue?clinic=${id}`);
+    } catch (error: any) {
+      toast.error(error.message || "Failed to join queue");
+    } finally {
+      setIsJoining(false);
+    }
+  };
 
   return (
     <Card className="p-6 hover:shadow-lg transition-all duration-300 border-border/50 cursor-pointer" onClick={() => id && navigate(`/clinic/${id}`)}>
@@ -68,6 +135,15 @@ export const ClinicCard = ({
 
         <div className="flex gap-2">
           <Button 
+            variant="outline"
+            className="flex-1" 
+            disabled={!isOpen || isJoining}
+            onClick={handleJoinQueue}
+          >
+            <Users className="mr-2 h-4 w-4" />
+            {isJoining ? "Joining..." : "Join Queue"}
+          </Button>
+          <Button 
             className="flex-1" 
             disabled={!isOpen}
             onClick={(e) => {
@@ -75,7 +151,7 @@ export const ClinicCard = ({
               id && navigate(`/clinic/${id}`);
             }}
           >
-            {isOpen ? "View Details" : "Closed"}
+            View Details
           </Button>
         </div>
       </div>
