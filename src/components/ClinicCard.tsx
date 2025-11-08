@@ -285,30 +285,30 @@ export const ClinicCard = ({
           </div>
         ) : (
           <div className="space-y-3 pt-2">
-            <div className="p-4 bg-gradient-to-br from-primary/10 via-accent/10 to-primary/5 rounded-xl border border-primary/30">
-              <div className="flex items-center gap-3 mb-2">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-                  <Users className="h-5 w-5 text-primary-foreground" strokeWidth={2.5} />
+            <div className="p-5 bg-gradient-to-br from-primary/30 via-accent/30 to-primary/20 rounded-xl border-2 border-primary/50 shadow-lg">
+              <div className="flex items-center gap-4 mb-3">
+                <div className="h-14 w-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/40">
+                  <Users className="h-7 w-7 text-primary-foreground" strokeWidth={3} />
                 </div>
                 <div>
-                  <p className="text-sm font-bold text-foreground">Ready to skip the wait?</p>
-                  <p className="text-xs text-muted-foreground">Join the virtual queue now</p>
+                  <p className="text-base font-black text-foreground">Ready to Skip the Wait?</p>
+                  <p className="text-sm font-bold text-foreground/80">Join the virtual queue now</p>
                 </div>
               </div>
             </div>
             
             <div className="flex gap-3">
               <Button 
-                className="flex-1 bg-gradient-to-r from-primary via-primary to-accent hover:from-primary/90 hover:via-primary/90 hover:to-accent/90 text-primary-foreground font-bold shadow-lg shadow-primary/30 border-0" 
+                className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
                 disabled={!isOpen || isJoining}
                 onClick={handleJoinQueue}
               >
-                <Users className="mr-2 h-5 w-5" strokeWidth={2.5} />
+                <Users className="mr-2 h-6 w-6" strokeWidth={3} />
                 {isJoining ? "Joining..." : "Join Queue"}
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 font-bold hover:bg-primary/10 hover:border-primary border-2" 
+                className="flex-1 font-black text-base hover:bg-primary/20 hover:border-primary border-2 border-primary/50 h-12 hover:scale-105 transition-transform" 
                 disabled={!isOpen}
                 onClick={(e) => {
                   e.stopPropagation();
