@@ -13,6 +13,7 @@ import Chatbot from "./pages/Chatbot";
 import Queue from "./pages/Queue";
 import DoctorProfile from "./pages/DoctorProfile";
 import Analytics from "./pages/Analytics";
+import StaffDashboard from "./pages/StaffDashboard";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/queue" element={<Queue />} />
           <Route path="/doctor/:id" element={<DoctorProfile />} />
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/staff" element={<StaffDashboard />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

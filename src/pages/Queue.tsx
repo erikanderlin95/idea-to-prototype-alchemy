@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useQueueNotifications } from "@/hooks/useQueueNotifications";
+import { StaffNotifications } from "@/components/StaffNotifications";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -187,6 +188,11 @@ export default function Queue() {
       <Navbar />
       
       <div className="container mx-auto px-4 py-8 max-w-4xl">
+        {/* Staff Notifications */}
+        <div className="mb-6">
+          <StaffNotifications />
+        </div>
+
         <Card className="mb-6 bg-gradient-to-r from-card to-primary/5">
           <CardHeader>
             <div className="flex items-start justify-between">

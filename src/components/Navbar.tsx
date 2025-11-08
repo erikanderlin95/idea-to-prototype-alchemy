@@ -1,11 +1,34 @@
 import { Button } from "@/components/ui/button";
-import { Heart, MessageSquare } from "lucide-react";
+import { Heart, MessageSquare, ClipboardList } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 export const Navbar = () => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const [isStaff, setIsStaff] = useState(false);
+
+  useEffect(() => {
+    if (!user) {
+      setIsStaff(false);
+      return;
+    }
+
+    const checkStaffRole = async () => {
+      const { data } = await supabase
+        .from("user_roles")
+        .select("role")
+        .eq("user_id", user.id)
+        .eq("role", "clinic_staff")
+        .maybeSingle();
+
+      setIsStaff(!!data);
+    };
+
+    checkStaffRole();
+  }, [user]);
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -23,6 +46,12 @@ export const Navbar = () => {
           </a>
           {user && (
             <>
+              {isStaff && (
+                <a href="/staff" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-1">
+                  <ClipboardList className="h-4 w-4" />
+                  Staff Dashboard
+                </a>
+              )}
               <a href="/appointments" className="text-sm font-medium hover:text-primary transition-colors">
                 My Appointments
               </a>

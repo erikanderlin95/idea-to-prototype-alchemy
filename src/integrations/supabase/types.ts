@@ -327,6 +327,54 @@ export type Database = {
           },
         ]
       }
+      queue_notifications: {
+        Row: {
+          clinic_id: string
+          id: string
+          message: string
+          queue_entry_id: string
+          read_at: string | null
+          sent_at: string | null
+          sent_by: string
+          user_id: string
+        }
+        Insert: {
+          clinic_id: string
+          id?: string
+          message: string
+          queue_entry_id: string
+          read_at?: string | null
+          sent_at?: string | null
+          sent_by: string
+          user_id: string
+        }
+        Update: {
+          clinic_id?: string
+          id?: string
+          message?: string
+          queue_entry_id?: string
+          read_at?: string | null
+          sent_at?: string | null
+          sent_by?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "queue_notifications_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "queue_notifications_queue_entry_id_fkey"
+            columns: ["queue_entry_id"]
+            isOneToOne: false
+            referencedRelation: "queue_entries"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       queue_statistics: {
         Row: {
           average_wait_time: number | null
