@@ -22,7 +22,7 @@ export const MyClynicQPlugin = () => {
             <div className="flex items-center justify-center gap-3 mb-4">
               <MyClynicQIcon size="lg" />
               <h2 className="text-3xl md:text-5xl font-bold">
-                My<span className="bg-gradient-to-r from-ai-purple via-ai-blue to-ai-cyan bg-clip-text text-transparent">Clynic</span><span className="text-5xl md:text-6xl bg-gradient-to-br from-ai-cyan via-white to-ai-purple bg-clip-text text-transparent font-black drop-shadow-lg">Q</span>
+                My<span className="bg-gradient-to-r from-ai-purple to-ai-cyan bg-clip-text text-transparent">ClynicQ</span>
               </h2>
             </div>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
