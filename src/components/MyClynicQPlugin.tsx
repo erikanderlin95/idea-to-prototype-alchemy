@@ -1,32 +1,51 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Calendar, Bell, CheckCircle, MessageCircle } from "lucide-react";
+import { MessageSquare, Calendar, Bell, CheckCircle, MessageCircle, Sparkles } from "lucide-react";
+import { ChatbotIcon } from "@/components/icons/FeatureIcons";
 
 export const MyClynicQPlugin = () => {
   return (
-    <section className="py-24 bg-secondary/20">
-      <div className="container px-4 md:px-6">
+    <section className="relative py-24 overflow-hidden">
+      {/* Background decorations matching logo style */}
+      <div className="absolute inset-0 bg-gradient-to-b from-secondary/20 via-primary/5 to-background" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,hsl(var(--primary)/0.15),transparent_40%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,hsl(var(--accent)/0.12),transparent_40%)]" />
+      
+      <div className="container px-4 md:px-6 relative z-10">
         <div className="space-y-10">
-          <div className="text-center space-y-4">
-            <Badge variant="secondary" className="mb-2">Coming Soon</Badge>
-            <h2 className="text-3xl md:text-5xl font-bold">MyClynicQ Chatbot</h2>
+          <div className="text-center space-y-4 animate-fade-in">
+            <Badge variant="secondary" className="mb-2 bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20">
+              <Sparkles className="h-3 w-3 mr-1" />
+              Coming Soon
+            </Badge>
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <ChatbotIcon size="lg" />
+              <h2 className="text-3xl md:text-5xl font-bold">
+                My<span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">ClynicQ</span>
+              </h2>
+            </div>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Never miss an appointment with automated reminders and instant support on WhatsApp
             </p>
           </div>
 
-          <div className="max-w-4xl mx-auto">
-            <Card className="p-8 md:p-12 bg-gradient-to-br from-background to-secondary/30 border-2 border-primary/20">
+          <div className="max-w-4xl mx-auto animate-scale-in">
+            <Card className="p-8 md:p-12 bg-gradient-to-br from-background via-primary/5 to-accent/5 border-2 border-primary/20 shadow-[0_8px_32px_hsl(var(--primary)/0.15)] hover:shadow-[0_12px_40px_hsl(var(--primary)/0.2)] transition-all duration-300">
               <div className="grid md:grid-cols-2 gap-8">
                 {/* Left side - Benefits */}
                 <div className="space-y-6">
-                  <div className="flex items-center gap-3">
-                    <div className="h-12 w-12 rounded-full bg-[#25D366]/10 flex items-center justify-center">
-                      <MessageCircle className="h-6 w-6 text-[#25D366]" />
+                  <div className="flex items-center gap-3 group">
+                    <div className="relative">
+                      <div className="absolute inset-0 bg-[#25D366]/20 rounded-full blur-xl group-hover:blur-2xl transition-all" />
+                      <div className="relative h-12 w-12 rounded-full bg-gradient-to-br from-[#25D366] to-[#128C7E] flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                        <MessageCircle className="h-6 w-6 text-white" />
+                      </div>
                     </div>
                     <div>
-                      <h3 className="text-2xl font-bold">Chat on WhatsApp</h3>
+                      <h3 className="text-2xl font-bold bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">
+                        Chat on WhatsApp
+                      </h3>
                       <p className="text-sm text-muted-foreground">Your health assistant, always available</p>
                     </div>
                   </div>
@@ -57,8 +76,13 @@ export const MyClynicQPlugin = () => {
 
                 {/* Right side - How it works */}
                 <div className="space-y-6">
-                  <div className="p-6 rounded-lg bg-background/80 border border-border space-y-4">
-                    <h4 className="font-semibold text-lg">How It Works</h4>
+                  <div className="p-6 rounded-lg bg-gradient-to-br from-background to-secondary/30 border border-primary/20 shadow-[0_4px_16px_hsl(var(--primary)/0.1)] space-y-4">
+                    <h4 className="font-semibold text-lg flex items-center gap-2">
+                      <div className="h-6 w-6 rounded-md bg-primary/10 flex items-center justify-center">
+                        <Sparkles className="h-4 w-4 text-primary" />
+                      </div>
+                      How It Works
+                    </h4>
                     
                     <div className="space-y-4">
                       <StepItem number="1" text="Book an appointment on ClynicQ" />
@@ -68,19 +92,22 @@ export const MyClynicQPlugin = () => {
                     </div>
                   </div>
 
-                  <div className="p-6 rounded-lg bg-primary/5 border border-primary/20 space-y-3">
+                  <div className="p-6 rounded-lg bg-gradient-to-br from-primary/10 via-primary/5 to-accent/5 border border-primary/30 shadow-inner space-y-3">
                     <h4 className="font-semibold">Available Channels</h4>
                     <div className="flex flex-wrap gap-2">
-                      <Badge variant="secondary" className="bg-[#25D366]/10 text-[#25D366] border-[#25D366]/20">
+                      <Badge variant="secondary" className="bg-[#25D366]/15 text-[#25D366] border-[#25D366]/30 hover:bg-[#25D366]/25 transition-colors">
                         <MessageCircle className="h-3 w-3 mr-1" />
                         WhatsApp
                       </Badge>
-                      <Badge variant="secondary">SMS</Badge>
-                      <Badge variant="secondary">Web Chat</Badge>
+                      <Badge variant="secondary" className="hover:bg-secondary/80 transition-colors">SMS</Badge>
+                      <Badge variant="secondary" className="hover:bg-secondary/80 transition-colors">Web Chat</Badge>
                     </div>
                   </div>
 
-                  <Button className="w-full" variant="outline" disabled>
+                  <Button 
+                    className="w-full bg-gradient-to-r from-primary to-accent hover:opacity-90 transition-opacity shadow-lg" 
+                    disabled
+                  >
                     <MessageCircle className="h-4 w-4 mr-2" />
                     Coming Soon
                   </Button>
@@ -90,9 +117,12 @@ export const MyClynicQPlugin = () => {
           </div>
 
           <div className="text-center max-w-2xl mx-auto">
-            <p className="text-sm text-muted-foreground">
-              Stay connected with your healthcare journey. MyClynicQ keeps you informed and makes managing appointments effortless.
-            </p>
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/20">
+              <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+              <p className="text-sm text-muted-foreground">
+                Stay connected with your healthcare journey. MyClynicQ keeps you informed and makes managing appointments effortless.
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -101,22 +131,30 @@ export const MyClynicQPlugin = () => {
 };
 
 const BenefitItem = ({ icon, title, description }: { icon: React.ReactNode; title: string; description: string }) => (
-  <div className="flex gap-3">
-    <div className="h-8 w-8 rounded-md bg-primary/10 flex items-center justify-center flex-shrink-0">
-      {icon}
+  <div className="flex gap-3 group cursor-default">
+    <div className="relative">
+      <div className="absolute inset-0 bg-primary/20 rounded-md blur-sm group-hover:blur-md transition-all" />
+      <div className="relative h-8 w-8 rounded-md bg-gradient-to-br from-primary/20 to-accent/20 border border-primary/30 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+        <div className="text-primary">
+          {icon}
+        </div>
+      </div>
     </div>
     <div>
-      <p className="font-medium text-sm">{title}</p>
+      <p className="font-medium text-sm group-hover:text-primary transition-colors">{title}</p>
       <p className="text-xs text-muted-foreground">{description}</p>
     </div>
   </div>
 );
 
 const StepItem = ({ number, text }: { number: string; text: string }) => (
-  <div className="flex items-center gap-3">
-    <div className="h-6 w-6 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0">
-      {number}
+  <div className="flex items-center gap-3 group cursor-default">
+    <div className="relative">
+      <div className="absolute inset-0 bg-primary/30 rounded-full blur-sm group-hover:blur-md transition-all" />
+      <div className="relative h-6 w-6 rounded-full bg-gradient-to-br from-primary to-accent text-primary-foreground flex items-center justify-center text-xs font-bold flex-shrink-0 shadow-md group-hover:scale-110 transition-transform">
+        {number}
+      </div>
     </div>
-    <p className="text-sm">{text}</p>
+    <p className="text-sm group-hover:text-foreground/90 transition-colors">{text}</p>
   </div>
 );
