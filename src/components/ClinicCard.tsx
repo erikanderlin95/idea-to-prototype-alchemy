@@ -236,43 +236,36 @@ export const ClinicCard = ({
 
         {myQueueEntry ? (
           <div className="space-y-3 pt-2">
-            <div className="relative p-4 bg-card rounded-xl border-2 border-primary shadow-lg">
-              {/* Queue Position Info */}
-              <div className="flex items-center justify-between p-5 bg-gradient-to-br from-primary/20 to-accent/20 rounded-lg border-2 border-primary/40 mb-3">
+            <div className="relative p-5 bg-card rounded-xl border-2 border-primary/30 shadow-lg">
+              <div className="flex items-center justify-between p-4 bg-gradient-to-r from-primary/10 to-accent/10 rounded-lg border-2 border-primary/20 mb-3">
                 <div className="flex items-center gap-4">
-                  <div className="h-20 w-20 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center border-4 border-background shadow-2xl">
-                    <span className="text-3xl font-black text-primary-foreground">#{myQueueEntry.queue_number}</span>
+                  <div className="h-16 w-16 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg">
+                    #{myQueueEntry.queue_number}
                   </div>
                   <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">Your Position</p>
-                    <p className="text-2xl font-black text-foreground">
-                      #{myQueueEntry.queue_number}
-                      <span className="text-lg font-bold text-muted-foreground ml-2">/ {queueCount}</span>
+                    <p className="text-sm font-medium text-muted-foreground mb-1">You're in the Queue</p>
+                    <p className="text-lg font-bold text-foreground">
+                      Position <span className="text-2xl font-black text-primary">#{myQueueEntry.queue_number}</span>
+                      <span className="text-sm font-medium text-muted-foreground ml-2">of {queueCount}</span>
                     </p>
                   </div>
                 </div>
-                <Badge className="bg-accent text-accent-foreground font-bold px-4 py-2 text-sm">
-                  Active
+                <Badge variant="secondary" className="text-xs font-semibold px-3 py-1">
+                  Waiting
                 </Badge>
               </div>
               
-              {/* Estimated Wait Time */}
-              <div className="flex items-center justify-between p-5 bg-gradient-to-br from-accent/20 to-primary/10 rounded-lg border-2 border-accent/40">
-                <div className="flex items-center gap-3">
-                  <div className="h-12 w-12 rounded-full bg-accent flex items-center justify-center">
-                    <Clock className="h-6 w-6 text-accent-foreground" strokeWidth={2.5} />
-                  </div>
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-1">Estimated Wait</p>
-                    <p className="text-2xl font-black text-accent">{myQueueEntry.queue_number * 15} <span className="text-base font-bold text-foreground">minutes</span></p>
-                  </div>
-                </div>
+              <div className="flex items-center justify-center gap-3 p-4 bg-accent/10 rounded-lg border-2 border-accent/30">
+                <Clock className="h-6 w-6 text-accent" strokeWidth={2.5} />
+                <p className="text-base font-bold text-foreground">
+                  Estimated Wait: <span className="text-accent text-xl font-black ml-1">{myQueueEntry.queue_number * 15} mins</span>
+                </p>
               </div>
             </div>
             
             <div className="flex gap-3">
               <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-lg border-0 h-12 text-base" 
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-md border-0 h-11" 
                 disabled={isLoading}
                 onClick={handleCheckIn}
               >
@@ -281,7 +274,7 @@ export const ClinicCard = ({
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 border-2 border-destructive text-destructive hover:bg-destructive hover:text-destructive-foreground font-bold h-12 text-base" 
+                className="flex-1 border-2 border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive font-bold h-11" 
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
