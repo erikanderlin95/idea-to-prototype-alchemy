@@ -187,16 +187,16 @@ export const ClinicCard = ({
         <div className="flex items-start justify-between">
           <div className="space-y-3 flex-1">
             <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-lg font-bold group-hover:text-primary transition-colors">{name}</h3>
-              <Badge variant="secondary" className="text-xs font-medium">
+              <h3 className="text-xl font-bold group-hover:text-primary transition-colors">{name}</h3>
+              <Badge variant="secondary" className="text-sm font-medium">
                 {type}
               </Badge>
               {isOpen ? (
-                <Badge variant="outline" className="text-xs border-accent text-accent">
+                <Badge variant="outline" className="text-sm border-accent text-accent">
                   Open
                 </Badge>
               ) : (
-                <Badge variant="outline" className="text-xs border-muted text-muted-foreground">
+                <Badge variant="outline" className="text-sm border-muted text-muted-foreground">
                   Closed
                 </Badge>
               )}
@@ -311,7 +311,7 @@ export const ClinicCard = ({
                   <Users className="h-7 w-7 text-primary-foreground" strokeWidth={3} />
                 </div>
                 <div>
-                  <p className="text-lg font-black text-foreground">Ready to Skip the Wait?</p>
+                  <p className="text-lg font-semibold text-foreground">Ready to Skip the Wait?</p>
                   <p className="text-base font-bold text-foreground/80">Join the virtual queue now</p>
                 </div>
               </div>
