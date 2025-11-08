@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Heart } from "lucide-react";
+import { ClipboardList } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { z } from "zod";
 
@@ -81,7 +81,8 @@ const Auth = () => {
         <div className="flex items-center justify-center gap-3 mb-8 cursor-pointer group" onClick={() => navigate("/")}>
           <div className="relative h-12 w-12 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 blur-md group-hover:blur-lg transition-all" />
-            <Heart className="h-7 w-7 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" fill="currentColor" />
+            {/* Clinic Queue Icon - ClipboardList representing digital queue */}
+            <ClipboardList className="h-7 w-7 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" />
             {/* Queue Indicator Badge */}
             <div className="absolute -top-2 -right-2 z-20">
               <div className="relative flex items-center justify-center h-6 w-6 rounded-full bg-accent shadow-lg animate-pulse">
@@ -89,12 +90,21 @@ const Auth = () => {
                 <div className="absolute inset-0 rounded-full bg-accent/40 animate-ping" />
               </div>
             </div>
+            {/* Medical Cross indicator */}
+            <div className="absolute -bottom-1 -left-1 z-10">
+              <div className="h-3.5 w-3.5 rounded-sm bg-background flex items-center justify-center shadow-md">
+                <div className="relative">
+                  <div className="absolute h-2 w-0.5 bg-accent left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+                  <div className="absolute w-2 h-0.5 bg-accent left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+                </div>
+              </div>
+            </div>
           </div>
           <div className="flex flex-col">
             <span className="text-3xl font-poppins font-bold tracking-tight leading-none bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text">
               Clynic<span className="text-primary">Q</span>
             </span>
-            <span className="text-xs font-semibold text-muted-foreground tracking-wider uppercase">Healthcare Simplified</span>
+            <span className="text-xs font-semibold text-muted-foreground tracking-wider uppercase">Digital Queue System</span>
           </div>
         </div>
 

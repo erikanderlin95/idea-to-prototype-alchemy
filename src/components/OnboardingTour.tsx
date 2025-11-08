@@ -16,7 +16,7 @@ const tourSteps: TourStep[] = [
   {
     target: ".onboarding-logo",
     title: "Welcome to ClynicQ! 👋",
-    description: "Your smart healthcare queue management system. The 'Q' badge represents our real-time queue feature - join virtual queues and track wait times instantly!",
+    description: "Your digital queue management system for clinics. The clipboard icon represents our queue system, the 'Q' badge shows active queues, and the medical cross indicates healthcare services!",
     position: "bottom",
     spotlight: true,
   },

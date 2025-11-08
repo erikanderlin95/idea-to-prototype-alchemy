@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Heart, MessageSquare, ClipboardList, HelpCircle } from "lucide-react";
+import { ClipboardList, MessageSquare, ClipboardList as ClipboardIcon, HelpCircle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -48,12 +48,22 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
         <div className="flex items-center gap-3 cursor-pointer group onboarding-logo" onClick={() => navigate("/")}>
           <div className="relative h-11 w-11 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
             <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 blur-md group-hover:blur-lg transition-all" />
-            <Heart className="h-6 w-6 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" fill="currentColor" />
-            {/* Queue Indicator Badge */}
+            {/* Clinic Queue Icon - ClipboardList representing digital queue */}
+            <ClipboardList className="h-6 w-6 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" />
+            {/* Queue Indicator Badge - Active queue count */}
             <div className="absolute -top-1.5 -right-1.5 z-20">
               <div className="relative flex items-center justify-center h-5 w-5 rounded-full bg-accent shadow-lg animate-pulse">
                 <span className="text-[10px] font-bold text-accent-foreground">Q</span>
                 <div className="absolute inset-0 rounded-full bg-accent/40 animate-ping" />
+              </div>
+            </div>
+            {/* Medical Cross indicator on bottom left */}
+            <div className="absolute -bottom-0.5 -left-0.5 z-10">
+              <div className="h-3 w-3 rounded-sm bg-background flex items-center justify-center shadow-sm">
+                <div className="relative">
+                  <div className="absolute h-2 w-0.5 bg-accent left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+                  <div className="absolute w-2 h-0.5 bg-accent left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
+                </div>
               </div>
             </div>
           </div>
@@ -61,7 +71,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
             <span className="text-2xl font-poppins font-bold tracking-tight leading-none">
               Clynic<span className="text-primary">Q</span>
             </span>
-            <span className="text-[9px] font-semibold text-muted-foreground tracking-widest uppercase">Healthcare Simplified</span>
+            <span className="text-[9px] font-semibold text-muted-foreground tracking-widest uppercase">Digital Queue System</span>
           </div>
         </div>
 
