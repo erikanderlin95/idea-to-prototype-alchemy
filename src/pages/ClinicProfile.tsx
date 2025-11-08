@@ -156,11 +156,11 @@ const ClinicProfile = () => {
 
           {/* Tabs */}
           <Tabs defaultValue="doctors" className="w-full">
-            <TabsList className="grid w-full grid-cols-4">
-              <TabsTrigger value="doctors" className="text-base">Doctors</TabsTrigger>
-              <TabsTrigger value="awards" className="text-base">Awards</TabsTrigger>
-              <TabsTrigger value="hours" className="text-base">Operating Hours</TabsTrigger>
-              <TabsTrigger value="reviews" className="text-base">Reviews</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4 p-2 bg-muted/50">
+              <TabsTrigger value="doctors" className="text-base font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Doctors</TabsTrigger>
+              <TabsTrigger value="awards" className="text-base font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Awards</TabsTrigger>
+              <TabsTrigger value="hours" className="text-base font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Operating Hours</TabsTrigger>
+              <TabsTrigger value="reviews" className="text-base font-bold data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Reviews</TabsTrigger>
             </TabsList>
 
             <TabsContent value="doctors" className="space-y-6">
