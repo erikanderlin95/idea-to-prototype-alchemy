@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
-import { Clock, Users, AlertCircle, CheckCircle2, LogOut, LogIn, Bell, BellOff } from "lucide-react";
+import { Clock, Users, AlertCircle, CheckCircle2, LogOut, LogIn, Bell, BellOff, Star } from "lucide-react";
 
 export default function Queue() {
   const [searchParams] = useSearchParams();
@@ -22,6 +22,8 @@ export default function Queue() {
   const [queueData, setQueueData] = useState<any[]>([]);
   const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [rating, setRating] = useState(0);
+  const [lastRefresh, setLastRefresh] = useState(Date.now());
 
   // Initialize queue notifications
   const { notificationPermission, requestNotificationPermission } = useQueueNotifications({
@@ -45,8 +47,14 @@ export default function Queue() {
     loadQueueData();
     const unsubscribe = subscribeToQueue();
     
+    // Auto-refresh indicator every 10 seconds
+    const refreshInterval = setInterval(() => {
+      setLastRefresh(Date.now());
+    }, 10000);
+    
     return () => {
       if (unsubscribe) unsubscribe();
+      clearInterval(refreshInterval);
     };
   }, [clinicId, user]);
 
@@ -277,30 +285,42 @@ export default function Queue() {
         </Card>
 
         {myQueueEntry?.status === "served" ? (
-          <Card className="mb-6 border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20">
+          <Card className="mb-6 border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 animate-in slide-in-from-bottom">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-green-700 dark:text-green-400">
-                <CheckCircle2 className="h-6 w-6" />
-                Thank You for Visiting!
+                <CheckCircle2 className="h-6 w-6 animate-pulse" />
+                Consultation Complete!
               </CardTitle>
               <CardDescription className="text-green-600 dark:text-green-500">
-                You've been successfully served at {clinic?.name}
+                Thank you for visiting {clinic?.name}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="p-6 bg-white dark:bg-background rounded-xl border border-green-200 dark:border-green-800">
-                <p className="text-center text-lg mb-4">How was your experience today?</p>
+                <p className="text-center text-lg font-medium mb-4">Rate your visit</p>
                 <div className="flex gap-2 justify-center mb-4">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button
                       key={star}
-                      className="text-3xl hover:scale-110 transition-transform"
+                      onClick={() => setRating(star)}
+                      className="transition-transform hover:scale-110"
                     >
-                      ⭐
+                      <Star
+                        className={`h-8 w-8 ${
+                          star <= rating
+                            ? "fill-yellow-400 text-yellow-400"
+                            : "text-gray-300"
+                        }`}
+                      />
                     </button>
                   ))}
                 </div>
-                <p className="text-sm text-muted-foreground text-center">
+                {rating > 0 && (
+                  <p className="text-sm text-green-600 dark:text-green-400 text-center animate-in fade-in">
+                    Thanks for your feedback!
+                  </p>
+                )}
+                <p className="text-xs text-muted-foreground text-center mt-2">
                   Your feedback helps us improve our service
                 </p>
               </div>
@@ -309,25 +329,31 @@ export default function Queue() {
                 className="w-full bg-gradient-to-r from-primary to-accent"
                 size="lg"
               >
-                Back to Home
+                Return to Home
               </Button>
             </CardContent>
           </Card>
         ) : myQueueEntry?.status === "serving" ? (
-          <Card className="mb-6 border-accent bg-gradient-to-br from-accent/20 to-primary/10">
+          <Card className="mb-6 border-accent bg-gradient-to-br from-accent/20 to-primary/10 animate-in slide-in-from-bottom">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-accent">
-                <CheckCircle2 className="h-6 w-6" />
-                You're Being Served
-              </CardTitle>
+              <div className="relative">
+                <CardTitle className="flex items-center gap-2 text-accent">
+                  <CheckCircle2 className="h-6 w-6 animate-bounce" />
+                  You're Being Served Now!
+                </CardTitle>
+                <div className="absolute -top-2 right-0">
+                  <Badge variant="default" className="animate-pulse">In Progress</Badge>
+                </div>
+              </div>
               <CardDescription>
                 Please proceed to the consultation area
               </CardDescription>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
-                <div className="p-6 bg-white dark:bg-background rounded-xl border-2 border-accent">
-                  <div className="text-center">
+                <div className="p-6 bg-white dark:bg-background rounded-xl border-2 border-accent relative overflow-hidden">
+                  <div className="absolute inset-0 bg-accent/5 animate-pulse" />
+                  <div className="text-center relative z-10">
                     <p className="text-6xl font-bold text-accent mb-2">#{myQueueEntry.queue_number}</p>
                     <p className="text-lg font-medium">Your Queue Number</p>
                   </div>
@@ -341,38 +367,59 @@ export default function Queue() {
             </CardContent>
           </Card>
         ) : myQueueEntry?.status === "checked_in" ? (
-          <Card className="mb-6 border-primary bg-gradient-to-br from-primary/10 to-accent/5">
+          <Card className="mb-6 border-primary bg-gradient-to-br from-primary/10 to-accent/5 animate-in slide-in-from-bottom">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-primary">
-                <CheckCircle2 className="h-6 w-6" />
-                You're Checked In at {clinic?.name}
-              </CardTitle>
-              <CardDescription>
-                Please wait to be called for your turn
-              </CardDescription>
+              <div className="flex items-center justify-between">
+                <div>
+                  <CardTitle className="flex items-center gap-2 text-primary">
+                    <CheckCircle2 className="h-6 w-6" />
+                    <span className="relative">
+                      You're in Queue!
+                      <span className="absolute -top-1 -right-1 h-2 w-2 bg-green-500 rounded-full animate-pulse" />
+                    </span>
+                  </CardTitle>
+                  <CardDescription className="mt-1">
+                    {clinic?.name}
+                  </CardDescription>
+                </div>
+                <span className="text-xs text-muted-foreground">
+                  Updated {Math.floor((Date.now() - lastRefresh) / 1000)}s ago
+                </span>
+              </div>
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
                 <div className="grid grid-cols-3 gap-4">
-                  <div className="text-center">
+                  <div className="text-center p-4 bg-background rounded-lg border-2 border-primary/20">
                     <p className="text-sm text-muted-foreground mb-1">Queue Number</p>
-                    <p className="text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
+                    <p className="text-4xl font-bold text-primary animate-in zoom-in">{myQueueEntry.queue_number}</p>
                   </div>
-                  <div className="text-center">
+                  <div className="text-center p-4 bg-background rounded-lg border-2 border-primary/20">
                     <p className="text-sm text-muted-foreground mb-1">Status</p>
-                    <Badge variant="default" className="text-base px-4 py-2">
-                      Checked In
+                    <Badge variant="default" className="text-base px-4 py-2 animate-pulse">
+                      Waiting
                     </Badge>
                   </div>
-                  <div className="text-center">
+                  <div className="text-center p-4 bg-background rounded-lg border-2 border-primary/20">
                     <p className="text-sm text-muted-foreground mb-1">Est. Wait</p>
-                    <p className="text-2xl font-medium">
+                    <p className="text-2xl font-medium animate-in zoom-in">
                       {myPosition ? (myPosition - 1) * 15 : 0}m
                     </p>
                   </div>
                 </div>
 
                 <div className="p-4 bg-primary/10 rounded-xl border border-primary/20">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-muted-foreground">Visit Type</span>
+                    <span className="font-medium">{myQueueEntry.visit_type || "General Consultation"}</span>
+                  </div>
+                  <div className="flex items-center justify-between text-sm mt-2">
+                    <span className="text-muted-foreground">People Ahead</span>
+                    <span className="font-medium">{myPosition ? myPosition - 1 : 0}</span>
+                  </div>
+                </div>
+
+                <div className="p-4 bg-accent/10 rounded-xl border border-accent/20">
                   <p className="text-sm text-center font-medium">
                     🔔 You'll be notified when it's your turn
                   </p>

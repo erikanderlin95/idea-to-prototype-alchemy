@@ -53,6 +53,7 @@ export default function StaffDashboard() {
   const [loading, setLoading] = useState(true);
   const [selectedPatient, setSelectedPatient] = useState<QueueEntry | null>(null);
   const [notificationMessage, setNotificationMessage] = useState("");
+  const [queueOpen, setQueueOpen] = useState(true);
 
   useEffect(() => {
     if (!user) {
@@ -259,6 +260,32 @@ export default function StaffDashboard() {
     }
   };
 
+  const moveQueuePosition = async (entryId: string, direction: "up" | "down") => {
+    const currentIndex = queueData.findIndex(e => e.id === entryId);
+    if (currentIndex === -1) return;
+    
+    const targetIndex = direction === "up" ? currentIndex - 1 : currentIndex + 1;
+    if (targetIndex < 0 || targetIndex >= queueData.length) return;
+
+    const currentEntry = queueData[currentIndex];
+    const targetEntry = queueData[targetIndex];
+
+    try {
+      // Swap queue numbers
+      await supabase.from("queue_entries").update({ 
+        queue_number: targetEntry.queue_number 
+      }).eq("id", currentEntry.id);
+
+      await supabase.from("queue_entries").update({ 
+        queue_number: currentEntry.queue_number 
+      }).eq("id", targetEntry.id);
+
+      toast.success("Queue position updated");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to reorder queue");
+    }
+  };
+
   const sendCustomNotification = async () => {
     if (!selectedPatient || !notificationMessage.trim()) {
       toast.error("Please enter a message");
@@ -302,8 +329,25 @@ export default function StaffDashboard() {
       
       <div className="container mx-auto px-4 py-8 max-w-7xl">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold mb-2">Staff Dashboard</h1>
-          <p className="text-muted-foreground">{clinic?.name}</p>
+          <div className="flex items-center justify-between">
+            <div>
+              <h1 className="text-3xl font-bold mb-2">Staff Dashboard</h1>
+              <p className="text-muted-foreground">{clinic?.name}</p>
+            </div>
+            <div className="flex items-center gap-3">
+              <span className="text-sm text-muted-foreground">Queue Status:</span>
+              <Button
+                variant={queueOpen ? "default" : "outline"}
+                onClick={() => {
+                  setQueueOpen(!queueOpen);
+                  toast.success(`Queue ${!queueOpen ? "opened" : "closed"} for today`);
+                }}
+                className="gap-2"
+              >
+                {queueOpen ? "Open" : "Closed"}
+              </Button>
+            </div>
+          </div>
         </div>
 
         {/* Statistics Cards */}
@@ -417,6 +461,27 @@ export default function StaffDashboard() {
                       </div>
 
                       <div className="flex items-center gap-2">
+                        {index > 0 && (
+                          <Button
+                            onClick={() => moveQueuePosition(entry.id, "up")}
+                            variant="ghost"
+                            size="sm"
+                            title="Move up"
+                          >
+                            ↑
+                          </Button>
+                        )}
+                        {index < queueData.length - 1 && (
+                          <Button
+                            onClick={() => moveQueuePosition(entry.id, "down")}
+                            variant="ghost"
+                            size="sm"
+                            title="Move down"
+                          >
+                            ↓
+                          </Button>
+                        )}
+
                         {index === 0 && entry.status === "waiting" && (
                           <Button
                             onClick={() => markAsServing(entry.id, entry.queue_number)}
