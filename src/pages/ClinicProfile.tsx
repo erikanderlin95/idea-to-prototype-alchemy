@@ -7,9 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const ClinicProfile = () => {
   const { id } = useParams();
@@ -140,40 +141,48 @@ const ClinicProfile = () => {
               <TabsTrigger value="reviews">Reviews</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="doctors" className="space-y-4">
+            <TabsContent value="doctors" className="space-y-6">
               {doctors.length > 0 ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-6">
                   {doctors.map((doctor) => (
                     <Card 
                       key={doctor.id} 
-                      className="p-6 cursor-pointer hover:border-primary transition-colors"
+                      className="p-8 cursor-pointer hover:border-primary transition-all hover:shadow-lg"
                       onClick={() => navigate(`/doctor/${doctor.id}`)}
                     >
-                      <div className="space-y-3">
-                        <div>
-                          <div className="flex items-center gap-2">
-                            <h3 className="text-lg font-semibold">{doctor.name}</h3>
-                            {doctor.is_verified && (
-                              <Badge variant="default" className="text-xs">Verified</Badge>
+                      <div className="flex items-start gap-6">
+                        <Avatar className="h-32 w-32 border-4 border-primary/20">
+                          <AvatarImage src={doctor.photo_url} alt={doctor.name} />
+                          <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-3xl font-bold">
+                            <User className="h-16 w-16" />
+                          </AvatarFallback>
+                        </Avatar>
+                        <div className="flex-1 space-y-4">
+                          <div>
+                            <div className="flex items-center gap-3">
+                              <h3 className="text-2xl font-bold">{doctor.name}</h3>
+                              {doctor.is_verified && (
+                                <Badge variant="default" className="text-sm">Verified</Badge>
+                              )}
+                            </div>
+                            <p className="text-lg text-muted-foreground mt-1">{doctor.specialty}</p>
+                            {doctor.years_of_practice && (
+                              <p className="text-base text-muted-foreground mt-2">
+                                {doctor.years_of_practice} years experience
+                              </p>
                             )}
                           </div>
-                          <p className="text-sm text-muted-foreground">{doctor.specialty}</p>
-                          {doctor.years_of_practice && (
-                            <p className="text-xs text-muted-foreground mt-1">
-                              {doctor.years_of_practice} years experience
-                            </p>
+                          {doctor.qualifications && (
+                            <p className="text-base line-clamp-3">{doctor.qualifications}</p>
+                          )}
+                          {doctor.languages && doctor.languages.length > 0 && (
+                            <div className="flex gap-2 flex-wrap">
+                              {doctor.languages.map((lang: string, i: number) => (
+                                <Badge key={i} variant="outline" className="text-sm">{lang}</Badge>
+                              ))}
+                            </div>
                           )}
                         </div>
-                        {doctor.qualifications && (
-                          <p className="text-sm line-clamp-2">{doctor.qualifications}</p>
-                        )}
-                        {doctor.languages && doctor.languages.length > 0 && (
-                          <div className="flex gap-2 flex-wrap">
-                            {doctor.languages.map((lang: string, i: number) => (
-                              <Badge key={i} variant="outline">{lang}</Badge>
-                            ))}
-                          </div>
-                        )}
                       </div>
                     </Card>
                   ))}
