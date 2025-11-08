@@ -34,16 +34,16 @@ export const Navbar = () => {
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-3 cursor-pointer group" onClick={() => navigate("/")}>
-          <div className="relative h-10 w-10 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300 group-hover:scale-105">
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 blur-sm group-hover:blur-md transition-all" />
+          <div className="relative h-11 w-11 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 blur-md group-hover:blur-lg transition-all" />
             <Heart className="h-6 w-6 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" fill="currentColor" />
-            <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-accent animate-pulse" />
+            <div className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-accent animate-pulse shadow-md" />
           </div>
-          <div className="flex flex-col">
-            <span className="text-2xl font-poppins font-bold tracking-tight leading-none bg-gradient-to-r from-foreground to-foreground/80 bg-clip-text">
+          <div className="flex flex-col -space-y-1">
+            <span className="text-2xl font-poppins font-bold tracking-tight leading-none">
               Clynic<span className="text-primary">Q</span>
             </span>
-            <span className="text-[10px] font-medium text-muted-foreground tracking-wider uppercase">Healthcare Simplified</span>
+            <span className="text-[9px] font-semibold text-muted-foreground tracking-widest uppercase">Healthcare Simplified</span>
           </div>
         </div>
 

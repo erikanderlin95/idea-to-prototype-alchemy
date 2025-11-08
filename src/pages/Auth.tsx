@@ -78,11 +78,18 @@ const Auth = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary/30 to-background p-4">
       <div className="w-full max-w-md">
-        <div className="flex items-center justify-center gap-2 mb-6">
-          <div className="h-10 w-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
-            <Heart className="h-6 w-6 text-primary-foreground" fill="currentColor" />
+        <div className="flex items-center justify-center gap-3 mb-8 cursor-pointer group" onClick={() => navigate("/")}>
+          <div className="relative h-12 w-12 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
+            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 blur-md group-hover:blur-lg transition-all" />
+            <Heart className="h-7 w-7 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" fill="currentColor" />
+            <div className="absolute -top-1 -right-1 h-3.5 w-3.5 rounded-full bg-accent animate-pulse shadow-lg" />
           </div>
-          <span className="text-2xl font-bold">ClynicQ</span>
+          <div className="flex flex-col">
+            <span className="text-3xl font-poppins font-bold tracking-tight leading-none bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text">
+              Clynic<span className="text-primary">Q</span>
+            </span>
+            <span className="text-xs font-semibold text-muted-foreground tracking-wider uppercase">Healthcare Simplified</span>
+          </div>
         </div>
 
         <Tabs defaultValue="login" className="w-full">
