@@ -1,6 +1,9 @@
 import { ClipboardList } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Footer = () => {
+  const { t } = useLanguage();
+  
   return (
     <footer className="border-t border-border/40 bg-secondary/20">
       <div className="container px-4 md:px-6 py-12">
@@ -15,40 +18,40 @@ export const Footer = () => {
               </span>
             </div>
             <p className="text-sm text-muted-foreground">
-              Simplifying healthcare access across Singapore
+              {t("footer.tagline")}
             </p>
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">For Patients</h3>
+            <h3 className="font-semibold mb-4">{t("footer.forPatients")}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Find Clinics</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">How it Works</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">FAQ</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t("footer.findClinics")}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t("footer.howItWorks")}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t("footer.faq")}</a></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">For Clinics</h3>
+            <h3 className="font-semibold mb-4">{t("footer.forClinics")}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">Join Platform</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Features</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Pricing</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t("footer.joinPlatform")}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t("footer.features")}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t("footer.pricing")}</a></li>
             </ul>
           </div>
 
           <div>
-            <h3 className="font-semibold mb-4">Company</h3>
+            <h3 className="font-semibold mb-4">{t("footer.company")}</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="#" className="hover:text-primary transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-primary transition-colors">Terms of Service</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t("footer.aboutUs")}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t("footer.privacyPolicy")}</a></li>
+              <li><a href="#" className="hover:text-primary transition-colors">{t("footer.termsOfService")}</a></li>
             </ul>
           </div>
         </div>
 
         <div className="mt-8 pt-8 border-t border-border/40 text-center text-sm text-muted-foreground">
-          <p>© 2024 ClynicQ. PDPA Compliant Healthcare Platform.</p>
+          <p>{t("footer.copyright")}</p>
         </div>
       </div>
     </footer>

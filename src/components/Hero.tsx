@@ -2,8 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Search } from "lucide-react";
 import { QueueIcon, AppointmentsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Hero = () => {
+  const { t } = useLanguage();
+  
   return (
     <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-ai-purple/5 via-ai-blue/5 to-background">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--ai-purple)/0.15),transparent_50%)]" />
@@ -14,17 +17,17 @@ export const Hero = () => {
           <div className="space-y-6 animate-fade-in">
             <div className="inline-block">
               <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-semibold">
-                Queue • Book • Connect
+                {t("hero.badge")}
               </Badge>
             </div>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
-              Healthcare Made
+              {t("hero.title1")}
               <span className="block mt-2 bg-gradient-to-r from-ai-purple via-ai-blue to-ai-cyan bg-clip-text text-transparent">
-                Simple & Smart
+                {t("hero.title2")}
               </span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Join virtual queues, book appointments instantly, and connect with healthcare professionals across Singapore
+              {t("hero.subtitle")}
             </p>
           </div>
 
@@ -35,7 +38,7 @@ export const Hero = () => {
               onClick={() => document.getElementById('marketplace')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <Search className="mr-2 h-5 w-5" />
-              Find Clinics
+              {t("hero.findClinics")}
             </Button>
             <Button 
               size="lg" 
@@ -43,25 +46,25 @@ export const Hero = () => {
               className="text-lg px-8 py-6 hover:bg-secondary/50 transition-all"
               onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Learn More
+              {t("hero.learnMore")}
             </Button>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-3xl mt-12 pt-12 border-t border-border/50">
             <div className="flex flex-col items-center gap-3 group cursor-default">
               <QueueIcon size="md" className="group-hover:scale-110 transition-transform" />
-              <p className="text-base font-bold">Queue</p>
-              <p className="text-sm text-muted-foreground text-center">Real-time virtual queues & wait times</p>
+              <p className="text-base font-bold">{t("hero.queueTitle")}</p>
+              <p className="text-sm text-muted-foreground text-center">{t("hero.queueDesc")}</p>
             </div>
             <div className="flex flex-col items-center gap-3 group cursor-default">
               <AppointmentsIcon size="md" className="group-hover:scale-110 transition-transform" />
-              <p className="text-base font-bold">Book</p>
-              <p className="text-sm text-muted-foreground text-center">Instant appointments across all clinics</p>
+              <p className="text-base font-bold">{t("hero.bookTitle")}</p>
+              <p className="text-sm text-muted-foreground text-center">{t("hero.bookDesc")}</p>
             </div>
             <div className="flex flex-col items-center gap-3 group cursor-default">
               <ChatbotIcon size="md" className="group-hover:scale-110 transition-transform" />
-              <p className="text-base font-bold">Connect</p>
-              <p className="text-sm text-muted-foreground text-center">AI health assistant & support</p>
+              <p className="text-base font-bold">{t("hero.connectTitle")}</p>
+              <p className="text-sm text-muted-foreground text-center">{t("hero.connectDesc")}</p>
             </div>
           </div>
         </div>

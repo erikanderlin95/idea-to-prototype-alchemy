@@ -1,44 +1,47 @@
 import { BarChart3, Shield, Zap } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { QueueIcon, AppointmentsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Features = () => {
+  const { t } = useLanguage();
+  
   const mainFeatures = [
     {
       icon: "queue",
-      title: "Digital Queue",
-      subtitle: "Real-time Updates",
-      description: "Join virtual queues from anywhere and see live queue status and wait times before you go.",
+      title: t("features.queue.title"),
+      subtitle: t("features.queue.subtitle"),
+      description: t("features.queue.description"),
     },
     {
       icon: "book",
-      title: "Book",
-      subtitle: "Easy Appointments",
-      description: "Book appointments across GP, TCM, and wellness centers with instant confirmation.",
+      title: t("features.book.title"),
+      subtitle: t("features.book.subtitle"),
+      description: t("features.book.description"),
     },
     {
       icon: "connect",
-      title: "Connect",
-      subtitle: "Smart Assistance",
-      description: "Pre and post consultation support via AI-powered health chatbot assistance.",
+      title: t("features.connect.title"),
+      subtitle: t("features.connect.subtitle"),
+      description: t("features.connect.description"),
     },
   ];
 
   const additionalFeatures = [
     {
       icon: BarChart3,
-      title: "Doctor Transparency",
-      description: "View profiles, specialties, and patient reviews",
+      title: t("features.transparency.title"),
+      description: t("features.transparency.description"),
     },
     {
       icon: Shield,
-      title: "PDPA Compliant",
-      description: "Your data is secure and privacy-protected",
+      title: t("features.pdpa.title"),
+      description: t("features.pdpa.description"),
     },
     {
       icon: Zap,
-      title: "Fast & Efficient",
-      description: "Reduce waiting time and streamline your healthcare journey",
+      title: t("features.fast.title"),
+      description: t("features.fast.description"),
     },
   ];
 
@@ -46,10 +49,10 @@ export const Features = () => {
     <section id="features" className="py-24 bg-gradient-to-b from-background to-secondary/10">
       <div className="container px-4 md:px-6">
         <div className="text-center space-y-4 mb-16">
-          <Badge variant="secondary" className="mb-2">Features</Badge>
-          <h2 className="text-3xl md:text-5xl font-bold">Digital Queue • Book • Connect</h2>
+          <Badge variant="secondary" className="mb-2">{t("features.badge")}</Badge>
+          <h2 className="text-3xl md:text-5xl font-bold">{t("features.title")}</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            A complete healthcare platform designed for Singapore's diverse medical ecosystem
+            {t("features.subtitle")}
           </p>
         </div>
 

@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -45,6 +46,7 @@ interface QueueStats {
 export default function StaffDashboard() {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useLanguage();
   
   const [staffRole, setStaffRole] = useState<any>(null);
   const [clinic, setClinic] = useState<any>(null);
@@ -316,7 +318,7 @@ export default function StaffDashboard() {
       <div className="min-h-screen bg-background">
         <Navbar />
         <div className="container mx-auto px-4 py-8">
-          <p>Loading staff dashboard...</p>
+          <p>{t("staff.loading")}</p>
         </div>
         <Footer />
       </div>
@@ -331,20 +333,20 @@ export default function StaffDashboard() {
         <div className="mb-8">
           <div className="flex items-center justify-between">
             <div>
-              <h1 className="text-3xl font-bold mb-2">Staff Dashboard</h1>
+              <h1 className="text-3xl font-bold mb-2">{t("staff.title")}</h1>
               <p className="text-muted-foreground">{clinic?.name}</p>
             </div>
             <div className="flex items-center gap-3">
-              <span className="text-sm text-muted-foreground">Queue Status:</span>
+              <span className="text-sm text-muted-foreground">{t("staff.queueStatus")}</span>
               <Button
                 variant={queueOpen ? "default" : "outline"}
                 onClick={() => {
                   setQueueOpen(!queueOpen);
-                  toast.success(`Queue ${!queueOpen ? "opened" : "closed"} for today`);
+                  toast.success(`${t("staff." + (queueOpen ? "closed" : "open"))} ${t("staff.queueStatus")}`);
                 }}
                 className="gap-2"
               >
-                {queueOpen ? "Open" : "Closed"}
+                {queueOpen ? t("staff.open") : t("staff.closed")}
               </Button>
             </div>
           </div>
@@ -356,7 +358,7 @@ export default function StaffDashboard() {
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium flex items-center gap-2">
                 <Activity className="h-4 w-4 text-primary" />
-                Total Today
+                {t("staff.totalToday")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -368,7 +370,7 @@ export default function StaffDashboard() {
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium flex items-center gap-2">
                 <Users className="h-4 w-4 text-accent" />
-                Waiting
+                {t("staff.waiting")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -380,7 +382,7 @@ export default function StaffDashboard() {
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium flex items-center gap-2">
                 <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400" />
-                Served
+                {t("staff.served")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -392,7 +394,7 @@ export default function StaffDashboard() {
             <CardHeader className="pb-3">
               <CardTitle className="text-sm font-medium flex items-center gap-2">
                 <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
-                Avg Wait
+                {t("staff.avgWait")}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -408,8 +410,8 @@ export default function StaffDashboard() {
             <CardHeader>
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle>Current Queue</CardTitle>
-                  <CardDescription>Manage patients waiting in line</CardDescription>
+                  <CardTitle>{t("staff.currentQueue")}</CardTitle>
+                  <CardDescription>{t("staff.managePatients")}</CardDescription>
                 </div>
                 <Button 
                   onClick={callNextPatient}
@@ -418,7 +420,7 @@ export default function StaffDashboard() {
                   className="bg-accent hover:bg-accent/90"
                 >
                   <PhoneCall className="mr-2 h-5 w-5" />
-                  Call Next Patient
+                  {t("staff.callNextPatient")}
                 </Button>
               </div>
             </CardHeader>
@@ -426,8 +428,8 @@ export default function StaffDashboard() {
               {queueData.length === 0 ? (
                 <div className="text-center py-12 text-muted-foreground">
                   <Users className="h-16 w-16 mx-auto mb-4 opacity-20" />
-                  <p className="text-lg font-medium">No patients in queue</p>
-                  <p className="text-sm">Queue is empty right now</p>
+                  <p className="text-lg font-medium">{t("staff.noPatients")}</p>
+                  <p className="text-sm">{t("staff.queueEmpty")}</p>
                 </div>
               ) : (
                 <div className="space-y-3">
@@ -449,13 +451,13 @@ export default function StaffDashboard() {
                         </Badge>
                         <div className="flex-1">
                           <p className="font-semibold text-base">
-                            {entry.patient_name || "Patient"}
+                            {entry.patient_name || t("staff.patient")}
                           </p>
                           <p className="text-sm text-muted-foreground">
-                            {entry.visit_type || "General Consultation"}
+                            {entry.visit_type || t("queue.generalConsultation")}
                           </p>
                           <p className="text-xs text-muted-foreground mt-1">
-                            Waiting: {Math.floor((Date.now() - new Date(entry.created_at).getTime()) / 60000)} minutes
+                            {t("staff.waitingTime")} {Math.floor((Date.now() - new Date(entry.created_at).getTime()) / 60000)} {t("staff.minutes2")}
                           </p>
                         </div>
                       </div>
@@ -490,7 +492,7 @@ export default function StaffDashboard() {
                             className="bg-accent hover:bg-accent/90"
                           >
                             <PhoneCall className="h-4 w-4 mr-2" />
-                            Call Patient
+                            {t("staff.callPatient")}
                           </Button>
                         )}
 
@@ -502,7 +504,7 @@ export default function StaffDashboard() {
                             className="border-green-500 text-green-600 hover:bg-green-50 dark:hover:bg-green-950"
                           >
                             <CheckCircle2 className="h-4 w-4 mr-2" />
-                            Mark Served
+                            {t("staff.markServed")}
                           </Button>
                         )}
 

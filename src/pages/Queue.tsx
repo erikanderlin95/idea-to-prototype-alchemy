@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useQueueNotifications } from "@/hooks/useQueueNotifications";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { StaffNotifications } from "@/components/StaffNotifications";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -17,6 +18,7 @@ export default function Queue() {
   const clinicId = searchParams.get("clinic");
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useLanguage();
   
   const [clinic, setClinic] = useState<any>(null);
   const [queueData, setQueueData] = useState<any[]>([]);
@@ -118,9 +120,9 @@ export default function Queue() {
           // Check if this update affects current user
           if (payload.new && user && payload.new.user_id === user.id) {
             if (payload.new.status === "served") {
-              toast.success("You've been marked as served! Thank you for visiting.");
+              toast.success(t("queue.thankYou"));
             } else if (payload.new.status === "serving") {
-              toast.success("You're being called! Please proceed to the counter.");
+              toast.success(t("queue.beingServedNow"));
             }
           }
         }
@@ -149,7 +151,7 @@ export default function Queue() {
       });
 
       if (error) throw error;
-      toast.success("Successfully joined the queue!");
+      toast.success(t("queue.joinQueue") + "!");
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -165,7 +167,7 @@ export default function Queue() {
         .eq("id", myQueueEntry.id);
 
       if (error) throw error;
-      toast.success("You've left the queue");
+      toast.success(t("queue.leaveQueue"));
       setMyQueueEntry(null);
     } catch (error: any) {
       toast.error(error.message || "Failed to cancel queue");
@@ -182,7 +184,7 @@ export default function Queue() {
         .eq("id", myQueueEntry.id);
 
       if (error) throw error;
-      toast.success("Checked in successfully! Please wait to be called.");
+      toast.success(t("queue.checkIn") + "!");
       loadQueueData(); // Reload to show updated status
     } catch (error: any) {
       toast.error(error.message || "Failed to check in");
@@ -194,7 +196,7 @@ export default function Queue() {
       <div className="min-h-screen bg-background">
         <Navbar />
         <div className="container mx-auto px-4 py-8">
-          <p>Loading queue information...</p>
+          <p>{t("queue.loading")}</p>
         </div>
         <Footer />
       </div>
@@ -232,12 +234,12 @@ export default function Queue() {
                   {notificationPermission === "granted" ? (
                     <>
                       <Bell className="h-4 w-4 mr-2" />
-                      Notifications On
+                      {t("queue.notificationsOn")}
                     </>
                   ) : (
                     <>
                       <BellOff className="h-4 w-4 mr-2" />
-                      Enable Alerts
+                      {t("queue.enableAlerts")}
                     </>
                   )}
                 </Button>
@@ -251,7 +253,7 @@ export default function Queue() {
                   <Users className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground font-medium">In Queue</p>
+                  <p className="text-xs text-muted-foreground font-medium">{t("queue.inQueue")}</p>
                   <p className="text-2xl font-bold">{queueData.length}</p>
                 </div>
               </div>
@@ -260,8 +262,8 @@ export default function Queue() {
                   <Clock className="h-6 w-6 text-accent" />
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground font-medium">Est. Wait</p>
-                  <p className="text-2xl font-bold">{queueData.length * 15} min</p>
+                  <p className="text-xs text-muted-foreground font-medium">{t("queue.estWait")}</p>
+                  <p className="text-2xl font-bold">{queueData.length * 15} {t("queue.minutes")}</p>
                 </div>
               </div>
             </div>
@@ -272,10 +274,10 @@ export default function Queue() {
                   <Bell className="h-5 w-5 text-amber-600 dark:text-amber-400 mt-0.5" />
                   <div className="flex-1">
                     <p className="text-sm font-semibold text-amber-900 dark:text-amber-100">
-                      Enable notifications for queue updates
+                      {t("queue.enableNotifications")}
                     </p>
                     <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
-                      Get notified when it's almost your turn so you don't miss your spot
+                      {t("queue.notificationDesc")}
                     </p>
                   </div>
                 </div>
@@ -289,15 +291,15 @@ export default function Queue() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-green-700 dark:text-green-400">
                 <CheckCircle2 className="h-6 w-6 animate-pulse" />
-                Consultation Complete!
+                {t("queue.complete")}
               </CardTitle>
               <CardDescription className="text-green-600 dark:text-green-500">
-                Thank you for visiting {clinic?.name}
+                {t("queue.thankYou")} {clinic?.name}
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="p-6 bg-white dark:bg-background rounded-xl border border-green-200 dark:border-green-800">
-                <p className="text-center text-lg font-medium mb-4">Rate your visit</p>
+                <p className="text-center text-lg font-medium mb-4">{t("queue.rateVisit")}</p>
                 <div className="flex gap-2 justify-center mb-4">
                   {[1, 2, 3, 4, 5].map((star) => (
                     <button
@@ -317,11 +319,11 @@ export default function Queue() {
                 </div>
                 {rating > 0 && (
                   <p className="text-sm text-green-600 dark:text-green-400 text-center animate-in fade-in">
-                    Thanks for your feedback!
+                    {t("queue.feedbackThanks")}
                   </p>
                 )}
                 <p className="text-xs text-muted-foreground text-center mt-2">
-                  Your feedback helps us improve our service
+                  {t("queue.feedbackHelps")}
                 </p>
               </div>
               <Button 
@@ -329,7 +331,7 @@ export default function Queue() {
                 className="w-full bg-gradient-to-r from-primary to-accent"
                 size="lg"
               >
-                Return to Home
+                {t("queue.returnHome")}
               </Button>
             </CardContent>
           </Card>
@@ -339,14 +341,14 @@ export default function Queue() {
               <div className="relative">
                 <CardTitle className="flex items-center gap-2 text-accent">
                   <CheckCircle2 className="h-6 w-6 animate-bounce" />
-                  You're Being Served Now!
+                  {t("queue.beingServedNow")}
                 </CardTitle>
                 <div className="absolute -top-2 right-0">
-                  <Badge variant="default" className="animate-pulse">In Progress</Badge>
+                  <Badge variant="default" className="animate-pulse">{t("queue.status")}</Badge>
                 </div>
               </div>
               <CardDescription>
-                Please proceed to the consultation area
+                {t("queue.proceedToConsultation")}
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -355,12 +357,12 @@ export default function Queue() {
                   <div className="absolute inset-0 bg-accent/5 animate-pulse" />
                   <div className="text-center relative z-10">
                     <p className="text-6xl font-bold text-accent mb-2">#{myQueueEntry.queue_number}</p>
-                    <p className="text-lg font-medium">Your Queue Number</p>
+                    <p className="text-lg font-medium">{t("queue.yourQueueNumber")}</p>
                   </div>
                 </div>
                 <div className="p-4 bg-accent/10 rounded-lg">
                   <p className="text-sm text-center">
-                    <strong>Visit Type:</strong> {myQueueEntry.visit_type || "General Consultation"}
+                    <strong>{t("queue.visitType")}:</strong> {myQueueEntry.visit_type || t("queue.generalConsultation")}
                   </p>
                 </div>
               </div>
@@ -374,7 +376,7 @@ export default function Queue() {
                   <CardTitle className="flex items-center gap-2 text-primary">
                     <CheckCircle2 className="h-6 w-6" />
                     <span className="relative">
-                      You're in Queue!
+                      {t("queue.checkedIn")}
                       <span className="absolute -top-1 -right-1 h-2 w-2 bg-green-500 rounded-full animate-pulse" />
                     </span>
                   </CardTitle>
@@ -383,7 +385,7 @@ export default function Queue() {
                   </CardDescription>
                 </div>
                 <span className="text-xs text-muted-foreground">
-                  Updated {Math.floor((Date.now() - lastRefresh) / 1000)}s ago
+                  {t("queue.updated")} {Math.floor((Date.now() - lastRefresh) / 1000)}s {t("queue.ago")}
                 </span>
               </div>
             </CardHeader>
@@ -391,17 +393,17 @@ export default function Queue() {
               <div className="space-y-6">
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center p-4 bg-background rounded-lg border-2 border-primary/20">
-                    <p className="text-sm text-muted-foreground mb-1">Queue Number</p>
+                    <p className="text-sm text-muted-foreground mb-1">{t("queue.queueNumber")}</p>
                     <p className="text-4xl font-bold text-primary animate-in zoom-in">{myQueueEntry.queue_number}</p>
                   </div>
                   <div className="text-center p-4 bg-background rounded-lg border-2 border-primary/20">
-                    <p className="text-sm text-muted-foreground mb-1">Status</p>
+                    <p className="text-sm text-muted-foreground mb-1">{t("queue.status")}</p>
                     <Badge variant="default" className="text-base px-4 py-2 animate-pulse">
-                      Waiting
+                      {t("queue.waiting")}
                     </Badge>
                   </div>
                   <div className="text-center p-4 bg-background rounded-lg border-2 border-primary/20">
-                    <p className="text-sm text-muted-foreground mb-1">Est. Wait</p>
+                    <p className="text-sm text-muted-foreground mb-1">{t("queue.estWaitTime")}</p>
                     <p className="text-2xl font-medium animate-in zoom-in">
                       {myPosition ? (myPosition - 1) * 15 : 0}m
                     </p>
@@ -410,18 +412,18 @@ export default function Queue() {
 
                 <div className="p-4 bg-primary/10 rounded-xl border border-primary/20">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Visit Type</span>
-                    <span className="font-medium">{myQueueEntry.visit_type || "General Consultation"}</span>
+                    <span className="text-muted-foreground">{t("queue.visitType")}</span>
+                    <span className="font-medium">{myQueueEntry.visit_type || t("queue.generalConsultation")}</span>
                   </div>
                   <div className="flex items-center justify-between text-sm mt-2">
-                    <span className="text-muted-foreground">People Ahead</span>
+                    <span className="text-muted-foreground">{t("queue.peopleAhead")}</span>
                     <span className="font-medium">{myPosition ? myPosition - 1 : 0}</span>
                   </div>
                 </div>
 
                 <div className="p-4 bg-accent/10 rounded-xl border border-accent/20">
                   <p className="text-sm text-center font-medium">
-                    🔔 You'll be notified when it's your turn
+                    🔔 {t("queue.notifiedWhenTurn")}
                   </p>
                 </div>
 
@@ -432,7 +434,7 @@ export default function Queue() {
                   size="lg"
                 >
                   <LogOut className="mr-2 h-5 w-5" />
-                  Leave Queue
+                  {t("queue.leaveQueue")}
                 </Button>
               </div>
             </CardContent>
