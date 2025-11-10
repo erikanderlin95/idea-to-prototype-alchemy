@@ -4,6 +4,8 @@ import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { LanguageSwitcher } from "@/components/LanguageSwitcher";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -29,6 +31,7 @@ interface NavbarProps {
 export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [isStaff, setIsStaff] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
@@ -68,27 +71,27 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
         {/* Desktop Navigation - Only show on xl screens when signed in */}
         <div className={`hidden ${user ? 'xl:flex' : 'lg:flex'} items-center gap-4 xl:gap-6 onboarding-nav`}>
           <a href="/" className="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
-            Find Clinics
+            {t("nav.findClinics")}
           </a>
           {user && (
             <>
               {isStaff && (
                 <a href="/staff" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
                   <QueueIcon size="sm" />
-                  Staff Dashboard
+                  {t("nav.staffDashboard")}
                 </a>
               )}
               <a href="/appointments" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
                 <AppointmentsIcon size="sm" />
-                My Appointments
+                {t("nav.myAppointments")}
               </a>
               <a href="/chatbot" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
                 <ChatbotIcon size="sm" />
-                Health Assistant
+                {t("nav.healthAssistant")}
               </a>
               <a href="/analytics" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
                 <AnalyticsIcon size="sm" />
-                Analytics
+                {t("nav.analytics")}
               </a>
             </>
           )}
@@ -105,7 +108,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
               </SheetTrigger>
               <SheetContent side="right" className="w-72">
                 <SheetHeader>
-                  <SheetTitle>Menu</SheetTitle>
+                  <SheetTitle>{t("nav.menu")}</SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-4 mt-6">
                   <a 
@@ -113,7 +116,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
-                    <span className="text-sm font-medium">Find Clinics</span>
+                    <span className="text-sm font-medium">{t("nav.findClinics")}</span>
                   </a>
                   {isStaff && (
                     <a 
@@ -122,7 +125,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <QueueIcon size="sm" />
-                      <span className="text-sm font-medium">Staff Dashboard</span>
+                      <span className="text-sm font-medium">{t("nav.staffDashboard")}</span>
                     </a>
                   )}
                   <a 
@@ -131,7 +134,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <AppointmentsIcon size="sm" />
-                    <span className="text-sm font-medium">My Appointments</span>
+                    <span className="text-sm font-medium">{t("nav.myAppointments")}</span>
                   </a>
                   <a 
                     href="/chatbot" 
@@ -139,7 +142,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <ChatbotIcon size="sm" />
-                    <span className="text-sm font-medium">Health Assistant</span>
+                    <span className="text-sm font-medium">{t("nav.healthAssistant")}</span>
                   </a>
                   <a 
                     href="/analytics" 
@@ -147,12 +150,15 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <AnalyticsIcon size="sm" />
-                    <span className="text-sm font-medium">Analytics</span>
+                    <span className="text-sm font-medium">{t("nav.analytics")}</span>
                   </a>
                 </div>
               </SheetContent>
             </Sheet>
           )}
+
+          {/* Language Switcher */}
+          <LanguageSwitcher />
 
           {/* Help Menu */}
           {onRestartTour && (
@@ -163,11 +169,11 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuLabel>Help & Support</DropdownMenuLabel>
+                <DropdownMenuLabel>{t("nav.help")}</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={onRestartTour}>
                   <HelpCircle className="mr-2 h-4 w-4" />
-                  Restart Tour
+                  {t("nav.restartTour")}
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -175,15 +181,15 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
 
           {user ? (
             <Button variant="ghost" size="sm" onClick={signOut}>
-              Sign Out
+              {t("nav.signOut")}
             </Button>
           ) : (
             <>
               <Button variant="ghost" size="sm" onClick={() => navigate("/auth")}>
-                Login
+                {t("nav.login")}
               </Button>
               <Button size="sm" onClick={() => navigate("/auth")}>
-                Sign Up
+                {t("nav.signUp")}
               </Button>
             </>
           )}
