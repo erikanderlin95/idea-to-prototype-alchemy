@@ -8,6 +8,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface ClinicCardProps {
   id?: string;
@@ -32,10 +33,11 @@ export const ClinicCard = ({
 }: ClinicCardProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [isJoining, setIsJoining] = useState(false);
   const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [visitType, setVisitType] = useState("General Consultation");
+  const [visitType, setVisitType] = useState(t("clinicCard.generalConsultation"));
 
   useEffect(() => {
     if (user && id) {
@@ -91,10 +93,10 @@ export const ClinicCard = ({
 
       if (error) throw error;
 
-      toast.success("Left the queue successfully");
+      toast.success(t("clinicCard.leftQueue"));
       setMyQueueEntry(null);
     } catch (error: any) {
-      toast.error(error.message || "Failed to leave queue");
+      toast.error(error.message || t("clinicCard.failedToLeave"));
     } finally {
       setIsLoading(false);
     }
@@ -113,10 +115,10 @@ export const ClinicCard = ({
 
       if (error) throw error;
 
-      toast.success("Checked in successfully!");
+      toast.success(t("clinicCard.checkedIn"));
       navigate(`/queue?clinic=${id}`);
     } catch (error: any) {
-      toast.error(error.message || "Failed to check in");
+      toast.error(error.message || t("clinicCard.failedToJoin"));
     } finally {
       setIsLoading(false);
     }
@@ -126,7 +128,7 @@ export const ClinicCard = ({
     e.stopPropagation();
 
     if (!user) {
-      toast.error("Please sign in to join the queue");
+      toast.error(t("clinicCard.signInRequired"));
       navigate("/auth");
       return;
     }
@@ -145,7 +147,7 @@ export const ClinicCard = ({
         .maybeSingle();
 
       if (existingQueue) {
-        toast.info("You're already in this queue!");
+        toast.info(t("clinicCard.alreadyInQueue"));
         navigate(`/queue?clinic=${id}`);
         return;
       }
@@ -175,10 +177,10 @@ export const ClinicCard = ({
 
       if (error) throw error;
 
-      toast.success(`You're #${nextQueueNumber} in the queue!`);
+      toast.success(t("clinicCard.queueSuccess").replace("{number}", nextQueueNumber.toString()));
       navigate(`/queue?clinic=${id}`);
     } catch (error: any) {
-      toast.error(error.message || "Failed to join queue");
+      toast.error(error.message || t("clinicCard.failedToJoin"));
     } finally {
       setIsJoining(false);
     }
@@ -196,11 +198,11 @@ export const ClinicCard = ({
               </Badge>
               {isOpen ? (
                 <Badge variant="outline" className="text-sm border-accent text-accent">
-                  Open
+                  {t("clinicCard.open")}
                 </Badge>
               ) : (
                 <Badge variant="outline" className="text-sm border-muted text-muted-foreground">
-                  Closed
+                  {t("clinicCard.closed")}
                 </Badge>
               )}
             </div>
@@ -226,8 +228,8 @@ export const ClinicCard = ({
               <Users className="h-5 w-5 text-primary" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground font-medium">In Queue</p>
-              <p className="text-base font-bold">{queueCount} people</p>
+              <p className="text-xs text-muted-foreground font-medium">{t("clinicCard.inQueue")}</p>
+              <p className="text-base font-bold">{queueCount} {t("clinicCard.people")}</p>
             </div>
           </div>
           <div className="h-8 w-px bg-border" />
@@ -236,7 +238,7 @@ export const ClinicCard = ({
               <Clock className="h-5 w-5 text-accent" />
             </div>
             <div>
-              <p className="text-xs text-muted-foreground font-medium">Est. Wait</p>
+              <p className="text-xs text-muted-foreground font-medium">{t("clinicCard.estWait")}</p>
               <p className="text-base font-bold">{waitTime}</p>
             </div>
           </div>
@@ -285,15 +287,15 @@ export const ClinicCard = ({
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-1">You're in the Queue</p>
+                    <p className="text-sm font-medium text-muted-foreground mb-1">{t("clinicCard.youreInQueue")}</p>
                     <p className="text-lg font-bold text-foreground">
-                      Position <span className="text-2xl font-black text-primary">#{myQueueEntry.queue_number}</span>
-                      <span className="text-sm font-medium text-muted-foreground ml-2">of {queueCount}</span>
+                      {t("clinicCard.position")} <span className="text-2xl font-black text-primary">#{myQueueEntry.queue_number}</span>
+                      <span className="text-sm font-medium text-muted-foreground ml-2">{t("clinicCard.of")} {queueCount}</span>
                     </p>
                   </div>
                 </div>
                 <Badge variant="secondary" className="text-xs font-semibold px-3 py-1">
-                  Waiting
+                  {t("clinicCard.waiting")}
                 </Badge>
               </div>
             </div>
@@ -305,7 +307,7 @@ export const ClinicCard = ({
                 onClick={handleCheckIn}
               >
                 <CheckCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
-                Check In
+                {t("clinicCard.checkIn")}
               </Button>
               <Button 
                 variant="outline"
@@ -314,7 +316,7 @@ export const ClinicCard = ({
                 onClick={handleCancelQueue}
               >
                 <XCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
-                Leave Queue
+                {t("clinicCard.leaveQueue")}
               </Button>
             </div>
           </div>
@@ -332,23 +334,23 @@ export const ClinicCard = ({
                   <Users className="h-7 w-7 text-primary-foreground" strokeWidth={3} />
                 </div>
                 <div>
-                  <p className="text-lg font-semibold text-foreground">Ready to Skip the Wait?</p>
-                  <p className="text-base font-bold text-foreground/80">Join the virtual queue now</p>
+                  <p className="text-lg font-semibold text-foreground">{t("clinicCard.readyToSkip")}</p>
+                  <p className="text-base font-bold text-foreground/80">{t("clinicCard.joinVirtual")}</p>
                 </div>
               </div>
               
               <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
-                <label className="text-sm font-medium text-foreground">Visit Type</label>
+                <label className="text-sm font-medium text-foreground">{t("clinicCard.visitType")}</label>
                 <Select value={visitType} onValueChange={setVisitType}>
                   <SelectTrigger className="w-full">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="General Consultation">General Consultation</SelectItem>
-                    <SelectItem value="Follow-up">Follow-up</SelectItem>
-                    <SelectItem value="Emergency">Emergency</SelectItem>
-                    <SelectItem value="Vaccination">Vaccination</SelectItem>
-                    <SelectItem value="Health Screening">Health Screening</SelectItem>
+                    <SelectItem value={t("clinicCard.generalConsultation")}>{t("clinicCard.generalConsultation")}</SelectItem>
+                    <SelectItem value={t("clinicCard.followUp")}>{t("clinicCard.followUp")}</SelectItem>
+                    <SelectItem value={t("clinicCard.emergency")}>{t("clinicCard.emergency")}</SelectItem>
+                    <SelectItem value={t("clinicCard.vaccination")}>{t("clinicCard.vaccination")}</SelectItem>
+                    <SelectItem value={t("clinicCard.healthScreening")}>{t("clinicCard.healthScreening")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -361,7 +363,7 @@ export const ClinicCard = ({
                 onClick={handleJoinQueue}
               >
                 <Users className="mr-2 h-6 w-6" strokeWidth={3} />
-                {isJoining ? "Joining..." : "Join Queue"}
+                {isJoining ? t("clinicCard.joining") : t("clinicCard.joinQueue")}
               </Button>
               <Button 
                 variant="outline"
@@ -372,7 +374,7 @@ export const ClinicCard = ({
                   id && navigate(`/clinic/${id}`);
                 }}
               >
-                View Details
+                {t("clinicCard.viewDetails")}
               </Button>
             </div>
           </div>

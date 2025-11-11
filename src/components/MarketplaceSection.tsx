@@ -2,8 +2,10 @@ import { SearchFilters } from "./SearchFilters";
 import { ClinicCard } from "./ClinicCard";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const MarketplaceSection = () => {
+  const { t } = useLanguage();
   const [clinics, setClinics] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -57,7 +59,7 @@ export const MarketplaceSection = () => {
     return (
       <section className="py-20">
         <div className="container px-4 md:px-6">
-          <div className="text-center">Loading clinics...</div>
+          <div className="text-center">{t("marketplace.loading")}</div>
         </div>
       </section>
     );
@@ -68,9 +70,9 @@ export const MarketplaceSection = () => {
       <div className="container px-4 md:px-6">
         <div className="space-y-10">
           <div className="text-center space-y-4">
-            <h2 className="text-3xl md:text-5xl font-bold">Find Your Clinic</h2>
+            <h2 className="text-3xl md:text-5xl font-bold">{t("marketplace.title")}</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Browse clinics near you with real-time queue information and join virtual queues instantly
+              {t("marketplace.subtitle")}
             </p>
           </div>
 

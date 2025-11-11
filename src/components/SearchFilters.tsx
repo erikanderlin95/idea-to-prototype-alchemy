@@ -2,9 +2,17 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Search, MapPin, Filter } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const SearchFilters = () => {
-  const categories = ["All", "GP", "TCM", "Wellness", "Specialists"];
+  const { t } = useLanguage();
+  const categories = [
+    { key: "all", label: t("search.all") },
+    { key: "gp", label: t("search.gp") },
+    { key: "tcm", label: t("search.tcm") },
+    { key: "wellness", label: t("search.wellness") },
+    { key: "specialists", label: t("search.specialists") }
+  ];
 
   return (
     <div className="space-y-6">
@@ -12,31 +20,31 @@ export const SearchFilters = () => {
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
-            placeholder="Search clinics, doctors, or specialties..."
+            placeholder={t("search.placeholder")}
             className="pl-10 h-12"
           />
         </div>
         <div className="relative md:w-64">
           <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
           <Input
-            placeholder="Location"
+            placeholder={t("search.location")}
             className="pl-10 h-12"
           />
         </div>
         <Button size="lg" variant="outline" className="md:w-auto">
           <Filter className="mr-2 h-5 w-5" />
-          Filters
+          {t("search.filters")}
         </Button>
       </div>
 
       <div className="flex items-center gap-2 flex-wrap">
-        {categories.map((category) => (
+        {categories.map((category, index) => (
           <Badge
-            key={category}
-            variant={category === "All" ? "default" : "outline"}
+            key={category.key}
+            variant={index === 0 ? "default" : "outline"}
             className="cursor-pointer px-4 py-2 text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
           >
-            {category}
+            {category.label}
           </Badge>
         ))}
       </div>

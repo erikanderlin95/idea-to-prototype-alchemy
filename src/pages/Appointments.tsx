@@ -10,10 +10,12 @@ import { useAuth } from "@/hooks/useAuth";
 import { Calendar, Clock, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { format } from "date-fns";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const Appointments = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [appointments, setAppointments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -38,7 +40,7 @@ const Appointments = () => {
       setAppointments(data || []);
     } catch (error) {
       console.error("Error fetching appointments:", error);
-      toast.error("Failed to load appointments");
+      toast.error(t("appointments.failedToLoad"));
     } finally {
       setLoading(false);
     }
@@ -55,7 +57,7 @@ const Appointments = () => {
   };
 
   if (loading) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return <div className="min-h-screen flex items-center justify-center">{t("appointments.loading")}</div>;
   }
 
   return (
@@ -65,8 +67,8 @@ const Appointments = () => {
       <main className="container px-4 md:px-6 py-8">
         <div className="space-y-6">
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold">My Appointments</h1>
-            <Button onClick={() => navigate("/")}>Book New Appointment</Button>
+            <h1 className="text-3xl font-bold">{t("appointments.title")}</h1>
+            <Button onClick={() => navigate("/")}>{t("appointments.bookNew")}</Button>
           </div>
 
           {appointments.length > 0 ? (
@@ -100,7 +102,7 @@ const Appointments = () => {
 
                       {appointment.reason && (
                         <p className="text-sm text-muted-foreground">
-                          <span className="font-medium">Reason:</span> {appointment.reason}
+                          <span className="font-medium">{t("appointments.reason")}:</span> {appointment.reason}
                         </p>
                       )}
                     </div>
@@ -110,8 +112,8 @@ const Appointments = () => {
             </div>
           ) : (
             <Card className="p-12 text-center">
-              <p className="text-muted-foreground mb-4">No appointments yet</p>
-              <Button onClick={() => navigate("/")}>Browse Clinics</Button>
+              <p className="text-muted-foreground mb-4">{t("appointments.noAppointments")}</p>
+              <Button onClick={() => navigate("/")}>{t("appointments.browseClinics")}</Button>
             </Card>
           )}
         </div>
