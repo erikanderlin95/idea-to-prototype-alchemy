@@ -11,11 +11,13 @@ import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User } from "lucide-
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const ClinicProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { t } = useLanguage();
   const [clinic, setClinic] = useState<any>(null);
   const [doctors, setDoctors] = useState<any[]>([]);
   const [reviews, setReviews] = useState<any[]>([]);
@@ -41,7 +43,7 @@ const ClinicProfile = () => {
       if (queueData.data) setQueue(queueData.data);
     } catch (error) {
       console.error("Error fetching clinic data:", error);
-      toast.error("Failed to load clinic information");
+      toast.error(t('clinicProfile.failedToLoad'));
     } finally {
       setLoading(false);
     }
@@ -49,7 +51,7 @@ const ClinicProfile = () => {
 
   const handleBookAppointment = () => {
     if (!user) {
-      toast.error("Please sign in to book an appointment");
+      toast.error(t('clinicProfile.signInToBook'));
       navigate("/auth");
       return;
     }
@@ -57,7 +59,7 @@ const ClinicProfile = () => {
   };
 
   if (loading || !clinic) {
-    return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
+    return <div className="min-h-screen flex items-center justify-center">{t('clinicProfile.loading')}</div>;
   }
 
   return (
@@ -88,7 +90,7 @@ const ClinicProfile = () => {
               <div className="flex gap-3">
                 <Button size="lg" className="text-base px-6 py-6" onClick={handleBookAppointment}>
                   <Calendar className="mr-2 h-6 w-6" />
-                  Book Appointment
+                  {t('clinicProfile.bookAppointment')}
                 </Button>
                 <Button 
                   size="lg" 
@@ -97,7 +99,7 @@ const ClinicProfile = () => {
                   onClick={() => navigate(`/queue?clinic=${id}`)}
                 >
                   <Users className="mr-2 h-6 w-6" />
-                  Join Queue
+                  {t('clinicProfile.joinQueue')}
                 </Button>
               </div>
             </div>
@@ -107,7 +109,7 @@ const ClinicProfile = () => {
 
           {/* Photo Gallery */}
           <Card className="p-4">
-            <h2 className="text-2xl font-bold mb-3">Clinic Photos</h2>
+            <h2 className="text-2xl font-bold mb-3">{t('clinicProfile.clinicPhotos')}</h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {clinic.photos && clinic.photos.length > 0 ? (
                 clinic.photos.map((photo: string, index: number) => (
@@ -117,7 +119,7 @@ const ClinicProfile = () => {
                 ))
               ) : (
                 <div className="col-span-full text-center py-6 text-muted-foreground">
-                  <p className="text-base">Photo gallery coming soon</p>
+                  <p className="text-base">{t('clinicProfile.photoGalleryComingSoon')}</p>
                 </div>
               )}
             </div>
@@ -131,7 +133,7 @@ const ClinicProfile = () => {
                   <Phone className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-base font-bold text-foreground mb-1">Phone</p>
+                  <p className="text-base font-bold text-foreground mb-1">{t('clinicProfile.phone')}</p>
                   <p className="text-lg text-foreground">{clinic.phone}</p>
                 </div>
               </div>
@@ -142,8 +144,8 @@ const ClinicProfile = () => {
                   <Mail className="h-6 w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-base font-bold text-foreground mb-1">Email</p>
-                  <p className="text-lg text-foreground">{clinic.email || "Not available"}</p>
+                  <p className="text-base font-bold text-foreground mb-1">{t('clinicProfile.email')}</p>
+                  <p className="text-lg text-foreground">{clinic.email || t('clinicProfile.notAvailable')}</p>
                 </div>
               </div>
             </Card>
@@ -153,8 +155,8 @@ const ClinicProfile = () => {
                   <Users className="h-6 w-6 text-primary-foreground" />
                 </div>
                 <div>
-                  <p className="text-base font-bold text-foreground mb-1">Current Queue</p>
-                  <p className="font-black text-2xl text-primary">{queue.length} waiting</p>
+                  <p className="text-base font-bold text-foreground mb-1">{t('clinicProfile.currentQueue')}</p>
+                  <p className="font-black text-2xl text-primary">{queue.length} {t('clinicProfile.waiting')}</p>
                 </div>
               </div>
             </Card>
@@ -163,10 +165,10 @@ const ClinicProfile = () => {
           {/* Tabs */}
           <Tabs defaultValue="doctors" className="w-full">
             <TabsList className="grid w-full grid-cols-4 p-2 bg-muted/50">
-              <TabsTrigger value="doctors" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Doctors</TabsTrigger>
-              <TabsTrigger value="awards" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Awards</TabsTrigger>
-              <TabsTrigger value="hours" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Operating Hours</TabsTrigger>
-              <TabsTrigger value="reviews" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">Reviews</TabsTrigger>
+              <TabsTrigger value="doctors" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.doctors')}</TabsTrigger>
+              <TabsTrigger value="awards" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.awards')}</TabsTrigger>
+              <TabsTrigger value="hours" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.operatingHours')}</TabsTrigger>
+              <TabsTrigger value="reviews" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.reviews')}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="doctors" className="space-y-6">
@@ -190,19 +192,19 @@ const ClinicProfile = () => {
                             <div className="flex items-center gap-3">
                               <h3 className="text-2xl font-bold">{doctor.name}</h3>
                               {doctor.is_verified && (
-                                <Badge variant="default" className="text-sm">Verified</Badge>
+                                <Badge variant="default" className="text-sm">{t('clinicProfile.verified')}</Badge>
                               )}
                             </div>
                             <p className="text-lg text-muted-foreground mt-1">{doctor.specialty}</p>
                             {doctor.years_of_practice && (
                               <p className="text-base text-muted-foreground mt-2">
-                                {doctor.years_of_practice} years experience
+                                {doctor.years_of_practice} {t('clinicProfile.yearsExperience')}
                               </p>
                             )}
                           </div>
                           {doctor.qualifications && (
                             <div className="space-y-2">
-                              <h4 className="text-sm font-semibold text-foreground">Qualifications & Certificates</h4>
+                              <h4 className="text-sm font-semibold text-foreground">{t('clinicProfile.qualifications')}</h4>
                               <p className="text-base line-clamp-3 text-foreground/90">{doctor.qualifications}</p>
                             </div>
                           )}
@@ -220,14 +222,14 @@ const ClinicProfile = () => {
                 </div>
               ) : (
                 <Card className="p-6 text-center text-muted-foreground">
-                  No doctors information available
+                  {t('clinicProfile.noDoctorsAvailable')}
                 </Card>
               )}
             </TabsContent>
 
             <TabsContent value="awards" className="space-y-6">
               <Card className="p-8">
-                <h3 className="text-2xl font-bold mb-6">Awards & Recognition</h3>
+                <h3 className="text-2xl font-bold mb-6">{t('clinicProfile.awardsRecognition')}</h3>
                 {clinic.awards && clinic.awards.length > 0 ? (
                   <div className="space-y-6">
                     {clinic.awards.map((award: any, index: number) => (
@@ -236,7 +238,7 @@ const ClinicProfile = () => {
                         <div>
                           <h4 className="text-lg font-bold text-foreground">{award.title}</h4>
                           <p className="text-base text-foreground/80 mt-1">{award.description}</p>
-                          {award.year && <p className="text-sm text-muted-foreground mt-2">Awarded in {award.year}</p>}
+                          {award.year && <p className="text-sm text-muted-foreground mt-2">{t('clinicProfile.awardedIn')} {award.year}</p>}
                         </div>
                       </div>
                     ))}
@@ -244,7 +246,7 @@ const ClinicProfile = () => {
                 ) : (
                   <div className="text-center py-12">
                     <Star className="h-16 w-16 text-muted mx-auto mb-4" />
-                    <p className="text-base text-muted-foreground">Awards and recognition will be displayed here</p>
+                    <p className="text-base text-muted-foreground">{t('clinicProfile.awardsComingSoon')}</p>
                   </div>
                 )}
               </Card>
@@ -255,7 +257,7 @@ const ClinicProfile = () => {
                 <div className="space-y-4">
                   <div className="flex items-center gap-3 mb-6">
                     <Clock className="h-7 w-7 text-primary" />
-                    <h3 className="text-2xl font-bold">Operating Hours</h3>
+                    <h3 className="text-2xl font-bold">{t('clinicProfile.operatingHours')}</h3>
                   </div>
                   {clinic.operating_hours && Object.entries(clinic.operating_hours).map(([day, hours]) => (
                     <div key={day} className="flex justify-between items-center py-3 border-b last:border-0">
@@ -273,7 +275,7 @@ const ClinicProfile = () => {
                   <Card key={review.id} className="p-8">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <p className="font-bold text-lg">{review.profiles?.full_name || "Anonymous"}</p>
+                        <p className="font-bold text-lg">{review.profiles?.full_name || t('clinicProfile.anonymous')}</p>
                         <div className="flex items-center gap-2">
                           <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
                           <span className="text-base font-semibold">{review.rating}</span>
@@ -287,7 +289,7 @@ const ClinicProfile = () => {
                 ))
               ) : (
                 <Card className="p-8 text-center">
-                  <p className="text-base text-muted-foreground">No reviews yet</p>
+                  <p className="text-base text-muted-foreground">{t('clinicProfile.noReviews')}</p>
                 </Card>
               )}
             </TabsContent>
