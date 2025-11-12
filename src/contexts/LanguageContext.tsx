@@ -348,6 +348,28 @@ const translations: Record<Language, Record<string, string>> = {
     "myclynicq.sms": "SMS",
     "myclynicq.webChat": "Web Chat",
     "myclynicq.stayConnected": "Stay connected with your healthcare journey. MyClynicQ keeps you informed and makes managing appointments effortless.",
+    
+    // Auth additional keys
+    "auth.enterCredentials": "Enter your credentials to access your account",
+    "auth.signupDescription": "Sign up to start booking appointments",
+    "auth.termsAgreement": "By continuing, you agree to our Terms of Service and Privacy Policy",
+    "auth.emailPlaceholder": "your@email.com",
+    "auth.namePlaceholder": "John Doe",
+    
+    // DoctorProfile
+    "doctorProfile.loading": "Loading doctor profile...",
+    "doctorProfile.notFound": "Doctor not found",
+    "doctorProfile.qualifications": "Qualifications",
+    "doctorProfile.languages": "Languages",
+    "doctorProfile.about": "About",
+    "doctorProfile.availability": "Availability",
+    "doctorProfile.bookAppointment": "Book Appointment",
+    "doctorProfile.viewClinic": "View Clinic",
+    "doctorProfile.registration": "Reg",
+    "doctorProfile.yearsExperience": "years experience",
+    "doctorProfile.noQualifications": "No qualifications listed",
+    "doctorProfile.noLanguages": "No languages listed",
+    "doctorProfile.closed": "Closed",
   },
   zh: {
     // Navbar
@@ -686,6 +708,28 @@ const translations: Record<Language, Record<string, string>> = {
     "myclynicq.sms": "短信",
     "myclynicq.webChat": "网页聊天",
     "myclynicq.stayConnected": "与您的医疗保健旅程保持联系。MyClynicQ让您随时了解情况，并使管理预约变得轻松。",
+    
+    // Auth additional keys
+    "auth.enterCredentials": "输入您的凭证以访问您的账户",
+    "auth.signupDescription": "注册以开始预约",
+    "auth.termsAgreement": "继续即表示您同意我们的服务条款和隐私政策",
+    "auth.emailPlaceholder": "您的邮箱@example.com",
+    "auth.namePlaceholder": "张三",
+    
+    // DoctorProfile
+    "doctorProfile.loading": "正在加载医生资料...",
+    "doctorProfile.notFound": "未找到医生",
+    "doctorProfile.qualifications": "资质",
+    "doctorProfile.languages": "语言",
+    "doctorProfile.about": "关于",
+    "doctorProfile.availability": "可预约时间",
+    "doctorProfile.bookAppointment": "预约",
+    "doctorProfile.viewClinic": "查看诊所",
+    "doctorProfile.registration": "注册号",
+    "doctorProfile.yearsExperience": "年经验",
+    "doctorProfile.noQualifications": "无资质信息",
+    "doctorProfile.noLanguages": "无语言信息",
+    "doctorProfile.closed": "休息",
   },
 };
 

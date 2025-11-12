@@ -5,8 +5,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ClipboardList } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { ClynicQIcon } from "@/components/icons/ClynicQIcon";
 import { z } from "zod";
 
 const loginSchema = z.object({
@@ -25,6 +26,7 @@ const signupSchema = loginSchema.extend({
 const Auth = () => {
   const navigate = useNavigate();
   const { user, signIn, signUp } = useAuth();
+  const { t, language } = useLanguage();
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
   const [signupForm, setSignupForm] = useState({ fullName: "", email: "", password: "", confirmPassword: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -79,27 +81,7 @@ const Auth = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-secondary/30 to-background p-4">
       <div className="w-full max-w-md">
         <div className="flex items-center justify-center gap-3 mb-8 cursor-pointer group" onClick={() => navigate("/")}>
-          <div className="relative h-12 w-12 rounded-xl bg-gradient-to-br from-primary via-primary to-accent flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300 group-hover:scale-110">
-            <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-primary/30 to-accent/30 blur-md group-hover:blur-lg transition-all" />
-            {/* Clinic Queue Icon - ClipboardList representing digital queue */}
-            <ClipboardList className="h-7 w-7 text-primary-foreground relative z-10 group-hover:scale-110 transition-transform" />
-            {/* Queue Indicator Badge */}
-            <div className="absolute -top-2 -right-2 z-20">
-              <div className="relative flex items-center justify-center h-6 w-6 rounded-full bg-accent shadow-lg animate-pulse">
-                <span className="text-xs font-bold text-accent-foreground">Q</span>
-                <div className="absolute inset-0 rounded-full bg-accent/40 animate-ping" />
-              </div>
-            </div>
-            {/* Medical Cross indicator */}
-            <div className="absolute -bottom-1 -left-1 z-10">
-              <div className="h-3.5 w-3.5 rounded-sm bg-background flex items-center justify-center shadow-md">
-                <div className="relative">
-                  <div className="absolute h-2 w-0.5 bg-accent left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
-                  <div className="absolute w-2 h-0.5 bg-accent left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" />
-                </div>
-              </div>
-            </div>
-          </div>
+          <ClynicQIcon size="lg" showNotification />
           <div className="flex flex-col space-y-0.5">
             <span className="text-3xl font-poppins font-bold tracking-tight leading-none bg-gradient-to-r from-foreground via-foreground to-foreground/80 bg-clip-text">
               Clynic<span className="text-primary">Q</span>
@@ -110,24 +92,24 @@ const Auth = () => {
 
         <Tabs defaultValue="login" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="login">Login</TabsTrigger>
-            <TabsTrigger value="signup">Sign Up</TabsTrigger>
+            <TabsTrigger value="login">{language === 'en' ? t('auth.login') : t('auth.loginZh')}</TabsTrigger>
+            <TabsTrigger value="signup">{language === 'en' ? t('auth.signup') : t('auth.signupZh')}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="login">
             <Card>
               <CardHeader>
-                <CardTitle>Welcome Back</CardTitle>
-                <CardDescription>Enter your credentials to access your account</CardDescription>
+                <CardTitle>{language === 'en' ? t('auth.welcomeBack') : t('auth.welcomeBackZh')}</CardTitle>
+                <CardDescription>{language === 'en' ? t('auth.enterCredentials') : t('auth.enterCredentialsZh')}</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="login-email">Email</Label>
+                    <Label htmlFor="login-email">{language === 'en' ? t('auth.email') : t('auth.emailZh')}</Label>
                     <Input
                       id="login-email"
                       type="email"
-                      placeholder="your@email.com"
+                      placeholder={language === 'en' ? t('auth.emailPlaceholder') : t('auth.emailPlaceholderZh')}
                       value={loginForm.email}
                       onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
                       required
@@ -135,7 +117,7 @@ const Auth = () => {
                     {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="login-password">Password</Label>
+                    <Label htmlFor="login-password">{language === 'en' ? t('auth.password') : t('auth.passwordZh')}</Label>
                     <Input
                       id="login-password"
                       type="password"
@@ -145,7 +127,7 @@ const Auth = () => {
                     />
                     {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
                   </div>
-                  <Button type="submit" className="w-full">Sign In</Button>
+                  <Button type="submit" className="w-full">{language === 'en' ? t('auth.signIn') : t('auth.signInZh')}</Button>
                 </form>
               </CardContent>
             </Card>
@@ -154,17 +136,17 @@ const Auth = () => {
           <TabsContent value="signup">
             <Card>
               <CardHeader>
-                <CardTitle>Create Account</CardTitle>
-                <CardDescription>Sign up to start booking appointments</CardDescription>
+                <CardTitle>{language === 'en' ? t('auth.createAccount') : t('auth.createAccountZh')}</CardTitle>
+                <CardDescription>{language === 'en' ? t('auth.signupDescription') : t('auth.signupDescriptionZh')}</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSignup} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="signup-name">Full Name</Label>
+                    <Label htmlFor="signup-name">{language === 'en' ? t('auth.fullName') : t('auth.fullNameZh')}</Label>
                     <Input
                       id="signup-name"
                       type="text"
-                      placeholder="John Doe"
+                      placeholder={language === 'en' ? t('auth.namePlaceholder') : t('auth.namePlaceholderZh')}
                       value={signupForm.fullName}
                       onChange={(e) => setSignupForm({ ...signupForm, fullName: e.target.value })}
                       required
@@ -172,11 +154,11 @@ const Auth = () => {
                     {errors.fullName && <p className="text-sm text-destructive">{errors.fullName}</p>}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="signup-email">Email</Label>
+                    <Label htmlFor="signup-email">{language === 'en' ? t('auth.email') : t('auth.emailZh')}</Label>
                     <Input
                       id="signup-email"
                       type="email"
-                      placeholder="your@email.com"
+                      placeholder={language === 'en' ? t('auth.emailPlaceholder') : t('auth.emailPlaceholderZh')}
                       value={signupForm.email}
                       onChange={(e) => setSignupForm({ ...signupForm, email: e.target.value })}
                       required
@@ -184,7 +166,7 @@ const Auth = () => {
                     {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="signup-password">Password</Label>
+                    <Label htmlFor="signup-password">{language === 'en' ? t('auth.password') : t('auth.passwordZh')}</Label>
                     <Input
                       id="signup-password"
                       type="password"
@@ -195,7 +177,7 @@ const Auth = () => {
                     {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="signup-confirm">Confirm Password</Label>
+                    <Label htmlFor="signup-confirm">{language === 'en' ? t('auth.confirmPassword') : t('auth.confirmPasswordZh')}</Label>
                     <Input
                       id="signup-confirm"
                       type="password"
@@ -205,7 +187,7 @@ const Auth = () => {
                     />
                     {errors.confirmPassword && <p className="text-sm text-destructive">{errors.confirmPassword}</p>}
                   </div>
-                  <Button type="submit" className="w-full">Create Account</Button>
+                  <Button type="submit" className="w-full">{language === 'en' ? t('auth.createAccount') : t('auth.createAccountZh')}</Button>
                 </form>
               </CardContent>
             </Card>
@@ -213,7 +195,7 @@ const Auth = () => {
         </Tabs>
 
         <p className="text-center text-sm text-muted-foreground mt-4">
-          By continuing, you agree to our Terms of Service and Privacy Policy
+          {language === 'en' ? t('auth.termsAgreement') : t('auth.termsAgreementZh')}
         </p>
       </div>
     </div>

@@ -9,10 +9,12 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
 import { Calendar, Clock, Languages, Award, CheckCircle2, Building2 } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export default function DoctorProfile() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { t, language } = useLanguage();
   const [doctor, setDoctor] = useState<any>(null);
   const [clinic, setClinic] = useState<any>(null);
   const [loading, setLoading] = useState(true);
@@ -53,7 +55,7 @@ export default function DoctorProfile() {
       <div className="min-h-screen bg-background">
         <Navbar />
         <div className="container mx-auto px-4 py-8">
-          <p>Loading doctor profile...</p>
+          <p>{language === 'en' ? t('doctorProfile.loading') : t('doctorProfile.loadingZh')}</p>
         </div>
         <Footer />
       </div>
@@ -65,7 +67,7 @@ export default function DoctorProfile() {
       <div className="min-h-screen bg-background">
         <Navbar />
         <div className="container mx-auto px-4 py-8">
-          <p>Doctor not found</p>
+          <p>{language === 'en' ? t('doctorProfile.notFound') : t('doctorProfile.notFoundZh')}</p>
         </div>
         <Footer />
       </div>
@@ -105,11 +107,13 @@ export default function DoctorProfile() {
                 
                 <div className="flex flex-wrap gap-2 mb-4">
                   {doctor.registration_no && (
-                    <Badge variant="secondary">Reg: {doctor.registration_no}</Badge>
+                    <Badge variant="secondary">
+                      {language === 'en' ? t('doctorProfile.registration') : t('doctorProfile.registrationZh')}: {doctor.registration_no}
+                    </Badge>
                   )}
                   {doctor.years_of_practice && (
                     <Badge variant="secondary">
-                      {doctor.years_of_practice} years experience
+                      {doctor.years_of_practice} {language === 'en' ? t('doctorProfile.yearsExperience') : t('doctorProfile.yearsExperienceZh')}
                     </Badge>
                   )}
                 </div>
@@ -130,12 +134,12 @@ export default function DoctorProfile() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Award className="h-5 w-5" />
-                Qualifications
+                {language === 'en' ? t('doctorProfile.qualifications') : t('doctorProfile.qualificationsZh')}
               </CardTitle>
             </CardHeader>
             <CardContent>
               <p className="whitespace-pre-line">
-                {doctor.qualifications || "No qualifications listed"}
+                {doctor.qualifications || (language === 'en' ? t('doctorProfile.noQualifications') : t('doctorProfile.noQualificationsZh'))}
               </p>
             </CardContent>
           </Card>
@@ -144,7 +148,7 @@ export default function DoctorProfile() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Languages className="h-5 w-5" />
-                Languages
+                {language === 'en' ? t('doctorProfile.languages') : t('doctorProfile.languagesZh')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -156,7 +160,9 @@ export default function DoctorProfile() {
                     </Badge>
                   ))
                 ) : (
-                  <p className="text-muted-foreground">No languages listed</p>
+                  <p className="text-muted-foreground">
+                    {language === 'en' ? t('doctorProfile.noLanguages') : t('doctorProfile.noLanguagesZh')}
+                  </p>
                 )}
               </div>
             </CardContent>
@@ -166,7 +172,7 @@ export default function DoctorProfile() {
         {doctor.bio && (
           <Card className="mb-6">
             <CardHeader>
-              <CardTitle>About</CardTitle>
+              <CardTitle>{language === 'en' ? t('doctorProfile.about') : t('doctorProfile.aboutZh')}</CardTitle>
             </CardHeader>
             <CardContent>
               <p className="whitespace-pre-line">{doctor.bio}</p>
@@ -179,7 +185,7 @@ export default function DoctorProfile() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <Clock className="h-5 w-5" />
-                Availability
+                {language === 'en' ? t('doctorProfile.availability') : t('doctorProfile.availabilityZh')}
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -188,7 +194,7 @@ export default function DoctorProfile() {
                   <div key={day} className="flex justify-between items-center py-2 border-b last:border-0">
                     <span className="font-medium capitalize">{day}</span>
                     <span className="text-muted-foreground">
-                      {Array.isArray(hours) ? hours.join(", ") : "Closed"}
+                      {Array.isArray(hours) ? hours.join(", ") : (language === 'en' ? t('doctorProfile.closed') : t('doctorProfile.closedZh'))}
                     </span>
                   </div>
                 ))}
@@ -204,7 +210,7 @@ export default function DoctorProfile() {
             onClick={() => navigate(`/booking?clinic=${clinic?.id}&doctor=${doctor.id}`)}
           >
             <Calendar className="mr-2 h-4 w-4" />
-            Book Appointment
+            {language === 'en' ? t('doctorProfile.bookAppointment') : t('doctorProfile.bookAppointmentZh')}
           </Button>
           {clinic && (
             <Button 
@@ -212,7 +218,7 @@ export default function DoctorProfile() {
               size="lg"
               onClick={() => navigate(`/clinic/${clinic.id}`)}
             >
-              View Clinic
+              {language === 'en' ? t('doctorProfile.viewClinic') : t('doctorProfile.viewClinicZh')}
             </Button>
           )}
         </div>
