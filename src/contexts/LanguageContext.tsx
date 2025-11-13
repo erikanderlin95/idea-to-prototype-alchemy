@@ -142,6 +142,7 @@ const translations: Record<Language, Record<string, string>> = {
     "appointments.browseClinics": "Browse Clinics",
     "appointments.loading": "Loading...",
     "appointments.failedToLoad": "Failed to load appointments",
+    "appointments.signInRequired": "Please sign in to view appointments",
     
     // Analytics Page
     "analytics.title": "Analytics Dashboard",
@@ -524,6 +525,7 @@ const translations: Record<Language, Record<string, string>> = {
     "appointments.browseClinics": "浏览诊所",
     "appointments.loading": "加载中...",
     "appointments.failedToLoad": "加载预约失败",
+    "appointments.signInRequired": "请登录以查看预约",
     
     // Analytics Page
     "analytics.title": "分析仪表板",

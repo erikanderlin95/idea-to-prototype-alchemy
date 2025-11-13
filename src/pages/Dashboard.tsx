@@ -24,6 +24,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (!user) {
+      toast.error("Please sign in to access the dashboard");
       navigate("/auth");
       return;
     }

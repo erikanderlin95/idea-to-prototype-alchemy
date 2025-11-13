@@ -83,14 +83,16 @@ export default function Queue() {
       if (queueError) throw queueError;
       setQueueData(queueEntries || []);
 
-      // Check if user is in queue (any active status)
+      // Check if user is in queue (any active status including served for feedback)
       if (user) {
         const { data: userQueue } = await supabase
           .from("queue_entries")
           .select("*")
           .eq("clinic_id", clinicId)
           .eq("user_id", user.id)
-          .in("status", ["waiting", "checked_in", "serving"])
+          .in("status", ["waiting", "checked_in", "serving", "served"])
+          .order("created_at", { ascending: false })
+          .limit(1)
           .maybeSingle();
 
         setMyQueueEntry(userQueue);

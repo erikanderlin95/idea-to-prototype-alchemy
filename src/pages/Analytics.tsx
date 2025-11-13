@@ -19,6 +19,7 @@ export default function Analytics() {
 
   useEffect(() => {
     if (!user) {
+      toast.error("Please sign in to view analytics");
       navigate("/auth");
       return;
     }
