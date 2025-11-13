@@ -92,24 +92,24 @@ const Auth = () => {
 
         <Tabs defaultValue="login" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="login">{language === 'en' ? t('auth.login') : t('auth.loginZh')}</TabsTrigger>
-            <TabsTrigger value="signup">{language === 'en' ? t('auth.signup') : t('auth.signupZh')}</TabsTrigger>
+            <TabsTrigger value="login">{t('auth.login')}</TabsTrigger>
+            <TabsTrigger value="signup">{t('auth.signup')}</TabsTrigger>
           </TabsList>
 
           <TabsContent value="login">
             <Card>
               <CardHeader>
-                <CardTitle>{language === 'en' ? t('auth.welcomeBack') : t('auth.welcomeBackZh')}</CardTitle>
-                <CardDescription>{language === 'en' ? t('auth.enterCredentials') : t('auth.enterCredentialsZh')}</CardDescription>
+                <CardTitle>{t('auth.welcomeBack')}</CardTitle>
+                <CardDescription>{t('auth.enterCredentials')}</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleLogin} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="login-email">{language === 'en' ? t('auth.email') : t('auth.emailZh')}</Label>
+                    <Label htmlFor="login-email">{t('auth.email')}</Label>
                     <Input
                       id="login-email"
                       type="email"
-                      placeholder={language === 'en' ? t('auth.emailPlaceholder') : t('auth.emailPlaceholderZh')}
+                      placeholder={t('auth.emailPlaceholder')}
                       value={loginForm.email}
                       onChange={(e) => setLoginForm({ ...loginForm, email: e.target.value })}
                       required
@@ -117,7 +117,7 @@ const Auth = () => {
                     {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="login-password">{language === 'en' ? t('auth.password') : t('auth.passwordZh')}</Label>
+                    <Label htmlFor="login-password">{t('auth.password')}</Label>
                     <Input
                       id="login-password"
                       type="password"
@@ -127,7 +127,7 @@ const Auth = () => {
                     />
                     {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
                   </div>
-                  <Button type="submit" className="w-full">{language === 'en' ? t('auth.signIn') : t('auth.signInZh')}</Button>
+                  <Button type="submit" className="w-full">{t('auth.signIn')}</Button>
                 </form>
               </CardContent>
             </Card>
@@ -136,17 +136,17 @@ const Auth = () => {
           <TabsContent value="signup">
             <Card>
               <CardHeader>
-                <CardTitle>{language === 'en' ? t('auth.createAccount') : t('auth.createAccountZh')}</CardTitle>
-                <CardDescription>{language === 'en' ? t('auth.signupDescription') : t('auth.signupDescriptionZh')}</CardDescription>
+                <CardTitle>{t('auth.createAccount')}</CardTitle>
+                <CardDescription>{t('auth.signupDescription')}</CardDescription>
               </CardHeader>
               <CardContent>
                 <form onSubmit={handleSignup} className="space-y-4">
                   <div className="space-y-2">
-                    <Label htmlFor="signup-name">{language === 'en' ? t('auth.fullName') : t('auth.fullNameZh')}</Label>
+                    <Label htmlFor="signup-name">{t('auth.fullName')}</Label>
                     <Input
                       id="signup-name"
                       type="text"
-                      placeholder={language === 'en' ? t('auth.namePlaceholder') : t('auth.namePlaceholderZh')}
+                      placeholder={t('auth.namePlaceholder')}
                       value={signupForm.fullName}
                       onChange={(e) => setSignupForm({ ...signupForm, fullName: e.target.value })}
                       required
@@ -154,11 +154,11 @@ const Auth = () => {
                     {errors.fullName && <p className="text-sm text-destructive">{errors.fullName}</p>}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="signup-email">{language === 'en' ? t('auth.email') : t('auth.emailZh')}</Label>
+                    <Label htmlFor="signup-email">{t('auth.email')}</Label>
                     <Input
                       id="signup-email"
                       type="email"
-                      placeholder={language === 'en' ? t('auth.emailPlaceholder') : t('auth.emailPlaceholderZh')}
+                      placeholder={t('auth.emailPlaceholder')}
                       value={signupForm.email}
                       onChange={(e) => setSignupForm({ ...signupForm, email: e.target.value })}
                       required
@@ -166,7 +166,7 @@ const Auth = () => {
                     {errors.email && <p className="text-sm text-destructive">{errors.email}</p>}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="signup-password">{language === 'en' ? t('auth.password') : t('auth.passwordZh')}</Label>
+                    <Label htmlFor="signup-password">{t('auth.password')}</Label>
                     <Input
                       id="signup-password"
                       type="password"
@@ -177,7 +177,7 @@ const Auth = () => {
                     {errors.password && <p className="text-sm text-destructive">{errors.password}</p>}
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="signup-confirm">{language === 'en' ? t('auth.confirmPassword') : t('auth.confirmPasswordZh')}</Label>
+                    <Label htmlFor="signup-confirm">{t('auth.confirmPassword')}</Label>
                     <Input
                       id="signup-confirm"
                       type="password"
@@ -187,7 +187,7 @@ const Auth = () => {
                     />
                     {errors.confirmPassword && <p className="text-sm text-destructive">{errors.confirmPassword}</p>}
                   </div>
-                  <Button type="submit" className="w-full">{language === 'en' ? t('auth.createAccount') : t('auth.createAccountZh')}</Button>
+                  <Button type="submit" className="w-full">{t('auth.createAccount')}</Button>
                 </form>
               </CardContent>
             </Card>
@@ -195,7 +195,7 @@ const Auth = () => {
         </Tabs>
 
         <p className="text-center text-sm text-muted-foreground mt-4">
-          {language === 'en' ? t('auth.termsAgreement') : t('auth.termsAgreementZh')}
+          {t('auth.termsAgreement')}
         </p>
       </div>
     </div>

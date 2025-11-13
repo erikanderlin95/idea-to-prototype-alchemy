@@ -232,17 +232,19 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Auth Page
     "auth.welcomeBack": "Welcome Back",
-    "auth.credentials": "Enter your credentials to access your account",
+    "auth.enterCredentials": "Enter your credentials to access your account",
     "auth.createAccount": "Create Account",
-    "auth.signUpPrompt": "Sign up to start booking appointments",
+    "auth.signupDescription": "Sign up to start booking appointments",
     "auth.email": "Email",
+    "auth.emailPlaceholder": "your@email.com",
     "auth.password": "Password",
     "auth.fullName": "Full Name",
+    "auth.namePlaceholder": "John Doe",
     "auth.confirmPassword": "Confirm Password",
     "auth.signIn": "Sign In",
     "auth.login": "Login",
-    "auth.signUp": "Sign Up",
-    "auth.terms": "By continuing, you agree to our Terms of Service and Privacy Policy",
+    "auth.signup": "Sign Up",
+    "auth.termsAgreement": "By continuing, you agree to our Terms of Service and Privacy Policy",
     "auth.invalidEmail": "Invalid email address",
     "auth.passwordLength": "Password must be at least 6 characters",
     "auth.passwordMismatch": "Passwords don't match",
@@ -348,13 +350,6 @@ const translations: Record<Language, Record<string, string>> = {
     "myclynicq.sms": "SMS",
     "myclynicq.webChat": "Web Chat",
     "myclynicq.stayConnected": "Stay connected with your healthcare journey. MyClynicQ keeps you informed and makes managing appointments effortless.",
-    
-    // Auth additional keys
-    "auth.enterCredentials": "Enter your credentials to access your account",
-    "auth.signupDescription": "Sign up to start booking appointments",
-    "auth.termsAgreement": "By continuing, you agree to our Terms of Service and Privacy Policy",
-    "auth.emailPlaceholder": "your@email.com",
-    "auth.namePlaceholder": "John Doe",
     
     // DoctorProfile
     "doctorProfile.loading": "Loading doctor profile...",
@@ -619,17 +614,19 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Auth Page
     "auth.welcomeBack": "欢迎回来",
-    "auth.credentials": "输入您的凭据以访问您的账户",
+    "auth.enterCredentials": "输入您的凭据以访问您的账户",
     "auth.createAccount": "创建账户",
-    "auth.signUpPrompt": "注册以开始预约",
+    "auth.signupDescription": "注册以开始预约",
     "auth.email": "邮箱",
+    "auth.emailPlaceholder": "your@email.com",
     "auth.password": "密码",
     "auth.fullName": "全名",
+    "auth.namePlaceholder": "张三",
     "auth.confirmPassword": "确认密码",
     "auth.signIn": "登录",
     "auth.login": "登录",
-    "auth.signUp": "注册",
-    "auth.terms": "继续即表示您同意我们的服务条款和隐私政策",
+    "auth.signup": "注册",
+    "auth.termsAgreement": "继续即表示您同意我们的服务条款和隐私政策",
     "auth.invalidEmail": "无效的邮箱地址",
     "auth.passwordLength": "密码必须至少6个字符",
     "auth.passwordMismatch": "密码不匹配",
@@ -735,13 +732,6 @@ const translations: Record<Language, Record<string, string>> = {
     "myclynicq.sms": "短信",
     "myclynicq.webChat": "网页聊天",
     "myclynicq.stayConnected": "与您的医疗保健旅程保持联系。MyClynicQ让您随时了解情况，并使管理预约变得轻松。",
-    
-    // Auth additional keys
-    "auth.enterCredentials": "输入您的凭证以访问您的账户",
-    "auth.signupDescription": "注册以开始预约",
-    "auth.termsAgreement": "继续即表示您同意我们的服务条款和隐私政策",
-    "auth.emailPlaceholder": "您的邮箱@example.com",
-    "auth.namePlaceholder": "张三",
     
     // DoctorProfile
     "doctorProfile.loading": "正在加载医生资料...",
