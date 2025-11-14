@@ -9,6 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { 
@@ -56,6 +57,9 @@ export default function StaffDashboard() {
   const [selectedPatient, setSelectedPatient] = useState<QueueEntry | null>(null);
   const [notificationMessage, setNotificationMessage] = useState("");
   const [queueOpen, setQueueOpen] = useState(true);
+  const [showWalkInDialog, setShowWalkInDialog] = useState(false);
+  const [walkInName, setWalkInName] = useState("");
+  const [walkInPhone, setWalkInPhone] = useState("");
 
   useEffect(() => {
     if (!user) {
@@ -314,6 +318,45 @@ export default function StaffDashboard() {
     }
   };
 
+  const addWalkInPatient = async () => {
+    if (!walkInName.trim() || !walkInPhone.trim()) {
+      toast.error("Please enter both name and phone");
+      return;
+    }
+
+    try {
+      const { data: lastEntry } = await supabase
+        .from("queue_entries")
+        .select("queue_number")
+        .eq("clinic_id", staffRole.clinic_id)
+        .eq("status", "waiting")
+        .order("queue_number", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      const nextQueueNumber = lastEntry ? lastEntry.queue_number + 1 : 1;
+      const walkInUserId = "00000000-0000-0000-0000-000000000000";
+
+      const { error } = await supabase.from("queue_entries").insert({
+        clinic_id: staffRole.clinic_id,
+        user_id: walkInUserId,
+        queue_number: nextQueueNumber,
+        status: "waiting",
+        estimated_wait_time: queueData.length * 15,
+        visit_type: "Walk-in",
+      });
+
+      if (error) throw error;
+
+      toast.success(t("staff.walkInAdded") + ` #${nextQueueNumber}`);
+      setShowWalkInDialog(false);
+      setWalkInName("");
+      setWalkInPhone("");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to add walk-in patient");
+    }
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
@@ -409,20 +452,63 @@ export default function StaffDashboard() {
           {/* Current Queue */}
           <Card className="lg:col-span-2">
             <CardHeader>
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between flex-wrap gap-3">
                 <div>
                   <CardTitle>{t("staff.currentQueue")}</CardTitle>
                   <CardDescription>{t("staff.managePatients")}</CardDescription>
                 </div>
-                <Button 
-                  onClick={callNextPatient}
-                  disabled={queueData.length === 0}
-                  size="lg"
-                  className="bg-accent hover:bg-accent/90"
-                >
-                  <PhoneCall className="mr-2 h-5 w-5" />
-                  {t("staff.callNextPatient")}
-                </Button>
+                <div className="flex gap-2">
+                  <Dialog open={showWalkInDialog} onOpenChange={setShowWalkInDialog}>
+                    <DialogTrigger asChild>
+                      <Button variant="outline" size="lg">
+                        <Users className="mr-2 h-5 w-5" />
+                        {t("staff.addWalkIn")}
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent>
+                      <DialogHeader>
+                        <DialogTitle>{t("staff.addWalkIn")}</DialogTitle>
+                        <DialogDescription>
+                          {t("staff.walkInName")} + {t("staff.walkInPhone")} → Auto-assign queue
+                        </DialogDescription>
+                      </DialogHeader>
+                      <div className="space-y-4">
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium">{t("staff.walkInName")}</label>
+                          <input
+                            type="text"
+                            placeholder={t("staff.walkInNamePlaceholder")}
+                            value={walkInName}
+                            onChange={(e) => setWalkInName(e.target.value)}
+                            className="w-full px-3 py-2 border rounded-md"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-sm font-medium">{t("staff.walkInPhone")}</label>
+                          <input
+                            type="tel"
+                            placeholder={t("staff.walkInPhonePlaceholder")}
+                            value={walkInPhone}
+                            onChange={(e) => setWalkInPhone(e.target.value)}
+                            className="w-full px-3 py-2 border rounded-md"
+                          />
+                        </div>
+                        <Button onClick={addWalkInPatient} className="w-full" size="lg">
+                          {t("staff.addWalkIn")}
+                        </Button>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                  <Button 
+                    onClick={callNextPatient}
+                    disabled={queueData.length === 0}
+                    size="lg"
+                    className="bg-accent hover:bg-accent/90"
+                  >
+                    <PhoneCall className="mr-2 h-5 w-5" />
+                    {t("staff.callNextPatient")}
+                  </Button>
+                </div>
               </div>
             </CardHeader>
             <CardContent>

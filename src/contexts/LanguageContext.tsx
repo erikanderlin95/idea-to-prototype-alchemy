@@ -93,6 +93,17 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.notificationsOn": "Notifications On",
     "queue.enableAlerts": "Enable Alerts",
     "queue.minutes": "min",
+    "queue.disclaimer.title": "Before Joining the Queue",
+    "queue.disclaimer.riskAssessment": "Please arrive 10 minutes early for risk assessment. Urgent cases may override queue sequence based on clinic priority rules.",
+    "queue.disclaimer.queueShift": "Your queue position may change if urgent walk-in patients arrive.",
+    "queue.disclaimer.understand": "I understand and agree",
+    "queue.queueShiftNotice": "Queue updated by clinic. Your position has changed based on clinic priority rules.",
+    "queue.preConsult.title": "Pre-Consultation Information",
+    "queue.preConsult.visitReason": "Reason for Visit",
+    "queue.preConsult.visitReasonPlaceholder": "Please describe your symptoms or reason for visit...",
+    "queue.preConsult.visitType": "Visit Type",
+    "queue.preConsult.continue": "Continue to Queue",
+    "queue.smsConfirmation": "SMS confirmation sent with re-queue link",
     
     // Staff Dashboard
     "staff.title": "Staff Dashboard",
@@ -118,6 +129,12 @@ const translations: Record<Language, Record<string, string>> = {
     "staff.noShow": "No-Show",
     "staff.moveUp": "Move up",
     "staff.moveDown": "Move down",
+    "staff.addWalkIn": "Add Walk-In Patient",
+    "staff.walkInName": "Patient Name",
+    "staff.walkInPhone": "Phone Number",
+    "staff.walkInNamePlaceholder": "Enter patient name",
+    "staff.walkInPhonePlaceholder": "+65 XXXX XXXX",
+    "staff.walkInAdded": "Walk-in patient added to queue",
     
     // Footer
     "footer.tagline": "Simplifying healthcare access across Singapore",
@@ -477,6 +494,17 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.notificationsOn": "通知已开启",
     "queue.enableAlerts": "启用提醒",
     "queue.minutes": "分钟",
+    "queue.disclaimer.title": "加入队列前",
+    "queue.disclaimer.riskAssessment": "请提前10分钟到达进行风险评估。紧急情况可能会根据诊所优先规则覆盖队列顺序。",
+    "queue.disclaimer.queueShift": "如果有紧急上门患者到达，您的队列位置可能会改变。",
+    "queue.disclaimer.understand": "我理解并同意",
+    "queue.queueShiftNotice": "诊所已更新队列。您的位置已根据诊所优先规则更改。",
+    "queue.preConsult.title": "咨询前信息",
+    "queue.preConsult.visitReason": "就诊原因",
+    "queue.preConsult.visitReasonPlaceholder": "请描述您的症状或就诊原因...",
+    "queue.preConsult.visitType": "就诊类型",
+    "queue.preConsult.continue": "继续排队",
+    "queue.smsConfirmation": "已发送包含重新排队链接的短信确认",
     
     // Staff Dashboard
     "staff.title": "员工仪表板",
@@ -502,6 +530,12 @@ const translations: Record<Language, Record<string, string>> = {
     "staff.noShow": "未出现",
     "staff.moveUp": "上移",
     "staff.moveDown": "下移",
+    "staff.addWalkIn": "添加上门患者",
+    "staff.walkInName": "患者姓名",
+    "staff.walkInPhone": "电话号码",
+    "staff.walkInNamePlaceholder": "输入患者姓名",
+    "staff.walkInPhonePlaceholder": "+65 XXXX XXXX",
+    "staff.walkInAdded": "上门患者已添加到队列",
     
     // Footer
     "footer.tagline": "简化新加坡的医疗保健服务",
