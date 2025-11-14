@@ -10,8 +10,13 @@ import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Clock, Users, AlertCircle, CheckCircle2, LogOut, LogIn, Bell, BellOff, Star } from "lucide-react";
+import { Clock, Users, AlertCircle, CheckCircle2, LogOut, LogIn, Bell, BellOff, Star, AlertTriangle } from "lucide-react";
 
 export default function Queue() {
   const [searchParams] = useSearchParams();
@@ -26,6 +31,13 @@ export default function Queue() {
   const [loading, setLoading] = useState(true);
   const [rating, setRating] = useState(0);
   const [lastRefresh, setLastRefresh] = useState(Date.now());
+  const [showDisclaimerDialog, setShowDisclaimerDialog] = useState(false);
+  const [showPreConsultDialog, setShowPreConsultDialog] = useState(false);
+  const [visitReason, setVisitReason] = useState("");
+  const [visitType, setVisitType] = useState("General Consultation");
+  const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
+  const [previousPosition, setPreviousPosition] = useState<number | null>(null);
+  const [showQueueShiftAlert, setShowQueueShiftAlert] = useState(false);
 
   // Initialize queue notifications
   const { notificationPermission, requestNotificationPermission } = useQueueNotifications({
@@ -96,6 +108,18 @@ export default function Queue() {
           .maybeSingle();
 
         setMyQueueEntry(userQueue);
+        
+        // Detect queue position shift
+        if (userQueue && userQueue.queue_number) {
+          const currentPosition = queueEntries?.findIndex(q => q.id === userQueue.id) + 1 || 0;
+          if (previousPosition !== null && currentPosition > 0 && currentPosition !== previousPosition && Math.abs(currentPosition - previousPosition) > 1) {
+            setShowQueueShiftAlert(true);
+            setTimeout(() => setShowQueueShiftAlert(false), 10000);
+          }
+          if (currentPosition > 0) {
+            setPreviousPosition(currentPosition);
+          }
+        }
       }
     } catch (error: any) {
       toast.error(error.message);
@@ -140,23 +164,47 @@ export default function Queue() {
     if (!user || !clinicId) return;
 
     try {
-      const nextQueueNumber = queueData.length > 0 
-        ? Math.max(...queueData.map(q => q.queue_number)) + 1 
-        : 1;
+      // Get the highest queue number
+      const { data: lastEntry } = await supabase
+        .from("queue_entries")
+        .select("queue_number")
+        .eq("clinic_id", clinicId)
+        .eq("status", "waiting")
+        .order("queue_number", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      const nextQueueNumber = lastEntry ? lastEntry.queue_number + 1 : 1;
 
       const { error } = await supabase.from("queue_entries").insert({
         clinic_id: clinicId,
         user_id: user.id,
         queue_number: nextQueueNumber,
         status: "waiting",
-        estimated_wait_time: queueData.length * 15, // 15 min per person estimate
+        estimated_wait_time: queueData.length * 15,
+        visit_type: visitType,
       });
 
       if (error) throw error;
+      
       toast.success(t("queue.joinQueue") + "!");
+      toast.info(t("queue.smsConfirmation"));
+      
+      setShowPreConsultDialog(false);
+      setShowDisclaimerDialog(false);
     } catch (error: any) {
       toast.error(error.message);
     }
+  };
+
+  const handleJoinQueueClick = () => {
+    setShowDisclaimerDialog(true);
+  };
+
+  const handleDisclaimerAgree = () => {
+    setDisclaimerAgreed(true);
+    setShowDisclaimerDialog(false);
+    setShowPreConsultDialog(true);
   };
 
   const cancelQueue = async () => {
@@ -523,17 +571,27 @@ export default function Queue() {
         ) : (
           <Card>
             <CardHeader>
-              <CardTitle>Join the Queue</CardTitle>
+              <CardTitle>{t("queue.joinQueue")}</CardTitle>
               <CardDescription>
-                Get in line and we'll notify you when it's your turn
+                {t("queue.notifiedWhenTurn")}
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <Button onClick={joinQueue} className="w-full" size="lg">
-                Join Queue Now
+              <Button onClick={handleJoinQueueClick} className="w-full" size="lg">
+                {t("queue.joinQueue")}
               </Button>
             </CardContent>
           </Card>
+        )}
+
+        {/* Queue Shift Alert */}
+        {showQueueShiftAlert && myQueueEntry && (
+          <Alert className="mb-6 border-amber-500 bg-amber-50 dark:bg-amber-950/20">
+            <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400" />
+            <AlertDescription className="text-amber-800 dark:text-amber-200">
+              {t("queue.queueShiftNotice")}
+            </AlertDescription>
+          </Alert>
         )}
 
         <Card className="mt-6">
@@ -577,6 +635,78 @@ export default function Queue() {
           </CardContent>
         </Card>
       </div>
+
+      {/* Disclaimer Dialog */}
+      <Dialog open={showDisclaimerDialog} onOpenChange={setShowDisclaimerDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-amber-500" />
+              {t("queue.disclaimer.title")}
+            </DialogTitle>
+            <DialogDescription className="space-y-4 pt-4">
+              <Alert className="border-amber-500 bg-amber-50 dark:bg-amber-950/20">
+                <AlertCircle className="h-4 w-4 text-amber-600" />
+                <AlertDescription className="text-amber-800 dark:text-amber-200">
+                  {t("queue.disclaimer.riskAssessment")}
+                </AlertDescription>
+              </Alert>
+              <Alert className="border-blue-500 bg-blue-50 dark:bg-blue-950/20">
+                <AlertCircle className="h-4 w-4 text-blue-600" />
+                <AlertDescription className="text-blue-800 dark:text-blue-200">
+                  {t("queue.disclaimer.queueShift")}
+                </AlertDescription>
+              </Alert>
+            </DialogDescription>
+          </DialogHeader>
+          <Button onClick={handleDisclaimerAgree} className="w-full" size="lg">
+            {t("queue.disclaimer.understand")}
+          </Button>
+        </DialogContent>
+      </Dialog>
+
+      {/* Pre-Consult Form Dialog */}
+      <Dialog open={showPreConsultDialog} onOpenChange={setShowPreConsultDialog}>
+        <DialogContent className="sm:max-w-lg">
+          <DialogHeader>
+            <DialogTitle>{t("queue.preConsult.title")}</DialogTitle>
+            <DialogDescription>
+              {t("queue.preConsult.visitReason")}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4 pt-4">
+            <div className="space-y-2">
+              <Label htmlFor="visitType">{t("queue.preConsult.visitType")}</Label>
+              <Select value={visitType} onValueChange={setVisitType}>
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="General Consultation">General Consultation</SelectItem>
+                  <SelectItem value="Follow-up">Follow-up</SelectItem>
+                  <SelectItem value="Acute Condition">Acute Condition</SelectItem>
+                  <SelectItem value="Chronic Condition">Chronic Condition</SelectItem>
+                  <SelectItem value="Health Screening">Health Screening</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="visitReason">{t("queue.preConsult.visitReason")}</Label>
+              <Textarea
+                id="visitReason"
+                placeholder={t("queue.preConsult.visitReasonPlaceholder")}
+                value={visitReason}
+                onChange={(e) => setVisitReason(e.target.value)}
+                rows={4}
+                className="resize-none"
+              />
+            </div>
+            <Button onClick={joinQueue} className="w-full" size="lg">
+              {t("queue.preConsult.continue")}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </div>
