@@ -328,13 +328,23 @@ export default function Queue() {
                   {t("queue.feedbackHelps")}
                 </p>
               </div>
-              <Button 
-                onClick={() => navigate("/")} 
-                className="w-full bg-gradient-to-r from-primary to-accent"
-                size="lg"
-              >
-                {t("queue.returnHome")}
-              </Button>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <Button 
+                  onClick={() => navigate("/")} 
+                  variant="outline"
+                  size="lg"
+                >
+                  {t("queue.returnHome")}
+                </Button>
+                <Button 
+                  onClick={() => navigate(`/clinic/${clinicId}`)} 
+                  className="bg-gradient-to-r from-primary to-accent"
+                  size="lg"
+                >
+                  {t("queue.bookAgain")}
+                </Button>
+              </div>
             </CardContent>
           </Card>
         ) : myQueueEntry?.status === "serving" ? (
