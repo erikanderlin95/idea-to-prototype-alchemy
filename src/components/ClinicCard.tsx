@@ -135,55 +135,8 @@ export const ClinicCard = ({
 
     if (!id) return;
 
-    setIsJoining(true);
-    try {
-      // Check if user is already in queue
-      const { data: existingQueue } = await supabase
-        .from("queue_entries")
-        .select("*")
-        .eq("clinic_id", id)
-        .eq("user_id", user.id)
-        .eq("status", "waiting")
-        .maybeSingle();
-
-      if (existingQueue) {
-        toast.info(t("clinicCard.alreadyInQueue"));
-        navigate(`/queue?clinic=${id}`);
-        return;
-      }
-
-      // Get the next queue number
-      const { data: queueData } = await supabase
-        .from("queue_entries")
-        .select("queue_number")
-        .eq("clinic_id", id)
-        .eq("status", "waiting")
-        .order("queue_number", { ascending: false })
-        .limit(1);
-
-      const nextQueueNumber = queueData && queueData.length > 0 
-        ? queueData[0].queue_number + 1 
-        : 1;
-
-      // Join the queue
-      const { error } = await supabase.from("queue_entries").insert({
-        clinic_id: id,
-        user_id: user.id,
-        queue_number: nextQueueNumber,
-        status: "waiting",
-        estimated_wait_time: queueCount * 15,
-        visit_type: visitType,
-      });
-
-      if (error) throw error;
-
-      toast.success(t("clinicCard.queueSuccess").replace("{number}", nextQueueNumber.toString()));
-      navigate(`/queue?clinic=${id}`);
-    } catch (error: any) {
-      toast.error(error.message || t("clinicCard.failedToJoin"));
-    } finally {
-      setIsJoining(false);
-    }
+    // Navigate to queue page where disclaimer and pre-consult form will be shown
+    navigate(`/queue?clinic=${id}`);
   };
 
   return (
