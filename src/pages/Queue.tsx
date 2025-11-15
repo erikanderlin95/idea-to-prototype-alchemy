@@ -72,6 +72,19 @@ export default function Queue() {
     };
   }, [clinicId, user]);
 
+  // Auto-open disclaimer when navigating from clinic card with join=1
+  useEffect(() => {
+    const wantsToJoin = searchParams.get("join") === "1";
+    if (wantsToJoin && !loading) {
+      if (!myQueueEntry) {
+        setShowDisclaimerDialog(true);
+      }
+      const params = new URLSearchParams(searchParams);
+      params.delete("join");
+      navigate(`/queue?clinic=${clinicId}&${params.toString()}`.replace(/&$/, ""), { replace: true });
+    }
+  }, [searchParams, myQueueEntry, loading]);
+
   const loadQueueData = async () => {
     try {
       // Load clinic details

@@ -136,7 +136,7 @@ export const ClinicCard = ({
     if (!id) return;
 
     // Navigate to queue page where disclaimer and pre-consult form will be shown
-    navigate(`/queue?clinic=${id}`);
+    navigate(`/queue?clinic=${id}&join=1`);
   };
 
   return (
