@@ -2,7 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { MapPin, Clock, Users, Star, CheckCircle, XCircle } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { MapPin, Clock, Users, Star, CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -38,6 +43,15 @@ export const ClinicCard = ({
   const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [visitType, setVisitType] = useState(t("clinicCard.generalConsultation"));
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const [showPreConsult, setShowPreConsult] = useState(false);
+  const [showQueueCard, setShowQueueCard] = useState(false);
+  const [preConsultData, setPreConsultData] = useState({
+    symptoms: "",
+    duration: "",
+    allergies: "",
+    medications: ""
+  });
 
   useEffect(() => {
     if (user && id) {
@@ -135,12 +149,53 @@ export const ClinicCard = ({
 
     if (!id) return;
 
-    // Navigate to queue page where disclaimer and pre-consult form will be shown
-    navigate(`/queue?clinic=${id}&join=1`);
+    // Open disclaimer dialog
+    setShowDisclaimer(true);
+  };
+
+  const addToQueue = async (formData: any) => {
+    if (!user || !id) return;
+
+    setIsJoining(true);
+    try {
+      const { data: queueData, error: queueError } = await supabase
+        .from("queue_entries")
+        .select("queue_number")
+        .eq("clinic_id", id)
+        .order("queue_number", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (queueError && queueError.code !== "PGRST116") throw queueError;
+
+      const nextQueueNumber = queueData ? queueData.queue_number + 1 : 1;
+
+      const { error: insertError } = await supabase
+        .from("queue_entries")
+        .insert({
+          clinic_id: id,
+          user_id: user.id,
+          queue_number: nextQueueNumber,
+          visit_type: visitType,
+          status: "waiting",
+          estimated_wait_time: parseInt(waitTime) || 15,
+        });
+
+      if (insertError) throw insertError;
+
+      toast.success(t("clinicCard.joinedQueue"));
+      await checkQueueStatus();
+      setShowQueueCard(true);
+    } catch (error: any) {
+      toast.error(error.message || t("clinicCard.failedToJoin"));
+    } finally {
+      setIsJoining(false);
+    }
   };
 
   return (
-    <Card className="group p-6 hover:shadow-xl transition-all duration-300 border-ai-indigo/30 hover:border-ai-purple/50 cursor-pointer bg-gradient-to-br from-card to-ai-purple/5 onboarding-join-queue hover:shadow-ai-purple/10" onClick={() => id && navigate(`/clinic/${id}`)}>
+    <>
+      <Card className="group p-6 hover:shadow-xl transition-all duration-300 border-ai-indigo/30 hover:border-ai-purple/50 cursor-pointer bg-gradient-to-br from-card to-ai-purple/5 onboarding-join-queue hover:shadow-ai-purple/10" onClick={() => id && navigate(`/clinic/${id}`)}>
       <div className="space-y-5">
         <div className="flex items-start justify-between">
           <div className="space-y-3 flex-1">
@@ -334,5 +389,134 @@ export const ClinicCard = ({
         )}
       </div>
     </Card>
-  );
+
+    {/* Disclaimer Dialog */}
+    <Dialog open={showDisclaimer} onOpenChange={setShowDisclaimer}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Queue Disclaimer</DialogTitle>
+          <DialogDescription>Please read and agree to continue</DialogDescription>
+        </DialogHeader>
+        <div className="space-y-4">
+          <Alert>
+            <AlertTriangle className="h-4 w-4" />
+            <AlertDescription>
+              <strong>Important Notice:</strong>
+              <ul className="mt-2 space-y-1 text-sm">
+                <li>• Queue positions are estimates and may change</li>
+                <li>• Wait times are approximate and subject to clinic operations</li>
+                <li>• You must check in when your number is called</li>
+                <li>• Missing your turn may result in queue removal</li>
+              </ul>
+            </AlertDescription>
+          </Alert>
+        </div>
+        <DialogFooter>
+          <Button variant="outline" onClick={() => setShowDisclaimer(false)}>
+            Cancel
+          </Button>
+          <Button onClick={() => {
+            setShowDisclaimer(false);
+            setShowPreConsult(true);
+          }}>
+            I understand and agree
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+
+    {/* Pre-Consult Form Dialog */}
+    <Dialog open={showPreConsult} onOpenChange={setShowPreConsult}>
+      <DialogContent className="max-w-2xl">
+        <DialogHeader>
+          <DialogTitle>Pre-Consultation Form</DialogTitle>
+          <DialogDescription>Help us prepare for your visit</DialogDescription>
+        </DialogHeader>
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          addToQueue(preConsultData);
+          setShowPreConsult(false);
+        }} className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="symptoms">What are your symptoms?</Label>
+            <Textarea
+              id="symptoms"
+              placeholder="Describe your symptoms..."
+              value={preConsultData.symptoms}
+              onChange={(e) => setPreConsultData({...preConsultData, symptoms: e.target.value})}
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="duration">How long have you had these symptoms?</Label>
+            <Input
+              id="duration"
+              placeholder="e.g., 3 days"
+              value={preConsultData.duration}
+              onChange={(e) => setPreConsultData({...preConsultData, duration: e.target.value})}
+              required
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="allergies">Any allergies?</Label>
+            <Input
+              id="allergies"
+              placeholder="e.g., Penicillin, None"
+              value={preConsultData.allergies}
+              onChange={(e) => setPreConsultData({...preConsultData, allergies: e.target.value})}
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="medications">Current medications?</Label>
+            <Textarea
+              id="medications"
+              placeholder="List any medications you're currently taking..."
+              value={preConsultData.medications}
+              onChange={(e) => setPreConsultData({...preConsultData, medications: e.target.value})}
+            />
+          </div>
+          <DialogFooter>
+            <Button type="button" variant="outline" onClick={() => setShowPreConsult(false)}>
+              Cancel
+            </Button>
+            <Button type="submit" disabled={isJoining}>
+              {isJoining ? "Joining..." : "Join Queue"}
+            </Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+
+    {/* Queue Card Dialog */}
+    <Dialog open={showQueueCard} onOpenChange={setShowQueueCard}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>You're in the Queue!</DialogTitle>
+          <DialogDescription>Your queue position has been confirmed</DialogDescription>
+        </DialogHeader>
+        <div className="space-y-4">
+          <div className="text-center p-6 bg-muted rounded-lg">
+            <p className="text-sm text-muted-foreground mb-2">Your Queue Number</p>
+            <p className="text-5xl font-bold text-primary">{myQueueEntry?.queue_number}</p>
+            <p className="text-sm text-muted-foreground mt-4">
+              Estimated wait time: {myQueueEntry?.estimated_wait_time || waitTime} mins
+            </p>
+          </div>
+          <Alert>
+            <AlertDescription>
+              Please stay nearby and check your notifications. You'll be notified when it's your turn.
+            </AlertDescription>
+          </Alert>
+        </div>
+        <DialogFooter>
+          <Button onClick={() => {
+            setShowQueueCard(false);
+            navigate(`/queue?clinic=${id}`);
+          }}>
+            View Queue Details
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  </>);
 };
