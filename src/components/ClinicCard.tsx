@@ -3,9 +3,6 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { MapPin, Clock, Users, Star, CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -44,14 +41,7 @@ export const ClinicCard = ({
   const [isLoading, setIsLoading] = useState(false);
   const [visitType, setVisitType] = useState(t("clinicCard.generalConsultation"));
   const [showDisclaimer, setShowDisclaimer] = useState(false);
-  const [showPreConsult, setShowPreConsult] = useState(false);
   const [showQueueCard, setShowQueueCard] = useState(false);
-  const [preConsultData, setPreConsultData] = useState({
-    symptoms: "",
-    duration: "",
-    allergies: "",
-    medications: ""
-  });
 
   useEffect(() => {
     if (user && id) {
@@ -153,7 +143,7 @@ export const ClinicCard = ({
     setShowDisclaimer(true);
   };
 
-  const addToQueue = async (formData: any) => {
+  const addToQueue = async () => {
     if (!user || !id) return;
 
     setIsJoining(true);
@@ -415,75 +405,16 @@ export const ClinicCard = ({
           <Button variant="outline" onClick={() => setShowDisclaimer(false)}>
             Cancel
           </Button>
-          <Button onClick={() => {
-            setShowDisclaimer(false);
-            setShowPreConsult(true);
-          }}>
-            I understand and agree
+          <Button 
+            onClick={async () => {
+              setShowDisclaimer(false);
+              await addToQueue();
+            }}
+            disabled={isJoining}
+          >
+            {isJoining ? "Joining..." : "I understand and agree"}
           </Button>
         </DialogFooter>
-      </DialogContent>
-    </Dialog>
-
-    {/* Pre-Consult Form Dialog */}
-    <Dialog open={showPreConsult} onOpenChange={setShowPreConsult}>
-      <DialogContent className="max-w-2xl">
-        <DialogHeader>
-          <DialogTitle>Pre-Consultation Form</DialogTitle>
-          <DialogDescription>Help us prepare for your visit</DialogDescription>
-        </DialogHeader>
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          addToQueue(preConsultData);
-          setShowPreConsult(false);
-        }} className="space-y-4">
-          <div className="space-y-2">
-            <Label htmlFor="symptoms">What are your symptoms?</Label>
-            <Textarea
-              id="symptoms"
-              placeholder="Describe your symptoms..."
-              value={preConsultData.symptoms}
-              onChange={(e) => setPreConsultData({...preConsultData, symptoms: e.target.value})}
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="duration">How long have you had these symptoms?</Label>
-            <Input
-              id="duration"
-              placeholder="e.g., 3 days"
-              value={preConsultData.duration}
-              onChange={(e) => setPreConsultData({...preConsultData, duration: e.target.value})}
-              required
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="allergies">Any allergies?</Label>
-            <Input
-              id="allergies"
-              placeholder="e.g., Penicillin, None"
-              value={preConsultData.allergies}
-              onChange={(e) => setPreConsultData({...preConsultData, allergies: e.target.value})}
-            />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="medications">Current medications?</Label>
-            <Textarea
-              id="medications"
-              placeholder="List any medications you're currently taking..."
-              value={preConsultData.medications}
-              onChange={(e) => setPreConsultData({...preConsultData, medications: e.target.value})}
-            />
-          </div>
-          <DialogFooter>
-            <Button type="button" variant="outline" onClick={() => setShowPreConsult(false)}>
-              Cancel
-            </Button>
-            <Button type="submit" disabled={isJoining}>
-              {isJoining ? "Joining..." : "Join Queue"}
-            </Button>
-          </DialogFooter>
-        </form>
       </DialogContent>
     </Dialog>
 
