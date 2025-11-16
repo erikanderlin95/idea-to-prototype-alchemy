@@ -387,20 +387,21 @@ export const ClinicCard = ({
           <DialogTitle>Queue Disclaimer</DialogTitle>
           <DialogDescription>Please read and agree to continue</DialogDescription>
         </DialogHeader>
-        <div className="space-y-4">
-          <Alert>
-            <AlertTriangle className="h-4 w-4" />
-            <AlertDescription>
-              <strong>Important Notice:</strong>
-              <ul className="mt-2 space-y-1 text-sm">
-                <li>• Queue positions are estimates and may change</li>
-                <li>• Wait times are approximate and subject to clinic operations</li>
-                <li>• You must check in when your number is called</li>
-                <li>• Missing your turn may result in queue removal</li>
-              </ul>
-            </AlertDescription>
-          </Alert>
-        </div>
+          <div className="space-y-4">
+            <Alert>
+              <AlertTriangle className="h-4 w-4" />
+              <AlertDescription>
+                <strong>Important Notice:</strong>
+                <ul className="mt-2 space-y-1 text-sm">
+                  <li>• Queue numbers are estimates, not guaranteed</li>
+                  <li>• Queue order is fully managed by clinic staff and may shift due to urgent cases, drop-offs, or clinic triage</li>
+                  <li>• Wait times are approximate and subject to clinic operations</li>
+                  <li>• You must check in when your number is called</li>
+                  <li>• Missing your turn may result in queue removal</li>
+                </ul>
+              </AlertDescription>
+            </Alert>
+          </div>
         <DialogFooter>
           <Button variant="outline" onClick={() => setShowDisclaimer(false)}>
             Cancel
