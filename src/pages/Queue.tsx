@@ -3,6 +3,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useQueueNotifications } from "@/hooks/useQueueNotifications";
+import { usePhase2Features } from "@/hooks/usePhase2Features";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { StaffNotifications } from "@/components/StaffNotifications";
 import { Navbar } from "@/components/Navbar";
@@ -38,12 +39,25 @@ export default function Queue() {
   const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
   const [previousPosition, setPreviousPosition] = useState<number | null>(null);
   const [showQueueShiftAlert, setShowQueueShiftAlert] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
 
   // Initialize queue notifications
   const { notificationPermission, requestNotificationPermission } = useQueueNotifications({
     clinicId,
     userId: user?.id || null,
     clinicName: clinic?.name,
+  });
+
+  // Initialize Phase 2 features (bot-enabled)
+  const myPosition = myQueueEntry 
+    ? queueData.findIndex(q => q.id === myQueueEntry.id) + 1 
+    : null;
+
+  usePhase2Features({
+    enabled: clinic?.phase2_enabled || false,
+    myQueueEntry,
+    myPosition,
+    clinicName: clinic?.name || "",
   });
 
   useEffect(() => {
@@ -90,7 +104,7 @@ export default function Queue() {
       // Load clinic details
       const { data: clinicData, error: clinicError } = await supabase
         .from("clinics")
-        .select("*")
+        .select("*, phase2_enabled")
         .eq("id", clinicId)
         .single();
 
@@ -232,6 +246,7 @@ export default function Queue() {
       if (error) throw error;
       toast.success(t("queue.leaveQueue"));
       setMyQueueEntry(null);
+      setShowThankYou(true); // Show Thank You screen
     } catch (error: any) {
       toast.error(error.message || "Failed to cancel queue");
     }
@@ -266,10 +281,6 @@ export default function Queue() {
     );
   }
 
-  const myPosition = myQueueEntry 
-    ? queueData.findIndex(q => q.id === myQueueEntry.id) + 1 
-    : null;
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -284,8 +295,20 @@ export default function Queue() {
           <CardHeader>
             <div className="flex items-start justify-between">
               <div>
-                <CardTitle className="text-2xl">{clinic?.name}</CardTitle>
+                <div className="flex items-center gap-2">
+                  <CardTitle className="text-2xl">{clinic?.name}</CardTitle>
+                  {clinic?.phase2_enabled && (
+                    <Badge variant="secondary" className="bg-accent/20 text-accent border-accent/30">
+                      Smart Queue
+                    </Badge>
+                  )}
+                </div>
                 <CardDescription className="mt-1">{clinic?.address}</CardDescription>
+                {clinic?.phase2_enabled && (
+                  <p className="text-xs text-accent mt-1">
+                    Enhanced with automated reminders & smart notifications
+                  </p>
+                )}
               </div>
               {myQueueEntry && (
                 <Button
@@ -349,63 +372,34 @@ export default function Queue() {
           </CardContent>
         </Card>
 
-        {myQueueEntry?.status === "served" ? (
+        {(myQueueEntry?.status === "served" || showThankYou) ? (
           <Card className="mb-6 border-green-500 bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20 animate-in slide-in-from-bottom">
             <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-green-700 dark:text-green-400">
-                <CheckCircle2 className="h-6 w-6 animate-pulse" />
-                {t("queue.complete")}
+              <CardTitle className="flex items-center gap-2 text-green-700 dark:text-green-400 text-2xl">
+                <CheckCircle2 className="h-8 w-8" />
+                Thank you for visiting!
               </CardTitle>
-              <CardDescription className="text-green-600 dark:text-green-500">
-                {t("queue.thankYou")} {clinic?.name}
+              <CardDescription className="text-green-600 dark:text-green-500 text-base">
+                Your visit is complete.
               </CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
-              <div className="p-6 bg-white dark:bg-background rounded-xl border border-green-200 dark:border-green-800">
-                <p className="text-center text-lg font-medium mb-4">{t("queue.rateVisit")}</p>
-                <div className="flex gap-2 justify-center mb-4">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <button
-                      key={star}
-                      onClick={() => setRating(star)}
-                      className="transition-transform hover:scale-110"
-                    >
-                      <Star
-                        className={`h-8 w-8 ${
-                          star <= rating
-                            ? "fill-yellow-400 text-yellow-400"
-                            : "text-gray-300"
-                        }`}
-                      />
-                    </button>
-                  ))}
-                </div>
-                {rating > 0 && (
-                  <p className="text-sm text-green-600 dark:text-green-400 text-center animate-in fade-in">
-                    {t("queue.feedbackThanks")}
-                  </p>
-                )}
-                <p className="text-xs text-muted-foreground text-center mt-2">
-                  {t("queue.feedbackHelps")}
-                </p>
-              </div>
+              <Button 
+                onClick={() => navigate(`/clinic/${clinicId}`)} 
+                className="w-full bg-gradient-to-r from-primary to-accent"
+                size="lg"
+              >
+                Book Again
+              </Button>
               
-              <div className="grid grid-cols-2 gap-4">
-                <Button 
-                  onClick={() => navigate("/")} 
-                  variant="outline"
-                  size="lg"
-                >
-                  {t("queue.returnHome")}
-                </Button>
-                <Button 
-                  onClick={() => navigate(`/clinic/${clinicId}`)} 
-                  className="bg-gradient-to-r from-primary to-accent"
-                  size="lg"
-                >
-                  {t("queue.bookAgain")}
-                </Button>
-              </div>
+              {clinic?.phase2_enabled && (
+                <div className="p-4 bg-accent/10 rounded-xl border border-accent/20">
+                  <p className="text-sm font-semibold text-accent mb-2">Quick Rebook</p>
+                  <p className="text-xs text-muted-foreground">
+                    Save time on your next visit with our enhanced booking system
+                  </p>
+                </div>
+              )}
             </CardContent>
           </Card>
         ) : myQueueEntry?.status === "serving" ? (
