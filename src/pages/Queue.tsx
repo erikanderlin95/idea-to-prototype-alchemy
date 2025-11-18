@@ -111,18 +111,22 @@ export default function Queue() {
       if (clinicError) throw clinicError;
       setClinic(clinicData);
 
-      // Load queue entries
+      // SINGLE SOURCE OF TRUTH: Load ALL queue entries for this clinic
+      // This includes waiting, checked_in, and serving statuses
       const { data: queueEntries, error: queueError } = await supabase
         .from("queue_entries")
         .select("*")
         .eq("clinic_id", clinicId)
-        .eq("status", "waiting")
+        .in("status", ["waiting", "checked_in", "serving"])
         .order("queue_number", { ascending: true });
 
       if (queueError) throw queueError;
-      setQueueData(queueEntries || []);
+      
+      // Set the single source of truth
+      const queue = queueEntries || [];
+      setQueueData(queue);
 
-      // Check if user is in queue (any active status including served for feedback)
+      // Check if user is in queue (including served status for Thank-You screen)
       if (user) {
         const { data: userQueue } = await supabase
           .from("queue_entries")
@@ -136,9 +140,14 @@ export default function Queue() {
 
         setMyQueueEntry(userQueue);
         
-        // Detect queue position shift
-        if (userQueue && userQueue.queue_number) {
-          const currentPosition = queueEntries?.findIndex(q => q.id === userQueue.id) + 1 || 0;
+        // Automatically show Thank-You screen when status is served
+        if (userQueue?.status === "served") {
+          setShowThankYou(true);
+        }
+        
+        // Detect queue position shift (only for active queue members)
+        if (userQueue && userQueue.status !== "served") {
+          const currentPosition = queue.findIndex(q => q.id === userQueue.id) + 1;
           if (previousPosition !== null && currentPosition > 0 && currentPosition !== previousPosition && Math.abs(currentPosition - previousPosition) > 1) {
             setShowQueueShiftAlert(true);
             setTimeout(() => setShowQueueShiftAlert(false), 10000);
@@ -191,17 +200,9 @@ export default function Queue() {
     if (!user || !clinicId) return;
 
     try {
-      // Get the highest queue number
-      const { data: lastEntry } = await supabase
-        .from("queue_entries")
-        .select("queue_number")
-        .eq("clinic_id", clinicId)
-        .eq("status", "waiting")
-        .order("queue_number", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-
-      const nextQueueNumber = lastEntry ? lastEntry.queue_number + 1 : 1;
+      // SINGLE SOURCE OF TRUTH: Next queue number is current queue length + 1
+      // This ensures queue numbers always match the actual queue size
+      const nextQueueNumber = queueData.length + 1;
 
       const { error } = await supabase.from("queue_entries").insert({
         clinic_id: clinicId,
@@ -219,6 +220,9 @@ export default function Queue() {
       
       setShowPreConsultDialog(false);
       setShowDisclaimerDialog(false);
+      
+      // Reload queue data to reflect the new entry
+      loadQueueData();
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -266,6 +270,24 @@ export default function Queue() {
       loadQueueData(); // Reload to show updated status
     } catch (error: any) {
       toast.error(error.message || "Failed to check in");
+    }
+  };
+
+  // Phase 1 Simulation: Mark as served (for testing Thank-You screen)
+  const simulateServed = async () => {
+    if (!myQueueEntry) return;
+
+    try {
+      const { error } = await supabase
+        .from("queue_entries")
+        .update({ status: "served" })
+        .eq("id", myQueueEntry.id);
+
+      if (error) throw error;
+      toast.success("Visit completed! (Simulated for Phase 1 testing)");
+      loadQueueData(); // This will trigger the Thank-You screen
+    } catch (error: any) {
+      toast.error(error.message || "Failed to update status");
     }
   };
 
@@ -570,6 +592,21 @@ export default function Queue() {
                   >
                     <LogOut className="mr-2 h-5 w-5" />
                     Leave Queue
+                  </Button>
+                </div>
+
+                {/* Phase 1 Simulation Button */}
+                <div className="pt-4 border-t border-border">
+                  <p className="text-xs text-muted-foreground text-center mb-2">
+                    Phase 1 Testing - Simulate completion
+                  </p>
+                  <Button 
+                    onClick={simulateServed}
+                    variant="secondary"
+                    size="sm"
+                    className="w-full"
+                  >
+                    Simulate "Served" Status (Test)
                   </Button>
                 </div>
               </div>
