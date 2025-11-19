@@ -11,7 +11,7 @@ import Booking from "./pages/Booking";
 import Appointments from "./pages/Appointments";
 import Dashboard from "./pages/Dashboard";
 import Chatbot from "./pages/Chatbot";
-
+import Queue from "./pages/Queue";
 import DoctorProfile from "./pages/DoctorProfile";
 import Analytics from "./pages/Analytics";
 import StaffDashboard from "./pages/StaffDashboard";
@@ -34,7 +34,7 @@ const App = () => (
             <Route path="/appointments" element={<Appointments />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/chatbot" element={<Chatbot />} />
-            
+            <Route path="/queue" element={<Queue />} />
             <Route path="/doctor/:id" element={<DoctorProfile />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/staff" element={<StaffDashboard />} />
