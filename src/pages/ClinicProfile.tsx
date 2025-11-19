@@ -7,7 +7,10 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -23,10 +26,38 @@ const ClinicProfile = () => {
   const [reviews, setReviews] = useState<any[]>([]);
   const [queue, setQueue] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const [showThankYou, setShowThankYou] = useState(false);
+  const [visitType, setVisitType] = useState(t("clinicCard.generalConsultation"));
+  const [isJoining, setIsJoining] = useState(false);
 
   useEffect(() => {
     fetchClinicData();
-  }, [id]);
+    
+    if (user && id) {
+      // Subscribe to queue changes
+      const channel = supabase
+        .channel(`queue-${id}`)
+        .on(
+          'postgres_changes',
+          {
+            event: '*',
+            schema: 'public',
+            table: 'queue_entries',
+            filter: `clinic_id=eq.${id}`,
+          },
+          (payload) => {
+            fetchClinicData();
+          }
+        )
+        .subscribe();
+
+      return () => {
+        supabase.removeChannel(channel);
+      };
+    }
+  }, [id, user]);
 
   const fetchClinicData = async () => {
     try {
@@ -34,18 +65,116 @@ const ClinicProfile = () => {
         supabase.from("clinics").select("*").eq("id", id).single(),
         supabase.from("doctors").select("*").eq("clinic_id", id),
         supabase.from("reviews").select("*, profiles(full_name)").eq("clinic_id", id).order("created_at", { ascending: false }),
-        supabase.from("queue_entries").select("*").eq("clinic_id", id).eq("status", "waiting").order("queue_number"),
+        supabase.from("queue_entries").select("*").eq("clinic_id", id).in("status", ["waiting", "checked_in", "serving"]).order("queue_number"),
       ]);
 
       if (clinicData.data) setClinic(clinicData.data);
       if (doctorsData.data) setDoctors(doctorsData.data);
       if (reviewsData.data) setReviews(reviewsData.data);
-      if (queueData.data) setQueue(queueData.data);
+      if (queueData.data) {
+        setQueue(queueData.data);
+        // Check if current user is in queue
+        if (user) {
+          const userEntry = queueData.data.find((entry: any) => entry.user_id === user.id && entry.status !== 'served');
+          setMyQueueEntry(userEntry || null);
+          
+          // Check if user was just served
+          const servedEntry = queueData.data.find((entry: any) => entry.user_id === user.id && entry.status === 'served');
+          if (servedEntry) {
+            setShowThankYou(true);
+          }
+        }
+      }
     } catch (error) {
       console.error("Error fetching clinic data:", error);
       toast.error(t('clinicProfile.failedToLoad'));
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleJoinQueue = () => {
+    if (!user) {
+      toast.error(t("clinicCard.signInRequired"));
+      navigate("/auth");
+      return;
+    }
+    setShowDisclaimer(true);
+  };
+
+  const addToQueue = async () => {
+    if (!user || !id) return;
+
+    setIsJoining(true);
+    try {
+      // Get current queue count for this clinic
+      const { data: currentQueue, error: queueError } = await supabase
+        .from("queue_entries")
+        .select("id")
+        .eq("clinic_id", id)
+        .in("status", ["waiting", "checked_in", "serving"]);
+
+      if (queueError) throw queueError;
+
+      // Next queue number = current queue length + 1
+      const nextQueueNumber = (currentQueue?.length || 0) + 1;
+
+      const { error: insertError } = await supabase
+        .from("queue_entries")
+        .insert({
+          clinic_id: id,
+          user_id: user.id,
+          queue_number: nextQueueNumber,
+          visit_type: visitType,
+          status: "waiting",
+          estimated_wait_time: 15,
+        });
+
+      if (insertError) throw insertError;
+
+      toast.success(t("clinicCard.joinedQueue"));
+      await fetchClinicData();
+    } catch (error: any) {
+      toast.error(error.message || t("clinicCard.failedToJoin"));
+    } finally {
+      setIsJoining(false);
+    }
+  };
+
+  const handleCancelQueue = async () => {
+    if (!myQueueEntry) return;
+
+    try {
+      const { error } = await supabase
+        .from("queue_entries")
+        .delete()
+        .eq("id", myQueueEntry.id);
+
+      if (error) throw error;
+
+      toast.success(t("clinicCard.leftQueue"));
+      setMyQueueEntry(null);
+      setShowThankYou(true);
+    } catch (error: any) {
+      toast.error(error.message || t("clinicCard.failedToLeave"));
+    }
+  };
+
+  const handleCheckIn = async () => {
+    if (!myQueueEntry) return;
+
+    try {
+      const { error } = await supabase
+        .from("queue_entries")
+        .update({ status: "checked_in" })
+        .eq("id", myQueueEntry.id);
+
+      if (error) throw error;
+
+      toast.success(t("clinicCard.checkedIn"));
+      await fetchClinicData();
+    } catch (error: any) {
+      toast.error(error.message || t("clinicCard.failedToJoin"));
     }
   };
 
@@ -92,15 +221,18 @@ const ClinicProfile = () => {
                   <Calendar className="mr-2 h-6 w-6" />
                   {t('clinicProfile.bookAppointment')}
                 </Button>
-                <Button 
-                  size="lg" 
-                  variant="outline"
-                  className="text-base px-6 py-6"
-                  onClick={() => navigate(`/queue?clinic=${id}`)}
-                >
-                  <Users className="mr-2 h-6 w-6" />
-                  {t('clinicProfile.joinQueue')}
-                </Button>
+                {!myQueueEntry && !showThankYou && (
+                  <Button 
+                    size="lg" 
+                    variant="outline"
+                    className="text-base px-6 py-6"
+                    onClick={handleJoinQueue}
+                    disabled={!clinic.is_open}
+                  >
+                    <Users className="mr-2 h-6 w-6" />
+                    {t('clinicProfile.joinQueue')}
+                  </Button>
+                )}
               </div>
             </div>
 
@@ -161,6 +293,93 @@ const ClinicProfile = () => {
               </div>
             </Card>
           </div>
+
+          {/* Queue Status Card */}
+          {myQueueEntry && !showThankYou && (
+            <Card className="p-6 border-2 shadow-xl" style={{ borderColor: 'hsl(var(--ai-purple)/0.4)' }}>
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 rounded-lg border-2"
+                  style={{ 
+                    background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.1))',
+                    borderColor: 'hsl(var(--ai-purple)/0.3)'
+                  }}
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="relative h-16 w-16">
+                      <svg className="absolute inset-0 -rotate-90" viewBox="0 0 64 64">
+                        <circle cx="32" cy="32" r="28" fill="none" stroke="hsl(var(--muted))" strokeWidth="4" opacity="0.3" />
+                        <circle
+                          cx="32" cy="32" r="28" fill="none" stroke="hsl(var(--accent))" strokeWidth="4"
+                          strokeLinecap="round" strokeDasharray={`${2 * Math.PI * 28}`}
+                          strokeDashoffset={`${2 * Math.PI * 28 * (1 - ((queue.length - myQueueEntry.queue_number) / queue.length))}`}
+                          className="transition-all duration-1000 ease-out"
+                        />
+                      </svg>
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg">
+                        #{myQueueEntry.queue_number}
+                      </div>
+                    </div>
+                    <div>
+                      <p className="text-sm font-medium text-muted-foreground mb-1">{t("clinicCard.youreInQueue")}</p>
+                      <p className="text-lg font-bold text-foreground">
+                        {t("clinicCard.position")} <span className="text-2xl font-black text-primary">#{myQueueEntry.queue_number}</span>
+                        <span className="text-sm font-medium text-muted-foreground ml-2">{t("clinicCard.of")} {queue.length}</span>
+                      </p>
+                    </div>
+                  </div>
+                  <Badge variant="secondary" className="text-xs font-semibold px-3 py-1">
+                    {myQueueEntry.status === "waiting" && t("clinicCard.waiting")}
+                    {myQueueEntry.status === "checked_in" && "Checked In"}
+                    {myQueueEntry.status === "serving" && "Being Served"}
+                  </Badge>
+                </div>
+                
+                <div className="flex gap-3">
+                  {myQueueEntry.status === "waiting" && (
+                    <Button 
+                      className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-black shadow-md border-0 h-16 text-lg" 
+                      onClick={handleCheckIn}
+                    >
+                      <CheckCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
+                      {t("clinicCard.checkIn")}
+                    </Button>
+                  )}
+                  <Button 
+                    variant="outline"
+                    className="flex-1 border-2 border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive font-black h-16 text-lg" 
+                    onClick={handleCancelQueue}
+                  >
+                    <XCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
+                    {t("clinicCard.leaveQueue")}
+                  </Button>
+                </div>
+              </div>
+            </Card>
+          )}
+
+          {/* Thank You Screen */}
+          {showThankYou && (
+            <Card className="p-12 text-center space-y-6 border-2 shadow-xl" style={{ borderColor: 'hsl(var(--primary)/0.3)' }}>
+              <div className="space-y-4">
+                <div className="mx-auto h-24 w-24 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl">
+                  <CheckCircle className="h-12 w-12 text-primary-foreground" strokeWidth={3} />
+                </div>
+                <h2 className="text-4xl font-black text-foreground">Thank you for visiting!</h2>
+                <p className="text-xl text-muted-foreground font-medium">Your visit is complete.</p>
+              </div>
+              <Button 
+                size="lg"
+                className="bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-lg shadow-2xl shadow-primary/50 h-14 px-8"
+                onClick={() => {
+                  setShowThankYou(false);
+                  setMyQueueEntry(null);
+                }}
+              >
+                <Calendar className="mr-2 h-6 w-6" />
+                Book Again
+              </Button>
+            </Card>
+          )}
 
           {/* Tabs */}
           <Tabs defaultValue="doctors" className="w-full">
@@ -296,8 +515,63 @@ const ClinicProfile = () => {
           </Tabs>
         </div>
       </main>
-
+      
       <Footer />
+
+      {/* Disclaimer Dialog */}
+      <Dialog open={showDisclaimer} onOpenChange={setShowDisclaimer}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Queue Disclaimer</DialogTitle>
+            <DialogDescription>Please read and agree to continue</DialogDescription>
+          </DialogHeader>
+          <div className="space-y-4">
+            <Alert>
+              <AlertTriangle className="h-4 w-4" />
+              <AlertDescription>
+                <strong>Important Notice:</strong>
+                <ul className="mt-2 space-y-1 text-sm">
+                  <li>• Queue numbers are estimates, not guaranteed</li>
+                  <li>• Queue order is fully managed by clinic staff and may shift due to urgent cases, drop-offs, or clinic triage</li>
+                  <li>• Wait times are approximate and subject to clinic operations</li>
+                  <li>• You must check in when your number is called</li>
+                  <li>• Missing your turn may result in queue removal</li>
+                </ul>
+              </AlertDescription>
+            </Alert>
+            
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-foreground">{t("clinicCard.visitType")}</label>
+              <Select value={visitType} onValueChange={setVisitType}>
+                <SelectTrigger className="w-full">
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value={t("clinicCard.generalConsultation")}>{t("clinicCard.generalConsultation")}</SelectItem>
+                  <SelectItem value={t("clinicCard.followUp")}>{t("clinicCard.followUp")}</SelectItem>
+                  <SelectItem value={t("clinicCard.emergency")}>{t("clinicCard.emergency")}</SelectItem>
+                  <SelectItem value={t("clinicCard.vaccination")}>{t("clinicCard.vaccination")}</SelectItem>
+                  <SelectItem value={t("clinicCard.healthScreening")}>{t("clinicCard.healthScreening")}</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </div>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setShowDisclaimer(false)}>
+              Cancel
+            </Button>
+            <Button 
+              onClick={async () => {
+                setShowDisclaimer(false);
+                await addToQueue();
+              }}
+              disabled={isJoining}
+            >
+              {isJoining ? "Joining..." : "I understand and agree"}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
