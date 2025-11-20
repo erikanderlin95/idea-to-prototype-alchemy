@@ -21,7 +21,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { QueueIcon, AppointmentsIcon, AnalyticsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
 import { ClynicQIcon } from "@/components/icons/ClynicQIcon";
 
 interface NavbarProps {
@@ -32,28 +31,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   const { t } = useLanguage();
-  const [isStaff, setIsStaff] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  useEffect(() => {
-    if (!user) {
-      setIsStaff(false);
-      return;
-    }
-
-    const checkStaffRole = async () => {
-      const { data } = await supabase
-        .from("user_roles")
-        .select("role")
-        .eq("user_id", user.id)
-        .eq("role", "clinic_staff")
-        .maybeSingle();
-
-      setIsStaff(!!data);
-    };
-
-    checkStaffRole();
-  }, [user]);
 
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -73,28 +51,6 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
           <a href="/" className="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
             {t("nav.findClinics")}
           </a>
-          {user && (
-            <>
-              {isStaff && (
-                <a href="/staff" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
-                  <QueueIcon size="sm" />
-                  {t("nav.staffDashboard")}
-                </a>
-              )}
-              <a href="/appointments" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
-                <AppointmentsIcon size="sm" />
-                {t("nav.myAppointments")}
-              </a>
-              <a href="/chatbot" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
-                <ChatbotIcon size="sm" />
-                {t("nav.healthAssistant")}
-              </a>
-              <a href="/analytics" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
-                <AnalyticsIcon size="sm" />
-                {t("nav.analytics")}
-              </a>
-            </>
-          )}
         </div>
 
         <div className="flex items-center gap-2 md:gap-4 shrink-0">
@@ -110,47 +66,13 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
                 <SheetHeader>
                   <SheetTitle>{t("nav.menu")}</SheetTitle>
                 </SheetHeader>
-                <div className="flex flex-col gap-4 mt-6">
+                <div className="space-y-1 mt-6">
                   <a 
                     href="/" 
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <span className="text-sm font-medium">{t("nav.findClinics")}</span>
-                  </a>
-                  {isStaff && (
-                    <a 
-                      href="/staff" 
-                      className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      <QueueIcon size="sm" />
-                      <span className="text-sm font-medium">{t("nav.staffDashboard")}</span>
-                    </a>
-                  )}
-                  <a 
-                    href="/appointments" 
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <AppointmentsIcon size="sm" />
-                    <span className="text-sm font-medium">{t("nav.myAppointments")}</span>
-                  </a>
-                  <a 
-                    href="/chatbot" 
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <ChatbotIcon size="sm" />
-                    <span className="text-sm font-medium">{t("nav.healthAssistant")}</span>
-                  </a>
-                  <a 
-                    href="/analytics" 
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
-                    onClick={() => setMobileMenuOpen(false)}
-                  >
-                    <AnalyticsIcon size="sm" />
-                    <span className="text-sm font-medium">{t("nav.analytics")}</span>
                   </a>
                 </div>
               </SheetContent>
