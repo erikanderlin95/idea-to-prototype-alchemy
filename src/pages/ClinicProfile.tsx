@@ -15,22 +15,25 @@ import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useQueueStore } from "@/stores/useQueueStore";
 
 const ClinicProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
+  const { patient, status } = useQueueStore();
   const [clinic, setClinic] = useState<any>(null);
   const [doctors, setDoctors] = useState<any[]>([]);
   const [reviews, setReviews] = useState<any[]>([]);
   const [queue, setQueue] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
   const [showDisclaimer, setShowDisclaimer] = useState(false);
-  const [showThankYou, setShowThankYou] = useState(false);
   const [visitType, setVisitType] = useState(t("clinicCard.generalConsultation"));
   const [isJoining, setIsJoining] = useState(false);
+  
+  // Check if patient is in queue for THIS clinic
+  const isInQueueForThisClinic = patient !== null && patient.clinicId === id;
 
   useEffect(() => {
     fetchClinicData();
@@ -71,20 +74,7 @@ const ClinicProfile = () => {
       if (clinicData.data) setClinic(clinicData.data);
       if (doctorsData.data) setDoctors(doctorsData.data);
       if (reviewsData.data) setReviews(reviewsData.data);
-      if (queueData.data) {
-        setQueue(queueData.data);
-        // Check if current user is in queue
-        if (user) {
-          const userEntry = queueData.data.find((entry: any) => entry.user_id === user.id && entry.status !== 'served');
-          setMyQueueEntry(userEntry || null);
-          
-          // Check if user was just served
-          const servedEntry = queueData.data.find((entry: any) => entry.user_id === user.id && entry.status === 'served');
-          if (servedEntry) {
-            setShowThankYou(true);
-          }
-        }
-      }
+      if (queueData.data) setQueue(queueData.data);
     } catch (error) {
       console.error("Error fetching clinic data:", error);
       toast.error(t('clinicProfile.failedToLoad'));
@@ -102,80 +92,29 @@ const ClinicProfile = () => {
     setShowDisclaimer(true);
   };
 
-  const addToQueue = async () => {
-    if (!user || !id) return;
-
-    setIsJoining(true);
-    try {
-      // Get current queue count for this clinic
-      const { data: currentQueue, error: queueError } = await supabase
-        .from("queue_entries")
-        .select("id")
-        .eq("clinic_id", id)
-        .in("status", ["waiting", "checked_in", "serving"]);
-
-      if (queueError) throw queueError;
-
-      // Next queue number = current queue length + 1
-      const nextQueueNumber = (currentQueue?.length || 0) + 1;
-
-      const { error: insertError } = await supabase
-        .from("queue_entries")
-        .insert({
-          clinic_id: id,
-          user_id: user.id,
-          queue_number: nextQueueNumber,
-          visit_type: visitType,
-          status: "waiting",
-          estimated_wait_time: 15,
-        });
-
-      if (insertError) throw insertError;
-
-      toast.success(t("clinicCard.joinedQueue"));
-      await fetchClinicData();
-    } catch (error: any) {
-      toast.error(error.message || t("clinicCard.failedToJoin"));
-    } finally {
-      setIsJoining(false);
-    }
+  const addToQueue = () => {
+    if (!id) return;
+    
+    const { joinQueue } = useQueueStore.getState();
+    joinQueue({
+      clinicId: id,
+      visitType,
+      estimatedWaitTime: queue.length * 15,
+    });
+    
+    setShowDisclaimer(false);
+    setIsJoining(false);
+    navigate(`/queue?clinic=${id}`);
   };
 
-  const handleCancelQueue = async () => {
-    if (!myQueueEntry) return;
-
-    try {
-      const { error } = await supabase
-        .from("queue_entries")
-        .delete()
-        .eq("id", myQueueEntry.id);
-
-      if (error) throw error;
-
-      toast.success(t("clinicCard.leftQueue"));
-      setMyQueueEntry(null);
-      setShowThankYou(true);
-    } catch (error: any) {
-      toast.error(error.message || t("clinicCard.failedToLeave"));
-    }
+  const handleCancelQueue = () => {
+    const { leaveQueue } = useQueueStore.getState();
+    leaveQueue();
+    toast.success(t("clinicCard.leftQueue"));
   };
 
-  const handleCheckIn = async () => {
-    if (!myQueueEntry) return;
-
-    try {
-      const { error } = await supabase
-        .from("queue_entries")
-        .update({ status: "checked_in" })
-        .eq("id", myQueueEntry.id);
-
-      if (error) throw error;
-
-      toast.success(t("clinicCard.checkedIn"));
-      await fetchClinicData();
-    } catch (error: any) {
-      toast.error(error.message || t("clinicCard.failedToJoin"));
-    }
+  const handleCheckIn = () => {
+    navigate(`/queue?clinic=${id}`);
   };
 
   const handleBookAppointment = () => {
@@ -221,7 +160,7 @@ const ClinicProfile = () => {
                   <Calendar className="mr-2 h-6 w-6" />
                   {t('clinicProfile.bookAppointment')}
                 </Button>
-                {!myQueueEntry && !showThankYou && (
+                {!isInQueueForThisClinic && status !== 'served' && (
                   <Button 
                     size="lg" 
                     variant="outline"
@@ -295,7 +234,7 @@ const ClinicProfile = () => {
           </div>
 
           {/* Queue Status Card */}
-          {myQueueEntry && !showThankYou && (
+          {isInQueueForThisClinic && status === 'waiting' && (
             <Card className="p-6 border-2 shadow-xl" style={{ borderColor: 'hsl(var(--ai-purple)/0.4)' }}>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 rounded-lg border-2"
@@ -311,39 +250,35 @@ const ClinicProfile = () => {
                         <circle
                           cx="32" cy="32" r="28" fill="none" stroke="hsl(var(--accent))" strokeWidth="4"
                           strokeLinecap="round" strokeDasharray={`${2 * Math.PI * 28}`}
-                          strokeDashoffset={`${2 * Math.PI * 28 * (1 - ((queue.length - myQueueEntry.queue_number) / queue.length))}`}
+                          strokeDashoffset={`${2 * Math.PI * 28 * (1 - ((queue.length - (patient?.queueNumber || 0)) / queue.length))}`}
                           className="transition-all duration-1000 ease-out"
                         />
                       </svg>
                       <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg">
-                        #{myQueueEntry.queue_number}
+                        #{patient?.queueNumber}
                       </div>
                     </div>
                     <div>
                       <p className="text-sm font-medium text-muted-foreground mb-1">{t("clinicCard.youreInQueue")}</p>
                       <p className="text-lg font-bold text-foreground">
-                        {t("clinicCard.position")} <span className="text-2xl font-black text-primary">#{myQueueEntry.queue_number}</span>
+                        {t("clinicCard.position")} <span className="text-2xl font-black text-primary">#{patient?.queueNumber}</span>
                         <span className="text-sm font-medium text-muted-foreground ml-2">{t("clinicCard.of")} {queue.length}</span>
                       </p>
                     </div>
                   </div>
                   <Badge variant="secondary" className="text-xs font-semibold px-3 py-1">
-                    {myQueueEntry.status === "waiting" && t("clinicCard.waiting")}
-                    {myQueueEntry.status === "checked_in" && "Checked In"}
-                    {myQueueEntry.status === "serving" && "Being Served"}
+                    {t("clinicCard.waiting")}
                   </Badge>
                 </div>
                 
                 <div className="flex gap-3">
-                  {myQueueEntry.status === "waiting" && (
-                    <Button 
-                      className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-black shadow-md border-0 h-16 text-lg" 
-                      onClick={handleCheckIn}
-                    >
-                      <CheckCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
-                      {t("clinicCard.checkIn")}
-                    </Button>
-                  )}
+                  <Button 
+                    className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-black shadow-md border-0 h-16 text-lg" 
+                    onClick={handleCheckIn}
+                  >
+                    <CheckCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
+                    {t("clinicCard.checkIn")}
+                  </Button>
                   <Button 
                     variant="outline"
                     className="flex-1 border-2 border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive font-black h-16 text-lg" 
@@ -358,7 +293,7 @@ const ClinicProfile = () => {
           )}
 
           {/* Thank You Screen */}
-          {showThankYou && (
+          {status === 'served' && (
             <Card className="p-12 text-center space-y-6 border-2 shadow-xl" style={{ borderColor: 'hsl(var(--primary)/0.3)' }}>
               <div className="space-y-4">
                 <div className="mx-auto h-24 w-24 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl">
@@ -371,8 +306,8 @@ const ClinicProfile = () => {
                 size="lg"
                 className="bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-lg shadow-2xl shadow-primary/50 h-14 px-8"
                 onClick={() => {
-                  setShowThankYou(false);
-                  setMyQueueEntry(null);
+                  const { leaveQueue } = useQueueStore.getState();
+                  leaveQueue();
                 }}
               >
                 <Calendar className="mr-2 h-6 w-6" />
@@ -560,15 +495,15 @@ const ClinicProfile = () => {
             <Button variant="outline" onClick={() => setShowDisclaimer(false)}>
               Cancel
             </Button>
-            <Button 
-              onClick={async () => {
-                setShowDisclaimer(false);
-                await addToQueue();
-              }}
-              disabled={isJoining}
-            >
-              {isJoining ? "Joining..." : "I understand and agree"}
-            </Button>
+          <Button 
+            onClick={() => {
+              setShowDisclaimer(false);
+              addToQueue();
+            }}
+            disabled={isJoining}
+          >
+            {isJoining ? "Joining..." : "I understand and agree"}
+          </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
