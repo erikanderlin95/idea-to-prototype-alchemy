@@ -5,17 +5,25 @@ import { CheckCircle2 } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useQueueStore } from "@/stores/useQueueStore";
+import { useEffect } from "react";
 
 export default function ThankYou() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const clinicId = searchParams.get("clinic");
-  const { reset } = useQueueStore();
+  const { patient, status, leaveQueue } = useQueueStore();
+
+  useEffect(() => {
+    // Only show this page if status is served
+    if (status !== 'served') {
+      navigate('/');
+    }
+  }, [status, navigate]);
 
   const handleBookAgain = () => {
-    reset();
-    if (clinicId) {
-      navigate(`/clinic/${clinicId}`);
+    leaveQueue(); // Reset state to idle
+    if (patient?.clinicId || clinicId) {
+      navigate(`/clinic/${patient?.clinicId || clinicId}`);
     } else {
       navigate("/");
     }
