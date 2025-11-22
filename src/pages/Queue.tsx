@@ -106,6 +106,7 @@ const Queue = () => {
 
   const handleServed = () => {
     servePatient();
+    navigate('/thank-you');
   };
 
   if (loading || !patient) {
