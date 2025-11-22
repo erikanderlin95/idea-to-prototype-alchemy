@@ -29,7 +29,7 @@ const ClinicProfile = () => {
   const [queue, setQueue] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [showDisclaimer, setShowDisclaimer] = useState(false);
-  const [visitType, setVisitType] = useState(t("clinicCard.generalConsultation"));
+  const [visitType, setVisitType] = useState("");
   const [isJoining, setIsJoining] = useState(false);
   
   // Check if patient is in queue for THIS clinic
@@ -457,39 +457,38 @@ const ClinicProfile = () => {
       <Dialog open={showDisclaimer} onOpenChange={setShowDisclaimer}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Queue Disclaimer</DialogTitle>
+            <DialogTitle>Join Queue</DialogTitle>
             <DialogDescription>Please read and agree to continue</DialogDescription>
           </DialogHeader>
           <div className="space-y-4">
+            <div className="space-y-2">
+              <label className="text-sm font-medium text-foreground">Visit Type *</label>
+              <Select value={visitType} onValueChange={setVisitType}>
+                <SelectTrigger className="w-full bg-background">
+                  <SelectValue placeholder="Select visit type" />
+                </SelectTrigger>
+                <SelectContent className="bg-popover z-50">
+                  <SelectItem value="General Consultation">General Consultation</SelectItem>
+                  <SelectItem value="Follow-up">Follow-up</SelectItem>
+                  <SelectItem value="TCM Treatment">TCM Treatment</SelectItem>
+                  <SelectItem value="Pain & Wellness">Pain & Wellness</SelectItem>
+                  <SelectItem value="Others">Others</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
             <Alert>
               <AlertTriangle className="h-4 w-4" />
               <AlertDescription>
                 <strong>Important Notice:</strong>
-                <ul className="mt-2 space-y-1 text-sm">
-                  <li>• Queue numbers are estimates, not guaranteed</li>
-                  <li>• Queue order is fully managed by clinic staff and may shift due to urgent cases, drop-offs, or clinic triage</li>
-                  <li>• Wait times are approximate and subject to clinic operations</li>
-                  <li>• You must check in when your number is called</li>
-                  <li>• Missing your turn may result in queue removal</li>
-                </ul>
+                <div className="mt-2 space-y-1 text-sm">
+                  <p>Queue order is fully managed by clinic staff.</p>
+                  <p>Queue numbers are estimates, not guaranteed.</p>
+                  <p>Queue positions may shift due to urgent cases, drop-offs, or clinic triage.</p>
+                  <p>ClynicQ displays data based on clinic updates; platform is not liable for delays or changes.</p>
+                </div>
               </AlertDescription>
             </Alert>
-            
-            <div className="space-y-2">
-              <label className="text-sm font-medium text-foreground">{t("clinicCard.visitType")}</label>
-              <Select value={visitType} onValueChange={setVisitType}>
-                <SelectTrigger className="w-full">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value={t("clinicCard.generalConsultation")}>{t("clinicCard.generalConsultation")}</SelectItem>
-                  <SelectItem value={t("clinicCard.followUp")}>{t("clinicCard.followUp")}</SelectItem>
-                  <SelectItem value={t("clinicCard.emergency")}>{t("clinicCard.emergency")}</SelectItem>
-                  <SelectItem value={t("clinicCard.vaccination")}>{t("clinicCard.vaccination")}</SelectItem>
-                  <SelectItem value={t("clinicCard.healthScreening")}>{t("clinicCard.healthScreening")}</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setShowDisclaimer(false)}>
@@ -500,7 +499,7 @@ const ClinicProfile = () => {
               setShowDisclaimer(false);
               addToQueue();
             }}
-            disabled={isJoining}
+            disabled={isJoining || !visitType}
           >
             {isJoining ? "Joining..." : "I understand and agree"}
           </Button>
