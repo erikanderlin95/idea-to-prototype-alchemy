@@ -4,25 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Users, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState } from "react";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import { useQueueStore } from "@/stores/useQueueStore";
+import { useJoinQueueModal } from "@/contexts/JoinQueueContext";
 
 interface ClinicCardProps {
   id?: string;
@@ -47,21 +29,12 @@ export const ClinicCard = ({
 }: ClinicCardProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
-  const { joinQueue } = useQueueStore();
-  const [showDisclaimer, setShowDisclaimer] = useState(false);
-  const [visitType, setVisitType] = useState("");
+  const { openModal } = useJoinQueueModal();
 
-  const handleJoinQueue = () => {
-    if (!visitType || !id) return;
-    
-    joinQueue({
-      clinicId: id,
-      visitType,
-      estimatedWaitTime: queueCount * 15,
-    });
-    
-    setShowDisclaimer(false);
-    navigate(`/queue?clinic=${id}`);
+  const handleJoinQueue = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!id) return;
+    openModal(id, name, queueCount);
   };
 
   return (
@@ -139,53 +112,12 @@ export const ClinicCard = ({
           <Button 
             className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
             disabled={!isOpen}
-            onClick={(e) => {
-              e.stopPropagation();
-              setShowDisclaimer(true);
-            }}
+            onClick={handleJoinQueue}
           >
             {t("clinicCard.joinQueue")}
           </Button>
         </div>
       </div>
-
-      <AlertDialog open={showDisclaimer} onOpenChange={setShowDisclaimer}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Join Queue</AlertDialogTitle>
-            <AlertDialogDescription className="space-y-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-foreground">Visit Type *</label>
-                <Select value={visitType} onValueChange={setVisitType}>
-                  <SelectTrigger className="bg-background">
-                    <SelectValue placeholder="Select visit type" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    <SelectItem value="General Consultation">General Consultation</SelectItem>
-                    <SelectItem value="Follow-up">Follow-up</SelectItem>
-                    <SelectItem value="TCM Treatment">TCM Treatment</SelectItem>
-                    <SelectItem value="Pain & Wellness">Pain & Wellness</SelectItem>
-                    <SelectItem value="Others">Others</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              <div className="text-sm text-muted-foreground space-y-1 pt-2">
-                <p className="font-semibold text-foreground">Important Notice:</p>
-                <p>Queue order is fully managed by clinic staff.</p>
-                <p>Queue numbers are estimates, not guaranteed.</p>
-                <p>Queue positions may shift due to urgent cases, drop-offs, or clinic triage.</p>
-                <p>ClynicQ displays data based on clinic updates; platform is not liable for delays or changes.</p>
-              </div>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleJoinQueue} disabled={!visitType}>
-              I understand and agree
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
     </Card>
   );
 };
