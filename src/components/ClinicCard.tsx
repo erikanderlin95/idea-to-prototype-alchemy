@@ -4,6 +4,25 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Users, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import { useQueueStore } from "@/stores/useQueueStore";
 
 interface ClinicCardProps {
   id?: string;
@@ -28,6 +47,22 @@ export const ClinicCard = ({
 }: ClinicCardProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const { joinQueue } = useQueueStore();
+  const [showDisclaimer, setShowDisclaimer] = useState(false);
+  const [visitType, setVisitType] = useState("");
+
+  const handleJoinQueue = () => {
+    if (!visitType || !id) return;
+    
+    joinQueue({
+      clinicId: id,
+      visitType,
+      estimatedWaitTime: queueCount * 15,
+    });
+    
+    setShowDisclaimer(false);
+    navigate(`/queue?clinic=${id}`);
+  };
 
   return (
     <Card 
@@ -90,17 +125,56 @@ export const ClinicCard = ({
           </div>
         </div>
 
-        <Button 
-          className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
-          disabled={!isOpen}
-          onClick={(e) => {
-            e.stopPropagation();
-            id && navigate(`/clinic/${id}`);
-          }}
-        >
-          {t("clinicCard.viewDetails")}
-        </Button>
+        <div className="flex gap-2">
+          <Button 
+            variant="outline"
+            className="flex-1 h-12" 
+            onClick={(e) => {
+              e.stopPropagation();
+              id && navigate(`/clinic/${id}`);
+            }}
+          >
+            {t("clinicCard.viewDetails")}
+          </Button>
+          <Button 
+            className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
+            disabled={!isOpen}
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowDisclaimer(true);
+            }}
+          >
+            {t("clinicCard.joinQueue")}
+          </Button>
+        </div>
       </div>
+
+      <AlertDialog open={showDisclaimer} onOpenChange={setShowDisclaimer}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>{t("clinicCard.selectVisitType")}</AlertDialogTitle>
+            <AlertDialogDescription className="space-y-4">
+              <Select value={visitType} onValueChange={setVisitType}>
+                <SelectTrigger>
+                  <SelectValue placeholder={t("clinicCard.selectVisitType")} />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="consultation">{t("clinicCard.consultation")}</SelectItem>
+                  <SelectItem value="followup">{t("clinicCard.followup")}</SelectItem>
+                  <SelectItem value="emergency">{t("clinicCard.emergency")}</SelectItem>
+                </SelectContent>
+              </Select>
+              <p className="text-sm">{t("clinicCard.disclaimer")}</p>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
+            <AlertDialogAction onClick={handleJoinQueue} disabled={!visitType}>
+              {t("clinicCard.agree")}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </Card>
   );
 };
