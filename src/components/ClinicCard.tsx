@@ -152,25 +152,36 @@ export const ClinicCard = ({
       <AlertDialog open={showDisclaimer} onOpenChange={setShowDisclaimer}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>{t("clinicCard.selectVisitType")}</AlertDialogTitle>
+            <AlertDialogTitle>Join Queue</AlertDialogTitle>
             <AlertDialogDescription className="space-y-4">
-              <Select value={visitType} onValueChange={setVisitType}>
-                <SelectTrigger>
-                  <SelectValue placeholder={t("clinicCard.selectVisitType")} />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="consultation">{t("clinicCard.consultation")}</SelectItem>
-                  <SelectItem value="followup">{t("clinicCard.followup")}</SelectItem>
-                  <SelectItem value="emergency">{t("clinicCard.emergency")}</SelectItem>
-                </SelectContent>
-              </Select>
-              <p className="text-sm">{t("clinicCard.disclaimer")}</p>
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-foreground">Visit Type *</label>
+                <Select value={visitType} onValueChange={setVisitType}>
+                  <SelectTrigger className="bg-background">
+                    <SelectValue placeholder="Select visit type" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    <SelectItem value="General Consultation">General Consultation</SelectItem>
+                    <SelectItem value="Follow-up">Follow-up</SelectItem>
+                    <SelectItem value="TCM Treatment">TCM Treatment</SelectItem>
+                    <SelectItem value="Pain & Wellness">Pain & Wellness</SelectItem>
+                    <SelectItem value="Others">Others</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              <div className="text-sm text-muted-foreground space-y-1 pt-2">
+                <p className="font-semibold text-foreground">Important Notice:</p>
+                <p>Queue order is fully managed by clinic staff.</p>
+                <p>Queue numbers are estimates, not guaranteed.</p>
+                <p>Queue positions may shift due to urgent cases, drop-offs, or clinic triage.</p>
+                <p>ClynicQ displays data based on clinic updates; platform is not liable for delays or changes.</p>
+              </div>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>{t("common.cancel")}</AlertDialogCancel>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
             <AlertDialogAction onClick={handleJoinQueue} disabled={!visitType}>
-              {t("clinicCard.agree")}
+              I understand and agree
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
