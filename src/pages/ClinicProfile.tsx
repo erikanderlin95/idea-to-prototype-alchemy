@@ -7,71 +7,26 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Alert, AlertDescription } from "@/components/ui/alert";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, CheckCircle, XCircle, AlertTriangle } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useQueueStore } from "@/stores/useQueueStore";
 
 const ClinicProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
-  const { patient, status, joinQueue } = useQueueStore();
   const [clinic, setClinic] = useState<any>(null);
   const [doctors, setDoctors] = useState<any[]>([]);
   const [reviews, setReviews] = useState<any[]>([]);
   const [queue, setQueue] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [showJoinModal, setShowJoinModal] = useState(false);
-  const [visitType, setVisitType] = useState("");
 
   useEffect(() => {
     fetchClinicData();
-    
-    if (user && id) {
-      // Subscribe to queue changes
-      const channel = supabase
-        .channel(`queue-${id}`)
-        .on(
-          'postgres_changes',
-          {
-            event: '*',
-            schema: 'public',
-            table: 'queue_entries',
-            filter: `clinic_id=eq.${id}`,
-          },
-          (payload) => {
-            fetchClinicData();
-          }
-        )
-        .subscribe();
-
-      return () => {
-        supabase.removeChannel(channel);
-      };
-    }
-  }, [id, user]);
+  }, [id]);
 
   const fetchClinicData = async () => {
     try {
@@ -79,7 +34,7 @@ const ClinicProfile = () => {
         supabase.from("clinics").select("*").eq("id", id).single(),
         supabase.from("doctors").select("*").eq("clinic_id", id),
         supabase.from("reviews").select("*, profiles(full_name)").eq("clinic_id", id).order("created_at", { ascending: false }),
-        supabase.from("queue_entries").select("*").eq("clinic_id", id).in("status", ["waiting", "checked_in", "serving"]).order("queue_number"),
+        supabase.from("queue_entries").select("*").eq("clinic_id", id).eq("status", "waiting").order("queue_number"),
       ]);
 
       if (clinicData.data) setClinic(clinicData.data);
@@ -92,43 +47,6 @@ const ClinicProfile = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleJoinQueue = () => {
-    if (!user) {
-      toast.error(t("clinicCard.signInRequired"));
-      navigate("/auth");
-      return;
-    }
-    setShowJoinModal(true);
-  };
-
-  const handleConfirmJoinQueue = () => {
-    if (!visitType || !id) return;
-
-    const estimatedWait = queue.length * 15;
-    joinQueue({
-      clinicId: id,
-      visitType,
-      estimatedWaitTime: estimatedWait || 15,
-    });
-
-    toast.success("Successfully joined the queue!");
-    setVisitType("");
-    setShowJoinModal(false);
-    navigate(`/queue?clinic=${id}`);
-  };
-
-  const isInQueue = patient?.clinicId === id;
-
-  const handleCancelQueue = () => {
-    const { leaveQueue } = useQueueStore.getState();
-    leaveQueue();
-    toast.success(t("clinicCard.leftQueue"));
-  };
-
-  const handleCheckIn = () => {
-    navigate(`/queue?clinic=${id}`);
   };
 
   const handleBookAppointment = () => {
@@ -174,28 +92,15 @@ const ClinicProfile = () => {
                   <Calendar className="mr-2 h-6 w-6" />
                   {t('clinicProfile.bookAppointment')}
                 </Button>
-                {isInQueue ? (
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="text-base px-6 py-6 bg-accent/20 text-accent border-accent"
-                    onClick={() => navigate(`/queue?clinic=${id}`)}
-                  >
-                    <Users className="mr-2 h-6 w-6" />
-                    In Queue
-                  </Button>
-                ) : (
-                  <Button 
-                    size="lg" 
-                    variant="outline"
-                    className="text-base px-6 py-6"
-                    onClick={handleJoinQueue}
-                    disabled={!clinic.is_open}
-                  >
-                    <Users className="mr-2 h-6 w-6" />
-                    {t('clinicProfile.joinQueue')}
-                  </Button>
-                )}
+                <Button 
+                  size="lg" 
+                  variant="outline"
+                  className="text-base px-6 py-6"
+                  onClick={() => navigate(`/queue?clinic=${id}`)}
+                >
+                  <Users className="mr-2 h-6 w-6" />
+                  {t('clinicProfile.joinQueue')}
+                </Button>
               </div>
             </div>
 
@@ -256,89 +161,6 @@ const ClinicProfile = () => {
               </div>
             </Card>
           </div>
-
-          {/* Queue Status Card */}
-          {isInQueue && status === 'waiting' && (
-            <Card className="p-6 border-2 shadow-xl" style={{ borderColor: 'hsl(var(--ai-purple)/0.4)' }}>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 rounded-lg border-2"
-                  style={{ 
-                    background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.1))',
-                    borderColor: 'hsl(var(--ai-purple)/0.3)'
-                  }}
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="relative h-16 w-16">
-                      <svg className="absolute inset-0 -rotate-90" viewBox="0 0 64 64">
-                        <circle cx="32" cy="32" r="28" fill="none" stroke="hsl(var(--muted))" strokeWidth="4" opacity="0.3" />
-                        <circle
-                          cx="32" cy="32" r="28" fill="none" stroke="hsl(var(--accent))" strokeWidth="4"
-                          strokeLinecap="round" strokeDasharray={`${2 * Math.PI * 28}`}
-                          strokeDashoffset={`${2 * Math.PI * 28 * (1 - ((queue.length - (patient?.queueNumber || 0)) / queue.length))}`}
-                          className="transition-all duration-1000 ease-out"
-                        />
-                      </svg>
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg">
-                        #{patient?.queueNumber}
-                      </div>
-                    </div>
-                    <div>
-                      <p className="text-sm font-medium text-muted-foreground mb-1">{t("clinicCard.youreInQueue")}</p>
-                      <p className="text-lg font-bold text-foreground">
-                        {t("clinicCard.position")} <span className="text-2xl font-black text-primary">#{patient?.queueNumber}</span>
-                        <span className="text-sm font-medium text-muted-foreground ml-2">{t("clinicCard.of")} {queue.length}</span>
-                      </p>
-                    </div>
-                  </div>
-                  <Badge variant="secondary" className="text-xs font-semibold px-3 py-1">
-                    {t("clinicCard.waiting")}
-                  </Badge>
-                </div>
-                
-                <div className="flex gap-3">
-                  <Button 
-                    className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-black shadow-md border-0 h-16 text-lg" 
-                    onClick={handleCheckIn}
-                  >
-                    <CheckCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
-                    {t("clinicCard.checkIn")}
-                  </Button>
-                  <Button 
-                    variant="outline"
-                    className="flex-1 border-2 border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive font-black h-16 text-lg" 
-                    onClick={handleCancelQueue}
-                  >
-                    <XCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
-                    {t("clinicCard.leaveQueue")}
-                  </Button>
-                </div>
-              </div>
-            </Card>
-          )}
-
-          {/* Thank You Screen */}
-          {status === 'served' && (
-            <Card className="p-12 text-center space-y-6 border-2 shadow-xl" style={{ borderColor: 'hsl(var(--primary)/0.3)' }}>
-              <div className="space-y-4">
-                <div className="mx-auto h-24 w-24 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl">
-                  <CheckCircle className="h-12 w-12 text-primary-foreground" strokeWidth={3} />
-                </div>
-                <h2 className="text-4xl font-black text-foreground">Thank you for visiting!</h2>
-                <p className="text-xl text-muted-foreground font-medium">Your visit is complete.</p>
-              </div>
-              <Button 
-                size="lg"
-                className="bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-lg shadow-2xl shadow-primary/50 h-14 px-8"
-                onClick={() => {
-                  const { leaveQueue } = useQueueStore.getState();
-                  leaveQueue();
-                }}
-              >
-                <Calendar className="mr-2 h-6 w-6" />
-                Book Again
-              </Button>
-            </Card>
-          )}
 
           {/* Tabs */}
           <Tabs defaultValue="doctors" className="w-full">
@@ -474,62 +296,8 @@ const ClinicProfile = () => {
           </Tabs>
         </div>
       </main>
-      
-      <Footer />
 
-      {/* Join Queue Modal */}
-      <AlertDialog open={showJoinModal} onOpenChange={setShowJoinModal}>
-        <AlertDialogContent 
-          className="z-[100]"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <AlertDialogHeader>
-            <AlertDialogTitle>Join Queue - {clinic?.name}</AlertDialogTitle>
-            <AlertDialogDescription className="space-y-4">
-              <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
-                <label className="text-sm font-medium text-foreground">Visit Type *</label>
-                <Select value={visitType} onValueChange={setVisitType}>
-                  <SelectTrigger 
-                    className="bg-background"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <SelectValue placeholder="Select visit type" />
-                  </SelectTrigger>
-                  <SelectContent 
-                    className="bg-popover z-[101]"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <SelectItem value="General Consultation">General Consultation</SelectItem>
-                    <SelectItem value="Follow-up">Follow-up</SelectItem>
-                    <SelectItem value="TCM Treatment">TCM Treatment</SelectItem>
-                    <SelectItem value="Pain & Wellness">Pain & Wellness</SelectItem>
-                    <SelectItem value="Others">Others</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-              
-              <Alert>
-                <AlertTriangle className="h-4 w-4" />
-                <AlertDescription>
-                  <strong>Important Notice:</strong>
-                  <div className="mt-2 space-y-1 text-sm">
-                    <p>Queue order is fully managed by clinic staff.</p>
-                    <p>Queue numbers are estimates, not guaranteed.</p>
-                    <p>Queue positions may shift due to urgent cases, drop-offs, or clinic triage.</p>
-                    <p>ClynicQ displays data based on clinic updates; platform is not liable for delays or changes.</p>
-                  </div>
-                </AlertDescription>
-              </Alert>
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel onClick={() => setShowJoinModal(false)}>Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={handleConfirmJoinQueue} disabled={!visitType}>
-              I understand and agree
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      <Footer />
     </div>
   );
 };

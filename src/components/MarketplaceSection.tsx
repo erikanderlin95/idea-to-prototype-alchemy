@@ -4,11 +4,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-interface MarketplaceSectionProps {
-  onJoinQueue?: (clinic: any) => void;
-}
-
-export const MarketplaceSection = ({ onJoinQueue }: MarketplaceSectionProps) => {
+export const MarketplaceSection = () => {
   const { t } = useLanguage();
   const [clinics, setClinics] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -84,7 +80,7 @@ export const MarketplaceSection = ({ onJoinQueue }: MarketplaceSectionProps) => 
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
             {clinics.map((clinic, index) => (
-              <ClinicCard key={clinic.id || index} {...clinic} onJoinQueue={onJoinQueue} />
+              <ClinicCard key={clinic.id || index} {...clinic} />
             ))}
           </div>
         </div>
