@@ -7,26 +7,44 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, CheckCircle, XCircle } from "lucide-react";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, CheckCircle, XCircle, AlertTriangle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useQueueStore } from "@/stores/useQueueStore";
-import { useJoinQueueModal } from "@/contexts/JoinQueueContext";
 
 const ClinicProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
-  const { patient, status } = useQueueStore();
-  const { openModal } = useJoinQueueModal();
+  const { patient, status, joinQueue } = useQueueStore();
   const [clinic, setClinic] = useState<any>(null);
   const [doctors, setDoctors] = useState<any[]>([]);
   const [reviews, setReviews] = useState<any[]>([]);
   const [queue, setQueue] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showJoinModal, setShowJoinModal] = useState(false);
+  const [visitType, setVisitType] = useState("");
   
   // Check if patient is in queue for THIS clinic
   const isInQueueForThisClinic = patient !== null && patient.clinicId === id;
@@ -85,8 +103,22 @@ const ClinicProfile = () => {
       navigate("/auth");
       return;
     }
-    if (!clinic) return;
-    openModal(clinic.id, clinic.name, queue.length);
+    setShowJoinModal(true);
+  };
+
+  const handleConfirmJoinQueue = () => {
+    if (!visitType || !id) return;
+
+    joinQueue({
+      clinicId: id,
+      visitType,
+      estimatedWaitTime: queue.length * 15,
+    });
+
+    toast.success("Successfully joined the queue!");
+    setVisitType("");
+    setShowJoinModal(false);
+    navigate(`/queue?clinic=${id}`);
   };
 
   const handleCancelQueue = () => {
@@ -434,6 +466,60 @@ const ClinicProfile = () => {
       </main>
       
       <Footer />
+
+      {/* Join Queue Modal */}
+      <AlertDialog open={showJoinModal} onOpenChange={setShowJoinModal}>
+        <AlertDialogContent 
+          className="z-[100]"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <AlertDialogHeader>
+            <AlertDialogTitle>Join Queue - {clinic?.name}</AlertDialogTitle>
+            <AlertDialogDescription className="space-y-4">
+              <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
+                <label className="text-sm font-medium text-foreground">Visit Type *</label>
+                <Select value={visitType} onValueChange={setVisitType}>
+                  <SelectTrigger 
+                    className="bg-background"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <SelectValue placeholder="Select visit type" />
+                  </SelectTrigger>
+                  <SelectContent 
+                    className="bg-popover z-[101]"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <SelectItem value="General Consultation">General Consultation</SelectItem>
+                    <SelectItem value="Follow-up">Follow-up</SelectItem>
+                    <SelectItem value="TCM Treatment">TCM Treatment</SelectItem>
+                    <SelectItem value="Pain & Wellness">Pain & Wellness</SelectItem>
+                    <SelectItem value="Others">Others</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+              
+              <Alert>
+                <AlertTriangle className="h-4 w-4" />
+                <AlertDescription>
+                  <strong>Important Notice:</strong>
+                  <div className="mt-2 space-y-1 text-sm">
+                    <p>Queue order is fully managed by clinic staff.</p>
+                    <p>Queue numbers are estimates, not guaranteed.</p>
+                    <p>Queue positions may shift due to urgent cases, drop-offs, or clinic triage.</p>
+                    <p>ClynicQ displays data based on clinic updates; platform is not liable for delays or changes.</p>
+                  </div>
+                </AlertDescription>
+              </Alert>
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel onClick={() => setShowJoinModal(false)}>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={handleConfirmJoinQueue} disabled={!visitType}>
+              I understand and agree
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

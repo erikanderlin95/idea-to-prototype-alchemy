@@ -4,7 +4,6 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Users, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useJoinQueueModal } from "@/contexts/JoinQueueContext";
 
 interface ClinicCardProps {
   id?: string;
@@ -29,13 +28,6 @@ export const ClinicCard = ({
 }: ClinicCardProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
-  const { openModal } = useJoinQueueModal();
-
-  const handleJoinQueue = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (!id) return;
-    openModal(id, name, queueCount);
-  };
 
   return (
     <Card 
@@ -112,7 +104,10 @@ export const ClinicCard = ({
           <Button 
             className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
             disabled={!isOpen}
-            onClick={handleJoinQueue}
+            onClick={(e) => {
+              e.stopPropagation();
+              id && navigate(`/clinic/${id}`);
+            }}
           >
             {t("clinicCard.joinQueue")}
           </Button>
