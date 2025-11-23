@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { MapPin, Clock, Users, Star } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useQueueStore } from "@/stores/useQueueStore";
 
 interface ClinicCardProps {
   id?: string;
@@ -14,6 +15,7 @@ interface ClinicCardProps {
   waitTime: string;
   rating: number;
   isOpen: boolean;
+  onJoinQueue?: (clinic: any) => void;
 }
 
 export const ClinicCard = ({
@@ -25,9 +27,13 @@ export const ClinicCard = ({
   waitTime,
   rating,
   isOpen,
+  onJoinQueue,
 }: ClinicCardProps) => {
   const navigate = useNavigate();
   const { t } = useLanguage();
+  const { patient } = useQueueStore();
+
+  const isInQueue = patient?.clinicId === id;
 
   return (
     <Card 
@@ -101,16 +107,33 @@ export const ClinicCard = ({
           >
             {t("clinicCard.viewDetails")}
           </Button>
-          <Button 
-            className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
-            disabled={!isOpen}
-            onClick={(e) => {
-              e.stopPropagation();
-              id && navigate(`/clinic/${id}`);
-            }}
-          >
-            {t("clinicCard.joinQueue")}
-          </Button>
+          {isInQueue ? (
+            <Button 
+              className="flex-1 bg-accent/20 text-accent border-accent h-12" 
+              variant="outline"
+              onClick={(e) => {
+                e.stopPropagation();
+                id && navigate(`/queue?clinic=${id}`);
+              }}
+            >
+              In Queue
+            </Button>
+          ) : (
+            <Button 
+              className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
+              disabled={!isOpen}
+              onClick={(e) => {
+                e.stopPropagation();
+                if (onJoinQueue) {
+                  onJoinQueue({ id, name, type, address, queueCount, waitTime, rating, isOpen });
+                } else {
+                  id && navigate(`/clinic/${id}`);
+                }
+              }}
+            >
+              {t("clinicCard.joinQueue")}
+            </Button>
+          )}
         </div>
       </div>
     </Card>

@@ -45,9 +45,6 @@ const ClinicProfile = () => {
   const [loading, setLoading] = useState(true);
   const [showJoinModal, setShowJoinModal] = useState(false);
   const [visitType, setVisitType] = useState("");
-  
-  // Check if patient is in queue for THIS clinic
-  const isInQueueForThisClinic = patient !== null && patient.clinicId === id;
 
   useEffect(() => {
     fetchClinicData();
@@ -109,10 +106,11 @@ const ClinicProfile = () => {
   const handleConfirmJoinQueue = () => {
     if (!visitType || !id) return;
 
+    const estimatedWait = queue.length * 15;
     joinQueue({
       clinicId: id,
       visitType,
-      estimatedWaitTime: queue.length * 15,
+      estimatedWaitTime: estimatedWait || 15,
     });
 
     toast.success("Successfully joined the queue!");
@@ -120,6 +118,8 @@ const ClinicProfile = () => {
     setShowJoinModal(false);
     navigate(`/queue?clinic=${id}`);
   };
+
+  const isInQueue = patient?.clinicId === id;
 
   const handleCancelQueue = () => {
     const { leaveQueue } = useQueueStore.getState();
@@ -174,7 +174,17 @@ const ClinicProfile = () => {
                   <Calendar className="mr-2 h-6 w-6" />
                   {t('clinicProfile.bookAppointment')}
                 </Button>
-                {!isInQueueForThisClinic && status !== 'served' && (
+                {isInQueue ? (
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="text-base px-6 py-6 bg-accent/20 text-accent border-accent"
+                    onClick={() => navigate(`/queue?clinic=${id}`)}
+                  >
+                    <Users className="mr-2 h-6 w-6" />
+                    In Queue
+                  </Button>
+                ) : (
                   <Button 
                     size="lg" 
                     variant="outline"
@@ -248,7 +258,7 @@ const ClinicProfile = () => {
           </div>
 
           {/* Queue Status Card */}
-          {isInQueueForThisClinic && status === 'waiting' && (
+          {isInQueue && status === 'waiting' && (
             <Card className="p-6 border-2 shadow-xl" style={{ borderColor: 'hsl(var(--ai-purple)/0.4)' }}>
               <div className="space-y-4">
                 <div className="flex items-center justify-between p-4 rounded-lg border-2"
