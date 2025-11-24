@@ -148,17 +148,18 @@ export const ClinicCard = ({
 
     setIsJoining(true);
     try {
-      const { data: queueData, error: queueError } = await supabase
+      // Query current waiting queue entries to get accurate count
+      const { data: currentQueue, error: queueError } = await supabase
         .from("queue_entries")
-        .select("queue_number")
+        .select("*")
         .eq("clinic_id", id)
-        .order("queue_number", { ascending: false })
-        .limit(1)
-        .maybeSingle();
+        .eq("status", "waiting")
+        .order("queue_number", { ascending: true });
 
-      if (queueError && queueError.code !== "PGRST116") throw queueError;
+      if (queueError) throw queueError;
 
-      const nextQueueNumber = queueData ? queueData.queue_number + 1 : 1;
+      // Calculate next queue number from current queue length
+      const nextQueueNumber = (currentQueue?.length || 0) + 1;
 
       const { error: insertError } = await supabase
         .from("queue_entries")
