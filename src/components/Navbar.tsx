@@ -179,11 +179,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
             </DropdownMenu>
           )}
 
-          {user && (
-            <Button variant="ghost" size="sm" onClick={signOut}>
-              {t("nav.signOut")}
-            </Button>
-          )}
+          {/* Sign out button hidden */}
         </div>
       </div>
     </nav>
