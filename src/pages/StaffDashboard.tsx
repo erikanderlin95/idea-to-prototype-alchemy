@@ -64,7 +64,7 @@ export default function StaffDashboard() {
   useEffect(() => {
     if (!user) {
       toast.error("Please sign in to access staff dashboard");
-      navigate("/auth");
+      navigate("/");
       return;
     }
 

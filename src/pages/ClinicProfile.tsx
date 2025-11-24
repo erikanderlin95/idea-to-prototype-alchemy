@@ -52,7 +52,6 @@ const ClinicProfile = () => {
   const handleBookAppointment = () => {
     if (!user) {
       toast.error(t('clinicProfile.signInToBook'));
-      navigate("/auth");
       return;
     }
     navigate(`/booking/${id}`);

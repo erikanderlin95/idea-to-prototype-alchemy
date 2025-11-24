@@ -26,7 +26,7 @@ const Chatbot = () => {
   useEffect(() => {
     if (!user) {
       toast.error("Please sign in to access the health assistant");
-      navigate("/auth");
+      navigate("/");
       return;
     }
     loadChatHistory();

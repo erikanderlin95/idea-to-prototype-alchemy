@@ -48,7 +48,7 @@ export default function Queue() {
 
   useEffect(() => {
     if (!user) {
-      navigate("/auth");
+      navigate("/");
       return;
     }
 

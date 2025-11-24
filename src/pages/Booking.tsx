@@ -33,7 +33,7 @@ const Booking = () => {
   useEffect(() => {
     if (!user) {
       toast.error("Please sign in to book an appointment");
-      navigate("/auth");
+      navigate("/");
       return;
     }
     fetchClinicData();

@@ -22,7 +22,7 @@ const Appointments = () => {
   useEffect(() => {
     if (!user) {
       toast.error(t("appointments.signInRequired"));
-      navigate("/auth");
+      navigate("/");
       return;
     }
     fetchAppointments();
