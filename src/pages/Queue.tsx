@@ -177,24 +177,25 @@ export default function Queue() {
     if (!user || !clinicId) return;
 
     try {
-      // Get the highest queue number
-      const { data: lastEntry } = await supabase
+      // Query current waiting queue entries to get accurate count
+      const { data: currentQueue, error: queueError } = await supabase
         .from("queue_entries")
-        .select("queue_number")
+        .select("*")
         .eq("clinic_id", clinicId)
         .eq("status", "waiting")
-        .order("queue_number", { ascending: false })
-        .limit(1)
-        .maybeSingle();
+        .order("queue_number", { ascending: true });
 
-      const nextQueueNumber = lastEntry ? lastEntry.queue_number + 1 : 1;
+      if (queueError) throw queueError;
+
+      // Calculate next queue number from current queue length
+      const nextQueueNumber = (currentQueue?.length || 0) + 1;
 
       const { error } = await supabase.from("queue_entries").insert({
         clinic_id: clinicId,
         user_id: user.id,
         queue_number: nextQueueNumber,
         status: "waiting",
-        estimated_wait_time: queueData.length * 15,
+        estimated_wait_time: (currentQueue?.length || 0) * 15,
         visit_type: visitType,
       });
 

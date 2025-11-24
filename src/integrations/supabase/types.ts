@@ -165,6 +165,7 @@ export type Database = {
           is_open: boolean | null
           name: string
           operating_hours: Json | null
+          phase2_enabled: boolean | null
           phone: string
           rating: number | null
           type: string
@@ -179,6 +180,7 @@ export type Database = {
           is_open?: boolean | null
           name: string
           operating_hours?: Json | null
+          phase2_enabled?: boolean | null
           phone: string
           rating?: number | null
           type: string
@@ -193,6 +195,7 @@ export type Database = {
           is_open?: boolean | null
           name?: string
           operating_hours?: Json | null
+          phase2_enabled?: boolean | null
           phone?: string
           rating?: number | null
           type?: string
