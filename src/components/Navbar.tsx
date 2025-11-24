@@ -179,19 +179,10 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
             </DropdownMenu>
           )}
 
-          {user ? (
+          {user && (
             <Button variant="ghost" size="sm" onClick={signOut}>
               {t("nav.signOut")}
             </Button>
-          ) : (
-            <>
-              <Button variant="ghost" size="sm" onClick={() => navigate("/auth")}>
-                {t("nav.login")}
-              </Button>
-              <Button size="sm" onClick={() => navigate("/auth")}>
-                {t("nav.signUp")}
-              </Button>
-            </>
           )}
         </div>
       </div>

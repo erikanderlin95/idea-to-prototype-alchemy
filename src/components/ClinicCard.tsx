@@ -133,7 +133,6 @@ export const ClinicCard = ({
 
     if (!user) {
       toast.error(t("clinicCard.signInRequired"));
-      navigate("/auth");
       return;
     }
 
