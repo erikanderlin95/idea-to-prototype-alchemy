@@ -17,6 +17,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { Clock, Users, AlertCircle, CheckCircle2, LogOut, LogIn, Bell, BellOff, Star, AlertTriangle } from "lucide-react";
+import { format } from "date-fns";
 
 export default function Queue() {
   const [searchParams] = useSearchParams();
@@ -419,32 +420,40 @@ export default function Queue() {
 
                 <div className="flex gap-3 pt-2">
                   {myQueueEntry.status === 'waiting' && (
-                    <Button 
-                      onClick={checkIn} 
-                      className="flex-1 bg-accent hover:bg-accent/90"
-                      size="lg"
-                      disabled={checkInLoading}
-                    >
-                      <LogIn className="mr-2 h-5 w-5" />
-                      {checkInLoading ? "Checking In..." : "Check In at Clinic"}
-                    </Button>
+                    <>
+                      <Button 
+                        onClick={checkIn} 
+                        className="flex-1 bg-accent hover:bg-accent/90"
+                        size="lg"
+                        disabled={checkInLoading}
+                      >
+                        <LogIn className="mr-2 h-5 w-5" />
+                        {checkInLoading ? "Checking In..." : "Check In at Clinic"}
+                      </Button>
+                      <Button 
+                        onClick={cancelQueue} 
+                        variant="outline"
+                        className="flex-1 border-destructive text-destructive hover:bg-destructive/10"
+                        size="lg"
+                      >
+                        <LogOut className="mr-2 h-5 w-5" />
+                        Leave Queue
+                      </Button>
+                    </>
                   )}
                   {myQueueEntry.status === 'checked_in' && (
-                    <div className="flex-1 p-4 bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 rounded-lg">
-                      <p className="text-center text-emerald-700 dark:text-emerald-300 font-semibold">
-                        ✓ Checked In
+                    <div className="w-full p-6 bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 rounded-lg">
+                      <div className="flex items-center justify-center gap-2 mb-2">
+                        <CheckCircle2 className="h-6 w-6 text-emerald-700 dark:text-emerald-300" />
+                        <p className="text-center text-emerald-700 dark:text-emerald-300 font-semibold text-lg">
+                          Checked In
+                        </p>
+                      </div>
+                      <p className="text-center text-emerald-600 dark:text-emerald-400 text-sm">
+                        {format(new Date(myQueueEntry.updated_at || myQueueEntry.created_at || new Date()), 'h:mm a')}
                       </p>
                     </div>
                   )}
-                  <Button 
-                    onClick={cancelQueue} 
-                    variant="outline"
-                    className={`${myQueueEntry.status === 'waiting' ? 'flex-1' : 'w-full'} border-destructive text-destructive hover:bg-destructive/10`}
-                    size="lg"
-                  >
-                    <LogOut className="mr-2 h-5 w-5" />
-                    Leave Queue
-                  </Button>
                 </div>
               </div>
             </CardContent>
