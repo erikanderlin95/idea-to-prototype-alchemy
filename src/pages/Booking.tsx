@@ -30,6 +30,14 @@ const Booking = () => {
     window.open(bookingUrl, "_blank");
   };
 
+  const handleContactClinic = () => {
+    if (clinic.phone) {
+      // Format phone number for WhatsApp (remove spaces, dashes, etc.)
+      const cleanPhone = clinic.phone.replace(/\D/g, '');
+      window.open(`https://wa.me/${cleanPhone}`, "_blank");
+    }
+  };
+
   if (!clinic) {
     return <div className="min-h-screen flex items-center justify-center">Loading...</div>;
   }
@@ -62,9 +70,31 @@ const Booking = () => {
                 </p>
               </>
             ) : (
-              <p className="text-muted-foreground text-lg">
-                This clinic has not provided an online booking link.
-              </p>
+              <>
+                <Button 
+                  size="lg"
+                  className="w-full max-w-md mx-auto text-lg py-6"
+                  disabled
+                >
+                  <Calendar className="mr-2 h-6 w-6" />
+                  Book Appointment
+                </Button>
+
+                <p className="text-sm text-muted-foreground pt-4">
+                  Online booking is not yet available for this clinic.
+                </p>
+
+                {clinic.phone && (
+                  <Button 
+                    onClick={handleContactClinic}
+                    variant="outline"
+                    size="lg"
+                    className="w-full max-w-md mx-auto text-lg py-6"
+                  >
+                    Contact Clinic
+                  </Button>
+                )}
+              </>
             )}
           </div>
 
