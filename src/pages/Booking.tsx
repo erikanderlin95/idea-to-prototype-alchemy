@@ -31,13 +31,8 @@ const Booking = () => {
   ];
 
   useEffect(() => {
-    if (!user) {
-      toast.error("Please sign in to book an appointment");
-      navigate("/");
-      return;
-    }
     fetchClinicData();
-  }, [id, user]);
+  }, [id]);
 
   const fetchClinicData = async () => {
     try {
@@ -66,7 +61,7 @@ const Booking = () => {
 
     try {
       const { error } = await supabase.from("appointments").insert({
-        user_id: user!.id,
+        user_id: user?.id || null,
         clinic_id: id,
         doctor_id: selectedDoctor || null,
         appointment_date: format(selectedDate, "yyyy-MM-dd"),
@@ -78,7 +73,14 @@ const Booking = () => {
       if (error) throw error;
 
       toast.success("Appointment booked successfully!");
-      navigate("/appointments");
+      
+      // Navigate to appointments page only if user is logged in
+      if (user) {
+        navigate("/appointments");
+      } else {
+        toast.info("Your appointment request has been submitted. The clinic will contact you to confirm.");
+        navigate(`/clinic/${id}`);
+      }
     } catch (error: any) {
       console.error("Error booking appointment:", error);
       toast.error(error.message || "Failed to book appointment");
