@@ -47,11 +47,6 @@ export default function Queue() {
   });
 
   useEffect(() => {
-    if (!user) {
-      navigate("/");
-      return;
-    }
-
     if (!clinicId) {
       toast.error("No clinic selected");
       navigate("/");
@@ -174,7 +169,7 @@ export default function Queue() {
   };
 
   const joinQueue = async () => {
-    if (!user || !clinicId) return;
+    if (!clinicId) return;
 
     try {
       // Query current waiting queue entries to get accurate count
@@ -192,7 +187,7 @@ export default function Queue() {
 
       const { error } = await supabase.from("queue_entries").insert({
         clinic_id: clinicId,
-        user_id: user.id,
+        user_id: user?.id || null,
         queue_number: nextQueueNumber,
         status: "waiting",
         estimated_wait_time: (currentQueue?.length || 0) * 15,
