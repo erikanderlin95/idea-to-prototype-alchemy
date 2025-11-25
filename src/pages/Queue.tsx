@@ -21,6 +21,7 @@ import { Clock, Users, AlertCircle, CheckCircle2, LogOut, LogIn, Bell, BellOff, 
 export default function Queue() {
   const [searchParams] = useSearchParams();
   const clinicId = searchParams.get("clinic");
+  const mobileNumber = searchParams.get("mobile");
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
@@ -65,7 +66,7 @@ export default function Queue() {
       if (unsubscribe) unsubscribe();
       clearInterval(refreshInterval);
     };
-  }, [clinicId, user]);
+  }, [clinicId, user, mobileNumber]);
 
   // Auto-open disclaimer when navigating from clinic card with join=1
   useEffect(() => {
@@ -104,8 +105,23 @@ export default function Queue() {
       setQueueData(queueEntries || []);
 
       // Check if user is in queue (any active status including served for feedback)
-      if (user) {
-        const { data: userQueue } = await supabase
+      // First try by mobile number if provided, then by user_id
+      let userQueue = null;
+      
+      if (mobileNumber) {
+        const { data } = await supabase
+          .from("queue_entries")
+          .select("*")
+          .eq("clinic_id", clinicId)
+          .eq("mobile_number", mobileNumber)
+          .in("status", ["waiting", "checked_in", "serving", "served"])
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .maybeSingle();
+        
+        userQueue = data;
+      } else if (user) {
+        const { data } = await supabase
           .from("queue_entries")
           .select("*")
           .eq("clinic_id", clinicId)
@@ -115,18 +131,20 @@ export default function Queue() {
           .limit(1)
           .maybeSingle();
 
-        setMyQueueEntry(userQueue);
-        
-        // Detect queue position shift
-        if (userQueue && userQueue.queue_number) {
-          const currentPosition = queueEntries?.findIndex(q => q.id === userQueue.id) + 1 || 0;
-          if (previousPosition !== null && currentPosition > 0 && currentPosition !== previousPosition && Math.abs(currentPosition - previousPosition) > 1) {
-            setShowQueueShiftAlert(true);
-            setTimeout(() => setShowQueueShiftAlert(false), 10000);
-          }
-          if (currentPosition > 0) {
-            setPreviousPosition(currentPosition);
-          }
+        userQueue = data;
+      }
+
+      setMyQueueEntry(userQueue);
+      
+      // Detect queue position shift
+      if (userQueue && userQueue.queue_number) {
+        const currentPosition = queueEntries?.findIndex(q => q.id === userQueue.id) + 1 || 0;
+        if (previousPosition !== null && currentPosition > 0 && currentPosition !== previousPosition && Math.abs(currentPosition - previousPosition) > 1) {
+          setShowQueueShiftAlert(true);
+          setTimeout(() => setShowQueueShiftAlert(false), 10000);
+        }
+        if (currentPosition > 0) {
+          setPreviousPosition(currentPosition);
         }
       }
     } catch (error: any) {
