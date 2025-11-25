@@ -46,18 +46,26 @@ const Booking = () => {
           </div>
 
           <div className="space-y-4">
-            <Button 
-              onClick={handleBookAppointment}
-              size="lg"
-              className="w-full max-w-md mx-auto text-lg py-6"
-            >
-              <Calendar className="mr-2 h-6 w-6" />
-              Book Appointment
-            </Button>
+            {clinic.booking_url ? (
+              <>
+                <Button 
+                  onClick={handleBookAppointment}
+                  size="lg"
+                  className="w-full max-w-md mx-auto text-lg py-6"
+                >
+                  <Calendar className="mr-2 h-6 w-6" />
+                  Book Appointment
+                </Button>
 
-            <p className="text-sm text-muted-foreground pt-4">
-              Bookings are handled by the clinic's existing system (Calendly / Google Calendar).
-            </p>
+                <p className="text-sm text-muted-foreground pt-4">
+                  Bookings are handled by the clinic's existing system (Calendly / Google Calendar).
+                </p>
+              </>
+            ) : (
+              <p className="text-muted-foreground text-lg">
+                This clinic has not provided an online booking link.
+              </p>
+            )}
           </div>
 
           <Button
