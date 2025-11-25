@@ -158,6 +158,7 @@ export type Database = {
       clinics: {
         Row: {
           address: string
+          booking_url: string | null
           created_at: string | null
           description: string | null
           email: string | null
@@ -173,6 +174,7 @@ export type Database = {
         }
         Insert: {
           address: string
+          booking_url?: string | null
           created_at?: string | null
           description?: string | null
           email?: string | null
@@ -188,6 +190,7 @@ export type Database = {
         }
         Update: {
           address?: string
+          booking_url?: string | null
           created_at?: string | null
           description?: string | null
           email?: string | null
