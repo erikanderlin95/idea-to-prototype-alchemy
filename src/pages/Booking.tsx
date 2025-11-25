@@ -63,7 +63,7 @@ const Booking = () => {
       const { error } = await supabase.from("appointments").insert({
         user_id: user?.id || null,
         clinic_id: id,
-        doctor_id: selectedDoctor || null,
+        doctor_id: selectedDoctor && selectedDoctor !== "none" ? selectedDoctor : null,
         appointment_date: format(selectedDate, "yyyy-MM-dd"),
         appointment_time: selectedTime,
         reason,
@@ -114,7 +114,7 @@ const Booking = () => {
                       <SelectValue placeholder="Any available doctor" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="">Any available doctor</SelectItem>
+                      <SelectItem value="none">Any available doctor</SelectItem>
                       {doctors.map((doctor) => (
                         <SelectItem key={doctor.id} value={doctor.id}>
                           {doctor.name} - {doctor.specialty}
