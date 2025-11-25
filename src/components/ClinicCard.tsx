@@ -158,7 +158,8 @@ export const ClinicCard = ({
       // Calculate next queue number from current queue length
       const nextQueueNumber = (currentQueue?.length || 0) + 1;
 
-      const { error: insertError } = await supabase
+      // Create queue entry and get the created record
+      const { data: createdEntry, error: insertError } = await supabase
         .from("queue_entries")
         .insert({
           clinic_id: id,
@@ -169,12 +170,19 @@ export const ClinicCard = ({
           estimated_wait_time: parseInt(waitTime) || 15,
           mobile_number: mobileNumber,
           patient_name: patientName,
-        });
+        })
+        .select()
+        .single();
 
       if (insertError) throw insertError;
+      if (!createdEntry) throw new Error("Failed to create queue entry");
 
+      // Set the queue number from the created entry
+      setNewQueueNumber(createdEntry.queue_number);
+      
       toast.success(t("clinicCard.joinedQueue"));
-      setNewQueueNumber(nextQueueNumber);
+      
+      // Show confirmation modal only after successful creation
       setShowQueueCard(true);
     } catch (error: any) {
       toast.error(error.message || t("clinicCard.failedToJoin"));
@@ -471,7 +479,7 @@ export const ClinicCard = ({
         <DialogFooter>
           <Button onClick={() => {
             setShowQueueCard(false);
-            navigate(`/queue?clinic=${id}`);
+            navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(mobileNumber)}`);
           }}>
             View Queue Details
           </Button>
