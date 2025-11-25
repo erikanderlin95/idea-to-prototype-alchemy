@@ -273,12 +273,20 @@ export const ClinicCard = ({
         {myQueueEntry ? (
           <div className="space-y-3 pt-2" onClick={(e) => e.stopPropagation()}>
             <div className="relative p-5 bg-card rounded-xl border-2 shadow-lg"
-              style={{ borderColor: 'hsl(var(--ai-purple)/0.4)' }}
+              style={{ 
+                borderColor: myQueueEntry.status === 'checked_in' 
+                  ? 'hsl(var(--accent)/0.6)' 
+                  : 'hsl(var(--ai-purple)/0.4)' 
+              }}
             >
               <div className="flex items-center justify-between p-4 rounded-lg border-2 mb-3"
                 style={{ 
-                  background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.1))',
-                  borderColor: 'hsl(var(--ai-purple)/0.3)'
+                  background: myQueueEntry.status === 'checked_in'
+                    ? 'linear-gradient(135deg, hsl(var(--accent)/0.15), hsl(142 76% 36%/0.15))'
+                    : 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.1))',
+                  borderColor: myQueueEntry.status === 'checked_in'
+                    ? 'hsl(var(--accent)/0.4)'
+                    : 'hsl(var(--ai-purple)/0.3)'
                 }}
               >
                 <div className="flex items-center gap-4">
@@ -300,7 +308,7 @@ export const ClinicCard = ({
                         cy="32"
                         r="28"
                         fill="none"
-                        stroke="hsl(var(--accent))"
+                        stroke={myQueueEntry.status === 'checked_in' ? 'hsl(142 76% 36%)' : 'hsl(var(--accent))'}
                         strokeWidth="4"
                         strokeLinecap="round"
                         strokeDasharray={`${2 * Math.PI * 28}`}
@@ -308,7 +316,14 @@ export const ClinicCard = ({
                         className="transition-all duration-1000 ease-out"
                       />
                     </svg>
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg">
+                    <div 
+                      className="absolute inset-0 rounded-full flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg"
+                      style={{
+                        background: myQueueEntry.status === 'checked_in'
+                          ? 'linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 46%))'
+                          : 'linear-gradient(to bottom right, hsl(var(--primary)), hsl(var(--accent)))'
+                      }}
+                    >
                       #{myQueueEntry.queue_number}
                     </div>
                   </div>
@@ -320,24 +335,33 @@ export const ClinicCard = ({
                     </p>
                   </div>
                 </div>
-                <Badge variant="secondary" className="text-xs font-semibold px-3 py-1">
-                  {t("clinicCard.waiting")}
+                <Badge 
+                  variant={myQueueEntry.status === 'checked_in' ? 'default' : 'secondary'}
+                  className={`text-xs font-semibold px-3 py-1 ${
+                    myQueueEntry.status === 'checked_in' 
+                      ? 'bg-emerald-600 hover:bg-emerald-700 text-white' 
+                      : ''
+                  }`}
+                >
+                  {myQueueEntry.status === 'checked_in' ? '✓ Checked In' : t("clinicCard.waiting")}
                 </Badge>
               </div>
             </div>
             
             <div className="flex gap-3">
-              <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-black shadow-md border-0 h-16 text-lg" 
-                disabled={isLoading}
-                onClick={handleCheckIn}
-              >
-                <CheckCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
-                {t("clinicCard.checkIn")}
-              </Button>
+              {myQueueEntry.status === 'waiting' && (
+                <Button 
+                  className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-black shadow-md border-0 h-16 text-lg" 
+                  disabled={isLoading}
+                  onClick={handleCheckIn}
+                >
+                  <CheckCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
+                  {t("clinicCard.checkIn")}
+                </Button>
+              )}
               <Button 
                 variant="outline"
-                className="flex-1 border-2 border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive font-black h-16 text-lg" 
+                className={`${myQueueEntry.status === 'waiting' ? 'flex-1' : 'w-full'} border-2 border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive font-black h-16 text-lg`}
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
