@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { MapPin, Clock, Users, Star, CheckCircle, XCircle, AlertTriangle } from "lucide-react";
+import { MapPin, Clock, Users, Star, CheckCircle, XCircle, AlertTriangle, Copy } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -490,6 +490,24 @@ export const ClinicCard = ({
               Estimated wait time: {waitTime} mins
             </p>
           </div>
+          
+          <div className="p-4 border rounded-lg space-y-3">
+            <p className="text-sm font-medium">Save your queue link</p>
+            <Button
+              variant="outline"
+              className="w-full"
+              onClick={() => {
+                const queueUrl = `${window.location.origin}/queue?clinic=${id}&mobile=${encodeURIComponent(mobileNumber)}`;
+                navigator.clipboard.writeText(queueUrl);
+                toast.success("Link copied to clipboard!");
+              }}
+            >
+              <Copy className="mr-2 h-4 w-4" />
+              Copy Link
+            </Button>
+            <p className="text-xs text-muted-foreground">Use this link to return to your queue anytime.</p>
+          </div>
+          
           <Alert>
             <AlertDescription>
               Please stay nearby and check your notifications. You'll be notified when it's your turn.
