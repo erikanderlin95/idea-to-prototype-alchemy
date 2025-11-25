@@ -39,6 +39,7 @@ export default function Queue() {
   const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
   const [previousPosition, setPreviousPosition] = useState<number | null>(null);
   const [showQueueShiftAlert, setShowQueueShiftAlert] = useState(false);
+  const [checkInLoading, setCheckInLoading] = useState(false);
 
   // Initialize queue notifications
   const { notificationPermission, requestNotificationPermission } = useQueueNotifications({
@@ -254,6 +255,7 @@ export default function Queue() {
   const checkIn = async () => {
     if (!myQueueEntry) return;
 
+    setCheckInLoading(true);
     try {
       const { error } = await supabase
         .from("queue_entries")
@@ -261,10 +263,13 @@ export default function Queue() {
         .eq("id", myQueueEntry.id);
 
       if (error) throw error;
-      toast.success(t("queue.checkIn") + "!");
-      loadQueueData(); // Reload to show updated status
+      
+      toast.success("✓ Checked In Successfully!");
+      await loadQueueData(); // Reload to show updated status
     } catch (error: any) {
       toast.error(error.message || "Failed to check in");
+    } finally {
+      setCheckInLoading(false);
     }
   };
 
@@ -411,18 +416,28 @@ export default function Queue() {
                 )}
 
                 <div className="flex gap-3 pt-2">
-                  <Button 
-                    onClick={checkIn} 
-                    className="flex-1 bg-accent hover:bg-accent/90"
-                    size="lg"
-                  >
-                    <LogIn className="mr-2 h-5 w-5" />
-                    Check In at Clinic
-                  </Button>
+                  {myQueueEntry.status === 'waiting' && (
+                    <Button 
+                      onClick={checkIn} 
+                      className="flex-1 bg-accent hover:bg-accent/90"
+                      size="lg"
+                      disabled={checkInLoading}
+                    >
+                      <LogIn className="mr-2 h-5 w-5" />
+                      {checkInLoading ? "Checking In..." : "Check In at Clinic"}
+                    </Button>
+                  )}
+                  {myQueueEntry.status === 'checked_in' && (
+                    <div className="flex-1 p-4 bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 rounded-lg">
+                      <p className="text-center text-emerald-700 dark:text-emerald-300 font-semibold">
+                        ✓ Checked In
+                      </p>
+                    </div>
+                  )}
                   <Button 
                     onClick={cancelQueue} 
                     variant="outline"
-                    className="flex-1 border-destructive text-destructive hover:bg-destructive/10"
+                    className={`${myQueueEntry.status === 'waiting' ? 'flex-1' : 'w-full'} border-destructive text-destructive hover:bg-destructive/10`}
                     size="lg"
                   >
                     <LogOut className="mr-2 h-5 w-5" />
