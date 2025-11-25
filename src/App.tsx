@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Auth from "./pages/Auth";
 import ClinicProfile from "./pages/ClinicProfile";
 import Booking from "./pages/Booking";
+import BookingTriage from "./pages/BookingTriage";
 import Appointments from "./pages/Appointments";
 import Dashboard from "./pages/Dashboard";
 import Chatbot from "./pages/Chatbot";
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/doctor/:id" element={<DoctorProfile />} />
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/staff" element={<StaffDashboard />} />
+            <Route path="/booking-triage" element={<BookingTriage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
