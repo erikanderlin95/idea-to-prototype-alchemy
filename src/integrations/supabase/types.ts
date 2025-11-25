@@ -295,6 +295,8 @@ export type Database = {
           created_at: string | null
           estimated_wait_time: number | null
           id: string
+          mobile_number: string | null
+          patient_name: string | null
           queue_number: number
           status: string
           updated_at: string | null
@@ -306,6 +308,8 @@ export type Database = {
           created_at?: string | null
           estimated_wait_time?: number | null
           id?: string
+          mobile_number?: string | null
+          patient_name?: string | null
           queue_number: number
           status?: string
           updated_at?: string | null
@@ -317,6 +321,8 @@ export type Database = {
           created_at?: string | null
           estimated_wait_time?: number | null
           id?: string
+          mobile_number?: string | null
+          patient_name?: string | null
           queue_number?: number
           status?: string
           updated_at?: string | null

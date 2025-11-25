@@ -42,6 +42,9 @@ export const ClinicCard = ({
   const [visitType, setVisitType] = useState(t("clinicCard.generalConsultation"));
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [showQueueCard, setShowQueueCard] = useState(false);
+  const [patientName, setPatientName] = useState("");
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [newQueueNumber, setNewQueueNumber] = useState<number | null>(null);
 
   useEffect(() => {
     if (user && id) {
@@ -159,17 +162,19 @@ export const ClinicCard = ({
         .from("queue_entries")
         .insert({
           clinic_id: id,
-          user_id: user?.id || null,
+          user_id: null,
           queue_number: nextQueueNumber,
           visit_type: visitType,
           status: "waiting",
           estimated_wait_time: parseInt(waitTime) || 15,
+          mobile_number: mobileNumber,
+          patient_name: patientName,
         });
 
       if (insertError) throw insertError;
 
       toast.success(t("clinicCard.joinedQueue"));
-      await checkQueueStatus();
+      setNewQueueNumber(nextQueueNumber);
       setShowQueueCard(true);
     } catch (error: any) {
       toast.error(error.message || t("clinicCard.failedToJoin"));
@@ -383,6 +388,30 @@ export const ClinicCard = ({
           <DialogDescription>Please read and agree to continue</DialogDescription>
         </DialogHeader>
           <div className="space-y-4">
+            <div className="space-y-3">
+              <div>
+                <label className="text-sm font-medium">Name</label>
+                <input
+                  type="text"
+                  value={patientName}
+                  onChange={(e) => setPatientName(e.target.value)}
+                  className="w-full mt-1 px-3 py-2 border rounded-md"
+                  placeholder="Enter your name"
+                  required
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium">Mobile Number</label>
+                <input
+                  type="tel"
+                  value={mobileNumber}
+                  onChange={(e) => setMobileNumber(e.target.value)}
+                  className="w-full mt-1 px-3 py-2 border rounded-md"
+                  placeholder="Enter your mobile number"
+                  required
+                />
+              </div>
+            </div>
             <Alert>
               <AlertTriangle className="h-4 w-4" />
               <AlertDescription>
@@ -403,6 +432,10 @@ export const ClinicCard = ({
           </Button>
           <Button 
             onClick={async () => {
+              if (!patientName.trim() || !mobileNumber.trim()) {
+                toast.error("Please fill in all fields");
+                return;
+              }
               setShowDisclaimer(false);
               await addToQueue();
             }}
@@ -424,9 +457,9 @@ export const ClinicCard = ({
         <div className="space-y-4">
           <div className="text-center p-6 bg-muted rounded-lg">
             <p className="text-sm text-muted-foreground mb-2">Your Queue Number</p>
-            <p className="text-5xl font-bold text-primary">{myQueueEntry?.queue_number}</p>
+            <p className="text-5xl font-bold text-primary">{newQueueNumber}</p>
             <p className="text-sm text-muted-foreground mt-4">
-              Estimated wait time: {myQueueEntry?.estimated_wait_time || waitTime} mins
+              Estimated wait time: {waitTime} mins
             </p>
           </div>
           <Alert>
