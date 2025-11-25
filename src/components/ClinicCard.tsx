@@ -85,7 +85,7 @@ export const ClinicCard = ({
       .select("*")
       .eq("clinic_id", id)
       .eq("mobile_number", storedMobile)
-      .eq("status", "waiting")
+      .in("status", ["waiting", "checked_in"])
       .maybeSingle();
     
     setMyQueueEntry(data);
@@ -137,7 +137,7 @@ export const ClinicCard = ({
       if (error) throw error;
 
       toast.success(t("clinicCard.checkedIn"));
-      navigate(`/queue?clinic=${id}`);
+      navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(mobileNumber)}`);
     } catch (error: any) {
       toast.error(error.message || t("clinicCard.failedToJoin"));
     } finally {
