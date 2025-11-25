@@ -129,17 +129,15 @@ export const ClinicCard = ({
 
     setIsLoading(true);
     try {
-      const { error, data } = await supabase
+      const { error } = await supabase
         .from("queue_entries")
         .update({ status: "checked_in" })
-        .eq("id", myQueueEntry.id)
-        .select()
-        .single();
+        .eq("id", myQueueEntry.id);
 
       if (error) throw error;
 
       // Update local state immediately
-      setMyQueueEntry(data);
+      setMyQueueEntry({ ...myQueueEntry, status: "checked_in" });
       
       toast.success(t("clinicCard.checkedIn"));
     } catch (error: any) {
