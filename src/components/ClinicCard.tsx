@@ -129,15 +129,19 @@ export const ClinicCard = ({
 
     setIsLoading(true);
     try {
-      const { error } = await supabase
+      const { error, data } = await supabase
         .from("queue_entries")
         .update({ status: "checked_in" })
-        .eq("id", myQueueEntry.id);
+        .eq("id", myQueueEntry.id)
+        .select()
+        .single();
 
       if (error) throw error;
 
+      // Update local state immediately
+      setMyQueueEntry(data);
+      
       toast.success(t("clinicCard.checkedIn"));
-      navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(mobileNumber)}`);
     } catch (error: any) {
       toast.error(error.message || t("clinicCard.failedToJoin"));
     } finally {
