@@ -47,7 +47,7 @@ export const ClinicCard = ({
   const [newQueueNumber, setNewQueueNumber] = useState<number | null>(null);
 
   useEffect(() => {
-    if (user && id) {
+    if (id) {
       checkQueueStatus();
       
       // Subscribe to queue changes
@@ -71,20 +71,29 @@ export const ClinicCard = ({
         supabase.removeChannel(channel);
       };
     }
-  }, [user, id]);
+  }, [id]);
 
   const checkQueueStatus = async () => {
-    if (!user || !id) return;
+    if (!id) return;
     
+    // Try to get mobile number from localStorage
+    const storedMobile = localStorage.getItem(`queue_mobile_${id}`);
+    if (!storedMobile) return;
+
     const { data } = await supabase
       .from("queue_entries")
       .select("*")
       .eq("clinic_id", id)
-      .eq("user_id", user.id)
+      .eq("mobile_number", storedMobile)
       .eq("status", "waiting")
       .maybeSingle();
     
     setMyQueueEntry(data);
+    
+    // Update state with stored mobile
+    if (data) {
+      setMobileNumber(storedMobile);
+    }
   };
 
   const handleCancelQueue = async (e: React.MouseEvent) => {
@@ -99,6 +108,11 @@ export const ClinicCard = ({
         .eq("id", myQueueEntry.id);
 
       if (error) throw error;
+
+      // Clear stored mobile number
+      if (id) {
+        localStorage.removeItem(`queue_mobile_${id}`);
+      }
 
       toast.success(t("clinicCard.leftQueue"));
       setMyQueueEntry(null);
@@ -179,6 +193,12 @@ export const ClinicCard = ({
 
       // Set the queue number from the created entry
       setNewQueueNumber(createdEntry.queue_number);
+      
+      // Store mobile number in localStorage for this clinic
+      localStorage.setItem(`queue_mobile_${id}`, mobileNumber);
+      
+      // Update state to show in-queue UI
+      setMyQueueEntry(createdEntry);
       
       toast.success(t("clinicCard.joinedQueue"));
       
