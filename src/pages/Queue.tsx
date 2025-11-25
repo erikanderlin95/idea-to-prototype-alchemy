@@ -264,8 +264,10 @@ export default function Queue() {
 
       if (error) throw error;
       
+      // Update local state immediately
+      setMyQueueEntry({ ...myQueueEntry, status: "checked_in" });
+      
       toast.success("✓ Checked In Successfully!");
-      await loadQueueData(); // Reload to show updated status
     } catch (error: any) {
       toast.error(error.message || "Failed to check in");
     } finally {
