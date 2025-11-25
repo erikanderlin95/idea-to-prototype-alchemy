@@ -400,19 +400,25 @@ export default function Queue() {
                   </div>
                 </div>
 
-                {myPosition === 1 && (
+                {myQueueEntry.status === 'checked_in' && (
+                  <Badge variant="default" className="w-full justify-center py-3 text-sm bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-500">
+                    📅 <a href="/booking" className="underline ml-1">Click here to rebook your next appointment</a>
+                  </Badge>
+                )}
+
+                {myQueueEntry.status === 'waiting' && myPosition === 1 && (
                   <Badge variant="default" className="w-full justify-center py-3 text-sm bg-accent">
                     🎉 You're next! Please check in when you arrive
                   </Badge>
                 )}
 
-                {myPosition && myPosition > 1 && myPosition <= 3 && (
+                {myQueueEntry.status === 'waiting' && myPosition && myPosition > 1 && myPosition <= 3 && (
                   <Badge variant="secondary" className="w-full justify-center py-3 text-sm">
                     ⏰ Almost your turn! Get ready to head to the clinic
                   </Badge>
                 )}
 
-                {myPosition && myPosition > 3 && (
+                {myQueueEntry.status === 'waiting' && myPosition && myPosition > 3 && (
                   <Badge variant="outline" className="w-full justify-center py-3 text-sm">
                     📱 We'll notify you when it's almost your turn
                   </Badge>
