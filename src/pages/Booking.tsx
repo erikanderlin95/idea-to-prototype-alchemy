@@ -25,8 +25,9 @@ const Booking = () => {
   };
 
   const handleBookAppointment = () => {
-    // Placeholder Calendly URL - clinic will configure their own
-    window.open("https://calendly.com/your-clinic", "_blank");
+    // Use clinic's configured booking URL or fallback to placeholder
+    const bookingUrl = clinic.booking_url || "https://calendly.com/your-clinic";
+    window.open(bookingUrl, "_blank");
   };
 
   if (!clinic) {
@@ -55,7 +56,7 @@ const Booking = () => {
             </Button>
 
             <p className="text-sm text-muted-foreground pt-4">
-              📋 After booking, you will be redirected to the clinic's intake form (Google Form).
+              Bookings are handled by the clinic's existing system (Calendly / Google Calendar).
             </p>
           </div>
 
