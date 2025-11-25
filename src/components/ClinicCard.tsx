@@ -131,11 +131,6 @@ export const ClinicCard = ({
   const handleJoinQueue = async (e: React.MouseEvent) => {
     e.stopPropagation();
 
-    if (!user) {
-      toast.error(t("clinicCard.signInRequired"));
-      return;
-    }
-
     if (!id) return;
 
     // Open disclaimer dialog
@@ -143,7 +138,7 @@ export const ClinicCard = ({
   };
 
   const addToQueue = async () => {
-    if (!user || !id) return;
+    if (!id) return;
 
     setIsJoining(true);
     try {
@@ -164,7 +159,7 @@ export const ClinicCard = ({
         .from("queue_entries")
         .insert({
           clinic_id: id,
-          user_id: user.id,
+          user_id: user?.id || null,
           queue_number: nextQueueNumber,
           visit_type: visitType,
           status: "waiting",
