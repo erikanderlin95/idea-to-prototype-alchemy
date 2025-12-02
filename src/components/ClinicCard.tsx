@@ -287,24 +287,24 @@ export const ClinicCard = ({
               }}
             >
               <div className="flex items-center gap-2 mb-3">
-                <Clock className="h-4 w-4 text-primary" />
-                <p className="text-xs text-muted-foreground font-medium">Availabilities Today</p>
+                <Clock className="h-4 w-4 text-foreground" />
+                <p className="text-sm text-foreground font-semibold">Availabilities Today</p>
               </div>
               <div className="flex gap-2 flex-wrap">
                 <button 
-                  className="px-4 py-2 text-sm font-semibold rounded-full bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors"
+                  className="px-4 py-2 text-sm font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
                   onClick={(e) => e.stopPropagation()}
                 >
                   2:30 PM
                 </button>
                 <button 
-                  className="px-4 py-2 text-sm font-semibold rounded-full bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors"
+                  className="px-4 py-2 text-sm font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
                   onClick={(e) => e.stopPropagation()}
                 >
                   4:00 PM
                 </button>
                 <button 
-                  className="px-4 py-2 text-sm font-semibold rounded-full bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors"
+                  className="px-4 py-2 text-sm font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
                   onClick={(e) => e.stopPropagation()}
                 >
                   5:30 PM
