@@ -50,10 +50,6 @@ const ClinicProfile = () => {
   };
 
   const handleBookAppointment = () => {
-    if (!user) {
-      toast.error(t('clinicProfile.signInToBook'));
-      return;
-    }
     navigate(`/booking/${id}`);
   };
 
