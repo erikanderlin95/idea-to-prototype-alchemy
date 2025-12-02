@@ -279,27 +279,41 @@ export const ClinicCard = ({
           </div>
         ) : (
           <div className="space-y-3">
-            {/* Next Available Section */}
-            <div className="flex items-center gap-3 py-4 px-4 rounded-xl border"
+            {/* Availabilities Today Section */}
+            <div className="py-4 px-4 rounded-xl border"
               style={{ 
                 background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
                 borderColor: 'hsl(var(--ai-cyan)/0.3)'
               }}
             >
-              <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                <Clock className="h-5 w-5 text-primary" />
+              <div className="flex items-center gap-2 mb-3">
+                <Clock className="h-4 w-4 text-primary" />
+                <p className="text-xs text-muted-foreground font-medium">Availabilities Today</p>
               </div>
-              <div className="flex-1">
-                <p className="text-xs text-muted-foreground font-medium">Next Available</p>
-                <p className="text-base font-bold">Today, 2:30 PM</p>
+              <div className="flex gap-2 flex-wrap">
+                <button 
+                  className="px-4 py-2 text-sm font-semibold rounded-full bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  2:30 PM
+                </button>
+                <button 
+                  className="px-4 py-2 text-sm font-semibold rounded-full bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  4:00 PM
+                </button>
+                <button 
+                  className="px-4 py-2 text-sm font-semibold rounded-full bg-primary/10 text-primary border border-primary/30 hover:bg-primary/20 transition-colors"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  5:30 PM
+                </button>
               </div>
-              <Badge variant="outline" className="text-xs border-accent text-accent">
-                Open Now
-              </Badge>
             </div>
 
             {/* Services Dropdown Section */}
-            <div className="py-3 px-4 rounded-xl border"
+            <div className="py-4 px-4 rounded-xl border"
               style={{ 
                 background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.05))',
                 borderColor: 'hsl(var(--ai-purple)/0.3)'
