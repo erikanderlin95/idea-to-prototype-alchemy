@@ -43,6 +43,7 @@ export const MarketplaceSection = () => {
             rating: clinic.rating,
             isOpen: clinic.is_open,
             id: clinic.id,
+            hasDigitalQueue: clinic.has_digital_queue !== false,
           };
         })
       );
