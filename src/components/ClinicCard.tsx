@@ -411,7 +411,7 @@ export const ClinicCard = ({
                   }}
                 >
                   <Calendar className="mr-2 h-6 w-6" strokeWidth={3} />
-                  {t("clinicCard.bookAppointment") || "Book Appointment"}
+                  Book
                 </Button>
               )}
               <Button 
