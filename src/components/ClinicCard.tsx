@@ -278,29 +278,51 @@ export const ClinicCard = ({
             </div>
           </div>
         ) : (
-          <div className="flex items-center gap-3 py-4 px-4 rounded-xl border"
-            style={{ 
-              background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.08))',
-              borderColor: 'hsl(var(--ai-purple)/0.3)'
-            }}
-          >
-            <div className="flex items-center gap-3 flex-1">
+          <div className="space-y-3">
+            {/* Next Available Section */}
+            <div className="flex items-center gap-3 py-4 px-4 rounded-xl border"
+              style={{ 
+                background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
+                borderColor: 'hsl(var(--ai-cyan)/0.3)'
+              }}
+            >
               <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
                 <Clock className="h-5 w-5 text-primary" />
               </div>
-              <div>
+              <div className="flex-1">
                 <p className="text-xs text-muted-foreground font-medium">Next Available</p>
                 <p className="text-base font-bold">Today, 2:30 PM</p>
               </div>
+              <Badge variant="outline" className="text-xs border-accent text-accent">
+                Open Now
+              </Badge>
             </div>
-            <div className="h-8 w-px bg-border" />
-            <div className="flex items-center gap-3 flex-1">
-              <div className="h-10 w-10 rounded-lg bg-accent/20 flex items-center justify-center">
-                <Star className="h-5 w-5 text-accent" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground font-medium">Services</p>
-                <p className="text-sm font-bold">Massage • Therapy</p>
+
+            {/* Services Dropdown Section */}
+            <div className="py-3 px-4 rounded-xl border"
+              style={{ 
+                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.05))',
+                borderColor: 'hsl(var(--ai-purple)/0.3)'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="space-y-2">
+                <div className="flex items-center gap-2">
+                  <Star className="h-4 w-4 text-accent" />
+                  <p className="text-xs text-muted-foreground font-medium">Services Offered</p>
+                </div>
+                <Select defaultValue="massage">
+                  <SelectTrigger className="w-full bg-background/50 border-border/50">
+                    <SelectValue placeholder="Select a service" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-popover z-50">
+                    <SelectItem value="massage">Massage Therapy</SelectItem>
+                    <SelectItem value="acupuncture">Acupuncture</SelectItem>
+                    <SelectItem value="aromatherapy">Aromatherapy</SelectItem>
+                    <SelectItem value="reflexology">Reflexology</SelectItem>
+                    <SelectItem value="cupping">Cupping Therapy</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
           </div>
