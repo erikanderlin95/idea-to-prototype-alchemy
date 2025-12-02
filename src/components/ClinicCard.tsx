@@ -353,78 +353,67 @@ export const ClinicCard = ({
               </Button>
             </div>
           </div>
-        ) : hasDigitalQueue ? (
+        ) : (
             <div className="space-y-3 pt-2">
-            <div className="p-5 rounded-xl border-2 shadow-lg"
-              style={{ 
-                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.05))',
-                borderColor: 'hsl(var(--ai-purple)/0.4)'
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="h-14 w-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/40">
-                  <Users className="h-7 w-7 text-primary-foreground" strokeWidth={3} />
+            {hasDigitalQueue && (
+              <div className="p-5 rounded-xl border-2 shadow-lg"
+                style={{ 
+                  background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.05))',
+                  borderColor: 'hsl(var(--ai-purple)/0.4)'
+                }}
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="h-14 w-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/40">
+                    <Users className="h-7 w-7 text-primary-foreground" strokeWidth={3} />
+                  </div>
+                  <div>
+                    <p className="text-lg font-semibold text-foreground">{t("clinicCard.readyToSkip")}</p>
+                    <p className="text-base font-bold text-foreground/80">{t("clinicCard.joinVirtual")}</p>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-lg font-semibold text-foreground">{t("clinicCard.readyToSkip")}</p>
-                  <p className="text-base font-bold text-foreground/80">{t("clinicCard.joinVirtual")}</p>
+                
+                <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
+                  <label className="text-sm font-medium text-foreground">{t("clinicCard.visitType")}</label>
+                  <Select value={visitType} onValueChange={setVisitType}>
+                    <SelectTrigger className="w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value={t("clinicCard.generalConsultation")}>{t("clinicCard.generalConsultation")}</SelectItem>
+                      <SelectItem value={t("clinicCard.followUp")}>{t("clinicCard.followUp")}</SelectItem>
+                      <SelectItem value={t("clinicCard.emergency")}>{t("clinicCard.emergency")}</SelectItem>
+                      <SelectItem value={t("clinicCard.vaccination")}>{t("clinicCard.vaccination")}</SelectItem>
+                      <SelectItem value={t("clinicCard.healthScreening")}>{t("clinicCard.healthScreening")}</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
               </div>
-              
-              <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
-                <label className="text-sm font-medium text-foreground">{t("clinicCard.visitType")}</label>
-                <Select value={visitType} onValueChange={setVisitType}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value={t("clinicCard.generalConsultation")}>{t("clinicCard.generalConsultation")}</SelectItem>
-                    <SelectItem value={t("clinicCard.followUp")}>{t("clinicCard.followUp")}</SelectItem>
-                    <SelectItem value={t("clinicCard.emergency")}>{t("clinicCard.emergency")}</SelectItem>
-                    <SelectItem value={t("clinicCard.vaccination")}>{t("clinicCard.vaccination")}</SelectItem>
-                    <SelectItem value={t("clinicCard.healthScreening")}>{t("clinicCard.healthScreening")}</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
+            )}
             
             <div className="flex gap-3">
-              <Button 
-                className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
-                disabled={!isOpen || isJoining}
-                onClick={handleJoinQueue}
-              >
-                <Users className="mr-2 h-6 w-6" strokeWidth={3} />
-                {isJoining ? t("clinicCard.joining") : t("clinicCard.joinQueue")}
-              </Button>
-              <Button 
-                variant="outline"
-                className="flex-1 font-black text-base hover:bg-primary/20 hover:border-primary border-2 border-primary/50 h-12 hover:scale-105 transition-transform" 
-                disabled={!isOpen}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  id && navigate(`/clinic/${id}`);
-                }}
-              >
-                {t("clinicCard.viewDetails")}
-              </Button>
-            </div>
-          </div>
-        ) : (
-          <div className="space-y-3 pt-2">
-            <div className="flex gap-3">
-              <Button 
-                className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
-                disabled={!isOpen}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  id && navigate(`/booking/${id}`);
-                }}
-              >
-                <Calendar className="mr-2 h-6 w-6" strokeWidth={3} />
-                {t("clinicCard.bookAppointment") || "Book Appointment"}
-              </Button>
+              {hasDigitalQueue ? (
+                <Button 
+                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
+                  disabled={!isOpen || isJoining}
+                  onClick={handleJoinQueue}
+                >
+                  <Users className="mr-2 h-6 w-6" strokeWidth={3} />
+                  {isJoining ? t("clinicCard.joining") : t("clinicCard.joinQueue")}
+                </Button>
+              ) : (
+                <Button 
+                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
+                  disabled={!isOpen}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    id && navigate(`/booking/${id}`);
+                  }}
+                >
+                  <Calendar className="mr-2 h-6 w-6" strokeWidth={3} />
+                  {t("clinicCard.bookAppointment") || "Book Appointment"}
+                </Button>
+              )}
               <Button 
                 variant="outline"
                 className="flex-1 font-black text-base hover:bg-primary/20 hover:border-primary border-2 border-primary/50 h-12 hover:scale-105 transition-transform" 
