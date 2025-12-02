@@ -322,8 +322,8 @@ export const ClinicCard = ({
             >
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
-                  <Star className="h-4 w-4 text-accent" />
-                  <p className="text-xs text-muted-foreground font-medium">Services Offered</p>
+                  <Star className="h-4 w-4 text-foreground" />
+                  <p className="text-sm text-foreground font-semibold">Services Offered</p>
                 </div>
                 <Select defaultValue="massage">
                   <SelectTrigger className="w-full bg-background/50 border-border/50">
