@@ -162,6 +162,7 @@ export type Database = {
           created_at: string | null
           description: string | null
           email: string | null
+          has_digital_queue: boolean | null
           id: string
           is_open: boolean | null
           name: string
@@ -178,6 +179,7 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           email?: string | null
+          has_digital_queue?: boolean | null
           id?: string
           is_open?: boolean | null
           name: string
@@ -194,6 +196,7 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           email?: string | null
+          has_digital_queue?: boolean | null
           id?: string
           is_open?: boolean | null
           name?: string

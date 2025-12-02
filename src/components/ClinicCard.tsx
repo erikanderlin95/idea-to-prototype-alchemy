@@ -4,7 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { MapPin, Clock, Users, Star, CheckCircle, XCircle, AlertTriangle, Copy } from "lucide-react";
+import { MapPin, Clock, Users, Star, CheckCircle, XCircle, AlertTriangle, Copy, Calendar } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
@@ -21,6 +21,7 @@ interface ClinicCardProps {
   waitTime: string;
   rating: number;
   isOpen: boolean;
+  hasDigitalQueue?: boolean;
 }
 
 export const ClinicCard = ({
@@ -32,6 +33,7 @@ export const ClinicCard = ({
   waitTime,
   rating,
   isOpen,
+  hasDigitalQueue = true,
 }: ClinicCardProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -351,7 +353,7 @@ export const ClinicCard = ({
               </Button>
             </div>
           </div>
-        ) : (
+        ) : hasDigitalQueue ? (
             <div className="space-y-3 pt-2">
             <div className="p-5 rounded-xl border-2 shadow-lg"
               style={{ 
@@ -395,6 +397,33 @@ export const ClinicCard = ({
               >
                 <Users className="mr-2 h-6 w-6" strokeWidth={3} />
                 {isJoining ? t("clinicCard.joining") : t("clinicCard.joinQueue")}
+              </Button>
+              <Button 
+                variant="outline"
+                className="flex-1 font-black text-base hover:bg-primary/20 hover:border-primary border-2 border-primary/50 h-12 hover:scale-105 transition-transform" 
+                disabled={!isOpen}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  id && navigate(`/clinic/${id}`);
+                }}
+              >
+                {t("clinicCard.viewDetails")}
+              </Button>
+            </div>
+          </div>
+        ) : (
+          <div className="space-y-3 pt-2">
+            <div className="flex gap-3">
+              <Button 
+                className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
+                disabled={!isOpen}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  id && navigate(`/booking/${id}`);
+                }}
+              >
+                <Calendar className="mr-2 h-6 w-6" strokeWidth={3} />
+                {t("clinicCard.bookAppointment") || "Book Appointment"}
               </Button>
               <Button 
                 variant="outline"
