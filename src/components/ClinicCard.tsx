@@ -288,7 +288,7 @@ export const ClinicCard = ({
             >
               <div className="flex items-center gap-2 mb-3">
                 <Clock className="h-5 w-5 text-foreground" />
-                <p className="text-base text-foreground font-semibold">Availabilities Today</p>
+                <p className="text-base text-foreground font-semibold">{t("clinicCard.availabilitiesToday")}</p>
               </div>
               <div className="flex gap-2 flex-wrap">
                 <button 
@@ -323,7 +323,7 @@ export const ClinicCard = ({
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <Star className="h-5 w-5 text-foreground" />
-                  <p className="text-base text-foreground font-semibold">Services Offered</p>
+                  <p className="text-base text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
                 </div>
                 <Select defaultValue="massage">
                   <SelectTrigger className="w-full bg-background/50 border-border/50">
