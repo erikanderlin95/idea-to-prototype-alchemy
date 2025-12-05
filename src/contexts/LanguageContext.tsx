@@ -304,6 +304,9 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.checkedIn": "Checked in successfully!",
     "clinicCard.signInRequired": "Please sign in to join the queue",
     "clinicCard.failedToJoin": "Failed to join queue",
+    "clinicCard.availabilitiesToday": "Availabilities Today",
+    "clinicCard.servicesOffered": "Services Offered",
+    "clinicCard.joinedQueue": "You've joined the queue!",
     
     // MarketplaceSection
     "marketplace.title": "Find Your Clinic",
@@ -705,6 +708,9 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.checkedIn": "签到成功！",
     "clinicCard.signInRequired": "请登录以加入队列",
     "clinicCard.failedToJoin": "加入队列失败",
+    "clinicCard.availabilitiesToday": "今日可预约时段",
+    "clinicCard.servicesOffered": "提供的服务",
+    "clinicCard.joinedQueue": "您已加入队列！",
     
     // MarketplaceSection
     "marketplace.title": "寻找您的诊所",
