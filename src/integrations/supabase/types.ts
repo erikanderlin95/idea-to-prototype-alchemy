@@ -209,6 +209,87 @@ export type Database = {
         }
         Relationships: []
       }
+      consultant_clinic_recommendations: {
+        Row: {
+          clinic_id: string
+          consultant_id: string
+          created_at: string | null
+          id: string
+        }
+        Insert: {
+          clinic_id: string
+          consultant_id: string
+          created_at?: string | null
+          id?: string
+        }
+        Update: {
+          clinic_id?: string
+          consultant_id?: string
+          created_at?: string | null
+          id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "consultant_clinic_recommendations_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "consultant_clinic_recommendations_consultant_id_fkey"
+            columns: ["consultant_id"]
+            isOneToOne: false
+            referencedRelation: "consultants"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      consultants: {
+        Row: {
+          areas_of_focus: string[] | null
+          created_at: string | null
+          full_bio: string | null
+          id: string
+          is_active: boolean | null
+          name: string
+          patient_types: string[] | null
+          photo_url: string | null
+          services_offered: string[] | null
+          short_bio: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          areas_of_focus?: string[] | null
+          created_at?: string | null
+          full_bio?: string | null
+          id?: string
+          is_active?: boolean | null
+          name: string
+          patient_types?: string[] | null
+          photo_url?: string | null
+          services_offered?: string[] | null
+          short_bio?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Update: {
+          areas_of_focus?: string[] | null
+          created_at?: string | null
+          full_bio?: string | null
+          id?: string
+          is_active?: boolean | null
+          name?: string
+          patient_types?: string[] | null
+          photo_url?: string | null
+          services_offered?: string[] | null
+          short_bio?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       doctors: {
         Row: {
           availability: Json | null
