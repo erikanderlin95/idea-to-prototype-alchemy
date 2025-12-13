@@ -26,6 +26,12 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.restartTour": "Restart Tour",
     "nav.consultants": "Consultants",
     
+    // Featured Consultants
+    "featuredConsultants.badge": "Wellness Advisors",
+    "featuredConsultants.title": "Need Guidance? Meet Our Wellness Advisors",
+    "featuredConsultants.subtitle": "Not sure which clinic to choose? Our trusted advisors help guide you to the right healthcare providers.",
+    "featuredConsultants.viewAll": "View All Advisors",
+    
     // Hero
     "hero.badge": "Queue • Book • Connect",
     "hero.title1": "Healthcare Made",
@@ -490,6 +496,12 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.help": "帮助与支持",
     "nav.restartTour": "重新开始导览",
     "nav.consultants": "健康顾问",
+    
+    // Featured Consultants
+    "featuredConsultants.badge": "健康顾问",
+    "featuredConsultants.title": "需要指导？认识我们的健康顾问",
+    "featuredConsultants.subtitle": "不确定选择哪家诊所？我们值得信赖的顾问帮助您找到合适的医疗服务提供者。",
+    "featuredConsultants.viewAll": "查看所有顾问",
     
     // Hero
     "hero.badge": "排队 • 预约 • 连接",
