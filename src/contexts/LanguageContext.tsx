@@ -24,6 +24,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.menu": "Menu",
     "nav.help": "Help & Support",
     "nav.restartTour": "Restart Tour",
+    "nav.consultants": "Consultants",
     
     // Hero
     "hero.badge": "Queue • Book • Connect",
@@ -488,6 +489,7 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.menu": "菜单",
     "nav.help": "帮助与支持",
     "nav.restartTour": "重新开始导览",
+    "nav.consultants": "健康顾问",
     
     // Hero
     "hero.badge": "排队 • 预约 • 连接",

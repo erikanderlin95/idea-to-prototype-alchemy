@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/sheet";
 import { QueueIcon, AppointmentsIcon, AnalyticsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
 import { ClynicQIcon } from "@/components/icons/ClynicQIcon";
+import { Heart } from "lucide-react";
 
 interface NavbarProps {
   onRestartTour?: () => void;
@@ -73,6 +74,10 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
           <a href="/" className="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
             {t("nav.findClinics")}
           </a>
+          <a href="/consultants" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
+            <Heart className="h-4 w-4" />
+            {t("nav.consultants")}
+          </a>
           {user && (
             <>
               {isStaff && (
@@ -117,6 +122,14 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     <span className="text-sm font-medium">{t("nav.findClinics")}</span>
+                  </a>
+                  <a 
+                    href="/consultants" 
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <Heart className="h-4 w-4" />
+                    <span className="text-sm font-medium">{t("nav.consultants")}</span>
                   </a>
                   {isStaff && (
                     <a 
