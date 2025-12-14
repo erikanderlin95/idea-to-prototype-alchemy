@@ -552,8 +552,8 @@ export const ClinicCard = ({
                 toast.error("Please fill in all fields");
                 return;
               }
-              setShowDisclaimer(false);
               await addToQueue();
+              setShowDisclaimer(false);
             }}
             disabled={isJoining}
           >
