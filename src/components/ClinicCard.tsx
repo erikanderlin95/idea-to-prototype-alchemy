@@ -77,21 +77,28 @@ export const ClinicCard = ({
 
   const checkQueueStatus = async () => {
     if (!id) return;
-    
+
     // Try to get mobile number from localStorage
     const storedMobile = localStorage.getItem(`queue_mobile_${id}`);
     if (!storedMobile) return;
 
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from("queue_entries")
       .select("*")
       .eq("clinic_id", id)
       .eq("mobile_number", storedMobile)
       .eq("status", "waiting")
+      .order("created_at", { ascending: false })
+      .limit(1)
       .maybeSingle();
-    
+
+    if (error) {
+      console.warn("checkQueueStatus error", error);
+      return;
+    }
+
     setMyQueueEntry(data);
-    
+
     // Update state with stored mobile
     if (data) {
       setMobileNumber(storedMobile);
