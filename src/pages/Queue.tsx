@@ -22,7 +22,9 @@ import { format } from "date-fns";
 export default function Queue() {
   const [searchParams] = useSearchParams();
   const clinicId = searchParams.get("clinic");
-  const mobileNumber = searchParams.get("mobile");
+  const mobileNumberFromUrl = searchParams.get("mobile");
+  const storedMobileNumber = clinicId ? localStorage.getItem(`queue_mobile_${clinicId}`) : null;
+  const mobileNumber = mobileNumberFromUrl || storedMobileNumber;
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
@@ -41,6 +43,13 @@ export default function Queue() {
   const [previousPosition, setPreviousPosition] = useState<number | null>(null);
   const [showQueueShiftAlert, setShowQueueShiftAlert] = useState(false);
   const [checkInLoading, setCheckInLoading] = useState(false);
+  const [now, setNow] = useState(() => Date.now());
+
+  useEffect(() => {
+    if (!myQueueEntry || myQueueEntry.status !== "waiting") return;
+    const interval = window.setInterval(() => setNow(Date.now()), 1000);
+    return () => window.clearInterval(interval);
+  }, [myQueueEntry?.id, myQueueEntry?.status]);
 
   // Initialize queue notifications
   const { notificationPermission, requestNotificationPermission } = useQueueNotifications({
@@ -191,6 +200,12 @@ export default function Queue() {
   const joinQueue = async () => {
     if (!clinicId) return;
 
+    // We must be able to identify you later to show your position + check-in.
+    if (!user && !mobileNumber) {
+      toast.error("Please sign in or provide a mobile number to join the queue.");
+      return;
+    }
+
     try {
       // Query current waiting queue entries to get accurate count
       const { data: currentQueue, error: queueError } = await supabase
@@ -204,21 +219,37 @@ export default function Queue() {
 
       // Calculate next queue number from current queue length
       const nextQueueNumber = (currentQueue?.length || 0) + 1;
+      const estimatedWait = (nextQueueNumber - 1) * 15;
 
-      const { error } = await supabase.from("queue_entries").insert({
-        clinic_id: clinicId,
-        user_id: user?.id || null,
-        queue_number: nextQueueNumber,
-        status: "waiting",
-        estimated_wait_time: (currentQueue?.length || 0) * 15,
-        visit_type: visitType,
-      });
+      const { data: createdEntry, error } = await supabase
+        .from("queue_entries")
+        .insert({
+          clinic_id: clinicId,
+          user_id: user?.id || null,
+          mobile_number: mobileNumber || null,
+          queue_number: nextQueueNumber,
+          status: "waiting",
+          estimated_wait_time: estimatedWait,
+          visit_type: visitType,
+        })
+        .select()
+        .single();
 
       if (error) throw error;
-      
+
+      if (mobileNumber) {
+        localStorage.setItem(`queue_mobile_${clinicId}`, mobileNumber);
+      }
+
+      // Update UI immediately (don’t rely on realtime)
+      if (createdEntry) {
+        setMyQueueEntry(createdEntry);
+        setQueueData([...(currentQueue || []), createdEntry].sort((a: any, b: any) => a.queue_number - b.queue_number));
+      }
+
       toast.success(t("queue.joinQueue") + "!");
       toast.info(t("queue.smsConfirmation"));
-      
+
       setShowPreConsultDialog(false);
       setShowDisclaimerDialog(false);
     } catch (error: any) {
@@ -276,6 +307,16 @@ export default function Queue() {
     }
   };
 
+  const formatCountdown = (ms: number) => {
+    const totalSeconds = Math.max(0, Math.ceil(ms / 1000));
+    const hours = Math.floor(totalSeconds / 3600);
+    const minutes = Math.floor((totalSeconds % 3600) / 60);
+    const seconds = totalSeconds % 60;
+
+    if (hours > 0) return `${hours}h ${minutes}m`;
+    return `${minutes}:${seconds.toString().padStart(2, "0")}`;
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen bg-background">
@@ -288,9 +329,17 @@ export default function Queue() {
     );
   }
 
-  const myPosition = myQueueEntry 
-    ? queueData.findIndex(q => q.id === myQueueEntry.id) + 1 
-    : null;
+  const myPosition = myQueueEntry ? queueData.findIndex((q) => q.id === myQueueEntry.id) + 1 : null;
+  const estimatedWaitMinutes = myQueueEntry
+    ? myPosition
+      ? Math.max(0, (myPosition - 1) * 15)
+      : myQueueEntry.estimated_wait_time ?? 0
+    : 0;
+  const createdAtMs = myQueueEntry?.created_at ? new Date(myQueueEntry.created_at).getTime() : Date.now();
+  const waitTargetMs = createdAtMs + estimatedWaitMinutes * 60_000;
+  const waitRemainingMs = myQueueEntry ? Math.max(0, waitTargetMs - now) : 0;
+  const waitCountdown = formatCountdown(waitRemainingMs);
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -394,8 +443,11 @@ export default function Queue() {
                   </div>
                   <div className="text-center">
                     <p className="text-sm text-muted-foreground mb-1">Est. Wait</p>
-                    <p className="text-2xl font-medium">
-                      {myPosition ? (myPosition - 1) * 15 : 0}m
+                    <p className="text-2xl font-medium tabular-nums">
+                      {estimatedWaitMinutes}m
+                    </p>
+                    <p className="text-xs text-muted-foreground tabular-nums">
+                      {myQueueEntry?.status === "waiting" ? `${waitCountdown} remaining` : ""}
                     </p>
                   </div>
                 </div>
