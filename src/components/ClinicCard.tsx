@@ -184,7 +184,7 @@ export const ClinicCard = ({
         .from("queue_entries")
         .insert({
           clinic_id: id,
-          user_id: null,
+          user_id: user?.id || null,
           queue_number: nextQueueNumber,
           visit_type: visitType,
           status: "waiting",
