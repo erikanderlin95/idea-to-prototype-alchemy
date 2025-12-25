@@ -3,9 +3,21 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Search, MapPin, Filter } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useState, useEffect } from "react";
 
-export const SearchFilters = () => {
+interface SearchFiltersProps {
+  defaultCategory?: string;
+  onCategoryChange?: (category: string) => void;
+}
+
+export const SearchFilters = ({ defaultCategory = "all", onCategoryChange }: SearchFiltersProps) => {
   const { t } = useLanguage();
+  const [activeCategory, setActiveCategory] = useState(defaultCategory);
+
+  useEffect(() => {
+    setActiveCategory(defaultCategory);
+  }, [defaultCategory]);
+
   const categories = [
     { key: "all", label: t("search.all") },
     { key: "gp", label: t("search.gp") },
@@ -13,6 +25,11 @@ export const SearchFilters = () => {
     { key: "wellness", label: t("search.wellness") },
     { key: "specialists", label: t("search.specialists") }
   ];
+
+  const handleCategoryClick = (key: string) => {
+    setActiveCategory(key);
+    onCategoryChange?.(key);
+  };
 
   return (
     <div className="space-y-6">
@@ -38,11 +55,12 @@ export const SearchFilters = () => {
       </div>
 
       <div className="flex items-center gap-2 flex-wrap">
-        {categories.map((category, index) => (
+        {categories.map((category) => (
           <Badge
             key={category.key}
-            variant={index === 0 ? "default" : "outline"}
+            variant={activeCategory === category.key ? "default" : "outline"}
             className="cursor-pointer px-4 py-2 text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
+            onClick={() => handleCategoryClick(category.key)}
           >
             {category.label}
           </Badge>

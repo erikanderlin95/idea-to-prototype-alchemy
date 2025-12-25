@@ -4,14 +4,34 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-export const MarketplaceSection = () => {
+interface MarketplaceSectionProps {
+  defaultCategory?: string;
+  title?: string;
+  subtitle?: string;
+}
+
+export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }: MarketplaceSectionProps) => {
   const { t } = useLanguage();
   const [clinics, setClinics] = useState<any[]>([]);
+  const [filteredClinics, setFilteredClinics] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [activeCategory, setActiveCategory] = useState(defaultCategory);
 
   useEffect(() => {
     fetchClinics();
   }, []);
+
+  useEffect(() => {
+    if (activeCategory === "all") {
+      setFilteredClinics(clinics);
+    } else {
+      setFilteredClinics(
+        clinics.filter((clinic) => 
+          clinic.type?.toLowerCase() === activeCategory.toLowerCase()
+        )
+      );
+    }
+  }, [activeCategory, clinics]);
 
   const fetchClinics = async () => {
     try {
@@ -56,6 +76,10 @@ export const MarketplaceSection = () => {
     }
   };
 
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+  };
+
   if (loading) {
     return (
       <section className="py-20">
@@ -71,16 +95,16 @@ export const MarketplaceSection = () => {
       <div className="container px-4 md:px-6">
         <div className="space-y-10">
           <div className="text-center space-y-4">
-            <h2 className="text-3xl md:text-5xl font-bold">{t("marketplace.title")}</h2>
+            <h2 className="text-3xl md:text-5xl font-bold">{title || t("marketplace.title")}</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              {t("marketplace.subtitle")}
+              {subtitle || t("marketplace.subtitle")}
             </p>
           </div>
 
-          <SearchFilters />
+          <SearchFilters defaultCategory={defaultCategory} onCategoryChange={handleCategoryChange} />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-            {clinics.map((clinic, index) => (
+            {filteredClinics.map((clinic, index) => (
               <ClinicCard key={clinic.id || index} {...clinic} />
             ))}
           </div>
