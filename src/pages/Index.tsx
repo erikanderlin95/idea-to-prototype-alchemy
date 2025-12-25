@@ -7,9 +7,12 @@ import { MyClynicQPlugin } from "@/components/MyClynicQPlugin";
 import { Footer } from "@/components/Footer";
 import { OnboardingTour } from "@/components/OnboardingTour";
 import { useOnboarding } from "@/hooks/useOnboarding";
+import { useSearchParams } from "react-router-dom";
 
 const Index = () => {
   const { showOnboarding, completeOnboarding, startOnboarding } = useOnboarding();
+  const [searchParams] = useSearchParams();
+  const defaultCategory = searchParams.get("category") || "all";
 
   return (
     <div className="min-h-screen bg-background">
@@ -17,7 +20,7 @@ const Index = () => {
       <main>
         <Hero />
         <Features />
-        <MarketplaceSection />
+        <MarketplaceSection defaultCategory={defaultCategory} />
         <FeaturedConsultants />
         <MyClynicQPlugin />
       </main>
