@@ -19,6 +19,9 @@ import StaffDashboard from "./pages/StaffDashboard";
 import Consultants from "./pages/Consultants";
 import ConsultantProfile from "./pages/ConsultantProfile";
 import AdminConsultants from "./pages/AdminConsultants";
+import GPClinics from "./pages/GPClinics";
+import TCMClinics from "./pages/TCMClinics";
+import WellnessClinics from "./pages/WellnessClinics";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,6 +49,9 @@ const App = () => (
             <Route path="/consultants" element={<Consultants />} />
             <Route path="/consultant/:id" element={<ConsultantProfile />} />
             <Route path="/admin/consultants" element={<AdminConsultants />} />
+            <Route path="/gp" element={<GPClinics />} />
+            <Route path="/tcm" element={<TCMClinics />} />
+            <Route path="/wellness" element={<WellnessClinics />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
