@@ -19,6 +19,26 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
 
   useEffect(() => {
     fetchClinics();
+
+    // Subscribe to real-time queue changes to update counts
+    const channel = supabase
+      .channel('marketplace-queue-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'queue_entries',
+        },
+        () => {
+          fetchClinics();
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, []);
 
   useEffect(() => {
