@@ -264,23 +264,13 @@ export const ClinicCard = ({
               borderColor: 'hsl(var(--ai-cyan)/0.3)'
             }}
           >
-            <div className="flex items-center gap-3 flex-1">
+            <div className="flex items-center gap-3">
               <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
                 <Users className="h-5 w-5 text-primary" />
               </div>
               <div>
                 <p className="text-xs text-muted-foreground font-medium">{t("clinicCard.inQueue")}</p>
                 <p className="text-base font-bold">{queueCount} {t("clinicCard.people")}</p>
-              </div>
-            </div>
-            <div className="h-8 w-px bg-border" />
-            <div className="flex items-center gap-3 flex-1">
-              <div className="h-10 w-10 rounded-lg bg-accent/20 flex items-center justify-center">
-                <Clock className="h-5 w-5 text-accent" />
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground font-medium">{t("clinicCard.estWait")}</p>
-                <p className="text-base font-bold">{waitTime}</p>
               </div>
             </div>
           </div>
