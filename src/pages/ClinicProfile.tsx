@@ -30,17 +30,20 @@ const ClinicProfile = () => {
 
   const fetchClinicData = async () => {
     try {
-      const [clinicData, doctorsData, reviewsData, queueData] = await Promise.all([
+      const [clinicData, doctorsData, reviewsData, queueStatsData] = await Promise.all([
         supabase.from("clinics").select("*").eq("id", id).single(),
         supabase.from("doctors").select("*").eq("clinic_id", id),
         supabase.from("reviews").select("*, profiles(full_name)").eq("clinic_id", id).order("created_at", { ascending: false }),
-        supabase.from("queue_entries").select("*").eq("clinic_id", id).eq("status", "waiting").order("queue_number"),
+        // Use secure queue_stats_public view instead of direct table access
+        supabase.from("queue_stats_public").select("queue_count").eq("clinic_id", id).maybeSingle(),
       ]);
 
       if (clinicData.data) setClinic(clinicData.data);
       if (doctorsData.data) setDoctors(doctorsData.data);
       if (reviewsData.data) setReviews(reviewsData.data);
-      if (queueData.data) setQueue(queueData.data);
+      // Set queue as count only (no personal data exposed)
+      const queueCount = queueStatsData.data?.queue_count || 0;
+      setQueue(Array.from({ length: Number(queueCount) }, (_, i) => ({ queue_number: i + 1 })));
     } catch (error) {
       console.error("Error fetching clinic data:", error);
       toast.error(t('clinicProfile.failedToLoad'));

@@ -80,66 +80,78 @@ export const useQueueNotifications = ({ clinicId, userId, clinicName }: QueueNot
           filter: `clinic_id=eq.${clinicId}`,
         },
         async (payload) => {
-          // Fetch current user's position
-          const { data: allQueue } = await supabase
-            .from("queue_entries")
-            .select("*")
-            .eq("clinic_id", clinicId)
-            .eq("status", "waiting")
-            .order("queue_number", { ascending: true });
+          try {
+            // For authenticated users, get their entry directly (RLS allows this)
+            const { data: myEntry } = await supabase
+              .from("queue_entries")
+              .select("*")
+              .eq("clinic_id", clinicId)
+              .eq("user_id", userId)
+              .eq("status", "waiting")
+              .maybeSingle();
 
-          const { data: myEntry } = await supabase
-            .from("queue_entries")
-            .select("*")
-            .eq("clinic_id", clinicId)
-            .eq("user_id", userId)
-            .eq("status", "waiting")
-            .maybeSingle();
+            if (!myEntry) return;
 
-          if (!myEntry || !allQueue) return;
-
-          const myPosition = allQueue.findIndex((q) => q.id === myEntry.id) + 1;
-          const queueNumber = myEntry.queue_number;
-          const clinic = clinicName || "clinic";
-
-          // Notify based on position
-          if (myPosition === 1) {
-            sendNotification(
-              "🎉 You're Next!",
-              `Your turn at ${clinic}! Please head to the clinic now. Queue #${queueNumber}`,
-              myPosition
+            // Get public queue list via edge function
+            const { data: response } = await supabase.functions.invoke(
+              "queue-lookup",
+              {
+                body: {
+                  action: "get_public_queue_list",
+                  clinic_id: clinicId,
+                  mobile_number: "anonymous", // Required param, not used for this action
+                },
+              }
             );
-            toast.success("You're next in queue! Head to the clinic", {
-              duration: 10000,
-            });
-          } else if (myPosition === 2) {
-            sendNotification(
-              "⏰ Almost Your Turn",
-              `You're 2nd in queue at ${clinic}. Get ready! Queue #${queueNumber}`,
-              myPosition
-            );
-            toast.info("You're 2nd in queue! Get ready", {
-              duration: 8000,
-            });
-          } else if (myPosition === 3) {
-            sendNotification(
-              "📱 Coming Up Soon",
-              `You're 3rd in queue at ${clinic}. Please prepare to head over. Queue #${queueNumber}`,
-              myPosition
-            );
-            toast.info("You're 3rd in queue! Prepare to head over", {
-              duration: 6000,
-            });
-          }
 
-          // Notify when someone checks in or cancels ahead of you
-          if (payload.eventType === "DELETE" || (payload.eventType === "UPDATE" && payload.new.status !== "waiting")) {
-            const deletedEntry = payload.old;
-            if (deletedEntry && deletedEntry.queue_number < myEntry.queue_number) {
-              toast.info("Someone ahead left the queue. Your wait time is shorter!", {
-                duration: 5000,
+            const allQueue = response?.queue || [];
+            if (!allQueue.length) return;
+
+            const myPosition = allQueue.findIndex((q: any) => q.id === myEntry.id) + 1;
+            const queueNumber = myEntry.queue_number;
+            const clinic = clinicName || "clinic";
+
+            // Notify based on position
+            if (myPosition === 1) {
+              sendNotification(
+                "🎉 You're Next!",
+                `Your turn at ${clinic}! Please head to the clinic now. Queue #${queueNumber}`,
+                myPosition
+              );
+              toast.success("You're next in queue! Head to the clinic", {
+                duration: 10000,
+              });
+            } else if (myPosition === 2) {
+              sendNotification(
+                "⏰ Almost Your Turn",
+                `You're 2nd in queue at ${clinic}. Get ready! Queue #${queueNumber}`,
+                myPosition
+              );
+              toast.info("You're 2nd in queue! Get ready", {
+                duration: 8000,
+              });
+            } else if (myPosition === 3) {
+              sendNotification(
+                "📱 Coming Up Soon",
+                `You're 3rd in queue at ${clinic}. Please prepare to head over. Queue #${queueNumber}`,
+                myPosition
+              );
+              toast.info("You're 3rd in queue! Prepare to head over", {
+                duration: 6000,
               });
             }
+
+            // Notify when someone checks in or cancels ahead of you
+            if (payload.eventType === "DELETE" || (payload.eventType === "UPDATE" && payload.new.status !== "waiting")) {
+              const deletedEntry = payload.old;
+              if (deletedEntry && deletedEntry.queue_number < myEntry.queue_number) {
+                toast.info("Someone ahead left the queue. Your wait time is shorter!", {
+                  duration: 5000,
+                });
+              }
+            }
+          } catch (error) {
+            console.error("Queue notification error:", error);
           }
         }
       )

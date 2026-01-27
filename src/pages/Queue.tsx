@@ -104,34 +104,46 @@ export default function Queue() {
       if (clinicError) throw clinicError;
       setClinic(clinicData);
 
-      // Load queue entries
-      const { data: queueEntries, error: queueError } = await supabase
-        .from("queue_entries")
-        .select("*")
-        .eq("clinic_id", clinicId)
-        .eq("status", "waiting")
-        .order("queue_number", { ascending: true });
+      // Load public queue list via edge function (no personal data exposed)
+      const { data: queueListResponse, error: queueListError } = await supabase.functions.invoke(
+        "queue-lookup",
+        {
+          body: {
+            action: "get_public_queue_list",
+            clinic_id: clinicId,
+            mobile_number: mobileNumber || "anonymous", // Required param but not used for this action
+          },
+        }
+      );
 
-      if (queueError) throw queueError;
-      setQueueData(queueEntries || []);
+      if (queueListError) throw queueListError;
+      setQueueData(queueListResponse?.queue || []);
 
       // Check if user is in queue (any active status including served for feedback)
-      // First try by mobile number if provided, then by user_id
       let userQueue = null;
+      let position = null;
       
       if (mobileNumber) {
-        const { data } = await supabase
-          .from("queue_entries")
-          .select("*")
-          .eq("clinic_id", clinicId)
-          .eq("mobile_number", mobileNumber)
-          .in("status", ["waiting", "checked_in", "serving", "served"])
-          .order("created_at", { ascending: false })
-          .limit(1)
-          .maybeSingle();
+        // Use edge function for mobile lookup (secure - bypasses RLS)
+        const { data: lookupResponse, error: lookupError } = await supabase.functions.invoke(
+          "queue-lookup",
+          {
+            body: {
+              action: "get_queue_position",
+              clinic_id: clinicId,
+              mobile_number: mobileNumber,
+            },
+          }
+        );
         
-        userQueue = data;
+        if (lookupError) {
+          console.error("Queue lookup error:", lookupError);
+        } else {
+          userQueue = lookupResponse?.entry || null;
+          position = lookupResponse?.position || null;
+        }
       } else if (user) {
+        // For authenticated users, query by user_id (allowed by RLS)
         const { data } = await supabase
           .from("queue_entries")
           .select("*")
@@ -149,7 +161,7 @@ export default function Queue() {
       
       // Detect queue position shift
       if (userQueue && userQueue.queue_number) {
-        const currentPosition = queueEntries?.findIndex(q => q.id === userQueue.id) + 1 || 0;
+        const currentPosition = position || (queueListResponse?.queue?.findIndex((q: any) => q.id === userQueue.id) + 1) || 0;
         if (previousPosition !== null && currentPosition > 0 && currentPosition !== previousPosition && Math.abs(currentPosition - previousPosition) > 1) {
           setShowQueueShiftAlert(true);
           setTimeout(() => setShowQueueShiftAlert(false), 10000);

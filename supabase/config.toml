@@ -1,1 +1,7 @@
 project_id = "intxbtchbezoatiwilqw"
+
+[functions.chatbot]
+verify_jwt = false
+
+[functions.queue-lookup]
+verify_jwt = false
