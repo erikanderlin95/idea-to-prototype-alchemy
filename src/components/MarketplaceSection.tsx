@@ -62,31 +62,33 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
 
       if (error) throw error;
       
-      // Calculate queue stats for each clinic
-      const clinicsWithQueue = await Promise.all(
-        (data || []).map(async (clinic) => {
-          const { data: queueData } = await supabase
-            .from("queue_entries")
-            .select("*")
-            .eq("clinic_id", clinic.id)
-            .eq("status", "waiting");
+      // Use the secure queue_stats_public view for aggregated stats (no personal data exposed)
+      const { data: queueStats } = await supabase
+        .from("queue_stats_public")
+        .select("clinic_id, queue_count, estimated_wait_minutes");
 
-          const queueCount = queueData?.length || 0;
-          const estimatedWait = queueCount * 15; // 15 min per person
-
-          return {
-            name: clinic.name,
-            type: clinic.type,
-            address: clinic.address,
-            queueCount,
-            waitTime: queueCount === 0 ? "Walk-in" : `${estimatedWait}-${estimatedWait + 15} min`,
-            rating: clinic.rating,
-            isOpen: clinic.is_open,
-            id: clinic.id,
-            hasDigitalQueue: clinic.has_digital_queue !== false,
-          };
-        })
+      // Create a map for quick lookup
+      const statsMap = new Map(
+        (queueStats || []).map((stat: any) => [stat.clinic_id, stat])
       );
+
+      const clinicsWithQueue = (data || []).map((clinic) => {
+        const stats = statsMap.get(clinic.id);
+        const queueCount = Number(stats?.queue_count) || 0;
+        const estimatedWait = Number(stats?.estimated_wait_minutes) || 0;
+
+        return {
+          name: clinic.name,
+          type: clinic.type,
+          address: clinic.address,
+          queueCount,
+          waitTime: queueCount === 0 ? "Walk-in" : `${estimatedWait}-${estimatedWait + 15} min`,
+          rating: clinic.rating,
+          isOpen: clinic.is_open,
+          id: clinic.id,
+          hasDigitalQueue: clinic.has_digital_queue !== false,
+        };
+      });
 
       setClinics(clinicsWithQueue);
     } catch (error) {

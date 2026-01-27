@@ -608,7 +608,22 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      queue_stats_public: {
+        Row: {
+          clinic_id: string | null
+          estimated_wait_minutes: number | null
+          queue_count: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "queue_entries_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Functions: {
       has_role: {

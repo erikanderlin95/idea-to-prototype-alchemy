@@ -60,6 +60,8 @@ const AdminConsultants = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingConsultant, setEditingConsultant] = useState<Consultant | null>(null);
   const [recommendations, setRecommendations] = useState<Record<string, string[]>>({});
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [authLoading, setAuthLoading] = useState(true);
 
   // Form state
   const [formData, setFormData] = useState({
@@ -77,9 +79,41 @@ const AdminConsultants = () => {
   const [newService, setNewService] = useState("");
   const [newPatientType, setNewPatientType] = useState("");
 
+  // Server-side admin role verification
   useEffect(() => {
-    fetchData();
+    const checkAdminRole = async () => {
+      setAuthLoading(true);
+      const { data: { user } } = await supabase.auth.getUser();
+      
+      if (!user) {
+        setIsAdmin(false);
+        setAuthLoading(false);
+        return;
+      }
+
+      // Check admin role using the has_role function
+      const { data, error } = await supabase
+        .rpc('has_role', { _user_id: user.id, _role: 'admin' });
+
+      if (error) {
+        console.error('Error checking admin role:', error);
+        setIsAdmin(false);
+      } else {
+        setIsAdmin(data === true);
+      }
+      setAuthLoading(false);
+    };
+
+    checkAdminRole();
   }, []);
+
+  useEffect(() => {
+    if (!authLoading && isAdmin) {
+      fetchData();
+    } else if (!authLoading && !isAdmin) {
+      setLoading(false);
+    }
+  }, [authLoading, isAdmin]);
 
   const fetchData = async () => {
     // Fetch all consultants (admin view)
@@ -246,6 +280,45 @@ const AdminConsultants = () => {
       [field]: formData[field].filter((_, i) => i !== index),
     });
   };
+
+  // Show loading state while checking auth
+  if (authLoading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="pt-24 pb-12 px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex items-center justify-center py-12">
+              <div className="text-muted-foreground">Loading...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // Show unauthorized message if not admin
+  if (!isAdmin) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <div className="pt-24 pb-12 px-4">
+          <div className="max-w-6xl mx-auto">
+            <Card>
+              <CardContent className="p-12 text-center">
+                <h3 className="text-lg font-medium text-foreground mb-2">
+                  Access Denied
+                </h3>
+                <p className="text-muted-foreground">
+                  You do not have permission to access this page. Only administrators can manage consultants.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
