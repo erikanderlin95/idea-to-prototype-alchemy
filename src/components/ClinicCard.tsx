@@ -82,26 +82,33 @@ export const ClinicCard = ({
     const storedMobile = localStorage.getItem(`queue_mobile_${id}`);
     if (!storedMobile) return;
 
-    const { data, error } = await supabase
-      .from("queue_entries")
-      .select("*")
-      .eq("clinic_id", id)
-      .eq("mobile_number", storedMobile)
-      .eq("status", "waiting")
-      .order("created_at", { ascending: false })
-      .limit(1)
-      .maybeSingle();
+    // Use edge function for secure mobile lookup (bypasses RLS)
+    try {
+      const { data: response, error } = await supabase.functions.invoke(
+        "queue-lookup",
+        {
+          body: {
+            action: "check_active_entry",
+            clinic_id: id,
+            mobile_number: storedMobile,
+          },
+        }
+      );
 
-    if (error) {
-      console.warn("checkQueueStatus error", error);
-      return;
-    }
+      if (error) {
+        console.warn("checkQueueStatus error", error);
+        return;
+      }
 
-    setMyQueueEntry(data);
+      const entry = response?.entry || null;
+      setMyQueueEntry(entry);
 
-    // Update state with stored mobile
-    if (data) {
-      setMobileNumber(storedMobile);
+      // Update state with stored mobile
+      if (entry) {
+        setMobileNumber(storedMobile);
+      }
+    } catch (err) {
+      console.warn("checkQueueStatus exception", err);
     }
   };
 
