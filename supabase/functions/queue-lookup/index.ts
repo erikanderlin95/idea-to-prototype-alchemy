@@ -161,6 +161,8 @@ Deno.serve(async (req) => {
         .eq("clinic_id", clinic_id)
         .eq("mobile_number", normalizedMobile)
         .eq("status", "waiting")
+        .order("created_at", { ascending: false })
+        .limit(1)
         .maybeSingle();
 
       if (findError) {
@@ -205,6 +207,8 @@ Deno.serve(async (req) => {
         .eq("clinic_id", clinic_id)
         .eq("mobile_number", normalizedMobile)
         .eq("status", "waiting")
+        .order("created_at", { ascending: false })
+        .limit(1)
         .maybeSingle();
 
       if (findError) {
