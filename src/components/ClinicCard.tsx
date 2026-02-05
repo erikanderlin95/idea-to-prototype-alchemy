@@ -80,7 +80,10 @@ export const ClinicCard = ({
 
     // Try to get mobile number from localStorage
     const storedMobile = localStorage.getItem(`queue_mobile_${id}`);
-    if (!storedMobile) return;
+    if (!storedMobile) {
+      setMyQueueEntry(null);
+      return;
+    }
 
     // Use edge function for secure mobile lookup (bypasses RLS)
     try {
@@ -106,6 +109,9 @@ export const ClinicCard = ({
       // Update state with stored mobile
       if (entry) {
         setMobileNumber(storedMobile);
+      } else {
+        // No active entry found, clear stored mobile
+        localStorage.removeItem(`queue_mobile_${id}`);
       }
     } catch (err) {
       console.warn("checkQueueStatus exception", err);
@@ -118,12 +124,29 @@ export const ClinicCard = ({
 
     setIsLoading(true);
     try {
-      const { error } = await supabase
-        .from("queue_entries")
-        .delete()
-        .eq("id", myQueueEntry.id);
+      // Use edge function for anonymous users (bypasses RLS)
+      const storedMobile = id ? localStorage.getItem(`queue_mobile_${id}`) : null;
+      
+      if (storedMobile) {
+        const { data, error } = await supabase.functions.invoke("queue-lookup", {
+          body: {
+            action: "cancel_queue",
+            clinic_id: id,
+            mobile_number: storedMobile,
+          },
+        });
 
-      if (error) throw error;
+        if (error) throw error;
+        if (data?.error) throw new Error(data.error);
+      } else {
+        // Fallback to direct delete for authenticated users
+        const { error } = await supabase
+          .from("queue_entries")
+          .delete()
+          .eq("id", myQueueEntry.id);
+
+        if (error) throw error;
+      }
 
       // Clear stored mobile number
       if (id) {
@@ -145,12 +168,29 @@ export const ClinicCard = ({
 
     setIsLoading(true);
     try {
-      const { error } = await supabase
-        .from("queue_entries")
-        .update({ status: "checked_in" })
-        .eq("id", myQueueEntry.id);
+      // Use edge function for anonymous users (bypasses RLS)
+      const storedMobile = id ? localStorage.getItem(`queue_mobile_${id}`) : null;
+      
+      if (storedMobile) {
+        const { data, error } = await supabase.functions.invoke("queue-lookup", {
+          body: {
+            action: "check_in",
+            clinic_id: id,
+            mobile_number: storedMobile,
+          },
+        });
 
-      if (error) throw error;
+        if (error) throw error;
+        if (data?.error) throw new Error(data.error);
+      } else {
+        // Fallback to direct update for authenticated users
+        const { error } = await supabase
+          .from("queue_entries")
+          .update({ status: "checked_in" })
+          .eq("id", myQueueEntry.id);
+
+        if (error) throw error;
+      }
 
       // Clear the queue entry state and localStorage
       setMyQueueEntry(null);
@@ -225,6 +265,11 @@ export const ClinicCard = ({
       
       // Show confirmation modal only after successful creation
       setShowQueueCard(true);
+
+      // Force a verification refetch after a short delay to ensure sync
+      setTimeout(() => {
+        checkQueueStatus();
+      }, 500);
     } catch (error: any) {
       toast.error(error.message || t("clinicCard.failedToJoin"));
     } finally {
