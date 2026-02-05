@@ -283,12 +283,33 @@ export default function Queue() {
     if (!myQueueEntry) return;
 
     try {
-      const { error } = await supabase
-        .from("queue_entries")
-        .delete()
-        .eq("id", myQueueEntry.id);
+      // Use edge function for anonymous users (bypasses RLS)
+      if (mobileNumber) {
+        const { data, error } = await supabase.functions.invoke("queue-lookup", {
+          body: {
+            action: "cancel_queue",
+            clinic_id: clinicId,
+            mobile_number: mobileNumber,
+          },
+        });
 
-      if (error) throw error;
+        if (error) throw error;
+        if (data?.error) throw new Error(data.error);
+      } else {
+        // Fallback to direct delete for authenticated users
+        const { error } = await supabase
+          .from("queue_entries")
+          .delete()
+          .eq("id", myQueueEntry.id);
+
+        if (error) throw error;
+      }
+
+      // Clear stored mobile number
+      if (clinicId) {
+        localStorage.removeItem(`queue_mobile_${clinicId}`);
+      }
+
       toast.success(t("queue.leaveQueue"));
       setMyQueueEntry(null);
     } catch (error: any) {
@@ -301,16 +322,36 @@ export default function Queue() {
 
     setCheckInLoading(true);
     try {
-      const { error } = await supabase
-        .from("queue_entries")
-        .update({ status: "checked_in" })
-        .eq("id", myQueueEntry.id);
+      // Use edge function for anonymous users (bypasses RLS)
+      if (mobileNumber) {
+        const { data, error } = await supabase.functions.invoke("queue-lookup", {
+          body: {
+            action: "check_in",
+            clinic_id: clinicId,
+            mobile_number: mobileNumber,
+          },
+        });
 
-      if (error) throw error;
-      
+        if (error) throw error;
+        if (data?.error) throw new Error(data.error);
+      } else {
+        // Fallback to direct update for authenticated users
+        const { error } = await supabase
+          .from("queue_entries")
+          .update({ status: "checked_in" })
+          .eq("id", myQueueEntry.id);
+
+        if (error) throw error;
+      }
+
       // Update local state immediately
       setMyQueueEntry({ ...myQueueEntry, status: "checked_in" });
       
+      // Clear stored mobile number after check-in
+      if (clinicId) {
+        localStorage.removeItem(`queue_mobile_${clinicId}`);
+      }
+
       toast.success("✓ Checked In Successfully!");
     } catch (error: any) {
       toast.error(error.message || "Failed to check in");

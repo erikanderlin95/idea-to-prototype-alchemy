@@ -153,8 +153,96 @@ Deno.serve(async (req) => {
       );
     }
 
+    if (action === "cancel_queue") {
+      // Cancel/delete queue entry by mobile number (bypasses RLS for anonymous users)
+      const { data: entry, error: findError } = await supabase
+        .from("queue_entries")
+        .select("id")
+        .eq("clinic_id", clinic_id)
+        .eq("mobile_number", normalizedMobile)
+        .eq("status", "waiting")
+        .maybeSingle();
+
+      if (findError) {
+        console.error("Error finding queue entry:", findError);
+        return new Response(
+          JSON.stringify({ error: "Failed to find queue entry" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      if (!entry) {
+        return new Response(
+          JSON.stringify({ error: "No active queue entry found" }),
+          { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      const { error: deleteError } = await supabase
+        .from("queue_entries")
+        .delete()
+        .eq("id", entry.id);
+
+      if (deleteError) {
+        console.error("Error deleting queue entry:", deleteError);
+        return new Response(
+          JSON.stringify({ error: "Failed to cancel queue entry" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ success: true, message: "Queue entry cancelled" }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    if (action === "check_in") {
+      // Check-in queue entry by mobile number (bypasses RLS for anonymous users)
+      const { data: entry, error: findError } = await supabase
+        .from("queue_entries")
+        .select("id, status")
+        .eq("clinic_id", clinic_id)
+        .eq("mobile_number", normalizedMobile)
+        .eq("status", "waiting")
+        .maybeSingle();
+
+      if (findError) {
+        console.error("Error finding queue entry:", findError);
+        return new Response(
+          JSON.stringify({ error: "Failed to find queue entry" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      if (!entry) {
+        return new Response(
+          JSON.stringify({ error: "No active queue entry found" }),
+          { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      const { error: updateError } = await supabase
+        .from("queue_entries")
+        .update({ status: "checked_in" })
+        .eq("id", entry.id);
+
+      if (updateError) {
+        console.error("Error checking in:", updateError);
+        return new Response(
+          JSON.stringify({ error: "Failed to check in" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ success: true, message: "Checked in successfully" }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     return new Response(
-      JSON.stringify({ error: "Invalid action. Use: get_queue_position, check_active_entry, or get_public_queue_list" }),
+      JSON.stringify({ error: "Invalid action. Use: get_queue_position, check_active_entry, get_public_queue_list, cancel_queue, or check_in" }),
       { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
 
