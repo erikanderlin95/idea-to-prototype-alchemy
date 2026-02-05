@@ -12,6 +12,20 @@ import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+// Helper to sanitize and validate mobile number
+const sanitizeMobileNumber = (mobile: string): string => {
+  // Remove all non-digit characters except leading +
+  const hasPlus = mobile.trim().startsWith('+');
+  const digitsOnly = mobile.replace(/\D/g, '');
+  return hasPlus ? `+${digitsOnly}` : digitsOnly;
+};
+
+const isValidMobileNumber = (mobile: string): boolean => {
+  const sanitized = sanitizeMobileNumber(mobile);
+  // Valid format: optional + followed by 8-15 digits
+  return /^\+?[0-9]{8,15}$/.test(sanitized);
+};
+
 interface ClinicCardProps {
   id?: string;
   name: string;
@@ -243,7 +257,7 @@ export const ClinicCard = ({
           visit_type: visitType,
           status: "waiting",
           estimated_wait_time: parseInt(waitTime) || 15,
-          mobile_number: mobileNumber,
+          mobile_number: sanitizeMobileNumber(mobileNumber),
           patient_name: patientName,
         })
         .select()
@@ -255,8 +269,10 @@ export const ClinicCard = ({
       // Set the queue number from the created entry
       setNewQueueNumber(createdEntry.queue_number);
       
-      // Store mobile number in localStorage for this clinic
-      localStorage.setItem(`queue_mobile_${id}`, mobileNumber);
+      // Store sanitized mobile number in localStorage for this clinic
+      const sanitizedMobile = sanitizeMobileNumber(mobileNumber);
+      localStorage.setItem(`queue_mobile_${id}`, sanitizedMobile);
+      setMobileNumber(sanitizedMobile);
       
       // Update state to show in-queue UI
       setMyQueueEntry(createdEntry);
@@ -572,9 +588,12 @@ export const ClinicCard = ({
                   value={mobileNumber}
                   onChange={(e) => setMobileNumber(e.target.value)}
                   className="w-full mt-1 px-3 py-2 border rounded-md"
-                  placeholder="Enter your mobile number"
+                  placeholder="e.g. +6591234567"
                   required
                 />
+                <p className="text-xs text-muted-foreground mt-1">
+                  8-15 digits, country code optional
+                </p>
               </div>
             </div>
             <Alert>
@@ -599,6 +618,10 @@ export const ClinicCard = ({
             onClick={async () => {
               if (!patientName.trim() || !mobileNumber.trim()) {
                 toast.error("Please fill in all fields");
+                return;
+              }
+              if (!isValidMobileNumber(mobileNumber)) {
+                toast.error("Please enter a valid mobile number (8-15 digits)");
                 return;
               }
               await addToQueue();
