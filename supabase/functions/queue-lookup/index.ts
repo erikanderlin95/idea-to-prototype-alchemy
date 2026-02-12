@@ -12,7 +12,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const { mobile_number, clinic_id, action } = await req.json();
+    const { mobile_number, clinic_id, action, patient_name, visit_type, estimated_wait_time } = await req.json();
 
     // Validate required parameters
     if (!mobile_number || typeof mobile_number !== "string") {
@@ -245,8 +245,57 @@ Deno.serve(async (req) => {
       );
     }
 
+    if (action === "join_queue") {
+      // patient_name, visit_type, estimated_wait_time already destructured from request body
+      // Get current queue to determine next number
+      const { data: currentQueue, error: queueError } = await supabase
+        .from("queue_entries")
+        .select("queue_number")
+        .eq("clinic_id", clinic_id)
+        .eq("status", "waiting")
+        .order("queue_number", { ascending: true });
+
+      if (queueError) {
+        console.error("Error fetching queue:", queueError);
+        return new Response(
+          JSON.stringify({ error: "Failed to fetch queue" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      const nextQueueNumber = (currentQueue?.length || 0) + 1;
+
+      const { data: newEntry, error: insertError } = await supabase
+        .from("queue_entries")
+        .insert({
+          clinic_id,
+          queue_number: nextQueueNumber,
+          mobile_number: normalizedMobile,
+          patient_name: patient_name || null,
+          visit_type: visit_type || "General Consultation",
+          status: "waiting",
+          estimated_wait_time: estimated_wait_time || 15,
+          user_id: null,
+        })
+        .select()
+        .single();
+
+      if (insertError) {
+        console.error("Error inserting queue entry:", insertError);
+        return new Response(
+          JSON.stringify({ error: "Failed to join queue" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ entry: newEntry }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     return new Response(
-      JSON.stringify({ error: "Invalid action. Use: get_queue_position, check_active_entry, get_public_queue_list, cancel_queue, or check_in" }),
+      JSON.stringify({ error: "Invalid action. Use: join_queue, get_queue_position, check_active_entry, get_public_queue_list, cancel_queue, or check_in" }),
       { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
 

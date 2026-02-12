@@ -234,43 +234,33 @@ export const ClinicCard = ({
 
     setIsJoining(true);
     try {
-      // Query current waiting queue entries to get accurate count
-      const { data: currentQueue, error: queueError } = await supabase
-        .from("queue_entries")
-        .select("*")
-        .eq("clinic_id", id)
-        .eq("status", "waiting")
-        .order("queue_number", { ascending: true });
+      const sanitizedMobile = sanitizeMobileNumber(mobileNumber);
+      
+      // Use edge function to join queue (bypasses RLS for anonymous users)
+      const { data: response, error: invokeError } = await supabase.functions.invoke(
+        "queue-lookup",
+        {
+          body: {
+            action: "join_queue",
+            clinic_id: id,
+            mobile_number: sanitizedMobile,
+            patient_name: patientName,
+            visit_type: visitType,
+            estimated_wait_time: parseInt(waitTime) || 15,
+          },
+        }
+      );
 
-      if (queueError) throw queueError;
-
-      // Calculate next queue number from current queue length
-      const nextQueueNumber = (currentQueue?.length || 0) + 1;
-
-      // Create queue entry and get the created record
-      const { data: createdEntry, error: insertError } = await supabase
-        .from("queue_entries")
-        .insert({
-          clinic_id: id,
-          user_id: user?.id || null,
-          queue_number: nextQueueNumber,
-          visit_type: visitType,
-          status: "waiting",
-          estimated_wait_time: parseInt(waitTime) || 15,
-          mobile_number: sanitizeMobileNumber(mobileNumber),
-          patient_name: patientName,
-        })
-        .select()
-        .single();
-
-      if (insertError) throw insertError;
+      if (invokeError) throw invokeError;
+      if (response?.error) throw new Error(response.error);
+      
+      const createdEntry = response?.entry;
       if (!createdEntry) throw new Error("Failed to create queue entry");
 
       // Set the queue number from the created entry
       setNewQueueNumber(createdEntry.queue_number);
       
       // Store sanitized mobile number in localStorage for this clinic
-      const sanitizedMobile = sanitizeMobileNumber(mobileNumber);
       localStorage.setItem(`queue_mobile_${id}`, sanitizedMobile);
       setMobileNumber(sanitizedMobile);
       
