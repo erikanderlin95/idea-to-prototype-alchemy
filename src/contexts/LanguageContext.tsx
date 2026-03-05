@@ -27,10 +27,10 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.consultants": "Consultants",
     
     // Featured Consultants
-    "featuredConsultants.badge": "Wellness Advisors",
-    "featuredConsultants.title": "Need Guidance? Meet Our Wellness Advisors",
-    "featuredConsultants.subtitle": "Not sure which clinic to choose? Our trusted advisors help guide you to the right healthcare providers.",
-    "featuredConsultants.viewAll": "View All Advisors",
+    "featuredConsultants.badge": "Managed Healthcare",
+    "featuredConsultants.title": "Managed Healthcare Providers",
+    "featuredConsultants.subtitle": "Not sure which clinic to choose? Our trusted providers help guide you to the right healthcare services.",
+    "featuredConsultants.viewAll": "View All Providers",
     
     // Hero
     "hero.badge": "Queue • Book • Connect",
@@ -424,8 +424,8 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Consultant Section
     "consultant.badge": "Expert Guidance",
-    "consultant.pageTitle": "Wellness Advisors",
-    "consultant.pageDescription": "Not sure which clinic to choose? Our trusted wellness advisors guide you to the right healthcare provider.",
+    "consultant.pageTitle": "Managed Healthcare Providers",
+    "consultant.pageDescription": "Not sure which clinic to choose? Our trusted managed healthcare providers guide you to the right healthcare services.",
     "consultant.searchPlaceholder": "Search by name or specialty...",
     "consultant.feature1Title": "Personalized Guidance",
     "consultant.feature1Desc": "Get matched to the right provider",
@@ -450,7 +450,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Admin Consultants
     "admin.consultantsTitle": "Manage Consultants",
-    "admin.consultantsDesc": "Add, edit, and manage wellness advisors",
+    "admin.consultantsDesc": "Add, edit, and manage healthcare providers",
     "admin.addConsultant": "Add Consultant",
     "admin.editConsultant": "Edit Consultant",
     "admin.name": "Name",
@@ -475,7 +475,7 @@ const translations: Record<Language, Record<string, string>> = {
     "admin.recommendedClinics": "Recommended Clinics",
     "admin.addClinic": "Add Clinic",
     "admin.noConsultants": "No consultants yet",
-    "admin.noConsultantsDesc": "Add your first wellness advisor to get started",
+    "admin.noConsultantsDesc": "Add your first healthcare provider to get started",
     "admin.nameRequired": "Name is required",
     "admin.updateError": "Failed to update consultant",
     "admin.createError": "Failed to create consultant",
@@ -498,10 +498,10 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.consultants": "健康顾问",
     
     // Featured Consultants
-    "featuredConsultants.badge": "健康顾问",
-    "featuredConsultants.title": "需要指导？认识我们的健康顾问",
-    "featuredConsultants.subtitle": "不确定选择哪家诊所？我们值得信赖的顾问帮助您找到合适的医疗服务提供者。",
-    "featuredConsultants.viewAll": "查看所有顾问",
+    "featuredConsultants.badge": "管理式医疗",
+    "featuredConsultants.title": "管理式医疗服务提供商",
+    "featuredConsultants.subtitle": "不确定选择哪家诊所？我们值得信赖的服务提供商帮助您找到合适的医疗服务。",
+    "featuredConsultants.viewAll": "查看所有服务提供商",
     
     // Hero
     "hero.badge": "排队 • 预约 • 连接",
@@ -895,8 +895,8 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Consultant Section
     "consultant.badge": "专业指导",
-    "consultant.pageTitle": "健康顾问",
-    "consultant.pageDescription": "不确定选择哪家诊所？我们值得信赖的健康顾问将为您推荐合适的医疗服务提供者。",
+    "consultant.pageTitle": "管理式医疗服务提供商",
+    "consultant.pageDescription": "不确定选择哪家诊所？我们值得信赖的管理式医疗服务提供商将为您推荐合适的医疗服务。",
     "consultant.searchPlaceholder": "按姓名或专业搜索...",
     "consultant.feature1Title": "个性化指导",
     "consultant.feature1Desc": "为您匹配合适的医疗服务",
@@ -921,7 +921,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Admin Consultants
     "admin.consultantsTitle": "管理顾问",
-    "admin.consultantsDesc": "添加、编辑和管理健康顾问",
+    "admin.consultantsDesc": "添加、编辑和管理医疗服务提供商",
     "admin.addConsultant": "添加顾问",
     "admin.editConsultant": "编辑顾问",
     "admin.name": "姓名",
@@ -946,7 +946,7 @@ const translations: Record<Language, Record<string, string>> = {
     "admin.recommendedClinics": "推荐诊所",
     "admin.addClinic": "添加诊所",
     "admin.noConsultants": "暂无顾问",
-    "admin.noConsultantsDesc": "添加您的第一位健康顾问以开始",
+    "admin.noConsultantsDesc": "添加您的第一位医疗服务提供商以开始",
     "admin.nameRequired": "姓名为必填项",
     "admin.updateError": "更新顾问失败",
     "admin.createError": "创建顾问失败",

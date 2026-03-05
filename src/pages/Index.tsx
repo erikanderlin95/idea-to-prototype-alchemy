@@ -20,8 +20,8 @@ const Index = () => {
       <main>
         <Hero />
         <Features />
-        <MarketplaceSection defaultCategory={defaultCategory} />
         <FeaturedConsultants />
+        <MarketplaceSection defaultCategory={defaultCategory} />
         <MyClynicQPlugin />
       </main>
       <Footer />

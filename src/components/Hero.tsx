@@ -28,19 +28,19 @@ export const Hero = () => {
   const [isSearching, setIsSearching] = useState(false);
   
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-ai-purple/5 via-ai-blue/5 to-background">
+    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-ai-purple/5 via-ai-blue/5 to-background">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--ai-purple)/0.15),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,hsl(var(--ai-cyan)/0.12),transparent_50%)]" />
       
       <div className="container px-4 md:px-6 relative z-10">
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
-          <div className="space-y-6 animate-fade-in">
+          <div className="space-y-4 animate-fade-in">
             <div className="inline-block">
-              <Badge variant="secondary" className="mb-4 px-4 py-2 text-sm font-semibold">
+              <Badge variant="secondary" className="mb-2 px-4 py-2 text-sm font-semibold">
                 {t("hero.badge")}
               </Badge>
             </div>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight leading-tight">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
               {t("hero.title1")}
               <span className="block mt-2 bg-gradient-to-r from-ai-purple via-ai-blue to-ai-cyan bg-clip-text text-transparent">
                 {t("hero.title2")}
@@ -71,7 +71,7 @@ export const Hero = () => {
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-3xl mt-12 pt-12 border-t border-border/50">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-3xl mt-8 pt-8 border-t border-border/50">
             <div className="flex flex-col items-center gap-3 group cursor-default">
               <QueueIcon size="md" className="group-hover:scale-110 transition-transform" />
               <p className="text-base font-bold">{t("hero.queueTitle")}</p>
