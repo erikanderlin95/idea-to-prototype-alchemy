@@ -26,6 +26,18 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.restartTour": "Restart Tour",
     "nav.consultants": "Consultants",
     
+    // Continuity & Support Services
+    "continuity.badge": "Continuity & Support",
+    "continuity.title": "Continuity & Support Services",
+    "continuity.subtitle": "Beyond the clinic — services that support every stage of your healthcare journey.",
+    "continuity.speakers.title": "Healthcare Speakers & Trainers",
+    "continuity.speakers.desc": "Connect with experienced healthcare educators and trainers for workshops, talks, and professional development.",
+    "continuity.afterlife.title": "After Life Services",
+    "continuity.afterlife.desc": "Compassionate support and guidance for end-of-life planning, bereavement, and memorial services.",
+    "continuity.endOfService.title": "End of Services",
+    "continuity.endOfService.desc": "Smooth transitions and wrap-up support when concluding treatment plans or healthcare arrangements.",
+    "continuity.comingSoon": "Coming Soon",
+
     // Featured Consultants
     "featuredConsultants.badge": "Managed Healthcare",
     "featuredConsultants.title": "Managed Healthcare Providers",
@@ -497,6 +509,18 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.restartTour": "重新开始导览",
     "nav.consultants": "健康顾问",
     
+    // Continuity & Support Services
+    "continuity.badge": "延续与支持",
+    "continuity.title": "延续与支持服务",
+    "continuity.subtitle": "超越诊所——支持您医疗旅程每个阶段的服务。",
+    "continuity.speakers.title": "医疗演讲者与培训师",
+    "continuity.speakers.desc": "联系经验丰富的医疗教育者和培训师，参加研讨会、讲座和专业发展活动。",
+    "continuity.afterlife.title": "身后服务",
+    "continuity.afterlife.desc": "为临终规划、丧亲辅导和纪念服务提供贴心的支持与指导。",
+    "continuity.endOfService.title": "服务结束",
+    "continuity.endOfService.desc": "在结束治疗计划或医疗安排时，提供顺畅的过渡和收尾支持。",
+    "continuity.comingSoon": "即将推出",
+
     // Featured Consultants
     "featuredConsultants.badge": "管理式医疗",
     "featuredConsultants.title": "管理式医疗服务提供商",

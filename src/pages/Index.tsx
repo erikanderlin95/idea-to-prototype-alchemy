@@ -3,6 +3,7 @@ import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { MarketplaceSection } from "@/components/MarketplaceSection";
 import { FeaturedConsultants } from "@/components/FeaturedConsultants";
+import { ContinuityServices } from "@/components/ContinuityServices";
 import { MyClynicQPlugin } from "@/components/MyClynicQPlugin";
 import { Footer } from "@/components/Footer";
 import { OnboardingTour } from "@/components/OnboardingTour";
@@ -22,6 +23,7 @@ const Index = () => {
         <Features />
         <FeaturedConsultants />
         <MarketplaceSection defaultCategory={defaultCategory} />
+        <ContinuityServices />
         <MyClynicQPlugin />
       </main>
       <Footer />
