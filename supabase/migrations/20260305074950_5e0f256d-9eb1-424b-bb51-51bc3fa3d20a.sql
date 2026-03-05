@@ -1,0 +1,1 @@
+UPDATE consultants SET title = 'Medical Concierge' WHERE id IN ('7f3242e4-01bf-401c-83ba-7406dc4b19a8', '9e1fec88-408e-45aa-b40a-0e74088cb3ff', 'a673b5db-6bf2-410b-919c-66d013777602');
