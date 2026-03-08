@@ -7,12 +7,16 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { getBookingRoute, isManagedCareType } from "@/lib/pathwayUtils";
+import { isManagedCareType, NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
 
 const ClinicProfile = () => {
   const { id } = useParams();
@@ -24,6 +28,13 @@ const ClinicProfile = () => {
   const [reviews, setReviews] = useState<any[]>([]);
   const [queue, setQueue] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showManagedCareModal, setShowManagedCareModal] = useState(false);
+  const [managedCareSubmitted, setManagedCareSubmitted] = useState(false);
+  const [mcName, setMcName] = useState("");
+  const [mcPhone, setMcPhone] = useState("");
+  const [mcTiming, setMcTiming] = useState("");
+  const [mcConcern, setMcConcern] = useState("");
+  const [mcSubmitting, setMcSubmitting] = useState(false);
 
   useEffect(() => {
     fetchClinicData();
@@ -54,9 +65,33 @@ const ClinicProfile = () => {
   };
 
   const handleBookAppointment = () => {
-    if (clinic) {
-      navigate(getBookingRoute(id!, clinic.type));
+    if (!clinic) return;
+    if (isManagedCareType(clinic.type)) {
+      setShowManagedCareModal(true);
+      setManagedCareSubmitted(false);
+      setMcName("");
+      setMcPhone("");
+      setMcTiming("");
+      setMcConcern("");
+    } else {
+      navigate(`/booking/${id}`);
     }
+  };
+
+  const handleManagedCareSubmit = () => {
+    if (!mcName.trim() || !mcPhone.trim()) {
+      toast.error(t('clinicProfile.fieldName') + " & " + t('clinicProfile.fieldPhone') + " required");
+      return;
+    }
+    setMcSubmitting(true);
+    // Demo: simulate submission
+    console.log(`[MANAGED CARE] ${NMG_ATTRIBUTION_TAG}`);
+    console.log(`[MANAGED CARE] Clinic: ${clinic?.name}, Name: ${mcName}, Phone: ${mcPhone}`);
+    setTimeout(() => {
+      setMcSubmitting(false);
+      setManagedCareSubmitted(true);
+      toast.success(t('clinicProfile.requestReceived'));
+    }, 800);
   };
 
   if (loading || !clinic) {
