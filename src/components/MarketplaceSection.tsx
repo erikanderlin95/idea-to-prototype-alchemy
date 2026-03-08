@@ -46,9 +46,15 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       setFilteredClinics(clinics);
     } else {
       setFilteredClinics(
-        clinics.filter((clinic) => 
-          clinic.type?.toLowerCase() === activeCategory.toLowerCase()
-        )
+        clinics.filter((clinic) => {
+          const clinicType = clinic.type?.toLowerCase();
+          const filterKey = activeCategory.toLowerCase();
+          // Handle "specialists" filter matching "Specialist" type
+          if (filterKey === "specialists" || filterKey === "specialist") {
+            return clinicType === "specialist";
+          }
+          return clinicType === filterKey;
+        })
       );
     }
   }, [activeCategory, clinics]);
