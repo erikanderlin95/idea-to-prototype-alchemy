@@ -30,7 +30,7 @@ const isValidMobileNumber = (mobile: string): boolean => {
 interface ClinicCardProps {
   id?: string;
   name: string;
-  type: "GP" | "TCM" | "Wellness";
+  type: "GP" | "TCM" | "Wellness" | "Specialist";
   address: string;
   queueCount: number;
   waitTime: string;
