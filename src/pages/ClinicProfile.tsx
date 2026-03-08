@@ -12,6 +12,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getBookingRoute, isManagedCareType } from "@/lib/pathwayUtils";
 
 const ClinicProfile = () => {
   const { id } = useParams();
@@ -53,7 +54,9 @@ const ClinicProfile = () => {
   };
 
   const handleBookAppointment = () => {
-    navigate(`/booking/${id}`);
+    if (clinic) {
+      navigate(getBookingRoute(id!, clinic.type));
+    }
   };
 
   if (loading || !clinic) {
@@ -88,7 +91,7 @@ const ClinicProfile = () => {
               <div className="flex gap-3">
                 <Button size="lg" className="text-base px-6 py-6" onClick={handleBookAppointment}>
                   <Calendar className="mr-2 h-6 w-6" />
-                  {t('clinicProfile.bookAppointment')}
+                  {isManagedCareType(clinic.type) ? t('clinicProfile.requestReferral') || 'Request Referral' : t('clinicProfile.bookAppointment')}
                 </Button>
                 <Button 
                   size="lg" 
