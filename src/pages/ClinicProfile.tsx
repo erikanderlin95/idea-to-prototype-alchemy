@@ -334,6 +334,83 @@ const ClinicProfile = () => {
       </main>
 
       <Footer />
+
+      {/* Managed Care Request Modal */}
+      <Dialog open={showManagedCareModal} onOpenChange={setShowManagedCareModal}>
+        <DialogContent>
+          {!managedCareSubmitted ? (
+            <>
+              <DialogHeader>
+                <DialogTitle>{t('clinicProfile.requestManagedCare')}</DialogTitle>
+                <DialogDescription>{t('clinicProfile.managedCareSubtitle')}</DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4 py-2">
+                <div className="space-y-2">
+                  <Label htmlFor="mc-name">{t('clinicProfile.fieldName')} *</Label>
+                  <Input
+                    id="mc-name"
+                    value={mcName}
+                    onChange={(e) => setMcName(e.target.value)}
+                    placeholder={t('clinicProfile.fieldName')}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="mc-phone">{t('clinicProfile.fieldPhone')} *</Label>
+                  <Input
+                    id="mc-phone"
+                    type="tel"
+                    value={mcPhone}
+                    onChange={(e) => setMcPhone(e.target.value)}
+                    placeholder="e.g. +6591234567"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="mc-timing">{t('clinicProfile.fieldTiming')}</Label>
+                  <Input
+                    id="mc-timing"
+                    value={mcTiming}
+                    onChange={(e) => setMcTiming(e.target.value)}
+                    placeholder={t('clinicProfile.fieldTimingPlaceholder')}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="mc-concern">{t('clinicProfile.fieldConcern')}</Label>
+                  <Textarea
+                    id="mc-concern"
+                    value={mcConcern}
+                    onChange={(e) => setMcConcern(e.target.value)}
+                    placeholder={t('clinicProfile.fieldConcernPlaceholder')}
+                    rows={3}
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button
+                  onClick={handleManagedCareSubmit}
+                  disabled={mcSubmitting}
+                  className="w-full"
+                  size="lg"
+                >
+                  <Shield className="mr-2 h-5 w-5" />
+                  {mcSubmitting ? t('clinicProfile.submitting') : t('clinicProfile.submitRequest')}
+                </Button>
+              </DialogFooter>
+            </>
+          ) : (
+            <div className="py-6 text-center space-y-4">
+              <CheckCircle2 className="h-16 w-16 text-primary mx-auto" />
+              <DialogHeader>
+                <DialogTitle>{t('clinicProfile.requestReceived')}</DialogTitle>
+              </DialogHeader>
+              <Button variant="outline" onClick={() => setShowManagedCareModal(false)}>
+                OK
+              </Button>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
