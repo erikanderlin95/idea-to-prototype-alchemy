@@ -125,8 +125,8 @@ const ClinicProfile = () => {
               </div>
               <div className="flex gap-3">
                 <Button size="lg" className="text-base px-6 py-6" onClick={handleBookAppointment}>
-                  <Calendar className="mr-2 h-6 w-6" />
-                  {isManagedCareType(clinic.type) ? t('clinicProfile.requestReferral') || 'Request Referral' : t('clinicProfile.bookAppointment')}
+                  {isManagedCareType(clinic.type) ? <Shield className="mr-2 h-6 w-6" /> : <Calendar className="mr-2 h-6 w-6" />}
+                  {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
                 </Button>
                 <Button 
                   size="lg" 
