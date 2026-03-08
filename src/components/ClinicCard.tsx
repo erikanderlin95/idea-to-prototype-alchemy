@@ -11,6 +11,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getBookingRoute, isManagedCareType } from "@/lib/pathwayUtils";
 
 // Helper to sanitize and validate mobile number
 const sanitizeMobileNumber = (mobile: string): string => {
@@ -527,11 +528,11 @@ export const ClinicCard = ({
                   disabled={!isOpen}
                   onClick={(e) => {
                     e.stopPropagation();
-                    id && navigate(`/booking/${id}`);
+                    if (id) navigate(getBookingRoute(id, type));
                   }}
                 >
                   <Calendar className="mr-2 h-6 w-6" strokeWidth={3} />
-                  Book
+                  {isManagedCareType(type) ? "Request" : "Book"}
                 </Button>
               )}
               <Button 

@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "lucide-react";
+import { isManagedCareType } from "@/lib/pathwayUtils";
 
 const Booking = () => {
   const { id } = useParams();
@@ -18,7 +19,14 @@ const Booking = () => {
   const fetchClinicData = async () => {
     try {
       const { data } = await supabase.from("clinics").select("*").eq("id", id).single();
-      if (data) setClinic(data);
+      if (data) {
+        // Redirect specialist providers to managed care flow
+        if (isManagedCareType(data.type)) {
+          navigate(`/managed-care-request/${id}`, { replace: true });
+          return;
+        }
+        setClinic(data);
+      }
     } catch (error) {
       console.error("Error fetching clinic data:", error);
     }

@@ -22,6 +22,7 @@ import AdminConsultants from "./pages/AdminConsultants";
 import GPClinics from "./pages/GPClinics";
 import TCMClinics from "./pages/TCMClinics";
 import WellnessClinics from "./pages/WellnessClinics";
+import ManagedCareRequest from "./pages/ManagedCareRequest";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +53,7 @@ const App = () => (
             <Route path="/gp" element={<GPClinics />} />
             <Route path="/tcm" element={<TCMClinics />} />
             <Route path="/wellness" element={<WellnessClinics />} />
+            <Route path="/managed-care-request/:id" element={<ManagedCareRequest />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
