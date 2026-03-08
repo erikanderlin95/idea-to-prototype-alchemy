@@ -7,12 +7,16 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { getBookingRoute, isManagedCareType } from "@/lib/pathwayUtils";
+import { isManagedCareType, NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
 
 const ClinicProfile = () => {
   const { id } = useParams();
@@ -24,6 +28,13 @@ const ClinicProfile = () => {
   const [reviews, setReviews] = useState<any[]>([]);
   const [queue, setQueue] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showManagedCareModal, setShowManagedCareModal] = useState(false);
+  const [managedCareSubmitted, setManagedCareSubmitted] = useState(false);
+  const [mcName, setMcName] = useState("");
+  const [mcPhone, setMcPhone] = useState("");
+  const [mcTiming, setMcTiming] = useState("");
+  const [mcConcern, setMcConcern] = useState("");
+  const [mcSubmitting, setMcSubmitting] = useState(false);
 
   useEffect(() => {
     fetchClinicData();
@@ -54,9 +65,33 @@ const ClinicProfile = () => {
   };
 
   const handleBookAppointment = () => {
-    if (clinic) {
-      navigate(getBookingRoute(id!, clinic.type));
+    if (!clinic) return;
+    if (isManagedCareType(clinic.type)) {
+      setShowManagedCareModal(true);
+      setManagedCareSubmitted(false);
+      setMcName("");
+      setMcPhone("");
+      setMcTiming("");
+      setMcConcern("");
+    } else {
+      navigate(`/booking/${id}`);
     }
+  };
+
+  const handleManagedCareSubmit = () => {
+    if (!mcName.trim() || !mcPhone.trim()) {
+      toast.error(t('clinicProfile.fieldName') + " & " + t('clinicProfile.fieldPhone') + " required");
+      return;
+    }
+    setMcSubmitting(true);
+    // Demo: simulate submission
+    console.log(`[MANAGED CARE] ${NMG_ATTRIBUTION_TAG}`);
+    console.log(`[MANAGED CARE] Clinic: ${clinic?.name}, Name: ${mcName}, Phone: ${mcPhone}`);
+    setTimeout(() => {
+      setMcSubmitting(false);
+      setManagedCareSubmitted(true);
+      toast.success(t('clinicProfile.requestReceived'));
+    }, 800);
   };
 
   if (loading || !clinic) {
@@ -90,8 +125,8 @@ const ClinicProfile = () => {
               </div>
               <div className="flex gap-3">
                 <Button size="lg" className="text-base px-6 py-6" onClick={handleBookAppointment}>
-                  <Calendar className="mr-2 h-6 w-6" />
-                  {isManagedCareType(clinic.type) ? t('clinicProfile.requestReferral') || 'Request Referral' : t('clinicProfile.bookAppointment')}
+                  {isManagedCareType(clinic.type) ? <Shield className="mr-2 h-6 w-6" /> : <Calendar className="mr-2 h-6 w-6" />}
+                  {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
                 </Button>
                 <Button 
                   size="lg" 
@@ -299,6 +334,83 @@ const ClinicProfile = () => {
       </main>
 
       <Footer />
+
+      {/* Managed Care Request Modal */}
+      <Dialog open={showManagedCareModal} onOpenChange={setShowManagedCareModal}>
+        <DialogContent>
+          {!managedCareSubmitted ? (
+            <>
+              <DialogHeader>
+                <DialogTitle>{t('clinicProfile.requestManagedCare')}</DialogTitle>
+                <DialogDescription>{t('clinicProfile.managedCareSubtitle')}</DialogDescription>
+              </DialogHeader>
+              <div className="space-y-4 py-2">
+                <div className="space-y-2">
+                  <Label htmlFor="mc-name">{t('clinicProfile.fieldName')} *</Label>
+                  <Input
+                    id="mc-name"
+                    value={mcName}
+                    onChange={(e) => setMcName(e.target.value)}
+                    placeholder={t('clinicProfile.fieldName')}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="mc-phone">{t('clinicProfile.fieldPhone')} *</Label>
+                  <Input
+                    id="mc-phone"
+                    type="tel"
+                    value={mcPhone}
+                    onChange={(e) => setMcPhone(e.target.value)}
+                    placeholder="e.g. +6591234567"
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="mc-timing">{t('clinicProfile.fieldTiming')}</Label>
+                  <Input
+                    id="mc-timing"
+                    value={mcTiming}
+                    onChange={(e) => setMcTiming(e.target.value)}
+                    placeholder={t('clinicProfile.fieldTimingPlaceholder')}
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="mc-concern">{t('clinicProfile.fieldConcern')}</Label>
+                  <Textarea
+                    id="mc-concern"
+                    value={mcConcern}
+                    onChange={(e) => setMcConcern(e.target.value)}
+                    placeholder={t('clinicProfile.fieldConcernPlaceholder')}
+                    rows={3}
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button
+                  onClick={handleManagedCareSubmit}
+                  disabled={mcSubmitting}
+                  className="w-full"
+                  size="lg"
+                >
+                  <Shield className="mr-2 h-5 w-5" />
+                  {mcSubmitting ? t('clinicProfile.submitting') : t('clinicProfile.submitRequest')}
+                </Button>
+              </DialogFooter>
+            </>
+          ) : (
+            <div className="py-6 text-center space-y-4">
+              <CheckCircle2 className="h-16 w-16 text-primary mx-auto" />
+              <DialogHeader>
+                <DialogTitle>{t('clinicProfile.requestReceived')}</DialogTitle>
+              </DialogHeader>
+              <Button variant="outline" onClick={() => setShowManagedCareModal(false)}>
+                OK
+              </Button>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
