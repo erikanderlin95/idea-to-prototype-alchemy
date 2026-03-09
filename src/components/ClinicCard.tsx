@@ -339,6 +339,12 @@ export const ClinicCard = ({
                   {t("clinicCard.closed")}
                 </Badge>
               )}
+              {isNmgAffiliated && (
+                <Badge className="text-xs bg-primary/15 text-primary border border-primary/30">
+                  <Shield className="h-3 w-3 mr-1" />
+                  Managed Care Available
+                </Badge>
+              )}
             </div>
             <div className="flex items-center gap-1 text-sm text-muted-foreground">
               <MapPin className="h-4 w-4 flex-shrink-0" />
