@@ -66,6 +66,7 @@ export const ClinicCard = ({
   const [showQueueCard, setShowQueueCard] = useState(false);
   const [patientName, setPatientName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
+  const [newQueueNumber, setNewQueueNumber] = useState<number | null>(null);
   const [showManagedCareModal, setShowManagedCareModal] = useState(false);
   const [mcName, setMcName] = useState("");
   const [mcPhone, setMcPhone] = useState("");
@@ -73,6 +74,29 @@ export const ClinicCard = ({
   const [mcConcern, setMcConcern] = useState("");
   const [mcSubmitted, setMcSubmitted] = useState(false);
   const [mcSubmitting, setMcSubmitting] = useState(false);
+
+  const handleManagedCareSubmit = () => {
+    if (!mcName.trim() || !mcPhone.trim()) {
+      toast.error("Please fill in Name and Phone number");
+      return;
+    }
+    setMcSubmitting(true);
+    console.log(`[MANAGED CARE] Request submitted for NMG clinic: ${name}`);
+    console.log(`[MANAGED CARE] ${NMG_ATTRIBUTION_TAG}`);
+    setTimeout(() => {
+      setMcSubmitting(false);
+      setMcSubmitted(true);
+    }, 1000);
+  };
+
+  const resetManagedCareModal = () => {
+    setMcName("");
+    setMcPhone("");
+    setMcTiming("");
+    setMcConcern("");
+    setMcSubmitted(false);
+    setMcSubmitting(false);
+  };
 
   useEffect(() => {
     if (id) {
