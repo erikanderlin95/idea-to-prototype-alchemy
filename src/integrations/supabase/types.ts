@@ -164,6 +164,7 @@ export type Database = {
           email: string | null
           has_digital_queue: boolean | null
           id: string
+          is_nmg_affiliated: boolean | null
           is_open: boolean | null
           name: string
           operating_hours: Json | null
@@ -181,6 +182,7 @@ export type Database = {
           email?: string | null
           has_digital_queue?: boolean | null
           id?: string
+          is_nmg_affiliated?: boolean | null
           is_open?: boolean | null
           name: string
           operating_hours?: Json | null
@@ -198,6 +200,7 @@ export type Database = {
           email?: string | null
           has_digital_queue?: boolean | null
           id?: string
+          is_nmg_affiliated?: boolean | null
           is_open?: boolean | null
           name?: string
           operating_hours?: Json | null
