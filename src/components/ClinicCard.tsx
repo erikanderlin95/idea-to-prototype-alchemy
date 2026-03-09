@@ -563,6 +563,19 @@ export const ClinicCard = ({
                   <Users className="mr-2 h-6 w-6" strokeWidth={3} />
                   {isJoining ? t("clinicCard.joining") : t("clinicCard.joinQueue")}
                 </Button>
+              ) : isNmgAffiliated && isManagedCareType(type) ? (
+                <Button 
+                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
+                  disabled={!isOpen}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    resetManagedCareModal();
+                    setShowManagedCareModal(true);
+                  }}
+                >
+                  <Shield className="mr-2 h-6 w-6" strokeWidth={3} />
+                  Request Managed Care Support
+                </Button>
               ) : (
                 <Button 
                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
