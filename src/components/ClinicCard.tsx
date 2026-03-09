@@ -601,7 +601,7 @@ export const ClinicCard = ({
                 {t("clinicCard.viewDetails")}
               </Button>
             </div>
-            {isNmgAffiliated && (
+            {isNmgAffiliated && !isManagedCareType(type) && (
               <Button
                 variant="outline"
                 className="w-full border-2 border-primary/40 text-primary hover:bg-primary/10 font-semibold h-10 text-sm"
