@@ -53,6 +53,7 @@ export const ClinicCard = ({
   rating,
   isOpen,
   hasDigitalQueue = true,
+  isNmgAffiliated = false,
 }: ClinicCardProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
