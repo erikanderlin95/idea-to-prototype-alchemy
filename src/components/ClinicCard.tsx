@@ -40,6 +40,7 @@ interface ClinicCardProps {
   rating: number;
   isOpen: boolean;
   hasDigitalQueue?: boolean;
+  isNmgAffiliated?: boolean;
 }
 
 export const ClinicCard = ({
