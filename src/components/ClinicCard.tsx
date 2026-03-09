@@ -66,7 +66,13 @@ export const ClinicCard = ({
   const [showQueueCard, setShowQueueCard] = useState(false);
   const [patientName, setPatientName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
-  const [newQueueNumber, setNewQueueNumber] = useState<number | null>(null);
+  const [showManagedCareModal, setShowManagedCareModal] = useState(false);
+  const [mcName, setMcName] = useState("");
+  const [mcPhone, setMcPhone] = useState("");
+  const [mcTiming, setMcTiming] = useState("");
+  const [mcConcern, setMcConcern] = useState("");
+  const [mcSubmitted, setMcSubmitted] = useState(false);
+  const [mcSubmitting, setMcSubmitting] = useState(false);
 
   useEffect(() => {
     if (id) {
