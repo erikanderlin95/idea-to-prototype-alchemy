@@ -94,6 +94,24 @@ const ClinicProfile = () => {
     }, 800);
   };
 
+  // Demo reviews fallback for clinics without real reviews
+  const DEMO_REVIEWS: Record<string, Array<{ id: string; name: string; rating: number; comment: string }>> = {
+    "NMG Family Clinic": [
+      { id: "d1", name: "Lim Wei Ting", rating: 5, comment: "Excellent family clinic. Dr. Tan is very thorough and takes time to explain everything clearly. Highly recommended for families." },
+      { id: "d2", name: "Ahmad Razak", rating: 4, comment: "Friendly staff and short waiting times. The digital queue system is very convenient." },
+      { id: "d3", name: "Rachel Chen", rating: 5, comment: "Been coming here for years. The managed care coordination is seamless — they handle all the referrals efficiently." },
+    ],
+    "ABC Specialist Clinic": [
+      { id: "d4", name: "David Ong", rating: 5, comment: "Dr. Nair is one of the best cardiologists I've seen. Very professional and reassuring. The NMG referral process was smooth." },
+      { id: "d5", name: "Siti Aminah", rating: 5, comment: "Dr. Lim performed my knee surgery. Recovery was fast and he followed up personally. Excellent care." },
+      { id: "d6", name: "Michael Teo", rating: 4, comment: "Top-notch specialist clinic. Appointments are well-managed through the managed care pathway." },
+    ],
+  };
+
+  const displayReviews = reviews.length > 0
+    ? reviews
+    : (clinic ? (DEMO_REVIEWS[clinic.name] || []) : []);
+
   if (loading || !clinic) {
     return <div className="min-h-screen flex items-center justify-center">{t('clinicProfile.loading')}</div>;
   }
@@ -306,12 +324,12 @@ const ClinicProfile = () => {
             </TabsContent>
 
             <TabsContent value="reviews" className="space-y-6">
-              {reviews.length > 0 ? (
-                reviews.map((review) => (
+              {displayReviews.length > 0 ? (
+                displayReviews.map((review: any) => (
                   <Card key={review.id} className="p-8">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <p className="font-bold text-lg">{review.profiles?.full_name || t('clinicProfile.anonymous')}</p>
+                        <p className="font-bold text-lg">{review.profiles?.full_name || review.name || t('clinicProfile.anonymous')}</p>
                         <div className="flex items-center gap-2">
                           <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
                           <span className="text-base font-semibold">{review.rating}</span>
