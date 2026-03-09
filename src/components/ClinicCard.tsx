@@ -553,7 +553,7 @@ export const ClinicCard = ({
               </div>
             )}
             
-            <div className="flex gap-3">
+            <div className={`flex gap-3 ${isNmgAffiliated && isManagedCareType(type) ? 'flex-col' : ''}`}>
               {hasDigitalQueue ? (
                 <Button 
                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
@@ -565,7 +565,7 @@ export const ClinicCard = ({
                 </Button>
               ) : isNmgAffiliated && isManagedCareType(type) ? (
                 <Button 
-                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
+                  className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-base shadow-2xl shadow-primary/50 border-0 h-12 hover:scale-105 transition-transform" 
                   disabled={!isOpen}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -573,7 +573,7 @@ export const ClinicCard = ({
                     setShowManagedCareModal(true);
                   }}
                 >
-                  <Shield className="mr-2 h-6 w-6" strokeWidth={3} />
+                  <Shield className="mr-2 h-5 w-5" strokeWidth={3} />
                   Request Managed Care Support
                 </Button>
               ) : (
@@ -591,7 +591,7 @@ export const ClinicCard = ({
               )}
               <Button 
                 variant="outline"
-                className="flex-1 font-black text-base hover:bg-primary/20 hover:border-primary border-2 border-primary/50 h-12 hover:scale-105 transition-transform" 
+                className={`font-black text-base hover:bg-primary/20 hover:border-primary border-2 border-primary/50 h-12 hover:scale-105 transition-transform ${isNmgAffiliated && isManagedCareType(type) ? 'w-full' : 'flex-1'}`}
                 disabled={!isOpen}
                 onClick={(e) => {
                   e.stopPropagation();
