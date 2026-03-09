@@ -22,7 +22,7 @@ const services = [
     borderColor: "border-ai-blue/20 hover:border-ai-blue/40",
   },
   {
-    icon: HandHeart,
+    icon: Building2,
     titleKey: "continuity.endOfService.title",
     descKey: "continuity.endOfService.desc",
     gradient: "from-ai-cyan/15 to-ai-violet/10",
