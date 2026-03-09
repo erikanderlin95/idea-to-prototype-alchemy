@@ -4,14 +4,17 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { MapPin, Clock, Users, Star, CheckCircle, XCircle, AlertTriangle, Copy, Calendar } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
+import { MapPin, Clock, Users, Star, CheckCircle, XCircle, AlertTriangle, Copy, Calendar, Shield } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { getBookingRoute, isManagedCareType } from "@/lib/pathwayUtils";
+import { getBookingRoute, isManagedCareType, NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
 
 // Helper to sanitize and validate mobile number
 const sanitizeMobileNumber = (mobile: string): string => {
@@ -37,6 +40,7 @@ interface ClinicCardProps {
   rating: number;
   isOpen: boolean;
   hasDigitalQueue?: boolean;
+  isNmgAffiliated?: boolean;
 }
 
 export const ClinicCard = ({
@@ -49,6 +53,7 @@ export const ClinicCard = ({
   rating,
   isOpen,
   hasDigitalQueue = true,
+  isNmgAffiliated = false,
 }: ClinicCardProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -62,6 +67,36 @@ export const ClinicCard = ({
   const [patientName, setPatientName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [newQueueNumber, setNewQueueNumber] = useState<number | null>(null);
+  const [showManagedCareModal, setShowManagedCareModal] = useState(false);
+  const [mcName, setMcName] = useState("");
+  const [mcPhone, setMcPhone] = useState("");
+  const [mcTiming, setMcTiming] = useState("");
+  const [mcConcern, setMcConcern] = useState("");
+  const [mcSubmitted, setMcSubmitted] = useState(false);
+  const [mcSubmitting, setMcSubmitting] = useState(false);
+
+  const handleManagedCareSubmit = () => {
+    if (!mcName.trim() || !mcPhone.trim()) {
+      toast.error("Please fill in Name and Phone number");
+      return;
+    }
+    setMcSubmitting(true);
+    console.log(`[MANAGED CARE] Request submitted for NMG clinic: ${name}`);
+    console.log(`[MANAGED CARE] ${NMG_ATTRIBUTION_TAG}`);
+    setTimeout(() => {
+      setMcSubmitting(false);
+      setMcSubmitted(true);
+    }, 1000);
+  };
+
+  const resetManagedCareModal = () => {
+    setMcName("");
+    setMcPhone("");
+    setMcTiming("");
+    setMcConcern("");
+    setMcSubmitted(false);
+    setMcSubmitting(false);
+  };
 
   useEffect(() => {
     if (id) {
@@ -302,6 +337,12 @@ export const ClinicCard = ({
               ) : (
                 <Badge variant="outline" className="text-sm border-muted text-muted-foreground">
                   {t("clinicCard.closed")}
+                </Badge>
+              )}
+              {isNmgAffiliated && (
+                <Badge className="text-xs bg-primary/15 text-primary border border-primary/30">
+                  <Shield className="h-3 w-3 mr-1" />
+                  Managed Care Available
                 </Badge>
               )}
             </div>
@@ -547,6 +588,20 @@ export const ClinicCard = ({
                 {t("clinicCard.viewDetails")}
               </Button>
             </div>
+            {isNmgAffiliated && (
+              <Button
+                variant="outline"
+                className="w-full border-2 border-primary/40 text-primary hover:bg-primary/10 font-semibold h-10 text-sm"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  resetManagedCareModal();
+                  setShowManagedCareModal(true);
+                }}
+              >
+                <Shield className="mr-2 h-4 w-4" />
+                Request Managed Care Support
+              </Button>
+            )}
           </div>
         )}
       </div>
@@ -673,6 +728,48 @@ export const ClinicCard = ({
             View Queue Details
           </Button>
         </DialogFooter>
+      </DialogContent>
+    </Dialog>
+
+    {/* NMG Managed Care Request Modal */}
+    <Dialog open={showManagedCareModal} onOpenChange={(open) => { setShowManagedCareModal(open); if (!open) resetManagedCareModal(); }}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Request Managed Care Support</DialogTitle>
+          <DialogDescription>NMG will coordinate your appointment and contact you shortly.</DialogDescription>
+        </DialogHeader>
+        {!mcSubmitted ? (
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="mc-name">Name *</Label>
+              <Input id="mc-name" value={mcName} onChange={(e) => setMcName(e.target.value)} placeholder="Your full name" required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="mc-phone">Phone number *</Label>
+              <Input id="mc-phone" type="tel" value={mcPhone} onChange={(e) => setMcPhone(e.target.value)} placeholder="e.g. +6591234567" required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="mc-timing">Preferred timing</Label>
+              <Input id="mc-timing" value={mcTiming} onChange={(e) => setMcTiming(e.target.value)} placeholder="e.g. Weekday mornings" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="mc-concern">Brief concern</Label>
+              <Textarea id="mc-concern" value={mcConcern} onChange={(e) => setMcConcern(e.target.value)} placeholder="Describe your concern briefly" rows={3} />
+            </div>
+            <p className="text-xs text-muted-foreground">{NMG_ATTRIBUTION_TAG}</p>
+            <Button className="w-full" onClick={handleManagedCareSubmit} disabled={mcSubmitting}>
+              <Shield className="mr-2 h-4 w-4" />
+              {mcSubmitting ? "Submitting..." : "Submit Request"}
+            </Button>
+          </div>
+        ) : (
+          <div className="text-center space-y-4 py-4">
+            <CheckCircle className="h-12 w-12 text-primary mx-auto" />
+            <p className="text-lg font-semibold text-foreground">Request received. NMG will contact you shortly.</p>
+            <p className="text-xs text-muted-foreground">{NMG_ATTRIBUTION_TAG}</p>
+            <Button variant="outline" onClick={() => setShowManagedCareModal(false)}>Close</Button>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   </>);
