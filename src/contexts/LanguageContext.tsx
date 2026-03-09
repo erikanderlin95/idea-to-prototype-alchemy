@@ -34,8 +34,8 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.speakers.desc": "Connect with experienced healthcare educators and trainers for workshops, talks, and professional development.",
     "continuity.afterlife.title": "After Life Services",
     "continuity.afterlife.desc": "Compassionate support and guidance for end-of-life planning, bereavement, and memorial services.",
-    "continuity.endOfService.title": "End of Services",
-    "continuity.endOfService.desc": "Smooth transitions and wrap-up support when concluding treatment plans or healthcare arrangements.",
+    "continuity.endOfService.title": "Corporate & Community Health",
+    "continuity.endOfService.desc": "Workplace health programmes, screenings and coordinated wellness initiatives.",
     "continuity.comingSoon": "Coming Soon",
 
     // Featured Consultants
@@ -528,8 +528,8 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.speakers.desc": "联系经验丰富的医疗教育者和培训师，参加研讨会、讲座和专业发展活动。",
     "continuity.afterlife.title": "身后服务",
     "continuity.afterlife.desc": "为临终规划、丧亲辅导和纪念服务提供贴心的支持与指导。",
-    "continuity.endOfService.title": "服务结束",
-    "continuity.endOfService.desc": "在结束治疗计划或医疗安排时，提供顺畅的过渡和收尾支持。",
+    "continuity.endOfService.title": "企业与社区健康",
+    "continuity.endOfService.desc": "职场健康计划、健康检查及协调的健康促进活动。",
     "continuity.comingSoon": "即将推出",
 
     // Featured Consultants
