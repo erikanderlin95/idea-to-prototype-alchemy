@@ -730,5 +730,47 @@ export const ClinicCard = ({
         </DialogFooter>
       </DialogContent>
     </Dialog>
+
+    {/* NMG Managed Care Request Modal */}
+    <Dialog open={showManagedCareModal} onOpenChange={(open) => { setShowManagedCareModal(open); if (!open) resetManagedCareModal(); }}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Request Managed Care Support</DialogTitle>
+          <DialogDescription>NMG will coordinate your appointment and contact you shortly.</DialogDescription>
+        </DialogHeader>
+        {!mcSubmitted ? (
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="mc-name">Name *</Label>
+              <Input id="mc-name" value={mcName} onChange={(e) => setMcName(e.target.value)} placeholder="Your full name" required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="mc-phone">Phone number *</Label>
+              <Input id="mc-phone" type="tel" value={mcPhone} onChange={(e) => setMcPhone(e.target.value)} placeholder="e.g. +6591234567" required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="mc-timing">Preferred timing</Label>
+              <Input id="mc-timing" value={mcTiming} onChange={(e) => setMcTiming(e.target.value)} placeholder="e.g. Weekday mornings" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="mc-concern">Brief concern</Label>
+              <Textarea id="mc-concern" value={mcConcern} onChange={(e) => setMcConcern(e.target.value)} placeholder="Describe your concern briefly" rows={3} />
+            </div>
+            <p className="text-xs text-muted-foreground">{NMG_ATTRIBUTION_TAG}</p>
+            <Button className="w-full" onClick={handleManagedCareSubmit} disabled={mcSubmitting}>
+              <Shield className="mr-2 h-4 w-4" />
+              {mcSubmitting ? "Submitting..." : "Submit Request"}
+            </Button>
+          </div>
+        ) : (
+          <div className="text-center space-y-4 py-4">
+            <CheckCircle className="h-12 w-12 text-primary mx-auto" />
+            <p className="text-lg font-semibold text-foreground">Request received. NMG will contact you shortly.</p>
+            <p className="text-xs text-muted-foreground">{NMG_ATTRIBUTION_TAG}</p>
+            <Button variant="outline" onClick={() => setShowManagedCareModal(false)}>Close</Button>
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
   </>);
 };
