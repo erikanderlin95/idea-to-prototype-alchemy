@@ -324,12 +324,12 @@ const ClinicProfile = () => {
             </TabsContent>
 
             <TabsContent value="reviews" className="space-y-6">
-              {reviews.length > 0 ? (
-                reviews.map((review) => (
+              {displayReviews.length > 0 ? (
+                displayReviews.map((review: any) => (
                   <Card key={review.id} className="p-8">
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
-                        <p className="font-bold text-lg">{review.profiles?.full_name || t('clinicProfile.anonymous')}</p>
+                        <p className="font-bold text-lg">{review.profiles?.full_name || review.name || t('clinicProfile.anonymous')}</p>
                         <div className="flex items-center gap-2">
                           <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
                           <span className="text-base font-semibold">{review.rating}</span>
