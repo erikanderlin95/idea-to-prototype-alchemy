@@ -34,8 +34,8 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.speakers.desc": "Connect with experienced healthcare educators and trainers for workshops, talks, and professional development.",
     "continuity.afterlife.title": "After Life Services",
     "continuity.afterlife.desc": "Compassionate support and guidance for end-of-life planning, bereavement, and memorial services.",
-    "continuity.endOfService.title": "End of Services",
-    "continuity.endOfService.desc": "Smooth transitions and wrap-up support when concluding treatment plans or healthcare arrangements.",
+    "continuity.endOfService.title": "Corporate & Community Health",
+    "continuity.endOfService.desc": "Workplace health programmes, screenings and coordinated wellness initiatives.",
     "continuity.comingSoon": "Coming Soon",
 
     // Featured Consultants
