@@ -6,14 +6,39 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
-import { Shield, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Shield, ArrowLeft, CheckCircle2, MessageCircle } from "lucide-react";
 import { NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
+import { toast } from "sonner";
+
+const sanitizeMobileNumber = (mobile: string): string => {
+  const hasPlus = mobile.trim().startsWith('+');
+  const digitsOnly = mobile.replace(/\D/g, '');
+  return hasPlus ? `+${digitsOnly}` : digitsOnly;
+};
+
+const isValidMobileNumber = (mobile: string): boolean => {
+  const sanitized = sanitizeMobileNumber(mobile);
+  return /^\+?[0-9]{8,15}$/.test(sanitized);
+};
 
 const ManagedCareRequest = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [clinic, setClinic] = useState<any>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [caseId, setCaseId] = useState("");
+
+  // Form fields
+  const [concern, setConcern] = useState("");
+  const [location, setLocation] = useState("");
+  const [timing, setTiming] = useState("");
+  const [urgency, setUrgency] = useState("flexible");
+  const [contactName, setContactName] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
 
   useEffect(() => {
     const fetchClinic = async () => {
@@ -24,12 +49,49 @@ const ManagedCareRequest = () => {
     fetchClinic();
   }, [id]);
 
-  const handleSubmitRequest = () => {
-    // Demo: simulate managed care request submission with attribution
-    console.log(`[MANAGED CARE] Request submitted for clinic: ${clinic?.name}`);
-    console.log(`[MANAGED CARE] ${NMG_ATTRIBUTION_TAG}`);
-    console.log(`[MANAGED CARE] Flow: Patient → Discovery → Managed Care Pathway → Provider`);
-    setSubmitted(true);
+  const generateCaseId = () => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let result = "MC-";
+    for (let i = 0; i < 8; i++) result += chars.charAt(Math.floor(Math.random() * chars.length));
+    return result;
+  };
+
+  const handleSubmitRequest = async () => {
+    if (!contactName.trim() || !contactNumber.trim() || !concern.trim()) {
+      toast.error("Please fill in Name, Contact Number and Condition/Concern");
+      return;
+    }
+    if (!isValidMobileNumber(contactNumber)) {
+      toast.error("Please enter a valid contact number");
+      return;
+    }
+    setSubmitting(true);
+    const newCaseId = generateCaseId();
+    try {
+      const { error } = await supabase.from("managed_care_cases" as any).insert({
+        case_id: newCaseId,
+        clinic_id: id || null,
+        clinic_name: clinic?.name || null,
+        patient_name: contactName.trim(),
+        contact_number: sanitizeMobileNumber(contactNumber),
+        condition_concern: concern.trim(),
+        preferred_location: location.trim() || null,
+        preferred_timing: timing.trim() || null,
+        urgency,
+        source: "marketplace",
+        case_type: "managed_care",
+        status: "pending_coordinator_review",
+      } as any);
+      if (error) throw error;
+      setCaseId(newCaseId);
+      setSubmitted(true);
+      console.log(`[MANAGED CARE] Case ${newCaseId} created for clinic: ${clinic?.name}`);
+    } catch (err: any) {
+      console.error("[MANAGED CARE] Error:", err);
+      toast.error("Failed to submit request. Please try again.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (!clinic) {
@@ -55,63 +117,90 @@ const ManagedCareRequest = () => {
             <Badge variant="secondary" className="mb-2">Managed Care Pathway</Badge>
             <h1 className="text-3xl font-bold text-foreground">Request Specialist Referral</h1>
             <p className="text-muted-foreground">
-              {clinic.name} is a specialist provider. Appointments are coordinated through the NMG Managed Care Pathway.
+              {clinic.name} is a specialist provider. Complete the form below and a care coordinator will contact you shortly.
             </p>
           </div>
 
           {!submitted ? (
-            <Card className="p-6 space-y-6">
-              <div className="flex items-start gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <Shield className="h-6 w-6 text-primary" />
-                </div>
-                <div className="space-y-1">
-                  <h3 className="font-semibold text-foreground">How it works</h3>
-                  <ul className="text-sm text-muted-foreground space-y-2">
-                    <li className="flex items-start gap-2">
-                      <span className="font-bold text-primary">1.</span>
-                      Submit your managed care request below
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="font-bold text-primary">2.</span>
-                      A Medical Concierge will review and coordinate your referral
-                    </li>
-                    <li className="flex items-start gap-2">
-                      <span className="font-bold text-primary">3.</span>
-                      You'll be matched with the right specialist and guided through the process
-                    </li>
-                  </ul>
-                </div>
+            <Card className="p-6 space-y-5">
+              <div className="space-y-2">
+                <Label htmlFor="concern">Condition / Concern *</Label>
+                <Input id="concern" value={concern} onChange={(e) => setConcern(e.target.value)} placeholder="e.g. Knee pain, skin rash" required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="location">Preferred Location</Label>
+                <Input id="location" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. Central, East Singapore" />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="timing">Preferred Appointment Timing</Label>
+                <Input id="timing" value={timing} onChange={(e) => setTiming(e.target.value)} placeholder="e.g. Weekday mornings, ASAP" />
+              </div>
+              <div className="space-y-2">
+                <Label>Urgency Level *</Label>
+                <RadioGroup value={urgency} onValueChange={setUrgency} className="flex gap-3">
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="urgent" id="page-urg-urgent" />
+                    <Label htmlFor="page-urg-urgent" className="font-normal cursor-pointer">Urgent</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="soon" id="page-urg-soon" />
+                    <Label htmlFor="page-urg-soon" className="font-normal cursor-pointer">Soon</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <RadioGroupItem value="flexible" id="page-urg-flexible" />
+                    <Label htmlFor="page-urg-flexible" className="font-normal cursor-pointer">Flexible</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="contact-name">Name *</Label>
+                <Input id="contact-name" value={contactName} onChange={(e) => setContactName(e.target.value)} placeholder="Your full name" required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="contact-number">Contact Number *</Label>
+                <Input id="contact-number" type="tel" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} placeholder="e.g. +6591234567" required />
               </div>
 
               <div className="border-t pt-4">
-                <p className="text-xs text-muted-foreground mb-4">
-                  {NMG_ATTRIBUTION_TAG}
-                </p>
+                <p className="text-xs text-muted-foreground mb-4">{NMG_ATTRIBUTION_TAG}</p>
                 <Button
                   size="lg"
                   className="w-full text-lg py-6"
                   onClick={handleSubmitRequest}
+                  disabled={submitting}
                 >
                   <Shield className="mr-2 h-5 w-5" />
-                  Request Managed Care Referral
+                  {submitting ? "Submitting..." : "Submit Request"}
                 </Button>
               </div>
             </Card>
           ) : (
             <Card className="p-8 text-center space-y-4">
               <CheckCircle2 className="h-16 w-16 text-primary mx-auto" />
-              <h2 className="text-2xl font-bold text-foreground">Request Submitted</h2>
+              <h2 className="text-2xl font-bold text-foreground">Request Received</h2>
               <p className="text-muted-foreground">
-                Your managed care request has been received. A Medical Concierge will contact you shortly to coordinate your specialist appointment.
+                Your request has been received. A care coordinator will review your case and contact you shortly to recommend the most suitable provider.
               </p>
-              <p className="text-xs text-muted-foreground pt-2">
-                {NMG_ATTRIBUTION_TAG} • Demo Mode
-              </p>
+              <div className="bg-muted rounded-lg p-4">
+                <p className="text-xs text-muted-foreground">Case Reference</p>
+                <p className="text-2xl font-mono font-bold text-foreground">{caseId}</p>
+              </div>
+              <Button
+                size="lg"
+                className="w-full"
+                onClick={() => {
+                  const message = encodeURIComponent(`Hi, I have a managed care request. My Case ID is: ${caseId}. Please assist me.`);
+                  window.open(`https://wa.me/?text=${message}`, "_blank");
+                }}
+              >
+                <MessageCircle className="mr-2 h-5 w-5" />
+                Chat with Care Coordinator
+              </Button>
+              <p className="text-xs text-muted-foreground pt-2">{NMG_ATTRIBUTION_TAG}</p>
               <Button
                 variant="outline"
                 onClick={() => navigate("/")}
-                className="mt-4"
+                className="mt-2"
               >
                 Return to Home
               </Button>

@@ -352,6 +352,68 @@ export type Database = {
           },
         ]
       }
+      managed_care_cases: {
+        Row: {
+          case_id: string
+          case_type: string
+          clinic_id: string | null
+          clinic_name: string | null
+          condition_concern: string
+          contact_number: string
+          created_at: string | null
+          id: string
+          patient_name: string
+          preferred_location: string | null
+          preferred_timing: string | null
+          source: string
+          status: string
+          updated_at: string | null
+          urgency: string
+        }
+        Insert: {
+          case_id: string
+          case_type?: string
+          clinic_id?: string | null
+          clinic_name?: string | null
+          condition_concern: string
+          contact_number: string
+          created_at?: string | null
+          id?: string
+          patient_name: string
+          preferred_location?: string | null
+          preferred_timing?: string | null
+          source?: string
+          status?: string
+          updated_at?: string | null
+          urgency?: string
+        }
+        Update: {
+          case_id?: string
+          case_type?: string
+          clinic_id?: string | null
+          clinic_name?: string | null
+          condition_concern?: string
+          contact_number?: string
+          created_at?: string | null
+          id?: string
+          patient_name?: string
+          preferred_location?: string | null
+          preferred_timing?: string | null
+          source?: string
+          status?: string
+          updated_at?: string | null
+          urgency?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "managed_care_cases_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           address: string | null
