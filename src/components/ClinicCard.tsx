@@ -72,21 +72,55 @@ export const ClinicCard = ({
   const [mcPhone, setMcPhone] = useState("");
   const [mcTiming, setMcTiming] = useState("");
   const [mcConcern, setMcConcern] = useState("");
+  const [mcLocation, setMcLocation] = useState("");
+  const [mcUrgency, setMcUrgency] = useState("flexible");
   const [mcSubmitted, setMcSubmitted] = useState(false);
   const [mcSubmitting, setMcSubmitting] = useState(false);
+  const [mcCaseId, setMcCaseId] = useState("");
 
-  const handleManagedCareSubmit = () => {
-    if (!mcName.trim() || !mcPhone.trim()) {
-      toast.error("Please fill in Name and Phone number");
+  const generateCaseId = () => {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    let result = "MC-";
+    for (let i = 0; i < 8; i++) result += chars.charAt(Math.floor(Math.random() * chars.length));
+    return result;
+  };
+
+  const handleManagedCareSubmit = async () => {
+    if (!mcName.trim() || !mcPhone.trim() || !mcConcern.trim()) {
+      toast.error("Please fill in Name, Contact Number and Condition/Concern");
+      return;
+    }
+    if (!isValidMobileNumber(mcPhone)) {
+      toast.error("Please enter a valid contact number");
       return;
     }
     setMcSubmitting(true);
-    console.log(`[MANAGED CARE] Request submitted for NMG clinic: ${name}`);
-    console.log(`[MANAGED CARE] ${NMG_ATTRIBUTION_TAG}`);
-    setTimeout(() => {
-      setMcSubmitting(false);
+    const caseId = generateCaseId();
+    try {
+      const { error } = await supabase.from("managed_care_cases" as any).insert({
+        case_id: caseId,
+        clinic_id: id || null,
+        clinic_name: name,
+        patient_name: mcName.trim(),
+        contact_number: sanitizeMobileNumber(mcPhone),
+        condition_concern: mcConcern.trim(),
+        preferred_location: mcLocation.trim() || null,
+        preferred_timing: mcTiming.trim() || null,
+        urgency: mcUrgency,
+        source: "marketplace",
+        case_type: "managed_care",
+        status: "pending_coordinator_review",
+      } as any);
+      if (error) throw error;
+      setMcCaseId(caseId);
       setMcSubmitted(true);
-    }, 1000);
+      console.log(`[MANAGED CARE] Case ${caseId} created for clinic: ${name}`);
+    } catch (err: any) {
+      console.error("[MANAGED CARE] Error:", err);
+      toast.error("Failed to submit request. Please try again.");
+    } finally {
+      setMcSubmitting(false);
+    }
   };
 
   const resetManagedCareModal = () => {
@@ -94,8 +128,11 @@ export const ClinicCard = ({
     setMcPhone("");
     setMcTiming("");
     setMcConcern("");
+    setMcLocation("");
+    setMcUrgency("flexible");
     setMcSubmitted(false);
     setMcSubmitting(false);
+    setMcCaseId("");
   };
 
   useEffect(() => {
