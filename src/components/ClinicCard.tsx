@@ -784,28 +784,49 @@ export const ClinicCard = ({
 
     {/* NMG Managed Care Request Modal */}
     <Dialog open={showManagedCareModal} onOpenChange={(open) => { setShowManagedCareModal(open); if (!open) resetManagedCareModal(); }}>
-      <DialogContent>
+      <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Request Managed Care Support</DialogTitle>
-          <DialogDescription>NMG will coordinate your appointment and contact you shortly.</DialogDescription>
+          <DialogDescription>Complete this form and a care coordinator will contact you shortly.</DialogDescription>
         </DialogHeader>
         {!mcSubmitted ? (
           <div className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="mc-concern">Condition / Concern *</Label>
+              <Input id="mc-concern" value={mcConcern} onChange={(e) => setMcConcern(e.target.value)} placeholder="e.g. Knee pain, skin rash" required />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="mc-location">Preferred Location</Label>
+              <Input id="mc-location" value={mcLocation} onChange={(e) => setMcLocation(e.target.value)} placeholder="e.g. Central, East Singapore" />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="mc-timing">Preferred Appointment Timing</Label>
+              <Input id="mc-timing" value={mcTiming} onChange={(e) => setMcTiming(e.target.value)} placeholder="e.g. Weekday mornings, ASAP" />
+            </div>
+            <div className="space-y-2">
+              <Label>Urgency Level *</Label>
+              <RadioGroup value={mcUrgency} onValueChange={setMcUrgency} className="flex gap-3">
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="urgent" id="urg-urgent" />
+                  <Label htmlFor="urg-urgent" className="font-normal cursor-pointer">Urgent</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="soon" id="urg-soon" />
+                  <Label htmlFor="urg-soon" className="font-normal cursor-pointer">Soon</Label>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <RadioGroupItem value="flexible" id="urg-flexible" />
+                  <Label htmlFor="urg-flexible" className="font-normal cursor-pointer">Flexible</Label>
+                </div>
+              </RadioGroup>
+            </div>
             <div className="space-y-2">
               <Label htmlFor="mc-name">Name *</Label>
               <Input id="mc-name" value={mcName} onChange={(e) => setMcName(e.target.value)} placeholder="Your full name" required />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="mc-phone">Phone number *</Label>
+              <Label htmlFor="mc-phone">Contact Number *</Label>
               <Input id="mc-phone" type="tel" value={mcPhone} onChange={(e) => setMcPhone(e.target.value)} placeholder="e.g. +6591234567" required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="mc-timing">Preferred timing</Label>
-              <Input id="mc-timing" value={mcTiming} onChange={(e) => setMcTiming(e.target.value)} placeholder="e.g. Weekday mornings" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="mc-concern">Brief concern</Label>
-              <Textarea id="mc-concern" value={mcConcern} onChange={(e) => setMcConcern(e.target.value)} placeholder="Describe your concern briefly" rows={3} />
             </div>
             <p className="text-xs text-muted-foreground">{NMG_ATTRIBUTION_TAG}</p>
             <Button className="w-full" onClick={handleManagedCareSubmit} disabled={mcSubmitting}>
@@ -816,9 +837,25 @@ export const ClinicCard = ({
         ) : (
           <div className="text-center space-y-4 py-4">
             <CheckCircle className="h-12 w-12 text-primary mx-auto" />
-            <p className="text-lg font-semibold text-foreground">Request received. NMG will contact you shortly.</p>
-            <p className="text-xs text-muted-foreground">{NMG_ATTRIBUTION_TAG}</p>
-            <Button variant="outline" onClick={() => setShowManagedCareModal(false)}>Close</Button>
+            <p className="text-lg font-semibold text-foreground">Request Received</p>
+            <p className="text-sm text-muted-foreground">
+              Your request has been received. A care coordinator will review your case and contact you shortly to recommend the most suitable provider.
+            </p>
+            <div className="bg-muted rounded-lg p-3">
+              <p className="text-xs text-muted-foreground">Case Reference</p>
+              <p className="text-lg font-mono font-bold text-foreground">{mcCaseId}</p>
+            </div>
+            <Button
+              className="w-full"
+              onClick={() => {
+                const message = encodeURIComponent(`Hi, I have a managed care request. My Case ID is: ${mcCaseId}. Please assist me.`);
+                window.open(`https://wa.me/?text=${message}`, "_blank");
+              }}
+            >
+              <MessageCircle className="mr-2 h-4 w-4" />
+              Chat with Care Coordinator
+            </Button>
+            <Button variant="outline" className="w-full" onClick={() => setShowManagedCareModal(false)}>Close</Button>
           </div>
         )}
       </DialogContent>
