@@ -265,9 +265,9 @@ const ConsultantProfile = () => {
                   <p className="text-sm text-muted-foreground mb-4">
                     {t("consultant.needHelpDesc")}
                   </p>
-                  <Button className="w-full gap-2">
-                    <MessageCircle className="h-4 w-4" />
-                    {t("consultant.speakToConsultant")}
+                  <Button className="w-full gap-2" onClick={() => setShowManagedCareModal(true)}>
+                    <Shield className="h-4 w-4" />
+                    Request Managed Care Support
                   </Button>
                 </CardContent>
               </Card>
