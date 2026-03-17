@@ -180,9 +180,9 @@ const ConsultantProfile = () => {
 
                 {/* CTA */}
                 <div className="flex-shrink-0">
-                  <Button size="lg" className="gap-2">
-                    <MessageCircle className="h-5 w-5" />
-                    {t("consultant.getGuidance")}
+                  <Button size="lg" className="gap-2" onClick={() => setShowManagedCareModal(true)}>
+                    <Shield className="h-5 w-5" />
+                    Request Managed Care Support
                   </Button>
                 </div>
               </div>
