@@ -325,6 +325,13 @@ const ConsultantProfile = () => {
         </div>
       </div>
 
+      <ManagedCareModal
+        open={showManagedCareModal}
+        onOpenChange={setShowManagedCareModal}
+        clinicName={consultant?.name}
+        source="consultant_profile"
+      />
+
       <Footer />
     </div>
   );
