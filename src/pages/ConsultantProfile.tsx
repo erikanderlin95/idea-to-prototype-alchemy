@@ -17,7 +17,9 @@ import {
   CheckCircle,
   Star,
   MapPin,
+  Shield,
 } from "lucide-react";
+import { ManagedCareModal } from "@/components/ManagedCareModal";
 
 interface Consultant {
   id: string;
@@ -46,6 +48,7 @@ const ConsultantProfile = () => {
   const [consultant, setConsultant] = useState<Consultant | null>(null);
   const [recommendedClinics, setRecommendedClinics] = useState<RecommendedClinic[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showManagedCareModal, setShowManagedCareModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -177,9 +180,9 @@ const ConsultantProfile = () => {
 
                 {/* CTA */}
                 <div className="flex-shrink-0">
-                  <Button size="lg" className="gap-2">
-                    <MessageCircle className="h-5 w-5" />
-                    {t("consultant.getGuidance")}
+                  <Button size="lg" className="gap-2" onClick={() => setShowManagedCareModal(true)}>
+                    <Shield className="h-5 w-5" />
+                    Request Managed Care Support
                   </Button>
                 </div>
               </div>
@@ -262,9 +265,9 @@ const ConsultantProfile = () => {
                   <p className="text-sm text-muted-foreground mb-4">
                     {t("consultant.needHelpDesc")}
                   </p>
-                  <Button className="w-full gap-2">
-                    <MessageCircle className="h-4 w-4" />
-                    {t("consultant.speakToConsultant")}
+                  <Button className="w-full gap-2" onClick={() => setShowManagedCareModal(true)}>
+                    <Shield className="h-4 w-4" />
+                    Request Managed Care Support
                   </Button>
                 </CardContent>
               </Card>
@@ -321,6 +324,13 @@ const ConsultantProfile = () => {
           </div>
         </div>
       </div>
+
+      <ManagedCareModal
+        open={showManagedCareModal}
+        onOpenChange={setShowManagedCareModal}
+        clinicName={consultant?.name}
+        source="consultant_profile"
+      />
 
       <Footer />
     </div>
