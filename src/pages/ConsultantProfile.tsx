@@ -48,6 +48,7 @@ const ConsultantProfile = () => {
   const [consultant, setConsultant] = useState<Consultant | null>(null);
   const [recommendedClinics, setRecommendedClinics] = useState<RecommendedClinic[]>([]);
   const [loading, setLoading] = useState(true);
+  const [showManagedCareModal, setShowManagedCareModal] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
