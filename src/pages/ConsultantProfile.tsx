@@ -17,7 +17,9 @@ import {
   CheckCircle,
   Star,
   MapPin,
+  Shield,
 } from "lucide-react";
+import { ManagedCareModal } from "@/components/ManagedCareModal";
 
 interface Consultant {
   id: string;
