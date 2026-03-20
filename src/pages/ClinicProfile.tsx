@@ -124,35 +124,35 @@ const ClinicProfile = () => {
         <div className="space-y-8">
           {/* Header */}
           <div className="space-y-4">
-            <div className="flex items-start justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
               <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <h1 className="text-4xl font-bold">{clinic.name}</h1>
-                  <Badge variant="secondary" className="text-base px-3 py-1">{clinic.type}</Badge>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h1 className="text-2xl sm:text-4xl font-bold">{clinic.name}</h1>
+                  <Badge variant="secondary" className="text-sm px-3 py-1">{clinic.type}</Badge>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                   <div className="flex items-center gap-2">
-                    <MapPin className="h-5 w-5 text-foreground" />
-                    <span className="text-base font-medium text-foreground">{clinic.address}</span>
+                    <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-foreground flex-shrink-0" />
+                    <span className="text-sm sm:text-base font-medium text-foreground">{clinic.address}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
-                    <span className="text-base font-bold text-foreground">{clinic.rating}</span>
+                    <Star className="h-4 w-4 sm:h-5 sm:w-5 fill-amber-400 text-amber-400" />
+                    <span className="text-sm sm:text-base font-bold text-foreground">{clinic.rating}</span>
                   </div>
                 </div>
               </div>
-              <div className="flex gap-3">
-                <Button size="lg" className="text-base px-6 py-6" onClick={handleBookAppointment}>
-                  {isManagedCareType(clinic.type) ? <Shield className="mr-2 h-6 w-6" /> : <Calendar className="mr-2 h-6 w-6" />}
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                <Button size="default" className="text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-6" onClick={handleBookAppointment}>
+                  {isManagedCareType(clinic.type) ? <Shield className="mr-2 h-4 w-4 sm:h-6 sm:w-6" /> : <Calendar className="mr-2 h-4 w-4 sm:h-6 sm:w-6" />}
                   {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
                 </Button>
                 <Button 
-                  size="lg" 
+                  size="default" 
                   variant="outline"
-                  className="text-base px-6 py-6"
+                  className="text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-6"
                   onClick={() => navigate(`/queue?clinic=${id}`)}
                 >
-                  <Users className="mr-2 h-6 w-6" />
+                  <Users className="mr-2 h-4 w-4 sm:h-6 sm:w-6" />
                   {t('clinicProfile.joinQueue')}
                 </Button>
               </div>
@@ -218,11 +218,11 @@ const ClinicProfile = () => {
 
           {/* Tabs */}
           <Tabs defaultValue="doctors" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 p-2 bg-muted/50">
-              <TabsTrigger value="doctors" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.doctors')}</TabsTrigger>
-              <TabsTrigger value="awards" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.awards')}</TabsTrigger>
-              <TabsTrigger value="hours" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.operatingHours')}</TabsTrigger>
-              <TabsTrigger value="reviews" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.reviews')}</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4 p-1 sm:p-2 bg-muted/50">
+              <TabsTrigger value="doctors" className="text-xs sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.doctors')}</TabsTrigger>
+              <TabsTrigger value="awards" className="text-xs sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.awards')}</TabsTrigger>
+              <TabsTrigger value="hours" className="text-xs sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.operatingHours')}</TabsTrigger>
+              <TabsTrigger value="reviews" className="text-xs sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.reviews')}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="doctors" className="space-y-6">
@@ -231,25 +231,25 @@ const ClinicProfile = () => {
                   {doctors.map((doctor) => (
                     <Card 
                       key={doctor.id} 
-                      className="p-8 cursor-pointer hover:border-primary transition-all hover:shadow-lg"
+                      className="p-4 sm:p-8 cursor-pointer hover:border-primary transition-all hover:shadow-lg"
                       onClick={() => navigate(`/doctor/${doctor.id}`)}
                     >
-                      <div className="flex items-start gap-6">
-                        <Avatar className="h-32 w-32 border-4 border-primary/20">
+                      <div className="flex items-start gap-3 sm:gap-6">
+                        <Avatar className="h-16 w-16 sm:h-32 sm:w-32 border-2 sm:border-4 border-primary/20 flex-shrink-0">
                           <AvatarImage src={doctor.photo_url} alt={doctor.name} />
-                          <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-3xl font-bold">
-                            <User className="h-16 w-16" />
+                          <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-xl sm:text-3xl font-bold">
+                            <User className="h-8 w-8 sm:h-16 sm:w-16" />
                           </AvatarFallback>
                         </Avatar>
-                        <div className="flex-1 space-y-4">
+                        <div className="flex-1 space-y-2 sm:space-y-4 min-w-0">
                           <div>
                             <div className="flex items-center gap-3">
-                              <h3 className="text-2xl font-bold">{doctor.name}</h3>
+                              <h3 className="text-lg sm:text-2xl font-bold">{doctor.name}</h3>
                               {doctor.is_verified && (
                                 <Badge variant="default" className="text-sm">{t('clinicProfile.verified')}</Badge>
                               )}
                             </div>
-                            <p className="text-lg text-muted-foreground mt-1">{doctor.specialty}</p>
+                            <p className="text-sm sm:text-lg text-muted-foreground mt-1">{doctor.specialty}</p>
                             {doctor.years_of_practice && (
                               <p className="text-base text-muted-foreground mt-2">
                                 {doctor.years_of_practice} {t('clinicProfile.yearsExperience')}
