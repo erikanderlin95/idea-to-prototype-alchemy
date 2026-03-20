@@ -120,51 +120,51 @@ const ClinicProfile = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      <main className="container px-4 md:px-6 py-8">
-        <div className="space-y-8">
+      <main className="container px-3 md:px-6 py-4 sm:py-8">
+        <div className="space-y-4 sm:space-y-8">
           {/* Header */}
-          <div className="space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
-              <div className="space-y-3">
+          <div className="space-y-3">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
+              <div className="space-y-2">
                 <div className="flex items-center gap-2 flex-wrap">
-                  <h1 className="text-2xl sm:text-4xl font-bold">{clinic.name}</h1>
-                  <Badge variant="secondary" className="text-sm px-3 py-1">{clinic.type}</Badge>
+                  <h1 className="text-xl sm:text-4xl font-bold">{clinic.name}</h1>
+                  <Badge variant="secondary" className="text-xs sm:text-sm px-2 py-0.5">{clinic.type}</Badge>
                 </div>
-                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                  <div className="flex items-center gap-2">
-                    <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-foreground flex-shrink-0" />
-                    <span className="text-sm sm:text-base font-medium text-foreground">{clinic.address}</span>
+                <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-4">
+                  <div className="flex items-center gap-1.5">
+                    <MapPin className="h-3.5 w-3.5 sm:h-5 sm:w-5 text-foreground flex-shrink-0" />
+                    <span className="text-xs sm:text-base font-medium text-foreground">{clinic.address}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Star className="h-4 w-4 sm:h-5 sm:w-5 fill-amber-400 text-amber-400" />
-                    <span className="text-sm sm:text-base font-bold text-foreground">{clinic.rating}</span>
+                  <div className="flex items-center gap-1.5">
+                    <Star className="h-3.5 w-3.5 sm:h-5 sm:w-5 fill-amber-400 text-amber-400" />
+                    <span className="text-xs sm:text-base font-bold text-foreground">{clinic.rating}</span>
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
-                <Button size="default" className="text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-6" onClick={handleBookAppointment}>
-                  {isManagedCareType(clinic.type) ? <Shield className="mr-2 h-4 w-4 sm:h-6 sm:w-6" /> : <Calendar className="mr-2 h-4 w-4 sm:h-6 sm:w-6" />}
+              <div className="flex flex-col sm:flex-row gap-2">
+                <Button size="sm" className="text-xs sm:text-sm px-3 sm:px-6 py-2 sm:py-4 h-auto" onClick={handleBookAppointment}>
+                  {isManagedCareType(clinic.type) ? <Shield className="mr-1.5 h-3.5 w-3.5 sm:h-5 sm:w-5" /> : <Calendar className="mr-1.5 h-3.5 w-3.5 sm:h-5 sm:w-5" />}
                   {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
                 </Button>
                 <Button 
-                  size="default" 
+                  size="sm" 
                   variant="outline"
-                  className="text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-6"
+                  className="text-xs sm:text-sm px-3 sm:px-6 py-2 sm:py-4 h-auto"
                   onClick={() => navigate(`/queue?clinic=${id}`)}
                 >
-                  <Users className="mr-2 h-4 w-4 sm:h-6 sm:w-6" />
+                  <Users className="mr-1.5 h-3.5 w-3.5 sm:h-5 sm:w-5" />
                   {t('clinicProfile.joinQueue')}
                 </Button>
               </div>
             </div>
 
-            <p className="text-base text-foreground/90 font-medium">{clinic.description}</p>
+            <p className="text-sm sm:text-base text-foreground/90 font-medium">{clinic.description}</p>
           </div>
 
           {/* Photo Gallery */}
-          <Card className="p-4">
-            <h2 className="text-2xl font-bold mb-3">{t('clinicProfile.clinicPhotos')}</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <Card className="p-3 sm:p-4">
+            <h2 className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3">{t('clinicProfile.clinicPhotos')}</h2>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
               {clinic.photos && clinic.photos.length > 0 ? (
                 clinic.photos.map((photo: string, index: number) => (
                   <div key={index} className="aspect-square rounded-lg overflow-hidden bg-muted">
@@ -172,45 +172,45 @@ const ClinicProfile = () => {
                   </div>
                 ))
               ) : (
-                <div className="col-span-full text-center py-6 text-muted-foreground">
-                  <p className="text-base">{t('clinicProfile.photoGalleryComingSoon')}</p>
+                <div className="col-span-full text-center py-4 text-muted-foreground">
+                  <p className="text-sm sm:text-base">{t('clinicProfile.photoGalleryComingSoon')}</p>
                 </div>
               )}
             </div>
           </Card>
 
           {/* Contact & Queue Info */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <Card className="p-6 border-2 border-primary/30 shadow-lg">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <Phone className="h-6 w-6 text-primary" />
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
+            <Card className="p-3 sm:p-5 border-2 border-primary/30 shadow-md">
+              <div className="flex items-center gap-2.5 sm:gap-4">
+                <div className="p-2 sm:p-3 bg-primary/10 rounded-lg">
+                  <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-base font-bold text-foreground mb-1">{t('clinicProfile.phone')}</p>
-                  <p className="text-lg text-foreground">{clinic.phone}</p>
+                  <p className="text-xs sm:text-base font-bold text-foreground mb-0.5">{t('clinicProfile.phone')}</p>
+                  <p className="text-sm sm:text-lg text-foreground">{clinic.phone}</p>
                 </div>
               </div>
             </Card>
-            <Card className="p-6 border-2 border-primary/30 shadow-lg">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-primary/10 rounded-lg">
-                  <Mail className="h-6 w-6 text-primary" />
+            <Card className="p-3 sm:p-5 border-2 border-primary/30 shadow-md">
+              <div className="flex items-center gap-2.5 sm:gap-4">
+                <div className="p-2 sm:p-3 bg-primary/10 rounded-lg">
+                  <Mail className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-base font-bold text-foreground mb-1">{t('clinicProfile.email')}</p>
-                  <p className="text-lg text-foreground">{clinic.email || t('clinicProfile.notAvailable')}</p>
+                  <p className="text-xs sm:text-base font-bold text-foreground mb-0.5">{t('clinicProfile.email')}</p>
+                  <p className="text-sm sm:text-lg text-foreground">{clinic.email || t('clinicProfile.notAvailable')}</p>
                 </div>
               </div>
             </Card>
-            <Card className="p-6 border-4 border-primary/50 shadow-xl bg-gradient-to-br from-primary/5 to-accent/5">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-gradient-to-br from-primary to-accent rounded-lg shadow-lg">
-                  <Users className="h-6 w-6 text-primary-foreground" />
+            <Card className="p-3 sm:p-5 border-4 border-primary/50 shadow-lg bg-gradient-to-br from-primary/5 to-accent/5">
+              <div className="flex items-center gap-2.5 sm:gap-4">
+                <div className="p-2 sm:p-3 bg-gradient-to-br from-primary to-accent rounded-lg shadow-md">
+                  <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
                 </div>
                 <div>
-                  <p className="text-base font-bold text-foreground mb-1">{t('clinicProfile.currentQueue')}</p>
-                  <p className="font-black text-2xl text-primary">{queue.length} {t('clinicProfile.waiting')}</p>
+                  <p className="text-xs sm:text-base font-bold text-foreground mb-0.5">{t('clinicProfile.currentQueue')}</p>
+                  <p className="font-black text-xl sm:text-2xl text-primary">{queue.length} {t('clinicProfile.waiting')}</p>
                 </div>
               </div>
             </Card>
@@ -218,54 +218,54 @@ const ClinicProfile = () => {
 
           {/* Tabs */}
           <Tabs defaultValue="doctors" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 p-1 sm:p-2 bg-muted/50">
-              <TabsTrigger value="doctors" className="text-xs sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.doctors')}</TabsTrigger>
-              <TabsTrigger value="awards" className="text-xs sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.awards')}</TabsTrigger>
-              <TabsTrigger value="hours" className="text-xs sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.operatingHours')}</TabsTrigger>
-              <TabsTrigger value="reviews" className="text-xs sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.reviews')}</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4 p-0.5 sm:p-2 bg-muted/50">
+              <TabsTrigger value="doctors" className="text-[10px] sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md px-1 sm:px-3">{t('clinicProfile.doctors')}</TabsTrigger>
+              <TabsTrigger value="awards" className="text-[10px] sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md px-1 sm:px-3">{t('clinicProfile.awards')}</TabsTrigger>
+              <TabsTrigger value="hours" className="text-[10px] sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md px-1 sm:px-3">{t('clinicProfile.operatingHours')}</TabsTrigger>
+              <TabsTrigger value="reviews" className="text-[10px] sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md px-1 sm:px-3">{t('clinicProfile.reviews')}</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="doctors" className="space-y-6">
+            <TabsContent value="doctors" className="space-y-3 sm:space-y-6">
               {doctors.length > 0 ? (
-                <div className="grid grid-cols-1 gap-6">
+                <div className="grid grid-cols-1 gap-3 sm:gap-6">
                   {doctors.map((doctor) => (
                     <Card 
                       key={doctor.id} 
-                      className="p-4 sm:p-8 cursor-pointer hover:border-primary transition-all hover:shadow-lg"
+                      className="p-3 sm:p-8 cursor-pointer hover:border-primary transition-all hover:shadow-lg"
                       onClick={() => navigate(`/doctor/${doctor.id}`)}
                     >
-                      <div className="flex items-start gap-3 sm:gap-6">
-                        <Avatar className="h-16 w-16 sm:h-32 sm:w-32 border-2 sm:border-4 border-primary/20 flex-shrink-0">
+                      <div className="flex items-start gap-2.5 sm:gap-6">
+                        <Avatar className="h-12 w-12 sm:h-32 sm:w-32 border-2 border-primary/20 flex-shrink-0">
                           <AvatarImage src={doctor.photo_url} alt={doctor.name} />
-                          <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-xl sm:text-3xl font-bold">
-                            <User className="h-8 w-8 sm:h-16 sm:w-16" />
+                          <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-sm sm:text-3xl font-bold">
+                            <User className="h-5 w-5 sm:h-16 sm:w-16" />
                           </AvatarFallback>
                         </Avatar>
-                        <div className="flex-1 space-y-2 sm:space-y-4 min-w-0">
+                        <div className="flex-1 space-y-1.5 sm:space-y-4 min-w-0">
                           <div>
-                            <div className="flex items-center gap-3">
-                              <h3 className="text-lg sm:text-2xl font-bold">{doctor.name}</h3>
+                            <div className="flex items-center gap-2">
+                              <h3 className="text-sm sm:text-2xl font-bold">{doctor.name}</h3>
                               {doctor.is_verified && (
-                                <Badge variant="default" className="text-sm">{t('clinicProfile.verified')}</Badge>
+                                <Badge variant="default" className="text-[10px] sm:text-sm">{t('clinicProfile.verified')}</Badge>
                               )}
                             </div>
-                            <p className="text-sm sm:text-lg text-muted-foreground mt-1">{doctor.specialty}</p>
+                            <p className="text-xs sm:text-lg text-muted-foreground mt-0.5">{doctor.specialty}</p>
                             {doctor.years_of_practice && (
-                              <p className="text-base text-muted-foreground mt-2">
+                              <p className="text-xs sm:text-base text-muted-foreground mt-1">
                                 {doctor.years_of_practice} {t('clinicProfile.yearsExperience')}
                               </p>
                             )}
                           </div>
                           {doctor.qualifications && (
-                            <div className="space-y-2">
-                              <h4 className="text-sm font-semibold text-foreground">{t('clinicProfile.qualifications')}</h4>
-                              <p className="text-base line-clamp-3 text-foreground/90">{doctor.qualifications}</p>
+                            <div className="space-y-1">
+                              <h4 className="text-xs font-semibold text-foreground">{t('clinicProfile.qualifications')}</h4>
+                              <p className="text-xs sm:text-base line-clamp-3 text-foreground/90">{doctor.qualifications}</p>
                             </div>
                           )}
                           {doctor.languages && doctor.languages.length > 0 && (
-                            <div className="flex gap-2 flex-wrap">
+                            <div className="flex gap-1.5 flex-wrap">
                               {doctor.languages.map((lang: string, i: number) => (
-                                <Badge key={i} variant="outline" className="text-sm">{lang}</Badge>
+                                <Badge key={i} variant="outline" className="text-[10px] sm:text-sm">{lang}</Badge>
                               ))}
                             </div>
                           )}
@@ -275,75 +275,75 @@ const ClinicProfile = () => {
                   ))}
                 </div>
               ) : (
-                <Card className="p-6 text-center text-muted-foreground">
+                <Card className="p-4 sm:p-6 text-center text-muted-foreground text-sm">
                   {t('clinicProfile.noDoctorsAvailable')}
                 </Card>
               )}
             </TabsContent>
 
-            <TabsContent value="awards" className="space-y-6">
-              <Card className="p-8">
-                <h3 className="text-2xl font-bold mb-6">{t('clinicProfile.awardsRecognition')}</h3>
+            <TabsContent value="awards" className="space-y-3 sm:space-y-6">
+              <Card className="p-4 sm:p-8">
+                <h3 className="text-lg sm:text-2xl font-bold mb-3 sm:mb-6">{t('clinicProfile.awardsRecognition')}</h3>
                 {clinic.awards && clinic.awards.length > 0 ? (
-                  <div className="space-y-6">
+                  <div className="space-y-3 sm:space-y-6">
                     {clinic.awards.map((award: any, index: number) => (
-                      <div key={index} className="flex items-start gap-4 p-4 bg-gradient-to-r from-amber-50 to-amber-100 dark:from-amber-950/20 dark:to-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
-                        <Star className="h-8 w-8 text-amber-500 mt-1 flex-shrink-0" />
+                      <div key={index} className="flex items-start gap-2.5 sm:gap-4 p-3 sm:p-4 bg-gradient-to-r from-amber-50 to-amber-100 dark:from-amber-950/20 dark:to-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
+                        <Star className="h-5 w-5 sm:h-8 sm:w-8 text-amber-500 mt-0.5 flex-shrink-0" />
                         <div>
-                          <h4 className="text-lg font-bold text-foreground">{award.title}</h4>
-                          <p className="text-base text-foreground/80 mt-1">{award.description}</p>
-                          {award.year && <p className="text-sm text-muted-foreground mt-2">{t('clinicProfile.awardedIn')} {award.year}</p>}
+                          <h4 className="text-sm sm:text-lg font-bold text-foreground">{award.title}</h4>
+                          <p className="text-xs sm:text-base text-foreground/80 mt-0.5">{award.description}</p>
+                          {award.year && <p className="text-xs text-muted-foreground mt-1">{t('clinicProfile.awardedIn')} {award.year}</p>}
                         </div>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-12">
-                    <Star className="h-16 w-16 text-muted mx-auto mb-4" />
-                    <p className="text-base text-muted-foreground">{t('clinicProfile.awardsComingSoon')}</p>
+                  <div className="text-center py-6 sm:py-12">
+                    <Star className="h-10 w-10 sm:h-16 sm:w-16 text-muted mx-auto mb-3" />
+                    <p className="text-sm sm:text-base text-muted-foreground">{t('clinicProfile.awardsComingSoon')}</p>
                   </div>
                 )}
               </Card>
             </TabsContent>
 
             <TabsContent value="hours">
-              <Card className="p-8">
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 mb-6">
-                    <Clock className="h-7 w-7 text-primary" />
-                    <h3 className="text-2xl font-bold">{t('clinicProfile.operatingHours')}</h3>
+              <Card className="p-4 sm:p-8">
+                <div className="space-y-2 sm:space-y-4">
+                  <div className="flex items-center gap-2 mb-3 sm:mb-6">
+                    <Clock className="h-5 w-5 sm:h-7 sm:w-7 text-primary" />
+                    <h3 className="text-lg sm:text-2xl font-bold">{t('clinicProfile.operatingHours')}</h3>
                   </div>
                   {clinic.operating_hours && Object.entries(clinic.operating_hours).map(([day, hours]) => (
-                    <div key={day} className="flex justify-between items-center py-3 border-b last:border-0">
-                      <span className="capitalize font-semibold text-lg">{day}</span>
-                      <span className="text-foreground/80 font-medium text-base">{hours as string}</span>
+                    <div key={day} className="flex justify-between items-center py-2 border-b last:border-0">
+                      <span className="capitalize font-semibold text-sm sm:text-lg">{day}</span>
+                      <span className="text-foreground/80 font-medium text-xs sm:text-base">{hours as string}</span>
                     </div>
                   ))}
                 </div>
               </Card>
             </TabsContent>
 
-            <TabsContent value="reviews" className="space-y-6">
+            <TabsContent value="reviews" className="space-y-3 sm:space-y-6">
               {displayReviews.length > 0 ? (
                 displayReviews.map((review: any) => (
-                  <Card key={review.id} className="p-8">
-                    <div className="space-y-4">
+                  <Card key={review.id} className="p-4 sm:p-8">
+                    <div className="space-y-2 sm:space-y-4">
                       <div className="flex items-center justify-between">
-                        <p className="font-bold text-lg">{review.profiles?.full_name || review.name || t('clinicProfile.anonymous')}</p>
-                        <div className="flex items-center gap-2">
-                          <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
-                          <span className="text-base font-semibold">{review.rating}</span>
+                        <p className="font-bold text-sm sm:text-lg">{review.profiles?.full_name || review.name || t('clinicProfile.anonymous')}</p>
+                        <div className="flex items-center gap-1.5">
+                          <Star className="h-4 w-4 sm:h-5 sm:w-5 fill-amber-400 text-amber-400" />
+                          <span className="text-sm font-semibold">{review.rating}</span>
                         </div>
                       </div>
                       {review.comment && (
-                        <p className="text-base text-foreground/80">{review.comment}</p>
+                        <p className="text-xs sm:text-base text-foreground/80">{review.comment}</p>
                       )}
                     </div>
                   </Card>
                 ))
               ) : (
-                <Card className="p-8 text-center">
-                  <p className="text-base text-muted-foreground">{t('clinicProfile.noReviews')}</p>
+                <Card className="p-4 sm:p-8 text-center">
+                  <p className="text-sm text-muted-foreground">{t('clinicProfile.noReviews')}</p>
                 </Card>
               )}
             </TabsContent>
