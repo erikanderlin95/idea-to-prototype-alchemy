@@ -1,5 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Building2, Network, GitBranch, Stethoscope, MessageCircle } from "lucide-react";
+import { Building2, Network, GitBranch, Stethoscope, MessageCircle, ClipboardList, UserCheck, ChevronRight } from "lucide-react";
 
 export const OrgHero = () => {
   const { t } = useLanguage();
