@@ -124,35 +124,35 @@ const ClinicProfile = () => {
         <div className="space-y-8">
           {/* Header */}
           <div className="space-y-4">
-            <div className="flex items-start justify-between">
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4">
               <div className="space-y-3">
-                <div className="flex items-center gap-3">
-                  <h1 className="text-4xl font-bold">{clinic.name}</h1>
-                  <Badge variant="secondary" className="text-base px-3 py-1">{clinic.type}</Badge>
+                <div className="flex items-center gap-2 flex-wrap">
+                  <h1 className="text-2xl sm:text-4xl font-bold">{clinic.name}</h1>
+                  <Badge variant="secondary" className="text-sm px-3 py-1">{clinic.type}</Badge>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
                   <div className="flex items-center gap-2">
-                    <MapPin className="h-5 w-5 text-foreground" />
-                    <span className="text-base font-medium text-foreground">{clinic.address}</span>
+                    <MapPin className="h-4 w-4 sm:h-5 sm:w-5 text-foreground flex-shrink-0" />
+                    <span className="text-sm sm:text-base font-medium text-foreground">{clinic.address}</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <Star className="h-5 w-5 fill-amber-400 text-amber-400" />
-                    <span className="text-base font-bold text-foreground">{clinic.rating}</span>
+                    <Star className="h-4 w-4 sm:h-5 sm:w-5 fill-amber-400 text-amber-400" />
+                    <span className="text-sm sm:text-base font-bold text-foreground">{clinic.rating}</span>
                   </div>
                 </div>
               </div>
-              <div className="flex gap-3">
-                <Button size="lg" className="text-base px-6 py-6" onClick={handleBookAppointment}>
-                  {isManagedCareType(clinic.type) ? <Shield className="mr-2 h-6 w-6" /> : <Calendar className="mr-2 h-6 w-6" />}
+              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+                <Button size="default" className="text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-6" onClick={handleBookAppointment}>
+                  {isManagedCareType(clinic.type) ? <Shield className="mr-2 h-4 w-4 sm:h-6 sm:w-6" /> : <Calendar className="mr-2 h-4 w-4 sm:h-6 sm:w-6" />}
                   {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
                 </Button>
                 <Button 
-                  size="lg" 
+                  size="default" 
                   variant="outline"
-                  className="text-base px-6 py-6"
+                  className="text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-6"
                   onClick={() => navigate(`/queue?clinic=${id}`)}
                 >
-                  <Users className="mr-2 h-6 w-6" />
+                  <Users className="mr-2 h-4 w-4 sm:h-6 sm:w-6" />
                   {t('clinicProfile.joinQueue')}
                 </Button>
               </div>
