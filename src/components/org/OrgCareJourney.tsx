@@ -19,6 +19,9 @@ export const OrgCareJourney = () => {
             <p className="text-[17px] text-[#5F6F7E]">
               No app download. No fragmented handoff. You will be connected directly via WhatsApp after submission.
             </p>
+            <p className="text-[14px] text-[#5F6F7E]/70">
+              No additional fees — you pay the clinic directly.
+            </p>
           </div>
 
           <div className="rounded-xl bg-white border border-[#DCE8EF] shadow-[0_4px_16px_rgba(18,56,91,0.08)] p-4 space-y-2.5 relative">
