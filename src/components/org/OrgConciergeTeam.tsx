@@ -18,7 +18,7 @@ interface Props {
 export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
   return (
     <section className="py-8 px-4 bg-[#F4F8FB]">
-      <div className="max-w-4xl mx-auto space-y-1.5 text-center">
+      <div className="max-w-5xl mx-auto space-y-1.5 text-center">
         <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight">
           Care Coordination Team
         </h2>

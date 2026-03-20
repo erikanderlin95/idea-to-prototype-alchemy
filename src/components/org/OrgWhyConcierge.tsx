@@ -2,8 +2,8 @@ import { Check, X } from "lucide-react";
 
 export const OrgWhyConcierge = () => {
   return (
-    <section className="py-8 px-4 bg-white">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-8 px-4 bg-[#F4F8FB]">
+      <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
           <div className="space-y-3">
             <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight">

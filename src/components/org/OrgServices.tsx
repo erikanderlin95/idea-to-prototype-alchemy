@@ -10,7 +10,7 @@ const SERVICES = [
 export const OrgServices = () => {
   return (
     <section id="org-services" className="py-8 px-4 bg-[#F4F8FB]">
-      <div className="max-w-4xl mx-auto text-center space-y-4">
+      <div className="max-w-5xl mx-auto text-center space-y-4">
         <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight">
           Care Pathways
         </h2>

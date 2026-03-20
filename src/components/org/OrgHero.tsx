@@ -8,7 +8,7 @@ export const OrgHero = () => {
     <section className="pt-24 pb-6 px-4 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-[#F4F8FB]" />
 
-      <div className="max-w-6xl mx-auto relative">
+      <div className="max-w-5xl mx-auto relative">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-center">
           <div className="lg:col-span-3 space-y-3">
             <div className="inline-flex items-center gap-2.5 bg-white rounded-full pl-1.5 pr-4 py-1 shadow-sm ring-1 ring-[#DCE8EF]">
