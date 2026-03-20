@@ -26,22 +26,23 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
           Patients are guided to the right care coordinator based on need and care pathway.
         </p>
 
-        <div className="pt-4">
+        <div className="pt-3">
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
-              {[1, 2, 3].map((i) => (
-                <div key={i} className="h-36 rounded-xl bg-[#DCE8EF] animate-pulse" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 max-w-3xl mx-auto">
+              {[1, 2].map((i) => (
+                <div key={i} className="h-16 rounded-lg bg-[#DCE8EF] animate-pulse" />
               ))}
             </div>
           ) : concierges.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 max-w-3xl mx-auto">
               {concierges.map((person) => (
                 <div
                   key={person.id}
-                  className="group rounded-xl bg-white border border-[#DCE8EF] p-4 shadow-[0_2px_8px_rgba(18,56,91,0.06)] hover:shadow-[0_6px_24px_rgba(18,56,91,0.12)] hover:-translate-y-0.5 transition-all duration-300"
+                  className="group rounded-lg bg-white border border-[#DCE8EF] px-3 py-2.5 shadow-[0_1px_4px_rgba(18,56,91,0.05)] hover:shadow-[0_3px_12px_rgba(18,56,91,0.1)] transition-all duration-200"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-lg overflow-hidden bg-[#F0F5FA] ring-1 ring-[#DCE8EF] flex-shrink-0">
+                    {/* Avatar */}
+                    <div className="w-10 h-10 rounded-full overflow-hidden bg-[#F0F5FA] ring-1 ring-[#DCE8EF] flex-shrink-0">
                       {person.photo_url ? (
                         <img src={person.photo_url} alt={person.name} className="w-full h-full object-cover" />
                       ) : (
@@ -51,24 +52,30 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
                       )}
                     </div>
 
+                    {/* Info */}
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-sm font-semibold text-[#12385B] truncate">{person.name}</h3>
-                      <p className="text-xs text-[#5F6F7E] truncate">{person.title}</p>
+                      <h3 className="text-[13px] font-semibold text-[#12385B] truncate leading-tight">{person.name}</h3>
+                      <p className="text-[11px] text-[#5F6F7E] truncate">{person.title}</p>
+                      {person.short_bio && (
+                        <p className="text-[10px] text-[#5F6F7E]/70 truncate mt-0.5">{person.short_bio}</p>
+                      )}
                     </div>
 
-                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-[hsl(155,45%,93%)] text-[10px] font-semibold text-[hsl(155,50%,30%)] flex-shrink-0">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[hsl(155,55%,45%)]" />
-                      Active
-                    </span>
+                    {/* Right: status + CTA */}
+                    <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
+                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-[hsl(155,45%,93%)] text-[9px] font-semibold text-[hsl(155,50%,30%)]">
+                        <span className="w-1 h-1 rounded-full bg-[hsl(155,55%,45%)]" />
+                        Active
+                      </span>
+                      <Button
+                        size="sm"
+                        className="h-7 px-3 text-[11px] bg-[#18B7C9] hover:bg-[#149dab] text-white active:scale-[0.97] transition-all shadow-sm rounded-md"
+                        onClick={onConnect}
+                      >
+                        Start via Concierge
+                      </Button>
+                    </div>
                   </div>
-
-                  <Button
-                    size="sm"
-                    className="w-full mt-3 bg-[#18B7C9] hover:bg-[#149dab] text-white active:scale-[0.97] transition-all shadow-sm"
-                    onClick={onConnect}
-                  >
-                    Start via Concierge
-                  </Button>
                 </div>
               ))}
             </div>
