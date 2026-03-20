@@ -218,11 +218,11 @@ const ClinicProfile = () => {
 
           {/* Tabs */}
           <Tabs defaultValue="doctors" className="w-full">
-            <TabsList className="grid w-full grid-cols-4 p-2 bg-muted/50">
-              <TabsTrigger value="doctors" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.doctors')}</TabsTrigger>
-              <TabsTrigger value="awards" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.awards')}</TabsTrigger>
-              <TabsTrigger value="hours" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.operatingHours')}</TabsTrigger>
-              <TabsTrigger value="reviews" className="text-base font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.reviews')}</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-4 p-1 sm:p-2 bg-muted/50">
+              <TabsTrigger value="doctors" className="text-xs sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.doctors')}</TabsTrigger>
+              <TabsTrigger value="awards" className="text-xs sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.awards')}</TabsTrigger>
+              <TabsTrigger value="hours" className="text-xs sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.operatingHours')}</TabsTrigger>
+              <TabsTrigger value="reviews" className="text-xs sm:text-base font-bold sm:font-black text-foreground data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:shadow-md">{t('clinicProfile.reviews')}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="doctors" className="space-y-6">
