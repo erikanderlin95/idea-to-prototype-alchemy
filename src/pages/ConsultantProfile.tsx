@@ -123,24 +123,25 @@ const ConsultantProfile = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <div className="pt-24 pb-12 px-4">
+      <div className="pt-16 sm:pt-24 pb-8 sm:pb-12 px-3 sm:px-4">
         <div className="max-w-4xl mx-auto">
           {/* Back Button */}
           <Button
             variant="ghost"
-            className="mb-6"
+            size="sm"
+            className="mb-4 sm:mb-6 text-xs sm:text-sm"
             onClick={() => navigate("/consultants")}
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
+            <ArrowLeft className="mr-1.5 h-3.5 w-3.5 sm:h-4 sm:w-4" />
             {t("consultant.backToList")}
           </Button>
 
           {/* Profile Header */}
-          <Card className="mb-8 overflow-hidden">
-            <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-8">
-              <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+          <Card className="mb-4 sm:mb-8 overflow-hidden">
+            <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-transparent p-4 sm:p-8">
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-4 sm:gap-6">
                 {/* Photo */}
-                <div className="w-32 h-32 rounded-full overflow-hidden bg-muted ring-4 ring-background shadow-lg flex-shrink-0">
+                <div className="w-20 h-20 sm:w-32 sm:h-32 rounded-full overflow-hidden bg-muted ring-2 sm:ring-4 ring-background shadow-lg flex-shrink-0">
                   {consultant.photo_url ? (
                     <img
                       src={consultant.photo_url}
@@ -149,27 +150,27 @@ const ConsultantProfile = () => {
                     />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/10">
-                      <User className="h-16 w-16 text-primary/60" />
+                      <User className="h-8 w-8 sm:h-16 sm:w-16 text-primary/60" />
                     </div>
                   )}
                 </div>
 
                 {/* Info */}
                 <div className="text-center md:text-left flex-1">
-                  <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-2">
+                  <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground mb-1 sm:mb-2">
                     {consultant.name}
                   </h1>
-                  <p className="text-lg text-muted-foreground mb-4">
+                  <p className="text-sm sm:text-lg text-muted-foreground mb-3 sm:mb-4">
                     {consultant.title}
                   </p>
 
                   {/* Areas of Focus */}
                   {consultant.areas_of_focus && consultant.areas_of_focus.length > 0 && (
-                    <div className="flex flex-wrap gap-2 justify-center md:justify-start">
+                    <div className="flex flex-wrap gap-1.5 sm:gap-2 justify-center md:justify-start">
                       {consultant.areas_of_focus.map((area, index) => (
                         <Badge
                           key={index}
-                          className="bg-primary/10 text-primary hover:bg-primary/20"
+                          className="bg-primary/10 text-primary hover:bg-primary/20 text-[10px] sm:text-sm"
                         >
                           {area}
                         </Badge>
@@ -179,9 +180,9 @@ const ConsultantProfile = () => {
                 </div>
 
                 {/* CTA */}
-                <div className="flex-shrink-0">
-                  <Button size="lg" className="gap-2" onClick={() => setShowManagedCareModal(true)}>
-                    <Shield className="h-5 w-5" />
+                <div className="flex-shrink-0 w-full md:w-auto">
+                  <Button size="sm" className="gap-1.5 text-xs sm:text-sm w-full md:w-auto" onClick={() => setShowManagedCareModal(true)}>
+                    <Shield className="h-3.5 w-3.5 sm:h-5 sm:w-5" />
                     Request Managed Care Support
                   </Button>
                 </div>
@@ -189,20 +190,20 @@ const ConsultantProfile = () => {
             </div>
           </Card>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-8">
             {/* Main Content */}
-            <div className="lg:col-span-2 space-y-6">
+            <div className="lg:col-span-2 space-y-4 sm:space-y-6">
               {/* Bio */}
               {consultant.full_bio && (
                 <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <User className="h-5 w-5 text-primary" />
+                  <CardHeader className="p-4 sm:p-6 pb-2 sm:pb-3">
+                    <CardTitle className="flex items-center gap-1.5 text-sm sm:text-base">
+                      <User className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                       {t("consultant.about")}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-muted-foreground whitespace-pre-line">
+                  <CardContent className="p-4 sm:p-6 pt-0">
+                    <p className="text-xs sm:text-base text-muted-foreground whitespace-pre-line">
                       {consultant.full_bio}
                     </p>
                   </CardContent>
@@ -212,18 +213,18 @@ const ConsultantProfile = () => {
               {/* Services Offered */}
               {consultant.services_offered && consultant.services_offered.length > 0 && (
                 <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Briefcase className="h-5 w-5 text-primary" />
+                  <CardHeader className="p-4 sm:p-6 pb-2 sm:pb-3">
+                    <CardTitle className="flex items-center gap-1.5 text-sm sm:text-base">
+                      <Briefcase className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                       {t("consultant.services")}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
+                  <CardContent className="p-4 sm:p-6 pt-0">
+                    <ul className="space-y-1.5 sm:space-y-2">
                       {consultant.services_offered.map((service, index) => (
-                        <li key={index} className="flex items-start gap-2">
-                          <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="text-foreground">{service}</span>
+                        <li key={index} className="flex items-start gap-1.5">
+                          <CheckCircle className="h-3.5 w-3.5 sm:h-5 sm:w-5 text-primary mt-0.5 flex-shrink-0" />
+                          <span className="text-xs sm:text-base text-foreground">{service}</span>
                         </li>
                       ))}
                     </ul>
@@ -234,18 +235,18 @@ const ConsultantProfile = () => {
               {/* Patient Types */}
               {consultant.patient_types && consultant.patient_types.length > 0 && (
                 <Card>
-                  <CardHeader>
-                    <CardTitle className="flex items-center gap-2">
-                      <Users className="h-5 w-5 text-primary" />
+                  <CardHeader className="p-4 sm:p-6 pb-2 sm:pb-3">
+                    <CardTitle className="flex items-center gap-1.5 text-sm sm:text-base">
+                      <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                       {t("consultant.patientTypes")}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
+                  <CardContent className="p-4 sm:p-6 pt-0">
+                    <ul className="space-y-1.5 sm:space-y-2">
                       {consultant.patient_types.map((type, index) => (
-                        <li key={index} className="flex items-start gap-2">
-                          <CheckCircle className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
-                          <span className="text-foreground">{type}</span>
+                        <li key={index} className="flex items-start gap-1.5">
+                          <CheckCircle className="h-3.5 w-3.5 sm:h-5 sm:w-5 text-primary mt-0.5 flex-shrink-0" />
+                          <span className="text-xs sm:text-base text-foreground">{type}</span>
                         </li>
                       ))}
                     </ul>
@@ -255,18 +256,18 @@ const ConsultantProfile = () => {
             </div>
 
             {/* Sidebar */}
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {/* Contact Card */}
               <Card className="bg-primary/5 border-primary/20">
-                <CardContent className="p-6 text-center">
-                  <h3 className="font-semibold text-foreground mb-2">
+                <CardContent className="p-4 sm:p-6 text-center">
+                  <h3 className="font-semibold text-foreground mb-1.5 text-sm sm:text-base">
                     {t("consultant.needHelp")}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-3">
                     {t("consultant.needHelpDesc")}
                   </p>
-                  <Button className="w-full gap-2" onClick={() => setShowManagedCareModal(true)}>
-                    <Shield className="h-4 w-4" />
+                  <Button size="sm" className="w-full gap-1.5 text-xs sm:text-sm" onClick={() => setShowManagedCareModal(true)}>
+                    <Shield className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     Request Managed Care Support
                   </Button>
                 </CardContent>
