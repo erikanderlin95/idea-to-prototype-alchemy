@@ -365,8 +365,9 @@ export const ClinicCard = ({
           <div className="space-y-3 flex-1">
             <div className="flex items-center gap-2 flex-wrap">
               <h3 className="text-base sm:text-xl font-bold group-hover:text-primary transition-colors">{name}</h3>
-              <Badge variant="secondary" className="text-sm font-medium">
+               <Badge variant="secondary" className="text-xs sm:text-sm font-medium">
                 {type}
+              </Badge>
               </Badge>
               {isOpen ? (
                 <Badge variant="outline" className="text-sm border-accent text-accent">
