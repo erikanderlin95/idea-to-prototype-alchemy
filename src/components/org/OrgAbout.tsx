@@ -1,4 +1,4 @@
-import { Network, GitBranch, HeartPulse } from "lucide-react";
+import { Building, Users, HeartPulse } from "lucide-react";
 
 export const OrgAbout = () => {
   return (
@@ -10,14 +10,14 @@ export const OrgAbout = () => {
               About the Network
             </h2>
             <p className="text-[#5F6F7E] leading-relaxed max-w-lg text-[16px]">
-              This managed healthcare network supports a single patient intake and follow-up structure, helping direct each case to the right care pathway with clearer coordination and less operational friction.
+              A managed healthcare group supporting a single intake and follow-up model — helping direct each case to the right provider with less operational friction.
             </p>
           </div>
 
           <div className="grid grid-cols-3 gap-2.5">
-            <MetricCard icon={<Network className="h-5 w-5" />} label="Multi-Clinic Network" />
-            <MetricCard icon={<GitBranch className="h-5 w-5" />} label="Coordinated Patient Flow" />
-            <MetricCard icon={<HeartPulse className="h-5 w-5" />} label="Integrated Care Delivery" />
+            <MetricCard icon={<Building className="h-5 w-5" />} label="Multi-Clinic" />
+            <MetricCard icon={<Users className="h-5 w-5" />} label="Patient Flow" />
+            <MetricCard icon={<HeartPulse className="h-5 w-5" />} label="Care Delivery" />
           </div>
         </div>
       </div>
