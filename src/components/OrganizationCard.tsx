@@ -7,11 +7,11 @@ const OrganizationCard = () => {
   const navigate = useNavigate();
 
   return (
-    <Card className="group hover:shadow-[0_8px_30px_rgba(18,56,91,0.12)] hover:-translate-y-0.5 transition-all duration-300 border-[#DCE8EF] shadow-[0_2px_12px_rgba(18,56,91,0.06)] bg-white overflow-hidden">
+    <Card className="group hover:shadow-[0_12px_36px_rgba(18,56,91,0.14)] hover:-translate-y-1 transition-all duration-300 border-[#C8DAE5] shadow-[0_3px_16px_rgba(18,56,91,0.08)] bg-gradient-to-b from-white to-[#F6F9FC] overflow-hidden">
       <CardContent className="p-5">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
-          <div className="w-16 h-16 rounded-xl overflow-hidden bg-[#F0F8FA] mb-3 ring-1 ring-[#18B7C9]/25 group-hover:ring-[#18B7C9]/50 transition-all flex items-center justify-center">
+          <div className="w-16 h-16 rounded-xl overflow-hidden bg-gradient-to-br from-[#E6F7FA] to-[#D0F0F5] mb-3 ring-1 ring-[#18B7C9]/30 shadow-[0_0_12px_rgba(24,183,201,0.15)] group-hover:shadow-[0_0_18px_rgba(24,183,201,0.25)] group-hover:ring-[#18B7C9]/50 transition-all flex items-center justify-center">
             <div className="flex flex-col items-center gap-0.5">
               <Building2 className="h-7 w-7 text-[#18B7C9]" />
               <span className="text-[7px] font-bold text-[#18B7C9] tracking-wider uppercase">NYMG</span>
@@ -19,42 +19,42 @@ const OrganizationCard = () => {
           </div>
 
           {/* Title */}
-          <h3 className="text-[17px] font-semibold text-[#12385B] mb-0.5">
+          <h3 className="text-[17px] font-bold text-[#0E2E4A] mb-0.5">
             Nanyang Medical Group
           </h3>
-          <p className="text-[13px] text-[#6B7D8E] mb-2.5">
+          <p className="text-[13px] text-[#5A7089] mb-2.5">
             Managed Care Network
           </p>
 
           {/* Description */}
-          <p className="text-[14px] text-[#6B7D8E] leading-snug mb-3">
+          <p className="text-[14px] text-[#5A7089] leading-snug mb-3">
             Single entry access to coordinated GP and specialist care.
           </p>
 
           {/* Capability pills */}
-          <div className="flex flex-wrap gap-1 justify-center mb-3">
-            <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#18B7C9] bg-[#E6F7FA] rounded-full px-2.5 py-0.5">
+          <div className="flex flex-wrap gap-1.5 justify-center mb-3">
+            <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#15939F] bg-[#E0F4F7] border border-[#18B7C9]/20 rounded-full px-2.5 py-0.5">
               <Network className="h-3 w-3" />
               Multi-Clinic
             </span>
-            <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#18B7C9] bg-[#E6F7FA] rounded-full px-2.5 py-0.5">
+            <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#15939F] bg-[#E0F4F7] border border-[#18B7C9]/20 rounded-full px-2.5 py-0.5">
               <Stethoscope className="h-3 w-3" />
               GP & Specialist
             </span>
-            <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#18B7C9] bg-[#E6F7FA] rounded-full px-2.5 py-0.5">
+            <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#15939F] bg-[#E0F4F7] border border-[#18B7C9]/20 rounded-full px-2.5 py-0.5">
               <GitBranch className="h-3 w-3" />
               Coordinated Care
             </span>
           </div>
 
           {/* System hint */}
-          <p className="text-[12px] text-[#6B7D8E]/70 mb-4">
+          <p className="text-[12px] text-[#5A7089]/80 mb-4 pt-1 border-t border-[#DCE8EF]">
             One entry → matched → direct follow-up
           </p>
 
           {/* CTA */}
           <Button
-            className="w-full h-9 bg-[#18B7C9] hover:bg-[#139AA8] text-white font-medium text-[14px] transition-all group-hover:shadow-md active:scale-[0.97]"
+            className="w-full h-9 bg-gradient-to-r from-[#18B7C9] to-[#14A3B3] hover:from-[#139AA8] hover:to-[#11909E] text-white font-medium text-[14px] shadow-[0_2px_8px_rgba(24,183,201,0.3)] hover:shadow-[0_4px_14px_rgba(24,183,201,0.4)] transition-all group-hover:-translate-y-px active:scale-[0.97]"
             onClick={() => navigate("/organization/nymg")}
           >
             Start with Nanyang
