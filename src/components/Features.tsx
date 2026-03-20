@@ -81,7 +81,7 @@ export const Features = () => {
         </div>
 
         {/* Additional Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 px-2 sm:px-0">
           {additionalFeatures.map((feature, index) => (
             <div
               key={index}
