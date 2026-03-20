@@ -28,7 +28,7 @@ export const Hero = () => {
   const [isSearching, setIsSearching] = useState(false);
   
   return (
-    <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-ai-purple/5 via-ai-blue/5 to-background">
+    <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden bg-gradient-to-b from-ai-purple/5 via-ai-blue/5 to-background">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--ai-purple)/0.15),transparent_50%)]" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_60%,hsl(var(--ai-cyan)/0.12),transparent_50%)]" />
       
