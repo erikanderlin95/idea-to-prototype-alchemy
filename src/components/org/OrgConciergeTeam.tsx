@@ -19,10 +19,10 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
   return (
     <section className="py-8 px-4 bg-[#F4F8FB]">
       <div className="max-w-4xl mx-auto space-y-1.5 text-center">
-        <h2 className="text-xl md:text-2xl font-bold text-[#12385B] tracking-tight">
+        <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight">
           Care Coordination Team
         </h2>
-        <p className="text-[13px] text-[#5F6F7E] max-w-md mx-auto">
+        <p className="text-[15px] text-[#5F6F7E] max-w-md mx-auto">
           Patients are guided to the right care coordinator based on need and care pathway.
         </p>
 
@@ -52,24 +52,24 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
                   </div>
 
                   {/* Name */}
-                  <h3 className="text-[13px] font-semibold text-[#12385B] leading-tight truncate w-full">
+                  <h3 className="text-[15px] font-semibold text-[#12385B] leading-tight truncate w-full">
                     {person.name}
                   </h3>
 
                   {/* Role */}
-                  <p className="text-[11px] text-[#5F6F7E] mt-0.5 truncate w-full">
+                  <p className="text-[13px] text-[#5F6F7E] mt-0.5 truncate w-full">
                     {person.title}
                   </p>
 
                   {/* Focus line */}
                   {person.short_bio && (
-                    <p className="text-[10px] text-[#5F6F7E]/70 mt-1 truncate w-full leading-tight">
+                    <p className="text-[12px] text-[#5F6F7E]/70 mt-1 truncate w-full leading-tight">
                       {person.short_bio}
                     </p>
                   )}
 
                   {/* Active dot */}
-                  <span className="inline-flex items-center gap-1 mt-2.5 px-2 py-0.5 rounded-full bg-[hsl(155,45%,93%)] text-[9px] font-semibold text-[hsl(155,50%,30%)]">
+                  <span className="inline-flex items-center gap-1 mt-2.5 px-2 py-0.5 rounded-full bg-[hsl(155,45%,93%)] text-[11px] font-semibold text-[hsl(155,50%,30%)]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[hsl(155,55%,45%)]" />
                     Active
                   </span>
@@ -77,17 +77,17 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
                   {/* Compact pill CTA */}
                   <Button
                     size="sm"
-                    className="mt-2.5 h-7 px-4 text-[11px] rounded-full bg-[#18B7C9] hover:bg-[#149dab] text-white active:scale-[0.96] transition-all shadow-sm gap-1.5"
+                    className="mt-2.5 h-8 px-4 text-[13px] rounded-full bg-[#18B7C9] hover:bg-[#149dab] text-white active:scale-[0.96] transition-all shadow-sm gap-1.5"
                     onClick={onConnect}
                   >
-                    <MessageCircle className="h-3 w-3" />
+                    <MessageCircle className="h-3.5 w-3.5" />
                     Start
                   </Button>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-[#5F6F7E] text-sm">No concierges available at this time.</p>
+            <p className="text-[#5F6F7E] text-base">No concierges available at this time.</p>
           )}
         </div>
       </div>

@@ -10,7 +10,7 @@ export const OrgHowItWorks = () => {
   return (
     <section className="py-8 px-4">
       <div className="max-w-4xl mx-auto text-center space-y-5">
-        <h2 className="text-xl md:text-2xl font-bold text-[#12385B] tracking-tight">
+        <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight">
           How Care Coordination Works
         </h2>
 
@@ -24,8 +24,8 @@ export const OrgHowItWorks = () => {
                   <step.icon className="h-5 w-5 text-[#18B7C9]" />
                 </div>
                 <div className="space-y-0.5">
-                  <h3 className="text-sm font-bold text-[#12385B]">{step.title}</h3>
-                  <p className="text-xs text-[#5F6F7E]">{step.desc}</p>
+                  <h3 className="text-base font-bold text-[#12385B]">{step.title}</h3>
+                  <p className="text-sm text-[#5F6F7E]">{step.desc}</p>
                 </div>
               </div>
 
@@ -38,7 +38,7 @@ export const OrgHowItWorks = () => {
           ))}
         </div>
 
-        <p className="text-sm font-medium text-[#5F6F7E]">
+        <p className="text-base font-medium text-[#5F6F7E]">
           One intake · Coordinated matching · Direct follow-up
         </p>
       </div>

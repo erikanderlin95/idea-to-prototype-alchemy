@@ -6,10 +6,10 @@ export const OrgAbout = () => {
       <div className="max-w-6xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
           <div className="space-y-2">
-            <h2 className="text-xl md:text-2xl font-bold text-[#12385B] tracking-tight">
+            <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight">
               About the Network
             </h2>
-            <p className="text-[#5F6F7E] leading-relaxed max-w-lg text-[14px]">
+            <p className="text-[#5F6F7E] leading-relaxed max-w-lg text-[16px]">
               This managed healthcare network supports a single patient intake and follow-up structure, helping direct each case to the right care pathway with clearer coordination and less operational friction.
             </p>
           </div>
@@ -30,6 +30,6 @@ const MetricCard = ({ icon, label }: { icon: React.ReactNode; label: string }) =
     <div className="mx-auto w-9 h-9 rounded-lg bg-[#E6F7FA] flex items-center justify-center text-[#18B7C9] group-hover:bg-[#d6f2f6] transition-colors">
       {icon}
     </div>
-    <p className="text-xs font-semibold text-[#12385B] leading-snug">{label}</p>
+    <p className="text-sm font-semibold text-[#12385B] leading-snug">{label}</p>
   </div>
 );
