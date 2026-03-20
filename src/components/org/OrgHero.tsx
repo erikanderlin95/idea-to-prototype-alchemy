@@ -1,5 +1,5 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Building2, Network, GitBranch, Stethoscope, MessageCircle } from "lucide-react";
+import { Building2, Network, GitBranch, Stethoscope, MessageCircle, ClipboardList, UserCheck, ChevronRight } from "lucide-react";
 
 export const OrgHero = () => {
   const { t } = useLanguage();
@@ -26,9 +26,30 @@ export const OrgHero = () => {
               Coordinated patient access across general practice, specialist care, and structured referral pathways.
             </p>
 
-            <p className="text-base font-semibold text-[#18B7C9] tracking-wide">
-              One entry point · Structured matching · Direct follow-up
-            </p>
+            {/* Mechanism strip */}
+            <div className="flex items-stretch gap-0 pt-1 max-w-lg">
+              <MechanismCard
+                icon={<ClipboardList className="h-3.5 w-3.5" />}
+                title="One Entry Point"
+                sub="Single intake across all patients"
+              />
+              <div className="flex items-center px-1 text-[#18B7C9]/50">
+                <ChevronRight className="h-3.5 w-3.5" />
+              </div>
+              <MechanismCard
+                icon={<UserCheck className="h-3.5 w-3.5" />}
+                title="Structured Matching"
+                sub="Assigned based on care pathway"
+              />
+              <div className="flex items-center px-1 text-[#18B7C9]/50">
+                <ChevronRight className="h-3.5 w-3.5" />
+              </div>
+              <MechanismCard
+                icon={<MessageCircle className="h-3.5 w-3.5" />}
+                title="Direct Follow-up"
+                sub="Immediate response via WhatsApp"
+              />
+            </div>
           </div>
 
           <div className="lg:col-span-2">
@@ -60,5 +81,17 @@ const CapabilityRow = ({ icon, label, detail }: { icon: React.ReactNode; label: 
       <p className="text-[15px] font-semibold text-[#12385B] leading-tight">{label}</p>
       <p className="text-[13px] text-[#5F6F7E]">{detail}</p>
     </div>
+  </div>
+);
+
+const MechanismCard = ({ icon, title, sub }: { icon: React.ReactNode; title: string; sub: string }) => (
+  <div className="flex-1 rounded-lg bg-[#E6F7FA]/60 border border-[#DCE8EF] px-2.5 py-2 space-y-1">
+    <div className="flex items-center gap-1.5">
+      <div className="w-5 h-5 rounded-full bg-[#18B7C9]/15 flex items-center justify-center text-[#18B7C9] flex-shrink-0">
+        {icon}
+      </div>
+      <span className="text-[12px] font-bold text-[#12385B] leading-tight">{title}</span>
+    </div>
+    <p className="text-[10px] text-[#5F6F7E] leading-snug">{sub}</p>
   </div>
 );
