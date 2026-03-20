@@ -564,15 +564,15 @@ export const ClinicCard = ({
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                <div className="flex items-center gap-4 mb-4">
-                  <div className="h-14 w-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/40">
-                    <Users className="h-7 w-7 text-primary-foreground" strokeWidth={3} />
-                  </div>
-                  <div>
-                    <p className="text-lg font-semibold text-foreground">{t("clinicCard.readyToSkip")}</p>
-                    <p className="text-base font-bold text-foreground/80">{t("clinicCard.joinVirtual")}</p>
-                  </div>
-                </div>
+                 <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                   <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/40">
+                     <Users className="h-5 w-5 sm:h-7 sm:w-7 text-primary-foreground" strokeWidth={3} />
+                   </div>
+                   <div>
+                     <p className="text-sm sm:text-lg font-semibold text-foreground">{t("clinicCard.readyToSkip")}</p>
+                     <p className="text-xs sm:text-base font-bold text-foreground/80">{t("clinicCard.joinVirtual")}</p>
+                   </div>
+                 </div>
                 
                 <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
                   <label className="text-sm font-medium text-foreground">{t("clinicCard.visitType")}</label>
