@@ -557,7 +557,7 @@ export const ClinicCard = ({
         ) : (
             <div className="space-y-3 pt-2">
             {hasDigitalQueue && (
-              <div className="p-5 rounded-xl border-2 shadow-lg"
+              <div className="p-3 sm:p-5 rounded-xl border-2 shadow-lg"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.05))',
                   borderColor: 'hsl(var(--ai-purple)/0.4)'
