@@ -3,7 +3,7 @@ import { ClipboardList, UserCheck, MessageCircle } from "lucide-react";
 const STEPS = [
   { icon: ClipboardList, title: "Submit Intake", desc: "Structured care request form" },
   { icon: UserCheck, title: "Case Matching", desc: "Assigned to the right provider" },
-  { icon: MessageCircle, title: "Direct Follow-up", desc: "Continues via WhatsApp" },
+  { icon: MessageCircle, title: "Follow-up via WhatsApp", desc: "Immediate patient response" },
 ];
 
 export const OrgHowItWorks = () => {
@@ -37,10 +37,6 @@ export const OrgHowItWorks = () => {
             </div>
           ))}
         </div>
-
-        <p className="text-base font-medium text-[#5F6F7E]">
-          One intake · Coordinated matching · Direct follow-up
-        </p>
       </div>
     </section>
   );
