@@ -46,22 +46,22 @@ export const Hero = () => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-4 w-full sm:w-auto">
+          <div className="flex flex-col sm:flex-row gap-3 w-full max-w-xs sm:max-w-none sm:w-auto">
             <Button 
-              size="lg" 
-              className="text-lg px-8 py-6 shadow-lg hover:shadow-xl transition-all hover:scale-105"
+              size="default" 
+              className="text-sm sm:text-base px-5 sm:px-8 py-2.5 sm:py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
               onClick={() => document.getElementById('marketplace')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <Search className="mr-2 h-5 w-5" />
+              <Search className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
               {t("hero.findClinics")}
             </Button>
             <Button 
-              size="lg" 
+              size="default" 
               variant="outline" 
-              className="text-lg px-8 py-6 hover:bg-secondary/50 transition-all"
+              className="text-sm sm:text-base px-5 sm:px-8 py-2.5 sm:py-4 hover:bg-secondary/50 transition-all"
               onClick={() => setShowQueueFinder(true)}
             >
-              <Phone className="mr-2 h-5 w-5" />
+              <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
               Find My Queue
             </Button>
           </div>
