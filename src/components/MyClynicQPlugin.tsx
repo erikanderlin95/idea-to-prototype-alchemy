@@ -6,7 +6,7 @@ import { MyClynicQIcon } from "@/components/icons/MyClynicQIcon";
 
 export const MyClynicQPlugin = () => {
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-16 overflow-hidden">
       {/* Background decorations with AI gradients */}
       <div className="absolute inset-0 bg-gradient-to-b from-ai-purple/10 via-ai-blue/5 to-background" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,hsl(var(--ai-cyan)/0.15),transparent_40%)]" />
@@ -14,18 +14,18 @@ export const MyClynicQPlugin = () => {
       
       <div className="container px-4 md:px-6 relative z-10">
         <div className="space-y-10">
-          <div className="text-center space-y-4 animate-fade-in">
-            <Badge variant="secondary" className="mb-2 bg-gradient-to-r from-ai-purple/15 to-ai-cyan/15 border-ai-purple/30">
+          <div className="text-center mb-10 animate-fade-in">
+            <Badge variant="secondary" className="mb-4 bg-gradient-to-r from-ai-purple/15 to-ai-cyan/15 border-ai-purple/30">
               <Sparkles className="h-3 w-3 mr-1" />
               Coming Soon
             </Badge>
-            <div className="flex items-center justify-center gap-3 mb-4">
+            <div className="flex items-center justify-center gap-3 mb-3">
               <MyClynicQIcon size="lg" />
               <h2 className="text-3xl md:text-5xl font-bold">
                 My<span className="bg-gradient-to-r from-ai-purple to-ai-cyan bg-clip-text text-transparent">ClynicQ</span>
               </h2>
             </div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto">
               Never miss an appointment with automated reminders and instant support on WhatsApp
             </p>
           </div>

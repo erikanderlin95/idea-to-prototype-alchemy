@@ -40,7 +40,7 @@ export const Hero = () => {
                 {t("hero.badge")}
               </Badge>
             </div>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
+            <h1 className="text-3xl md:text-5xl font-bold tracking-tight leading-tight">
               {t("hero.title1")}
               <span className="block mt-2 bg-gradient-to-r from-ai-purple via-ai-blue to-ai-cyan bg-clip-text text-transparent">
                 {t("hero.title2")}
