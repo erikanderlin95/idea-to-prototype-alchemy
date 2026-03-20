@@ -52,7 +52,7 @@ export const Hero = () => {
               className="text-sm sm:text-base px-5 sm:px-8 py-2.5 sm:py-4 shadow-lg hover:shadow-xl transition-all hover:scale-105"
               onClick={() => document.getElementById('marketplace')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              <Search className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+              <Search className="mr-1.5 h-3.5 w-3.5 sm:h-4 sm:w-4" />
               {t("hero.findClinics")}
             </Button>
             <Button 
@@ -61,7 +61,7 @@ export const Hero = () => {
               className="text-sm sm:text-base px-5 sm:px-8 py-2.5 sm:py-4 hover:bg-secondary/50 transition-all"
               onClick={() => setShowQueueFinder(true)}
             >
-              <Phone className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
+              <Phone className="mr-1.5 h-3.5 w-3.5 sm:h-4 sm:w-4" />
               Find My Queue
             </Button>
           </div>
