@@ -7,7 +7,7 @@ const OrganizationCard = () => {
   const navigate = useNavigate();
 
   return (
-    <Card className="group hover:shadow-[0_12px_36px_rgba(18,56,91,0.14)] hover:-translate-y-1 transition-all duration-300 border-[#C8DAE5] shadow-[0_3px_16px_rgba(18,56,91,0.08)] bg-gradient-to-b from-white to-[#F6F9FC] overflow-hidden">
+    <Card className="group hover:shadow-[0_14px_40px_rgba(18,56,91,0.18)] hover:-translate-y-1 transition-all duration-300 border-[#B0C8DA] shadow-[0_4px_20px_rgba(18,56,91,0.1)] bg-gradient-to-b from-[#EEF5FA] via-[#F2F7FB] to-[#E4ECF3] overflow-hidden">
       <CardContent className="p-5">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
