@@ -21,10 +21,7 @@ export const FeaturedConsultants = () => {
           <p className="text-[20px] md:text-[22px] font-medium text-[#12385B]/80 max-w-2xl mx-auto mb-1">
             Not sure which clinic to choose?
           </p>
-          <p className="text-[12px] font-semibold uppercase tracking-widest text-[#5F6F7E] mb-0.5">
-            Available Care Networks
-          </p>
-          <p className="text-[15px] text-[#6B7D8E]">
+          <p className="text-[15px] text-[#6B7D8E] mt-1.5">
             Start with any network — we'll guide you to the right care.
           </p>
         </div>
