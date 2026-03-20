@@ -83,3 +83,15 @@ const CapabilityRow = ({ icon, label, detail }: { icon: React.ReactNode; label: 
     </div>
   </div>
 );
+
+const MechanismCard = ({ icon, title, sub }: { icon: React.ReactNode; title: string; sub: string }) => (
+  <div className="flex-1 rounded-lg bg-[#E6F7FA]/60 border border-[#DCE8EF] px-2.5 py-2 space-y-1">
+    <div className="flex items-center gap-1.5">
+      <div className="w-5 h-5 rounded-full bg-[#18B7C9]/15 flex items-center justify-center text-[#18B7C9] flex-shrink-0">
+        {icon}
+      </div>
+      <span className="text-[12px] font-bold text-[#12385B] leading-tight">{title}</span>
+    </div>
+    <p className="text-[10px] text-[#5F6F7E] leading-snug">{sub}</p>
+  </div>
+);
