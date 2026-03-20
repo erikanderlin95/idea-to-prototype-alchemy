@@ -18,8 +18,8 @@ export const FeaturedConsultants = () => {
           <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-3">
             {t("featuredConsultants.title")}
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            {t("featuredConsultants.subtitle")}
+          <p className="text-[20px] md:text-[22px] font-medium text-[#12385B]/80 max-w-2xl mx-auto">
+            Not sure which clinic to choose?
           </p>
         </div>
 
