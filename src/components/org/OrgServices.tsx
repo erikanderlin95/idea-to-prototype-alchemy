@@ -9,20 +9,22 @@ const SERVICES = [
 
 export const OrgServices = () => {
   return (
-    <section id="org-services" className="py-14 px-4">
-      <div className="max-w-4xl mx-auto text-center space-y-6">
-        <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight">
+    <section id="org-services" className="py-10 px-4 bg-[hsl(210,35%,96%)]">
+      <div className="max-w-4xl mx-auto text-center space-y-5">
+        <h2 className="text-xl md:text-2xl font-bold text-[hsl(210,50%,18%)] tracking-tight">
           Care Pathways
         </h2>
 
-        <div className="flex flex-wrap gap-3 justify-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
           {SERVICES.map((s) => (
             <div
               key={s.label}
-              className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-card border border-border/50 text-sm font-medium text-foreground shadow-[0_1px_4px_hsl(var(--primary)/0.04)] hover:shadow-[0_4px_16px_hsl(var(--primary)/0.1)] hover:border-primary/30 hover:-translate-y-0.5 transition-all duration-300 cursor-default"
+              className="group flex flex-col items-center gap-2 px-4 py-4 rounded-xl bg-white border border-[hsl(210,25%,90%)] shadow-[0_2px_10px_hsl(210,40%,85%,0.25)] hover:shadow-[0_4px_16px_hsl(178,40%,70%,0.25)] hover:border-[hsl(178,40%,70%)] hover:-translate-y-0.5 transition-all duration-300 cursor-default"
             >
-              <s.icon className="h-4 w-4 text-primary group-hover:scale-110 transition-transform duration-200" />
-              {s.label}
+              <div className="w-10 h-10 rounded-lg bg-[hsl(178,45%,92%)] flex items-center justify-center group-hover:bg-[hsl(178,45%,88%)] transition-colors">
+                <s.icon className="h-5 w-5 text-[hsl(178,55%,32%)]" />
+              </div>
+              <span className="text-xs font-semibold text-[hsl(210,50%,18%)]">{s.label}</span>
             </div>
           ))}
         </div>
