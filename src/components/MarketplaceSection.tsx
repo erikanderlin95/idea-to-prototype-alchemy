@@ -120,12 +120,12 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   }
 
   return (
-    <section id="marketplace" className="py-24 bg-background onboarding-clinics">
+    <section id="marketplace" className="py-16 bg-background onboarding-clinics">
       <div className="container px-4 md:px-6">
         <div className="space-y-10">
-          <div className="text-center space-y-4">
-            <h2 className="text-3xl md:text-5xl font-bold">{title || t("marketplace.title")}</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-3">{title || t("marketplace.title")}</h2>
+            <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto">
               {subtitle || t("marketplace.subtitle")}
             </p>
           </div>

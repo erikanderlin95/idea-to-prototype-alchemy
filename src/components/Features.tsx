@@ -46,12 +46,12 @@ export const Features = () => {
   ];
 
   return (
-    <section id="features" className="py-14 bg-gradient-to-b from-background to-secondary/10">
+    <section id="features" className="py-16 bg-gradient-to-b from-background to-secondary/10">
       <div className="container px-4 md:px-6">
-        <div className="text-center space-y-3 mb-10">
-          <Badge variant="secondary">{t("features.badge")}</Badge>
-          <h2 className="text-2xl md:text-4xl font-bold">{t("features.title")}</h2>
-          <p className="text-base text-muted-foreground max-w-2xl mx-auto">
+        <div className="text-center mb-10">
+          <Badge variant="secondary" className="mb-4">{t("features.badge")}</Badge>
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-3">{t("features.title")}</h2>
+          <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto">
             {t("features.subtitle")}
           </p>
         </div>
