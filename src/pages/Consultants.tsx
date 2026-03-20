@@ -133,6 +133,8 @@ const Consultants = () => {
             </div>
           ) : filteredConsultants.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Organization Card first */}
+              <OrganizationCard />
               {filteredConsultants.map((consultant) => (
                 <ConsultantCard key={consultant.id} consultant={consultant} />
               ))}
