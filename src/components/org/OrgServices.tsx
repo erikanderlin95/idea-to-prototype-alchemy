@@ -9,22 +9,27 @@ const SERVICES = [
 
 export const OrgServices = () => {
   return (
-    <section id="org-services" className="py-8 px-4 bg-[#F4F8FB]">
-      <div className="max-w-5xl mx-auto text-center space-y-4">
-        <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight">
-          Care Pathways
-        </h2>
+    <section id="org-services" className="py-6 px-4">
+      <div className="max-w-5xl mx-auto space-y-2">
+        <div className="text-center">
+          <p className="text-[11px] font-semibold uppercase tracking-widest text-[#5F6F7E]">
+            Available Care Areas
+          </p>
+          <h2 className="text-xl md:text-2xl font-bold text-[#12385B] tracking-tight mt-0.5">
+            Care Pathways
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-2.5">
+        <div className="flex flex-wrap justify-center gap-2">
           {SERVICES.map((s) => (
             <div
               key={s.label}
-              className="group flex flex-col items-center gap-2 px-4 py-3.5 rounded-xl bg-white border border-[#DCE8EF] shadow-[0_2px_8px_rgba(18,56,91,0.06)] hover:shadow-[0_4px_16px_rgba(24,183,201,0.12)] hover:border-[#18B7C9]/30 hover:-translate-y-0.5 transition-all duration-300 cursor-default"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-[#DCE8EF] shadow-[0_1px_4px_rgba(18,56,91,0.05)] hover:shadow-[0_3px_12px_rgba(24,183,201,0.1)] hover:border-[#18B7C9]/30 transition-all duration-200 cursor-default"
             >
-              <div className="w-10 h-10 rounded-lg bg-[#E6F7FA] flex items-center justify-center group-hover:bg-[#d6f2f6] transition-colors">
-                <s.icon className="h-5 w-5 text-[#18B7C9]" />
+              <div className="w-7 h-7 rounded-md bg-[#E6F7FA] flex items-center justify-center">
+                <s.icon className="h-4 w-4 text-[#18B7C9]" />
               </div>
-              <span className="text-sm font-semibold text-[#12385B]">{s.label}</span>
+              <span className="text-[13px] font-semibold text-[#12385B]">{s.label}</span>
             </div>
           ))}
         </div>
