@@ -231,17 +231,17 @@ const ClinicProfile = () => {
                   {doctors.map((doctor) => (
                     <Card 
                       key={doctor.id} 
-                      className="p-8 cursor-pointer hover:border-primary transition-all hover:shadow-lg"
+                      className="p-4 sm:p-8 cursor-pointer hover:border-primary transition-all hover:shadow-lg"
                       onClick={() => navigate(`/doctor/${doctor.id}`)}
                     >
-                      <div className="flex items-start gap-6">
-                        <Avatar className="h-32 w-32 border-4 border-primary/20">
+                      <div className="flex items-start gap-3 sm:gap-6">
+                        <Avatar className="h-16 w-16 sm:h-32 sm:w-32 border-2 sm:border-4 border-primary/20 flex-shrink-0">
                           <AvatarImage src={doctor.photo_url} alt={doctor.name} />
-                          <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-3xl font-bold">
-                            <User className="h-16 w-16" />
+                          <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-xl sm:text-3xl font-bold">
+                            <User className="h-8 w-8 sm:h-16 sm:w-16" />
                           </AvatarFallback>
                         </Avatar>
-                        <div className="flex-1 space-y-4">
+                        <div className="flex-1 space-y-2 sm:space-y-4 min-w-0">
                           <div>
                             <div className="flex items-center gap-3">
                               <h3 className="text-2xl font-bold">{doctor.name}</h3>
