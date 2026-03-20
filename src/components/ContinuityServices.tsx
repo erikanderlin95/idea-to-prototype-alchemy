@@ -42,7 +42,7 @@ export const ContinuityServices = () => {
             <Sparkles className="h-4 w-4" />
             <span className="text-sm font-medium">{t("continuity.badge")}</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-3">
+          <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3">
             {t("continuity.title")}
           </h2>
           <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto">
