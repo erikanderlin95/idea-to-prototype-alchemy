@@ -16,10 +16,10 @@ export const OrgCareJourney = () => {
               <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text="Continue instantly via WhatsApp" />
             </div>
 
-            <p className="text-[17px] text-[#5F6F7E]">
-              No app download. No fragmented handoff. You will be connected directly via WhatsApp after submission.
+            <p className="text-[15px] text-[#5F6F7E]/80">
+              No app needed. You'll be connected via WhatsApp after submission.
             </p>
-            <p className="text-[14px] text-[#5F6F7E]/70">
+            <p className="text-[14px] text-[#5F6F7E]/65">
               No additional fees — you pay the clinic directly.
             </p>
           </div>
