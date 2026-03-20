@@ -24,6 +24,7 @@ import TCMClinics from "./pages/TCMClinics";
 import WellnessClinics from "./pages/WellnessClinics";
 import ManagedCareRequest from "./pages/ManagedCareRequest";
 import OrganizationProfile from "./pages/OrganizationProfile";
+import SHAProfile from "./pages/SHAProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
