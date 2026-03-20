@@ -116,7 +116,6 @@ export const FeaturedConsultants = () => {
               )}
             </div>
           ))}
-          ))}
         </div>
 
         {/* CTA */}
