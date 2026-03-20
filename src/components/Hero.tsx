@@ -35,11 +35,6 @@ export const Hero = () => {
       <div className="container px-4 md:px-6 relative z-10">
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
           <div className="space-y-4 animate-fade-in">
-            <div className="inline-block">
-              <Badge variant="secondary" className="mb-2 px-4 py-2 text-sm font-semibold">
-                {t("hero.badge")}
-              </Badge>
-            </div>
             <h1 className="text-3xl md:text-5xl font-bold">
               {t("hero.title1")}
               <span className="block mt-2 bg-gradient-to-r from-ai-purple via-ai-blue to-ai-cyan bg-clip-text text-transparent">
