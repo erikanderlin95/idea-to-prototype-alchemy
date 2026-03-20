@@ -9,10 +9,10 @@ const SERVICES = [
 
 export const OrgServices = () => {
   return (
-    <section id="org-services" className="py-20 px-4">
-      <div className="max-w-4xl mx-auto text-center space-y-8">
+    <section id="org-services" className="py-14 px-4">
+      <div className="max-w-4xl mx-auto text-center space-y-6">
         <h2 className="text-2xl md:text-3xl font-bold text-foreground tracking-tight">
-          Services
+          Care Pathways
         </h2>
 
         <div className="flex flex-wrap gap-3 justify-center">
