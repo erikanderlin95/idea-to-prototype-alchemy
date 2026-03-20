@@ -8,9 +8,9 @@ interface ClynicQIconProps {
 }
 
 const sizeClasses = {
-  sm: "h-8 w-8",
-  md: "h-10 w-10",
-  lg: "h-11 w-11",
+  sm: "h-6 w-6",
+  md: "h-8 w-8",
+  lg: "h-9 w-9",
 };
 
 const iconSizes = {
