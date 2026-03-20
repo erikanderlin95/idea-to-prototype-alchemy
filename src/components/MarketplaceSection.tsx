@@ -122,7 +122,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   return (
     <section id="marketplace" className="py-16 bg-background onboarding-clinics">
       <div className="container px-4 md:px-6">
-        <div className="space-y-10">
+        <div className="px-2 sm:px-0 space-y-10">
           <div className="text-center mb-10">
             <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-foreground mb-3">{title || t("marketplace.title")}</h2>
             <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto">
@@ -132,7 +132,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
 
           <SearchFilters defaultCategory={defaultCategory} onCategoryChange={handleCategoryChange} />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-8">
             {filteredClinics.map((clinic, index) => (
               <ClinicCard key={clinic.id || index} {...clinic} />
             ))}
