@@ -29,7 +29,7 @@ export const FeaturedConsultants = () => {
             Available Care Networks
           </p>
           <p className="text-[15px] text-[#6B7D8E]">
-            Choose a care network — both guide you from intake to the right provider.
+            Start with any network — we'll guide you to the right care.
           </p>
         </div>
 
