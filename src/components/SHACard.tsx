@@ -11,7 +11,7 @@ const SHACard = () => {
       <CardContent className="p-5">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
-          <div className="w-16 h-16 rounded-xl overflow-hidden bg-gradient-to-br from-[#EBF0FA] to-[#DCE5F3] mb-3 ring-1 ring-[#4A7FC1]/25 shadow-[0_0_12px_rgba(74,127,193,0.15)] group-hover:shadow-[0_0_18px_rgba(74,127,193,0.25)] group-hover:ring-[#4A7FC1]/50 transition-all flex items-center justify-center">
+          <div className="w-16 h-16 rounded-xl overflow-hidden bg-gradient-to-br from-[#D8E4F3] to-[#C2D5EA] mb-3 ring-1 ring-[#4A7FC1]/40 shadow-[0_0_16px_rgba(74,127,193,0.2)] group-hover:shadow-[0_0_24px_rgba(74,127,193,0.35)] group-hover:ring-[#4A7FC1]/60 transition-all flex items-center justify-center">
             <div className="flex flex-col items-center gap-0.5">
               <HeartPulse className="h-7 w-7 text-[#4A7FC1]" />
               <span className="text-[7px] font-bold text-[#4A7FC1] tracking-wider uppercase">SHA</span>

@@ -11,7 +11,7 @@ const OrganizationCard = () => {
       <CardContent className="p-5">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
-          <div className="w-16 h-16 rounded-xl overflow-hidden bg-gradient-to-br from-[#E6F7FA] to-[#D0F0F5] mb-3 ring-1 ring-[#18B7C9]/30 shadow-[0_0_12px_rgba(24,183,201,0.15)] group-hover:shadow-[0_0_18px_rgba(24,183,201,0.25)] group-hover:ring-[#18B7C9]/50 transition-all flex items-center justify-center">
+          <div className="w-16 h-16 rounded-xl overflow-hidden bg-gradient-to-br from-[#D4F2F6] to-[#B8E8EF] mb-3 ring-1 ring-[#18B7C9]/40 shadow-[0_0_16px_rgba(24,183,201,0.2)] group-hover:shadow-[0_0_24px_rgba(24,183,201,0.35)] group-hover:ring-[#18B7C9]/60 transition-all flex items-center justify-center">
             <div className="flex flex-col items-center gap-0.5">
               <Building2 className="h-7 w-7 text-[#18B7C9]" />
               <span className="text-[7px] font-bold text-[#18B7C9] tracking-wider uppercase">NYMG</span>
