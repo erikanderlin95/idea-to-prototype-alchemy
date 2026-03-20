@@ -4,6 +4,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import ConsultantCard from "@/components/ConsultantCard";
+import OrganizationCard from "@/components/OrganizationCard";
 import { Input } from "@/components/ui/input";
 import { Search, Users, Heart, Sparkles } from "lucide-react";
 
