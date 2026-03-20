@@ -4,15 +4,10 @@ export const OrgAbout = () => {
   return (
     <section className="py-8 px-4 bg-[#F4F8FB]">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
-          <div className="space-y-2">
-            <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight">
-              About the Network
-            </h2>
-            <p className="text-[#5F6F7E] leading-relaxed max-w-lg text-[16px]">
-              A managed healthcare group supporting a single intake and follow-up model — helping direct each case to the right provider with less operational friction.
-            </p>
-          </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+          <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight">
+            About the Network
+          </h2>
 
           <div className="grid grid-cols-3 gap-2.5">
             <MetricCard icon={<Building className="h-5 w-5" />} label="Multi-Clinic" />
