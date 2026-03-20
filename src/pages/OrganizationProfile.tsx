@@ -6,6 +6,7 @@ import { Footer } from "@/components/Footer";
 import { ManagedCareModal } from "@/components/ManagedCareModal";
 import { OrgHero } from "@/components/org/OrgHero";
 import { OrgAbout } from "@/components/org/OrgAbout";
+import { OrgWhyConcierge } from "@/components/org/OrgWhyConcierge";
 import { OrgHowItWorks } from "@/components/org/OrgHowItWorks";
 import { OrgConciergeTeam } from "@/components/org/OrgConciergeTeam";
 import { OrgCareJourney } from "@/components/org/OrgCareJourney";
