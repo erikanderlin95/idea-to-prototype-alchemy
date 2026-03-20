@@ -15,18 +15,18 @@ export const OrgHero = () => {
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#12385B] to-[#1a4a72] flex items-center justify-center shadow-sm">
                 <Building2 className="h-3.5 w-3.5 text-white" />
               </div>
-              <span className="text-[11px] font-semibold text-[#5F6F7E] uppercase tracking-widest">Managed Healthcare Provider</span>
+              <span className="text-[13px] font-semibold text-[#5F6F7E] uppercase tracking-widest">Managed Healthcare Provider</span>
             </div>
 
-            <h1 className="text-3xl md:text-4xl lg:text-[2.6rem] font-bold text-[#12385B] leading-[1.1] tracking-tight">
+            <h1 className="text-4xl md:text-[2.75rem] lg:text-[3rem] font-bold text-[#12385B] leading-[1.1] tracking-tight">
               {t("org.name")}
             </h1>
 
-            <p className="text-[15px] text-[#5F6F7E] leading-relaxed max-w-lg">
+            <p className="text-[17px] text-[#5F6F7E] leading-relaxed max-w-lg">
               Coordinated patient access across general practice, specialist care, and structured referral pathways.
             </p>
 
-            <p className="text-sm font-semibold text-[#18B7C9] tracking-wide">
+            <p className="text-base font-semibold text-[#18B7C9] tracking-wide">
               One entry point · Structured matching · Direct follow-up
             </p>
           </div>
@@ -34,7 +34,7 @@ export const OrgHero = () => {
           <div className="lg:col-span-2">
             <div className="rounded-2xl bg-white border border-[#DCE8EF] shadow-[0_8px_32px_rgba(18,56,91,0.12)] overflow-hidden">
               <div className="px-5 py-3 bg-[#F0F5FA] border-b border-[#DCE8EF]">
-                <span className="text-[11px] font-bold text-[#12385B] uppercase tracking-widest">Network Capabilities</span>
+                <span className="text-[13px] font-bold text-[#12385B] uppercase tracking-widest">Network Capabilities</span>
               </div>
 
               <div className="p-3 space-y-0.5">
@@ -57,8 +57,8 @@ const CapabilityRow = ({ icon, label, detail }: { icon: React.ReactNode; label: 
       {icon}
     </div>
     <div className="min-w-0">
-      <p className="text-[13px] font-semibold text-[#12385B] leading-tight">{label}</p>
-      <p className="text-[11px] text-[#5F6F7E]">{detail}</p>
+      <p className="text-[15px] font-semibold text-[#12385B] leading-tight">{label}</p>
+      <p className="text-[13px] text-[#5F6F7E]">{detail}</p>
     </div>
   </div>
 );
