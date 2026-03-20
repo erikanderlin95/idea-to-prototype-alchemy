@@ -50,9 +50,7 @@ export const OrgHero = () => {
               </div>
             </div>
 
-            <p className="text-[17px] md:text-[19px] font-semibold text-[#12385B]/80 pt-1.5 tracking-tight">
-              Tell us your condition <span className="text-[#18B7C9]">→</span> we match you <span className="text-[#18B7C9]">→</span> continue on WhatsApp
-            </p>
+
           </div>
 
           <div className="lg:col-span-2">
