@@ -35,17 +35,17 @@ export const ContinuityServices = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="py-20 bg-gradient-to-b from-background via-secondary/20 to-background">
+    <section className="py-16 bg-gradient-to-b from-background via-secondary/20 to-background">
       <div className="container px-4 md:px-6">
-        <div className="text-center mb-12 space-y-4">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ai-cyan/10 text-ai-cyan">
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ai-cyan/10 text-ai-cyan mb-4">
             <Sparkles className="h-4 w-4" />
             <span className="text-sm font-medium">{t("continuity.badge")}</span>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+          <h2 className="text-3xl md:text-5xl font-bold text-foreground mb-3">
             {t("continuity.title")}
           </h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto">
             {t("continuity.subtitle")}
           </p>
         </div>
