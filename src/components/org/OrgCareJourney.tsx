@@ -17,7 +17,7 @@ export const OrgCareJourney = () => {
             </div>
 
             <p className="text-[15px] text-[#5F6F7E]">
-              No app download. No fragmented handoff. Faster patient response.
+              No app download. No fragmented handoff. You will be connected directly via WhatsApp after submission.
             </p>
           </div>
 
