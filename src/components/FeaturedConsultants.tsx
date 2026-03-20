@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, ArrowRight, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import OrganizationCard from "@/components/OrganizationCard";
 
 interface Consultant {
   id: string;
@@ -61,7 +62,10 @@ export const FeaturedConsultants = () => {
 
         {/* Consultants Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          {consultants.map((consultant) => (
+          {/* Organization Card — first position */}
+          <OrganizationCard />
+
+          {consultants.slice(0, 2).map((consultant) => (
             <div
               key={consultant.id}
               className="group bg-card rounded-xl border border-border/50 p-6 hover:shadow-lg hover:border-primary/30 transition-all duration-300 cursor-pointer"
