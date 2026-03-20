@@ -9,9 +9,9 @@ const SERVICES = [
 
 export const OrgServices = () => {
   return (
-    <section id="org-services" className="py-10 px-4 bg-[hsl(210,35%,96%)]">
-      <div className="max-w-4xl mx-auto text-center space-y-5">
-        <h2 className="text-xl md:text-2xl font-bold text-[hsl(210,50%,18%)] tracking-tight">
+    <section id="org-services" className="py-8 px-4 bg-[#F4F8FB]">
+      <div className="max-w-4xl mx-auto text-center space-y-4">
+        <h2 className="text-xl md:text-2xl font-bold text-[#12385B] tracking-tight">
           Care Pathways
         </h2>
 
@@ -19,12 +19,12 @@ export const OrgServices = () => {
           {SERVICES.map((s) => (
             <div
               key={s.label}
-              className="group flex flex-col items-center gap-2 px-4 py-4 rounded-xl bg-white border border-[hsl(210,25%,90%)] shadow-[0_2px_10px_hsl(210,40%,85%,0.25)] hover:shadow-[0_4px_16px_hsl(178,40%,70%,0.25)] hover:border-[hsl(178,40%,70%)] hover:-translate-y-0.5 transition-all duration-300 cursor-default"
+              className="group flex flex-col items-center gap-2 px-4 py-3.5 rounded-xl bg-white border border-[#DCE8EF] shadow-[0_2px_8px_rgba(18,56,91,0.06)] hover:shadow-[0_4px_16px_rgba(24,183,201,0.12)] hover:border-[#18B7C9]/30 hover:-translate-y-0.5 transition-all duration-300 cursor-default"
             >
-              <div className="w-10 h-10 rounded-lg bg-[hsl(178,45%,92%)] flex items-center justify-center group-hover:bg-[hsl(178,45%,88%)] transition-colors">
-                <s.icon className="h-5 w-5 text-[hsl(178,55%,32%)]" />
+              <div className="w-10 h-10 rounded-lg bg-[#E6F7FA] flex items-center justify-center group-hover:bg-[#d6f2f6] transition-colors">
+                <s.icon className="h-5 w-5 text-[#18B7C9]" />
               </div>
-              <span className="text-xs font-semibold text-[hsl(210,50%,18%)]">{s.label}</span>
+              <span className="text-xs font-semibold text-[#12385B]">{s.label}</span>
             </div>
           ))}
         </div>
