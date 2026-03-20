@@ -1,10 +1,8 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { Button } from "@/components/ui/button";
 import { ManagedCareModal } from "@/components/ManagedCareModal";
 import { OrgHero } from "@/components/org/OrgHero";
 import { OrgAbout } from "@/components/org/OrgAbout";
@@ -22,7 +20,6 @@ interface Concierge {
 }
 
 const OrganizationProfile = () => {
-  const navigate = useNavigate();
   const { t } = useLanguage();
   const [concierges, setConcierges] = useState<Concierge[]>([]);
   const [loading, setLoading] = useState(true);
@@ -41,18 +38,11 @@ const OrganizationProfile = () => {
     fetchConcierges();
   }, []);
 
-  const scrollToServices = () => {
-    document.getElementById("org-services")?.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <OrgHero
-        onStartConsultation={() => setShowIntakeModal(true)}
-        onViewServices={scrollToServices}
-      />
+      <OrgHero />
 
       <OrgAbout />
 
@@ -64,7 +54,7 @@ const OrganizationProfile = () => {
         onConnect={() => setShowIntakeModal(true)}
       />
 
-      <OrgCareJourney onStart={() => setShowIntakeModal(true)} />
+      <OrgCareJourney />
 
       <OrgServices />
 
