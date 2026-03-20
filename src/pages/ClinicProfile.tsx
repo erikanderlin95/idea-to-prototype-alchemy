@@ -249,7 +249,7 @@ const ClinicProfile = () => {
                                 <Badge variant="default" className="text-sm">{t('clinicProfile.verified')}</Badge>
                               )}
                             </div>
-                            <p className="text-lg text-muted-foreground mt-1">{doctor.specialty}</p>
+                            <p className="text-sm sm:text-lg text-muted-foreground mt-1">{doctor.specialty}</p>
                             {doctor.years_of_practice && (
                               <p className="text-base text-muted-foreground mt-2">
                                 {doctor.years_of_practice} {t('clinicProfile.yearsExperience')}
