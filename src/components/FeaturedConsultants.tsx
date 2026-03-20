@@ -23,6 +23,16 @@ export const FeaturedConsultants = () => {
           </p>
         </div>
 
+        {/* Section label + context */}
+        <div className="text-center mb-5">
+          <p className="text-[12px] font-semibold uppercase tracking-widest text-[#5F6F7E] mb-1">
+            Available Care Networks
+          </p>
+          <p className="text-[15px] text-[#6B7D8E]">
+            Choose a care network — both guide you from intake to the right provider.
+          </p>
+        </div>
+
         {/* Organization Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           <OrganizationCard />
