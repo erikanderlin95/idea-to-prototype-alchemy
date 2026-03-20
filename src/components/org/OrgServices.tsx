@@ -12,10 +12,10 @@ export const OrgServices = () => {
     <section id="org-services" className="py-6 px-4">
       <div className="max-w-5xl mx-auto space-y-2">
         <div className="text-center">
-          <p className="text-[11px] font-semibold uppercase tracking-widest text-[#5F6F7E]">
+          <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">
             Available Care Areas
           </p>
-          <h2 className="text-xl md:text-2xl font-bold text-[#12385B] tracking-tight mt-0.5">
+          <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight mt-0.5">
             Care Pathways
           </h2>
         </div>
@@ -29,7 +29,7 @@ export const OrgServices = () => {
               <div className="w-7 h-7 rounded-md bg-[#E6F7FA] flex items-center justify-center">
                 <s.icon className="h-4 w-4 text-[#18B7C9]" />
               </div>
-              <span className="text-[13px] font-semibold text-[#12385B]">{s.label}</span>
+              <span className="text-[15px] font-semibold text-[#12385B]">{s.label}</span>
             </div>
           ))}
         </div>
