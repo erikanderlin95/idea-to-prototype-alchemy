@@ -22,8 +22,8 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
         <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight">
           Care Coordination Team
         </h2>
-        <p className="text-[15px] text-[#5F6F7E] max-w-md mx-auto">
-          Patients are guided to the right care coordinator based on need and care pathway.
+        <p className="text-[13px] text-[#5F6F7E]/70">
+          Start by choosing a care coordinator below
         </p>
 
         <div className="pt-4">
