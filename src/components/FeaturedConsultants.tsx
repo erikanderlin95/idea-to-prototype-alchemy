@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Heart, ArrowRight, Sparkles } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import OrganizationCard from "@/components/OrganizationCard";
 
 interface Consultant {
   id: string;
