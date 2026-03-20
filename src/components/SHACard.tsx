@@ -28,7 +28,7 @@ const SHACard = () => {
 
           {/* Description */}
           <p className="text-[14px] text-[#5A7089] leading-snug mb-3">
-            Connected access to primary, specialist, and allied health services.
+            Access primary, specialist, and allied care.
           </p>
 
           {/* Capability pills */}
