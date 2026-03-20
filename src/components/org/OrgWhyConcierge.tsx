@@ -2,53 +2,49 @@ import { Check, X } from "lucide-react";
 
 export const OrgWhyConcierge = () => {
   return (
-    <section className="py-10 px-4 bg-white">
+    <section className="py-8 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* Left — Text */}
-          <div className="space-y-3">
-            <h2 className="text-xl md:text-2xl font-bold text-[hsl(210,50%,18%)] tracking-tight">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+          <div className="space-y-2.5">
+            <h2 className="text-xl md:text-2xl font-bold text-[#12385B] tracking-tight">
               Why Medical Concierge Care Exists
             </h2>
-            <div className="space-y-2.5 max-w-lg">
-              <p className="text-[hsl(210,15%,40%)] leading-relaxed text-[14px]">
+            <div className="space-y-2 max-w-lg">
+              <p className="text-[#5F6F7E] leading-relaxed text-[14px]">
                 Healthcare today is not a single system — it is a network of providers, referrals, and processes that patients often have to navigate on their own.
               </p>
-              <p className="text-[hsl(210,15%,40%)] leading-relaxed text-[14px]">
+              <p className="text-[#5F6F7E] leading-relaxed text-[14px]">
                 Medical concierge services exist to simplify this. Instead of managing appointments, referrals, and decisions independently, patients are guided through a structured coordination process.
               </p>
-              <p className="text-[hsl(210,50%,18%)] leading-relaxed text-[14px] font-medium">
+              <p className="text-[#12385B] leading-relaxed text-[14px] font-medium">
                 Within Nanyang Medical Group, this coordination is integrated into a managed care network — ensuring patients are directed to the right provider with clearer continuity and less friction.
               </p>
             </div>
           </div>
 
-          {/* Right — Comparison Cards */}
           <div className="space-y-2">
-            <p className="text-[11px] font-semibold uppercase tracking-widest text-[hsl(210,15%,55%)]">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-[#5F6F7E]">
               Care Experience Comparison
             </p>
             <div className="grid grid-cols-2 gap-3">
-              {/* Unstructured */}
-              <div className="rounded-xl border border-[hsl(210,20%,88%)] bg-[hsl(210,20%,97%)] p-4 space-y-3">
-                <h3 className="text-[13px] font-bold text-[hsl(210,15%,45%)]">Unstructured Experience</h3>
-                <ul className="space-y-2">
+              <div className="rounded-xl border border-[#DCE8EF] bg-white p-4 space-y-2.5">
+                <h3 className="text-[13px] font-bold text-[#5F6F7E]">Unstructured Experience</h3>
+                <ul className="space-y-1.5">
                   {["Multiple entry points", "Unclear provider selection", "Manual coordination", "Disconnected follow-ups"].map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-[12px] text-[hsl(210,15%,50%)]">
-                      <X className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[hsl(210,15%,70%)]" />
+                    <li key={item} className="flex items-start gap-2 text-[12px] text-[#5F6F7E]">
+                      <X className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#b0bec5]" />
                       {item}
                     </li>
                   ))}
                 </ul>
               </div>
 
-              {/* Coordinated */}
-              <div className="rounded-xl border border-[hsl(178,40%,80%)] bg-gradient-to-b from-[hsl(178,45%,96%)] to-[hsl(210,35%,96%)] p-4 space-y-3 shadow-[0_2px_12px_hsl(178,40%,85%,0.35)]">
-                <h3 className="text-[13px] font-bold text-[hsl(210,50%,18%)]">Nanyang Coordinated Model</h3>
-                <ul className="space-y-2">
+              <div className="rounded-xl border border-[#18B7C9]/20 bg-[#E6F7FA] p-4 space-y-2.5 shadow-[0_2px_12px_rgba(24,183,201,0.1)]">
+                <h3 className="text-[13px] font-bold text-[#12385B]">Nanyang Coordinated Model</h3>
+                <ul className="space-y-1.5">
                   {["Single intake point", "Guided provider matching", "Structured care pathways", "Continuous follow-up"].map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-[12px] text-[hsl(210,50%,18%)]">
-                      <Check className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[hsl(178,55%,32%)]" />
+                    <li key={item} className="flex items-start gap-2 text-[12px] text-[#12385B]">
+                      <Check className="h-3.5 w-3.5 mt-0.5 shrink-0 text-[#18B7C9]" />
                       {item}
                     </li>
                   ))}
