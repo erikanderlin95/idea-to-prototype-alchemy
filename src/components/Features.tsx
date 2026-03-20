@@ -50,7 +50,7 @@ export const Features = () => {
       <div className="container px-4 md:px-6">
         <div className="text-center mb-10">
           <Badge variant="secondary" className="mb-4">{t("features.badge")}</Badge>
-          <h2 className="text-2xl md:text-4xl font-bold text-foreground mb-3">{t("features.title")}</h2>
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-foreground mb-3">{t("features.title")}</h2>
           <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto">
             {t("features.subtitle")}
           </p>
