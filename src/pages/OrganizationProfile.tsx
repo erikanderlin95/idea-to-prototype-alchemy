@@ -45,11 +45,7 @@ const OrganizationProfile = () => {
 
       <OrgCareJourney />
 
-      <OrgAbout />
-
       <OrgWhyConcierge />
-
-      <OrgHowItWorks />
 
       <OrgConciergeTeam
         concierges={concierges}
