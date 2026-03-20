@@ -397,7 +397,7 @@ export const ClinicCard = ({
         </div>
 
         {hasDigitalQueue ? (
-          <div className="flex items-center gap-3 py-4 px-4 rounded-xl border onboarding-stats"
+          <div className="flex items-center gap-3 py-3 sm:py-4 px-3 sm:px-4 rounded-xl border onboarding-stats"
             style={{ 
               background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
               borderColor: 'hsl(var(--ai-cyan)/0.3)'
