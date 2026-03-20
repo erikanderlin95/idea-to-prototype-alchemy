@@ -244,7 +244,7 @@ const ClinicProfile = () => {
                         <div className="flex-1 space-y-2 sm:space-y-4 min-w-0">
                           <div>
                             <div className="flex items-center gap-3">
-                              <h3 className="text-2xl font-bold">{doctor.name}</h3>
+                              <h3 className="text-lg sm:text-2xl font-bold">{doctor.name}</h3>
                               {doctor.is_verified && (
                                 <Badge variant="default" className="text-sm">{t('clinicProfile.verified')}</Badge>
                               )}
