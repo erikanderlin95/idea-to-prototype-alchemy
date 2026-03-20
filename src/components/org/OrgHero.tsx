@@ -26,9 +26,30 @@ export const OrgHero = () => {
               Coordinated patient access across general practice, specialist care, and structured referral pathways.
             </p>
 
-            <p className="text-base font-semibold text-[#18B7C9] tracking-wide">
-              One entry point · Structured matching · Direct follow-up
-            </p>
+            {/* Mechanism strip */}
+            <div className="flex items-stretch gap-0 pt-1 max-w-lg">
+              <MechanismCard
+                icon={<ClipboardList className="h-3.5 w-3.5" />}
+                title="One Entry Point"
+                sub="Single intake across all patients"
+              />
+              <div className="flex items-center px-1 text-[#18B7C9]/50">
+                <ChevronRight className="h-3.5 w-3.5" />
+              </div>
+              <MechanismCard
+                icon={<UserCheck className="h-3.5 w-3.5" />}
+                title="Structured Matching"
+                sub="Assigned based on care pathway"
+              />
+              <div className="flex items-center px-1 text-[#18B7C9]/50">
+                <ChevronRight className="h-3.5 w-3.5" />
+              </div>
+              <MechanismCard
+                icon={<MessageCircle className="h-3.5 w-3.5" />}
+                title="Direct Follow-up"
+                sub="Immediate response via WhatsApp"
+              />
+            </div>
           </div>
 
           <div className="lg:col-span-2">
