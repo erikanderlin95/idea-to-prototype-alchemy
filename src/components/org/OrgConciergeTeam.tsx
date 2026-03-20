@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { User } from "lucide-react";
+import { User, MessageCircle } from "lucide-react";
 
 interface Concierge {
   id: string;
@@ -18,7 +18,7 @@ interface Props {
 export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
   return (
     <section className="py-8 px-4 bg-[#F4F8FB]">
-      <div className="max-w-5xl mx-auto space-y-1.5 text-center">
+      <div className="max-w-4xl mx-auto space-y-1.5 text-center">
         <h2 className="text-xl md:text-2xl font-bold text-[#12385B] tracking-tight">
           Care Coordination Team
         </h2>
@@ -26,56 +26,63 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
           Patients are guided to the right care coordinator based on need and care pathway.
         </p>
 
-        <div className="pt-3">
+        <div className="pt-4">
           {loading ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 max-w-3xl mx-auto">
-              {[1, 2].map((i) => (
-                <div key={i} className="h-16 rounded-lg bg-[#DCE8EF] animate-pulse" />
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-2xl mx-auto">
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="aspect-[4/5] rounded-2xl bg-[#DCE8EF] animate-pulse" />
               ))}
             </div>
           ) : concierges.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 max-w-3xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-3 max-w-2xl mx-auto">
               {concierges.map((person) => (
                 <div
                   key={person.id}
-                  className="group rounded-lg bg-white border border-[#DCE8EF] px-3 py-2.5 shadow-[0_1px_4px_rgba(18,56,91,0.05)] hover:shadow-[0_3px_12px_rgba(18,56,91,0.1)] transition-all duration-200"
+                  className="group rounded-2xl bg-white border border-[#DCE8EF] p-4 pb-3.5 shadow-[0_2px_8px_rgba(18,56,91,0.06)] hover:shadow-[0_6px_20px_rgba(18,56,91,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col items-center text-center"
                 >
-                  <div className="flex items-center gap-3">
-                    {/* Avatar */}
-                    <div className="w-10 h-10 rounded-full overflow-hidden bg-[#F0F5FA] ring-1 ring-[#DCE8EF] flex-shrink-0">
-                      {person.photo_url ? (
-                        <img src={person.photo_url} alt={person.name} className="w-full h-full object-cover" />
-                      ) : (
-                        <div className="w-full h-full flex items-center justify-center bg-[#F0F5FA]">
-                          <User className="h-4 w-4 text-[#5F6F7E]" />
-                        </div>
-                      )}
-                    </div>
-
-                    {/* Info */}
-                    <div className="flex-1 min-w-0">
-                      <h3 className="text-[13px] font-semibold text-[#12385B] truncate leading-tight">{person.name}</h3>
-                      <p className="text-[11px] text-[#5F6F7E] truncate">{person.title}</p>
-                      {person.short_bio && (
-                        <p className="text-[10px] text-[#5F6F7E]/70 truncate mt-0.5">{person.short_bio}</p>
-                      )}
-                    </div>
-
-                    {/* Right: status + CTA */}
-                    <div className="flex flex-col items-end gap-1.5 flex-shrink-0">
-                      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-[hsl(155,45%,93%)] text-[9px] font-semibold text-[hsl(155,50%,30%)]">
-                        <span className="w-1 h-1 rounded-full bg-[hsl(155,55%,45%)]" />
-                        Active
-                      </span>
-                      <Button
-                        size="sm"
-                        className="h-7 px-3 text-[11px] bg-[#18B7C9] hover:bg-[#149dab] text-white active:scale-[0.97] transition-all shadow-sm rounded-md"
-                        onClick={onConnect}
-                      >
-                        Start via Concierge
-                      </Button>
-                    </div>
+                  {/* Circular avatar */}
+                  <div className="w-14 h-14 rounded-full overflow-hidden bg-[#F0F5FA] ring-2 ring-[#DCE8EF] group-hover:ring-[#18B7C9]/30 transition-all mb-3">
+                    {person.photo_url ? (
+                      <img src={person.photo_url} alt={person.name} className="w-full h-full object-cover" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center bg-[#F0F5FA]">
+                        <User className="h-6 w-6 text-[#5F6F7E]" />
+                      </div>
+                    )}
                   </div>
+
+                  {/* Name */}
+                  <h3 className="text-[13px] font-semibold text-[#12385B] leading-tight truncate w-full">
+                    {person.name}
+                  </h3>
+
+                  {/* Role */}
+                  <p className="text-[11px] text-[#5F6F7E] mt-0.5 truncate w-full">
+                    {person.title}
+                  </p>
+
+                  {/* Focus line */}
+                  {person.short_bio && (
+                    <p className="text-[10px] text-[#5F6F7E]/70 mt-1 truncate w-full leading-tight">
+                      {person.short_bio}
+                    </p>
+                  )}
+
+                  {/* Active dot */}
+                  <span className="inline-flex items-center gap-1 mt-2.5 px-2 py-0.5 rounded-full bg-[hsl(155,45%,93%)] text-[9px] font-semibold text-[hsl(155,50%,30%)]">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[hsl(155,55%,45%)]" />
+                    Active
+                  </span>
+
+                  {/* Compact pill CTA */}
+                  <Button
+                    size="sm"
+                    className="mt-2.5 h-7 px-4 text-[11px] rounded-full bg-[#18B7C9] hover:bg-[#149dab] text-white active:scale-[0.96] transition-all shadow-sm gap-1.5"
+                    onClick={onConnect}
+                  >
+                    <MessageCircle className="h-3 w-3" />
+                    Start
+                  </Button>
                 </div>
               ))}
             </div>
