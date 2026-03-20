@@ -7,11 +7,11 @@ const SHACard = () => {
   const navigate = useNavigate();
 
   return (
-    <Card className="group hover:shadow-[0_12px_36px_rgba(18,56,91,0.14)] hover:-translate-y-1 transition-all duration-300 border-[#C8DAE5] shadow-[0_3px_16px_rgba(18,56,91,0.08)] bg-gradient-to-b from-white to-[#F6F9FC] overflow-hidden">
+    <Card className="group hover:shadow-[0_14px_40px_rgba(18,56,91,0.18)] hover:-translate-y-1 transition-all duration-300 border-[#A8BDD4] shadow-[0_4px_20px_rgba(18,56,91,0.1)] bg-gradient-to-b from-[#EDF2F9] via-[#F0F4FA] to-[#E2EAF3] overflow-hidden">
       <CardContent className="p-5">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
-          <div className="w-16 h-16 rounded-xl overflow-hidden bg-gradient-to-br from-[#EBF0FA] to-[#DCE5F3] mb-3 ring-1 ring-[#4A7FC1]/25 shadow-[0_0_12px_rgba(74,127,193,0.15)] group-hover:shadow-[0_0_18px_rgba(74,127,193,0.25)] group-hover:ring-[#4A7FC1]/50 transition-all flex items-center justify-center">
+          <div className="w-16 h-16 rounded-xl overflow-hidden bg-gradient-to-br from-[#D8E4F3] to-[#C2D5EA] mb-3 ring-1 ring-[#4A7FC1]/40 shadow-[0_0_16px_rgba(74,127,193,0.2)] group-hover:shadow-[0_0_24px_rgba(74,127,193,0.35)] group-hover:ring-[#4A7FC1]/60 transition-all flex items-center justify-center">
             <div className="flex flex-col items-center gap-0.5">
               <HeartPulse className="h-7 w-7 text-[#4A7FC1]" />
               <span className="text-[7px] font-bold text-[#4A7FC1] tracking-wider uppercase">SHA</span>
