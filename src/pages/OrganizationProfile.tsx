@@ -47,6 +47,8 @@ const OrganizationProfile = () => {
 
       <OrgAbout />
 
+      <OrgWhyConcierge />
+
       <OrgHowItWorks />
 
       <OrgConciergeTeam
