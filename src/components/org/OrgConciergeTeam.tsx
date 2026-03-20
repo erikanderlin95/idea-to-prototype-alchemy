@@ -19,10 +19,10 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
   return (
     <section className="py-6 px-4 bg-[#F4F8FB]">
       <div className="max-w-5xl mx-auto space-y-1 text-center">
-        <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight">
+        <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
           Care Coordination Team
         </h2>
-        <p className="text-[15px] text-[#5F6F7E]">
+        <p className="text-[17px] text-[#5F6F7E]">
           Each coordinator guides you from intake to the right care provider.
         </p>
 
@@ -50,26 +50,26 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
                     )}
                   </div>
 
-                  <h3 className="text-[14px] font-semibold text-[#12385B] leading-tight truncate w-full">
+                  <h3 className="text-[16px] font-semibold text-[#12385B] leading-tight truncate w-full">
                     {person.name}
                   </h3>
-                  <p className="text-[12px] text-[#5F6F7E] mt-0.5 truncate w-full">
+                  <p className="text-[14px] text-[#5F6F7E] mt-0.5 truncate w-full">
                     {person.title}
                   </p>
                   {person.short_bio && (
-                    <p className="text-[11px] text-[#5F6F7E]/70 mt-0.5 truncate w-full leading-tight">
+                    <p className="text-[13px] text-[#5F6F7E]/70 mt-0.5 truncate w-full leading-tight">
                       {person.short_bio}
                     </p>
                   )}
 
                   <div className="flex items-center gap-2 mt-auto pt-2.5">
-                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-[hsl(155,45%,93%)] text-[10px] font-semibold text-[hsl(155,50%,30%)]">
+                    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-[hsl(155,45%,93%)] text-[12px] font-semibold text-[hsl(155,50%,30%)]">
                       <span className="w-1.5 h-1.5 rounded-full bg-[hsl(155,55%,45%)]" />
                       Active
                     </span>
                     <Button
                       size="sm"
-                      className="h-7 px-3.5 text-[12px] rounded-full bg-[#18B7C9] hover:bg-[#149dab] text-white active:scale-[0.96] transition-all shadow-sm gap-1"
+                      className="h-7 px-3.5 text-[14px] rounded-full bg-[#18B7C9] hover:bg-[#149dab] text-white active:scale-[0.96] transition-all shadow-sm gap-1"
                       onClick={onConnect}
                     >
                       <MessageCircle className="h-3 w-3" />
@@ -80,7 +80,7 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
               ))}
             </div>
           ) : (
-            <p className="text-[#5F6F7E] text-base">No concierges available at this time.</p>
+            <p className="text-[#5F6F7E] text-[17px]">No concierges available at this time.</p>
           )}
         </div>
       </div>
