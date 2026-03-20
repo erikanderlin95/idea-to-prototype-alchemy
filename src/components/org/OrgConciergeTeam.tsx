@@ -61,6 +61,11 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
                     {person.title}
                   </p>
 
+                  {/* Guidance line */}
+                  <p className="text-[11px] text-[#18B7C9] mt-0.5 font-medium">
+                    Guides your care journey
+                  </p>
+
                   {/* Focus line */}
                   {person.short_bio && (
                     <p className="text-[12px] text-[#5F6F7E]/70 mt-1 truncate w-full leading-tight">

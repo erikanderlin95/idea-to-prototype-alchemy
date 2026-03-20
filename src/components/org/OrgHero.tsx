@@ -32,23 +32,27 @@ export const OrgHero = () => {
                 <div className="w-6 h-6 rounded-full bg-[#18B7C9]/20 flex items-center justify-center text-[#18B7C9]">
                   <ClipboardList className="h-3 w-3" />
                 </div>
-                <span className="text-[13px] font-bold text-[#12385B]">One Entry Point</span>
+                <span className="text-[13px] font-bold text-[#12385B]">One Entry</span>
               </div>
               <ChevronRight className="h-3.5 w-3.5 text-[#18B7C9]/40 mx-1 flex-shrink-0" />
               <div className="flex items-center gap-2 rounded-lg bg-[#E6F7FA] px-3 py-2">
                 <div className="w-6 h-6 rounded-full bg-[#18B7C9]/20 flex items-center justify-center text-[#18B7C9]">
                   <UserCheck className="h-3 w-3" />
                 </div>
-                <span className="text-[13px] font-bold text-[#12385B]">Structured Matching</span>
+                <span className="text-[13px] font-bold text-[#12385B]">We Match You</span>
               </div>
               <ChevronRight className="h-3.5 w-3.5 text-[#18B7C9]/40 mx-1 flex-shrink-0" />
               <div className="flex items-center gap-2 rounded-lg bg-[#E6F7FA] px-3 py-2">
                 <div className="w-6 h-6 rounded-full bg-[#18B7C9]/20 flex items-center justify-center text-[#18B7C9]">
                   <MessageCircle className="h-3 w-3" />
                 </div>
-                <span className="text-[13px] font-bold text-[#12385B]">Direct Follow-up</span>
+                <span className="text-[13px] font-bold text-[#12385B]">We Follow Up</span>
               </div>
             </div>
+
+            <p className="text-[13px] text-[#5F6F7E]/70 pt-0.5">
+              Tell us your condition → we match you → continue on WhatsApp
+            </p>
           </div>
 
           <div className="lg:col-span-2">
