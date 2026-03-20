@@ -21,25 +21,22 @@ export const OrgCareJourney = () => {
             </p>
           </div>
 
-          <div className="rounded-xl bg-white border border-[#DCE8EF] shadow-[0_4px_16px_rgba(18,56,91,0.08)] p-4 space-y-2.5">
-            <div className="flex items-center gap-2 pb-2 border-b border-[#DCE8EF]">
-              <div className="w-2 h-2 rounded-full bg-[hsl(0,50%,65%)]" />
-              <div className="w-2 h-2 rounded-full bg-[hsl(45,60%,60%)]" />
-              <div className="w-2 h-2 rounded-full bg-[hsl(155,45%,55%)]" />
-              <span className="text-[12px] text-[#5F6F7E] ml-2 font-mono">care-intake</span>
+          <div className="rounded-xl bg-white border border-[#DCE8EF] shadow-[0_4px_16px_rgba(18,56,91,0.08)] p-4 space-y-2.5 relative">
+            <div className="flex items-center justify-between pb-2 border-b border-[#DCE8EF]">
+              <div className="flex items-center gap-2">
+                <div className="w-2 h-2 rounded-full bg-[hsl(0,50%,65%)]" />
+                <div className="w-2 h-2 rounded-full bg-[hsl(45,60%,60%)]" />
+                <div className="w-2 h-2 rounded-full bg-[hsl(155,45%,55%)]" />
+                <span className="text-[12px] text-[#5F6F7E] ml-2 font-mono">care-intake</span>
+              </div>
+              <span className="text-[10px] text-[#5F6F7E]/60 italic">Example intake preview</span>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-2 opacity-80">
               <FakeField label="Condition / Concern" value="Chronic back pain management" />
               <FakeField label="Preferred Location" value="Central / East" />
               <FakeField label="Urgency" value="Soon" />
               <FakeField label="Contact" value="+65 ●●●● ●●48" />
-            </div>
-
-            <div className="pt-1">
-              <div className="w-full h-8 rounded-md bg-[#F4F8FB] border border-[#DCE8EF] flex items-center justify-center">
-                <span className="text-[13px] font-medium text-[#5F6F7E]">Submit Request</span>
-              </div>
             </div>
           </div>
         </div>

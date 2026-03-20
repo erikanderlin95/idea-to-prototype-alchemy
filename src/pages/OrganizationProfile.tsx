@@ -45,6 +45,8 @@ const OrganizationProfile = () => {
 
       <OrgHero />
 
+      <OrgCareJourney />
+
       <OrgAbout />
 
       <OrgWhyConcierge />
@@ -56,8 +58,6 @@ const OrganizationProfile = () => {
         loading={loading}
         onConnect={() => setShowIntakeModal(true)}
       />
-
-      <OrgCareJourney />
 
       <OrgServices />
 
