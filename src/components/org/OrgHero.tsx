@@ -23,10 +23,10 @@ export const OrgHero = () => {
             </h1>
 
             <p className="text-[17px] text-[#5F6F7E] leading-relaxed max-w-lg">
-              Coordinated patient access across general practice, specialist care, and structured referral pathways.
+              Patient access across general practice, specialist care, and referral services — managed through a single network.
             </p>
 
-            {/* Mechanism strip — icon + title only, no subtext */}
+            {/* Mechanism strip */}
             <div className="flex items-center gap-0 pt-1">
               <div className="flex items-center gap-2 rounded-lg bg-[#E6F7FA] px-3 py-2">
                 <div className="w-6 h-6 rounded-full bg-[#18B7C9]/20 flex items-center justify-center text-[#18B7C9]">
@@ -58,9 +58,9 @@ export const OrgHero = () => {
               </div>
 
               <div className="p-3 space-y-0.5">
-                <CapabilityRow icon={<Network className="h-4 w-4" />} label="Multi-Clinic Network" detail="Integrated provider access" />
-                <CapabilityRow icon={<Stethoscope className="h-4 w-4" />} label="Specialist Referral Support" detail="Structured care pathways" />
-                <CapabilityRow icon={<Shield className="h-4 w-4" />} label="Managed Care Coverage" detail="Coordinated insurance pathways" />
+                <CapabilityChip icon={<Network className="h-4 w-4" />} label="Clinic Network" />
+                <CapabilityChip icon={<Stethoscope className="h-4 w-4" />} label="Specialist Access" />
+                <CapabilityChip icon={<Shield className="h-4 w-4" />} label="Coverage Support" />
               </div>
             </div>
           </div>
@@ -70,14 +70,11 @@ export const OrgHero = () => {
   );
 };
 
-const CapabilityRow = ({ icon, label, detail }: { icon: React.ReactNode; label: string; detail: string }) => (
+const CapabilityChip = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
   <div className="flex items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-[#E6F7FA] transition-colors duration-200">
     <div className="w-8 h-8 rounded-lg bg-[#E6F7FA] flex items-center justify-center text-[#18B7C9] flex-shrink-0">
       {icon}
     </div>
-    <div className="min-w-0">
-      <p className="text-[15px] font-semibold text-[#12385B] leading-tight">{label}</p>
-      <p className="text-[13px] text-[#5F6F7E]">{detail}</p>
-    </div>
+    <p className="text-[15px] font-semibold text-[#12385B] leading-tight">{label}</p>
   </div>
 );
