@@ -24,9 +24,8 @@ export const SHACareJourney = ({ onStartIntake }: SHACareJourneyProps) => {
               <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text="Continue directly via WhatsApp" />
             </div>
 
-            <p className="mt-4 text-[15px] leading-relaxed text-[#6B7D8E]">
-              No app download needed. You pay the clinic directly — no additional fees.
-            </p>
+
+
 
             <div className="pt-3">
               <Button
