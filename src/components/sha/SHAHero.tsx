@@ -20,7 +20,7 @@ export const SHAHero = () => {
             </h1>
 
             <p className="text-[19px] text-[#5F6F7E] leading-relaxed max-w-lg">
-              Integrated access to primary care, specialist consultation, and allied health — delivered through one coordinated network.
+              Access specialist care across Singapore, coordinated through our medical network.
             </p>
 
             <div className="flex items-center gap-0 pt-1">
