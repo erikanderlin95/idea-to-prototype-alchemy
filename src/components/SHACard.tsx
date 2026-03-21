@@ -28,7 +28,7 @@ const SHACard = () => {
 
           {/* Description */}
           <p className="text-[14px] text-[#5A7089] leading-snug mb-3">
-            Access specialist care across multiple disciplines through a coordinated network.
+            Access specialist disciplines across multiple areas of medical care.
           </p>
 
           {/* Capability pills */}
