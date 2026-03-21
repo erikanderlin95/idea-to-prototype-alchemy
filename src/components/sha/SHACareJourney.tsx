@@ -21,7 +21,7 @@ export const SHACareJourney = ({ onStartIntake }: SHACareJourneyProps) => {
             <div className="space-y-2.5">
               <JourneyStep icon={<ClipboardList className="h-4 w-4" />} text="Describe your health concern" />
               <JourneyStep icon={<UserCheck className="h-4 w-4" />} text="We will connect you to the appropriate specialist" />
-              <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text="Continue directly via WhatsApp" />
+              <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text="Continue via WhatsApp" />
             </div>
 
 
