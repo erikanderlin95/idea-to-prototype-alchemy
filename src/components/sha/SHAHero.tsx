@@ -65,11 +65,14 @@ export const SHAHero = () => {
   );
 };
 
-const CapabilityChip = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <div className="flex items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-[#E8EFF8] transition-colors duration-200">
-    <div className="w-8 h-8 rounded-lg bg-[#E8EFF8] flex items-center justify-center text-[#4A7FC1] flex-shrink-0">
+const CapabilityChip = ({ icon, label, desc }: { icon: React.ReactNode; label: string; desc?: string }) => (
+  <div className="flex items-start gap-3 rounded-lg px-3 py-2.5 hover:bg-[#E8EFF8] transition-colors duration-200">
+    <div className="w-8 h-8 rounded-lg bg-[#E8EFF8] flex items-center justify-center text-[#4A7FC1] flex-shrink-0 mt-0.5">
       {icon}
     </div>
-    <p className="text-[17px] font-semibold text-[#12385B] leading-tight">{label}</p>
+    <div>
+      <p className="text-[17px] font-semibold text-[#12385B] leading-tight">{label}</p>
+      {desc && <p className="text-[14px] text-[#5F6F7E] leading-snug mt-0.5">{desc}</p>}
+    </div>
   </div>
 );
