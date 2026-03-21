@@ -28,7 +28,7 @@ const OrganizationCard = () => {
 
           {/* Description */}
           <p className="text-[14px] text-[#5A7089] leading-snug mb-3">
-            One entry to GP and specialist care.
+            Access specialist care across multiple disciplines.
           </p>
 
           {/* Capability pills */}
