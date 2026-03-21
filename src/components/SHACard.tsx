@@ -47,9 +47,6 @@ const SHACard = () => {
             </span>
           </div>
 
-
-          {/* CTA */}
-
           {/* CTA */}
           <Button
             className="w-full h-9 bg-gradient-to-r from-[#4A7FC1] to-[#3A6BAD] hover:from-[#3D6EA3] hover:to-[#325D96] text-white font-medium text-[14px] shadow-[0_2px_8px_rgba(74,127,193,0.3)] hover:shadow-[0_4px_14px_rgba(74,127,193,0.4)] transition-all group-hover:-translate-y-px active:scale-[0.97]"
