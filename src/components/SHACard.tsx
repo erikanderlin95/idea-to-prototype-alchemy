@@ -20,7 +20,7 @@ const SHACard = () => {
 
           {/* Title */}
           <h3 className="text-[17px] font-bold text-[#0E2E4A] mb-0.5">
-            SG HealthCare Alliance
+            SG Healthcare Alliance
           </h3>
           <p className="text-[13px] text-[#5A7089] mb-2.5">
             Integrated Care Network
@@ -28,28 +28,28 @@ const SHACard = () => {
 
           {/* Description */}
           <p className="text-[14px] text-[#5A7089] leading-snug mb-3">
-            Access primary, specialist, and allied care.
+            Care coordinated through our medical network, led by an experienced clinician.
           </p>
 
           {/* Capability pills */}
           <div className="flex flex-wrap gap-1.5 justify-center mb-3">
             <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#3D6EA3] bg-[#E8EFF8] border border-[#4A7FC1]/20 rounded-full px-2.5 py-0.5">
               <Network className="h-3 w-3" />
-              Multi-Clinic
+              Specialist Access
             </span>
             <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#3D6EA3] bg-[#E8EFF8] border border-[#4A7FC1]/20 rounded-full px-2.5 py-0.5">
               <Stethoscope className="h-3 w-3" />
-              GP & Specialist
+              Coordinated Care
             </span>
             <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#3D6EA3] bg-[#E8EFF8] border border-[#4A7FC1]/20 rounded-full px-2.5 py-0.5">
               <Shield className="h-3 w-3" />
-              Integrated Care
+              Multi-Provider Network
             </span>
           </div>
 
           {/* System hint */}
           <p className="text-[12px] text-[#5A7089]/80 mb-4 pt-1 border-t border-[#DCE8EF]">
-            One entry → assessed → follow-up
+            One entry → assessed → coordinated care
           </p>
 
           {/* CTA */}

@@ -20,7 +20,7 @@ export const SHAHero = () => {
             </h1>
 
             <p className="text-[19px] text-[#5F6F7E] leading-relaxed max-w-lg">
-              Integrated access to primary care, specialist consultation, and allied health — delivered through one coordinated network.
+              Access specialist care across Singapore, coordinated through our medical network.
             </p>
 
             <div className="flex items-center gap-0 pt-1">
@@ -50,12 +50,12 @@ export const SHAHero = () => {
           <div className="lg:col-span-2">
             <div className="rounded-2xl bg-white border border-[#DCE8EF] shadow-[0_8px_32px_rgba(18,56,91,0.12)] overflow-hidden">
               <div className="px-5 py-3 bg-[#EDF2F9] border-b border-[#DCE8EF]">
-                <span className="text-[15px] font-bold text-[#12385B] uppercase tracking-widest">Network Capabilities</span>
+                <span className="text-[15px] font-bold text-[#12385B] uppercase tracking-widest">Care Capabilities</span>
               </div>
               <div className="p-3 space-y-0.5">
-                <CapabilityChip icon={<Network className="h-4 w-4" />} label="Multi-Site Network" />
-                <CapabilityChip icon={<Stethoscope className="h-4 w-4" />} label="Specialist Access" />
-                <CapabilityChip icon={<Shield className="h-4 w-4" />} label="Allied Health Services" />
+                <CapabilityChip icon={<Network className="h-4 w-4" />} label="Specialist Access" desc="Access specialist care across multiple disciplines through our network." />
+                <CapabilityChip icon={<Stethoscope className="h-4 w-4" />} label="Appointment Coordination" desc="We coordinate appointments with the right specialist for your condition." />
+                <CapabilityChip icon={<Shield className="h-4 w-4" />} label="Care Support" desc="Ongoing support from consultation through treatment and follow-up." />
               </div>
             </div>
           </div>
@@ -65,11 +65,14 @@ export const SHAHero = () => {
   );
 };
 
-const CapabilityChip = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <div className="flex items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-[#E8EFF8] transition-colors duration-200">
-    <div className="w-8 h-8 rounded-lg bg-[#E8EFF8] flex items-center justify-center text-[#4A7FC1] flex-shrink-0">
+const CapabilityChip = ({ icon, label, desc }: { icon: React.ReactNode; label: string; desc?: string }) => (
+  <div className="flex items-start gap-3 rounded-lg px-3 py-2.5 hover:bg-[#E8EFF8] transition-colors duration-200">
+    <div className="w-8 h-8 rounded-lg bg-[#E8EFF8] flex items-center justify-center text-[#4A7FC1] flex-shrink-0 mt-0.5">
       {icon}
     </div>
-    <p className="text-[17px] font-semibold text-[#12385B] leading-tight">{label}</p>
+    <div>
+      <p className="text-[17px] font-semibold text-[#12385B] leading-tight">{label}</p>
+      {desc && <p className="text-[14px] text-[#5F6F7E] leading-snug mt-0.5">{desc}</p>}
+    </div>
   </div>
 );

@@ -19,10 +19,10 @@ export const FeaturedConsultants = () => {
             {t("featuredConsultants.title")}
           </h2>
           <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto mb-1">
-            Not sure which clinic to choose?
+            Not sure which specialist to see? We coordinate your care and connect you to the right provider.
           </p>
           <p className="text-[15px] text-muted-foreground mt-1.5">
-            Start with any network — we'll guide you to the right care.
+            Start here — we'll guide you to the right care.
           </p>
         </div>
 

@@ -7,8 +7,11 @@ export const SHACareJourney = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
           <div className="space-y-3">
             <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
-              Patient Intake Flow
+              Find Your Specialist
             </h2>
+            <p className="text-[17px] text-[#5F6F7E] leading-relaxed max-w-lg">
+              Submit your request and we'll connect you to the right specialist.
+            </p>
 
             <div className="space-y-2.5">
               <JourneyStep icon={<ClipboardList className="h-4 w-4" />} text="Describe your health concern" />

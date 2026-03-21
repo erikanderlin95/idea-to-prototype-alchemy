@@ -23,7 +23,7 @@ export const SHAConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
           Care Coordination Team
         </h2>
         <p className="text-[17px] text-[#5F6F7E]">
-          Each coordinator connects you to the right provider across our network.
+          Led by Dr Richard Kwok, with coordinated specialist referrals across our network.
         </p>
 
         <div className="pt-3">
