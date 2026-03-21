@@ -35,7 +35,7 @@ export const SHACareJourney = ({ onStartIntake }: SHACareJourneyProps) => {
               >
                 Start with Dr Richard Kwok →
               </Button>
-              <p className="text-[13px] text-[#6B7D8E] mt-2">No app download needed. You pay the clinic directly — no additional fees.</p>
+              <p className="text-[13px] text-[#6B7D8E] mt-2">No app download needed. Contact is made directly via WhatsApp.</p>
             </div>
           </div>
 
