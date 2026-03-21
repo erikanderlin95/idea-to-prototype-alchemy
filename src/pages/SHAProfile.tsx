@@ -14,7 +14,7 @@ const SHAProfile = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <SHAHero />
-      <SHACareJourney />
+      <SHACareJourney onStartIntake={() => setShowIntakeModal(true)} />
       <SHAWhyConcierge />
       <SHAServices />
       <ManagedCareModal
