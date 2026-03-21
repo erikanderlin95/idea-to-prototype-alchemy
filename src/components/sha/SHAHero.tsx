@@ -20,7 +20,7 @@ export const SHAHero = () => {
             </h1>
 
             <p className="text-[19px] text-[#5F6F7E] leading-relaxed max-w-lg">
-              Access a wide range of specialist disciplines across Singapore.
+              Access a wide panel of specialist doctors across multiple disciplines in Singapore.
             </p>
 
             <div className="flex items-center gap-0 pt-1">
@@ -35,14 +35,14 @@ export const SHAHero = () => {
                 <div className="w-6 h-6 rounded-full bg-[#4A7FC1]/20 flex items-center justify-center text-[#4A7FC1]">
                   <UserCheck className="h-3 w-3" />
                 </div>
-                <span className="text-[15px] font-bold text-[#12385B]">Multi-Disciplinary</span>
+                <span className="text-[15px] font-bold text-[#12385B]">Specialist Disciplines</span>
               </div>
               <ChevronRight className="h-4 w-4 text-[#4A7FC1]/40 mx-1 flex-shrink-0" />
               <div className="flex items-center gap-2 rounded-lg bg-[#E8EFF8] px-3 py-2">
                 <div className="w-6 h-6 rounded-full bg-[#4A7FC1]/20 flex items-center justify-center text-[#4A7FC1]">
                   <MessageCircle className="h-3 w-3" />
                 </div>
-                <span className="text-[15px] font-bold text-[#12385B]">Specialist Access</span>
+                <span className="text-[15px] font-bold text-[#12385B]">Multi-Disciplinary</span>
               </div>
             </div>
           </div>
@@ -54,8 +54,8 @@ export const SHAHero = () => {
               </div>
               <div className="p-3 space-y-0.5">
                 <CapabilityChip icon={<Network className="h-4 w-4" />} label="Specialist Disciplines" desc="Access a range of medical specialties across different fields." />
-                <CapabilityChip icon={<Stethoscope className="h-4 w-4" />} label="Multi-Disciplinary Care" desc="Includes specialties such as surgery, cardiology, dermatology and more." />
-                <CapabilityChip icon={<Shield className="h-4 w-4" />} label="Specialist Access" desc="Connect with specialists across various areas of medical care." />
+                <CapabilityChip icon={<Stethoscope className="h-4 w-4" />} label="Multi-Disciplinary Care" desc="Includes specialties such as general surgery, cardiology, dermatology, oncology, ENT and more." />
+                <CapabilityChip icon={<Shield className="h-4 w-4" />} label="Specialist Access" desc="Connect with specialist doctors across various areas of medical care." />
               </div>
             </div>
           </div>

@@ -10,11 +10,11 @@ export const SHAWhyConcierge = () => {
               Why Integrated Care Matters
             </h2>
             <p className="text-[18px] text-[#5F6F7E] leading-relaxed max-w-lg">
-              Patients often move between clinics, specialists, and therapists without a clear thread connecting their care.
+              Patients can access specialist care across multiple disciplines through a single panel of doctors.
             </p>
-            <p className="text-[18px] text-[#12385B] font-medium">The Alliance model brings it together:</p>
+            <p className="text-[18px] text-[#12385B] font-medium">Available specialist disciplines:</p>
             <ul className="space-y-1.5 pl-1">
-              {["One intake point", "Coordinated provider matching", "Ongoing care continuity"].map((item) => (
+              {["Surgical specialties including general surgery and orthopaedics", "Medical specialties including cardiology, endocrinology and dermatology", "Access across multiple specialist disciplines"].map((item) => (
                 <li key={item} className="flex items-center gap-2 text-[17px] text-[#12385B]">
                   <Check className="h-4 w-4 text-[#4A7FC1] shrink-0" />
                   {item}
@@ -31,7 +31,7 @@ export const SHAWhyConcierge = () => {
               <div className="rounded-xl border border-[#DCE8EF] bg-white p-3.5 space-y-2">
                 <h3 className="text-[16px] font-bold text-[#5F6F7E]">Fragmented</h3>
                 <ul className="space-y-1">
-                  {["Separate providers", "No shared records", "Repeated intake", "Gaps in follow-up"].map((item) => (
+                  {["Separate providers", "No shared access", "Repeated intake", "Gaps in follow-up"].map((item) => (
                     <li key={item} className="flex items-center gap-2 text-[15px] text-[#5F6F7E]">
                       <X className="h-3.5 w-3.5 shrink-0 text-[#b0bec5]" />
                       {item}
@@ -44,9 +44,9 @@ export const SHAWhyConcierge = () => {
                 <h3 className="text-[16px] font-bold text-[#12385B]">Alliance Model</h3>
                 <ul className="space-y-1">
                   {[
-                    { label: "Surgical Specialties", desc: "General surgery, orthopaedics and other surgical disciplines" },
-                    { label: "Medical Specialties", desc: "Cardiology, endocrinology, dermatology, urology and more" },
-                    { label: "Comprehensive Coverage", desc: "Access across multiple specialist areas within one platform" },
+                    { label: "Surgical Specialties", desc: "general surgery, orthopaedics and related disciplines" },
+                    { label: "Medical Specialties", desc: "cardiology, endocrinology, dermatology, urology and more" },
+                    { label: "Comprehensive Coverage", desc: "access across multiple specialist areas" },
                   ].map((item) => (
                     <li key={item.label} className="flex items-start gap-2 text-[15px] text-[#12385B]">
                       <Check className="h-3.5 w-3.5 shrink-0 text-[#4A7FC1] mt-0.5" />
