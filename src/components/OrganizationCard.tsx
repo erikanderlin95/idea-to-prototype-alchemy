@@ -47,10 +47,8 @@ const OrganizationCard = () => {
             </span>
           </div>
 
-          {/* System hint */}
-          <p className="text-[12px] text-[#5A7089]/80 mb-4 pt-1 border-t border-[#DCE8EF]">
-            One entry → matched → direct follow-up
-          </p>
+
+          {/* CTA */}
 
           {/* CTA */}
           <Button
