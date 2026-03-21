@@ -35,15 +35,15 @@ const SHACard = () => {
           <div className="flex flex-wrap gap-1.5 justify-center mb-3">
             <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#3D6EA3] bg-[#E8EFF8] border border-[#4A7FC1]/20 rounded-full px-2.5 py-0.5">
               <Network className="h-3 w-3" />
-              Specialist Access
+              Multi-Disciplinary Care
             </span>
             <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#3D6EA3] bg-[#E8EFF8] border border-[#4A7FC1]/20 rounded-full px-2.5 py-0.5">
               <Stethoscope className="h-3 w-3" />
-              Coordinated Care
+              Specialist Access
             </span>
             <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#3D6EA3] bg-[#E8EFF8] border border-[#4A7FC1]/20 rounded-full px-2.5 py-0.5">
               <Shield className="h-3 w-3" />
-              Multi-Provider Network
+              Coordinated Care
             </span>
           </div>
 
