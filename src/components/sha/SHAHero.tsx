@@ -20,7 +20,7 @@ export const SHAHero = () => {
             </h1>
 
             <p className="text-[19px] text-[#5F6F7E] leading-relaxed max-w-lg">
-              Access specialist care across Singapore, coordinated through our medical network.
+              Access specialist care across multiple medical disciplines through a coordinated network.
             </p>
 
             <div className="flex items-center gap-0 pt-1">
@@ -28,21 +28,21 @@ export const SHAHero = () => {
                 <div className="w-6 h-6 rounded-full bg-[#4A7FC1]/20 flex items-center justify-center text-[#4A7FC1]">
                   <ClipboardList className="h-3 w-3" />
                 </div>
-                <span className="text-[15px] font-bold text-[#12385B]">One Request</span>
+                <span className="text-[15px] font-bold text-[#12385B]">Specialist Care</span>
               </div>
               <ChevronRight className="h-4 w-4 text-[#4A7FC1]/40 mx-1 flex-shrink-0" />
               <div className="flex items-center gap-2 rounded-lg bg-[#E8EFF8] px-3 py-2">
                 <div className="w-6 h-6 rounded-full bg-[#4A7FC1]/20 flex items-center justify-center text-[#4A7FC1]">
                   <UserCheck className="h-3 w-3" />
                 </div>
-                <span className="text-[15px] font-bold text-[#12385B]">We Assess</span>
+                <span className="text-[15px] font-bold text-[#12385B]">Multi-Disciplinary Access</span>
               </div>
               <ChevronRight className="h-4 w-4 text-[#4A7FC1]/40 mx-1 flex-shrink-0" />
               <div className="flex items-center gap-2 rounded-lg bg-[#E8EFF8] px-3 py-2">
                 <div className="w-6 h-6 rounded-full bg-[#4A7FC1]/20 flex items-center justify-center text-[#4A7FC1]">
                   <MessageCircle className="h-3 w-3" />
                 </div>
-                <span className="text-[15px] font-bold text-[#12385B]">Care Begins</span>
+                <span className="text-[15px] font-bold text-[#12385B]">Coordinated Support</span>
               </div>
             </div>
           </div>
@@ -53,9 +53,9 @@ export const SHAHero = () => {
                 <span className="text-[15px] font-bold text-[#12385B] uppercase tracking-widest">Care Capabilities</span>
               </div>
               <div className="p-3 space-y-0.5">
-                <CapabilityChip icon={<Network className="h-4 w-4" />} label="Specialist Access" desc="Access specialist care across multiple disciplines through our network." />
-                <CapabilityChip icon={<Stethoscope className="h-4 w-4" />} label="Appointment Coordination" desc="We coordinate appointments with the right specialist for your condition." />
-                <CapabilityChip icon={<Shield className="h-4 w-4" />} label="Care Support" desc="Ongoing support from consultation through treatment and follow-up." />
+                <CapabilityChip icon={<Network className="h-4 w-4" />} label="Specialist Disciplines" desc="Access care across multiple specialties including surgery, cardiology, dermatology and more." />
+                <CapabilityChip icon={<Stethoscope className="h-4 w-4" />} label="Coordinated Access" desc="Care is coordinated across disciplines based on your medical needs." />
+                <CapabilityChip icon={<Shield className="h-4 w-4" />} label="Multi-Disciplinary Care" desc="Integrated access to different specialist fields within a single network." />
               </div>
             </div>
           </div>

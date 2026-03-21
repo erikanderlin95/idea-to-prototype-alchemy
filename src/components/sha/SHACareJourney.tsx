@@ -10,7 +10,7 @@ export const SHACareJourney = () => {
               Find Your Specialist
             </h2>
             <p className="text-[17px] text-[#5F6F7E] leading-relaxed max-w-lg">
-              Submit your request and we'll connect you to the right specialist.
+              Access specialist disciplines across surgery, cardiology, dermatology and more.
             </p>
 
             <div className="space-y-2.5">

@@ -20,10 +20,10 @@ export const SHAConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
     <section className="py-6 px-4 bg-[#F4F8FB]">
       <div className="max-w-5xl mx-auto space-y-1 text-center">
         <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
-          Care Coordination Team
+          Care Coordination
         </h2>
         <p className="text-[17px] text-[#5F6F7E]">
-          Led by Dr Richard Kwok, with coordinated specialist referrals across our network.
+          Care coordination led by Dr Richard Kwok.
         </p>
 
         <div className="pt-3">
