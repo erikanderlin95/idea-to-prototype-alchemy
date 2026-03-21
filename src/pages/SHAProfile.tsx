@@ -13,6 +13,7 @@ const SHAProfile = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
+      <SHAHero />
       <SHAWhyConcierge />
       <SHACareJourney onStartIntake={() => setShowIntakeModal(true)} />
       <SHAServices />
