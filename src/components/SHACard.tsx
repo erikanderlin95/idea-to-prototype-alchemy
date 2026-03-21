@@ -55,7 +55,7 @@ const SHACard = () => {
             className="w-full h-9 bg-gradient-to-r from-[#4A7FC1] to-[#3A6BAD] hover:from-[#3D6EA3] hover:to-[#325D96] text-white font-medium text-[14px] shadow-[0_2px_8px_rgba(74,127,193,0.3)] hover:shadow-[0_4px_14px_rgba(74,127,193,0.4)] transition-all group-hover:-translate-y-px active:scale-[0.97]"
             onClick={() => navigate("/organization/sha")}
           >
-            Start with SHA
+            View Specialists
             <ArrowRight className="ml-1.5 h-4 w-4" />
           </Button>
         </div>

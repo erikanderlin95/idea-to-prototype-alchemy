@@ -19,10 +19,10 @@ export const FeaturedConsultants = () => {
             {t("featuredConsultants.title")}
           </h2>
           <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto mb-1">
-            Access specialist care across multiple disciplines through a coordinated network.
+            Explore specialist disciplines and find the right doctor for your condition.
           </p>
           <p className="text-[15px] text-muted-foreground mt-1.5">
-            Start here — your care will be guided across the right specialty.
+            Browse specialties and connect with the appropriate specialist.
           </p>
         </div>
 
