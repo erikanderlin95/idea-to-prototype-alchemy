@@ -1,6 +1,11 @@
 import { ClipboardList, UserCheck, MessageCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export const SHACareJourney = () => {
+interface SHACareJourneyProps {
+  onStartIntake: () => void;
+}
+
+export const SHACareJourney = ({ onStartIntake }: SHACareJourneyProps) => {
   return (
     <section className="py-8 px-4">
       <div className="max-w-5xl mx-auto">
@@ -15,31 +20,45 @@ export const SHACareJourney = () => {
 
             <div className="space-y-2.5">
               <JourneyStep icon={<ClipboardList className="h-4 w-4" />} text="Describe your health concern" />
-              <JourneyStep icon={<UserCheck className="h-4 w-4" />} text="Get assessed and matched to care" />
+              <JourneyStep icon={<UserCheck className="h-4 w-4" />} text="We will connect you to the appropriate specialist" />
               <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text="Continue directly via WhatsApp" />
             </div>
 
             <p className="mt-4 text-[15px] leading-relaxed text-[#6B7D8E]">
               No app download needed. You pay the clinic directly — no additional fees.
             </p>
+
+            <div className="pt-2">
+              <Button
+                className="h-10 px-6 text-[15px] rounded-lg bg-[#4A7FC1] hover:bg-[#3D6EA3] text-white font-medium shadow-[0_2px_8px_rgba(74,127,193,0.3)] hover:shadow-[0_4px_14px_rgba(74,127,193,0.4)] transition-all active:scale-[0.97]"
+                onClick={onStartIntake}
+              >
+                Start with Dr Richard Kwok
+              </Button>
+            </div>
           </div>
 
-          <div className="rounded-xl bg-white border border-[#DCE8EF] shadow-[0_4px_16px_rgba(18,56,91,0.08)] p-4 space-y-2.5 relative">
-            <div className="flex items-center justify-between pb-2 border-b border-[#DCE8EF]">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-[hsl(0,50%,65%)]" />
-                <div className="w-2 h-2 rounded-full bg-[hsl(45,60%,60%)]" />
-                <div className="w-2 h-2 rounded-full bg-[hsl(155,45%,55%)]" />
-                <span className="text-[14px] text-[#5F6F7E] ml-2 font-mono">care-intake</span>
+          <div className="space-y-2">
+            <p className="text-[14px] text-[#5F6F7E] leading-relaxed">
+              Start by describing your condition — we will guide you to the appropriate specialist.
+            </p>
+            <div className="rounded-xl bg-white border border-[#DCE8EF] shadow-[0_4px_16px_rgba(18,56,91,0.08)] p-4 space-y-2.5 relative">
+              <div className="flex items-center justify-between pb-2 border-b border-[#DCE8EF]">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-[hsl(0,50%,65%)]" />
+                  <div className="w-2 h-2 rounded-full bg-[hsl(45,60%,60%)]" />
+                  <div className="w-2 h-2 rounded-full bg-[hsl(155,45%,55%)]" />
+                  <span className="text-[14px] text-[#5F6F7E] ml-2 font-mono">care-intake</span>
+                </div>
+                <span className="text-[12px] text-[#5F6F7E]/60 italic">Example intake preview</span>
               </div>
-              <span className="text-[12px] text-[#5F6F7E]/60 italic">Example intake preview</span>
-            </div>
 
-            <div className="space-y-2 opacity-80">
-              <FakeField label="Condition / Concern" value="Recurring knee discomfort" />
-              <FakeField label="Preferred Location" value="West / Jurong" />
-              <FakeField label="Urgency" value="Within a week" />
-              <FakeField label="Contact" value="+65 ●●●● ●●12" />
+              <div className="space-y-2 opacity-80">
+                <FakeField label="Condition / Concern" value="Recurring knee discomfort" />
+                <FakeField label="Preferred Location" value="West / Jurong" />
+                <FakeField label="Urgency" value="Within a week" />
+                <FakeField label="Contact" value="+65 ●●●● ●●12" />
+              </div>
             </div>
           </div>
         </div>
