@@ -22,7 +22,8 @@ export const SearchFilters = ({ defaultCategory = "all", onCategoryChange }: Sea
     { key: "all", label: t("search.all") },
     { key: "gp", label: t("search.gp") },
     { key: "tcm", label: t("search.tcm") },
-    { key: "allied_health", label: "Allied Health" }
+    { key: "allied_health", label: "Allied Health" },
+    { key: "mental_health", label: "Mental Health" }
   ];
 
   const handleCategoryClick = (key: string) => {
