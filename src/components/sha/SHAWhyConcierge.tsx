@@ -31,7 +31,7 @@ export const SHAWhyConcierge = () => {
               <div className="rounded-xl border border-[#DCE8EF] bg-white p-3.5 space-y-2">
                 <h3 className="text-[16px] font-bold text-[#5F6F7E]">Fragmented</h3>
                 <ul className="space-y-1">
-                  {["Separate providers", "No shared records", "Repeated intake", "Gaps in follow-up"].map((item) => (
+                  {["Separate providers", "No shared access", "Repeated intake", "Gaps in follow-up"].map((item) => (
                     <li key={item} className="flex items-center gap-2 text-[15px] text-[#5F6F7E]">
                       <X className="h-3.5 w-3.5 shrink-0 text-[#b0bec5]" />
                       {item}
