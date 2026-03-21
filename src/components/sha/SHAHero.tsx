@@ -54,7 +54,7 @@ export const SHAHero = () => {
               </div>
               <div className="p-3 space-y-0.5">
                 <CapabilityChip icon={<Network className="h-4 w-4" />} label="Specialist Disciplines" desc="Access a range of medical specialties across different fields." />
-                <CapabilityChip icon={<Stethoscope className="h-4 w-4" />} label="Multi-Disciplinary Care" desc="Includes specialties such as surgery, cardiology, dermatology and more." />
+                <CapabilityChip icon={<Stethoscope className="h-4 w-4" />} label="Multi-Disciplinary Care" desc="Includes specialties such as general surgery, cardiology, dermatology, oncology, ENT and more." />
                 <CapabilityChip icon={<Shield className="h-4 w-4" />} label="Specialist Access" desc="Connect with specialists across various areas of medical care." />
               </div>
             </div>
