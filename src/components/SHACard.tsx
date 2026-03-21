@@ -23,7 +23,7 @@ const SHACard = () => {
             SG Healthcare Alliance
           </h3>
           <p className="text-[13px] text-[#5A7089] mb-2.5">
-            Integrated Care Network
+            Panel of Specialists
           </p>
 
           {/* Description */}
