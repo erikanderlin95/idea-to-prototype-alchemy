@@ -10,11 +10,11 @@ export const SHAWhyConcierge = () => {
               Why Integrated Care Matters
             </h2>
             <p className="text-[18px] text-[#5F6F7E] leading-relaxed max-w-lg">
-              Patients often move between clinics, specialists, and therapists without a clear thread connecting their care.
+              Patients can access specialist care across multiple disciplines through a single panel of doctors.
             </p>
-            <p className="text-[18px] text-[#12385B] font-medium">The Alliance model brings it together:</p>
+            <p className="text-[18px] text-[#12385B] font-medium">Available specialist disciplines:</p>
             <ul className="space-y-1.5 pl-1">
-              {["One intake point", "Coordinated provider matching", "Ongoing care continuity"].map((item) => (
+              {["Surgical specialties including general surgery and orthopaedics", "Medical specialties including cardiology, endocrinology and dermatology", "Access across multiple specialist disciplines"].map((item) => (
                 <li key={item} className="flex items-center gap-2 text-[17px] text-[#12385B]">
                   <Check className="h-4 w-4 text-[#4A7FC1] shrink-0" />
                   {item}
