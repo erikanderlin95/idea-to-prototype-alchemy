@@ -24,17 +24,18 @@ export const SHACareJourney = ({ onStartIntake }: SHACareJourneyProps) => {
               <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text="Continue directly via WhatsApp" />
             </div>
 
-            <p className="mt-4 text-[15px] leading-relaxed text-[#6B7D8E]">
-              No app download needed. You pay the clinic directly — no additional fees.
-            </p>
 
-            <div className="pt-2">
+
+
+            <div className="pt-3">
               <Button
-                className="h-10 px-6 text-[15px] rounded-lg bg-[#4A7FC1] hover:bg-[#3D6EA3] text-white font-medium shadow-[0_2px_8px_rgba(74,127,193,0.3)] hover:shadow-[0_4px_14px_rgba(74,127,193,0.4)] transition-all active:scale-[0.97]"
+                size="lg"
+                className="w-full sm:w-auto h-12 px-8 text-[16px] font-semibold rounded-xl bg-gradient-to-r from-[#4A7FC1] to-[#3A6BAD] hover:from-[#3D6EA3] hover:to-[#325D96] text-white shadow-[0_4px_16px_rgba(74,127,193,0.35)] hover:shadow-[0_6px_24px_rgba(74,127,193,0.45)] transition-all active:scale-[0.97] hover:-translate-y-0.5"
                 onClick={onStartIntake}
               >
-                Start with Dr Richard Kwok
+                Start with Dr Richard Kwok →
               </Button>
+              <p className="text-[13px] text-[#6B7D8E] mt-2">No app download needed. You pay the clinic directly — no additional fees.</p>
             </div>
           </div>
 
