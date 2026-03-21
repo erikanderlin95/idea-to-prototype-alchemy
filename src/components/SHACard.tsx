@@ -23,19 +23,19 @@ const SHACard = () => {
             SG Healthcare Alliance
           </h3>
           <p className="text-[13px] text-[#5A7089] mb-2.5">
-            Integrated Care Network
+            Panel of Specialists
           </p>
 
           {/* Description */}
           <p className="text-[14px] text-[#5A7089] leading-snug mb-3">
-            Access specialist care across multiple disciplines through a coordinated network.
+            Access specialist disciplines across multiple areas of medical care.
           </p>
 
           {/* Capability pills */}
           <div className="flex flex-wrap gap-1.5 justify-center mb-3">
             <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#3D6EA3] bg-[#E8EFF8] border border-[#4A7FC1]/20 rounded-full px-2.5 py-0.5">
               <Network className="h-3 w-3" />
-              Multi-Disciplinary Care
+              Multi-Disciplinary
             </span>
             <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#3D6EA3] bg-[#E8EFF8] border border-[#4A7FC1]/20 rounded-full px-2.5 py-0.5">
               <Stethoscope className="h-3 w-3" />
@@ -43,21 +43,19 @@ const SHACard = () => {
             </span>
             <span className="inline-flex items-center gap-1 text-[11px] font-medium text-[#3D6EA3] bg-[#E8EFF8] border border-[#4A7FC1]/20 rounded-full px-2.5 py-0.5">
               <Shield className="h-3 w-3" />
-              Coordinated Care
+              Medical Specialties
             </span>
           </div>
 
-          {/* System hint */}
-          <p className="text-[12px] text-[#5A7089]/80 mb-4 pt-1 border-t border-[#DCE8EF]">
-            One entry → guided across specialties
-          </p>
+
+          {/* CTA */}
 
           {/* CTA */}
           <Button
             className="w-full h-9 bg-gradient-to-r from-[#4A7FC1] to-[#3A6BAD] hover:from-[#3D6EA3] hover:to-[#325D96] text-white font-medium text-[14px] shadow-[0_2px_8px_rgba(74,127,193,0.3)] hover:shadow-[0_4px_14px_rgba(74,127,193,0.4)] transition-all group-hover:-translate-y-px active:scale-[0.97]"
             onClick={() => navigate("/organization/sha")}
           >
-            Start with SHA
+            View Specialists
             <ArrowRight className="ml-1.5 h-4 w-4" />
           </Button>
         </div>
