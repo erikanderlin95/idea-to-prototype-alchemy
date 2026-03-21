@@ -50,7 +50,7 @@ export const SHAHero = () => {
           <div className="lg:col-span-2">
             <div className="rounded-2xl bg-white border border-[#DCE8EF] shadow-[0_8px_32px_rgba(18,56,91,0.12)] overflow-hidden">
               <div className="px-5 py-3 bg-[#EDF2F9] border-b border-[#DCE8EF]">
-                <span className="text-[15px] font-bold text-[#12385B] uppercase tracking-widest">Care Capabilities</span>
+                <span className="text-[15px] font-bold text-[#12385B] uppercase tracking-widest">Specialist Disciplines</span>
               </div>
               <div className="p-3 space-y-0.5">
                 <CapabilityChip icon={<Network className="h-4 w-4" />} label="Specialist Disciplines" desc="Access care across multiple specialties including surgery, cardiology, dermatology and more." />
