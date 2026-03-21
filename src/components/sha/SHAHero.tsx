@@ -20,7 +20,7 @@ export const SHAHero = () => {
             </h1>
 
             <p className="text-[19px] text-[#5F6F7E] leading-relaxed max-w-lg">
-              Access a wide range of specialist disciplines across Singapore.
+              Access a wide panel of specialist doctors across multiple disciplines in Singapore.
             </p>
 
             <div className="flex items-center gap-0 pt-1">
