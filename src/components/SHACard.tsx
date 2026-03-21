@@ -49,7 +49,7 @@ const SHACard = () => {
 
           {/* System hint */}
           <p className="text-[12px] text-[#5A7089]/80 mb-4 pt-1 border-t border-[#DCE8EF]">
-            One entry → assessed → coordinated care
+            One entry → guided across specialties
           </p>
 
           {/* CTA */}

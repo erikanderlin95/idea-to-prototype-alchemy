@@ -44,9 +44,9 @@ export const SHAWhyConcierge = () => {
                 <h3 className="text-[16px] font-bold text-[#12385B]">Alliance Model</h3>
                 <ul className="space-y-1">
                   {[
-                    { label: "Specialist Network", desc: "Connected access to specialists across private hospitals and clinics" },
-                    { label: "Fee Transparency", desc: "No inflated medical fees — aligned with standard clinic pricing" },
-                    { label: "Coordinated Care", desc: "One point of contact to guide your care journey" },
+                    { label: "Broad Specialties", desc: "Includes general surgery, orthopaedics, oncology, ENT and other specialist fields" },
+                    { label: "Specialist Coverage", desc: "Covers multiple areas such as cardiology, urology, dermatology and endocrinology" },
+                    { label: "Structured Care Access", desc: "Patients are guided across appropriate specialties based on condition" },
                   ].map((item) => (
                     <li key={item.label} className="flex items-start gap-2 text-[15px] text-[#12385B]">
                       <Check className="h-3.5 w-3.5 shrink-0 text-[#4A7FC1] mt-0.5" />
