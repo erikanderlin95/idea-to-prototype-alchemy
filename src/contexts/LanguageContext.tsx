@@ -46,9 +46,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero
     "hero.badge": "Check Queue • Book • Connect",
-    "hero.title1": "Healthcare Made",
-    "hero.title2": "Simple & Smart",
-    "hero.subtitle": "Check queue status before you leave, book appointments, and connect with healthcare professionals across Singapore",
+    "hero.title1": "Know Before",
+    "hero.title2": "You Go",
+    "hero.subtitle": "Find clinics, check availability or queues, and get guided to the right care — all in one place.",
     "hero.findClinics": "Find Clinics",
     "hero.learnMore": "Learn More",
     "hero.queueTitle": "Queue Visibility",
