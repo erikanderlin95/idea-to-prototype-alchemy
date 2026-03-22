@@ -578,7 +578,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.title1": "出发前",
     "hero.title2": "先了解",
     "hero.subtitle": "即时查看排队、可用性和附近选项。",
-    "hero.trustLine": "附近诊所实时数据",
+    "hero.trustLine": "",
     "hero.findClinics": "查看附近诊所",
     "hero.findMyQueue": "查看我的排队状态",
     "hero.learnMore": "了解更多",
