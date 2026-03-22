@@ -51,7 +51,7 @@ export const Features = () => {
         <div className="text-center mb-10">
           <Badge variant="secondary" className="mb-4">{t("features.badge")}</Badge>
           <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-foreground mb-3">{t("features.title")}</h2>
-          <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
             {t("features.subtitle")}
           </p>
         </div>
@@ -73,8 +73,7 @@ export const Features = () => {
                 {feature.icon === "book" && <AppointmentsIcon size="md" />}
                 {feature.icon === "connect" && <ChatbotIcon size="md" />}
               </div>
-              <h3 className="text-lg font-bold mb-1 text-center">{feature.title}</h3>
-              <p className="text-xs font-semibold text-primary text-center mb-2">{feature.subtitle}</p>
+              <h3 className="text-lg font-bold mb-2 text-center">{feature.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed text-center">{feature.description}</p>
             </div>
           ))}
