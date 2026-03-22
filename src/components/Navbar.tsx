@@ -65,7 +65,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
             <span className="text-base md:text-xl font-poppins font-bold tracking-tight leading-none whitespace-nowrap">
               Clynic<span className="text-primary">Q</span>
             </span>
-            <span className="text-[6px] md:text-[7px] font-semibold text-muted-foreground tracking-wide uppercase whitespace-nowrap">Queue • Book • Connect</span>
+            
           </div>
         </div>
 

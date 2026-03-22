@@ -73,8 +73,7 @@ export const Features = () => {
                 {feature.icon === "book" && <AppointmentsIcon size="md" />}
                 {feature.icon === "connect" && <ChatbotIcon size="md" />}
               </div>
-              <h3 className="text-lg font-bold mb-1 text-center">{feature.title}</h3>
-              <p className="text-xs font-semibold text-primary text-center mb-2">{feature.subtitle}</p>
+              <h3 className="text-lg font-bold mb-2 text-center">{feature.title}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed text-center">{feature.description}</p>
             </div>
           ))}
