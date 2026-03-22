@@ -46,9 +46,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero
     "hero.badge": "Check Queue • Book • Connect",
-    "hero.title1": "Healthcare Made",
-    "hero.title2": "Simple & Smart",
-    "hero.subtitle": "Check queue status before you leave, book appointments, and connect with healthcare professionals across Singapore",
+    "hero.title1": "Know Before",
+    "hero.title2": "You Go",
+    "hero.subtitle": "Find clinics, check availability or queues, and get guided to the right care — all in one place.",
     "hero.findClinics": "Find Clinics",
     "hero.learnMore": "Learn More",
     "hero.queueTitle": "Queue Visibility",
@@ -570,9 +570,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero
     "hero.badge": "查看排队 • 预约 • 连接",
-    "hero.title1": "简单智能的",
-    "hero.title2": "医疗保健",
-    "hero.subtitle": "出发前查看排队状况、预约就诊，并与新加坡各地的医疗保健专业人员联系",
+    "hero.title1": "出发前",
+    "hero.title2": "先了解",
+    "hero.subtitle": "查找诊所、查看排队或可用性，获得正确的医疗指引 — 一站式服务。",
     "hero.findClinics": "寻找诊所",
     "hero.learnMore": "了解更多",
     "hero.queueTitle": "排队可见",
