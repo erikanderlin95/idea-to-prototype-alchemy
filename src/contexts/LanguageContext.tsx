@@ -569,8 +569,8 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Featured Consultants
     "featuredConsultants.badge": "管理式医疗",
-    "featuredConsultants.title": "管理式医疗服务提供商",
-    "featuredConsultants.subtitle": "不确定选择哪家诊所？我们值得信赖的服务提供商帮助您找到合适的医疗服务。",
+    "featuredConsultants.title": "不确定从哪里开始？",
+    "featuredConsultants.subtitle": "通过我们的管理式医疗服务提供商，获得合适的医疗指导。",
     "featuredConsultants.viewAll": "查看所有服务提供商",
     
     // Hero
