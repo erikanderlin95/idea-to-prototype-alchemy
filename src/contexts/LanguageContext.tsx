@@ -50,7 +50,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.title1": "Know Before",
     "hero.title2": "You Go",
     "hero.subtitle": "See queues, availability, and nearby options instantly.",
-    "hero.trustLine": "Live clinic data near you",
+    "hero.trustLine": "",
     "hero.findClinics": "Check Clinics Near Me",
     "hero.findMyQueue": "View My Queue Status",
     "hero.learnMore": "Learn More",
