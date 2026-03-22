@@ -44,6 +44,9 @@ export const Hero = () => {
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               {t("hero.subtitle")}
             </p>
+            <p className="text-xs text-muted-foreground/70">
+              {t("hero.trustLine")}
+            </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-2 w-full max-w-[260px] sm:max-w-none sm:w-auto mx-auto sm:mx-0">
@@ -62,8 +65,15 @@ export const Hero = () => {
               onClick={() => setShowQueueFinder(true)}
             >
               <Phone className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
-              Find My Queue
+              {t("hero.findMyQueue")}
             </Button>
+          </div>
+
+          <p className="text-xs text-muted-foreground/60">{t("hero.microCta")}</p>
+
+          <div className="rounded-lg border border-border/50 bg-card/50 px-4 py-2 text-left max-w-xs">
+            <p className="text-sm font-medium text-foreground">{t("hero.previewClinic")}</p>
+            <p className="text-xs text-muted-foreground">{t("hero.previewStatus")}</p>
           </div>
         </div>
       </div>
