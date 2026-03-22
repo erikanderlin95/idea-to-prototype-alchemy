@@ -311,7 +311,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.checkIn": "Check In",
     "clinicCard.leaveQueue": "Leave Queue",
     "clinicCard.readyToSkip": "Check Queue",
-    "clinicCard.joinVirtual": "See wait time and join",
+    "clinicCard.joinVirtual": "See how many people are ahead",
     "clinicCard.visitType": "Visit Type",
     "clinicCard.generalConsultation": "General Consultation",
     "clinicCard.followUp": "Follow-up",
