@@ -680,7 +680,7 @@ const translations: Record<Language, Record<string, string>> = {
     "staff.walkInAdded": "上门患者已添加到队列",
     
     // Footer
-    "footer.tagline": "简化新加坡的医疗保健服务",
+    "footer.tagline": "帮助您规划诊所就诊，减少等待",
     "footer.forPatients": "患者服务",
     "footer.findClinics": "寻找诊所",
     "footer.howItWorks": "工作原理",
