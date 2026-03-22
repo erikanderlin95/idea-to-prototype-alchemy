@@ -42,7 +42,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Featured Consultants
     "featuredConsultants.badge": "Managed Healthcare",
     "featuredConsultants.title": "Not sure where to start?",
-    "featuredConsultants.subtitle": "Get guided to the right care with our Managed Healthcare providers.",
+    "featuredConsultants.subtitle": "Get guided to the right care with our Managed Healthcare Providers.",
     "featuredConsultants.viewAll": "View All Providers",
     
     // Hero
