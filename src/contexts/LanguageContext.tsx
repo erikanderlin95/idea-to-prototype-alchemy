@@ -839,7 +839,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.checkIn": "签到",
     "clinicCard.leaveQueue": "离开排队",
     "clinicCard.readyToSkip": "查看排队",
-    "clinicCard.joinVirtual": "查看等待时间并加入",
+    "clinicCard.joinVirtual": "查看前面有多少人",
     "clinicCard.visitType": "就诊类型",
     "clinicCard.generalConsultation": "一般咨询",
     "clinicCard.followUp": "复诊",
