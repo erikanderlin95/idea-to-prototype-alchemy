@@ -71,7 +71,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
 
         {/* Desktop Navigation removed */}
 
-        <div className="flex items-center gap-2 md:gap-4 shrink-0">
+        <div className="flex items-center gap-3 md:gap-5 shrink-0">
           {/* Mobile Menu - Show when signed in on smaller screens */}
           {user && (
             <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
