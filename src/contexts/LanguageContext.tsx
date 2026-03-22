@@ -113,7 +113,7 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.notifiedWhenTurn": "We'll notify you when it's nearly your turn",
     "queue.leaveQueue": "Leave Queue",
     "queue.checkIn": "Check In",
-    "queue.joinQueue": "Check Queue & Join",
+    "queue.joinQueue": "Join Queue",
     "queue.notificationsOn": "Notifications On",
     "queue.enableAlerts": "Enable Alerts",
     "queue.minutes": "min",
