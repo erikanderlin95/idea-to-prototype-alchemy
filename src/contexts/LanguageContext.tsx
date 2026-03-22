@@ -1,3 +1,4 @@
+// Language context with translations
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 export type Language = "en" | "zh";
