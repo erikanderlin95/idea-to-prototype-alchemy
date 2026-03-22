@@ -868,9 +868,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // QuickGuide
     "guide.welcome": "欢迎来到ClynicQ！👋",
-    "guide.description": "您的数字医疗保健伴侣。在新加坡各地排队、预约和连接医疗保健服务。",
+    "guide.description": "您的出行前医疗保健伴侣。查看排队预估、预约就诊，并与新加坡各地的医疗服务连接。",
     "guide.quickLinks": "快速链接：",
-    "guide.joinQueue": "加入队列",
+    "guide.joinQueue": "查看排队",
     "guide.appointments": "预约",
     "guide.healthAssistant": "健康助手",
     "guide.analytics": "分析",
@@ -880,9 +880,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // OnboardingTour
     "tour.welcomeTitle": "欢迎来到ClynicQ！👋",
-    "tour.welcomeDesc": "排队 • 预约 • 连接医疗保健服务。'Q'徽章显示所选诊所的活跃队列。",
-    "tour.browseTitle": "浏览并加入队列 🏥",
-    "tour.browseDesc": "查找诊所，检查实时队列，并从任何地方虚拟加入。",
+    "tour.welcomeDesc": "查看排队 • 预约 • 连接医疗服务。'Q'徽章显示参与诊所的预计排队活动。",
+    "tour.browseTitle": "浏览并查看排队 🏥",
+    "tour.browseDesc": "查找诊所，查看预计排队状况，出发前规划就诊。",
     "tour.navTitle": "快速访问 🧭",
     "tour.navDesc": "使用菜单访问预约、健康助手和分析。",
     "tour.back": "返回",
