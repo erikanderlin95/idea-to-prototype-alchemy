@@ -50,10 +50,9 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.title1": "Know Before",
     "hero.title2": "You Go",
     "hero.subtitle": "See queues, availability, and nearby options instantly.",
-    "hero.trustLine": "Live updates from clinics near you",
+    "hero.trustLine": "Live clinic data near you",
     "hero.findClinics": "Check Clinics Near Me",
-    "hero.findMyQueue": "View My Queue",
-    "hero.microCta": "Decide before you travel.",
+    "hero.findMyQueue": "View My Queue Status",
     "hero.learnMore": "Learn More",
     "hero.queueTitle": "Queue Visibility",
     "hero.queueDesc": "Check estimated queue status before arrival",
@@ -61,8 +60,8 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.bookDesc": "Instant appointments across all clinics",
     "hero.connectTitle": "Connect",
     "hero.connectDesc": "AI health assistant & support",
-    "hero.previewClinic": "Harmony TCM Clinic",
-    "hero.previewStatus": "5 people ahead • ~20 min wait",
+    "hero.activityTitle": "🟢 Live queue activity nearby",
+    "hero.activityDesc": "Multiple clinics updating in real time",
     
     // Features
     "features.badge": "Features",
