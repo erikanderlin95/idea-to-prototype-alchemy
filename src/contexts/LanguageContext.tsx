@@ -329,7 +329,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // MarketplaceSection
     "marketplace.title": "Find Your Clinic",
-    "marketplace.subtitle": "Browse clinics near you with real-time queue information and join virtual queues instantly",
+    "marketplace.subtitle": "Browse clinics near you, check estimated queue status, and plan your visit with less waiting",
     "marketplace.loading": "Loading clinics...",
     
     // SearchFilters
