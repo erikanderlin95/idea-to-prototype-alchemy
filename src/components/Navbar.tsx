@@ -69,38 +69,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
           </div>
         </div>
 
-        {/* Desktop Navigation - Only show on xl screens when signed in */}
-        <div className={`hidden ${user ? 'xl:flex' : 'lg:flex'} items-center gap-4 xl:gap-6 onboarding-nav`}>
-          <a href="/" className="text-sm font-medium hover:text-primary transition-colors whitespace-nowrap">
-            {t("nav.findClinics")}
-          </a>
-          <a href="/consultants" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
-            <Heart className="h-4 w-4" />
-            {t("nav.consultants")}
-          </a>
-          {user && (
-            <>
-              {isStaff && (
-                <a href="/staff" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
-                  <QueueIcon size="sm" />
-                  {t("nav.staffDashboard")}
-                </a>
-              )}
-              <a href="/appointments" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
-                <AppointmentsIcon size="sm" />
-                {t("nav.myAppointments")}
-              </a>
-              <a href="/chatbot" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
-                <ChatbotIcon size="sm" />
-                {t("nav.healthAssistant")}
-              </a>
-              <a href="/analytics" className="text-sm font-medium hover:text-primary transition-colors flex items-center gap-2 whitespace-nowrap">
-                <AnalyticsIcon size="sm" />
-                {t("nav.analytics")}
-              </a>
-            </>
-          )}
-        </div>
+        {/* Desktop Navigation removed */}
 
         <div className="flex items-center gap-2 md:gap-4 shrink-0">
           {/* Mobile Menu - Show when signed in on smaller screens */}
