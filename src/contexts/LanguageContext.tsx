@@ -578,10 +578,9 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.title1": "出发前",
     "hero.title2": "先了解",
     "hero.subtitle": "即时查看排队、可用性和附近选项。",
-    "hero.trustLine": "来自附近诊所的实时更新",
+    "hero.trustLine": "附近诊所实时数据",
     "hero.findClinics": "查看附近诊所",
-    "hero.findMyQueue": "查看我的排队",
-    "hero.microCta": "出发前做好决定。",
+    "hero.findMyQueue": "查看我的排队状态",
     "hero.learnMore": "了解更多",
     "hero.queueTitle": "排队可见",
     "hero.queueDesc": "到达前查看预计排队状况",
@@ -589,8 +588,8 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.bookDesc": "所有诊所的即时预约",
     "hero.connectTitle": "连接",
     "hero.connectDesc": "AI健康助手和支持",
-    "hero.previewClinic": "和谐中医诊所",
-    "hero.previewStatus": "前方5人 • 约20分钟等待",
+    "hero.activityTitle": "🟢 附近实时排队动态",
+    "hero.activityDesc": "多家诊所正在实时更新",
     
     // Features
     "features.badge": "功能特色",
