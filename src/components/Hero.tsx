@@ -34,22 +34,22 @@ export const Hero = () => {
       
       <div className="container px-4 md:px-6 relative z-10">
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
-          <div className="space-y-4 animate-fade-in">
+          <div className="space-y-5 animate-fade-in">
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold">
               {t("hero.title1")}
               <span className="block mt-2 bg-gradient-to-r from-ai-purple via-ai-blue to-ai-cyan bg-clip-text text-transparent">
                 {t("hero.title2")}
               </span>
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl font-medium text-muted-foreground max-w-2xl mx-auto leading-relaxed">
               {t("hero.subtitle")}
             </p>
-            <p className="text-xs text-muted-foreground/70">
+            <p className="text-sm text-muted-foreground/70">
               {t("hero.trustLine")}
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-2 w-full max-w-[260px] sm:max-w-none sm:w-auto mx-auto sm:mx-0">
+          <div className="flex flex-col sm:flex-row gap-2 w-full max-w-[260px] sm:max-w-none sm:w-auto mx-auto sm:mx-0 mt-2">
             <Button 
               size="sm" 
               className="text-xs sm:text-sm px-3 sm:px-5 py-1.5 sm:py-2 h-8 sm:h-9 shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-1"
@@ -69,11 +69,9 @@ export const Hero = () => {
             </Button>
           </div>
 
-          <p className="text-xs text-muted-foreground/60">{t("hero.microCta")}</p>
-
-          <div className="rounded-lg border border-border/50 bg-card/50 px-4 py-2 text-left max-w-xs">
-            <p className="text-sm font-medium text-foreground">{t("hero.previewClinic")}</p>
-            <p className="text-xs text-muted-foreground">{t("hero.previewStatus")}</p>
+          <div className="rounded-lg border border-border/50 bg-card/50 px-4 py-2.5 text-center max-w-xs mt-2">
+            <p className="text-sm font-medium text-foreground">{t("hero.activityTitle")}</p>
+            <p className="text-xs text-muted-foreground">{t("hero.activityDesc")}</p>
           </div>
         </div>
       </div>
