@@ -60,8 +60,8 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.bookDesc": "Instant appointments across all clinics",
     "hero.connectTitle": "Connect",
     "hero.connectDesc": "AI health assistant & support",
-    "hero.activityTitle": "🟢 Live queue activity nearby",
-    "hero.activityDesc": "Multiple clinics updating in real time",
+    "hero.activityTitle": "🟢 Live queue activity",
+    "hero.activityDesc": "Multiple clinics updating now",
     
     // Features
     "features.badge": "Features",
