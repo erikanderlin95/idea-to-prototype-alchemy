@@ -641,7 +641,7 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.notifiedWhenTurn": "快轮到您时我们会通知您",
     "queue.leaveQueue": "离开排队",
     "queue.checkIn": "签到",
-    "queue.joinQueue": "查看排队并加入",
+    "queue.joinQueue": "加入排队",
     "queue.notificationsOn": "通知已开启",
     "queue.enableAlerts": "启用提醒",
     "queue.minutes": "分钟",
