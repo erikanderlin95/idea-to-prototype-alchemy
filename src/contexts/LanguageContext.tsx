@@ -853,7 +853,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // MarketplaceSection
     "marketplace.title": "寻找您的诊所",
-    "marketplace.subtitle": "浏览附近的诊所，查看实时队列信息并立即加入虚拟队列",
+    "marketplace.subtitle": "浏览附近的诊所，查看预计排队状况，规划您的就诊以减少等待",
     "marketplace.loading": "加载诊所中...",
     
     // SearchFilters
