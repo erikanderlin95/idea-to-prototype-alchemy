@@ -18,7 +18,7 @@ export const FeaturedConsultants = () => {
           <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-foreground mb-3">
             {t("featuredConsultants.title")}
           </h2>
-          <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-base text-foreground/70 font-medium max-w-2xl mx-auto">
             {t("featuredConsultants.subtitle")}
           </p>
         </div>
