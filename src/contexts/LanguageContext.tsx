@@ -344,9 +344,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // QuickGuide
     "guide.welcome": "Welcome to ClynicQ! 👋",
-    "guide.description": "Your digital healthcare companion. Queue, Book, and Connect with healthcare services across Singapore.",
+    "guide.description": "Your pre-arrival healthcare companion. Check queue estimates, book appointments, and connect with healthcare services across Singapore.",
     "guide.quickLinks": "Quick Links:",
-    "guide.joinQueue": "Join Queue",
+    "guide.joinQueue": "Check Queue",
     "guide.appointments": "Appointments",
     "guide.healthAssistant": "Health Assistant",
     "guide.analytics": "Analytics",
@@ -356,9 +356,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // OnboardingTour
     "tour.welcomeTitle": "Welcome to ClynicQ! 👋",
-    "tour.welcomeDesc": "Queue • Book • Connect with healthcare services. The 'Q' badge shows active queues on selected clinics.",
-    "tour.browseTitle": "Browse & Join Queues 🏥",
-    "tour.browseDesc": "Find clinics, check real-time queues, and join virtually from anywhere.",
+    "tour.welcomeDesc": "Check Queue • Book • Connect with healthcare services. The 'Q' badge shows estimated queue activity at participating clinics.",
+    "tour.browseTitle": "Browse & Check Queues 🏥",
+    "tour.browseDesc": "Find clinics, check estimated queue status, and plan your visit before heading out.",
     "tour.navTitle": "Quick Access 🧭",
     "tour.navDesc": "Use the menu to access appointments, health assistant, and analytics.",
     "tour.back": "Back",
