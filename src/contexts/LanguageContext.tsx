@@ -588,8 +588,8 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.bookDesc": "所有诊所的即时预约",
     "hero.connectTitle": "连接",
     "hero.connectDesc": "AI健康助手和支持",
-    "hero.activityTitle": "🟢 附近实时排队动态",
-    "hero.activityDesc": "多家诊所正在实时更新",
+    "hero.activityTitle": "🟢 实时排队动态",
+    "hero.activityDesc": "多家诊所正在更新中",
     
     // Features
     "features.badge": "功能特色",
