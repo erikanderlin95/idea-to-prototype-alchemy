@@ -60,14 +60,14 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Features
     "features.badge": "Features",
-    "features.title": "Digital Queue • Book • Connect",
-    "features.subtitle": "A complete healthcare platform designed for Singapore's diverse medical ecosystem",
-    "features.queue.title": "Digital Queue",
-    "features.queue.subtitle": "Real-time Updates",
-    "features.queue.description": "Join virtual queues from anywhere and see live queue status and wait times before you go.",
+    "features.title": "Queue Visibility • Book • Connect",
+    "features.subtitle": "A healthcare companion designed for Singapore's diverse medical ecosystem",
+    "features.queue.title": "Queue Visibility",
+    "features.queue.subtitle": "Plan Before You Go",
+    "features.queue.description": "Check estimated queue status from anywhere before heading to the clinic. Save time and reduce uncertainty.",
     "features.book.title": "Book",
     "features.book.subtitle": "Easy Appointments",
-    "features.book.description": "Book appointments across GP, TCM, and wellness centers with instant confirmation.",
+    "features.book.description": "Book appointments across GP, TCM, and wellness centres with instant confirmation.",
     "features.connect.title": "Connect",
     "features.connect.subtitle": "Smart Assistance",
     "features.connect.description": "Pre and post consultation support via AI-powered health chatbot assistance.",
@@ -75,8 +75,8 @@ const translations: Record<Language, Record<string, string>> = {
     "features.transparency.description": "View profiles, specialties, and patient reviews",
     "features.pdpa.title": "PDPA Compliant",
     "features.pdpa.description": "Your data is secure and privacy-protected",
-    "features.fast.title": "Fast & Efficient",
-    "features.fast.description": "Reduce waiting time and streamline your healthcare journey",
+    "features.fast.title": "Plan Ahead",
+    "features.fast.description": "Check queue estimates, plan your visit, and reduce waiting uncertainty",
     
     // Queue Page
     "queue.title": "Live Queue",
