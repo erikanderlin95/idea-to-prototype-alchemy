@@ -22,8 +22,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { QueueIcon, AppointmentsIcon, AnalyticsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
-import { ClynicQIcon } from "@/components/icons/ClynicQIcon";
 import { Heart } from "lucide-react";
+import clynicqLogo from "@/assets/clynicq-logo.png";
 
 interface NavbarProps {
   onRestartTour?: () => void;
