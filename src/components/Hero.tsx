@@ -34,7 +34,7 @@ export const Hero = () => {
       
       <div className="container px-4 md:px-6 relative z-10">
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
-          <div className="space-y-3 animate-fade-in">
+          <div className="space-y-3">
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold">
               {t("hero.title1")}
               <span className="block mt-2 bg-gradient-to-r from-ai-purple via-ai-blue to-ai-cyan bg-clip-text text-transparent">
@@ -46,7 +46,7 @@ export const Hero = () => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-2 w-full max-w-[260px] sm:max-w-none sm:w-auto mx-auto sm:mx-0 mt-1">
+          <div className="flex flex-col sm:flex-row gap-2 w-full max-w-[260px] sm:max-w-none sm:w-auto mx-auto mt-1 justify-center">
             <Button 
               size="sm" 
               className="text-xs sm:text-sm px-3 sm:px-5 py-1.5 sm:py-2 h-8 sm:h-9 shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-1"
