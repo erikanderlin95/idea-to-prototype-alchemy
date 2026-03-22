@@ -45,14 +45,14 @@ const translations: Record<Language, Record<string, string>> = {
     "featuredConsultants.viewAll": "View All Providers",
     
     // Hero
-    "hero.badge": "Queue • Book • Connect",
+    "hero.badge": "Check Queue • Book • Connect",
     "hero.title1": "Healthcare Made",
     "hero.title2": "Simple & Smart",
-    "hero.subtitle": "Join virtual queues, book appointments instantly, and connect with healthcare professionals across Singapore",
+    "hero.subtitle": "Check queue status before you leave, book appointments, and connect with healthcare professionals across Singapore",
     "hero.findClinics": "Find Clinics",
     "hero.learnMore": "Learn More",
-    "hero.queueTitle": "Queue",
-    "hero.queueDesc": "Real-time virtual queues & wait times",
+    "hero.queueTitle": "Queue Visibility",
+    "hero.queueDesc": "Check estimated queue status before arrival",
     "hero.bookTitle": "Book",
     "hero.bookDesc": "Instant appointments across all clinics",
     "hero.connectTitle": "Connect",
