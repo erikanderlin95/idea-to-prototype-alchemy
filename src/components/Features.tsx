@@ -91,8 +91,8 @@ export const Features = () => {
               >
                 <feature.icon className="h-5 w-5 text-ai-purple" />
               </div>
-              <h3 className="text-base font-bold mb-1">{feature.title}</h3>
-              <p className="text-xs text-muted-foreground leading-relaxed">{feature.description}</p>
+              <h3 className="text-lg font-bold mb-1">{feature.title}</h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
             </div>
           ))}
         </div>
