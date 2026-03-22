@@ -569,14 +569,14 @@ const translations: Record<Language, Record<string, string>> = {
     "featuredConsultants.viewAll": "查看所有服务提供商",
     
     // Hero
-    "hero.badge": "排队 • 预约 • 连接",
+    "hero.badge": "查看排队 • 预约 • 连接",
     "hero.title1": "简单智能的",
     "hero.title2": "医疗保健",
-    "hero.subtitle": "随时随地加入虚拟队列、即时预约，并与新加坡各地的医疗保健专业人员联系",
+    "hero.subtitle": "出发前查看排队状况、预约就诊，并与新加坡各地的医疗保健专业人员联系",
     "hero.findClinics": "寻找诊所",
     "hero.learnMore": "了解更多",
-    "hero.queueTitle": "排队",
-    "hero.queueDesc": "实时虚拟队列和等待时间",
+    "hero.queueTitle": "排队可见",
+    "hero.queueDesc": "到达前查看预计排队状况",
     "hero.bookTitle": "预约",
     "hero.bookDesc": "所有诊所的即时预约",
     "hero.connectTitle": "连接",
@@ -584,11 +584,11 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Features
     "features.badge": "功能特色",
-    "features.title": "数字排队 • 预约 • 连接",
-    "features.subtitle": "为新加坡多元化医疗生态系统设计的完整医疗保健平台",
-    "features.queue.title": "数字排队",
-    "features.queue.subtitle": "实时更新",
-    "features.queue.description": "随时随地加入虚拟队列，在出发前查看实时队列状态和等待时间。",
+    "features.title": "排队可见 • 预约 • 连接",
+    "features.subtitle": "为新加坡多元化医疗生态系统设计的医疗保健伴侣",
+    "features.queue.title": "排队可见",
+    "features.queue.subtitle": "出发前规划",
+    "features.queue.description": "在前往诊所前随时随地查看预计排队状况。节省时间，减少不确定性。",
     "features.book.title": "预约",
     "features.book.subtitle": "轻松预约",
     "features.book.description": "在全科、中医和健康中心预约，即时确认。",
@@ -599,8 +599,8 @@ const translations: Record<Language, Record<string, string>> = {
     "features.transparency.description": "查看简介、专长和患者评价",
     "features.pdpa.title": "符合PDPA",
     "features.pdpa.description": "您的数据安全且受隐私保护",
-    "features.fast.title": "快速高效",
-    "features.fast.description": "减少等待时间，简化您的医疗保健旅程",
+    "features.fast.title": "提前规划",
+    "features.fast.description": "查看排队预估，规划就诊，减少等待的不确定性",
     
     // Queue Page
     "queue.title": "实时队列",
