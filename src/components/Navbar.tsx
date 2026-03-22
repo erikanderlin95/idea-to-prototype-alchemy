@@ -59,16 +59,8 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-12 items-center justify-between gap-3 px-3 md:px-6">
-        <div className="flex items-center gap-1.5 md:gap-2 cursor-pointer group onboarding-logo shrink-0" onClick={() => navigate("/")}>
-          <ClynicQIcon size="md" />
-          <div className="flex flex-col min-w-0">
-            <span className="text-base md:text-xl font-poppins font-bold tracking-tight leading-none whitespace-nowrap">
-              Clynic<span className="text-primary">Q</span>
-            </span>
-            <span className="text-[7px] md:text-[8px] font-semibold text-muted-foreground tracking-[0.12em] uppercase whitespace-nowrap leading-none mt-0.5">
-              Queue • Book • Connect
-            </span>
-          </div>
+        <div className="flex items-center cursor-pointer shrink-0" onClick={() => navigate("/")}>
+          <img src={clynicqLogo} alt="ClynicQ - Queue · Book · Connect" className="h-9 md:h-10 w-auto object-contain" />
         </div>
 
         {/* Desktop Navigation removed */}
