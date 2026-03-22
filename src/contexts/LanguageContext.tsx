@@ -156,7 +156,7 @@ const translations: Record<Language, Record<string, string>> = {
     "staff.walkInAdded": "Walk-in patient added to queue",
     
     // Footer
-    "footer.tagline": "Simplifying healthcare access across Singapore",
+    "footer.tagline": "Helping you plan clinic visits with less waiting",
     "footer.forPatients": "For Patients",
     "footer.findClinics": "Find Clinics",
     "footer.howItWorks": "How it Works",
