@@ -41,8 +41,8 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Featured Consultants
     "featuredConsultants.badge": "Managed Healthcare",
-    "featuredConsultants.title": "Managed Healthcare Providers",
-    "featuredConsultants.subtitle": "Not sure which clinic to choose? Our trusted providers help guide you to the right healthcare services.",
+    "featuredConsultants.title": "Not sure where to start?",
+    "featuredConsultants.subtitle": "Get guided to the right care with our Managed Healthcare providers.",
     "featuredConsultants.viewAll": "View All Providers",
     
     // Hero
