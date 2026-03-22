@@ -61,12 +61,12 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
       <div className="container flex h-12 items-center justify-between gap-3 px-3 md:px-6">
         <div className="flex items-center gap-1.5 md:gap-2 cursor-pointer group onboarding-logo shrink-0" onClick={() => navigate("/")}>
           <ClynicQIcon size="md" />
-          <div className="flex flex-col -space-y-0.5 min-w-0">
+          <div className="flex flex-col min-w-0">
             <span className="text-base md:text-xl font-poppins font-bold tracking-tight leading-none whitespace-nowrap">
               Clynic<span className="text-primary">Q</span>
             </span>
-            <span className="text-[9px] md:text-[10px] font-medium text-muted-foreground tracking-wide whitespace-nowrap leading-tight">
-              Digital Queue · Book · Connect
+            <span className="text-[8px] md:text-[9px] font-semibold text-muted-foreground tracking-[0.2em] uppercase whitespace-nowrap leading-none mt-0.5">
+              Queue • Book • Connect
             </span>
           </div>
         </div>
