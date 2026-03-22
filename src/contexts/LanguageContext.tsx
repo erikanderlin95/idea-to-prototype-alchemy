@@ -846,7 +846,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.emergency": "急诊",
     "clinicCard.vaccination": "疫苗接种",
     "clinicCard.healthScreening": "健康检查",
-    "clinicCard.joinQueue": "查看排队并加入",
+    "clinicCard.joinQueue": "加入排队",
     "clinicCard.joining": "加入中...",
     "clinicCard.viewDetails": "查看详情",
     "clinicCard.queueSuccess": "您是排队中的第{number}号！保存链接随时查看。",
