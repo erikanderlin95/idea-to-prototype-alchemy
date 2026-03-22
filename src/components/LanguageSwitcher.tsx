@@ -14,8 +14,9 @@ export const LanguageSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="rounded-full h-9 w-9">
-          <Languages className="h-5 w-5" />
+        <Button variant="ghost" size="sm" className="h-8 px-2.5 gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground">
+          <Languages className="h-3.5 w-3.5" />
+          {language === "en" ? "EN" : "中文"}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-32">
