@@ -645,23 +645,14 @@ export default function Queue() {
               <AlertTriangle className="h-5 w-5 text-amber-500" />
               {t("queue.disclaimer.title")}
             </DialogTitle>
-            <DialogDescription>
-              Please read and accept the following terms before joining the queue
-            </DialogDescription>
           </DialogHeader>
-          <div className="space-y-4">
-            <Alert className="border-amber-500 bg-amber-50 dark:bg-amber-950/20">
-              <AlertCircle className="h-4 w-4 text-amber-600" />
-              <AlertDescription className="text-amber-800 dark:text-amber-200">
-                {t("queue.disclaimer.riskAssessment")}
-              </AlertDescription>
-            </Alert>
-            <Alert className="border-blue-500 bg-blue-50 dark:bg-blue-950/20">
-              <AlertCircle className="h-4 w-4 text-blue-600" />
-              <AlertDescription className="text-blue-800 dark:text-blue-200">
-                {t("queue.disclaimer.queueShift")}
-              </AlertDescription>
-            </Alert>
+          <div className="space-y-3">
+            <ul className="space-y-2.5 text-sm text-muted-foreground list-disc pl-5">
+              <li>{t("queue.disclaimer.bullet1")}</li>
+              <li>{t("queue.disclaimer.bullet2")}</li>
+              <li>{t("queue.disclaimer.bullet3")}</li>
+              <li>{t("queue.disclaimer.bullet4")}</li>
+            </ul>
           </div>
           <Button onClick={handleDisclaimerAgree} className="w-full" size="lg">
             {t("queue.disclaimer.understand")}
