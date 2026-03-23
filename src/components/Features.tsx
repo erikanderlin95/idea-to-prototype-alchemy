@@ -1,4 +1,4 @@
-import { BarChart3, Shield, Zap } from "lucide-react";
+import { User, MapPin, Building2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { QueueIcon, AppointmentsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -10,38 +10,32 @@ export const Features = () => {
     {
       icon: "queue",
       title: t("features.queue.title"),
-      subtitle: t("features.queue.subtitle"),
       description: t("features.queue.description"),
     },
     {
       icon: "book",
       title: t("features.book.title"),
-      subtitle: t("features.book.subtitle"),
       description: t("features.book.description"),
     },
     {
       icon: "connect",
       title: t("features.connect.title"),
-      subtitle: t("features.connect.subtitle"),
       description: t("features.connect.description"),
     },
   ];
 
-  const additionalFeatures = [
+  const secondaryFeatures = [
     {
-      icon: BarChart3,
-      title: t("features.transparency.title"),
-      description: t("features.transparency.description"),
+      icon: User,
+      title: t("features.secondary1.title"),
     },
     {
-      icon: Shield,
-      title: t("features.pdpa.title"),
-      description: t("features.pdpa.description"),
+      icon: MapPin,
+      title: t("features.secondary2.title"),
     },
     {
-      icon: Zap,
-      title: t("features.fast.title"),
-      description: t("features.fast.description"),
+      icon: Building2,
+      title: t("features.secondary3.title"),
     },
   ];
 
@@ -49,11 +43,7 @@ export const Features = () => {
     <section id="features" className="py-16 bg-gradient-to-b from-background to-secondary/10">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-10">
-          <Badge variant="secondary" className="mb-4">{t("features.badge")}</Badge>
           <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-foreground mb-3">{t("features.title")}</h2>
-          <p className="text-base md:text-lg text-muted-foreground max-w-2xl mx-auto">
-            {t("features.subtitle")}
-          </p>
         </div>
 
         {/* Main Features - Queue, Book, Connect */}
@@ -79,20 +69,19 @@ export const Features = () => {
           ))}
         </div>
 
-        {/* Additional Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 px-2 sm:px-0">
-          {additionalFeatures.map((feature, index) => (
+        {/* Secondary Features */}
+        <div className="grid grid-cols-3 gap-3 sm:gap-4 px-2 sm:px-0">
+          {secondaryFeatures.map((feature, index) => (
             <div
               key={index}
-              className="group bg-card p-4 rounded-lg border border-ai-indigo/20 hover:border-ai-purple/40 transition-all duration-300 hover:shadow-md hover:shadow-ai-purple/10"
+              className="group bg-card p-4 rounded-lg border border-ai-indigo/20 hover:border-ai-purple/40 transition-all duration-300 hover:shadow-md hover:shadow-ai-purple/10 text-center"
             >
-              <div className="h-10 w-10 rounded-lg flex items-center justify-center mb-3 group-hover:scale-110 transition-transform"
+              <div className="h-10 w-10 rounded-lg flex items-center justify-center mb-3 mx-auto group-hover:scale-110 transition-transform"
                 style={{ background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.25), hsl(var(--ai-blue)/0.15))' }}
               >
                 <feature.icon className="h-5 w-5 text-ai-purple" />
               </div>
-              <h3 className="text-lg font-bold mb-1">{feature.title}</h3>
-              <p className="text-sm text-muted-foreground leading-relaxed">{feature.description}</p>
+              <h3 className="text-sm sm:text-base font-bold">{feature.title}</h3>
             </div>
           ))}
         </div>
