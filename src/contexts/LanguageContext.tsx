@@ -574,7 +574,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.badge": "查看排队 • 预约 • 连接",
     "hero.title1": "出发前",
     "hero.title2": "先了解",
-    "hero.subtitle": "即时查看排队、可用性和附近选项。",
+    "hero.subtitle": "在决定去哪里之前，先查看排队、可用性和附近的护理选项。",
     "hero.trustLine": "",
     "hero.findClinics": "查看附近诊所",
     "hero.findMyQueue": "查看我的排队状态",
