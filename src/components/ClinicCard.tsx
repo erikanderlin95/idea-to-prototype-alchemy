@@ -735,15 +735,14 @@ export const ClinicCard = ({
     <Dialog open={showQueueCard} onOpenChange={setShowQueueCard}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>You're in the Queue!</DialogTitle>
-          <DialogDescription>Your queue position has been confirmed</DialogDescription>
+          <DialogTitle>Your queue number has been confirmed</DialogTitle>
         </DialogHeader>
         <div className="space-y-4">
           <div className="text-center p-6 bg-muted rounded-lg">
-            <p className="text-sm text-muted-foreground mb-2">Your Queue Number</p>
+            <p className="text-sm text-muted-foreground mb-2">Queue Number</p>
             <p className="text-5xl font-bold text-primary">{newQueueNumber}</p>
-            <p className="text-sm text-muted-foreground mt-4">
-              Estimated wait time: {waitTime} mins
+            <p className="text-xs text-muted-foreground mt-4">
+              Current position may change based on clinic flow and urgent cases
             </p>
           </div>
           
