@@ -449,8 +449,8 @@ export default function Queue() {
                   <Clock className="h-6 w-6 text-accent" />
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground font-medium">{t("queue.estWait")}</p>
-                  <p className="text-2xl font-bold">{queueData.length * 15} {t("queue.minutes")}</p>
+                  <p className="text-xs text-muted-foreground font-medium">Status</p>
+                  <p className="text-2xl font-bold">{clinic?.is_open ? "Open" : "Closed"}</p>
                 </div>
               </div>
             </div>
