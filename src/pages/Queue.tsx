@@ -618,7 +618,7 @@ export default function Queue() {
                       )}
                     </div>
                     <span className="text-sm text-muted-foreground">
-                      {index === 0 ? "Now serving" : `~${index * 15} min wait`}
+                      {index === 0 ? "Now serving" : `${index} ahead`}
                     </span>
                   </div>
                 ))}
