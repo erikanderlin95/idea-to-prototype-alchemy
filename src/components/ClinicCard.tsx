@@ -741,7 +741,7 @@ export const ClinicCard = ({
           <div className="text-center p-6 bg-muted rounded-lg">
             <p className="text-sm text-muted-foreground mb-2">Queue Number</p>
             <p className="text-5xl font-bold text-primary">{newQueueNumber}</p>
-            <p className="text-xs text-muted-foreground mt-4">
+            <p className="text-sm font-bold text-foreground mt-4">
               Current position may change based on clinic flow and urgent cases
             </p>
           </div>
@@ -760,7 +760,7 @@ export const ClinicCard = ({
               <Copy className="mr-2 h-4 w-4" />
               Copy Link
             </Button>
-            <p className="text-xs text-muted-foreground">Use this link to return to your queue anytime.</p>
+            <p className="text-sm font-bold text-foreground">Use this link to return to your queue anytime.</p>
           </div>
           
           <Alert>
