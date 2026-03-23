@@ -760,7 +760,7 @@ export const ClinicCard = ({
               <Copy className="mr-2 h-4 w-4" />
               Copy Link
             </Button>
-            <p className="text-xs text-muted-foreground">Use this link to return to your queue anytime.</p>
+            <p className="text-sm font-bold text-foreground">Use this link to return to your queue anytime.</p>
           </div>
           
           <Alert>
