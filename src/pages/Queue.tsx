@@ -483,7 +483,7 @@ export default function Queue() {
             </CardHeader>
             <CardContent>
               <div className="space-y-6">
-                <div className="grid grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 gap-4">
                   <div className="text-center">
                     <p className="text-sm text-muted-foreground mb-1">Queue Number</p>
                     <p className="text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
@@ -492,15 +492,6 @@ export default function Queue() {
                     <p className="text-sm text-muted-foreground mb-1">Position</p>
                     <p className="text-3xl font-semibold">
                       {myPosition}/{queueData.length}
-                    </p>
-                  </div>
-                  <div className="text-center">
-                    <p className="text-sm text-muted-foreground mb-1">Est. Wait</p>
-                    <p className="text-2xl font-medium tabular-nums">
-                      {estimatedWaitMinutes}m
-                    </p>
-                    <p className="text-xs text-muted-foreground tabular-nums">
-                      {myQueueEntry?.status === "waiting" ? `${waitCountdown} remaining` : ""}
                     </p>
                   </div>
                 </div>
