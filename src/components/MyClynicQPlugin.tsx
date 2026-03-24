@@ -109,7 +109,7 @@ export const MyClynicQPlugin = () => {
                     disabled
                   >
                     <MessageCircle className="h-4 w-4 mr-2" />
-                    Coming Soon
+                    Available in Phase 2
                   </Button>
                 </div>
               </div>
