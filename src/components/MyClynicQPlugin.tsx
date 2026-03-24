@@ -41,7 +41,7 @@ export const MyClynicQPlugin = () => {
             <MyClynicQIcon size="md" />
 
             <div>
-              <h3 className="text-xl md:text-2xl font-bold text-[#1B2430]">MyClynicQ on WhatsApp</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-[#1B2430]"><span>My</span><span className="text-primary">Clynic</span><span>Q</span> on WhatsApp</h3>
               <p className="text-sm text-[#555E6C] mt-2 leading-relaxed">
                 Stay updated on appointments, queue progress, and clinic communication — without needing to call or follow up.
               </p>
