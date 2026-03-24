@@ -17,16 +17,16 @@ export const MyClynicQPlugin = () => {
           <div className="text-center mb-10 animate-fade-in">
             <Badge variant="secondary" className="mb-4 bg-gradient-to-r from-ai-purple/15 to-ai-cyan/15 border-ai-purple/30">
               <Sparkles className="h-3 w-3 mr-1" />
-              Coming Soon
+              Optional Add-On
             </Badge>
             <div className="flex items-center justify-center gap-3 mb-3">
               <MyClynicQIcon size="lg" />
               <h2 className="text-3xl md:text-5xl font-bold">
-                My<span className="bg-gradient-to-r from-ai-purple to-ai-cyan bg-clip-text text-transparent">ClynicQ</span>
+                Phase 2: Optional WhatsApp Automation
               </h2>
             </div>
             <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto">
-              Never miss an appointment with automated reminders and instant support on WhatsApp
+              For clinics that want less manual messaging, queue updates and reminders can be handled through WhatsApp on top of the same ClynicQ flow.
             </p>
           </div>
 
@@ -109,7 +109,7 @@ export const MyClynicQPlugin = () => {
                     disabled
                   >
                     <MessageCircle className="h-4 w-4 mr-2" />
-                    Coming Soon
+                    Available in Phase 2
                   </Button>
                 </div>
               </div>
