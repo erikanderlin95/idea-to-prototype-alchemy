@@ -602,7 +602,7 @@ export const ClinicCard = ({
                 </Button>
               ) : isNmgAffiliated && isManagedCareType(type) ? (
                 <Button 
-                  className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm sm:text-base shadow-2xl shadow-primary/50 border-0 h-10 sm:h-12 hover:scale-105 transition-transform" 
+                  className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs sm:text-sm shadow-2xl shadow-primary/50 border-0 h-8 sm:h-10 hover:scale-105 transition-transform" 
                   disabled={!isOpen}
                   onClick={(e) => {
                     e.stopPropagation();
