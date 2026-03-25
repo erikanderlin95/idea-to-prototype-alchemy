@@ -82,10 +82,17 @@ export const ClinicCard = ({
   const [joinError, setJoinError] = useState("");
   // Booking lead capture state
   const [showBookingLead, setShowBookingLead] = useState(false);
+  const [showBookingConfirm, setShowBookingConfirm] = useState(false);
   const [leadName, setLeadName] = useState("");
   const [leadMobile, setLeadMobile] = useState("");
+  const [leadPrefDate, setLeadPrefDate] = useState("");
+  const [leadPrefTime, setLeadPrefTime] = useState("");
+  const [leadNotes, setLeadNotes] = useState("");
+  const [leadDisclaimerAgreed, setLeadDisclaimerAgreed] = useState(false);
   const [leadSubmitting, setLeadSubmitting] = useState(false);
   const [bookingCaseId, setBookingCaseId] = useState("");
+  const [bookingRedirectUrl, setBookingRedirectUrl] = useState("");
+  const [bookingRedirectType, setBookingRedirectType] = useState("");
 
   const generateCaseId = () => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -305,11 +312,14 @@ export const ClinicCard = ({
       toast.error("Please enter a valid mobile number");
       return;
     }
+    if (!leadDisclaimerAgreed) {
+      toast.error("Please agree to the disclaimer to continue");
+      return;
+    }
     setLeadSubmitting(true);
     try {
       const sanitizedMobile = sanitizeMobileNumber(leadMobile);
       
-      // Fetch clinic data to determine redirect
       const { data: clinicData } = await supabase.from("clinics").select("booking_url, phone").eq("id", id).single();
       
       const bookingUrl = clinicData?.booking_url || null;
@@ -326,32 +336,54 @@ export const ClinicCard = ({
           booking_type: "external",
           redirect_type: redirectType,
           redirect_url: bookingUrl || null,
+          preferred_date: leadPrefDate || null,
+          preferred_time: leadPrefTime || null,
+          notes: leadNotes.trim() || null,
         },
       });
 
       const caseId = response?.case_id || "";
       setBookingCaseId(caseId);
-      setShowBookingLead(false);
-
-      // Redirect based on what's available
+      
+      // Prepare redirect info for confirmation screen
       if (bookingUrl) {
-        // Web booking - append case_id as query parameter
         const separator = bookingUrl.includes("?") ? "&" : "?";
-        window.open(`${bookingUrl}${separator}case_id=${encodeURIComponent(caseId)}`, "_blank");
-        toast.success(`Booking opened! Your Case ID: ${caseId}`);
+        setBookingRedirectUrl(`${bookingUrl}${separator}case_id=${encodeURIComponent(caseId)}`);
+        setBookingRedirectType("web");
       } else if (clinicPhone) {
-        // WhatsApp - pre-fill message with case_id
-        const message = encodeURIComponent(`Hi, I'd like to book an appointment.\nCase ID: ${caseId}`);
-        window.open(`https://wa.me/${clinicPhone}?text=${message}`, "_blank");
-        toast.success(`WhatsApp opened! Your Case ID: ${caseId}`);
+        const message = encodeURIComponent(`Hi, I'd like to book an appointment.\nName: ${leadName.trim()}\nCase ID: ${caseId}`);
+        setBookingRedirectUrl(`https://wa.me/${clinicPhone}?text=${message}`);
+        setBookingRedirectType("whatsapp");
       } else {
-        // Fallback - navigate to booking page
-        navigate(`/booking/${id}`);
+        setBookingRedirectUrl("");
+        setBookingRedirectType("none");
       }
+
+      setShowBookingLead(false);
+      setShowBookingConfirm(true);
     } catch (err) {
       console.error("Lead save error:", err);
       toast.error("Something went wrong. Please try again.");
     } finally { setLeadSubmitting(false); }
+  };
+
+  const handleBookingRedirect = () => {
+    if (bookingRedirectUrl) {
+      window.open(bookingRedirectUrl, "_blank");
+    }
+    setShowBookingConfirm(false);
+  };
+
+  const resetBookingLead = () => {
+    setLeadName("");
+    setLeadMobile("");
+    setLeadPrefDate("");
+    setLeadPrefTime("");
+    setLeadNotes("");
+    setLeadDisclaimerAgreed(false);
+    setBookingCaseId("");
+    setBookingRedirectUrl("");
+    setBookingRedirectType("");
   };
 
   return (
@@ -566,7 +598,7 @@ export const ClinicCard = ({
                 <Button 
                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-9 sm:h-10 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen}
-                  onClick={(e) => { e.stopPropagation(); if (id) setShowBookingLead(true); }}
+                  onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
                 >
                   <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
                   {isManagedCareType(type) ? "Request" : "Book"}
@@ -673,29 +705,131 @@ export const ClinicCard = ({
       </DialogContent>
     </Dialog>
 
-    {/* Booking Lead Capture Dialog */}
-    <Dialog open={showBookingLead} onOpenChange={setShowBookingLead}>
-      <DialogContent className="max-w-sm">
+    {/* Booking Lead Capture Dialog — Full Intake */}
+    <Dialog open={showBookingLead} onOpenChange={(open) => { setShowBookingLead(open); if (!open) setLeadDisclaimerAgreed(false); }}>
+      <DialogContent className="max-w-sm max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-base">Book Appointment</DialogTitle>
-          <DialogDescription className="text-xs">Enter your details before we redirect you to booking</DialogDescription>
+          <DialogDescription className="text-xs">Enter your details to proceed</DialogDescription>
         </DialogHeader>
         <div className="space-y-3">
           <div>
-            <Label htmlFor="lead-name" className="text-xs font-medium">Name</Label>
+            <Label htmlFor="lead-name" className="text-xs font-medium">Full Name *</Label>
             <Input id="lead-name" type="text" value={leadName} onChange={(e) => setLeadName(e.target.value)} placeholder="Your full name" className="mt-1 h-9 text-sm" />
           </div>
           <div>
-            <Label htmlFor="lead-mobile" className="text-xs font-medium">Mobile Number</Label>
+            <Label htmlFor="lead-mobile" className="text-xs font-medium">Mobile Number *</Label>
             <Input id="lead-mobile" type="tel" value={leadMobile} onChange={(e) => setLeadMobile(e.target.value)} placeholder="e.g. +6591234567" className="mt-1 h-9 text-sm" />
+            <p className="text-[10px] text-muted-foreground mt-0.5">8-15 digits, country code optional</p>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <Label htmlFor="lead-date" className="text-xs font-medium">Preferred Date</Label>
+              <Input id="lead-date" type="date" value={leadPrefDate} onChange={(e) => setLeadPrefDate(e.target.value)} className="mt-1 h-9 text-sm" />
+            </div>
+            <div>
+              <Label htmlFor="lead-time" className="text-xs font-medium">Preferred Time</Label>
+              <Input id="lead-time" type="time" value={leadPrefTime} onChange={(e) => setLeadPrefTime(e.target.value)} className="mt-1 h-9 text-sm" />
+            </div>
+          </div>
+          <div>
+            <Label htmlFor="lead-notes" className="text-xs font-medium">Notes</Label>
+            <Textarea id="lead-notes" value={leadNotes} onChange={(e) => setLeadNotes(e.target.value)} placeholder="Any additional information..." className="mt-1 text-sm min-h-[60px]" />
+          </div>
+
+          {/* Mandatory Disclaimer */}
+          <div className="p-2.5 rounded-md bg-muted/50 border border-border/40 space-y-1.5">
+            <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide">Please Note</p>
+            <ul className="space-y-1 text-[11px] text-muted-foreground list-disc pl-3.5">
+              <li>Submitting this form does not confirm your appointment.</li>
+              <li>The clinic will confirm availability directly with you.</li>
+              <li>Appointment slots depend on the clinic's own system.</li>
+              <li>ClynicQ does not guarantee booking confirmation.</li>
+            </ul>
+          </div>
+
+          <div className="flex items-start gap-2" onClick={(e) => e.stopPropagation()}>
+            <Checkbox
+              id="lead-disclaimer-agree"
+              checked={leadDisclaimerAgreed}
+              onCheckedChange={(checked) => setLeadDisclaimerAgreed(checked === true)}
+              className="mt-0.5"
+            />
+            <Label htmlFor="lead-disclaimer-agree" className="text-[11px] text-foreground font-medium cursor-pointer leading-tight">
+              I understand and agree
+            </Label>
           </div>
         </div>
         <DialogFooter className="gap-2 pt-1">
           <Button variant="outline" size="sm" onClick={() => setShowBookingLead(false)}>Cancel</Button>
-          <Button size="sm" onClick={handleSaveBookingLead} disabled={leadSubmitting}>
-            {leadSubmitting ? "Saving..." : "Continue to Book"}
+          <Button 
+            size="sm" 
+            onClick={handleSaveBookingLead} 
+            disabled={leadSubmitting || !leadDisclaimerAgreed}
+            className="bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold"
+          >
+            {leadSubmitting ? "Processing..." : "Proceed to Booking"}
           </Button>
         </DialogFooter>
+      </DialogContent>
+    </Dialog>
+
+    {/* Booking Confirmation Screen — Intermediate before redirect */}
+    <Dialog open={showBookingConfirm} onOpenChange={setShowBookingConfirm}>
+      <DialogContent className="max-w-sm">
+        <DialogHeader>
+          <DialogTitle className="text-base flex items-center gap-2">
+            <CheckCircle className="h-5 w-5 text-emerald-500" />
+            Request Recorded
+          </DialogTitle>
+        </DialogHeader>
+        <div className="space-y-3">
+          <div className="text-center p-4 border-2 border-primary/30 rounded-lg bg-primary/5">
+            <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide mb-1">Case ID</p>
+            <p className="text-2xl font-mono font-black tracking-[0.15em] text-primary">{bookingCaseId}</p>
+          </div>
+
+          <div className="space-y-1.5 text-sm">
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Patient</span>
+              <span className="font-medium">{leadName}</span>
+            </div>
+            <div className="flex justify-between">
+              <span className="text-muted-foreground">Clinic</span>
+              <span className="font-medium">{name}</span>
+            </div>
+          </div>
+
+          <p className="text-xs text-muted-foreground text-center">
+            Your details have been recorded. Continue to complete your booking with the clinic.
+          </p>
+
+          <Button
+            variant="outline"
+            size="sm"
+            className="w-full text-xs"
+            onClick={() => {
+              navigator.clipboard.writeText(bookingCaseId);
+              toast.success("Case ID copied!");
+            }}
+          >
+            <Copy className="mr-1.5 h-3.5 w-3.5" />
+            Copy Case ID
+          </Button>
+
+          <Button 
+            className="w-full bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold h-10"
+            onClick={handleBookingRedirect}
+          >
+            {bookingRedirectType === "whatsapp" ? (
+              <><MessageCircle className="mr-1.5 h-4 w-4" />Continue via WhatsApp</>
+            ) : bookingRedirectType === "web" ? (
+              <><Calendar className="mr-1.5 h-4 w-4" />Continue to Booking</>
+            ) : (
+              "Done"
+            )}
+          </Button>
+        </div>
       </DialogContent>
     </Dialog>
 
