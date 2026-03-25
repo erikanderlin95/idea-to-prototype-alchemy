@@ -496,6 +496,17 @@ export default function Queue() {
                   </div>
                 </div>
 
+                {/* Check-in Code */}
+                {myQueueEntry.check_in_code && myQueueEntry.status === 'waiting' && (
+                  <div className="text-center p-4 border-2 border-primary/30 rounded-lg bg-primary/5">
+                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide mb-1">Check-in Code</p>
+                    <p className="text-3xl font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</p>
+                    <p className="text-xs text-foreground font-medium mt-2">
+                      Show this code at the clinic counter when you arrive.
+                    </p>
+                  </div>
+                )}
+
                 {myQueueEntry.status === 'checked_in' && (
                   <Badge variant="default" className="w-full justify-center py-3 text-sm bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-500">
                     📅 <a href="/booking" className="underline ml-1">Click here to rebook your next appointment</a>

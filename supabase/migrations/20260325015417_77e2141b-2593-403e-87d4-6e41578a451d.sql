@@ -1,0 +1,1 @@
+ALTER TABLE public.queue_entries ADD COLUMN check_in_code text;
