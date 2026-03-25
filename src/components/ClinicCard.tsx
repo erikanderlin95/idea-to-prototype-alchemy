@@ -7,6 +7,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { MapPin, Clock, Users, Star, CheckCircle, XCircle, AlertTriangle, Copy, Calendar, Shield, MessageCircle } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useNavigate } from "react-router-dom";
@@ -17,9 +18,7 @@ import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getBookingRoute, isManagedCareType, NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
 
-// Helper to sanitize and validate mobile number
 const sanitizeMobileNumber = (mobile: string): string => {
-  // Remove all non-digit characters except leading +
   const hasPlus = mobile.trim().startsWith('+');
   const digitsOnly = mobile.replace(/\D/g, '');
   return hasPlus ? `+${digitsOnly}` : digitsOnly;
@@ -27,7 +26,6 @@ const sanitizeMobileNumber = (mobile: string): string => {
 
 const isValidMobileNumber = (mobile: string): boolean => {
   const sanitized = sanitizeMobileNumber(mobile);
-  // Valid format: optional + followed by 8-15 digits
   return /^\+?[0-9]{8,15}$/.test(sanitized);
 };
 
@@ -68,6 +66,8 @@ export const ClinicCard = ({
   const [patientName, setPatientName] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [newQueueNumber, setNewQueueNumber] = useState<number | null>(null);
+  const [newCheckInCode, setNewCheckInCode] = useState("");
+  const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
   const [showManagedCareModal, setShowManagedCareModal] = useState(false);
   const [mcName, setMcName] = useState("");
   const [mcPhone, setMcPhone] = useState("");
@@ -78,13 +78,8 @@ export const ClinicCard = ({
   const [mcSubmitted, setMcSubmitted] = useState(false);
   const [mcSubmitting, setMcSubmitting] = useState(false);
   const [mcCaseId, setMcCaseId] = useState("");
-  // OTP verification state
-  const [otpStep, setOtpStep] = useState<"form" | "verify">("form");
-  const [verificationId, setVerificationId] = useState("");
-  const [displayedOtp, setDisplayedOtp] = useState("");
-  const [otpInput, setOtpInput] = useState("");
-  const [otpError, setOtpError] = useState("");
-  const [otpLoading, setOtpLoading] = useState(false);
+  const [joinLoading, setJoinLoading] = useState(false);
+  const [joinError, setJoinError] = useState("");
   // Booking lead capture state
   const [showBookingLead, setShowBookingLead] = useState(false);
   const [leadName, setLeadName] = useState("");
@@ -127,7 +122,6 @@ export const ClinicCard = ({
       if (error) throw error;
       setMcCaseId(caseId);
       setMcSubmitted(true);
-      console.log(`[MANAGED CARE] Case ${caseId} created for clinic: ${name}`);
     } catch (err: any) {
       console.error("[MANAGED CARE] Error:", err);
       toast.error("Failed to submit request. Please try again.");
@@ -151,197 +145,121 @@ export const ClinicCard = ({
   useEffect(() => {
     if (id) {
       checkQueueStatus();
-      
-      // Subscribe to queue changes
       const channel = supabase
         .channel(`queue-${id}`)
         .on(
           'postgres_changes',
-          {
-            event: '*',
-            schema: 'public',
-            table: 'queue_entries',
-            filter: `clinic_id=eq.${id}`,
-          },
-          () => {
-            checkQueueStatus();
-          }
+          { event: '*', schema: 'public', table: 'queue_entries', filter: `clinic_id=eq.${id}` },
+          () => { checkQueueStatus(); }
         )
         .subscribe();
-
-      return () => {
-        supabase.removeChannel(channel);
-      };
+      return () => { supabase.removeChannel(channel); };
     }
   }, [id]);
 
   const checkQueueStatus = async () => {
     if (!id) return;
-
-    // Try to get mobile number from localStorage
     const storedMobile = localStorage.getItem(`queue_mobile_${id}`);
-    if (!storedMobile) {
-      setMyQueueEntry(null);
-      return;
-    }
-
-    // Use edge function for secure mobile lookup (bypasses RLS)
+    if (!storedMobile) { setMyQueueEntry(null); return; }
     try {
-      const { data: response, error } = await supabase.functions.invoke(
-        "queue-lookup",
-        {
-          body: {
-            action: "check_active_entry",
-            clinic_id: id,
-            mobile_number: storedMobile,
-          },
-        }
-      );
-
-      if (error) {
-        console.warn("checkQueueStatus error", error);
-        return;
-      }
-
+      const { data: response, error } = await supabase.functions.invoke("queue-lookup", {
+        body: { action: "check_active_entry", clinic_id: id, mobile_number: storedMobile },
+      });
+      if (error) { console.warn("checkQueueStatus error", error); return; }
       const entry = response?.entry || null;
       setMyQueueEntry(entry);
-
-      // Update state with stored mobile
-      if (entry) {
-        setMobileNumber(storedMobile);
-      } else {
-        // No active entry found, clear stored mobile
-        localStorage.removeItem(`queue_mobile_${id}`);
-      }
-    } catch (err) {
-      console.warn("checkQueueStatus exception", err);
-    }
+      if (entry) { setMobileNumber(storedMobile); } 
+      else { localStorage.removeItem(`queue_mobile_${id}`); }
+    } catch (err) { console.warn("checkQueueStatus exception", err); }
   };
 
   const handleCancelQueue = async (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!myQueueEntry) return;
-
     setIsLoading(true);
     try {
-      // Use edge function for anonymous users (bypasses RLS)
       const storedMobile = id ? localStorage.getItem(`queue_mobile_${id}`) : null;
-      
       if (storedMobile) {
         const { data, error } = await supabase.functions.invoke("queue-lookup", {
-          body: {
-            action: "cancel_queue",
-            clinic_id: id,
-            mobile_number: storedMobile,
-          },
+          body: { action: "cancel_queue", clinic_id: id, mobile_number: storedMobile },
         });
-
         if (error) throw error;
         if (data?.error) throw new Error(data.error);
       } else {
-        // Fallback to direct delete for authenticated users
-        const { error } = await supabase
-          .from("queue_entries")
-          .delete()
-          .eq("id", myQueueEntry.id);
-
+        const { error } = await supabase.from("queue_entries").delete().eq("id", myQueueEntry.id);
         if (error) throw error;
       }
-
-      // Clear stored mobile number
-      if (id) {
-        localStorage.removeItem(`queue_mobile_${id}`);
-      }
-
+      if (id) localStorage.removeItem(`queue_mobile_${id}`);
       toast.success(t("clinicCard.leftQueue"));
       setMyQueueEntry(null);
     } catch (error: any) {
       toast.error(error.message || t("clinicCard.failedToLeave"));
-    } finally {
-      setIsLoading(false);
-    }
+    } finally { setIsLoading(false); }
   };
 
   const handleCheckIn = async (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!myQueueEntry) return;
-
     setIsLoading(true);
     try {
-      // Use edge function for anonymous users (bypasses RLS)
       const storedMobile = id ? localStorage.getItem(`queue_mobile_${id}`) : null;
-      
       if (storedMobile) {
         const { data, error } = await supabase.functions.invoke("queue-lookup", {
-          body: {
-            action: "check_in",
-            clinic_id: id,
-            mobile_number: storedMobile,
-          },
+          body: { action: "check_in", clinic_id: id, mobile_number: storedMobile },
         });
-
         if (error) throw error;
         if (data?.error) throw new Error(data.error);
       } else {
-        // Fallback to direct update for authenticated users
-        const { error } = await supabase
-          .from("queue_entries")
-          .update({ status: "checked_in" })
-          .eq("id", myQueueEntry.id);
-
+        const { error } = await supabase.from("queue_entries").update({ status: "checked_in" }).eq("id", myQueueEntry.id);
         if (error) throw error;
       }
-
-      // Clear the queue entry state and localStorage
       setMyQueueEntry(null);
-      if (id) {
-        localStorage.removeItem(`queue_mobile_${id}`);
-      }
-      
+      if (id) localStorage.removeItem(`queue_mobile_${id}`);
       toast.success("✓ Checked In Successfully!");
     } catch (error: any) {
       toast.error(error.message || t("clinicCard.failedToJoin"));
-    } finally {
-      setIsLoading(false);
-    }
+    } finally { setIsLoading(false); }
   };
 
   const handleJoinQueue = async (e: React.MouseEvent) => {
     e.stopPropagation();
-
     if (!id) return;
-
-    // Open disclaimer dialog
     setShowDisclaimer(true);
+    setDisclaimerAgreed(false);
+    setJoinError("");
   };
 
-  // Generate a simple device fingerprint
   const getDeviceFingerprint = () => {
     const nav = navigator;
     return btoa(`${nav.userAgent}|${nav.language}|${screen.width}x${screen.height}|${new Date().getTimezoneOffset()}`).slice(0, 64);
   };
 
-  const requestOtp = async () => {
+  const handleSecureSpot = async () => {
     if (!patientName.trim() || !mobileNumber.trim()) {
-      toast.error("Please fill in all fields");
+      setJoinError("Please fill in all fields");
       return;
     }
     if (!isValidMobileNumber(mobileNumber)) {
-      toast.error("Please enter a valid mobile number (8-15 digits)");
+      setJoinError("Please enter a valid mobile number (8-15 digits)");
+      return;
+    }
+    if (!disclaimerAgreed) {
+      setJoinError("Please agree to the disclaimer to continue");
       return;
     }
 
-    setOtpLoading(true);
-    setOtpError("");
+    setJoinLoading(true);
+    setJoinError("");
     try {
       const sanitizedMobile = sanitizeMobileNumber(mobileNumber);
       const { data: response, error } = await supabase.functions.invoke("queue-lookup", {
         body: {
-          action: "request_otp",
+          action: "join_queue",
           clinic_id: id,
           mobile_number: sanitizedMobile,
           patient_name: patientName.trim(),
           visit_type: visitType,
+          estimated_wait_time: parseInt(waitTime) || 15,
           device_fingerprint: getDeviceFingerprint(),
         },
       });
@@ -349,82 +267,31 @@ export const ClinicCard = ({
       if (error) throw error;
       if (response?.error) {
         if (response.code === "ALREADY_IN_QUEUE") {
-          toast.error("You already have an active queue entry at this clinic");
+          setJoinError("You already have an active queue entry at this clinic");
         } else if (response.code === "COOLDOWN") {
-          toast.error(response.error);
+          setJoinError(response.error);
+        } else if (response.code === "RATE_LIMITED") {
+          setJoinError("Too many attempts. Please try again shortly.");
         } else {
-          toast.error(response.error);
+          setJoinError(response.error);
         }
         return;
       }
 
-      setVerificationId(response.verification_id);
-      setDisplayedOtp(response.otp);
-      setOtpStep("verify");
-      setOtpInput("");
-    } catch (err: any) {
-      toast.error(err.message || "Failed to start verification");
-    } finally {
-      setOtpLoading(false);
-    }
-  };
-
-  const verifyOtp = async () => {
-    if (!otpInput.trim()) {
-      setOtpError("Please enter the verification code");
-      return;
-    }
-
-    setOtpLoading(true);
-    setOtpError("");
-    try {
-      const sanitizedMobile = sanitizeMobileNumber(mobileNumber);
-      const { data: response, error } = await supabase.functions.invoke("queue-lookup", {
-        body: {
-          action: "verify_otp",
-          clinic_id: id,
-          mobile_number: sanitizedMobile,
-          verification_id: verificationId,
-          verification_code: otpInput.trim(),
-          estimated_wait_time: parseInt(waitTime) || 15,
-        },
-      });
-
-      if (error) throw error;
-      if (response?.error) {
-        if (response.code === "EXPIRED") {
-          setOtpError("Code expired. Please try again.");
-          setOtpStep("form");
-        } else if (response.code === "MAX_ATTEMPTS") {
-          setOtpError("Too many attempts. Please try again.");
-          setOtpStep("form");
-        } else if (response.code === "WRONG_CODE") {
-          setOtpError(`Incorrect code. ${response.attempts_left > 0 ? `${response.attempts_left} attempt(s) left.` : ''}`);
-        } else {
-          setOtpError(response.error);
-        }
-        return;
-      }
-
-      // Success!
       const createdEntry = response.entry;
       setNewQueueNumber(createdEntry.queue_number);
+      setNewCheckInCode(createdEntry.check_in_code || "");
       localStorage.setItem(`queue_mobile_${id}`, sanitizedMobile);
       setMobileNumber(sanitizedMobile);
       setMyQueueEntry(createdEntry);
       toast.success(t("clinicCard.joinedQueue"));
       setShowDisclaimer(false);
       setShowQueueCard(true);
-      setOtpStep("form");
-      setOtpInput("");
-      setDisplayedOtp("");
-      setVerificationId("");
-
       setTimeout(() => checkQueueStatus(), 500);
     } catch (err: any) {
-      setOtpError(err.message || "Verification failed");
+      setJoinError(err.message || "Failed to join queue");
     } finally {
-      setOtpLoading(false);
+      setJoinLoading(false);
     }
   };
 
@@ -437,138 +304,113 @@ export const ClinicCard = ({
       toast.error("Please enter a valid mobile number");
       return;
     }
-
     setLeadSubmitting(true);
     try {
       const sanitizedMobile = sanitizeMobileNumber(leadMobile);
       await supabase.functions.invoke("queue-lookup", {
-        body: {
-          action: "save_booking_lead",
-          clinic_id: id,
-          mobile_number: sanitizedMobile,
-          patient_name: leadName.trim(),
-          clinic_name: name,
-          booking_type: "external",
-        },
+        body: { action: "save_booking_lead", clinic_id: id, mobile_number: sanitizedMobile, patient_name: leadName.trim(), clinic_name: name, booking_type: "external" },
       });
       setShowBookingLead(false);
-      // Navigate to booking page
       navigate(bookingUrl);
     } catch (err) {
       console.error("Lead save error:", err);
-      // Still navigate even if lead save fails
       navigate(bookingUrl);
       setShowBookingLead(false);
-    } finally {
-      setLeadSubmitting(false);
-    }
+    } finally { setLeadSubmitting(false); }
   };
 
   return (
     <>
-      <Card className="group p-2.5 sm:p-4 hover:shadow-lg transition-all duration-300 border border-border/60 hover:border-ai-purple/40 cursor-pointer bg-gradient-to-br from-card to-ai-purple/5 onboarding-join-queue hover:shadow-ai-purple/10 w-full" onClick={() => id && navigate(`/clinic/${id}`)}>
-      <div className="space-y-2 sm:space-y-3">
+      <Card className="group p-2.5 sm:p-4 hover:shadow-lg transition-all duration-300 border border-border/40 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue w-full" onClick={() => id && navigate(`/clinic/${id}`)}>
+      <div className="space-y-2">
         <div className="flex items-start justify-between">
-          <div className="space-y-1.5 flex-1">
-            <div className="flex items-center gap-2 flex-wrap">
+          <div className="space-y-1 flex-1">
+            <div className="flex items-center gap-1.5 flex-wrap">
               <h3 className="text-sm sm:text-base font-bold group-hover:text-primary transition-colors">{name}</h3>
-               <Badge variant="secondary" className="text-[10px] sm:text-xs font-medium">
+               <Badge variant="secondary" className="text-[10px] font-medium">
                 {type}
               </Badge>
               {isOpen ? (
-                <Badge variant="outline" className="text-[10px] sm:text-xs border-accent text-accent">
+                <Badge variant="outline" className="text-[10px] border-accent text-accent">
                   {t("clinicCard.open")}
                 </Badge>
               ) : (
-                <Badge variant="outline" className="text-[10px] sm:text-xs border-muted text-muted-foreground">
+                <Badge variant="outline" className="text-[10px] border-muted text-muted-foreground">
                   {t("clinicCard.closed")}
                 </Badge>
               )}
               {isNmgAffiliated && (
-                <Badge className="text-xs bg-primary/15 text-primary border border-primary/30">
-                  <Shield className="h-3 w-3 mr-1" />
-                  Managed Care Available
+                <Badge className="text-[10px] bg-primary/15 text-primary border border-primary/30">
+                  <Shield className="h-2.5 w-2.5 mr-0.5" />
+                  Managed Care
                 </Badge>
               )}
             </div>
-            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+            <div className="flex items-center gap-1 text-[11px] text-muted-foreground">
               <MapPin className="h-3 w-3 flex-shrink-0" />
               <span className="line-clamp-1">{address}</span>
             </div>
           </div>
-          <div className="flex items-center gap-1 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded-md">
+          <div className="flex items-center gap-0.5 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded-md">
             <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-            <span className="text-xs font-bold">{rating}</span>
+            <span className="text-[11px] font-bold">{rating}</span>
           </div>
         </div>
 
         {hasDigitalQueue ? (
-          <div className="flex items-center gap-2 py-2 sm:py-3 px-2.5 sm:px-3 rounded-lg border onboarding-stats"
+          <div className="flex items-center gap-2 py-2 px-2.5 rounded-md border"
             style={{ 
               background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
-              borderColor: 'hsl(var(--ai-cyan)/0.3)'
+              borderColor: 'hsl(var(--ai-cyan)/0.2)'
             }}
           >
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-md bg-primary/20 flex items-center justify-center">
-                <Users className="h-4 w-4 text-primary" />
+              <div className="h-7 w-7 rounded-md bg-primary/20 flex items-center justify-center">
+                <Users className="h-3.5 w-3.5 text-primary" />
               </div>
               <div>
                 <p className="text-[10px] text-muted-foreground font-medium">{t("clinicCard.inQueue")}</p>
-                <p className="text-sm font-bold">{queueCount} {t("clinicCard.people")}</p>
+                <p className="text-xs font-bold">{queueCount} {t("clinicCard.people")}</p>
               </div>
             </div>
           </div>
         ) : (
-          <div className="space-y-3">
-            {/* Availabilities Today Section */}
-            <div className="py-4 px-4 rounded-xl border"
+          <div className="space-y-2">
+            <div className="py-3 px-3 rounded-lg border"
               style={{ 
                 background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
-                borderColor: 'hsl(var(--ai-cyan)/0.3)'
+                borderColor: 'hsl(var(--ai-cyan)/0.2)'
               }}
             >
-              <div className="flex items-center gap-2 mb-3">
-                <Clock className="h-5 w-5 text-foreground" />
-                <p className="text-base text-foreground font-semibold">{t("clinicCard.availabilitiesToday")}</p>
+              <div className="flex items-center gap-2 mb-2">
+                <Clock className="h-4 w-4 text-foreground" />
+                <p className="text-xs text-foreground font-semibold">{t("clinicCard.availabilitiesToday")}</p>
               </div>
-              <div className="flex gap-2 flex-wrap">
-                <button 
-                  className="px-4 py-2 text-sm font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  2:30 PM
-                </button>
-                <button 
-                  className="px-4 py-2 text-sm font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  4:00 PM
-                </button>
-                <button 
-                  className="px-4 py-2 text-sm font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  5:30 PM
-                </button>
+              <div className="flex gap-1.5 flex-wrap">
+                {["2:30 PM", "4:00 PM", "5:30 PM"].map((time) => (
+                  <button key={time}
+                    className="px-3 py-1.5 text-[11px] font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    {time}
+                  </button>
+                ))}
               </div>
             </div>
-
-            {/* Services Dropdown Section */}
-            <div className="py-4 px-4 rounded-xl border"
+            <div className="py-3 px-3 rounded-lg border"
               style={{ 
                 background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.05))',
-                borderColor: 'hsl(var(--ai-purple)/0.3)'
+                borderColor: 'hsl(var(--ai-purple)/0.2)'
               }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="space-y-2">
+              <div className="space-y-1.5">
                 <div className="flex items-center gap-2">
-                  <Star className="h-5 w-5 text-foreground" />
-                  <p className="text-base text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
+                  <Star className="h-4 w-4 text-foreground" />
+                  <p className="text-xs text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
                 </div>
                 <Select defaultValue="massage">
-                  <SelectTrigger className="w-full bg-background/50 border-border/50">
+                  <SelectTrigger className="w-full bg-background/50 border-border/50 h-8 text-xs">
                     <SelectValue placeholder="Select a service" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
@@ -585,104 +427,93 @@ export const ClinicCard = ({
         )}
 
         {myQueueEntry ? (
-          <div className="space-y-2 pt-1" onClick={(e) => e.stopPropagation()}>
-            <div className="relative p-3 bg-card rounded-lg border shadow-sm"
-              style={{ borderColor: 'hsl(var(--ai-purple)/0.3)' }}
+          <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
+            <div className="relative p-2.5 bg-card rounded-md border"
+              style={{ borderColor: 'hsl(var(--ai-purple)/0.2)' }}
             >
-              <div className="flex items-center justify-between p-3 rounded-md border mb-2"
+              <div className="flex items-center justify-between p-2.5 rounded-md border mb-2"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.1))',
-                  borderColor: 'hsl(var(--ai-purple)/0.2)'
+                  borderColor: 'hsl(var(--ai-purple)/0.15)'
                 }}
               >
-                <div className="flex items-center gap-4">
-                  <div className="relative h-16 w-16">
+                <div className="flex items-center gap-3">
+                  <div className="relative h-12 w-12">
                     <svg className="absolute inset-0 -rotate-90" viewBox="0 0 64 64">
-                      {/* Background circle */}
-                      <circle
-                        cx="32"
-                        cy="32"
-                        r="28"
-                        fill="none"
-                        stroke="hsl(var(--muted))"
-                        strokeWidth="4"
-                        opacity="0.3"
-                      />
-                      {/* Progress circle */}
-                      <circle
-                        cx="32"
-                        cy="32"
-                        r="28"
-                        fill="none"
-                        stroke="hsl(var(--accent))"
-                        strokeWidth="4"
-                        strokeLinecap="round"
+                      <circle cx="32" cy="32" r="28" fill="none" stroke="hsl(var(--muted))" strokeWidth="4" opacity="0.3" />
+                      <circle cx="32" cy="32" r="28" fill="none" stroke="hsl(var(--accent))" strokeWidth="4" strokeLinecap="round"
                         strokeDasharray={`${2 * Math.PI * 28}`}
                         strokeDashoffset={`${2 * Math.PI * 28 * (1 - ((queueCount - myQueueEntry.queue_number) / queueCount))}`}
                         className="transition-all duration-1000 ease-out"
                       />
                     </svg>
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-2xl font-black text-primary-foreground shadow-lg">
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-xl font-black text-primary-foreground shadow-md">
                       #{myQueueEntry.queue_number}
                     </div>
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-muted-foreground mb-1">{t("clinicCard.youreInQueue")}</p>
-                    <p className="text-lg font-bold text-foreground">
-                      {t("clinicCard.position")} <span className="text-2xl font-black text-primary">#{myQueueEntry.queue_number}</span>
-                      <span className="text-sm font-medium text-muted-foreground ml-2">{t("clinicCard.of")} {queueCount}</span>
+                    <p className="text-[11px] font-medium text-muted-foreground">{t("clinicCard.youreInQueue")}</p>
+                    <p className="text-sm font-bold text-foreground">
+                      {t("clinicCard.position")} <span className="text-lg font-black text-primary">#{myQueueEntry.queue_number}</span>
+                      <span className="text-[11px] font-medium text-muted-foreground ml-1">{t("clinicCard.of")} {queueCount}</span>
                     </p>
                   </div>
                 </div>
-                <Badge variant="secondary" className="text-xs font-semibold px-3 py-1">
+                <Badge variant="secondary" className="text-[10px] font-semibold px-2 py-0.5">
                   {t("clinicCard.waiting")}
                 </Badge>
               </div>
+              {/* Check-in code display */}
+              {myQueueEntry.check_in_code && (
+                <div className="text-center p-2 bg-muted/50 rounded-md border border-border/30">
+                  <p className="text-[10px] text-muted-foreground">Check-in Code</p>
+                  <p className="text-sm font-mono font-black tracking-widest text-primary">{myQueueEntry.check_in_code}</p>
+                  <p className="text-[9px] text-muted-foreground">Show at clinic counter</p>
+                </div>
+              )}
             </div>
             
-            <div className="flex gap-3">
+            <div className="flex gap-2">
               <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-md border-0 h-10 text-sm" 
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-sm border-0 h-9 text-xs" 
                 disabled={isLoading}
                 onClick={handleCheckIn}
               >
-                <CheckCircle className="mr-2 h-4 w-4" strokeWidth={2.5} />
+                <CheckCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={2.5} />
                 {t("clinicCard.checkIn")}
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 border border-destructive/40 text-destructive hover:bg-destructive/10 hover:border-destructive font-bold h-10 text-sm" 
+                className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-9 text-xs" 
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
-                <XCircle className="mr-2 h-4 w-4" strokeWidth={2.5} />
+                <XCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={2.5} />
                 {t("clinicCard.leaveQueue")}
               </Button>
             </div>
           </div>
         ) : (
-            <div className="space-y-2 pt-1">
+            <div className="space-y-1.5">
             {hasDigitalQueue && (
-              <div className="p-2.5 sm:p-3 rounded-lg border shadow-sm"
+              <div className="p-2.5 rounded-md border"
                 style={{ 
-                  background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.05))',
-                  borderColor: 'hsl(var(--ai-purple)/0.25)'
+                  background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
+                  borderColor: 'hsl(var(--ai-purple)/0.2)'
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                 <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
-                   <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/40">
-                     <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" strokeWidth={3} />
+                 <div className="flex items-center gap-2 mb-2">
+                   <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md shadow-primary/30">
+                     <Users className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
                    </div>
-                    <div>
-                      <p className="text-sm sm:text-base font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
-                    </div>
+                    <p className="text-xs sm:text-sm font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
                  </div>
                 
-                <div className="space-y-1.5" onClick={(e) => e.stopPropagation()}>
-                  <label className="text-xs font-medium text-foreground">{t("clinicCard.visitType")}</label>
+                <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
+                  <label className="text-[10px] font-medium text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
-                    <SelectTrigger className="w-full">
+                    <SelectTrigger className="w-full h-8 text-xs">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -697,52 +528,40 @@ export const ClinicCard = ({
               </div>
             )}
             
-            <div className={`flex gap-1.5 sm:gap-2 ${isNmgAffiliated && isManagedCareType(type) ? 'flex-col' : ''}`}>
+            <div className={`flex gap-1.5 ${isNmgAffiliated && isManagedCareType(type) ? 'flex-col' : ''}`}>
               {hasDigitalQueue ? (
                 <Button 
-                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs sm:text-sm shadow-2xl shadow-primary/50 border-0 h-8 sm:h-10 hover:scale-105 transition-transform" 
+                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs shadow-lg shadow-primary/40 border-0 h-8 sm:h-9 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen || isJoining}
                   onClick={handleJoinQueue}
                 >
-                  <Users className="mr-1.5 h-4 w-4" strokeWidth={3} />
+                  <Users className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
                   {isJoining ? t("clinicCard.joining") : t("clinicCard.joinQueue")}
                 </Button>
               ) : isNmgAffiliated && isManagedCareType(type) ? (
                 <Button 
-                  className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs sm:text-sm shadow-2xl shadow-primary/50 border-0 h-8 sm:h-10 hover:scale-105 transition-transform" 
+                  className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs shadow-lg shadow-primary/40 border-0 h-8 sm:h-9 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    resetManagedCareModal();
-                    setShowManagedCareModal(true);
-                  }}
+                  onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
                 >
-                  <Shield className="mr-2 h-5 w-5" strokeWidth={3} />
+                  <Shield className="mr-1.5 h-4 w-4" strokeWidth={3} />
                   Request Managed Care Support
                 </Button>
               ) : (
                 <Button 
-                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs sm:text-sm shadow-2xl shadow-primary/50 border-0 h-8 sm:h-10 hover:scale-105 transition-transform" 
+                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs shadow-lg shadow-primary/40 border-0 h-8 sm:h-9 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (id) {
-                      setShowBookingLead(true);
-                    }
-                  }}
+                  onClick={(e) => { e.stopPropagation(); if (id) setShowBookingLead(true); }}
                 >
-                  <Calendar className="mr-2 h-4 w-4" strokeWidth={3} />
+                  <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
                   {isManagedCareType(type) ? "Request" : "Book"}
                 </Button>
               )}
               <Button 
                 variant="outline"
-                className={`font-bold text-xs sm:text-sm hover:bg-primary/20 hover:border-primary border border-primary/40 h-8 sm:h-10 hover:scale-105 transition-transform ${isNmgAffiliated && isManagedCareType(type) ? 'w-full' : 'flex-1'}`}
+                className={`font-bold text-xs hover:bg-primary/20 hover:border-primary border border-primary/30 h-8 sm:h-9 hover:scale-[1.02] transition-transform ${isNmgAffiliated && isManagedCareType(type) ? 'w-full' : 'flex-1'}`}
                 disabled={!isOpen}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  id && navigate(`/clinic/${id}`);
-                }}
+                onClick={(e) => { e.stopPropagation(); id && navigate(`/clinic/${id}`); }}
               >
                 {t("clinicCard.viewDetails")}
               </Button>
@@ -750,14 +569,10 @@ export const ClinicCard = ({
             {isNmgAffiliated && !isManagedCareType(type) && (
               <Button
                 variant="outline"
-                className="w-full border-2 border-primary/40 text-primary hover:bg-primary/10 font-semibold h-10 text-sm"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  resetManagedCareModal();
-                  setShowManagedCareModal(true);
-                }}
+                className="w-full border border-primary/30 text-primary hover:bg-primary/10 font-semibold h-8 text-xs"
+                onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
               >
-                <Shield className="mr-2 h-4 w-4" />
+                <Shield className="mr-1.5 h-3.5 w-3.5" />
                 Request Managed Care Support
               </Button>
             )}
@@ -766,86 +581,80 @@ export const ClinicCard = ({
       </div>
     </Card>
 
-    {/* Queue Join with OTP Verification */}
-    <Dialog open={showDisclaimer} onOpenChange={(open) => { setShowDisclaimer(open); if (!open) { setOtpStep("form"); setOtpError(""); setOtpInput(""); setDisplayedOtp(""); } }}>
+    {/* Queue Join with Disclaimer + Checkbox */}
+    <Dialog open={showDisclaimer} onOpenChange={(open) => { setShowDisclaimer(open); if (!open) { setJoinError(""); setDisclaimerAgreed(false); } }}>
       <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle>{otpStep === "form" ? "Join Queue" : "Verify Your Identity"}</DialogTitle>
-          <DialogDescription>
-            {otpStep === "form" 
-              ? "Enter your name and number to secure your spot" 
-              : "Verification needed to prevent queue abuse"}
+          <DialogTitle className="text-base">Secure Your Spot</DialogTitle>
+          <DialogDescription className="text-xs">
+            Enter your name and number to join the queue
           </DialogDescription>
         </DialogHeader>
 
-        {otpStep === "form" ? (
-          <div className="space-y-3">
-            <div>
-              <Label htmlFor="q-name" className="text-xs font-medium">Name</Label>
-              <Input
-                id="q-name"
-                type="text"
-                value={patientName}
-                onChange={(e) => setPatientName(e.target.value)}
-                placeholder="Enter your name"
-                className="mt-1"
-              />
-            </div>
-            <div>
-              <Label htmlFor="q-mobile" className="text-xs font-medium">Mobile Number</Label>
-              <Input
-                id="q-mobile"
-                type="tel"
-                value={mobileNumber}
-                onChange={(e) => setMobileNumber(e.target.value)}
-                placeholder="e.g. +6591234567"
-                className="mt-1"
-              />
-              <p className="text-[10px] text-muted-foreground mt-1">8-15 digits, country code optional</p>
-            </div>
-            <Alert className="py-2">
-              <AlertTriangle className="h-3 w-3" />
-              <AlertDescription className="text-[11px]">
-                Queue position managed by clinic staff. May shift due to urgent cases.
-              </AlertDescription>
-            </Alert>
-            <DialogFooter className="gap-2 pt-1">
-              <Button variant="outline" size="sm" onClick={() => setShowDisclaimer(false)}>Cancel</Button>
-              <Button size="sm" onClick={requestOtp} disabled={otpLoading}>
-                {otpLoading ? "Verifying..." : "Continue"}
-              </Button>
-            </DialogFooter>
+        <div className="space-y-3">
+          <div>
+            <Label htmlFor="q-name" className="text-xs font-medium">Name</Label>
+            <Input
+              id="q-name"
+              type="text"
+              value={patientName}
+              onChange={(e) => setPatientName(e.target.value)}
+              placeholder="Enter your name"
+              className="mt-1 h-9 text-sm"
+            />
           </div>
-        ) : (
-          <div className="space-y-4">
-            <div className="text-center p-4 bg-muted rounded-lg">
-              <p className="text-xs text-muted-foreground mb-1">Your verification code</p>
-              <p className="text-3xl font-mono font-black tracking-[0.3em] text-primary">{displayedOtp}</p>
-              <p className="text-[10px] text-muted-foreground mt-2">Expires in 2 minutes</p>
-            </div>
-            <div>
-              <Label htmlFor="otp-input" className="text-xs font-medium">Enter the code above</Label>
-              <Input
-                id="otp-input"
-                type="text"
-                inputMode="numeric"
-                maxLength={6}
-                value={otpInput}
-                onChange={(e) => { setOtpInput(e.target.value.replace(/\D/g, '')); setOtpError(""); }}
-                placeholder="000000"
-                className="mt-1 text-center text-lg tracking-widest font-mono"
-                autoFocus
-              />
-              {otpError && <p className="text-xs text-destructive mt-1">{otpError}</p>}
-            </div>
-            <DialogFooter className="gap-2">
-              <Button variant="outline" size="sm" onClick={() => { setOtpStep("form"); setOtpError(""); }}>Back</Button>
-              <Button size="sm" onClick={verifyOtp} disabled={otpLoading || otpInput.length < 6}>
-                {otpLoading ? "Verifying..." : "Confirm & Join"}
-              </Button>
-            </DialogFooter>
+          <div>
+            <Label htmlFor="q-mobile" className="text-xs font-medium">Mobile Number</Label>
+            <Input
+              id="q-mobile"
+              type="tel"
+              value={mobileNumber}
+              onChange={(e) => setMobileNumber(e.target.value)}
+              placeholder="e.g. +6591234567"
+              className="mt-1 h-9 text-sm"
+            />
+            <p className="text-[10px] text-muted-foreground mt-0.5">8-15 digits, country code optional</p>
           </div>
-        )}
+
+          {/* Mandatory Disclaimer */}
+          <div className="p-2.5 rounded-md bg-muted/50 border border-border/40 space-y-1.5">
+            <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide">Please Note</p>
+            <ul className="space-y-1 text-[11px] text-muted-foreground list-disc pl-3.5">
+              <li>Queue order is managed by clinic staff and may change.</li>
+              <li>Number of patients ahead is provided for visibility only.</li>
+              <li>Urgent cases, walk-ins, and clinic prioritization may affect queue movement.</li>
+              <li>ClynicQ does not guarantee exact waiting time.</li>
+            </ul>
+          </div>
+
+          <div className="flex items-start gap-2" onClick={(e) => e.stopPropagation()}>
+            <Checkbox
+              id="disclaimer-agree"
+              checked={disclaimerAgreed}
+              onCheckedChange={(checked) => setDisclaimerAgreed(checked === true)}
+              className="mt-0.5"
+            />
+            <Label htmlFor="disclaimer-agree" className="text-[11px] text-foreground font-medium cursor-pointer leading-tight">
+              I understand and agree
+            </Label>
+          </div>
+
+          {joinError && (
+            <p className="text-xs text-destructive font-medium">{joinError}</p>
+          )}
+
+          <DialogFooter className="gap-2 pt-1">
+            <Button variant="outline" size="sm" onClick={() => setShowDisclaimer(false)}>Cancel</Button>
+            <Button 
+              size="sm" 
+              onClick={handleSecureSpot} 
+              disabled={joinLoading || !disclaimerAgreed}
+              className="bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold"
+            >
+              {joinLoading ? "Joining..." : "Secure My Spot"}
+            </Button>
+          </DialogFooter>
+        </div>
       </DialogContent>
     </Dialog>
 
@@ -853,86 +662,80 @@ export const ClinicCard = ({
     <Dialog open={showBookingLead} onOpenChange={setShowBookingLead}>
       <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle>Book Appointment</DialogTitle>
-          <DialogDescription>Enter your details before we redirect you to booking</DialogDescription>
+          <DialogTitle className="text-base">Book Appointment</DialogTitle>
+          <DialogDescription className="text-xs">Enter your details before we redirect you to booking</DialogDescription>
         </DialogHeader>
         <div className="space-y-3">
           <div>
             <Label htmlFor="lead-name" className="text-xs font-medium">Name</Label>
-            <Input
-              id="lead-name"
-              type="text"
-              value={leadName}
-              onChange={(e) => setLeadName(e.target.value)}
-              placeholder="Your full name"
-              className="mt-1"
-            />
+            <Input id="lead-name" type="text" value={leadName} onChange={(e) => setLeadName(e.target.value)} placeholder="Your full name" className="mt-1 h-9 text-sm" />
           </div>
           <div>
             <Label htmlFor="lead-mobile" className="text-xs font-medium">Mobile Number</Label>
-            <Input
-              id="lead-mobile"
-              type="tel"
-              value={leadMobile}
-              onChange={(e) => setLeadMobile(e.target.value)}
-              placeholder="e.g. +6591234567"
-              className="mt-1"
-            />
+            <Input id="lead-mobile" type="tel" value={leadMobile} onChange={(e) => setLeadMobile(e.target.value)} placeholder="e.g. +6591234567" className="mt-1 h-9 text-sm" />
           </div>
         </div>
         <DialogFooter className="gap-2 pt-1">
           <Button variant="outline" size="sm" onClick={() => setShowBookingLead(false)}>Cancel</Button>
-          <Button size="sm" onClick={() => {
-            // Get clinic booking URL - navigate to booking page which handles external redirect
-            handleSaveBookingLead(`/booking/${id}`);
-          }} disabled={leadSubmitting}>
+          <Button size="sm" onClick={() => handleSaveBookingLead(`/booking/${id}`)} disabled={leadSubmitting}>
             {leadSubmitting ? "Saving..." : "Continue to Book"}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
 
-
-    {/* Queue Card Dialog */}
+    {/* Queue Success Card Dialog */}
     <Dialog open={showQueueCard} onOpenChange={setShowQueueCard}>
-      <DialogContent>
+      <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle>Your queue number has been confirmed</DialogTitle>
+          <DialogTitle className="text-base">Your queue number has been confirmed</DialogTitle>
         </DialogHeader>
-        <div className="space-y-4">
-          <div className="text-center p-6 bg-muted rounded-lg">
-            <p className="text-sm text-muted-foreground mb-2">Queue Number</p>
+        <div className="space-y-3">
+          <div className="text-center p-5 bg-muted rounded-lg">
+            <p className="text-xs text-muted-foreground mb-1">Queue Number</p>
             <p className="text-5xl font-bold text-primary">{newQueueNumber}</p>
-            <p className="text-sm font-bold text-foreground mt-4">
+            <p className="text-[11px] font-medium text-foreground mt-3">
               Current position may change based on clinic flow and urgent cases
             </p>
           </div>
+
+          {/* Check-in code */}
+          {newCheckInCode && (
+            <div className="text-center p-4 border-2 border-primary/30 rounded-lg bg-primary/5">
+              <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide mb-1">Check-in Code</p>
+              <p className="text-2xl font-mono font-black tracking-[0.2em] text-primary">{newCheckInCode}</p>
+              <p className="text-[11px] text-foreground font-medium mt-2">
+                Show this code at the clinic counter when you arrive.
+              </p>
+            </div>
+          )}
           
-          <div className="p-4 border rounded-lg space-y-3">
-            <p className="text-sm font-medium">Save your queue link</p>
+          <div className="p-3 border rounded-md space-y-2">
+            <p className="text-xs font-medium">Save your queue link</p>
             <Button
               variant="outline"
-              className="w-full"
+              size="sm"
+              className="w-full text-xs"
               onClick={() => {
                 const queueUrl = `${window.location.origin}/queue?clinic=${id}&mobile=${encodeURIComponent(mobileNumber)}`;
                 navigator.clipboard.writeText(queueUrl);
-                toast.success("Link copied to clipboard!");
+                toast.success("Link copied!");
               }}
             >
-              <Copy className="mr-2 h-4 w-4" />
+              <Copy className="mr-1.5 h-3.5 w-3.5" />
               Copy Link
             </Button>
-            <p className="text-sm font-bold text-foreground">Use this link to return to your queue anytime.</p>
+            <p className="text-[11px] font-medium text-foreground">Use this link to return to your queue anytime.</p>
           </div>
           
-          <Alert>
-            <AlertDescription>
-              Please stay nearby and check your notifications. You'll be notified when it's your turn.
+          <Alert className="py-2">
+            <AlertDescription className="text-[11px]">
+              Please stay nearby and keep this page open. You'll be notified when it's your turn.
             </AlertDescription>
           </Alert>
         </div>
         <DialogFooter>
-          <Button onClick={() => {
+          <Button size="sm" onClick={() => {
             setShowQueueCard(false);
             navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(mobileNumber)}`);
           }}>
@@ -999,7 +802,7 @@ export const ClinicCard = ({
             <CheckCircle className="h-12 w-12 text-primary mx-auto" />
             <p className="text-lg font-semibold text-foreground">Request Received</p>
             <p className="text-sm text-muted-foreground">
-              Your request has been received. A care coordinator will review your case and contact you shortly to recommend the most suitable provider.
+              Your request has been received. A care coordinator will review your case and contact you shortly.
             </p>
             <div className="bg-muted rounded-lg p-3">
               <p className="text-xs text-muted-foreground">Case Reference</p>
