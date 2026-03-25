@@ -185,8 +185,18 @@ Deno.serve(async (req) => {
 
       const clinic_name = body.clinic_name || null;
       const booking_type = body.booking_type || "external";
+      const redirect_type = body.redirect_type || "web";
+      const redirect_url = body.redirect_url || null;
 
-      const { error: leadError } = await supabase
+      // Generate case_id: CQ-YYYYMMDD-XXXX
+      const now = new Date();
+      const dateStr = now.toISOString().slice(0, 10).replace(/-/g, "");
+      const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+      let suffix = "";
+      for (let i = 0; i < 4; i++) suffix += chars.charAt(Math.floor(Math.random() * chars.length));
+      const caseId = `CQ-${dateStr}-${suffix}`;
+
+      const { data: leadData, error: leadError } = await supabase
         .from("booking_leads")
         .insert({
           clinic_id,
@@ -194,8 +204,14 @@ Deno.serve(async (req) => {
           patient_name: patient_name.trim(),
           mobile_number: normalizedMobile,
           booking_type,
-          source: "marketplace",
-        });
+          source: body.source || "marketplace",
+          case_id: caseId,
+          status: "initiated",
+          redirect_type,
+          redirect_url,
+        })
+        .select("id, case_id")
+        .single();
 
       if (leadError) {
         console.error("Error saving booking lead:", leadError);
@@ -206,7 +222,7 @@ Deno.serve(async (req) => {
       }
 
       return new Response(
-        JSON.stringify({ success: true }),
+        JSON.stringify({ success: true, case_id: caseId, lead_id: leadData?.id }),
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
