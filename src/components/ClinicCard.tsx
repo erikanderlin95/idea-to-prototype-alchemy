@@ -384,8 +384,8 @@ export const ClinicCard = ({
                 </Badge>
               )}
             </div>
-            <div className="flex items-center gap-1 text-sm text-muted-foreground">
-              <MapPin className="h-4 w-4 flex-shrink-0" />
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+              <MapPin className="h-3 w-3 flex-shrink-0" />
               <span className="line-clamp-1">{address}</span>
             </div>
           </div>
