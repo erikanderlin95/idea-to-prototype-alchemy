@@ -463,17 +463,17 @@ export const ClinicCard = ({
         {myQueueEntry ? (
           <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
             {/* People ahead — large */}
-            <div className="flex items-center justify-between px-2 py-1 rounded border"
+            <div className="flex items-center justify-between px-2.5 py-2 rounded-lg border-2"
               style={{ 
-                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.08))',
-                borderColor: 'hsl(var(--ai-purple)/0.2)'
+                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.12), hsl(var(--ai-blue)/0.1))',
+                borderColor: 'hsl(var(--ai-purple)/0.3)'
               }}
             >
-              <div className="flex items-center gap-1.5">
-                <Users className="h-4 w-4 text-primary" />
-                <span className="text-[13px] font-semibold text-muted-foreground">People Ahead</span>
+              <div className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-primary" />
+                <span className="text-sm font-bold text-foreground">People Ahead</span>
               </div>
-              <span className="text-2xl font-black text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
+              <span className="text-3xl font-black text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
             </div>
 
             {/* Check-in code — bold */}
