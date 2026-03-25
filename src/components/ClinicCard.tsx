@@ -474,8 +474,8 @@ export const ClinicCard = ({
                 <p className="text-[15px] font-bold text-foreground leading-tight">{queueCount}</p>
               </div>
               <div className="text-center border-x border-border/30">
-                <p className="text-[10px] text-muted-foreground font-medium leading-none mb-0.5">{t("clinicCard.position")}</p>
-                <p className="text-[15px] font-black text-primary leading-tight">#{myQueueEntry.queue_number}</p>
+                <p className="text-[10px] text-muted-foreground font-medium leading-none mb-0.5">Ahead</p>
+                <p className="text-[15px] font-black text-primary leading-tight">{Math.max(0, myQueueEntry.queue_number - 1)}</p>
               </div>
               <div className="text-center">
                 <p className="text-[10px] text-muted-foreground font-medium leading-none mb-0.5">Status</p>
