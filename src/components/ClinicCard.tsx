@@ -546,7 +546,7 @@ export const ClinicCard = ({
             <div className={`flex gap-1.5 ${isNmgAffiliated && isManagedCareType(type) ? 'flex-col' : ''}`}>
               {hasDigitalQueue ? (
                 <Button 
-                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs shadow-lg shadow-primary/40 border-0 h-8 sm:h-9 hover:scale-[1.02] transition-transform" 
+                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-9 sm:h-10 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen || isJoining}
                   onClick={handleJoinQueue}
                 >
