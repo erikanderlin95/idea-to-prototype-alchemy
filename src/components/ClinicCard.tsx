@@ -361,21 +361,21 @@ export const ClinicCard = ({
         {/* Row 1: Name + type + status + rating */}
         <div className="flex items-center justify-between gap-1">
           <div className="flex items-center gap-1.5 flex-wrap flex-1 min-w-0">
-            <h3 className="text-[15px] sm:text-base font-semibold group-hover:text-primary transition-colors truncate">{name}</h3>
-            <Badge variant="secondary" className="text-[10px] font-medium px-1.5 py-0 h-[18px] shrink-0">
+            <h3 className="text-[15px] sm:text-base font-bold group-hover:text-primary transition-colors truncate">{name}</h3>
+            <Badge variant="secondary" className="text-xs font-medium px-1.5 py-0 h-[20px] shrink-0">
               {type}
             </Badge>
             {isOpen ? (
-              <Badge variant="outline" className="text-[10px] border-accent text-accent px-1.5 py-0 h-[18px] shrink-0">
+              <Badge variant="outline" className="text-xs border-accent text-accent px-1.5 py-0 h-[20px] shrink-0">
                 {t("clinicCard.open")}
               </Badge>
             ) : (
-              <Badge variant="outline" className="text-[10px] border-muted text-muted-foreground px-1.5 py-0 h-[18px] shrink-0">
+              <Badge variant="outline" className="text-xs border-muted text-muted-foreground px-1.5 py-0 h-[20px] shrink-0">
                 {t("clinicCard.closed")}
               </Badge>
             )}
             {isNmgAffiliated && (
-              <Badge className="text-[10px] bg-primary/15 text-primary border border-primary/30 px-1.5 py-0 h-[18px] shrink-0">
+              <Badge className="text-xs bg-primary/15 text-primary border border-primary/30 px-1.5 py-0 h-[20px] shrink-0">
                 <Shield className="h-2.5 w-2.5 mr-0.5" />
                 Managed Care
               </Badge>
@@ -383,12 +383,12 @@ export const ClinicCard = ({
           </div>
           <div className="flex items-center gap-0.5 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded shrink-0">
             <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-            <span className="text-[11px] font-bold">{rating}</span>
+            <span className="text-[13px] font-bold">{rating}</span>
           </div>
         </div>
 
         {/* Row 2: Address */}
-        <div className="flex items-center gap-1 text-[12px] text-muted-foreground -mt-0.5">
+        <div className="flex items-center gap-1 text-sm text-muted-foreground -mt-0.5">
           <MapPin className="h-3 w-3 flex-shrink-0" />
           <span className="line-clamp-1">{address}</span>
         </div>
@@ -404,8 +404,8 @@ export const ClinicCard = ({
               <Users className="h-3 w-3 text-primary" />
             </div>
             <div>
-              <p className="text-[10px] text-muted-foreground font-medium leading-none">{t("clinicCard.inQueue")}</p>
-              <p className="text-xs font-bold leading-tight">{queueCount} {t("clinicCard.people")}</p>
+              <p className="text-xs text-muted-foreground font-medium leading-none">{t("clinicCard.inQueue")}</p>
+              <p className="text-sm font-bold leading-tight">{queueCount} {t("clinicCard.people")}</p>
             </div>
           </div>
         ) : (
@@ -418,12 +418,12 @@ export const ClinicCard = ({
             >
               <div className="flex items-center gap-1.5 mb-1.5">
                 <Clock className="h-3.5 w-3.5 text-foreground" />
-                <p className="text-[11px] text-foreground font-semibold">{t("clinicCard.availabilitiesToday")}</p>
+                <p className="text-[13px] text-foreground font-semibold">{t("clinicCard.availabilitiesToday")}</p>
               </div>
               <div className="flex gap-1.5 flex-wrap">
                 {["2:30 PM", "4:00 PM", "5:30 PM"].map((time) => (
                   <button key={time}
-                    className="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
+                    className="px-2.5 py-1 text-[13px] font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
                     onClick={(e) => e.stopPropagation()}
                   >
                     {time}
@@ -441,10 +441,10 @@ export const ClinicCard = ({
               <div className="space-y-1">
                 <div className="flex items-center gap-1.5">
                   <Star className="h-3.5 w-3.5 text-foreground" />
-                  <p className="text-[11px] text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
+                  <p className="text-[13px] text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
                 </div>
                 <Select defaultValue="massage">
-                  <SelectTrigger className="w-full bg-background/50 border-border/50 h-7 text-[11px]">
+                  <SelectTrigger className="w-full bg-background/50 border-border/50 h-8 text-[13px]">
                     <SelectValue placeholder="Select a service" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
@@ -463,34 +463,34 @@ export const ClinicCard = ({
         {myQueueEntry ? (
           <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
             {/* People ahead — large */}
-            <div className="flex items-center justify-between px-2 py-1 rounded border"
+            <div className="flex items-center justify-between px-2.5 py-2 rounded-lg border-2"
               style={{ 
-                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.08))',
-                borderColor: 'hsl(var(--ai-purple)/0.2)'
+                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.12), hsl(var(--ai-blue)/0.1))',
+                borderColor: 'hsl(var(--ai-purple)/0.3)'
               }}
             >
-              <div className="flex items-center gap-1.5">
-                <Users className="h-4 w-4 text-primary" />
-                <span className="text-[13px] font-semibold text-muted-foreground">People Ahead</span>
+              <div className="flex items-center gap-2">
+                <Users className="h-5 w-5 text-primary" />
+                <span className="text-sm font-bold text-foreground">People Ahead</span>
               </div>
-              <span className="text-2xl font-black text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
+              <span className="text-3xl font-black text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
             </div>
 
             {/* Check-in code — bold */}
             {myQueueEntry.check_in_code && (
-              <div className="flex items-center justify-between px-2 py-1 bg-muted/50 rounded border border-border/30">
-                <div className="flex items-center gap-1">
-                  <Shield className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-[11px] font-medium text-muted-foreground">Check-in Code</span>
+              <div className="flex items-center justify-between px-2.5 py-1.5 bg-muted/50 rounded border border-border/30">
+                <div className="flex items-center gap-1.5">
+                  <Shield className="h-4 w-4 text-primary" />
+                  <span className="text-[13px] font-medium text-muted-foreground">Check-in Code</span>
                 </div>
-                <span className="text-lg font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</span>
+                <span className="text-xl font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</span>
               </div>
             )}
             
             {/* Action buttons */}
             <div className="flex gap-1.5">
               <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-sm border-0 h-9 text-[12px]" 
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-sm border-0 h-9 text-sm" 
                 disabled={isLoading}
                 onClick={handleCheckIn}
               >
@@ -499,7 +499,7 @@ export const ClinicCard = ({
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-9 text-[12px]" 
+                className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-9 text-sm" 
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
@@ -522,13 +522,13 @@ export const ClinicCard = ({
                    <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
                      <Users className="h-3.5 w-3.5 text-primary-foreground" strokeWidth={3} />
                    </div>
-                    <p className="text-xs font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
+                    <p className="text-sm font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
                  </div>
                 
                 <div className="space-y-0.5" onClick={(e) => e.stopPropagation()}>
-                  <label className="text-[10px] font-medium text-foreground">{t("clinicCard.visitType")}</label>
+                  <label className="text-xs font-medium text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
-                    <SelectTrigger className="w-full h-7 text-[11px]">
+                    <SelectTrigger className="w-full h-8 text-[13px]">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -546,7 +546,7 @@ export const ClinicCard = ({
             <div className={`flex gap-1.5 ${isNmgAffiliated && isManagedCareType(type) ? 'flex-col' : ''}`}>
               {hasDigitalQueue ? (
                 <Button 
-                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs shadow-lg shadow-primary/40 border-0 h-8 sm:h-9 hover:scale-[1.02] transition-transform" 
+                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-9 sm:h-10 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen || isJoining}
                   onClick={handleJoinQueue}
                 >
@@ -555,7 +555,7 @@ export const ClinicCard = ({
                 </Button>
               ) : isNmgAffiliated && isManagedCareType(type) ? (
                 <Button 
-                  className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs shadow-lg shadow-primary/40 border-0 h-8 sm:h-9 hover:scale-[1.02] transition-transform" 
+                  className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-9 sm:h-10 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen}
                   onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
                 >
@@ -564,7 +564,7 @@ export const ClinicCard = ({
                 </Button>
               ) : (
                 <Button 
-                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs shadow-lg shadow-primary/40 border-0 h-8 sm:h-9 hover:scale-[1.02] transition-transform" 
+                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-9 sm:h-10 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen}
                   onClick={(e) => { e.stopPropagation(); if (id) setShowBookingLead(true); }}
                 >
@@ -574,7 +574,7 @@ export const ClinicCard = ({
               )}
               <Button 
                 variant="outline"
-                className={`font-bold text-xs hover:bg-primary/20 hover:border-primary border border-primary/30 h-8 sm:h-9 hover:scale-[1.02] transition-transform ${isNmgAffiliated && isManagedCareType(type) ? 'w-full' : 'flex-1'}`}
+                className={`font-bold text-sm hover:bg-primary/20 hover:border-primary border border-primary/30 h-9 sm:h-10 hover:scale-[1.02] transition-transform ${isNmgAffiliated && isManagedCareType(type) ? 'w-full' : 'flex-1'}`}
                 disabled={!isOpen}
                 onClick={(e) => { e.stopPropagation(); id && navigate(`/clinic/${id}`); }}
               >
@@ -584,7 +584,7 @@ export const ClinicCard = ({
             {isNmgAffiliated && !isManagedCareType(type) && (
               <Button
                 variant="outline"
-                className="w-full border border-primary/30 text-primary hover:bg-primary/10 font-semibold h-8 text-xs"
+                className="w-full border border-primary/30 text-primary hover:bg-primary/10 font-semibold h-9 text-sm"
                 onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
               >
                 <Shield className="mr-1.5 h-3.5 w-3.5" />
