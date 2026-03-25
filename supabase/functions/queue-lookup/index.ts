@@ -86,7 +86,7 @@ Deno.serve(async (req) => {
         .select("id, updated_at")
         .eq("clinic_id", clinic_id)
         .eq("mobile_number", normalizedMobile)
-        .in("status", ["checked_in", "cancelled"])
+        .in("status", ["cancelled"])
         .order("updated_at", { ascending: false })
         .limit(1)
         .maybeSingle();
