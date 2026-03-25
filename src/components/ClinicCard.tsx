@@ -701,7 +701,7 @@ export const ClinicCard = ({
         </div>
         <DialogFooter className="gap-2 pt-1">
           <Button variant="outline" size="sm" onClick={() => setShowBookingLead(false)}>Cancel</Button>
-          <Button size="sm" onClick={() => handleSaveBookingLead(`/booking/${id}`)} disabled={leadSubmitting}>
+          <Button size="sm" onClick={handleSaveBookingLead} disabled={leadSubmitting}>
             {leadSubmitting ? "Saving..." : "Continue to Book"}
           </Button>
         </DialogFooter>
