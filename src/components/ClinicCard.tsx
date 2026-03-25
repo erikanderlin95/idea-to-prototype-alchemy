@@ -82,10 +82,17 @@ export const ClinicCard = ({
   const [joinError, setJoinError] = useState("");
   // Booking lead capture state
   const [showBookingLead, setShowBookingLead] = useState(false);
+  const [showBookingConfirm, setShowBookingConfirm] = useState(false);
   const [leadName, setLeadName] = useState("");
   const [leadMobile, setLeadMobile] = useState("");
+  const [leadPrefDate, setLeadPrefDate] = useState("");
+  const [leadPrefTime, setLeadPrefTime] = useState("");
+  const [leadNotes, setLeadNotes] = useState("");
+  const [leadDisclaimerAgreed, setLeadDisclaimerAgreed] = useState(false);
   const [leadSubmitting, setLeadSubmitting] = useState(false);
   const [bookingCaseId, setBookingCaseId] = useState("");
+  const [bookingRedirectUrl, setBookingRedirectUrl] = useState("");
+  const [bookingRedirectType, setBookingRedirectType] = useState("");
 
   const generateCaseId = () => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
