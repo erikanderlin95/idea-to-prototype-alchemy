@@ -78,6 +78,18 @@ export const ClinicCard = ({
   const [mcSubmitted, setMcSubmitted] = useState(false);
   const [mcSubmitting, setMcSubmitting] = useState(false);
   const [mcCaseId, setMcCaseId] = useState("");
+  // OTP verification state
+  const [otpStep, setOtpStep] = useState<"form" | "verify">("form");
+  const [verificationId, setVerificationId] = useState("");
+  const [displayedOtp, setDisplayedOtp] = useState("");
+  const [otpInput, setOtpInput] = useState("");
+  const [otpError, setOtpError] = useState("");
+  const [otpLoading, setOtpLoading] = useState(false);
+  // Booking lead capture state
+  const [showBookingLead, setShowBookingLead] = useState(false);
+  const [leadName, setLeadName] = useState("");
+  const [leadMobile, setLeadMobile] = useState("");
+  const [leadSubmitting, setLeadSubmitting] = useState(false);
 
   const generateCaseId = () => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
