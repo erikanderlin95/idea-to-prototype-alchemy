@@ -509,7 +509,7 @@ export const ClinicCard = ({
             </div>
           </div>
         ) : (
-            <div className="space-y-1.5">
+            <div className="space-y-1.5 mt-auto">
             {hasDigitalQueue && (
               <div className="p-2 rounded border"
                 style={{ 
