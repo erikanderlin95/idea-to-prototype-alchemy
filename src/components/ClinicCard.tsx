@@ -428,8 +428,8 @@ export const ClinicCard = ({
         </div>
 
         {/* === MIDDLE SECTION === */}
-        <div className="flex-1 flex flex-col mt-1.5">
-        {hasDigitalQueue ? (
+        <div className="flex-1 flex flex-col gap-1.5 mt-1.5">
+        {hasDigitalQueue && (
           <div className="flex items-center gap-2 py-1 px-2 rounded border"
             style={{ 
               background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
@@ -444,7 +444,8 @@ export const ClinicCard = ({
               <p className="text-sm font-bold leading-tight">{queueCount} {t("clinicCard.people")}</p>
             </div>
           </div>
-        ) : (
+        )}
+        {!hasDigitalQueue && (
           <div className="space-y-1.5">
             <div className="py-2 px-2.5 rounded border"
               style={{ 
@@ -497,9 +498,9 @@ export const ClinicCard = ({
         )}
 
         {myQueueEntry ? (
-          <div className="flex-1 flex flex-col justify-between gap-1.5 mt-1" onClick={(e) => e.stopPropagation()}>
-            <div className="flex-1 flex flex-col justify-evenly gap-1.5">
-              <div className="flex items-center justify-between px-2.5 py-2 rounded-lg border-2"
+          <div className="flex-1 flex flex-col justify-between gap-1.5" onClick={(e) => e.stopPropagation()}>
+            <div className="flex-1 flex flex-col gap-1.5">
+              <div className="flex-1 flex items-center justify-between px-2.5 py-2.5 rounded-lg border-2"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.12), hsl(var(--ai-blue)/0.1))',
                   borderColor: 'hsl(var(--ai-purple)/0.3)'
@@ -513,7 +514,7 @@ export const ClinicCard = ({
               </div>
 
               {myQueueEntry.check_in_code && (
-                <div className="flex items-center justify-between px-2.5 py-1.5 bg-muted/50 rounded-lg border border-border/30">
+                <div className="flex-1 flex items-center justify-between px-2.5 py-2 bg-muted/50 rounded-lg border border-border/30">
                   <div className="flex items-center gap-1.5">
                     <Shield className="h-3.5 w-3.5 text-primary" />
                     <span className="text-xs font-medium text-muted-foreground">Check-in Code</span>
@@ -545,11 +546,10 @@ export const ClinicCard = ({
             </div>
           </div>
         ) : (
-          <div className="flex-1 flex flex-col justify-between gap-1.5 mt-1">
-            {/* Middle expanding content */}
-            <div className="flex-1 flex flex-col justify-evenly gap-1.5">
+          <div className="flex-1 flex flex-col justify-between gap-1.5">
+            <div className="flex-1 flex flex-col gap-1.5">
             {hasDigitalQueue && (
-              <div className="p-2.5 rounded border"
+              <div className="flex-1 flex flex-col justify-between p-2.5 rounded border"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
                   borderColor: 'hsl(var(--ai-purple)/0.2)'
