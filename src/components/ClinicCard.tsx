@@ -497,36 +497,37 @@ export const ClinicCard = ({
         )}
 
         {myQueueEntry ? (
-          <div className="space-y-1 mt-auto" onClick={(e) => e.stopPropagation()}>
-            {/* People ahead — large */}
-            <div className="flex items-center justify-between px-2.5 py-2 rounded-lg border-2"
-              style={{ 
-                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.12), hsl(var(--ai-blue)/0.1))',
-                borderColor: 'hsl(var(--ai-purple)/0.3)'
-              }}
-            >
-              <div className="flex items-center gap-2">
-                <Users className="h-5 w-5 text-primary" />
-                <span className="text-sm font-bold text-foreground">People Ahead</span>
-              </div>
-              <span className="text-3xl font-black text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
-            </div>
-
-            {/* Check-in code — bold */}
-            {myQueueEntry.check_in_code && (
-              <div className="flex items-center justify-between px-2.5 py-1.5 bg-muted/50 rounded border border-border/30">
-                <div className="flex items-center gap-1.5">
-                  <Shield className="h-4 w-4 text-primary" />
-                  <span className="text-[13px] font-medium text-muted-foreground">Check-in Code</span>
+          <div className="flex-1 flex flex-col justify-between gap-2 mt-1" onClick={(e) => e.stopPropagation()}>
+            {/* People ahead + check-in code — expand to fill */}
+            <div className="flex-1 flex flex-col justify-evenly gap-2">
+              <div className="flex items-center justify-between px-3 py-3 rounded-lg border-2"
+                style={{ 
+                  background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.12), hsl(var(--ai-blue)/0.1))',
+                  borderColor: 'hsl(var(--ai-purple)/0.3)'
+                }}
+              >
+                <div className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-primary" />
+                  <span className="text-sm font-bold text-foreground">People Ahead</span>
                 </div>
-                <span className="text-xl font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</span>
+                <span className="text-4xl font-black text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
               </div>
-            )}
+
+              {myQueueEntry.check_in_code && (
+                <div className="flex items-center justify-between px-3 py-2.5 bg-muted/50 rounded-lg border border-border/30">
+                  <div className="flex items-center gap-1.5">
+                    <Shield className="h-4 w-4 text-primary" />
+                    <span className="text-[13px] font-medium text-muted-foreground">Check-in Code</span>
+                  </div>
+                  <span className="text-xl font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</span>
+                </div>
+              )}
+            </div>
             
-            {/* Action buttons */}
+            {/* Action buttons — anchored bottom */}
             <div className="flex gap-1.5">
               <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-sm border-0 h-9 text-sm" 
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-sm border-0 h-10 text-sm" 
                 disabled={isLoading}
                 onClick={handleCheckIn}
               >
@@ -535,7 +536,7 @@ export const ClinicCard = ({
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-9 text-sm" 
+                className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-10 text-sm" 
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
@@ -545,26 +546,28 @@ export const ClinicCard = ({
             </div>
           </div>
         ) : (
-            <div className="space-y-1.5 mt-auto">
+          <div className="flex-1 flex flex-col justify-between gap-1.5 mt-1">
+            {/* Middle expanding content */}
+            <div className="flex-1 flex flex-col justify-evenly gap-1.5">
             {hasDigitalQueue && (
-              <div className="p-2 rounded border"
+              <div className="flex-1 flex flex-col justify-between p-2.5 rounded border min-h-0"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
                   borderColor: 'hsl(var(--ai-purple)/0.2)'
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                 <div className="flex items-center gap-2 mb-1.5">
+                 <div className="flex items-center gap-2 mb-2">
                    <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
                      <Users className="h-3.5 w-3.5 text-primary-foreground" strokeWidth={3} />
                    </div>
                     <p className="text-sm font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
                  </div>
                 
-                <div className="space-y-0.5" onClick={(e) => e.stopPropagation()}>
+                <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
                   <label className="text-xs font-medium text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
-                    <SelectTrigger className="w-full h-8 text-[13px]">
+                    <SelectTrigger className="w-full h-9 text-sm">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -578,11 +581,14 @@ export const ClinicCard = ({
                 </div>
               </div>
             )}
+            </div>
             
+            {/* Buttons — anchored bottom */}
+            <div className="space-y-1.5">
             <div className={`flex gap-1.5 ${isNmgAffiliated && isManagedCareType(type) ? 'flex-col' : ''}`}>
               {hasDigitalQueue ? (
                 <Button 
-                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-9 sm:h-10 hover:scale-[1.02] transition-transform" 
+                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen || isJoining}
                   onClick={handleJoinQueue}
                 >
@@ -591,7 +597,7 @@ export const ClinicCard = ({
                 </Button>
               ) : isNmgAffiliated && isManagedCareType(type) ? (
                 <Button 
-                  className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-9 sm:h-10 hover:scale-[1.02] transition-transform" 
+                  className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen}
                   onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
                 >
@@ -600,7 +606,7 @@ export const ClinicCard = ({
                 </Button>
               ) : (
                 <Button 
-                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-9 sm:h-10 hover:scale-[1.02] transition-transform" 
+                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen}
                   onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
                 >
@@ -610,7 +616,7 @@ export const ClinicCard = ({
               )}
               <Button 
                 variant="outline"
-                className={`font-bold text-sm hover:bg-primary/20 hover:border-primary border border-primary/30 h-9 sm:h-10 hover:scale-[1.02] transition-transform ${isNmgAffiliated && isManagedCareType(type) ? 'w-full' : 'flex-1'}`}
+                className={`font-bold text-sm hover:bg-primary/20 hover:border-primary border border-primary/30 h-10 hover:scale-[1.02] transition-transform ${isNmgAffiliated && isManagedCareType(type) ? 'w-full' : 'flex-1'}`}
                 disabled={!isOpen}
                 onClick={(e) => { e.stopPropagation(); id && navigate(`/clinic/${id}`); }}
               >
@@ -620,13 +626,14 @@ export const ClinicCard = ({
             {isNmgAffiliated && !isManagedCareType(type) && (
               <Button
                 variant="outline"
-                className="w-full border border-primary/30 text-primary hover:bg-primary/10 font-semibold h-9 text-sm"
+                className="w-full border border-primary/30 text-primary hover:bg-primary/10 font-semibold h-10 text-sm"
                 onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
               >
                 <Shield className="mr-1.5 h-3.5 w-3.5" />
                 Request Managed Care Support
               </Button>
             )}
+            </div>
           </div>
         )}
       </div>
