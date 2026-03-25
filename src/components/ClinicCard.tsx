@@ -522,7 +522,7 @@ export const ClinicCard = ({
                    <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
                      <Users className="h-3.5 w-3.5 text-primary-foreground" strokeWidth={3} />
                    </div>
-                    <p className="text-xs font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
+                    <p className="text-sm font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
                  </div>
                 
                 <div className="space-y-0.5" onClick={(e) => e.stopPropagation()}>
