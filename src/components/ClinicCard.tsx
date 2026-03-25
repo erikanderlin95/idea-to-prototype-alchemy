@@ -396,19 +396,19 @@ export const ClinicCard = ({
         </div>
 
         {hasDigitalQueue ? (
-          <div className="flex items-center gap-3 py-3 sm:py-4 px-3 sm:px-4 rounded-xl border onboarding-stats"
+          <div className="flex items-center gap-2 py-2 sm:py-3 px-2.5 sm:px-3 rounded-lg border onboarding-stats"
             style={{ 
               background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
               borderColor: 'hsl(var(--ai-cyan)/0.3)'
             }}
           >
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                <Users className="h-5 w-5 text-primary" />
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-md bg-primary/20 flex items-center justify-center">
+                <Users className="h-4 w-4 text-primary" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground font-medium">{t("clinicCard.inQueue")}</p>
-                <p className="text-base font-bold">{queueCount} {t("clinicCard.people")}</p>
+                <p className="text-[10px] text-muted-foreground font-medium">{t("clinicCard.inQueue")}</p>
+                <p className="text-sm font-bold">{queueCount} {t("clinicCard.people")}</p>
               </div>
             </div>
           </div>
