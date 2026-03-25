@@ -78,6 +78,18 @@ export const ClinicCard = ({
   const [mcSubmitted, setMcSubmitted] = useState(false);
   const [mcSubmitting, setMcSubmitting] = useState(false);
   const [mcCaseId, setMcCaseId] = useState("");
+  // OTP verification state
+  const [otpStep, setOtpStep] = useState<"form" | "verify">("form");
+  const [verificationId, setVerificationId] = useState("");
+  const [displayedOtp, setDisplayedOtp] = useState("");
+  const [otpInput, setOtpInput] = useState("");
+  const [otpError, setOtpError] = useState("");
+  const [otpLoading, setOtpLoading] = useState(false);
+  // Booking lead capture state
+  const [showBookingLead, setShowBookingLead] = useState(false);
+  const [leadName, setLeadName] = useState("");
+  const [leadMobile, setLeadMobile] = useState("");
+  const [leadSubmitting, setLeadSubmitting] = useState(false);
 
   const generateCaseId = () => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -303,63 +315,158 @@ export const ClinicCard = ({
     setShowDisclaimer(true);
   };
 
-  const addToQueue = async () => {
-    if (!id) return;
+  // Generate a simple device fingerprint
+  const getDeviceFingerprint = () => {
+    const nav = navigator;
+    return btoa(`${nav.userAgent}|${nav.language}|${screen.width}x${screen.height}|${new Date().getTimezoneOffset()}`).slice(0, 64);
+  };
 
-    setIsJoining(true);
+  const requestOtp = async () => {
+    if (!patientName.trim() || !mobileNumber.trim()) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+    if (!isValidMobileNumber(mobileNumber)) {
+      toast.error("Please enter a valid mobile number (8-15 digits)");
+      return;
+    }
+
+    setOtpLoading(true);
+    setOtpError("");
     try {
       const sanitizedMobile = sanitizeMobileNumber(mobileNumber);
-      
-      // Use edge function to join queue (bypasses RLS for anonymous users)
-      const { data: response, error: invokeError } = await supabase.functions.invoke(
-        "queue-lookup",
-        {
-          body: {
-            action: "join_queue",
-            clinic_id: id,
-            mobile_number: sanitizedMobile,
-            patient_name: patientName,
-            visit_type: visitType,
-            estimated_wait_time: parseInt(waitTime) || 15,
-          },
+      const { data: response, error } = await supabase.functions.invoke("queue-lookup", {
+        body: {
+          action: "request_otp",
+          clinic_id: id,
+          mobile_number: sanitizedMobile,
+          patient_name: patientName.trim(),
+          visit_type: visitType,
+          device_fingerprint: getDeviceFingerprint(),
+        },
+      });
+
+      if (error) throw error;
+      if (response?.error) {
+        if (response.code === "ALREADY_IN_QUEUE") {
+          toast.error("You already have an active queue entry at this clinic");
+        } else if (response.code === "COOLDOWN") {
+          toast.error(response.error);
+        } else {
+          toast.error(response.error);
         }
-      );
+        return;
+      }
 
-      if (invokeError) throw invokeError;
-      if (response?.error) throw new Error(response.error);
-      
-      const createdEntry = response?.entry;
-      if (!createdEntry) throw new Error("Failed to create queue entry");
+      setVerificationId(response.verification_id);
+      setDisplayedOtp(response.otp);
+      setOtpStep("verify");
+      setOtpInput("");
+    } catch (err: any) {
+      toast.error(err.message || "Failed to start verification");
+    } finally {
+      setOtpLoading(false);
+    }
+  };
 
-      // Set the queue number from the created entry
+  const verifyOtp = async () => {
+    if (!otpInput.trim()) {
+      setOtpError("Please enter the verification code");
+      return;
+    }
+
+    setOtpLoading(true);
+    setOtpError("");
+    try {
+      const sanitizedMobile = sanitizeMobileNumber(mobileNumber);
+      const { data: response, error } = await supabase.functions.invoke("queue-lookup", {
+        body: {
+          action: "verify_otp",
+          clinic_id: id,
+          mobile_number: sanitizedMobile,
+          verification_id: verificationId,
+          verification_code: otpInput.trim(),
+          estimated_wait_time: parseInt(waitTime) || 15,
+        },
+      });
+
+      if (error) throw error;
+      if (response?.error) {
+        if (response.code === "EXPIRED") {
+          setOtpError("Code expired. Please try again.");
+          setOtpStep("form");
+        } else if (response.code === "MAX_ATTEMPTS") {
+          setOtpError("Too many attempts. Please try again.");
+          setOtpStep("form");
+        } else if (response.code === "WRONG_CODE") {
+          setOtpError(`Incorrect code. ${response.attempts_left > 0 ? `${response.attempts_left} attempt(s) left.` : ''}`);
+        } else {
+          setOtpError(response.error);
+        }
+        return;
+      }
+
+      // Success!
+      const createdEntry = response.entry;
       setNewQueueNumber(createdEntry.queue_number);
-      
-      // Store sanitized mobile number in localStorage for this clinic
       localStorage.setItem(`queue_mobile_${id}`, sanitizedMobile);
       setMobileNumber(sanitizedMobile);
-      
-      // Update state to show in-queue UI
       setMyQueueEntry(createdEntry);
-      
       toast.success(t("clinicCard.joinedQueue"));
-      
-      // Show confirmation modal only after successful creation
+      setShowDisclaimer(false);
       setShowQueueCard(true);
+      setOtpStep("form");
+      setOtpInput("");
+      setDisplayedOtp("");
+      setVerificationId("");
 
-      // Force a verification refetch after a short delay to ensure sync
-      setTimeout(() => {
-        checkQueueStatus();
-      }, 500);
-    } catch (error: any) {
-      toast.error(error.message || t("clinicCard.failedToJoin"));
+      setTimeout(() => checkQueueStatus(), 500);
+    } catch (err: any) {
+      setOtpError(err.message || "Verification failed");
     } finally {
-      setIsJoining(false);
+      setOtpLoading(false);
+    }
+  };
+
+  const handleSaveBookingLead = async (bookingUrl: string) => {
+    if (!leadName.trim() || !leadMobile.trim()) {
+      toast.error("Please fill in your name and mobile number");
+      return;
+    }
+    if (!isValidMobileNumber(leadMobile)) {
+      toast.error("Please enter a valid mobile number");
+      return;
+    }
+
+    setLeadSubmitting(true);
+    try {
+      const sanitizedMobile = sanitizeMobileNumber(leadMobile);
+      await supabase.functions.invoke("queue-lookup", {
+        body: {
+          action: "save_booking_lead",
+          clinic_id: id,
+          mobile_number: sanitizedMobile,
+          patient_name: leadName.trim(),
+          clinic_name: name,
+          booking_type: "external",
+        },
+      });
+      setShowBookingLead(false);
+      // Navigate to booking page
+      navigate(bookingUrl);
+    } catch (err) {
+      console.error("Lead save error:", err);
+      // Still navigate even if lead save fails
+      navigate(bookingUrl);
+      setShowBookingLead(false);
+    } finally {
+      setLeadSubmitting(false);
     }
   };
 
   return (
     <>
-      <Card className="group p-2.5 sm:p-4 hover:shadow-xl transition-all duration-300 border-ai-indigo/30 hover:border-ai-purple/50 cursor-pointer bg-gradient-to-br from-card to-ai-purple/5 onboarding-join-queue hover:shadow-ai-purple/10 w-full" onClick={() => id && navigate(`/clinic/${id}`)}>
+      <Card className="group p-2.5 sm:p-4 hover:shadow-lg transition-all duration-300 border border-border/60 hover:border-ai-purple/40 cursor-pointer bg-gradient-to-br from-card to-ai-purple/5 onboarding-join-queue hover:shadow-ai-purple/10 w-full" onClick={() => id && navigate(`/clinic/${id}`)}>
       <div className="space-y-2 sm:space-y-3">
         <div className="flex items-start justify-between">
           <div className="space-y-1.5 flex-1">
@@ -478,14 +585,14 @@ export const ClinicCard = ({
         )}
 
         {myQueueEntry ? (
-          <div className="space-y-3 pt-2" onClick={(e) => e.stopPropagation()}>
-            <div className="relative p-5 bg-card rounded-xl border-2 shadow-lg"
-              style={{ borderColor: 'hsl(var(--ai-purple)/0.4)' }}
+          <div className="space-y-2 pt-1" onClick={(e) => e.stopPropagation()}>
+            <div className="relative p-3 bg-card rounded-lg border shadow-sm"
+              style={{ borderColor: 'hsl(var(--ai-purple)/0.3)' }}
             >
-              <div className="flex items-center justify-between p-4 rounded-lg border-2 mb-3"
+              <div className="flex items-center justify-between p-3 rounded-md border mb-2"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.1))',
-                  borderColor: 'hsl(var(--ai-purple)/0.3)'
+                  borderColor: 'hsl(var(--ai-purple)/0.2)'
                 }}
               >
                 <div className="flex items-center gap-4">
@@ -535,20 +642,20 @@ export const ClinicCard = ({
             
             <div className="flex gap-3">
               <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-black shadow-md border-0 h-16 text-lg" 
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-md border-0 h-10 text-sm" 
                 disabled={isLoading}
                 onClick={handleCheckIn}
               >
-                <CheckCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
+                <CheckCircle className="mr-2 h-4 w-4" strokeWidth={2.5} />
                 {t("clinicCard.checkIn")}
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 border-2 border-destructive/50 text-destructive hover:bg-destructive/10 hover:border-destructive font-black h-16 text-lg" 
+                className="flex-1 border border-destructive/40 text-destructive hover:bg-destructive/10 hover:border-destructive font-bold h-10 text-sm" 
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
-                <XCircle className="mr-2 h-6 w-6" strokeWidth={2.5} />
+                <XCircle className="mr-2 h-4 w-4" strokeWidth={2.5} />
                 {t("clinicCard.leaveQueue")}
               </Button>
             </div>
@@ -556,10 +663,10 @@ export const ClinicCard = ({
         ) : (
             <div className="space-y-2 pt-1">
             {hasDigitalQueue && (
-              <div className="p-2.5 sm:p-4 rounded-lg border-2 shadow-md"
+              <div className="p-2.5 sm:p-3 rounded-lg border shadow-sm"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.05))',
-                  borderColor: 'hsl(var(--ai-purple)/0.4)'
+                  borderColor: 'hsl(var(--ai-purple)/0.25)'
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
@@ -619,16 +726,18 @@ export const ClinicCard = ({
                   disabled={!isOpen}
                   onClick={(e) => {
                     e.stopPropagation();
-                    if (id) navigate(getBookingRoute(id, type));
+                    if (id) {
+                      setShowBookingLead(true);
+                    }
                   }}
                 >
-                  <Calendar className="mr-2 h-6 w-6" strokeWidth={3} />
+                  <Calendar className="mr-2 h-4 w-4" strokeWidth={3} />
                   {isManagedCareType(type) ? "Request" : "Book"}
                 </Button>
               )}
               <Button 
                 variant="outline"
-                className={`font-black text-sm sm:text-base hover:bg-primary/20 hover:border-primary border-2 border-primary/50 h-10 sm:h-12 hover:scale-105 transition-transform ${isNmgAffiliated && isManagedCareType(type) ? 'w-full' : 'flex-1'}`}
+                className={`font-bold text-xs sm:text-sm hover:bg-primary/20 hover:border-primary border border-primary/40 h-8 sm:h-10 hover:scale-105 transition-transform ${isNmgAffiliated && isManagedCareType(type) ? 'w-full' : 'flex-1'}`}
                 disabled={!isOpen}
                 onClick={(e) => {
                   e.stopPropagation();
@@ -657,79 +766,132 @@ export const ClinicCard = ({
       </div>
     </Card>
 
-    {/* Disclaimer Dialog */}
-    <Dialog open={showDisclaimer} onOpenChange={setShowDisclaimer}>
-      <DialogContent>
+    {/* Queue Join with OTP Verification */}
+    <Dialog open={showDisclaimer} onOpenChange={(open) => { setShowDisclaimer(open); if (!open) { setOtpStep("form"); setOtpError(""); setOtpInput(""); setDisplayedOtp(""); } }}>
+      <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle>Queue Disclaimer</DialogTitle>
-          <DialogDescription>Please read and agree to continue</DialogDescription>
+          <DialogTitle>{otpStep === "form" ? "Join Queue" : "Verify Your Identity"}</DialogTitle>
+          <DialogDescription>
+            {otpStep === "form" 
+              ? "Enter your name and number to secure your spot" 
+              : "Verification needed to prevent queue abuse"}
+          </DialogDescription>
         </DialogHeader>
-          <div className="space-y-4">
-            <div className="space-y-3">
-              <div>
-                <label className="text-sm font-medium">Name</label>
-                <input
-                  type="text"
-                  value={patientName}
-                  onChange={(e) => setPatientName(e.target.value)}
-                  className="w-full mt-1 px-3 py-2 border rounded-md"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-              <div>
-                <label className="text-sm font-medium">Mobile Number</label>
-                <input
-                  type="tel"
-                  value={mobileNumber}
-                  onChange={(e) => setMobileNumber(e.target.value)}
-                  className="w-full mt-1 px-3 py-2 border rounded-md"
-                  placeholder="e.g. +6591234567"
-                  required
-                />
-                <p className="text-xs text-muted-foreground mt-1">
-                  8-15 digits, country code optional
-                </p>
-              </div>
+
+        {otpStep === "form" ? (
+          <div className="space-y-3">
+            <div>
+              <Label htmlFor="q-name" className="text-xs font-medium">Name</Label>
+              <Input
+                id="q-name"
+                type="text"
+                value={patientName}
+                onChange={(e) => setPatientName(e.target.value)}
+                placeholder="Enter your name"
+                className="mt-1"
+              />
             </div>
-            <Alert>
-              <AlertTriangle className="h-4 w-4" />
-              <AlertDescription>
-                <strong>Important Notice:</strong>
-                <ul className="mt-2 space-y-1 text-sm">
-                  <li>• Queue numbers are estimates, not guaranteed</li>
-                  <li>• Queue order is fully managed by clinic staff and may shift due to urgent cases, drop-offs, or clinic triage</li>
-                  <li>• Wait times are approximate and subject to clinic operations</li>
-                  <li>• You must check in when your number is called</li>
-                  <li>• Missing your turn may result in queue removal</li>
-                </ul>
+            <div>
+              <Label htmlFor="q-mobile" className="text-xs font-medium">Mobile Number</Label>
+              <Input
+                id="q-mobile"
+                type="tel"
+                value={mobileNumber}
+                onChange={(e) => setMobileNumber(e.target.value)}
+                placeholder="e.g. +6591234567"
+                className="mt-1"
+              />
+              <p className="text-[10px] text-muted-foreground mt-1">8-15 digits, country code optional</p>
+            </div>
+            <Alert className="py-2">
+              <AlertTriangle className="h-3 w-3" />
+              <AlertDescription className="text-[11px]">
+                Queue position managed by clinic staff. May shift due to urgent cases.
               </AlertDescription>
             </Alert>
+            <DialogFooter className="gap-2 pt-1">
+              <Button variant="outline" size="sm" onClick={() => setShowDisclaimer(false)}>Cancel</Button>
+              <Button size="sm" onClick={requestOtp} disabled={otpLoading}>
+                {otpLoading ? "Verifying..." : "Continue"}
+              </Button>
+            </DialogFooter>
           </div>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => setShowDisclaimer(false)}>
-            Cancel
-          </Button>
-          <Button 
-            onClick={async () => {
-              if (!patientName.trim() || !mobileNumber.trim()) {
-                toast.error("Please fill in all fields");
-                return;
-              }
-              if (!isValidMobileNumber(mobileNumber)) {
-                toast.error("Please enter a valid mobile number (8-15 digits)");
-                return;
-              }
-              await addToQueue();
-              setShowDisclaimer(false);
-            }}
-            disabled={isJoining}
-          >
-            {isJoining ? "Joining..." : "I understand and agree"}
+        ) : (
+          <div className="space-y-4">
+            <div className="text-center p-4 bg-muted rounded-lg">
+              <p className="text-xs text-muted-foreground mb-1">Your verification code</p>
+              <p className="text-3xl font-mono font-black tracking-[0.3em] text-primary">{displayedOtp}</p>
+              <p className="text-[10px] text-muted-foreground mt-2">Expires in 2 minutes</p>
+            </div>
+            <div>
+              <Label htmlFor="otp-input" className="text-xs font-medium">Enter the code above</Label>
+              <Input
+                id="otp-input"
+                type="text"
+                inputMode="numeric"
+                maxLength={6}
+                value={otpInput}
+                onChange={(e) => { setOtpInput(e.target.value.replace(/\D/g, '')); setOtpError(""); }}
+                placeholder="000000"
+                className="mt-1 text-center text-lg tracking-widest font-mono"
+                autoFocus
+              />
+              {otpError && <p className="text-xs text-destructive mt-1">{otpError}</p>}
+            </div>
+            <DialogFooter className="gap-2">
+              <Button variant="outline" size="sm" onClick={() => { setOtpStep("form"); setOtpError(""); }}>Back</Button>
+              <Button size="sm" onClick={verifyOtp} disabled={otpLoading || otpInput.length < 6}>
+                {otpLoading ? "Verifying..." : "Confirm & Join"}
+              </Button>
+            </DialogFooter>
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
+
+    {/* Booking Lead Capture Dialog */}
+    <Dialog open={showBookingLead} onOpenChange={setShowBookingLead}>
+      <DialogContent className="max-w-sm">
+        <DialogHeader>
+          <DialogTitle>Book Appointment</DialogTitle>
+          <DialogDescription>Enter your details before we redirect you to booking</DialogDescription>
+        </DialogHeader>
+        <div className="space-y-3">
+          <div>
+            <Label htmlFor="lead-name" className="text-xs font-medium">Name</Label>
+            <Input
+              id="lead-name"
+              type="text"
+              value={leadName}
+              onChange={(e) => setLeadName(e.target.value)}
+              placeholder="Your full name"
+              className="mt-1"
+            />
+          </div>
+          <div>
+            <Label htmlFor="lead-mobile" className="text-xs font-medium">Mobile Number</Label>
+            <Input
+              id="lead-mobile"
+              type="tel"
+              value={leadMobile}
+              onChange={(e) => setLeadMobile(e.target.value)}
+              placeholder="e.g. +6591234567"
+              className="mt-1"
+            />
+          </div>
+        </div>
+        <DialogFooter className="gap-2 pt-1">
+          <Button variant="outline" size="sm" onClick={() => setShowBookingLead(false)}>Cancel</Button>
+          <Button size="sm" onClick={() => {
+            // Get clinic booking URL - navigate to booking page which handles external redirect
+            handleSaveBookingLead(`/booking/${id}`);
+          }} disabled={leadSubmitting}>
+            {leadSubmitting ? "Saving..." : "Continue to Book"}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
+
 
     {/* Queue Card Dialog */}
     <Dialog open={showQueueCard} onOpenChange={setShowQueueCard}>
