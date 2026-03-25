@@ -428,20 +428,20 @@ export const ClinicCard = ({
         </div>
 
         {/* === MIDDLE SECTION (flex-grow, fills remaining space) === */}
-        <div className="flex-1 flex flex-col mt-1 gap-1">
+        <div className="flex-1 flex flex-col mt-1">
         {hasDigitalQueue ? (
-          <div className="flex items-center gap-2 py-1 px-2 rounded border"
+          <div className="flex items-center gap-2 py-1.5 px-2 rounded border"
             style={{ 
               background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
               borderColor: 'hsl(var(--ai-cyan)/0.2)'
             }}
           >
-            <div className="h-5 w-5 rounded bg-primary/20 flex items-center justify-center">
+            <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
               <Users className="h-3 w-3 text-primary" />
             </div>
-            <div className="flex items-center gap-1.5">
-              <p className="text-xs text-muted-foreground font-medium">{t("clinicCard.inQueue")}</p>
-              <p className="text-sm font-bold">{queueCount} {t("clinicCard.people")}</p>
+            <div>
+              <p className="text-xs text-muted-foreground font-medium leading-none">{t("clinicCard.inQueue")}</p>
+              <p className="text-sm font-bold leading-tight">{queueCount} {t("clinicCard.people")}</p>
             </div>
           </div>
         ) : (
@@ -497,28 +497,29 @@ export const ClinicCard = ({
         )}
 
         {myQueueEntry ? (
-          <div className="flex-1 flex flex-col justify-between gap-1" onClick={(e) => e.stopPropagation()}>
-            {/* People ahead + check-in code */}
-            <div className="flex-1 flex flex-col justify-center gap-1">
-              <div className="flex items-center justify-between px-2.5 py-2 rounded-lg border"
+          <div className="flex-1 flex flex-col justify-between gap-2 mt-1" onClick={(e) => e.stopPropagation()}>
+            {/* People ahead + check-in code — expand to fill */}
+            <div className="flex-1 flex flex-col justify-evenly gap-2">
+              <div className="flex items-center justify-between px-3 py-3 rounded-lg border-2"
                 style={{ 
+                  background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.12), hsl(var(--ai-blue)/0.1))',
                   borderColor: 'hsl(var(--ai-purple)/0.3)'
                 }}
               >
-                <div className="flex items-center gap-1.5">
-                  <Users className="h-4 w-4 text-primary" />
+                <div className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-primary" />
                   <span className="text-sm font-bold text-foreground">People Ahead</span>
                 </div>
-                <span className="text-3xl font-black text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
+                <span className="text-4xl font-black text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
               </div>
 
               {myQueueEntry.check_in_code && (
-                <div className="flex items-center justify-between px-2.5 py-1.5 bg-muted/50 rounded-lg border border-border/30">
+                <div className="flex items-center justify-between px-3 py-2.5 bg-muted/50 rounded-lg border border-border/30">
                   <div className="flex items-center gap-1.5">
-                    <Shield className="h-3.5 w-3.5 text-primary" />
-                    <span className="text-xs font-medium text-muted-foreground">Check-in Code</span>
+                    <Shield className="h-4 w-4 text-primary" />
+                    <span className="text-[13px] font-medium text-muted-foreground">Check-in Code</span>
                   </div>
-                  <span className="text-lg font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</span>
+                  <span className="text-xl font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</span>
                 </div>
               )}
             </div>
@@ -545,28 +546,28 @@ export const ClinicCard = ({
             </div>
           </div>
         ) : (
-          <div className="flex-1 flex flex-col justify-between gap-1">
+          <div className="flex-1 flex flex-col justify-between gap-1.5 mt-1">
             {/* Middle expanding content */}
-            <div className="flex-1 flex flex-col justify-center gap-1">
+            <div className="flex-1 flex flex-col justify-evenly gap-1.5">
             {hasDigitalQueue && (
-              <div className="flex flex-col gap-1.5 p-2 rounded border min-h-0"
+              <div className="flex-1 flex flex-col justify-between p-2.5 rounded border min-h-0"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
                   borderColor: 'hsl(var(--ai-purple)/0.2)'
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                 <div className="flex items-center gap-2">
-                   <div className="h-6 w-6 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
-                     <Users className="h-3 w-3 text-primary-foreground" strokeWidth={3} />
+                 <div className="flex items-center gap-2 mb-2">
+                   <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
+                     <Users className="h-3.5 w-3.5 text-primary-foreground" strokeWidth={3} />
                    </div>
                     <p className="text-sm font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
                  </div>
                 
-                <div onClick={(e) => e.stopPropagation()}>
+                <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
                   <label className="text-xs font-medium text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
-                    <SelectTrigger className="w-full h-8 text-sm mt-0.5">
+                    <SelectTrigger className="w-full h-9 text-sm">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
@@ -731,6 +732,16 @@ export const ClinicCard = ({
             <Label htmlFor="lead-mobile" className="text-xs font-medium">Mobile Number *</Label>
             <Input id="lead-mobile" type="tel" value={leadMobile} onChange={(e) => setLeadMobile(e.target.value)} placeholder="e.g. +6591234567" className="mt-1 h-9 text-sm" />
             <p className="text-[10px] text-muted-foreground mt-0.5">8-15 digits, country code optional</p>
+          </div>
+          <div className="grid grid-cols-2 gap-2">
+            <div>
+              <Label htmlFor="lead-date" className="text-xs font-medium">Preferred Date</Label>
+              <Input id="lead-date" type="date" value={leadPrefDate} onChange={(e) => setLeadPrefDate(e.target.value)} className="mt-1 h-9 text-sm" />
+            </div>
+            <div>
+              <Label htmlFor="lead-time" className="text-xs font-medium">Preferred Time</Label>
+              <Input id="lead-time" type="time" value={leadPrefTime} onChange={(e) => setLeadPrefTime(e.target.value)} className="mt-1 h-9 text-sm" />
+            </div>
           </div>
           <div>
             <Label htmlFor="lead-notes" className="text-xs font-medium">Notes</Label>
