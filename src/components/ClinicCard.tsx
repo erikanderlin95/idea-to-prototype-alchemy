@@ -461,7 +461,7 @@ export const ClinicCard = ({
         )}
 
         {myQueueEntry ? (
-          <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
+          <div className="space-y-1 mt-auto" onClick={(e) => e.stopPropagation()}>
             {/* People ahead — large */}
             <div className="flex items-center justify-between px-2.5 py-2 rounded-lg border-2"
               style={{ 
