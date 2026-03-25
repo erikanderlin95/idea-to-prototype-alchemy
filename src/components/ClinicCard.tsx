@@ -508,18 +508,18 @@ export const ClinicCard = ({
               >
                 <div className="flex items-center gap-1.5">
                   <Users className="h-4 w-4 text-primary" />
-                  <span className="text-[13px] font-semibold text-foreground">People Ahead</span>
+                  <span className="text-sm font-semibold text-foreground">People Ahead</span>
                 </div>
-                <span className="text-2xl font-semibold tabular-nums text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
+                <span className="text-3xl font-bold tabular-nums text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
               </div>
 
               {myQueueEntry.check_in_code && (
                 <div className="flex-1 flex items-center justify-between px-2.5 py-2 bg-muted/50 rounded-lg border border-border/30">
                   <div className="flex items-center gap-1.5">
                     <Shield className="h-3.5 w-3.5 text-primary" />
-                    <span className="text-xs font-medium text-muted-foreground">Check-in Code</span>
+                    <span className="text-sm font-medium text-muted-foreground">Check-in Code</span>
                   </div>
-                  <span className="text-lg font-mono font-semibold tracking-[0.15em] text-primary">{myQueueEntry.check_in_code}</span>
+                  <span className="text-xl font-mono font-bold tracking-[0.15em] text-primary">{myQueueEntry.check_in_code}</span>
                 </div>
               )}
             </div>
@@ -549,7 +549,7 @@ export const ClinicCard = ({
           <div className="flex-1 flex flex-col justify-between gap-1.5">
             <div className="flex-1 flex flex-col gap-1.5">
             {hasDigitalQueue && (
-              <div className="flex-1 flex flex-col justify-between p-2.5 rounded border"
+              <div className="flex-1 flex flex-col justify-center p-2.5 rounded border"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
                   borderColor: 'hsl(var(--ai-purple)/0.2)'
