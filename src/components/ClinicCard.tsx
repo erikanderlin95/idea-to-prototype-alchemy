@@ -499,7 +499,7 @@ export const ClinicCard = ({
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-9 text-[12px]" 
+                className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-9 text-sm" 
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
