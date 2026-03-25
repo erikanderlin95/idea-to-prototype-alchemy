@@ -636,7 +636,7 @@ export const ClinicCard = ({
             </div>
           </div>
         )}
-      </div>
+        </div>
     </Card>
 
     {/* Queue Join with Disclaimer + Checkbox */}
