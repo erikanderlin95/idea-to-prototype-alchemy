@@ -597,7 +597,7 @@ export const ClinicCard = ({
                   disabled={!isOpen || isJoining}
                   onClick={handleJoinQueue}
                 >
-                  <Users className="mr-2 h-6 w-6" strokeWidth={3} />
+                  <Users className="mr-1.5 h-4 w-4" strokeWidth={3} />
                   {isJoining ? t("clinicCard.joining") : t("clinicCard.joinQueue")}
                 </Button>
               ) : isNmgAffiliated && isManagedCareType(type) ? (
