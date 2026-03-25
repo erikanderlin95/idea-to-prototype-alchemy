@@ -726,10 +726,12 @@ export const ClinicCard = ({
                   disabled={!isOpen}
                   onClick={(e) => {
                     e.stopPropagation();
-                    if (id) navigate(getBookingRoute(id, type));
+                    if (id) {
+                      setShowBookingLead(true);
+                    }
                   }}
                 >
-                  <Calendar className="mr-2 h-6 w-6" strokeWidth={3} />
+                  <Calendar className="mr-2 h-4 w-4" strokeWidth={3} />
                   {isManagedCareType(type) ? "Request" : "Book"}
                 </Button>
               )}
