@@ -452,12 +452,12 @@ export const ClinicCard = ({
         },
       });
       setShowBookingLead(false);
-      // Redirect to booking URL
-      window.open(bookingUrl, "_blank");
+      // Navigate to booking page
+      navigate(bookingUrl);
     } catch (err) {
       console.error("Lead save error:", err);
-      // Still redirect even if lead save fails
-      window.open(bookingUrl, "_blank");
+      // Still navigate even if lead save fails
+      navigate(bookingUrl);
       setShowBookingLead(false);
     } finally {
       setLeadSubmitting(false);
