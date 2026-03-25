@@ -404,8 +404,8 @@ export const ClinicCard = ({
               <Users className="h-3 w-3 text-primary" />
             </div>
             <div>
-              <p className="text-[10px] text-muted-foreground font-medium leading-none">{t("clinicCard.inQueue")}</p>
-              <p className="text-xs font-bold leading-tight">{queueCount} {t("clinicCard.people")}</p>
+              <p className="text-xs text-muted-foreground font-medium leading-none">{t("clinicCard.inQueue")}</p>
+              <p className="text-sm font-bold leading-tight">{queueCount} {t("clinicCard.people")}</p>
             </div>
           </div>
         ) : (
