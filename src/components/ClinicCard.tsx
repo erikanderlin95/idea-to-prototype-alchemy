@@ -584,7 +584,7 @@ export const ClinicCard = ({
             {isNmgAffiliated && !isManagedCareType(type) && (
               <Button
                 variant="outline"
-                className="w-full border border-primary/30 text-primary hover:bg-primary/10 font-semibold h-8 text-xs"
+                className="w-full border border-primary/30 text-primary hover:bg-primary/10 font-semibold h-9 text-sm"
                 onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
               >
                 <Shield className="mr-1.5 h-3.5 w-3.5" />
