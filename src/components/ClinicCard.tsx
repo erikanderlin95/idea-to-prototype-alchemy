@@ -360,7 +360,7 @@ export const ClinicCard = ({
   return (
     <>
       <Card className="group p-2.5 sm:p-4 hover:shadow-xl transition-all duration-300 border-ai-indigo/30 hover:border-ai-purple/50 cursor-pointer bg-gradient-to-br from-card to-ai-purple/5 onboarding-join-queue hover:shadow-ai-purple/10 w-full" onClick={() => id && navigate(`/clinic/${id}`)}>
-      <div className="space-y-3 sm:space-y-5">
+      <div className="space-y-2 sm:space-y-3">
         <div className="flex items-start justify-between">
           <div className="space-y-3 flex-1">
             <div className="flex items-center gap-2 flex-wrap">
