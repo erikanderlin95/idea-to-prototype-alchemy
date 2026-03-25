@@ -764,79 +764,132 @@ export const ClinicCard = ({
       </div>
     </Card>
 
-    {/* Disclaimer Dialog */}
-    <Dialog open={showDisclaimer} onOpenChange={setShowDisclaimer}>
-      <DialogContent>
+    {/* Queue Join with OTP Verification */}
+    <Dialog open={showDisclaimer} onOpenChange={(open) => { setShowDisclaimer(open); if (!open) { setOtpStep("form"); setOtpError(""); setOtpInput(""); setDisplayedOtp(""); } }}>
+      <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle>Queue Disclaimer</DialogTitle>
-          <DialogDescription>Please read and agree to continue</DialogDescription>
+          <DialogTitle>{otpStep === "form" ? "Join Queue" : "Verify Your Identity"}</DialogTitle>
+          <DialogDescription>
+            {otpStep === "form" 
+              ? "Enter your name and number to secure your spot" 
+              : "Verification needed to prevent queue abuse"}
+          </DialogDescription>
         </DialogHeader>
-          <div className="space-y-4">
-            <div className="space-y-3">
-              <div>
-                <label className="text-sm font-medium">Name</label>
-                <input
-                  type="text"
-                  value={patientName}
-                  onChange={(e) => setPatientName(e.target.value)}
-                  className="w-full mt-1 px-3 py-2 border rounded-md"
-                  placeholder="Enter your name"
-                  required
-                />
-              </div>
-              <div>
-                <label className="text-sm font-medium">Mobile Number</label>
-                <input
-                  type="tel"
-                  value={mobileNumber}
-                  onChange={(e) => setMobileNumber(e.target.value)}
-                  className="w-full mt-1 px-3 py-2 border rounded-md"
-                  placeholder="e.g. +6591234567"
-                  required
-                />
-                <p className="text-xs text-muted-foreground mt-1">
-                  8-15 digits, country code optional
-                </p>
-              </div>
+
+        {otpStep === "form" ? (
+          <div className="space-y-3">
+            <div>
+              <Label htmlFor="q-name" className="text-xs font-medium">Name</Label>
+              <Input
+                id="q-name"
+                type="text"
+                value={patientName}
+                onChange={(e) => setPatientName(e.target.value)}
+                placeholder="Enter your name"
+                className="mt-1"
+              />
             </div>
-            <Alert>
-              <AlertTriangle className="h-4 w-4" />
-              <AlertDescription>
-                <strong>Important Notice:</strong>
-                <ul className="mt-2 space-y-1 text-sm">
-                  <li>• Queue numbers are estimates, not guaranteed</li>
-                  <li>• Queue order is fully managed by clinic staff and may shift due to urgent cases, drop-offs, or clinic triage</li>
-                  <li>• Wait times are approximate and subject to clinic operations</li>
-                  <li>• You must check in when your number is called</li>
-                  <li>• Missing your turn may result in queue removal</li>
-                </ul>
+            <div>
+              <Label htmlFor="q-mobile" className="text-xs font-medium">Mobile Number</Label>
+              <Input
+                id="q-mobile"
+                type="tel"
+                value={mobileNumber}
+                onChange={(e) => setMobileNumber(e.target.value)}
+                placeholder="e.g. +6591234567"
+                className="mt-1"
+              />
+              <p className="text-[10px] text-muted-foreground mt-1">8-15 digits, country code optional</p>
+            </div>
+            <Alert className="py-2">
+              <AlertTriangle className="h-3 w-3" />
+              <AlertDescription className="text-[11px]">
+                Queue position managed by clinic staff. May shift due to urgent cases.
               </AlertDescription>
             </Alert>
+            <DialogFooter className="gap-2 pt-1">
+              <Button variant="outline" size="sm" onClick={() => setShowDisclaimer(false)}>Cancel</Button>
+              <Button size="sm" onClick={requestOtp} disabled={otpLoading}>
+                {otpLoading ? "Verifying..." : "Continue"}
+              </Button>
+            </DialogFooter>
           </div>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => setShowDisclaimer(false)}>
-            Cancel
-          </Button>
-          <Button 
-            onClick={async () => {
-              if (!patientName.trim() || !mobileNumber.trim()) {
-                toast.error("Please fill in all fields");
-                return;
-              }
-              if (!isValidMobileNumber(mobileNumber)) {
-                toast.error("Please enter a valid mobile number (8-15 digits)");
-                return;
-              }
-              await addToQueue();
-              setShowDisclaimer(false);
-            }}
-            disabled={isJoining}
-          >
-            {isJoining ? "Joining..." : "I understand and agree"}
+        ) : (
+          <div className="space-y-4">
+            <div className="text-center p-4 bg-muted rounded-lg">
+              <p className="text-xs text-muted-foreground mb-1">Your verification code</p>
+              <p className="text-3xl font-mono font-black tracking-[0.3em] text-primary">{displayedOtp}</p>
+              <p className="text-[10px] text-muted-foreground mt-2">Expires in 2 minutes</p>
+            </div>
+            <div>
+              <Label htmlFor="otp-input" className="text-xs font-medium">Enter the code above</Label>
+              <Input
+                id="otp-input"
+                type="text"
+                inputMode="numeric"
+                maxLength={6}
+                value={otpInput}
+                onChange={(e) => { setOtpInput(e.target.value.replace(/\D/g, '')); setOtpError(""); }}
+                placeholder="000000"
+                className="mt-1 text-center text-lg tracking-widest font-mono"
+                autoFocus
+              />
+              {otpError && <p className="text-xs text-destructive mt-1">{otpError}</p>}
+            </div>
+            <DialogFooter className="gap-2">
+              <Button variant="outline" size="sm" onClick={() => { setOtpStep("form"); setOtpError(""); }}>Back</Button>
+              <Button size="sm" onClick={verifyOtp} disabled={otpLoading || otpInput.length < 6}>
+                {otpLoading ? "Verifying..." : "Confirm & Join"}
+              </Button>
+            </DialogFooter>
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
+
+    {/* Booking Lead Capture Dialog */}
+    <Dialog open={showBookingLead} onOpenChange={setShowBookingLead}>
+      <DialogContent className="max-w-sm">
+        <DialogHeader>
+          <DialogTitle>Book Appointment</DialogTitle>
+          <DialogDescription>Enter your details before we redirect you to booking</DialogDescription>
+        </DialogHeader>
+        <div className="space-y-3">
+          <div>
+            <Label htmlFor="lead-name" className="text-xs font-medium">Name</Label>
+            <Input
+              id="lead-name"
+              type="text"
+              value={leadName}
+              onChange={(e) => setLeadName(e.target.value)}
+              placeholder="Your full name"
+              className="mt-1"
+            />
+          </div>
+          <div>
+            <Label htmlFor="lead-mobile" className="text-xs font-medium">Mobile Number</Label>
+            <Input
+              id="lead-mobile"
+              type="tel"
+              value={leadMobile}
+              onChange={(e) => setLeadMobile(e.target.value)}
+              placeholder="e.g. +6591234567"
+              className="mt-1"
+            />
+          </div>
+        </div>
+        <DialogFooter className="gap-2 pt-1">
+          <Button variant="outline" size="sm" onClick={() => setShowBookingLead(false)}>Cancel</Button>
+          <Button size="sm" onClick={() => {
+            // Get clinic booking URL - navigate to booking page which handles external redirect
+            handleSaveBookingLead(`/booking/${id}`);
+          }} disabled={leadSubmitting}>
+            {leadSubmitting ? "Saving..." : "Continue to Book"}
           </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
+
 
     {/* Queue Card Dialog */}
     <Dialog open={showQueueCard} onOpenChange={setShowQueueCard}>
