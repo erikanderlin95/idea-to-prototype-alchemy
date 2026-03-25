@@ -389,9 +389,9 @@ export const ClinicCard = ({
               <span className="line-clamp-1">{address}</span>
             </div>
           </div>
-          <div className="flex items-center gap-1 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 rounded-lg">
-            <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-            <span className="text-sm font-bold">{rating}</span>
+          <div className="flex items-center gap-1 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded-md">
+            <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+            <span className="text-xs font-bold">{rating}</span>
           </div>
         </div>
 
