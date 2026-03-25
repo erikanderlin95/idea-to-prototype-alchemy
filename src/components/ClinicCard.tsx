@@ -598,7 +598,7 @@ export const ClinicCard = ({
                 <Button 
                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-9 sm:h-10 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen}
-                  onClick={(e) => { e.stopPropagation(); if (id) setShowBookingLead(true); }}
+                  onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
                 >
                   <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
                   {isManagedCareType(type) ? "Request" : "Book"}
