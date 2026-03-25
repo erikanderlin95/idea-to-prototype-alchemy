@@ -444,7 +444,7 @@ export const ClinicCard = ({
                   <p className="text-[13px] text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
                 </div>
                 <Select defaultValue="massage">
-                  <SelectTrigger className="w-full bg-background/50 border-border/50 h-7 text-[11px]">
+                  <SelectTrigger className="w-full bg-background/50 border-border/50 h-8 text-[13px]">
                     <SelectValue placeholder="Select a service" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
