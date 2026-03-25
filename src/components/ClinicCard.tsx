@@ -373,7 +373,7 @@ export const ClinicCard = ({
                   {t("clinicCard.open")}
                 </Badge>
               ) : (
-                <Badge variant="outline" className="text-sm border-muted text-muted-foreground">
+                <Badge variant="outline" className="text-[10px] sm:text-xs border-muted text-muted-foreground">
                   {t("clinicCard.closed")}
                 </Badge>
               )}
