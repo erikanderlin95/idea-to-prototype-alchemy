@@ -663,10 +663,10 @@ export const ClinicCard = ({
         ) : (
             <div className="space-y-2 pt-1">
             {hasDigitalQueue && (
-              <div className="p-2.5 sm:p-4 rounded-lg border-2 shadow-md"
+              <div className="p-2.5 sm:p-3 rounded-lg border shadow-sm"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.05))',
-                  borderColor: 'hsl(var(--ai-purple)/0.4)'
+                  borderColor: 'hsl(var(--ai-purple)/0.25)'
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
