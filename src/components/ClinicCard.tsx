@@ -554,21 +554,21 @@ export const ClinicCard = ({
             </div>
           </div>
         ) : (
-            <div className="space-y-3 pt-2">
+            <div className="space-y-2 pt-1">
             {hasDigitalQueue && (
-              <div className="p-3 sm:p-5 rounded-xl border-2 shadow-lg"
+              <div className="p-2.5 sm:p-4 rounded-lg border-2 shadow-md"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.05))',
                   borderColor: 'hsl(var(--ai-purple)/0.4)'
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                 <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-                   <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/40">
-                     <Users className="h-5 w-5 sm:h-7 sm:w-7 text-primary-foreground" strokeWidth={3} />
+                 <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                   <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/40">
+                     <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" strokeWidth={3} />
                    </div>
                     <div>
-                      <p className="text-base sm:text-xl font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
+                      <p className="text-sm sm:text-base font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
                     </div>
                  </div>
                 
