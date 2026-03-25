@@ -418,7 +418,7 @@ export const ClinicCard = ({
             >
               <div className="flex items-center gap-1.5 mb-1.5">
                 <Clock className="h-3.5 w-3.5 text-foreground" />
-                <p className="text-[11px] text-foreground font-semibold">{t("clinicCard.availabilitiesToday")}</p>
+                <p className="text-[13px] text-foreground font-semibold">{t("clinicCard.availabilitiesToday")}</p>
               </div>
               <div className="flex gap-1.5 flex-wrap">
                 {["2:30 PM", "4:00 PM", "5:30 PM"].map((time) => (
