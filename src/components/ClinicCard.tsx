@@ -425,7 +425,10 @@ export const ClinicCard = ({
           <MapPin className="h-3 w-3 flex-shrink-0" />
           <span className="line-clamp-1">{address}</span>
         </div>
+        </div>
 
+        {/* === MIDDLE SECTION (flex-grow, fills remaining space) === */}
+        <div className="flex-1 flex flex-col mt-1">
         {hasDigitalQueue ? (
           <div className="flex items-center gap-2 py-1.5 px-2 rounded border"
             style={{ 
