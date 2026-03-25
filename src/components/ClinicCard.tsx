@@ -427,10 +427,10 @@ export const ClinicCard = ({
         </div>
         </div>
 
-        {/* === MIDDLE SECTION (flex-grow, fills remaining space) === */}
-        <div className="flex-1 flex flex-col mt-1">
+        {/* === MIDDLE SECTION === */}
+        <div className="flex-1 flex flex-col mt-1.5">
         {hasDigitalQueue ? (
-          <div className="flex items-center gap-2 py-1.5 px-2 rounded border"
+          <div className="flex items-center gap-2 py-1 px-2 rounded border"
             style={{ 
               background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
               borderColor: 'hsl(var(--ai-cyan)/0.2)'
