@@ -321,75 +321,74 @@ export const ClinicCard = ({
 
   return (
     <>
-      <Card className="group p-2.5 sm:p-4 hover:shadow-lg transition-all duration-300 border border-border/40 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue w-full" onClick={() => id && navigate(`/clinic/${id}`)}>
+      <Card className="group px-3 py-2.5 sm:px-3.5 sm:py-3 hover:shadow-lg transition-all duration-300 border border-border/40 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue w-[94%] mx-auto sm:w-full" onClick={() => id && navigate(`/clinic/${id}`)}>
       <div className="space-y-2">
-        <div className="flex items-start justify-between">
-          <div className="space-y-1 flex-1">
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <h3 className="text-sm sm:text-base font-bold group-hover:text-primary transition-colors">{name}</h3>
-               <Badge variant="secondary" className="text-[10px] font-medium">
-                {type}
+        {/* Row 1: Name + type + status + rating */}
+        <div className="flex items-center justify-between gap-1">
+          <div className="flex items-center gap-1.5 flex-wrap flex-1 min-w-0">
+            <h3 className="text-[15px] sm:text-base font-semibold group-hover:text-primary transition-colors truncate">{name}</h3>
+            <Badge variant="secondary" className="text-[10px] font-medium px-1.5 py-0 h-[18px] shrink-0">
+              {type}
+            </Badge>
+            {isOpen ? (
+              <Badge variant="outline" className="text-[10px] border-accent text-accent px-1.5 py-0 h-[18px] shrink-0">
+                {t("clinicCard.open")}
               </Badge>
-              {isOpen ? (
-                <Badge variant="outline" className="text-[10px] border-accent text-accent">
-                  {t("clinicCard.open")}
-                </Badge>
-              ) : (
-                <Badge variant="outline" className="text-[10px] border-muted text-muted-foreground">
-                  {t("clinicCard.closed")}
-                </Badge>
-              )}
-              {isNmgAffiliated && (
-                <Badge className="text-[10px] bg-primary/15 text-primary border border-primary/30">
-                  <Shield className="h-2.5 w-2.5 mr-0.5" />
-                  Managed Care
-                </Badge>
-              )}
-            </div>
-            <div className="flex items-center gap-1 text-[11px] text-muted-foreground">
-              <MapPin className="h-3 w-3 flex-shrink-0" />
-              <span className="line-clamp-1">{address}</span>
-            </div>
+            ) : (
+              <Badge variant="outline" className="text-[10px] border-muted text-muted-foreground px-1.5 py-0 h-[18px] shrink-0">
+                {t("clinicCard.closed")}
+              </Badge>
+            )}
+            {isNmgAffiliated && (
+              <Badge className="text-[10px] bg-primary/15 text-primary border border-primary/30 px-1.5 py-0 h-[18px] shrink-0">
+                <Shield className="h-2.5 w-2.5 mr-0.5" />
+                Managed Care
+              </Badge>
+            )}
           </div>
-          <div className="flex items-center gap-0.5 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded-md">
+          <div className="flex items-center gap-0.5 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded shrink-0">
             <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
             <span className="text-[11px] font-bold">{rating}</span>
           </div>
         </div>
 
+        {/* Row 2: Address */}
+        <div className="flex items-center gap-1 text-[12px] text-muted-foreground -mt-0.5">
+          <MapPin className="h-3 w-3 flex-shrink-0" />
+          <span className="line-clamp-1">{address}</span>
+        </div>
+
         {hasDigitalQueue ? (
-          <div className="flex items-center gap-2 py-2 px-2.5 rounded-md border"
+          <div className="flex items-center gap-2 py-1.5 px-2 rounded border"
             style={{ 
               background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
               borderColor: 'hsl(var(--ai-cyan)/0.2)'
             }}
           >
-            <div className="flex items-center gap-2">
-              <div className="h-7 w-7 rounded-md bg-primary/20 flex items-center justify-center">
-                <Users className="h-3.5 w-3.5 text-primary" />
-              </div>
-              <div>
-                <p className="text-[10px] text-muted-foreground font-medium">{t("clinicCard.inQueue")}</p>
-                <p className="text-xs font-bold">{queueCount} {t("clinicCard.people")}</p>
-              </div>
+            <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
+              <Users className="h-3 w-3 text-primary" />
+            </div>
+            <div>
+              <p className="text-[10px] text-muted-foreground font-medium leading-none">{t("clinicCard.inQueue")}</p>
+              <p className="text-xs font-bold leading-tight">{queueCount} {t("clinicCard.people")}</p>
             </div>
           </div>
         ) : (
-          <div className="space-y-2">
-            <div className="py-3 px-3 rounded-lg border"
+          <div className="space-y-1.5">
+            <div className="py-2 px-2.5 rounded border"
               style={{ 
                 background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
                 borderColor: 'hsl(var(--ai-cyan)/0.2)'
               }}
             >
-              <div className="flex items-center gap-2 mb-2">
-                <Clock className="h-4 w-4 text-foreground" />
-                <p className="text-xs text-foreground font-semibold">{t("clinicCard.availabilitiesToday")}</p>
+              <div className="flex items-center gap-1.5 mb-1.5">
+                <Clock className="h-3.5 w-3.5 text-foreground" />
+                <p className="text-[11px] text-foreground font-semibold">{t("clinicCard.availabilitiesToday")}</p>
               </div>
               <div className="flex gap-1.5 flex-wrap">
                 {["2:30 PM", "4:00 PM", "5:30 PM"].map((time) => (
                   <button key={time}
-                    className="px-3 py-1.5 text-[11px] font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
+                    className="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
                     onClick={(e) => e.stopPropagation()}
                   >
                     {time}
@@ -397,20 +396,20 @@ export const ClinicCard = ({
                 ))}
               </div>
             </div>
-            <div className="py-3 px-3 rounded-lg border"
+            <div className="py-2 px-2.5 rounded border"
               style={{ 
                 background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.05))',
                 borderColor: 'hsl(var(--ai-purple)/0.2)'
               }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="space-y-1.5">
-                <div className="flex items-center gap-2">
-                  <Star className="h-4 w-4 text-foreground" />
-                  <p className="text-xs text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
+              <div className="space-y-1">
+                <div className="flex items-center gap-1.5">
+                  <Star className="h-3.5 w-3.5 text-foreground" />
+                  <p className="text-[11px] text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
                 </div>
                 <Select defaultValue="massage">
-                  <SelectTrigger className="w-full bg-background/50 border-border/50 h-8 text-xs">
+                  <SelectTrigger className="w-full bg-background/50 border-border/50 h-7 text-[11px]">
                     <SelectValue placeholder="Select a service" />
                   </SelectTrigger>
                   <SelectContent className="bg-popover z-50">
@@ -428,67 +427,57 @@ export const ClinicCard = ({
 
         {myQueueEntry ? (
           <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
-            <div className="relative p-2.5 bg-card rounded-md border"
-              style={{ borderColor: 'hsl(var(--ai-purple)/0.2)' }}
+            {/* Compact 3-column queue summary row */}
+            <div className="grid grid-cols-3 gap-1.5 p-2 rounded border"
+              style={{ 
+                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-blue)/0.06))',
+                borderColor: 'hsl(var(--ai-purple)/0.15)'
+              }}
             >
-              <div className="flex items-center justify-between p-2.5 rounded-md border mb-2"
-                style={{ 
-                  background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.1))',
-                  borderColor: 'hsl(var(--ai-purple)/0.15)'
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className="relative h-12 w-12">
-                    <svg className="absolute inset-0 -rotate-90" viewBox="0 0 64 64">
-                      <circle cx="32" cy="32" r="28" fill="none" stroke="hsl(var(--muted))" strokeWidth="4" opacity="0.3" />
-                      <circle cx="32" cy="32" r="28" fill="none" stroke="hsl(var(--accent))" strokeWidth="4" strokeLinecap="round"
-                        strokeDasharray={`${2 * Math.PI * 28}`}
-                        strokeDashoffset={`${2 * Math.PI * 28 * (1 - ((queueCount - myQueueEntry.queue_number) / queueCount))}`}
-                        className="transition-all duration-1000 ease-out"
-                      />
-                    </svg>
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-xl font-black text-primary-foreground shadow-md">
-                      #{myQueueEntry.queue_number}
-                    </div>
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-medium text-muted-foreground">{t("clinicCard.youreInQueue")}</p>
-                    <p className="text-sm font-bold text-foreground">
-                      {t("clinicCard.position")} <span className="text-lg font-black text-primary">#{myQueueEntry.queue_number}</span>
-                      <span className="text-[11px] font-medium text-muted-foreground ml-1">{t("clinicCard.of")} {queueCount}</span>
-                    </p>
-                  </div>
-                </div>
-                <Badge variant="secondary" className="text-[10px] font-semibold px-2 py-0.5">
+              <div className="text-center">
+                <p className="text-[10px] text-muted-foreground font-medium leading-none mb-0.5">{t("clinicCard.inQueue")}</p>
+                <p className="text-[15px] font-bold text-foreground leading-tight">{queueCount}</p>
+              </div>
+              <div className="text-center border-x border-border/30">
+                <p className="text-[10px] text-muted-foreground font-medium leading-none mb-0.5">{t("clinicCard.position")}</p>
+                <p className="text-[15px] font-black text-primary leading-tight">#{myQueueEntry.queue_number}</p>
+              </div>
+              <div className="text-center">
+                <p className="text-[10px] text-muted-foreground font-medium leading-none mb-0.5">Status</p>
+                <Badge variant="secondary" className="text-[10px] font-semibold px-1.5 py-0 h-[18px]">
                   {t("clinicCard.waiting")}
                 </Badge>
               </div>
-              {/* Check-in code display */}
-              {myQueueEntry.check_in_code && (
-                <div className="text-center p-2 bg-muted/50 rounded-md border border-border/30">
-                  <p className="text-[10px] text-muted-foreground">Check-in Code</p>
-                  <p className="text-sm font-mono font-black tracking-widest text-primary">{myQueueEntry.check_in_code}</p>
-                  <p className="text-[9px] text-muted-foreground">Show at clinic counter</p>
-                </div>
-              )}
             </div>
+
+            {/* Check-in code - compact inline */}
+            {myQueueEntry.check_in_code && (
+              <div className="flex items-center justify-between px-2.5 py-1.5 bg-muted/50 rounded border border-border/30">
+                <div className="flex items-center gap-1.5">
+                  <Shield className="h-3 w-3 text-primary" />
+                  <span className="text-[11px] text-muted-foreground">Check-in Code</span>
+                </div>
+                <span className="text-sm font-mono font-black tracking-widest text-primary">{myQueueEntry.check_in_code}</span>
+              </div>
+            )}
             
+            {/* Action buttons - h-[42px] for tap friendliness */}
             <div className="flex gap-2">
               <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-sm border-0 h-9 text-xs" 
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-sm border-0 h-[42px] text-[13px]" 
                 disabled={isLoading}
                 onClick={handleCheckIn}
               >
-                <CheckCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={2.5} />
+                <CheckCircle className="mr-1.5 h-4 w-4" strokeWidth={2.5} />
                 {t("clinicCard.checkIn")}
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-9 text-xs" 
+                className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-[42px] text-[13px]" 
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
-                <XCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={2.5} />
+                <XCircle className="mr-1.5 h-4 w-4" strokeWidth={2.5} />
                 {t("clinicCard.leaveQueue")}
               </Button>
             </div>
