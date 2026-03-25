@@ -478,12 +478,12 @@ export const ClinicCard = ({
 
             {/* Check-in code — bold */}
             {myQueueEntry.check_in_code && (
-              <div className="flex items-center justify-between px-2 py-1 bg-muted/50 rounded border border-border/30">
-                <div className="flex items-center gap-1">
-                  <Shield className="h-3.5 w-3.5 text-primary" />
-                  <span className="text-[11px] font-medium text-muted-foreground">Check-in Code</span>
+              <div className="flex items-center justify-between px-2.5 py-1.5 bg-muted/50 rounded border border-border/30">
+                <div className="flex items-center gap-1.5">
+                  <Shield className="h-4 w-4 text-primary" />
+                  <span className="text-[13px] font-medium text-muted-foreground">Check-in Code</span>
                 </div>
-                <span className="text-lg font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</span>
+                <span className="text-xl font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</span>
               </div>
             )}
             
