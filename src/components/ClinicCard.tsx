@@ -428,20 +428,20 @@ export const ClinicCard = ({
         </div>
 
         {/* === MIDDLE SECTION (flex-grow, fills remaining space) === */}
-        <div className="flex-1 flex flex-col mt-1">
+        <div className="flex-1 flex flex-col mt-1 gap-1">
         {hasDigitalQueue ? (
-          <div className="flex items-center gap-2 py-1.5 px-2 rounded border"
+          <div className="flex items-center gap-2 py-1 px-2 rounded border"
             style={{ 
               background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
               borderColor: 'hsl(var(--ai-cyan)/0.2)'
             }}
           >
-            <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
+            <div className="h-5 w-5 rounded bg-primary/20 flex items-center justify-center">
               <Users className="h-3 w-3 text-primary" />
             </div>
-            <div>
-              <p className="text-xs text-muted-foreground font-medium leading-none">{t("clinicCard.inQueue")}</p>
-              <p className="text-sm font-bold leading-tight">{queueCount} {t("clinicCard.people")}</p>
+            <div className="flex items-center gap-1.5">
+              <p className="text-xs text-muted-foreground font-medium">{t("clinicCard.inQueue")}</p>
+              <p className="text-sm font-bold">{queueCount} {t("clinicCard.people")}</p>
             </div>
           </div>
         ) : (
