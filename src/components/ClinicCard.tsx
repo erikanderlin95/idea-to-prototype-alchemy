@@ -461,49 +461,49 @@ export const ClinicCard = ({
         )}
 
         {myQueueEntry ? (
-          <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
-            {/* People ahead summary */}
-            <div className="flex items-center justify-between px-2.5 py-2 rounded border"
+          <div className="space-y-1.5" onClick={(e) => e.stopPropagation()}>
+            {/* People ahead — large and prominent */}
+            <div className="flex items-center justify-between px-2 py-1.5 rounded border"
               style={{ 
-                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-blue)/0.06))',
-                borderColor: 'hsl(var(--ai-purple)/0.15)'
+                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.08))',
+                borderColor: 'hsl(var(--ai-purple)/0.2)'
               }}
             >
-              <div className="flex items-center gap-2">
-                <Users className="h-4 w-4 text-primary" />
-                <span className="text-[12px] font-medium text-muted-foreground">People Ahead</span>
+              <div className="flex items-center gap-1.5">
+                <Users className="h-3.5 w-3.5 text-primary" />
+                <span className="text-[11px] font-medium text-muted-foreground">People Ahead</span>
               </div>
-              <span className="text-[16px] font-black text-primary">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
+              <span className="text-xl font-black text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
             </div>
 
-            {/* Check-in code - compact inline */}
+            {/* Check-in code — bold and scannable */}
             {myQueueEntry.check_in_code && (
-              <div className="flex items-center justify-between px-2.5 py-1.5 bg-muted/50 rounded border border-border/30">
-                <div className="flex items-center gap-1.5">
+              <div className="flex items-center justify-between px-2 py-1.5 bg-muted/50 rounded border border-border/30">
+                <div className="flex items-center gap-1">
                   <Shield className="h-3 w-3 text-primary" />
-                  <span className="text-[11px] text-muted-foreground">Check-in Code</span>
+                  <span className="text-[10px] text-muted-foreground">Check-in Code</span>
                 </div>
-                <span className="text-sm font-mono font-black tracking-widest text-primary">{myQueueEntry.check_in_code}</span>
+                <span className="text-base font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</span>
               </div>
             )}
             
-            {/* Action buttons - h-[42px] for tap friendliness */}
-            <div className="flex gap-2">
+            {/* Action buttons */}
+            <div className="flex gap-1.5">
               <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-sm border-0 h-[42px] text-[13px]" 
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-sm border-0 h-9 text-[12px]" 
                 disabled={isLoading}
                 onClick={handleCheckIn}
               >
-                <CheckCircle className="mr-1.5 h-4 w-4" strokeWidth={2.5} />
+                <CheckCircle className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
                 {t("clinicCard.checkIn")}
               </Button>
               <Button 
                 variant="outline"
-                className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-[42px] text-[13px]" 
+                className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-9 text-[12px]" 
                 disabled={isLoading}
                 onClick={handleCancelQueue}
               >
-                <XCircle className="mr-1.5 h-4 w-4" strokeWidth={2.5} />
+                <XCircle className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
                 {t("clinicCard.leaveQueue")}
               </Button>
             </div>
