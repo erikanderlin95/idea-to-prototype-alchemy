@@ -312,11 +312,14 @@ export const ClinicCard = ({
       toast.error("Please enter a valid mobile number");
       return;
     }
+    if (!leadDisclaimerAgreed) {
+      toast.error("Please agree to the disclaimer to continue");
+      return;
+    }
     setLeadSubmitting(true);
     try {
       const sanitizedMobile = sanitizeMobileNumber(leadMobile);
       
-      // Fetch clinic data to determine redirect
       const { data: clinicData } = await supabase.from("clinics").select("booking_url, phone").eq("id", id).single();
       
       const bookingUrl = clinicData?.booking_url || null;
@@ -333,32 +336,54 @@ export const ClinicCard = ({
           booking_type: "external",
           redirect_type: redirectType,
           redirect_url: bookingUrl || null,
+          preferred_date: leadPrefDate || null,
+          preferred_time: leadPrefTime || null,
+          notes: leadNotes.trim() || null,
         },
       });
 
       const caseId = response?.case_id || "";
       setBookingCaseId(caseId);
-      setShowBookingLead(false);
-
-      // Redirect based on what's available
+      
+      // Prepare redirect info for confirmation screen
       if (bookingUrl) {
-        // Web booking - append case_id as query parameter
         const separator = bookingUrl.includes("?") ? "&" : "?";
-        window.open(`${bookingUrl}${separator}case_id=${encodeURIComponent(caseId)}`, "_blank");
-        toast.success(`Booking opened! Your Case ID: ${caseId}`);
+        setBookingRedirectUrl(`${bookingUrl}${separator}case_id=${encodeURIComponent(caseId)}`);
+        setBookingRedirectType("web");
       } else if (clinicPhone) {
-        // WhatsApp - pre-fill message with case_id
-        const message = encodeURIComponent(`Hi, I'd like to book an appointment.\nCase ID: ${caseId}`);
-        window.open(`https://wa.me/${clinicPhone}?text=${message}`, "_blank");
-        toast.success(`WhatsApp opened! Your Case ID: ${caseId}`);
+        const message = encodeURIComponent(`Hi, I'd like to book an appointment.\nName: ${leadName.trim()}\nCase ID: ${caseId}`);
+        setBookingRedirectUrl(`https://wa.me/${clinicPhone}?text=${message}`);
+        setBookingRedirectType("whatsapp");
       } else {
-        // Fallback - navigate to booking page
-        navigate(`/booking/${id}`);
+        setBookingRedirectUrl("");
+        setBookingRedirectType("none");
       }
+
+      setShowBookingLead(false);
+      setShowBookingConfirm(true);
     } catch (err) {
       console.error("Lead save error:", err);
       toast.error("Something went wrong. Please try again.");
     } finally { setLeadSubmitting(false); }
+  };
+
+  const handleBookingRedirect = () => {
+    if (bookingRedirectUrl) {
+      window.open(bookingRedirectUrl, "_blank");
+    }
+    setShowBookingConfirm(false);
+  };
+
+  const resetBookingLead = () => {
+    setLeadName("");
+    setLeadMobile("");
+    setLeadPrefDate("");
+    setLeadPrefTime("");
+    setLeadNotes("");
+    setLeadDisclaimerAgreed(false);
+    setBookingCaseId("");
+    setBookingRedirectUrl("");
+    setBookingRedirectType("");
   };
 
   return (
