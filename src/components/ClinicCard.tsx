@@ -528,7 +528,7 @@ export const ClinicCard = ({
                 <div className="space-y-0.5" onClick={(e) => e.stopPropagation()}>
                   <label className="text-xs font-medium text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
-                    <SelectTrigger className="w-full h-7 text-[11px]">
+                    <SelectTrigger className="w-full h-8 text-[13px]">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
