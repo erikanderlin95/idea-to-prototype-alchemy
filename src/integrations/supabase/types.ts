@@ -131,6 +131,47 @@ export type Database = {
           },
         ]
       }
+      booking_leads: {
+        Row: {
+          booking_type: string
+          clinic_id: string | null
+          clinic_name: string | null
+          created_at: string
+          id: string
+          mobile_number: string
+          patient_name: string
+          source: string
+        }
+        Insert: {
+          booking_type?: string
+          clinic_id?: string | null
+          clinic_name?: string | null
+          created_at?: string
+          id?: string
+          mobile_number: string
+          patient_name: string
+          source?: string
+        }
+        Update: {
+          booking_type?: string
+          clinic_id?: string | null
+          clinic_name?: string | null
+          created_at?: string
+          id?: string
+          mobile_number?: string
+          patient_name?: string
+          source?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "booking_leads_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       chat_messages: {
         Row: {
           content: string
@@ -582,6 +623,62 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "queue_statistics_clinic_id_fkey"
+            columns: ["clinic_id"]
+            isOneToOne: false
+            referencedRelation: "clinics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      queue_verifications: {
+        Row: {
+          attempts: number
+          clinic_id: string
+          created_at: string
+          device_fingerprint: string | null
+          expires_at: string
+          id: string
+          ip_address: string | null
+          mobile_number: string
+          patient_name: string
+          status: string
+          verification_code: string
+          verified_at: string | null
+          visit_type: string
+        }
+        Insert: {
+          attempts?: number
+          clinic_id: string
+          created_at?: string
+          device_fingerprint?: string | null
+          expires_at?: string
+          id?: string
+          ip_address?: string | null
+          mobile_number: string
+          patient_name: string
+          status?: string
+          verification_code: string
+          verified_at?: string | null
+          visit_type?: string
+        }
+        Update: {
+          attempts?: number
+          clinic_id?: string
+          created_at?: string
+          device_fingerprint?: string | null
+          expires_at?: string
+          id?: string
+          ip_address?: string | null
+          mobile_number?: string
+          patient_name?: string
+          status?: string
+          verification_code?: string
+          verified_at?: string | null
+          visit_type?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "queue_verifications_clinic_id_fkey"
             columns: ["clinic_id"]
             isOneToOne: false
             referencedRelation: "clinics"
