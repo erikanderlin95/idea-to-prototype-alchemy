@@ -388,7 +388,7 @@ export const ClinicCard = ({
         </div>
 
         {/* Row 2: Address */}
-        <div className="flex items-center gap-1 text-[12px] text-muted-foreground -mt-0.5">
+        <div className="flex items-center gap-1 text-sm text-muted-foreground -mt-0.5">
           <MapPin className="h-3 w-3 flex-shrink-0" />
           <span className="line-clamp-1">{address}</span>
         </div>
