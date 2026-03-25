@@ -369,7 +369,7 @@ export const ClinicCard = ({
                 {type}
               </Badge>
               {isOpen ? (
-                <Badge variant="outline" className="text-sm border-accent text-accent">
+                <Badge variant="outline" className="text-[10px] sm:text-xs border-accent text-accent">
                   {t("clinicCard.open")}
                 </Badge>
               ) : (
