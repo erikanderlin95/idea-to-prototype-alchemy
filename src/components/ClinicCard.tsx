@@ -85,6 +85,7 @@ export const ClinicCard = ({
   const [leadName, setLeadName] = useState("");
   const [leadMobile, setLeadMobile] = useState("");
   const [leadSubmitting, setLeadSubmitting] = useState(false);
+  const [bookingCaseId, setBookingCaseId] = useState("");
 
   const generateCaseId = () => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
