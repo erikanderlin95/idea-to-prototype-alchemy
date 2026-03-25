@@ -574,7 +574,7 @@ export const ClinicCard = ({
               )}
               <Button 
                 variant="outline"
-                className={`font-bold text-xs hover:bg-primary/20 hover:border-primary border border-primary/30 h-8 sm:h-9 hover:scale-[1.02] transition-transform ${isNmgAffiliated && isManagedCareType(type) ? 'w-full' : 'flex-1'}`}
+                className={`font-bold text-sm hover:bg-primary/20 hover:border-primary border border-primary/30 h-9 sm:h-10 hover:scale-[1.02] transition-transform ${isNmgAffiliated && isManagedCareType(type) ? 'w-full' : 'flex-1'}`}
                 disabled={!isOpen}
                 onClick={(e) => { e.stopPropagation(); id && navigate(`/clinic/${id}`); }}
               >
