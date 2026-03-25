@@ -490,7 +490,7 @@ export const ClinicCard = ({
             {/* Action buttons */}
             <div className="flex gap-1.5">
               <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-sm border-0 h-9 text-[12px]" 
+                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-sm border-0 h-9 text-sm" 
                 disabled={isLoading}
                 onClick={handleCheckIn}
               >
