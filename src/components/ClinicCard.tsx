@@ -517,9 +517,9 @@ export const ClinicCard = ({
                 <div className="flex-1 flex items-center justify-between px-2.5 py-2 bg-muted/50 rounded-lg border border-border/30">
                   <div className="flex items-center gap-1.5">
                     <Shield className="h-3.5 w-3.5 text-primary" />
-                    <span className="text-xs font-medium text-muted-foreground">Check-in Code</span>
+                    <span className="text-sm font-medium text-muted-foreground">Check-in Code</span>
                   </div>
-                  <span className="text-lg font-mono font-semibold tracking-[0.15em] text-primary">{myQueueEntry.check_in_code}</span>
+                  <span className="text-xl font-mono font-bold tracking-[0.15em] text-primary">{myQueueEntry.check_in_code}</span>
                 </div>
               )}
             </div>
