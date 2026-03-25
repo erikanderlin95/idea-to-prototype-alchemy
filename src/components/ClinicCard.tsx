@@ -366,7 +366,7 @@ export const ClinicCard = ({
               {type}
             </Badge>
             {isOpen ? (
-              <Badge variant="outline" className="text-[10px] border-accent text-accent px-1.5 py-0 h-[18px] shrink-0">
+              <Badge variant="outline" className="text-xs border-accent text-accent px-1.5 py-0 h-[20px] shrink-0">
                 {t("clinicCard.open")}
               </Badge>
             ) : (
