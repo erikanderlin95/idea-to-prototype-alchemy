@@ -356,8 +356,8 @@ export const ClinicCard = ({
 
   return (
     <>
-      <Card className="group px-2.5 py-2 sm:px-3 sm:py-2 hover:shadow-lg transition-all duration-300 border border-border/40 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue" onClick={() => id && navigate(`/clinic/${id}`)}>
-      <div className="space-y-1">
+      <Card className="group flex flex-col px-2.5 py-2 sm:px-3 sm:py-2 hover:shadow-lg transition-all duration-300 border border-border/40 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue h-full" onClick={() => id && navigate(`/clinic/${id}`)}>
+      <div className="flex flex-col flex-1 gap-1">
         {/* Row 1: Name + type + status + rating */}
         <div className="flex items-center justify-between gap-1">
           <div className="flex items-center gap-1.5 flex-wrap flex-1 min-w-0">
