@@ -423,7 +423,7 @@ export const ClinicCard = ({
               <div className="flex gap-1.5 flex-wrap">
                 {["2:30 PM", "4:00 PM", "5:30 PM"].map((time) => (
                   <button key={time}
-                    className="px-2.5 py-1 text-[11px] font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
+                    className="px-2.5 py-1 text-[13px] font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
                     onClick={(e) => e.stopPropagation()}
                   >
                     {time}
