@@ -315,57 +315,152 @@ export const ClinicCard = ({
     setShowDisclaimer(true);
   };
 
-  const addToQueue = async () => {
-    if (!id) return;
+  // Generate a simple device fingerprint
+  const getDeviceFingerprint = () => {
+    const nav = navigator;
+    return btoa(`${nav.userAgent}|${nav.language}|${screen.width}x${screen.height}|${new Date().getTimezoneOffset()}`).slice(0, 64);
+  };
 
-    setIsJoining(true);
+  const requestOtp = async () => {
+    if (!patientName.trim() || !mobileNumber.trim()) {
+      toast.error("Please fill in all fields");
+      return;
+    }
+    if (!isValidMobileNumber(mobileNumber)) {
+      toast.error("Please enter a valid mobile number (8-15 digits)");
+      return;
+    }
+
+    setOtpLoading(true);
+    setOtpError("");
     try {
       const sanitizedMobile = sanitizeMobileNumber(mobileNumber);
-      
-      // Use edge function to join queue (bypasses RLS for anonymous users)
-      const { data: response, error: invokeError } = await supabase.functions.invoke(
-        "queue-lookup",
-        {
-          body: {
-            action: "join_queue",
-            clinic_id: id,
-            mobile_number: sanitizedMobile,
-            patient_name: patientName,
-            visit_type: visitType,
-            estimated_wait_time: parseInt(waitTime) || 15,
-          },
+      const { data: response, error } = await supabase.functions.invoke("queue-lookup", {
+        body: {
+          action: "request_otp",
+          clinic_id: id,
+          mobile_number: sanitizedMobile,
+          patient_name: patientName.trim(),
+          visit_type: visitType,
+          device_fingerprint: getDeviceFingerprint(),
+        },
+      });
+
+      if (error) throw error;
+      if (response?.error) {
+        if (response.code === "ALREADY_IN_QUEUE") {
+          toast.error("You already have an active queue entry at this clinic");
+        } else if (response.code === "COOLDOWN") {
+          toast.error(response.error);
+        } else {
+          toast.error(response.error);
         }
-      );
+        return;
+      }
 
-      if (invokeError) throw invokeError;
-      if (response?.error) throw new Error(response.error);
-      
-      const createdEntry = response?.entry;
-      if (!createdEntry) throw new Error("Failed to create queue entry");
+      setVerificationId(response.verification_id);
+      setDisplayedOtp(response.otp);
+      setOtpStep("verify");
+      setOtpInput("");
+    } catch (err: any) {
+      toast.error(err.message || "Failed to start verification");
+    } finally {
+      setOtpLoading(false);
+    }
+  };
 
-      // Set the queue number from the created entry
+  const verifyOtp = async () => {
+    if (!otpInput.trim()) {
+      setOtpError("Please enter the verification code");
+      return;
+    }
+
+    setOtpLoading(true);
+    setOtpError("");
+    try {
+      const sanitizedMobile = sanitizeMobileNumber(mobileNumber);
+      const { data: response, error } = await supabase.functions.invoke("queue-lookup", {
+        body: {
+          action: "verify_otp",
+          clinic_id: id,
+          mobile_number: sanitizedMobile,
+          verification_id: verificationId,
+          verification_code: otpInput.trim(),
+          estimated_wait_time: parseInt(waitTime) || 15,
+        },
+      });
+
+      if (error) throw error;
+      if (response?.error) {
+        if (response.code === "EXPIRED") {
+          setOtpError("Code expired. Please try again.");
+          setOtpStep("form");
+        } else if (response.code === "MAX_ATTEMPTS") {
+          setOtpError("Too many attempts. Please try again.");
+          setOtpStep("form");
+        } else if (response.code === "WRONG_CODE") {
+          setOtpError(`Incorrect code. ${response.attempts_left > 0 ? `${response.attempts_left} attempt(s) left.` : ''}`);
+        } else {
+          setOtpError(response.error);
+        }
+        return;
+      }
+
+      // Success!
+      const createdEntry = response.entry;
       setNewQueueNumber(createdEntry.queue_number);
-      
-      // Store sanitized mobile number in localStorage for this clinic
       localStorage.setItem(`queue_mobile_${id}`, sanitizedMobile);
       setMobileNumber(sanitizedMobile);
-      
-      // Update state to show in-queue UI
       setMyQueueEntry(createdEntry);
-      
       toast.success(t("clinicCard.joinedQueue"));
-      
-      // Show confirmation modal only after successful creation
+      setShowDisclaimer(false);
       setShowQueueCard(true);
+      setOtpStep("form");
+      setOtpInput("");
+      setDisplayedOtp("");
+      setVerificationId("");
 
-      // Force a verification refetch after a short delay to ensure sync
-      setTimeout(() => {
-        checkQueueStatus();
-      }, 500);
-    } catch (error: any) {
-      toast.error(error.message || t("clinicCard.failedToJoin"));
+      setTimeout(() => checkQueueStatus(), 500);
+    } catch (err: any) {
+      setOtpError(err.message || "Verification failed");
     } finally {
-      setIsJoining(false);
+      setOtpLoading(false);
+    }
+  };
+
+  const handleSaveBookingLead = async (bookingUrl: string) => {
+    if (!leadName.trim() || !leadMobile.trim()) {
+      toast.error("Please fill in your name and mobile number");
+      return;
+    }
+    if (!isValidMobileNumber(leadMobile)) {
+      toast.error("Please enter a valid mobile number");
+      return;
+    }
+
+    setLeadSubmitting(true);
+    try {
+      const sanitizedMobile = sanitizeMobileNumber(leadMobile);
+      await supabase.functions.invoke("queue-lookup", {
+        body: {
+          action: "save_booking_lead",
+          clinic_id: id,
+          mobile_number: sanitizedMobile,
+          patient_name: leadName.trim(),
+          clinic_name: name,
+          booking_type: "external",
+        },
+      });
+      setShowBookingLead(false);
+      // Redirect to booking URL
+      window.open(bookingUrl, "_blank");
+    } catch (err) {
+      console.error("Lead save error:", err);
+      // Still redirect even if lead save fails
+      window.open(bookingUrl, "_blank");
+      setShowBookingLead(false);
+    } finally {
+      setLeadSubmitting(false);
     }
   };
 
