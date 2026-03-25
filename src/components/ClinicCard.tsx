@@ -732,16 +732,6 @@ export const ClinicCard = ({
             <Input id="lead-mobile" type="tel" value={leadMobile} onChange={(e) => setLeadMobile(e.target.value)} placeholder="e.g. +6591234567" className="mt-1 h-9 text-sm" />
             <p className="text-[10px] text-muted-foreground mt-0.5">8-15 digits, country code optional</p>
           </div>
-          <div className="grid grid-cols-2 gap-2">
-            <div>
-              <Label htmlFor="lead-date" className="text-xs font-medium">Preferred Date</Label>
-              <Input id="lead-date" type="date" value={leadPrefDate} onChange={(e) => setLeadPrefDate(e.target.value)} className="mt-1 h-9 text-sm" />
-            </div>
-            <div>
-              <Label htmlFor="lead-time" className="text-xs font-medium">Preferred Time</Label>
-              <Input id="lead-time" type="time" value={leadPrefTime} onChange={(e) => setLeadPrefTime(e.target.value)} className="mt-1 h-9 text-sm" />
-            </div>
-          </div>
           <div>
             <Label htmlFor="lead-notes" className="text-xs font-medium">Notes</Label>
             <Textarea id="lead-notes" value={leadNotes} onChange={(e) => setLeadNotes(e.target.value)} placeholder="Any additional information..." className="mt-1 text-sm min-h-[60px]" />
