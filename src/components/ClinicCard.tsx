@@ -545,28 +545,28 @@ export const ClinicCard = ({
             </div>
           </div>
         ) : (
-          <div className="flex-1 flex flex-col justify-between gap-1.5 mt-1">
+          <div className="flex-1 flex flex-col justify-between gap-1">
             {/* Middle expanding content */}
-            <div className="flex-1 flex flex-col justify-evenly gap-1.5">
+            <div className="flex-1 flex flex-col justify-center gap-1">
             {hasDigitalQueue && (
-              <div className="flex-1 flex flex-col justify-between p-2.5 rounded border min-h-0"
+              <div className="flex flex-col gap-1.5 p-2 rounded border min-h-0"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
                   borderColor: 'hsl(var(--ai-purple)/0.2)'
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                 <div className="flex items-center gap-2 mb-2">
-                   <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
-                     <Users className="h-3.5 w-3.5 text-primary-foreground" strokeWidth={3} />
+                 <div className="flex items-center gap-2">
+                   <div className="h-6 w-6 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
+                     <Users className="h-3 w-3 text-primary-foreground" strokeWidth={3} />
                    </div>
                     <p className="text-sm font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
                  </div>
                 
-                <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
+                <div onClick={(e) => e.stopPropagation()}>
                   <label className="text-xs font-medium text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
-                    <SelectTrigger className="w-full h-9 text-sm">
+                    <SelectTrigger className="w-full h-8 text-sm mt-0.5">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
