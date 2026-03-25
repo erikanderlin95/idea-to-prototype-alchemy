@@ -462,27 +462,18 @@ export const ClinicCard = ({
 
         {myQueueEntry ? (
           <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
-            {/* Compact 3-column queue summary row */}
-            <div className="grid grid-cols-3 gap-1.5 p-2 rounded border"
+            {/* People ahead summary */}
+            <div className="flex items-center justify-between px-2.5 py-2 rounded border"
               style={{ 
                 background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-blue)/0.06))',
                 borderColor: 'hsl(var(--ai-purple)/0.15)'
               }}
             >
-              <div className="text-center">
-                <p className="text-[10px] text-muted-foreground font-medium leading-none mb-0.5">{t("clinicCard.inQueue")}</p>
-                <p className="text-[15px] font-bold text-foreground leading-tight">{queueCount}</p>
+              <div className="flex items-center gap-2">
+                <Users className="h-4 w-4 text-primary" />
+                <span className="text-[12px] font-medium text-muted-foreground">People Ahead</span>
               </div>
-              <div className="text-center border-x border-border/30">
-                <p className="text-[10px] text-muted-foreground font-medium leading-none mb-0.5">Ahead</p>
-                <p className="text-[15px] font-black text-primary leading-tight">{Math.max(0, myQueueEntry.queue_number - 1)}</p>
-              </div>
-              <div className="text-center">
-                <p className="text-[10px] text-muted-foreground font-medium leading-none mb-0.5">Status</p>
-                <Badge variant="secondary" className="text-[10px] font-semibold px-1.5 py-0 h-[18px]">
-                  {t("clinicCard.waiting")}
-                </Badge>
-              </div>
+              <span className="text-[16px] font-black text-primary">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
             </div>
 
             {/* Check-in code - compact inline */}
