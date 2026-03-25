@@ -359,21 +359,21 @@ export const ClinicCard = ({
 
   return (
     <>
-      <Card className="group p-3 sm:p-6 hover:shadow-xl transition-all duration-300 border-ai-indigo/30 hover:border-ai-purple/50 cursor-pointer bg-gradient-to-br from-card to-ai-purple/5 onboarding-join-queue hover:shadow-ai-purple/10 w-full" onClick={() => id && navigate(`/clinic/${id}`)}>
-      <div className="space-y-3 sm:space-y-5">
+      <Card className="group p-2.5 sm:p-4 hover:shadow-xl transition-all duration-300 border-ai-indigo/30 hover:border-ai-purple/50 cursor-pointer bg-gradient-to-br from-card to-ai-purple/5 onboarding-join-queue hover:shadow-ai-purple/10 w-full" onClick={() => id && navigate(`/clinic/${id}`)}>
+      <div className="space-y-2 sm:space-y-3">
         <div className="flex items-start justify-between">
-          <div className="space-y-3 flex-1">
+          <div className="space-y-1.5 flex-1">
             <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="text-base sm:text-xl font-bold group-hover:text-primary transition-colors">{name}</h3>
-               <Badge variant="secondary" className="text-xs sm:text-sm font-medium">
+              <h3 className="text-sm sm:text-base font-bold group-hover:text-primary transition-colors">{name}</h3>
+               <Badge variant="secondary" className="text-[10px] sm:text-xs font-medium">
                 {type}
               </Badge>
               {isOpen ? (
-                <Badge variant="outline" className="text-sm border-accent text-accent">
+                <Badge variant="outline" className="text-[10px] sm:text-xs border-accent text-accent">
                   {t("clinicCard.open")}
                 </Badge>
               ) : (
-                <Badge variant="outline" className="text-sm border-muted text-muted-foreground">
+                <Badge variant="outline" className="text-[10px] sm:text-xs border-muted text-muted-foreground">
                   {t("clinicCard.closed")}
                 </Badge>
               )}
@@ -384,31 +384,31 @@ export const ClinicCard = ({
                 </Badge>
               )}
             </div>
-            <div className="flex items-center gap-1 text-sm text-muted-foreground">
-              <MapPin className="h-4 w-4 flex-shrink-0" />
+            <div className="flex items-center gap-1 text-xs text-muted-foreground">
+              <MapPin className="h-3 w-3 flex-shrink-0" />
               <span className="line-clamp-1">{address}</span>
             </div>
           </div>
-          <div className="flex items-center gap-1 bg-amber-50 dark:bg-amber-950/20 px-2 py-1 rounded-lg">
-            <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
-            <span className="text-sm font-bold">{rating}</span>
+          <div className="flex items-center gap-1 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded-md">
+            <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+            <span className="text-xs font-bold">{rating}</span>
           </div>
         </div>
 
         {hasDigitalQueue ? (
-          <div className="flex items-center gap-3 py-3 sm:py-4 px-3 sm:px-4 rounded-xl border onboarding-stats"
+          <div className="flex items-center gap-2 py-2 sm:py-3 px-2.5 sm:px-3 rounded-lg border onboarding-stats"
             style={{ 
               background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
               borderColor: 'hsl(var(--ai-cyan)/0.3)'
             }}
           >
-            <div className="flex items-center gap-3">
-              <div className="h-10 w-10 rounded-lg bg-primary/20 flex items-center justify-center">
-                <Users className="h-5 w-5 text-primary" />
+            <div className="flex items-center gap-2">
+              <div className="h-8 w-8 rounded-md bg-primary/20 flex items-center justify-center">
+                <Users className="h-4 w-4 text-primary" />
               </div>
               <div>
-                <p className="text-xs text-muted-foreground font-medium">{t("clinicCard.inQueue")}</p>
-                <p className="text-base font-bold">{queueCount} {t("clinicCard.people")}</p>
+                <p className="text-[10px] text-muted-foreground font-medium">{t("clinicCard.inQueue")}</p>
+                <p className="text-sm font-bold">{queueCount} {t("clinicCard.people")}</p>
               </div>
             </div>
           </div>
@@ -554,26 +554,26 @@ export const ClinicCard = ({
             </div>
           </div>
         ) : (
-            <div className="space-y-3 pt-2">
+            <div className="space-y-2 pt-1">
             {hasDigitalQueue && (
-              <div className="p-3 sm:p-5 rounded-xl border-2 shadow-lg"
+              <div className="p-2.5 sm:p-4 rounded-lg border-2 shadow-md"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.05))',
                   borderColor: 'hsl(var(--ai-purple)/0.4)'
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                 <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-                   <div className="h-10 w-10 sm:h-14 sm:w-14 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-xl shadow-primary/40">
-                     <Users className="h-5 w-5 sm:h-7 sm:w-7 text-primary-foreground" strokeWidth={3} />
+                 <div className="flex items-center gap-2 sm:gap-3 mb-2 sm:mb-3">
+                   <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-lg shadow-primary/40">
+                     <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" strokeWidth={3} />
                    </div>
                     <div>
-                      <p className="text-base sm:text-xl font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
+                      <p className="text-sm sm:text-base font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
                     </div>
                  </div>
                 
-                <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
-                  <label className="text-sm font-medium text-foreground">{t("clinicCard.visitType")}</label>
+                <div className="space-y-1.5" onClick={(e) => e.stopPropagation()}>
+                  <label className="text-xs font-medium text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
                     <SelectTrigger className="w-full">
                       <SelectValue />
@@ -590,19 +590,19 @@ export const ClinicCard = ({
               </div>
             )}
             
-            <div className={`flex gap-2 sm:gap-3 ${isNmgAffiliated && isManagedCareType(type) ? 'flex-col' : ''}`}>
+            <div className={`flex gap-1.5 sm:gap-2 ${isNmgAffiliated && isManagedCareType(type) ? 'flex-col' : ''}`}>
               {hasDigitalQueue ? (
                 <Button 
-                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm sm:text-base shadow-2xl shadow-primary/50 border-0 h-10 sm:h-12 hover:scale-105 transition-transform" 
+                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs sm:text-sm shadow-2xl shadow-primary/50 border-0 h-8 sm:h-10 hover:scale-105 transition-transform" 
                   disabled={!isOpen || isJoining}
                   onClick={handleJoinQueue}
                 >
-                  <Users className="mr-2 h-6 w-6" strokeWidth={3} />
+                  <Users className="mr-1.5 h-4 w-4" strokeWidth={3} />
                   {isJoining ? t("clinicCard.joining") : t("clinicCard.joinQueue")}
                 </Button>
               ) : isNmgAffiliated && isManagedCareType(type) ? (
                 <Button 
-                  className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm sm:text-base shadow-2xl shadow-primary/50 border-0 h-10 sm:h-12 hover:scale-105 transition-transform" 
+                  className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs sm:text-sm shadow-2xl shadow-primary/50 border-0 h-8 sm:h-10 hover:scale-105 transition-transform" 
                   disabled={!isOpen}
                   onClick={(e) => {
                     e.stopPropagation();
@@ -615,7 +615,7 @@ export const ClinicCard = ({
                 </Button>
               ) : (
                 <Button 
-                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm sm:text-base shadow-2xl shadow-primary/50 border-0 h-10 sm:h-12 hover:scale-105 transition-transform" 
+                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-xs sm:text-sm shadow-2xl shadow-primary/50 border-0 h-8 sm:h-10 hover:scale-105 transition-transform" 
                   disabled={!isOpen}
                   onClick={(e) => {
                     e.stopPropagation();
