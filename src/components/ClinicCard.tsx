@@ -556,17 +556,17 @@ export const ClinicCard = ({
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                 <div className="flex items-center gap-2 mb-1.5">
-                   <div className="h-6 w-6 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
-                     <Users className="h-3 w-3 text-primary-foreground" strokeWidth={3} />
+                 <div className="flex items-center gap-2.5 mb-2.5">
+                   <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
+                     <Users className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
                    </div>
-                    <p className="text-sm font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
+                    <p className="text-base font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
                  </div>
                 
-                <div className="space-y-0.5" onClick={(e) => e.stopPropagation()}>
-                  <label className="text-xs font-medium text-foreground">{t("clinicCard.visitType")}</label>
+                <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
+                  <label className="text-sm font-medium text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
-                    <SelectTrigger className="w-full h-8 text-sm">
+                    <SelectTrigger className="w-full h-9 text-sm">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
