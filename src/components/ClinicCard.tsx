@@ -585,14 +585,14 @@ export const ClinicCard = ({
         )}
 
         {myQueueEntry ? (
-          <div className="space-y-3 pt-2" onClick={(e) => e.stopPropagation()}>
-            <div className="relative p-5 bg-card rounded-xl border-2 shadow-lg"
-              style={{ borderColor: 'hsl(var(--ai-purple)/0.4)' }}
+          <div className="space-y-2 pt-1" onClick={(e) => e.stopPropagation()}>
+            <div className="relative p-3 bg-card rounded-lg border shadow-sm"
+              style={{ borderColor: 'hsl(var(--ai-purple)/0.3)' }}
             >
-              <div className="flex items-center justify-between p-4 rounded-lg border-2 mb-3"
+              <div className="flex items-center justify-between p-3 rounded-md border mb-2"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.1))',
-                  borderColor: 'hsl(var(--ai-purple)/0.3)'
+                  borderColor: 'hsl(var(--ai-purple)/0.2)'
                 }}
               >
                 <div className="flex items-center gap-4">
