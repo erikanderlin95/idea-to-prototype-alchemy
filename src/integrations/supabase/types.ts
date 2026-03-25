@@ -134,33 +134,45 @@ export type Database = {
       booking_leads: {
         Row: {
           booking_type: string
+          case_id: string | null
           clinic_id: string | null
           clinic_name: string | null
           created_at: string
           id: string
           mobile_number: string
           patient_name: string
+          redirect_type: string | null
+          redirect_url: string | null
           source: string
+          status: string
         }
         Insert: {
           booking_type?: string
+          case_id?: string | null
           clinic_id?: string | null
           clinic_name?: string | null
           created_at?: string
           id?: string
           mobile_number: string
           patient_name: string
+          redirect_type?: string | null
+          redirect_url?: string | null
           source?: string
+          status?: string
         }
         Update: {
           booking_type?: string
+          case_id?: string | null
           clinic_id?: string | null
           clinic_name?: string | null
           created_at?: string
           id?: string
           mobile_number?: string
           patient_name?: string
+          redirect_type?: string | null
+          redirect_url?: string | null
           source?: string
+          status?: string
         }
         Relationships: [
           {

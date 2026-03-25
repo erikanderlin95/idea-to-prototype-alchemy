@@ -85,6 +85,7 @@ export const ClinicCard = ({
   const [leadName, setLeadName] = useState("");
   const [leadMobile, setLeadMobile] = useState("");
   const [leadSubmitting, setLeadSubmitting] = useState(false);
+  const [bookingCaseId, setBookingCaseId] = useState("");
 
   const generateCaseId = () => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -295,7 +296,7 @@ export const ClinicCard = ({
     }
   };
 
-  const handleSaveBookingLead = async (bookingUrl: string) => {
+  const handleSaveBookingLead = async () => {
     if (!leadName.trim() || !leadMobile.trim()) {
       toast.error("Please fill in your name and mobile number");
       return;
@@ -307,15 +308,49 @@ export const ClinicCard = ({
     setLeadSubmitting(true);
     try {
       const sanitizedMobile = sanitizeMobileNumber(leadMobile);
-      await supabase.functions.invoke("queue-lookup", {
-        body: { action: "save_booking_lead", clinic_id: id, mobile_number: sanitizedMobile, patient_name: leadName.trim(), clinic_name: name, booking_type: "external" },
+      
+      // Fetch clinic data to determine redirect
+      const { data: clinicData } = await supabase.from("clinics").select("booking_url, phone").eq("id", id).single();
+      
+      const bookingUrl = clinicData?.booking_url || null;
+      const clinicPhone = clinicData?.phone?.replace(/\D/g, '') || "";
+      const redirectType = bookingUrl ? "web" : (clinicPhone ? "whatsapp" : "web");
+
+      const { data: response } = await supabase.functions.invoke("queue-lookup", {
+        body: { 
+          action: "save_booking_lead", 
+          clinic_id: id, 
+          mobile_number: sanitizedMobile, 
+          patient_name: leadName.trim(), 
+          clinic_name: name, 
+          booking_type: "external",
+          redirect_type: redirectType,
+          redirect_url: bookingUrl || null,
+        },
       });
+
+      const caseId = response?.case_id || "";
+      setBookingCaseId(caseId);
       setShowBookingLead(false);
-      navigate(bookingUrl);
+
+      // Redirect based on what's available
+      if (bookingUrl) {
+        // Web booking - append case_id as query parameter
+        const separator = bookingUrl.includes("?") ? "&" : "?";
+        window.open(`${bookingUrl}${separator}case_id=${encodeURIComponent(caseId)}`, "_blank");
+        toast.success(`Booking opened! Your Case ID: ${caseId}`);
+      } else if (clinicPhone) {
+        // WhatsApp - pre-fill message with case_id
+        const message = encodeURIComponent(`Hi, I'd like to book an appointment.\nCase ID: ${caseId}`);
+        window.open(`https://wa.me/${clinicPhone}?text=${message}`, "_blank");
+        toast.success(`WhatsApp opened! Your Case ID: ${caseId}`);
+      } else {
+        // Fallback - navigate to booking page
+        navigate(`/booking/${id}`);
+      }
     } catch (err) {
       console.error("Lead save error:", err);
-      navigate(bookingUrl);
-      setShowBookingLead(false);
+      toast.error("Something went wrong. Please try again.");
     } finally { setLeadSubmitting(false); }
   };
 
@@ -439,8 +474,8 @@ export const ClinicCard = ({
                 <p className="text-[15px] font-bold text-foreground leading-tight">{queueCount}</p>
               </div>
               <div className="text-center border-x border-border/30">
-                <p className="text-[10px] text-muted-foreground font-medium leading-none mb-0.5">{t("clinicCard.position")}</p>
-                <p className="text-[15px] font-black text-primary leading-tight">#{myQueueEntry.queue_number}</p>
+                <p className="text-[10px] text-muted-foreground font-medium leading-none mb-0.5">Ahead</p>
+                <p className="text-[15px] font-black text-primary leading-tight">{Math.max(0, myQueueEntry.queue_number - 1)}</p>
               </div>
               <div className="text-center">
                 <p className="text-[10px] text-muted-foreground font-medium leading-none mb-0.5">Status</p>
@@ -666,7 +701,7 @@ export const ClinicCard = ({
         </div>
         <DialogFooter className="gap-2 pt-1">
           <Button variant="outline" size="sm" onClick={() => setShowBookingLead(false)}>Cancel</Button>
-          <Button size="sm" onClick={() => handleSaveBookingLead(`/booking/${id}`)} disabled={leadSubmitting}>
+          <Button size="sm" onClick={handleSaveBookingLead} disabled={leadSubmitting}>
             {leadSubmitting ? "Saving..." : "Continue to Book"}
           </Button>
         </DialogFooter>
