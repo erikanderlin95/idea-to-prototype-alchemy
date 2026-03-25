@@ -428,8 +428,8 @@ export const ClinicCard = ({
         </div>
 
         {/* === MIDDLE SECTION === */}
-        <div className="flex-1 flex flex-col mt-1.5">
-        {hasDigitalQueue ? (
+        <div className="flex-1 flex flex-col gap-1.5 mt-1.5">
+        {hasDigitalQueue && (
           <div className="flex items-center gap-2 py-1 px-2 rounded border"
             style={{ 
               background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
@@ -444,7 +444,8 @@ export const ClinicCard = ({
               <p className="text-sm font-bold leading-tight">{queueCount} {t("clinicCard.people")}</p>
             </div>
           </div>
-        ) : (
+        )}
+        {!hasDigitalQueue && (
           <div className="space-y-1.5">
             <div className="py-2 px-2.5 rounded border"
               style={{ 
