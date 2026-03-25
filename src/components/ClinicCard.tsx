@@ -572,8 +572,8 @@ export const ClinicCard = ({
                     </div>
                  </div>
                 
-                <div className="space-y-2" onClick={(e) => e.stopPropagation()}>
-                  <label className="text-sm font-medium text-foreground">{t("clinicCard.visitType")}</label>
+                <div className="space-y-1.5" onClick={(e) => e.stopPropagation()}>
+                  <label className="text-xs font-medium text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
                     <SelectTrigger className="w-full">
                       <SelectValue />
