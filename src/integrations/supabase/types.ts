@@ -487,6 +487,7 @@ export type Database = {
       }
       queue_entries: {
         Row: {
+          check_in_code: string | null
           clinic_id: string
           created_at: string | null
           estimated_wait_time: number | null
@@ -500,6 +501,7 @@ export type Database = {
           visit_type: string | null
         }
         Insert: {
+          check_in_code?: string | null
           clinic_id: string
           created_at?: string | null
           estimated_wait_time?: number | null
@@ -513,6 +515,7 @@ export type Database = {
           visit_type?: string | null
         }
         Update: {
+          check_in_code?: string | null
           clinic_id?: string
           created_at?: string | null
           estimated_wait_time?: number | null
