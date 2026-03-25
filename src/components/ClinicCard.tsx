@@ -508,9 +508,9 @@ export const ClinicCard = ({
               >
                 <div className="flex items-center gap-1.5">
                   <Users className="h-4 w-4 text-primary" />
-                  <span className="text-[13px] font-semibold text-foreground">People Ahead</span>
+                  <span className="text-sm font-semibold text-foreground">People Ahead</span>
                 </div>
-                <span className="text-2xl font-semibold tabular-nums text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
+                <span className="text-3xl font-bold tabular-nums text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
               </div>
 
               {myQueueEntry.check_in_code && (
