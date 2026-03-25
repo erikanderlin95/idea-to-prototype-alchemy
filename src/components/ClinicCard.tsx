@@ -375,7 +375,7 @@ export const ClinicCard = ({
               </Badge>
             )}
             {isNmgAffiliated && (
-              <Badge className="text-[10px] bg-primary/15 text-primary border border-primary/30 px-1.5 py-0 h-[18px] shrink-0">
+              <Badge className="text-xs bg-primary/15 text-primary border border-primary/30 px-1.5 py-0 h-[20px] shrink-0">
                 <Shield className="h-2.5 w-2.5 mr-0.5" />
                 Managed Care
               </Badge>
