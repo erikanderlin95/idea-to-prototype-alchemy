@@ -356,8 +356,8 @@ export const ClinicCard = ({
 
   return (
     <>
-      <Card className="group px-2.5 py-2 sm:px-3 sm:py-2.5 hover:shadow-lg transition-all duration-300 border border-border/40 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue max-w-[340px] w-full mx-auto sm:max-w-none" onClick={() => id && navigate(`/clinic/${id}`)}>
-      <div className="space-y-1.5">
+      <Card className="group px-2.5 py-2 sm:px-3 sm:py-2 hover:shadow-lg transition-all duration-300 border border-border/40 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue" onClick={() => id && navigate(`/clinic/${id}`)}>
+      <div className="space-y-1">
         {/* Row 1: Name + type + status + rating */}
         <div className="flex items-center justify-between gap-1">
           <div className="flex items-center gap-1.5 flex-wrap flex-1 min-w-0">
@@ -461,29 +461,29 @@ export const ClinicCard = ({
         )}
 
         {myQueueEntry ? (
-          <div className="space-y-1.5" onClick={(e) => e.stopPropagation()}>
-            {/* People ahead — large and prominent */}
-            <div className="flex items-center justify-between px-2 py-1.5 rounded border"
+          <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
+            {/* People ahead — large */}
+            <div className="flex items-center justify-between px-2 py-1 rounded border"
               style={{ 
                 background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.08))',
                 borderColor: 'hsl(var(--ai-purple)/0.2)'
               }}
             >
               <div className="flex items-center gap-1.5">
-                <Users className="h-3.5 w-3.5 text-primary" />
-                <span className="text-[11px] font-medium text-muted-foreground">People Ahead</span>
+                <Users className="h-4 w-4 text-primary" />
+                <span className="text-[13px] font-semibold text-muted-foreground">People Ahead</span>
               </div>
-              <span className="text-xl font-black text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
+              <span className="text-2xl font-black text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
             </div>
 
-            {/* Check-in code — bold and scannable */}
+            {/* Check-in code — bold */}
             {myQueueEntry.check_in_code && (
-              <div className="flex items-center justify-between px-2 py-1.5 bg-muted/50 rounded border border-border/30">
+              <div className="flex items-center justify-between px-2 py-1 bg-muted/50 rounded border border-border/30">
                 <div className="flex items-center gap-1">
-                  <Shield className="h-3 w-3 text-primary" />
-                  <span className="text-[10px] text-muted-foreground">Check-in Code</span>
+                  <Shield className="h-3.5 w-3.5 text-primary" />
+                  <span className="text-[11px] font-medium text-muted-foreground">Check-in Code</span>
                 </div>
-                <span className="text-base font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</span>
+                <span className="text-lg font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</span>
               </div>
             )}
             
