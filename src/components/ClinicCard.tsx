@@ -485,24 +485,24 @@ export const ClinicCard = ({
         ) : (
             <div className="space-y-1.5">
             {hasDigitalQueue && (
-              <div className="p-2.5 rounded-md border"
+              <div className="p-2 rounded border"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
                   borderColor: 'hsl(var(--ai-purple)/0.2)'
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                 <div className="flex items-center gap-2 mb-2">
-                   <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-md shadow-primary/30">
-                     <Users className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
+                 <div className="flex items-center gap-2 mb-1.5">
+                   <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
+                     <Users className="h-3.5 w-3.5 text-primary-foreground" strokeWidth={3} />
                    </div>
-                    <p className="text-xs sm:text-sm font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
+                    <p className="text-xs font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
                  </div>
                 
-                <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
+                <div className="space-y-0.5" onClick={(e) => e.stopPropagation()}>
                   <label className="text-[10px] font-medium text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
-                    <SelectTrigger className="w-full h-8 text-xs">
+                    <SelectTrigger className="w-full h-7 text-[11px]">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
