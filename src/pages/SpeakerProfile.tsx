@@ -88,7 +88,7 @@ const SpeakerProfile = () => {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
             <div className="lg:col-span-3 space-y-4">
               <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
-                About Ouch Pte Ltd
+                About Us
               </h2>
               <p className="text-[17px] text-[#5F6F7E] leading-relaxed">
                 Ouch Pte Ltd specialises in Traditional Chinese Medicine (TCM) education and wellness training for corporate (B2B) and consumer (B2C) audiences. From corporate wellness days to community health events, Ouch delivers engaging workshops and health talks that bridge traditional wisdom with modern wellness — covering stress management, acupressure self-care, dietary therapy, and holistic health.
