@@ -83,7 +83,7 @@ const SpeakerProfile = () => {
       </section>
 
       {/* About / Bio Section */}
-      <section className="py-8 px-4 bg-white">
+      <section className="py-4 px-4 bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
             <div className="lg:col-span-3 space-y-4">
@@ -129,7 +129,7 @@ const SpeakerProfile = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-8 px-4">
+      <section className="py-4 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
             <div className="space-y-3">
