@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { ManagedCareModal } from "@/components/ManagedCareModal";
-import { Mic, Presentation, Award, Users, ClipboardList, UserCheck, MessageCircle, ChevronRight, Check, X, Network } from "lucide-react";
+import { ServiceIntakeModal } from "@/components/ServiceIntakeModal";
+import { Mic, Presentation, Award, Users, ClipboardList, UserCheck, MessageCircle, ChevronRight, Check, X, User } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 
 const SpeakerProfile = () => {
   const [showIntakeModal, setShowIntakeModal] = useState(false);
@@ -11,7 +13,7 @@ const SpeakerProfile = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero - same layout as OrgHero */}
+      {/* Hero */}
       <section className="pt-24 pb-6 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-[#FDF6EE]" />
         <div className="max-w-5xl mx-auto relative">
@@ -29,7 +31,7 @@ const SpeakerProfile = () => {
               </h1>
 
               <p className="text-[19px] text-[#5F6F7E] leading-relaxed max-w-lg">
-                Corporate health talks, wellness workshops, and healthcare training — led by Hui Fang.
+                Corporate health talks, TCM wellness workshops, and healthcare training — led by Hui Fang.
               </p>
 
               <div className="flex items-center gap-0 pt-1">
@@ -54,6 +56,14 @@ const SpeakerProfile = () => {
                   <span className="text-[15px] font-bold text-[#12385B]">We Deliver</span>
                 </div>
               </div>
+
+              <Button
+                className="mt-3 bg-gradient-to-r from-[#D4860A] to-[#B8720A] hover:from-[#B8720A] hover:to-[#9C5F08] text-white font-semibold shadow-[0_2px_8px_rgba(212,134,10,0.3)] hover:shadow-[0_4px_14px_rgba(212,134,10,0.4)]"
+                onClick={() => setShowIntakeModal(true)}
+              >
+                <ClipboardList className="mr-2 h-4 w-4" />
+                Enquire Now
+              </Button>
             </div>
 
             <div className="lg:col-span-2">
@@ -62,8 +72,8 @@ const SpeakerProfile = () => {
                   <span className="text-[15px] font-bold text-[#12385B] uppercase tracking-widest">Capabilities</span>
                 </div>
                 <div className="p-3 space-y-0.5">
-                  <CapabilityChip icon={<Mic className="h-4 w-4" />} label="Health Talks" />
-                  <CapabilityChip icon={<Presentation className="h-4 w-4" />} label="Wellness Workshops" />
+                  <CapabilityChip icon={<Mic className="h-4 w-4" />} label="TCM Health Talks" />
+                  <CapabilityChip icon={<Presentation className="h-4 w-4" />} label="B2B & B2C Workshops" />
                   <CapabilityChip icon={<Award className="h-4 w-4" />} label="Corporate Training" />
                 </div>
               </div>
@@ -72,7 +82,59 @@ const SpeakerProfile = () => {
         </div>
       </section>
 
-      {/* Care Journey - same layout as OrgCareJourney */}
+      {/* About / Bio Section */}
+      <section className="py-8 px-4 bg-white">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
+            <div className="lg:col-span-3 space-y-4">
+              <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
+                About Ouch Pte Ltd
+              </h2>
+              <p className="text-[17px] text-[#5F6F7E] leading-relaxed">
+                Ouch Pte Ltd specialises in Traditional Chinese Medicine (TCM) education and wellness training for both corporate (B2B) and consumer (B2C) audiences. Founded with a mission to make TCM knowledge accessible and practical, Ouch delivers engaging workshops, health talks, and training programmes that bridge the gap between traditional wisdom and modern wellness needs.
+              </p>
+              <p className="text-[17px] text-[#5F6F7E] leading-relaxed">
+                From corporate wellness days to community health events, Ouch tailors every session to the audience — covering topics like stress management through TCM, acupressure self-care, dietary therapy, and holistic health maintenance.
+              </p>
+              <p className="text-[17px] text-[#5F6F7E] leading-relaxed">
+                Whether you're a company looking to enhance employee well-being or an individual curious about TCM, Ouch provides evidence-informed, interactive learning experiences that empower participants to take charge of their health.
+              </p>
+            </div>
+
+            {/* Speaker Card */}
+            <div className="lg:col-span-2">
+              <Card className="border-[#E8D5B5] shadow-[0_4px_16px_rgba(212,134,10,0.08)] overflow-hidden">
+                <CardContent className="p-5">
+                  <div className="flex flex-col items-center text-center">
+                    <div className="w-20 h-20 rounded-full bg-gradient-to-br from-[#FDECD2] to-[#F5D9B0] flex items-center justify-center mb-3 ring-2 ring-[#D4860A]/20">
+                      <User className="h-10 w-10 text-[#D4860A]/60" />
+                    </div>
+                    <h3 className="text-lg font-bold text-[#12385B]">Hui Fang</h3>
+                    <p className="text-[14px] text-[#5F6F7E] mb-2">Lead Speaker & TCM Educator</p>
+                    <p className="text-[14px] text-[#5F6F7E] leading-relaxed mb-4">
+                      Hui Fang is a certified TCM practitioner and healthcare educator with years of experience delivering corporate wellness talks and community workshops. She specialises in making TCM concepts practical and relatable for modern audiences.
+                    </p>
+                    <div className="flex flex-wrap gap-1.5 justify-center mb-3">
+                      <span className="text-[11px] font-medium text-[#9B6B1A] bg-[#FDF2E0] border border-[#D4860A]/20 rounded-full px-2.5 py-0.5">TCM Workshops</span>
+                      <span className="text-[11px] font-medium text-[#9B6B1A] bg-[#FDF2E0] border border-[#D4860A]/20 rounded-full px-2.5 py-0.5">Corporate Wellness</span>
+                      <span className="text-[11px] font-medium text-[#9B6B1A] bg-[#FDF2E0] border border-[#D4860A]/20 rounded-full px-2.5 py-0.5">Health Education</span>
+                    </div>
+                    <Button
+                      className="w-full bg-gradient-to-r from-[#D4860A] to-[#B8720A] hover:from-[#B8720A] hover:to-[#9C5F08] text-white font-medium text-[14px]"
+                      onClick={() => setShowIntakeModal(true)}
+                    >
+                      <MessageCircle className="mr-1.5 h-4 w-4" />
+                      Connect with Hui Fang
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How It Works */}
       <section className="py-8 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
@@ -88,6 +150,14 @@ const SpeakerProfile = () => {
               <p className="mt-4 text-[15px] leading-relaxed text-[#6B7D8E]">
                 Flexible scheduling. Tailored content for your audience — from corporate teams to community groups.
               </p>
+              <Button
+                variant="outline"
+                className="mt-2 border-[#D4860A]/30 text-[#D4860A] hover:bg-[#FDF2E0]"
+                onClick={() => setShowIntakeModal(true)}
+              >
+                <ClipboardList className="mr-2 h-4 w-4" />
+                Start Your Enquiry
+              </Button>
             </div>
 
             <div className="rounded-xl bg-white border border-[#E8D5B5] shadow-[0_4px_16px_rgba(212,134,10,0.08)] p-4 space-y-2.5 relative">
@@ -101,9 +171,9 @@ const SpeakerProfile = () => {
                 <span className="text-[12px] text-[#5F6F7E]/60 italic">Example enquiry</span>
               </div>
               <div className="space-y-2 opacity-80">
-                <FakeField label="Event Type" value="Corporate Wellness Talk" />
-                <FakeField label="Audience Size" value="50-100 pax" />
-                <FakeField label="Preferred Date" value="Q2 2026" />
+                <FakeField label="Event Type" value="Corporate TCM Wellness Workshop" />
+                <FakeField label="Audience" value="50 employees, finance team" />
+                <FakeField label="Format" value="B2B — onsite, 90 min" />
                 <FakeField label="Contact" value="+65 ●●●● ●●48" />
               </div>
             </div>
@@ -111,7 +181,7 @@ const SpeakerProfile = () => {
         </div>
       </section>
 
-      {/* Why Choose - same layout as OrgWhyConcierge */}
+      {/* Why Choose */}
       <section className="py-8 px-4 bg-[#FDF6EE]">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
@@ -124,7 +194,7 @@ const SpeakerProfile = () => {
               </p>
               <p className="text-[18px] text-[#12385B] font-medium">What sets us apart:</p>
               <ul className="space-y-1.5 pl-1">
-                {["Clinician-led content", "Customised to your industry", "Interactive & engaging delivery"].map((item) => (
+                {["TCM-focused expertise", "B2B & B2C programmes", "Customised to your industry", "Interactive & engaging delivery"].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-[17px] text-[#12385B]">
                     <Check className="h-4 w-4 text-[#D4860A] shrink-0" />
                     {item}
@@ -152,7 +222,7 @@ const SpeakerProfile = () => {
                 <div className="rounded-xl border border-[#D4860A]/20 bg-[#FDF2E0] p-3.5 space-y-2 shadow-[0_2px_12px_rgba(212,134,10,0.1)]">
                   <h3 className="text-[16px] font-bold text-[#12385B]">Ouch Model</h3>
                   <ul className="space-y-1">
-                    {["Customised content", "Evidence-based", "Interactive workshops", "Measurable outcomes"].map((item) => (
+                    {["TCM-customised", "Evidence-based", "Interactive workshops", "Measurable outcomes"].map((item) => (
                       <li key={item} className="flex items-center gap-2 text-[15px] text-[#12385B]">
                         <Check className="h-3.5 w-3.5 shrink-0 text-[#D4860A]" />
                         {item}
@@ -166,23 +236,19 @@ const SpeakerProfile = () => {
         </div>
       </section>
 
-      {/* Services - same layout as OrgServices */}
+      {/* Services */}
       <section className="py-6 px-4">
         <div className="max-w-5xl mx-auto space-y-2">
           <div className="text-center">
-            <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">
-              Available Programmes
-            </p>
-            <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight mt-0.5">
-              Service Areas
-            </h2>
+            <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">Available Programmes</p>
+            <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight mt-0.5">Service Areas</h2>
           </div>
           <div className="flex flex-wrap justify-center gap-2">
             {[
-              { icon: Mic, label: "Health Talks" },
-              { icon: Presentation, label: "Wellness Workshops" },
-              { icon: Award, label: "Corporate Training" },
-              { icon: Users, label: "Community Outreach" },
+              { icon: Mic, label: "TCM Health Talks" },
+              { icon: Presentation, label: "B2B Corporate Workshops" },
+              { icon: Users, label: "B2C Community Sessions" },
+              { icon: Award, label: "Professional Training" },
             ].map((s) => (
               <div key={s.label} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-[#E8D5B5] shadow-[0_1px_4px_rgba(212,134,10,0.05)] hover:shadow-[0_3px_12px_rgba(212,134,10,0.1)] hover:border-[#D4860A]/30 transition-all duration-200 cursor-default">
                 <div className="w-7 h-7 rounded-md bg-[#FDF2E0] flex items-center justify-center">
@@ -195,11 +261,36 @@ const SpeakerProfile = () => {
         </div>
       </section>
 
-      <ManagedCareModal
+      {/* Bottom CTA */}
+      <section className="py-8 px-4">
+        <div className="max-w-3xl mx-auto text-center space-y-4">
+          <h2 className="text-2xl font-bold text-[#12385B]">Ready to book a session?</h2>
+          <p className="text-[17px] text-[#5F6F7E]">Submit your enquiry and we'll get back to you with a customised proposal.</p>
+          <Button
+            size="lg"
+            className="bg-gradient-to-r from-[#D4860A] to-[#B8720A] hover:from-[#B8720A] hover:to-[#9C5F08] text-white font-semibold shadow-[0_2px_8px_rgba(212,134,10,0.3)]"
+            onClick={() => setShowIntakeModal(true)}
+          >
+            <ClipboardList className="mr-2 h-5 w-5" />
+            Enquire Now
+          </Button>
+        </div>
+      </section>
+
+      <ServiceIntakeModal
         open={showIntakeModal}
         onOpenChange={setShowIntakeModal}
-        clinicName="Ouch Pte Ltd"
-        source="organization_profile"
+        serviceName="Ouch Pte Ltd"
+        serviceType="speaker"
+        concernLabel="What are you looking for? *"
+        concernPlaceholder="e.g. TCM wellness workshop for 50 employees, corporate health talk..."
+        disclaimerItems={[
+          "Submitting this form does not confirm a booking.",
+          "Ouch Pte Ltd will contact you to discuss your requirements.",
+          "Programme details and pricing will be confirmed separately.",
+          "ClynicQ facilitates the connection only.",
+        ]}
+        icon={<Mic className="h-5 w-5 text-[#D4860A]" />}
       />
 
       <Footer />
