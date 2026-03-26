@@ -25,6 +25,10 @@ import WellnessClinics from "./pages/WellnessClinics";
 import ManagedCareRequest from "./pages/ManagedCareRequest";
 import OrganizationProfile from "./pages/OrganizationProfile";
 import SHAProfile from "./pages/SHAProfile";
+import SpeakersTrainers from "./pages/SpeakersTrainers";
+import SpeakerProfile from "./pages/SpeakerProfile";
+import AfterlifeServicesPage from "./pages/AfterlifeServices";
+import AfterlifeProfile from "./pages/AfterlifeProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
