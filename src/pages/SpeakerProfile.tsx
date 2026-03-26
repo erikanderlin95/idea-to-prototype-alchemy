@@ -83,7 +83,7 @@ const SpeakerProfile = () => {
       </section>
 
       {/* About / Bio Section */}
-      <section className="py-4 px-4 bg-white">
+      <section className="py-2 px-4 bg-white">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
             <div className="lg:col-span-3 space-y-4">
@@ -129,7 +129,7 @@ const SpeakerProfile = () => {
       </section>
 
       {/* How It Works */}
-      <section className="py-4 px-4">
+      <section className="py-2 px-4">
         <div className="max-w-5xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
             <div className="space-y-3">
@@ -144,14 +144,6 @@ const SpeakerProfile = () => {
               <p className="mt-4 text-[15px] leading-relaxed text-[#6B7D8E]">
                 Flexible scheduling. Tailored content for your audience — from corporate teams to community groups.
               </p>
-              <Button
-                variant="outline"
-                className="mt-2 border-[#D4860A]/30 text-[#D4860A] hover:bg-[#FDF2E0]"
-                onClick={() => setShowIntakeModal(true)}
-              >
-                <ClipboardList className="mr-2 h-4 w-4" />
-                Start Your Enquiry
-              </Button>
             </div>
 
             <div className="rounded-xl bg-white border border-[#E8D5B5] shadow-[0_4px_16px_rgba(212,134,10,0.08)] p-4 space-y-2.5 relative">
