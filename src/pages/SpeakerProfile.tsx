@@ -91,13 +91,7 @@ const SpeakerProfile = () => {
                 About Ouch Pte Ltd
               </h2>
               <p className="text-[17px] text-[#5F6F7E] leading-relaxed">
-                Ouch Pte Ltd specialises in Traditional Chinese Medicine (TCM) education and wellness training for both corporate (B2B) and consumer (B2C) audiences. Founded with a mission to make TCM knowledge accessible and practical, Ouch delivers engaging workshops, health talks, and training programmes that bridge the gap between traditional wisdom and modern wellness needs.
-              </p>
-              <p className="text-[17px] text-[#5F6F7E] leading-relaxed">
-                From corporate wellness days to community health events, Ouch tailors every session to the audience — covering topics like stress management through TCM, acupressure self-care, dietary therapy, and holistic health maintenance.
-              </p>
-              <p className="text-[17px] text-[#5F6F7E] leading-relaxed">
-                Whether you're a company looking to enhance employee well-being or an individual curious about TCM, Ouch provides evidence-informed, interactive learning experiences that empower participants to take charge of their health.
+                Ouch Pte Ltd specialises in Traditional Chinese Medicine (TCM) education and wellness training for corporate (B2B) and consumer (B2C) audiences. From corporate wellness days to community health events, Ouch delivers engaging workshops and health talks that bridge traditional wisdom with modern wellness — covering stress management, acupressure self-care, dietary therapy, and holistic health.
               </p>
             </div>
 

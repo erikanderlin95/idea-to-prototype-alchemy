@@ -76,12 +76,12 @@ export const ContinuityServices = () => {
                   {t(service.descKey)}
                 </p>
                 {service.clickable ? (
-                  <Button variant="ghost" size="sm" className="mt-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
-                    View Providers
+                  <Button variant="outline" size="sm" className="mt-2 text-primary border-primary/30 hover:bg-primary hover:text-primary-foreground transition-all">
+                    Explore
                     <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 ) : (
-                  <Button variant="ghost" size="sm" className="mt-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity" disabled>
+                  <Button variant="outline" size="sm" className="mt-2 text-muted-foreground border-border/50" disabled>
                     {t("continuity.comingSoon")}
                     <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
