@@ -25,6 +25,10 @@ import WellnessClinics from "./pages/WellnessClinics";
 import ManagedCareRequest from "./pages/ManagedCareRequest";
 import OrganizationProfile from "./pages/OrganizationProfile";
 import SHAProfile from "./pages/SHAProfile";
+import SpeakersTrainers from "./pages/SpeakersTrainers";
+import SpeakerProfile from "./pages/SpeakerProfile";
+import AfterlifeServicesPage from "./pages/AfterlifeServices";
+import AfterlifeProfile from "./pages/AfterlifeProfile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -58,6 +62,10 @@ const App = () => (
             <Route path="/managed-care-request/:id" element={<ManagedCareRequest />} />
             <Route path="/organization/sha" element={<SHAProfile />} />
             <Route path="/organization/nymg" element={<OrganizationProfile />} />
+            <Route path="/speakers" element={<SpeakersTrainers />} />
+            <Route path="/speakers/ouch-pte-ltd" element={<SpeakerProfile />} />
+            <Route path="/afterlife" element={<AfterlifeServicesPage />} />
+            <Route path="/afterlife/nirvana" element={<AfterlifeProfile />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

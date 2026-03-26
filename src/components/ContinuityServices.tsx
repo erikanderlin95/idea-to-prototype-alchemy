@@ -3,6 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Mic, Heart, Building2, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 const services = [
   {
@@ -12,6 +13,8 @@ const services = [
     gradient: "from-ai-purple/15 to-ai-blue/10",
     iconBg: "from-ai-purple to-ai-blue",
     borderColor: "border-ai-purple/20 hover:border-ai-purple/40",
+    route: "/speakers",
+    clickable: true,
   },
   {
     icon: Heart,
@@ -20,6 +23,8 @@ const services = [
     gradient: "from-ai-blue/15 to-ai-cyan/10",
     iconBg: "from-ai-blue to-ai-cyan",
     borderColor: "border-ai-blue/20 hover:border-ai-blue/40",
+    route: "/afterlife",
+    clickable: true,
   },
   {
     icon: Building2,
@@ -28,11 +33,14 @@ const services = [
     gradient: "from-ai-cyan/15 to-ai-violet/10",
     iconBg: "from-ai-cyan to-ai-violet",
     borderColor: "border-ai-cyan/20 hover:border-ai-cyan/40",
+    route: "",
+    clickable: false,
   },
 ];
 
 export const ContinuityServices = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   return (
     <section className="py-16 bg-gradient-to-b from-background via-secondary/20 to-background">
@@ -54,7 +62,8 @@ export const ContinuityServices = () => {
           {services.map((service, index) => (
             <Card
               key={index}
-              className={`group bg-gradient-to-br ${service.gradient} border ${service.borderColor} hover:shadow-lg transition-all duration-300 cursor-pointer`}
+              className={`group bg-gradient-to-br ${service.gradient} border ${service.borderColor} hover:shadow-lg transition-all duration-300 ${service.clickable ? 'cursor-pointer' : 'cursor-default'}`}
+              onClick={() => service.clickable && navigate(service.route)}
             >
               <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
                 <div className={`h-14 w-14 rounded-xl bg-gradient-to-br ${service.iconBg} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
@@ -66,10 +75,17 @@ export const ContinuityServices = () => {
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {t(service.descKey)}
                 </p>
-                <Button variant="ghost" size="sm" className="mt-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity" disabled>
-                  {t("continuity.comingSoon")}
-                  <ArrowRight className="ml-1 h-4 w-4" />
-                </Button>
+                {service.clickable ? (
+                  <Button variant="ghost" size="sm" className="mt-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity">
+                    View Providers
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </Button>
+                ) : (
+                  <Button variant="ghost" size="sm" className="mt-2 text-primary opacity-0 group-hover:opacity-100 transition-opacity" disabled>
+                    {t("continuity.comingSoon")}
+                    <ArrowRight className="ml-1 h-4 w-4" />
+                  </Button>
+                )}
               </CardContent>
             </Card>
           ))}
