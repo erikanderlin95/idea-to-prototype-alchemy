@@ -77,7 +77,7 @@ export const ContinuityServices = () => {
                 </p>
                 {service.clickable ? (
                   <Button variant="outline" size="sm" className="mt-2 text-primary border-primary/30 hover:bg-primary hover:text-primary-foreground transition-all">
-                    Explore
+                    {t("continuity.explore")}
                     <ArrowRight className="ml-1 h-4 w-4" />
                   </Button>
                 ) : (

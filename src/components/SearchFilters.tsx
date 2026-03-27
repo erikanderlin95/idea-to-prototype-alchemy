@@ -19,12 +19,12 @@ export const SearchFilters = ({ defaultCategory = "all", onCategoryChange }: Sea
   }, [defaultCategory]);
 
   const categories = [
-    { key: "all", label: "All Clinics" },
-    { key: "gp_specialist", label: "GP & Specialist Care" },
-    { key: "dental", label: "Dental Care" },
-    { key: "therapy_rehab", label: "Therapy & Rehab" },
-    { key: "mental_wellness", label: "Mental Wellness" },
-    { key: "traditional_medicine", label: "Traditional Medicine" },
+    { key: "all", labelKey: "search.category.all" },
+    { key: "gp_specialist", labelKey: "search.category.gp_specialist" },
+    { key: "dental", labelKey: "search.category.dental" },
+    { key: "therapy_rehab", labelKey: "search.category.therapy_rehab" },
+    { key: "mental_wellness", labelKey: "search.category.mental_wellness" },
+    { key: "traditional_medicine", labelKey: "search.category.traditional_medicine" },
   ];
 
   const handleCategoryClick = (key: string) => {
@@ -63,7 +63,7 @@ export const SearchFilters = ({ defaultCategory = "all", onCategoryChange }: Sea
             className="cursor-pointer px-4 py-2 text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => handleCategoryClick(category.key)}
           >
-            {category.label}
+            {t(category.labelKey)}
           </Badge>
         ))}
       </div>

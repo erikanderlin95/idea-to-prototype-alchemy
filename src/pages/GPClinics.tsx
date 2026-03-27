@@ -2,8 +2,10 @@ import { Navbar } from "@/components/Navbar";
 import { MarketplaceSection } from "@/components/MarketplaceSection";
 import { Footer } from "@/components/Footer";
 import { useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const GPClinics = () => {
+  const { t } = useLanguage();
   useEffect(() => {
     document.title = "Book a GP Appointment | ClynicQ";
   }, []);
@@ -14,8 +16,8 @@ const GPClinics = () => {
       <main className="pt-16">
         <MarketplaceSection 
           defaultCategory="gp" 
-          title="Book a GP Appointment"
-          subtitle="Find trusted general practitioners near you with real-time availability and digital queue management."
+          title={t("gpClinics.title")}
+          subtitle={t("gpClinics.subtitle")}
         />
       </main>
       <Footer />

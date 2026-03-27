@@ -2,8 +2,10 @@ import { Navbar } from "@/components/Navbar";
 import { MarketplaceSection } from "@/components/MarketplaceSection";
 import { Footer } from "@/components/Footer";
 import { useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const TCMClinics = () => {
+  const { t } = useLanguage();
   useEffect(() => {
     document.title = "Find Trusted TCM Clinics | ClynicQ";
   }, []);
@@ -14,8 +16,8 @@ const TCMClinics = () => {
       <main className="pt-16">
         <MarketplaceSection 
           defaultCategory="tcm" 
-          title="Find Trusted TCM Clinics"
-          subtitle="Discover experienced Traditional Chinese Medicine practitioners for acupuncture, herbal medicine, and holistic care."
+          title={t("tcmClinics.title")}
+          subtitle={t("tcmClinics.subtitle")}
         />
       </main>
       <Footer />
