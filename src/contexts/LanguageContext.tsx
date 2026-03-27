@@ -1707,7 +1707,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Marketplace CTA
     "marketplace.ctaTitle": "减少前台中断。\n更高效地管理步入患者。",
-    "marketplace.ctaDesc": "让患者在到达前查看排队情况，减少重复的"还要多久"问题——与您现有的工作流程兼容。",
+    "marketplace.ctaDesc": "让患者在到达前查看排队情况，减少重复的「还要多久」问题——与您现有的工作流程兼容。",
     "marketplace.ctaBullet1": "减少重复的排队询问",
     "marketplace.ctaBullet2": "让患者在到达前查看",
     "marketplace.ctaBullet3": "无需更换系统",
