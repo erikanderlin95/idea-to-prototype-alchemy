@@ -677,7 +677,7 @@ export const ClinicCard = ({
         <DialogHeader>
           <DialogTitle className="text-base">Secure Your Spot</DialogTitle>
           <DialogDescription className="text-xs">
-            Enter your name and number to join the queue
+            Join the queue. Arrive within {parseInt(waitTime) || 15} mins when called.
           </DialogDescription>
         </DialogHeader>
 
@@ -709,11 +709,9 @@ export const ClinicCard = ({
           {/* Mandatory Disclaimer */}
           <div className="p-2.5 rounded-md bg-muted/50 border border-border/40 space-y-1.5">
             <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide">Please Note</p>
-            <ul className="space-y-1 text-[11px] text-muted-foreground list-disc pl-3.5">
-              <li>Queue order is managed by clinic staff and may change.</li>
-              <li>Number of patients ahead is provided for visibility only.</li>
-              <li>Urgent cases, walk-ins, and clinic prioritization may affect queue movement.</li>
-              <li>ClynicQ does not guarantee exact waiting time.</li>
+            <ul className="space-y-1.5 text-xs text-foreground font-medium list-disc pl-3.5">
+              <li>Queue order is managed by clinic staff</li>
+              <li>Waiting time and position may change</li>
             </ul>
           </div>
 
