@@ -35,6 +35,7 @@ const ClinicProfile = () => {
   const [mcTiming, setMcTiming] = useState("");
   const [mcConcern, setMcConcern] = useState("");
   const [mcSubmitting, setMcSubmitting] = useState(false);
+  const [expandedAward, setExpandedAward] = useState<number | null>(null);
 
   useEffect(() => {
     fetchClinicData();
