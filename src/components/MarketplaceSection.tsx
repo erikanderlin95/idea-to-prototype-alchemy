@@ -1,5 +1,7 @@
 import { SearchFilters } from "./SearchFilters";
 import { ClinicCard } from "./ClinicCard";
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -12,6 +14,7 @@ interface MarketplaceSectionProps {
 
 export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }: MarketplaceSectionProps) => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [clinics, setClinics] = useState<any[]>([]);
   const [filteredClinics, setFilteredClinics] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -136,6 +139,17 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             {filteredClinics.map((clinic, index) => (
               <ClinicCard key={clinic.id || index} {...clinic} />
             ))}
+          </div>
+
+          {/* Clinic onboarding CTA */}
+          <div className="mt-12 text-center py-8 border-t border-border">
+            <h3 className="text-xl font-bold text-foreground mb-2">Are you a clinic?</h3>
+            <p className="text-muted-foreground text-[15px] mb-4 max-w-md mx-auto">
+              Join ClynicQ to improve patient flow and reduce front desk interruptions.
+            </p>
+            <Button variant="outline" onClick={() => navigate("/for-clinics")}>
+              Apply to Join
+            </Button>
           </div>
         </div>
       </div>
