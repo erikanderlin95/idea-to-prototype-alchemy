@@ -643,10 +643,10 @@ export const ClinicCard = ({
                 )
               )}
             </div>
-            {/* View Details — low-emphasis text link below primary actions */}
+            {/* View Details — secondary action */}
             <Button 
-              variant="ghost"
-              className="w-full text-xs text-muted-foreground hover:text-primary font-medium h-8"
+              variant="outline"
+              className="w-full text-xs text-primary border-primary/20 hover:bg-primary/5 hover:border-primary/40 font-semibold h-8"
               onClick={(e) => { e.stopPropagation(); id && navigate(`/clinic/${id}`); }}
             >
               {t("clinicCard.viewDetails")}
