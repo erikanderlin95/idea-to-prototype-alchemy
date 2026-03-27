@@ -63,6 +63,11 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
           <img src={clynicqLogo} alt="ClynicQ - Queue · Book · Connect" className="h-9 md:h-10 w-auto object-contain" />
         </div>
 
+        {/* For Clinics link - always visible */}
+        <Button variant="outline" size="sm" className="hidden sm:inline-flex text-xs" onClick={() => navigate("/for-clinics")}>
+          For Clinics
+        </Button>
+
         {/* Desktop Navigation removed */}
 
         <div className="flex items-center gap-3 md:gap-5 shrink-0">
@@ -79,6 +84,13 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
                   <SheetTitle>{t("nav.menu")}</SheetTitle>
                 </SheetHeader>
                 <div className="flex flex-col gap-4 mt-6">
+                  <a 
+                    href="/for-clinics" 
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    <span className="text-sm font-medium">For Clinics</span>
+                  </a>
                   <a 
                     href="/" 
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors"
