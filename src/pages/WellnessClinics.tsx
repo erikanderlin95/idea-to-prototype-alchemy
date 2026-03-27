@@ -2,8 +2,10 @@ import { Navbar } from "@/components/Navbar";
 import { MarketplaceSection } from "@/components/MarketplaceSection";
 import { Footer } from "@/components/Footer";
 import { useEffect } from "react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const WellnessClinics = () => {
+  const { t } = useLanguage();
   useEffect(() => {
     document.title = "Wellness & Health Services | ClynicQ";
   }, []);
@@ -14,8 +16,8 @@ const WellnessClinics = () => {
       <main className="pt-16">
         <MarketplaceSection 
           defaultCategory="wellness" 
-          title="Wellness & Health Services"
-          subtitle="Explore wellness centers, spas, and holistic health services to support your wellbeing journey."
+          title={t("wellnessClinics.title")}
+          subtitle={t("wellnessClinics.subtitle")}
         />
       </main>
       <Footer />

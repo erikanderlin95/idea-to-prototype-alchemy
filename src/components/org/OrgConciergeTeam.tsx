@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { User, MessageCircle } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 interface Concierge {
   id: string;
@@ -16,14 +17,16 @@ interface Props {
 }
 
 export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
+  const { t } = useLanguage();
+
   return (
     <section className="py-6 px-4 bg-[#F4F8FB]">
       <div className="max-w-5xl mx-auto space-y-1 text-center">
         <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
-          Care Coordination Team
+          {t("org.careCoordTeam")}
         </h2>
         <p className="text-[17px] text-[#5F6F7E]">
-          Each coordinator guides you from intake to the right care provider.
+          {t("org.careCoordDesc")}
         </p>
 
         <div className="pt-3">
@@ -65,7 +68,7 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
                   <div className="flex items-center gap-2 mt-auto pt-2.5">
                     <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-[hsl(155,45%,93%)] text-[12px] font-semibold text-[hsl(155,50%,30%)]">
                       <span className="w-1.5 h-1.5 rounded-full bg-[hsl(155,55%,45%)]" />
-                      Active
+                      {t("org.active")}
                     </span>
                     <Button
                       size="sm"
@@ -73,14 +76,14 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
                       onClick={onConnect}
                     >
                       <MessageCircle className="h-3 w-3" />
-                      Start
+                      {t("org.start")}
                     </Button>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <p className="text-[#5F6F7E] text-[17px]">No concierges available at this time.</p>
+            <p className="text-[#5F6F7E] text-[17px]">{t("org.noConciergesAvailable")}</p>
           )}
         </div>
       </div>

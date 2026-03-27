@@ -1,23 +1,26 @@
 import { ClipboardList, UserCheck, MessageCircle } from "lucide-react";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 export const OrgCareJourney = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="py-8 px-4">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
           <div className="space-y-3">
             <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
-              Patient Intake Flow
+              {t("org.intakeFlowTitle")}
             </h2>
 
             <div className="space-y-2.5">
-              <JourneyStep icon={<ClipboardList className="h-4 w-4" />} text="Submit your condition or concern" />
-              <JourneyStep icon={<UserCheck className="h-4 w-4" />} text="Get matched to the right provider" />
-              <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text="Continue instantly via WhatsApp" />
+              <JourneyStep icon={<ClipboardList className="h-4 w-4" />} text={t("org.intakeStep1")} />
+              <JourneyStep icon={<UserCheck className="h-4 w-4" />} text={t("org.intakeStep2")} />
+              <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text={t("org.intakeStep3")} />
             </div>
 
             <p className="mt-4 text-[15px] leading-relaxed text-[#6B7D8E]">
-              No app download needed. You pay the clinic directly — no additional fees.
+              {t("org.intakeNote")}
             </p>
           </div>
 
@@ -29,14 +32,14 @@ export const OrgCareJourney = () => {
                 <div className="w-2 h-2 rounded-full bg-[hsl(155,45%,55%)]" />
                 <span className="text-[14px] text-[#5F6F7E] ml-2 font-mono">care-intake</span>
               </div>
-              <span className="text-[12px] text-[#5F6F7E]/60 italic">Example intake preview</span>
+              <span className="text-[12px] text-[#5F6F7E]/60 italic">{t("org.exampleIntakePreview")}</span>
             </div>
 
             <div className="space-y-2 opacity-80">
-              <FakeField label="Condition / Concern" value="Chronic back pain management" />
-              <FakeField label="Preferred Location" value="Central / East" />
-              <FakeField label="Urgency" value="Soon" />
-              <FakeField label="Contact" value="+65 ●●●● ●●48" />
+              <FakeField label={t("org.fakeField.condition")} value={t("org.fakeField.conditionVal")} />
+              <FakeField label={t("org.fakeField.location")} value={t("org.fakeField.locationVal")} />
+              <FakeField label={t("org.fakeField.urgency")} value={t("org.fakeField.urgencyVal")} />
+              <FakeField label={t("org.fakeField.contact")} value="+65 ●●●● ●●48" />
             </div>
           </div>
         </div>
