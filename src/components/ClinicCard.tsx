@@ -609,7 +609,8 @@ export const ClinicCard = ({
             {/* Buttons — anchored bottom */}
             <div className="space-y-1.5">
             <div className={`flex gap-1.5 ${isNmgAffiliated && isManagedCareType(type) ? 'flex-col' : ''}`}>
-              {hasDigitalQueue ? (
+              {/* Join Queue button — shown when clinic has digital queue */}
+              {hasDigitalQueue && (
                 <Button 
                    className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen || isJoining}
@@ -618,7 +619,9 @@ export const ClinicCard = ({
                   <Users className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
                   {isJoining ? t("clinicCard.joining") : t("clinicCard.joinQueue")}
                 </Button>
-              ) : isNmgAffiliated && isManagedCareType(type) ? (
+              )}
+              {/* Book button — shown when clinic does NOT have digital queue (booking only), OR when clinic has both */}
+              {!hasDigitalQueue && isNmgAffiliated && isManagedCareType(type) ? (
                 <Button 
                   className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen}
@@ -629,7 +632,11 @@ export const ClinicCard = ({
                 </Button>
               ) : (
                 <Button 
-                  className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform" 
+                  variant={hasDigitalQueue ? "outline" : "default"}
+                  className={hasDigitalQueue 
+                    ? "flex-1 font-bold text-sm border border-primary/30 hover:bg-primary/20 hover:border-primary h-10 hover:scale-[1.02] transition-transform"
+                    : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform"
+                  }
                   disabled={!isOpen}
                   onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
                 >
@@ -637,15 +644,15 @@ export const ClinicCard = ({
                   {isManagedCareType(type) ? "Request" : "Book"}
                 </Button>
               )}
-              <Button 
-                variant="outline"
-                className={`font-bold text-sm hover:bg-primary/20 hover:border-primary border border-primary/30 h-10 hover:scale-[1.02] transition-transform ${isNmgAffiliated && isManagedCareType(type) ? 'w-full' : 'flex-1'}`}
-                disabled={!isOpen}
-                onClick={(e) => { e.stopPropagation(); id && navigate(`/clinic/${id}`); }}
-              >
-                {t("clinicCard.viewDetails")}
-              </Button>
             </div>
+            {/* View Details — low-emphasis text link below primary actions */}
+            <Button 
+              variant="ghost"
+              className="w-full text-xs text-muted-foreground hover:text-primary font-medium h-8"
+              onClick={(e) => { e.stopPropagation(); id && navigate(`/clinic/${id}`); }}
+            >
+              {t("clinicCard.viewDetails")}
+            </Button>
             {isNmgAffiliated && !isManagedCareType(type) && (
               <Button
                 variant="outline"
