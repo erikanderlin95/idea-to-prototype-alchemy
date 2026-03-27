@@ -282,28 +282,51 @@ const ClinicProfile = () => {
               )}
             </TabsContent>
 
-            <TabsContent value="awards" className="space-y-3 sm:space-y-6">
+             <TabsContent value="awards" className="space-y-3 sm:space-y-6">
               <Card className="p-4 sm:p-8">
                 <h3 className="text-lg sm:text-2xl font-bold mb-3 sm:mb-6">{t('clinicProfile.awardsRecognition')}</h3>
-                {clinic.awards && clinic.awards.length > 0 ? (
-                  <div className="space-y-3 sm:space-y-6">
-                    {clinic.awards.map((award: any, index: number) => (
-                      <div key={index} className="flex items-start gap-2.5 sm:gap-4 p-3 sm:p-4 bg-gradient-to-r from-amber-50 to-amber-100 dark:from-amber-950/20 dark:to-amber-900/20 rounded-lg border border-amber-200 dark:border-amber-800">
-                        <Star className="h-5 w-5 sm:h-8 sm:w-8 text-amber-500 mt-0.5 flex-shrink-0" />
-                        <div>
-                          <h4 className="text-sm sm:text-lg font-bold text-foreground">{award.title}</h4>
-                          <p className="text-xs sm:text-base text-foreground/80 mt-0.5">{award.description}</p>
-                          {award.year && <p className="text-xs text-muted-foreground mt-1">{t('clinicProfile.awardedIn')} {award.year}</p>}
+                {(() => {
+                  const DEMO_AWARDS = [
+                    { title: "Centre of Excellence – Cardiac Care", description: "Recognised by the National Heart Association for advanced interventional cardiology services.", year: "2024", certificateUrl: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80" },
+                    { title: "Top Specialist Clinic Award", description: "Awarded by Singapore Medical Journal for excellence in specialist outpatient care.", year: "2023", certificateUrl: "https://images.unsplash.com/photo-1578269174936-2709b6aeb913?w=800&q=80" },
+                    { title: "Patient Safety Excellence Award", description: "Achieved zero surgical complication rate for three consecutive years.", year: "2022", certificateUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&q=80" },
+                  ];
+                  const displayAwards = clinic.awards && clinic.awards.length > 0 ? clinic.awards : DEMO_AWARDS;
+                  return (
+                    <div className="space-y-3 sm:space-y-4">
+                      {displayAwards.map((award: any, index: number) => (
+                        <div key={index} className="rounded-lg border border-amber-200 dark:border-amber-800 overflow-hidden">
+                          <div className="flex items-start gap-2.5 sm:gap-4 p-3 sm:p-4 bg-gradient-to-r from-amber-50 to-amber-100 dark:from-amber-950/20 dark:to-amber-900/20">
+                            <Star className="h-5 w-5 sm:h-8 sm:w-8 text-amber-500 mt-0.5 flex-shrink-0" />
+                            <div className="flex-1 min-w-0">
+                              <h4 className="text-sm sm:text-lg font-bold text-foreground">{award.title}</h4>
+                              <p className="text-xs sm:text-base text-foreground/80 mt-0.5">{award.description}</p>
+                              {award.year && <p className="text-xs text-muted-foreground mt-1">{t('clinicProfile.awardedIn')} {award.year}</p>}
+                            </div>
+                            <button
+                              onClick={() => setExpandedAward(expandedAward === index ? null : index)}
+                              className="flex items-center gap-1 text-xs text-primary hover:text-primary/80 transition-colors flex-shrink-0 mt-1 p-1.5 rounded-md hover:bg-primary/10"
+                              title="View certificate"
+                            >
+                              <FileImage className="h-5 w-5 sm:h-6 sm:w-6" />
+                              {expandedAward === index ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
+                            </button>
+                          </div>
+                          {expandedAward === index && (
+                            <div className="p-3 sm:p-4 bg-background border-t border-amber-200 dark:border-amber-800">
+                              <img
+                                src={award.certificateUrl || "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&q=80"}
+                                alt={`${award.title} certificate`}
+                                className="w-full max-h-[400px] object-contain rounded-md border"
+                              />
+                              <p className="text-xs text-muted-foreground mt-2 text-center">{award.title} — {t('clinicProfile.awardedIn')} {award.year}</p>
+                            </div>
+                          )}
                         </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-6 sm:py-12">
-                    <Star className="h-10 w-10 sm:h-16 sm:w-16 text-muted mx-auto mb-3" />
-                    <p className="text-sm sm:text-base text-muted-foreground">{t('clinicProfile.awardsComingSoon')}</p>
-                  </div>
-                )}
+                      ))}
+                    </div>
+                  );
+                })()}
               </Card>
             </TabsContent>
 
