@@ -40,7 +40,6 @@ interface ClinicCardProps {
   isOpen: boolean;
   hasDigitalQueue?: boolean;
   isNmgAffiliated?: boolean;
-  hasBooking?: boolean;
 }
 
 export const ClinicCard = ({
@@ -54,7 +53,6 @@ export const ClinicCard = ({
   isOpen,
   hasDigitalQueue = true,
   isNmgAffiliated = false,
-  hasBooking = false,
 }: ClinicCardProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
