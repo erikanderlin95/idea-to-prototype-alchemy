@@ -142,16 +142,25 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           </div>
 
           {/* Clinic onboarding CTA */}
-          <div className="mt-12 text-center py-8 border-t border-border">
-            <h3 className="text-xl font-bold text-foreground mb-2">Reduce front desk interruptions and manage walk-ins better</h3>
-            <p className="text-muted-foreground text-[15px] mb-4 max-w-lg mx-auto">
-              Let patients check queue load before arriving, reduce repeated "how long" questions, and improve patient flow — without changing your current workflow.
+          <div className="mt-16 text-center py-12 px-6 rounded-2xl bg-gradient-to-br from-primary/5 via-accent/30 to-primary/10 border border-primary/10">
+            <h3 className="text-xl sm:text-2xl font-extrabold text-foreground mb-3 leading-snug max-w-xl mx-auto">
+              Reduce front desk interruptions.<br />Manage walk-ins more efficiently.
+            </h3>
+            <p className="text-muted-foreground text-[15px] leading-relaxed mb-6 max-w-lg mx-auto">
+              Let patients check queue load before arriving and reduce repeated "how long" questions — works alongside your existing workflow.
             </p>
-            <p className="text-xs text-muted-foreground mb-3">Suitable for clinics with regular walk-ins or queue congestion.</p>
-            <Button variant="outline" onClick={() => navigate("/for-clinics")}>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-8 text-sm text-foreground/80">
+              <span className="flex items-center gap-1.5"><span className="text-primary font-bold">✓</span> Reduce repeated queue questions</span>
+              <span className="flex items-center gap-1.5"><span className="text-primary font-bold">✓</span> Let patients check before arriving</span>
+              <span className="flex items-center gap-1.5"><span className="text-primary font-bold">✓</span> No system replacement required</span>
+            </div>
+
+            <p className="text-xs text-muted-foreground mb-4">Suitable for clinics with regular walk-ins or queue congestion.</p>
+            <Button size="lg" className="text-base px-8" onClick={() => navigate("/for-clinics")}>
               Submit Clinic Request
             </Button>
-            <p className="text-xs text-muted-foreground mt-3">We review each request to ensure fit.</p>
+            <p className="text-xs text-muted-foreground mt-4">We review each request to ensure fit.</p>
           </div>
         </div>
       </div>
