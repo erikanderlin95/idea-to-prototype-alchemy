@@ -620,8 +620,8 @@ export const ClinicCard = ({
                   {isJoining ? t("clinicCard.joining") : t("clinicCard.joinQueue")}
                 </Button>
               )}
-              {/* Book button — shown only when clinic does NOT have digital queue (booking only) */}
-              {!hasDigitalQueue && (
+              {/* Book button — shown when clinic does NOT have digital queue, OR specifically for Harmony TCM Centre */}
+              {(!hasDigitalQueue || name === "Harmony TCM Centre") && (
                 isNmgAffiliated && isManagedCareType(type) ? (
                   <Button 
                     className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform" 
@@ -633,7 +633,11 @@ export const ClinicCard = ({
                   </Button>
                 ) : (
                   <Button 
-                    className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform"
+                    variant={hasDigitalQueue ? "outline" : "default"}
+                    className={hasDigitalQueue 
+                      ? "flex-1 font-bold text-sm border border-primary/30 hover:bg-primary/20 hover:border-primary h-10 hover:scale-[1.02] transition-transform"
+                      : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform"
+                    }
                     disabled={!isOpen}
                     onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
                   >
