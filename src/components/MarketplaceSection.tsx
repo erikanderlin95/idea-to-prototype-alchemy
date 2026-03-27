@@ -154,21 +154,21 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             <h3 className="text-xl sm:text-2xl font-extrabold text-foreground mb-3 leading-snug max-w-xl mx-auto">
               Reduce front desk interruptions.<br />Manage walk-ins more efficiently.
             </h3>
-            <p className="text-muted-foreground text-[15px] leading-relaxed mb-6 max-w-lg mx-auto">
+            <p className="text-foreground/70 text-base leading-relaxed mb-6 max-w-lg mx-auto">
               Let patients check queue load before arriving and reduce repeated "how long" questions — works alongside your existing workflow.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-8 text-sm text-foreground/80">
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-8 text-[15px] text-foreground/90">
               <span className="flex items-center gap-1.5"><span className="text-primary font-bold">✓</span> Reduce repeated queue questions</span>
               <span className="flex items-center gap-1.5"><span className="text-primary font-bold">✓</span> Let patients check before arriving</span>
               <span className="flex items-center gap-1.5"><span className="text-primary font-bold">✓</span> No system replacement required</span>
             </div>
 
-            <p className="text-xs text-muted-foreground mb-4">Suitable for clinics with regular walk-ins or queue congestion.</p>
+            <p className="text-sm text-foreground/60 mb-4">Suitable for clinics with regular walk-ins or queue congestion.</p>
             <Button size="lg" className="text-base px-8" onClick={() => navigate("/for-clinics")}>
               Submit Clinic Request
             </Button>
-            <p className="text-xs text-muted-foreground mt-4">We review each request to ensure fit.</p>
+            <p className="text-sm text-foreground/60 mt-4">We review each request to ensure fit.</p>
           </div>
         </div>
       </div>
