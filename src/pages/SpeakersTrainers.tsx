@@ -2,18 +2,21 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import SpeakerCard from "@/components/SpeakerCard";
 import { Mic, Sparkles } from "lucide-react";
-
-const speakers = [
-  {
-    slug: "ouch-pte-ltd",
-    name: "Ouch Pte Ltd",
-    subtitle: "Healthcare Speaker & Trainer",
-    speakerName: "Hui Fang",
-    description: "Corporate health talks, wellness workshops, and healthcare training programmes.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const SpeakersTrainers = () => {
+  const { t } = useLanguage();
+
+  const speakers = [
+    {
+      slug: "ouch-pte-ltd",
+      name: "Ouch Pte Ltd",
+      subtitle: t("speakerProfile.badge"),
+      speakerName: "Hui Fang",
+      description: t("speakerProfile.heroDesc"),
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -22,14 +25,14 @@ const SpeakersTrainers = () => {
         <div className="max-w-6xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FDF2E0] text-[#D4860A] mb-6">
             <Mic className="h-4 w-4" />
-            <span className="text-sm font-medium">Healthcare Speakers & Trainers</span>
+            <span className="text-sm font-medium">{t("speakers.badge")}</span>
           </div>
 
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Healthcare Speakers & Trainers
+            {t("speakers.title")}
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Connect with experienced healthcare speakers and trainers for corporate wellness, community health, and professional development.
+            {t("speakers.desc")}
           </p>
         </div>
       </section>
@@ -42,8 +45,8 @@ const SpeakersTrainers = () => {
                 <Mic className="h-5 w-5 text-[#D4860A]" />
               </div>
               <div>
-                <p className="font-medium text-foreground">Expert Speakers</p>
-                <p className="text-sm text-muted-foreground">Industry-experienced professionals</p>
+                <p className="font-medium text-foreground">{t("speakers.expertSpeakers")}</p>
+                <p className="text-sm text-muted-foreground">{t("speakers.expertSpeakersDesc")}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-4 rounded-lg bg-card/50">
@@ -51,8 +54,8 @@ const SpeakersTrainers = () => {
                 <Sparkles className="h-5 w-5 text-[#D4860A]" />
               </div>
               <div>
-                <p className="font-medium text-foreground">Custom Programmes</p>
-                <p className="text-sm text-muted-foreground">Tailored to your organisation</p>
+                <p className="font-medium text-foreground">{t("speakers.customProgrammes")}</p>
+                <p className="text-sm text-muted-foreground">{t("speakers.customProgrammesDesc")}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-4 rounded-lg bg-card/50">
@@ -60,8 +63,8 @@ const SpeakersTrainers = () => {
                 <Mic className="h-5 w-5 text-[#D4860A]" />
               </div>
               <div>
-                <p className="font-medium text-foreground">Corporate & Community</p>
-                <p className="text-sm text-muted-foreground">For workplaces and communities</p>
+                <p className="font-medium text-foreground">{t("speakers.corporateCommunity")}</p>
+                <p className="text-sm text-muted-foreground">{t("speakers.corporateCommunityDesc")}</p>
               </div>
             </div>
           </div>

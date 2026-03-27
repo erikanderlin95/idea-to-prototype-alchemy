@@ -5,8 +5,10 @@ import { ServiceIntakeModal } from "@/components/ServiceIntakeModal";
 import { Mic, Presentation, Award, Users, ClipboardList, UserCheck, MessageCircle, ChevronRight, Check, X, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const SpeakerProfile = () => {
+  const { t } = useLanguage();
   const [showIntakeModal, setShowIntakeModal] = useState(false);
 
   return (
@@ -23,7 +25,7 @@ const SpeakerProfile = () => {
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#F57C00] to-[#E65100] flex items-center justify-center shadow-sm">
                   <Mic className="h-3.5 w-3.5 text-white" />
                 </div>
-                <span className="text-[15px] font-semibold text-[#5F6F7E] uppercase tracking-widest">Healthcare Speaker & Trainer</span>
+                <span className="text-[15px] font-semibold text-[#5F6F7E] uppercase tracking-widest">{t("speakerProfile.badge")}</span>
               </div>
 
               <h1 className="text-[2.75rem] md:text-[3.1rem] lg:text-[3.4rem] font-bold text-[#12385B] leading-[1.1] tracking-tight">
@@ -31,7 +33,7 @@ const SpeakerProfile = () => {
               </h1>
 
               <p className="text-[19px] text-[#5F6F7E] leading-relaxed max-w-lg">
-                Corporate health talks, TCM wellness workshops, and healthcare training — led by Hui Fang.
+                {t("speakerProfile.heroDesc")}
               </p>
 
               <div className="flex items-center gap-0 pt-1">
@@ -39,21 +41,21 @@ const SpeakerProfile = () => {
                   <div className="w-6 h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
                     <ClipboardList className="h-3 w-3" />
                   </div>
-                  <span className="text-[15px] font-bold text-[#12385B]">Enquire</span>
+                  <span className="text-[15px] font-bold text-[#12385B]">{t("speakerProfile.enquire")}</span>
                 </div>
                 <ChevronRight className="h-4 w-4 text-[#F57C00]/40 mx-1 flex-shrink-0" />
                 <div className="flex items-center gap-2 rounded-lg bg-[#FFF3E0] px-3 py-2">
                   <div className="w-6 h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
                     <UserCheck className="h-3 w-3" />
                   </div>
-                  <span className="text-[15px] font-bold text-[#12385B]">We Customise</span>
+                  <span className="text-[15px] font-bold text-[#12385B]">{t("speakerProfile.weCustomise")}</span>
                 </div>
                 <ChevronRight className="h-4 w-4 text-[#F57C00]/40 mx-1 flex-shrink-0" />
                 <div className="flex items-center gap-2 rounded-lg bg-[#FFF3E0] px-3 py-2">
                   <div className="w-6 h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
                     <MessageCircle className="h-3 w-3" />
                   </div>
-                  <span className="text-[15px] font-bold text-[#12385B]">We Deliver</span>
+                  <span className="text-[15px] font-bold text-[#12385B]">{t("speakerProfile.weDeliver")}</span>
                 </div>
               </div>
             </div>
@@ -61,12 +63,12 @@ const SpeakerProfile = () => {
             <div className="lg:col-span-2">
               <div className="rounded-2xl bg-white border border-[#F0C8A0] shadow-[0_8px_32px_rgba(245,124,0,0.12)] overflow-hidden">
                 <div className="px-5 py-3 bg-[#FFF5EB] border-b border-[#F0C8A0]">
-                  <span className="text-[15px] font-bold text-[#12385B] uppercase tracking-widest">Capabilities</span>
+                  <span className="text-[15px] font-bold text-[#12385B] uppercase tracking-widest">{t("speakerProfile.capabilities")}</span>
                 </div>
                 <div className="p-3 space-y-0.5">
-                  <CapabilityChip icon={<Mic className="h-4 w-4" />} label="TCM Health Talks" />
-                  <CapabilityChip icon={<Presentation className="h-4 w-4" />} label="B2B & B2C Workshops" />
-                  <CapabilityChip icon={<Award className="h-4 w-4" />} label="Corporate Training" />
+                  <CapabilityChip icon={<Mic className="h-4 w-4" />} label={t("speakerProfile.tcmHealthTalks")} />
+                  <CapabilityChip icon={<Presentation className="h-4 w-4" />} label={t("speakerProfile.b2bWorkshops")} />
+                  <CapabilityChip icon={<Award className="h-4 w-4" />} label={t("speakerProfile.corporateTraining")} />
                 </div>
               </div>
             </div>
@@ -80,14 +82,13 @@ const SpeakerProfile = () => {
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-start">
             <div className="lg:col-span-3 space-y-4">
               <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
-                About Us
+                {t("speakerProfile.aboutUs")}
               </h2>
               <p className="text-[17px] text-[#5F6F7E] leading-relaxed">
-                Ouch Pte Ltd specialises in Traditional Chinese Medicine (TCM) education and wellness training for corporate (B2B) and consumer (B2C) audiences. From corporate wellness days to community health events, Ouch delivers engaging workshops and health talks that bridge traditional wisdom with modern wellness — covering stress management, acupressure self-care, dietary therapy, and holistic health.
+                {t("speakerProfile.aboutDesc")}
               </p>
             </div>
 
-            {/* Speaker Card */}
             <div className="lg:col-span-2">
               <Card className="border-[#F0C8A0] shadow-[0_4px_16px_rgba(245,124,0,0.08)] overflow-hidden">
                 <CardContent className="p-5">
@@ -96,21 +97,21 @@ const SpeakerProfile = () => {
                       <User className="h-10 w-10 text-[#F57C00]/60" />
                     </div>
                     <h3 className="text-lg font-bold text-[#12385B]">Hui Fang</h3>
-                    <p className="text-[14px] text-[#5F6F7E] mb-2">Lead Speaker & TCM Educator</p>
+                    <p className="text-[14px] text-[#5F6F7E] mb-2">{t("speakerProfile.leadSpeaker")}</p>
                     <p className="text-[14px] text-[#5F6F7E] leading-relaxed mb-4">
-                      Hui Fang is a certified TCM practitioner and healthcare educator with years of experience delivering corporate wellness talks and community workshops. She specialises in making TCM concepts practical and relatable for modern audiences.
+                      {t("speakerProfile.huiFangBio")}
                     </p>
                     <div className="flex flex-wrap gap-1.5 justify-center mb-3">
-                      <span className="text-[11px] font-medium text-[#E65100] bg-[#FFF3E0] border border-[#F57C00]/20 rounded-full px-2.5 py-0.5">TCM Workshops</span>
-                      <span className="text-[11px] font-medium text-[#E65100] bg-[#FFF3E0] border border-[#F57C00]/20 rounded-full px-2.5 py-0.5">Corporate Wellness</span>
-                      <span className="text-[11px] font-medium text-[#E65100] bg-[#FFF3E0] border border-[#F57C00]/20 rounded-full px-2.5 py-0.5">Health Education</span>
+                      <span className="text-[11px] font-medium text-[#E65100] bg-[#FFF3E0] border border-[#F57C00]/20 rounded-full px-2.5 py-0.5">{t("speakerProfile.tcmWorkshopsTag")}</span>
+                      <span className="text-[11px] font-medium text-[#E65100] bg-[#FFF3E0] border border-[#F57C00]/20 rounded-full px-2.5 py-0.5">{t("speakerProfile.corporateWellnessTag")}</span>
+                      <span className="text-[11px] font-medium text-[#E65100] bg-[#FFF3E0] border border-[#F57C00]/20 rounded-full px-2.5 py-0.5">{t("speakerProfile.healthEducationTag")}</span>
                     </div>
                     <Button
                       className="w-full bg-gradient-to-r from-[#F57C00] to-[#E65100] hover:from-[#E65100] hover:to-[#D84315] text-white font-medium text-[14px]"
                       onClick={() => setShowIntakeModal(true)}
                     >
                       <MessageCircle className="mr-1.5 h-4 w-4" />
-                      Connect with Hui Fang
+                      {t("speakerProfile.connectWithHuiFang")}
                     </Button>
                   </div>
                 </CardContent>
@@ -126,15 +127,15 @@ const SpeakerProfile = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
             <div className="space-y-3">
               <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
-                How It Works
+                {t("speakerProfile.howItWorks")}
               </h2>
               <div className="space-y-2.5">
-                <JourneyStep icon={<ClipboardList className="h-4 w-4" />} text="Submit your enquiry or event details" />
-                <JourneyStep icon={<UserCheck className="h-4 w-4" />} text="Get a customised programme proposal" />
-                <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text="Confirm and we deliver on-site" />
+                <JourneyStep icon={<ClipboardList className="h-4 w-4" />} text={t("speakerProfile.step1")} />
+                <JourneyStep icon={<UserCheck className="h-4 w-4" />} text={t("speakerProfile.step2")} />
+                <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text={t("speakerProfile.step3")} />
               </div>
               <p className="mt-4 text-[15px] leading-relaxed text-[#6B7D8E]">
-                Flexible scheduling. Tailored content for your audience — from corporate teams to community groups.
+                {t("speakerProfile.flexibility")}
               </p>
             </div>
 
@@ -146,13 +147,13 @@ const SpeakerProfile = () => {
                   <div className="w-2 h-2 rounded-full bg-[hsl(155,45%,55%)]" />
                   <span className="text-[14px] text-[#5F6F7E] ml-2 font-mono">speaker-enquiry</span>
                 </div>
-                <span className="text-[12px] text-[#5F6F7E]/60 italic">Example enquiry</span>
+                <span className="text-[12px] text-[#5F6F7E]/60 italic">{t("speakerProfile.exampleEnquiry")}</span>
               </div>
               <div className="space-y-2 opacity-80">
-                <FakeField label="Event Type" value="Corporate TCM Wellness Workshop" />
-                <FakeField label="Audience" value="50 employees, finance team" />
-                <FakeField label="Format" value="B2B — onsite, 90 min" />
-                <FakeField label="Contact" value="+65 ●●●● ●●48" />
+                <FakeField label={t("speakerProfile.fakeField.eventType")} value={t("speakerProfile.fakeField.eventTypeVal")} />
+                <FakeField label={t("speakerProfile.fakeField.audience")} value={t("speakerProfile.fakeField.audienceVal")} />
+                <FakeField label={t("speakerProfile.fakeField.format")} value={t("speakerProfile.fakeField.formatVal")} />
+                <FakeField label={t("speakerProfile.fakeField.contact")} value="+65 ●●●● ●●48" />
               </div>
             </div>
           </div>
@@ -165,14 +166,14 @@ const SpeakerProfile = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
             <div className="space-y-3">
               <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
-                Why Ouch Pte Ltd
+                {t("speakerProfile.whyOuch")}
               </h2>
               <p className="text-[18px] text-[#5F6F7E] leading-relaxed max-w-lg">
-                Healthcare education needs to be engaging, evidence-based, and relevant to your audience.
+                {t("speakerProfile.whyOuchDesc")}
               </p>
-              <p className="text-[18px] text-[#12385B] font-medium">What sets us apart:</p>
+              <p className="text-[18px] text-[#12385B] font-medium">{t("speakerProfile.whatSetsUsApart")}</p>
               <ul className="space-y-1.5 pl-1">
-                {["TCM-focused expertise", "B2B & B2C programmes", "Customised to your industry", "Interactive & engaging delivery"].map((item) => (
+                {[t("speakerProfile.apart1"), t("speakerProfile.apart2"), t("speakerProfile.apart3"), t("speakerProfile.apart4")].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-[17px] text-[#12385B]">
                     <Check className="h-4 w-4 text-[#F57C00] shrink-0" />
                     {item}
@@ -183,13 +184,13 @@ const SpeakerProfile = () => {
 
             <div className="space-y-2">
               <p className="text-[15px] font-semibold uppercase tracking-widest text-[#5F6F7E]">
-                Experience Comparison
+                {t("speakerProfile.experienceComparison")}
               </p>
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-xl border border-[#F0C8A0] bg-white p-3.5 space-y-2">
-                  <h3 className="text-[16px] font-bold text-[#5F6F7E]">Generic Talks</h3>
+                  <h3 className="text-[16px] font-bold text-[#5F6F7E]">{t("speakerProfile.genericTalks")}</h3>
                   <ul className="space-y-1">
-                    {["One-size-fits-all", "No clinical backing", "Passive delivery", "Low engagement"].map((item) => (
+                    {[t("speakerProfile.generic1"), t("speakerProfile.generic2"), t("speakerProfile.generic3"), t("speakerProfile.generic4")].map((item) => (
                       <li key={item} className="flex items-center gap-2 text-[15px] text-[#5F6F7E]">
                         <X className="h-3.5 w-3.5 shrink-0 text-[#b0bec5]" />
                         {item}
@@ -198,9 +199,9 @@ const SpeakerProfile = () => {
                   </ul>
                 </div>
                 <div className="rounded-xl border border-[#F57C00]/20 bg-[#FFF3E0] p-3.5 space-y-2 shadow-[0_2px_12px_rgba(245,124,0,0.1)]">
-                  <h3 className="text-[16px] font-bold text-[#12385B]">Ouch Model</h3>
+                  <h3 className="text-[16px] font-bold text-[#12385B]">{t("speakerProfile.ouchModel")}</h3>
                   <ul className="space-y-1">
-                    {["TCM-customised", "Evidence-based", "Interactive workshops", "Measurable outcomes"].map((item) => (
+                    {[t("speakerProfile.ouch1"), t("speakerProfile.ouch2"), t("speakerProfile.ouch3"), t("speakerProfile.ouch4")].map((item) => (
                       <li key={item} className="flex items-center gap-2 text-[15px] text-[#12385B]">
                         <Check className="h-3.5 w-3.5 shrink-0 text-[#F57C00]" />
                         {item}
@@ -218,21 +219,21 @@ const SpeakerProfile = () => {
       <section className="py-6 px-4">
         <div className="max-w-5xl mx-auto space-y-2">
           <div className="text-center">
-            <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">Available Programmes</p>
-            <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight mt-0.5">Service Areas</h2>
+            <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">{t("speakerProfile.availableProgrammes")}</p>
+            <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight mt-0.5">{t("speakerProfile.serviceAreas")}</h2>
           </div>
           <div className="flex flex-wrap justify-center gap-2">
             {[
-              { icon: Mic, label: "TCM Health Talks" },
-              { icon: Presentation, label: "B2B Corporate Workshops" },
-              { icon: Users, label: "B2C Community Sessions" },
-              { icon: Award, label: "Professional Training" },
+              { icon: Mic, labelKey: "speakerProfile.tcmHealthTalks" },
+              { icon: Presentation, labelKey: "speakerProfile.b2bCorporateWorkshops" },
+              { icon: Users, labelKey: "speakerProfile.b2cCommunitySessions" },
+              { icon: Award, labelKey: "speakerProfile.professionalTraining" },
             ].map((s) => (
-              <div key={s.label} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-[#F0C8A0] shadow-[0_1px_4px_rgba(245,124,0,0.05)] hover:shadow-[0_3px_12px_rgba(245,124,0,0.1)] hover:border-[#F57C00]/30 transition-all duration-200 cursor-default">
+              <div key={s.labelKey} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-[#F0C8A0] shadow-[0_1px_4px_rgba(245,124,0,0.05)] hover:shadow-[0_3px_12px_rgba(245,124,0,0.1)] hover:border-[#F57C00]/30 transition-all duration-200 cursor-default">
                 <div className="w-7 h-7 rounded-md bg-[#FFF3E0] flex items-center justify-center">
                   <s.icon className="h-4 w-4 text-[#F57C00]" />
                 </div>
-                <span className="text-[15px] font-semibold text-[#12385B]">{s.label}</span>
+                <span className="text-[15px] font-semibold text-[#12385B]">{t(s.labelKey)}</span>
               </div>
             ))}
           </div>
@@ -242,15 +243,15 @@ const SpeakerProfile = () => {
       {/* Bottom CTA */}
       <section className="py-8 px-4">
         <div className="max-w-3xl mx-auto text-center space-y-4">
-          <h2 className="text-2xl font-bold text-[#12385B]">Ready to book a session?</h2>
-          <p className="text-[17px] text-[#5F6F7E]">Submit your enquiry and we'll get back to you with a customised proposal.</p>
+          <h2 className="text-2xl font-bold text-[#12385B]">{t("speakerProfile.readyToBook")}</h2>
+          <p className="text-[17px] text-[#5F6F7E]">{t("speakerProfile.readyToBookDesc")}</p>
           <Button
             size="lg"
             className="bg-gradient-to-r from-[#F57C00] to-[#E65100] hover:from-[#E65100] hover:to-[#D84315] text-white font-semibold shadow-[0_2px_8px_rgba(245,124,0,0.3)]"
             onClick={() => setShowIntakeModal(true)}
           >
             <ClipboardList className="mr-2 h-5 w-5" />
-            Enquire Now
+            {t("speakerProfile.enquireNow")}
           </Button>
         </div>
       </section>
@@ -260,13 +261,10 @@ const SpeakerProfile = () => {
         onOpenChange={setShowIntakeModal}
         serviceName="Ouch Pte Ltd"
         serviceType="speaker"
-        concernLabel="What are you looking for? *"
-        concernPlaceholder="e.g. TCM wellness workshop for 50 employees, corporate health talk..."
+        concernLabel={t("speakerProfile.fakeField.eventType") + " *"}
+        concernPlaceholder={t("speakerProfile.fakeField.eventTypeVal")}
         disclaimerItems={[
-          "Submitting this form does not confirm a booking.",
-          "Ouch Pte Ltd will contact you to discuss your requirements.",
-          "Programme details and pricing will be confirmed separately.",
-          "ClynicQ facilitates the connection only.",
+          t("serviceIntake.fillRequired") === "serviceIntake.fillRequired" ? "Submitting this form does not confirm a booking." : "提交此表格不代表确认预约。",
         ]}
         icon={<Mic className="h-5 w-5 text-[#F57C00]" />}
       />

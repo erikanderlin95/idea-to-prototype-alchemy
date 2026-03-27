@@ -5,30 +5,32 @@ import { ServiceIntakeModal } from "@/components/ServiceIntakeModal";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Heart, Flower2, Shield, Users, ClipboardList, UserCheck, MessageCircle, ChevronRight, Check, X, User, ArrowRight } from "lucide-react";
-
-const agents = [
-  {
-    name: "Sarah Lim",
-    title: "Senior Afterlife Consultant",
-    bio: "Over 10 years of experience guiding families through memorial planning with compassion and professionalism.",
-    tags: ["Memorial Planning", "Pre-Need Arrangements", "Family Support"],
-  },
-  {
-    name: "David Tan",
-    title: "Bereavement Support Advisor",
-    bio: "Specialises in bereavement counselling and helping families navigate end-of-life decisions with care and sensitivity.",
-    tags: ["Grief Counselling", "Cultural Services", "Estate Guidance"],
-  },
-  {
-    name: "Michelle Wong",
-    title: "Pre-Planning Specialist",
-    bio: "Helps individuals and families with advance planning, ensuring wishes are documented and arrangements are prepared.",
-    tags: ["Advance Planning", "Documentation", "Financial Planning"],
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const AfterlifeProfile = () => {
+  const { t } = useLanguage();
   const [showIntakeModal, setShowIntakeModal] = useState(false);
+
+  const agents = [
+    {
+      name: t("afterlifeProfile.agent1.name"),
+      title: t("afterlifeProfile.agent1.title"),
+      bio: t("afterlifeProfile.agent1.bio"),
+      tags: [t("afterlifeProfile.agent1.tag1"), t("afterlifeProfile.agent1.tag2"), t("afterlifeProfile.agent1.tag3")],
+    },
+    {
+      name: t("afterlifeProfile.agent2.name"),
+      title: t("afterlifeProfile.agent2.title"),
+      bio: t("afterlifeProfile.agent2.bio"),
+      tags: [t("afterlifeProfile.agent2.tag1"), t("afterlifeProfile.agent2.tag2"), t("afterlifeProfile.agent2.tag3")],
+    },
+    {
+      name: t("afterlifeProfile.agent3.name"),
+      title: t("afterlifeProfile.agent3.title"),
+      bio: t("afterlifeProfile.agent3.bio"),
+      tags: [t("afterlifeProfile.agent3.tag1"), t("afterlifeProfile.agent3.tag2"), t("afterlifeProfile.agent3.tag3")],
+    },
+  ];
 
   return (
     <div className="min-h-screen bg-background">
@@ -44,7 +46,7 @@ const AfterlifeProfile = () => {
                 <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#8B5CB8] to-[#7548A0] flex items-center justify-center shadow-sm">
                   <Heart className="h-3.5 w-3.5 text-white" />
                 </div>
-                <span className="text-[15px] font-semibold text-[#5F6F7E] uppercase tracking-widest">After Life Services</span>
+                <span className="text-[15px] font-semibold text-[#5F6F7E] uppercase tracking-widest">{t("afterlife.badge")}</span>
               </div>
 
               <h1 className="text-[2.75rem] md:text-[3.1rem] lg:text-[3.4rem] font-bold text-[#12385B] leading-[1.1] tracking-tight">
@@ -52,7 +54,7 @@ const AfterlifeProfile = () => {
               </h1>
 
               <p className="text-[19px] text-[#5F6F7E] leading-relaxed max-w-lg">
-                Comprehensive memorial planning, bereavement support, and dignified afterlife services for families.
+                {t("afterlifeProfile.heroDesc")}
               </p>
 
               <div className="flex items-center gap-0 pt-1">
@@ -60,21 +62,21 @@ const AfterlifeProfile = () => {
                   <div className="w-6 h-6 rounded-full bg-[#8B5CB8]/20 flex items-center justify-center text-[#8B5CB8]">
                     <ClipboardList className="h-3 w-3" />
                   </div>
-                  <span className="text-[15px] font-bold text-[#12385B]">Reach Out</span>
+                  <span className="text-[15px] font-bold text-[#12385B]">{t("afterlifeProfile.reachOut")}</span>
                 </div>
                 <ChevronRight className="h-4 w-4 text-[#8B5CB8]/40 mx-1 flex-shrink-0" />
                 <div className="flex items-center gap-2 rounded-lg bg-[#F0E6F8] px-3 py-2">
                   <div className="w-6 h-6 rounded-full bg-[#8B5CB8]/20 flex items-center justify-center text-[#8B5CB8]">
                     <UserCheck className="h-3 w-3" />
                   </div>
-                  <span className="text-[15px] font-bold text-[#12385B]">We Guide You</span>
+                  <span className="text-[15px] font-bold text-[#12385B]">{t("afterlifeProfile.weGuideYou")}</span>
                 </div>
                 <ChevronRight className="h-4 w-4 text-[#8B5CB8]/40 mx-1 flex-shrink-0" />
                 <div className="flex items-center gap-2 rounded-lg bg-[#F0E6F8] px-3 py-2">
                   <div className="w-6 h-6 rounded-full bg-[#8B5CB8]/20 flex items-center justify-center text-[#8B5CB8]">
                     <MessageCircle className="h-3 w-3" />
                   </div>
-                  <span className="text-[15px] font-bold text-[#12385B]">We Support</span>
+                  <span className="text-[15px] font-bold text-[#12385B]">{t("afterlifeProfile.weSupport")}</span>
                 </div>
               </div>
 
@@ -83,19 +85,19 @@ const AfterlifeProfile = () => {
                 onClick={() => setShowIntakeModal(true)}
               >
                 <ClipboardList className="mr-2 h-4 w-4" />
-                Enquire Now
+                {t("afterlifeProfile.enquireNow")}
               </Button>
             </div>
 
             <div className="lg:col-span-2">
               <div className="rounded-2xl bg-white border border-[#D4BFE8] shadow-[0_8px_32px_rgba(139,92,184,0.12)] overflow-hidden">
                 <div className="px-5 py-3 bg-[#F6F0FA] border-b border-[#D4BFE8]">
-                  <span className="text-[15px] font-bold text-[#12385B] uppercase tracking-widest">Services</span>
+                  <span className="text-[15px] font-bold text-[#12385B] uppercase tracking-widest">{t("afterlifeProfile.services")}</span>
                 </div>
                 <div className="p-3 space-y-0.5">
-                  <CapabilityChip icon={<Flower2 className="h-4 w-4" />} label="Memorial Services" />
-                  <CapabilityChip icon={<Shield className="h-4 w-4" />} label="Pre-Planning" />
-                  <CapabilityChip icon={<Heart className="h-4 w-4" />} label="Bereavement Support" />
+                  <CapabilityChip icon={<Flower2 className="h-4 w-4" />} label={t("afterlifeProfile.memorialServices")} />
+                  <CapabilityChip icon={<Shield className="h-4 w-4" />} label={t("afterlifeProfile.prePlanning")} />
+                  <CapabilityChip icon={<Heart className="h-4 w-4" />} label={t("afterlifeProfile.bereavementSupport")} />
                 </div>
               </div>
             </div>
@@ -107,14 +109,10 @@ const AfterlifeProfile = () => {
       <section className="py-8 px-4 bg-white">
         <div className="max-w-5xl mx-auto space-y-4">
           <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
-            About Nirvana
+            {t("afterlifeProfile.aboutTitle")}
           </h2>
-          <p className="text-[17px] text-[#5F6F7E] leading-relaxed max-w-3xl">
-            Nirvana is a trusted provider of comprehensive afterlife and memorial services. With a deep commitment to compassion and dignity, Nirvana helps families navigate end-of-life planning, memorial arrangements, and bereavement support — ensuring every family receives the care and guidance they deserve during difficult times.
-          </p>
-          <p className="text-[17px] text-[#5F6F7E] leading-relaxed max-w-3xl">
-            From pre-need planning to immediate arrangements, Nirvana's experienced team of consultants provides personalised guidance across all cultural and religious traditions, making the process as gentle and seamless as possible.
-          </p>
+          <p className="text-[17px] text-[#5F6F7E] leading-relaxed max-w-3xl">{t("afterlifeProfile.aboutP1")}</p>
+          <p className="text-[17px] text-[#5F6F7E] leading-relaxed max-w-3xl">{t("afterlifeProfile.aboutP2")}</p>
         </div>
       </section>
 
@@ -122,11 +120,11 @@ const AfterlifeProfile = () => {
       <section className="py-8 px-4 bg-[#F6F0FA]">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-6">
-            <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">Our Consultants</p>
+            <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">{t("afterlifeProfile.ourConsultants")}</p>
             <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight mt-0.5">
-              Connect with a Nirvana Advisor
+              {t("afterlifeProfile.connectWithAdvisor")}
             </h2>
-            <p className="text-[16px] text-[#5F6F7E] mt-1">Speak to an experienced advisor who can guide you with care.</p>
+            <p className="text-[16px] text-[#5F6F7E] mt-1">{t("afterlifeProfile.connectDesc")}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -152,7 +150,7 @@ const AfterlifeProfile = () => {
                       onClick={() => setShowIntakeModal(true)}
                     >
                       <MessageCircle className="mr-1.5 h-4 w-4" />
-                      Connect
+                      {t("afterlifeProfile.connect")}
                     </Button>
                   </div>
                 </CardContent>
@@ -168,15 +166,15 @@ const AfterlifeProfile = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
             <div className="space-y-3">
               <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
-                How It Works
+                {t("afterlifeProfile.howItWorks")}
               </h2>
               <div className="space-y-2.5">
-                <JourneyStep icon={<ClipboardList className="h-4 w-4" />} text="Reach out with your needs or enquiry" />
-                <JourneyStep icon={<UserCheck className="h-4 w-4" />} text="Get guided through available options" />
-                <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text="Continuous support throughout the process" />
+                <JourneyStep icon={<ClipboardList className="h-4 w-4" />} text={t("afterlifeProfile.howStep1")} />
+                <JourneyStep icon={<UserCheck className="h-4 w-4" />} text={t("afterlifeProfile.howStep2")} />
+                <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text={t("afterlifeProfile.howStep3")} />
               </div>
               <p className="mt-4 text-[15px] leading-relaxed text-[#6B7D8E]">
-                Compassionate guidance every step of the way. No pressure — just support when you need it.
+                {t("afterlifeProfile.howNote")}
               </p>
               <Button
                 variant="outline"
@@ -184,7 +182,7 @@ const AfterlifeProfile = () => {
                 onClick={() => setShowIntakeModal(true)}
               >
                 <ClipboardList className="mr-2 h-4 w-4" />
-                Start Your Enquiry
+                {t("afterlifeProfile.startEnquiry")}
               </Button>
             </div>
 
@@ -196,13 +194,13 @@ const AfterlifeProfile = () => {
                   <div className="w-2 h-2 rounded-full bg-[hsl(155,45%,55%)]" />
                   <span className="text-[14px] text-[#5F6F7E] ml-2 font-mono">service-enquiry</span>
                 </div>
-                <span className="text-[12px] text-[#5F6F7E]/60 italic">Example enquiry</span>
+                <span className="text-[12px] text-[#5F6F7E]/60 italic">{t("afterlifeProfile.exampleEnquiry")}</span>
               </div>
               <div className="space-y-2 opacity-80">
-                <FakeField label="Service Type" value="Memorial Planning" />
-                <FakeField label="Preferred Arrangement" value="Traditional / Modern" />
-                <FakeField label="Timeline" value="Flexible" />
-                <FakeField label="Contact" value="+65 ●●●● ●●48" />
+                <FakeField label={t("afterlifeProfile.fakeField.serviceType")} value={t("afterlifeProfile.fakeField.serviceTypeVal")} />
+                <FakeField label={t("afterlifeProfile.fakeField.arrangement")} value={t("afterlifeProfile.fakeField.arrangementVal")} />
+                <FakeField label={t("afterlifeProfile.fakeField.timeline")} value={t("afterlifeProfile.fakeField.timelineVal")} />
+                <FakeField label={t("afterlifeProfile.fakeField.contact")} value="+65 ●●●● ●●48" />
               </div>
             </div>
           </div>
@@ -215,14 +213,14 @@ const AfterlifeProfile = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
             <div className="space-y-3">
               <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
-                Why Nirvana
+                {t("afterlifeProfile.whyNirvana")}
               </h2>
               <p className="text-[18px] text-[#5F6F7E] leading-relaxed max-w-lg">
-                End-of-life planning deserves dignity, compassion, and professional guidance.
+                {t("afterlifeProfile.whyNirvanaDesc")}
               </p>
-              <p className="text-[18px] text-[#12385B] font-medium">What sets us apart:</p>
+              <p className="text-[18px] text-[#12385B] font-medium">{t("afterlifeProfile.whatSetsUsApart")}</p>
               <ul className="space-y-1.5 pl-1">
-                {["Established & trusted provider", "Comprehensive service range", "Family-centred approach", "Multi-cultural sensitivity"].map((item) => (
+                {[t("afterlifeProfile.apart1"), t("afterlifeProfile.apart2"), t("afterlifeProfile.apart3"), t("afterlifeProfile.apart4")].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-[17px] text-[#12385B]">
                     <Check className="h-4 w-4 text-[#8B5CB8] shrink-0" />
                     {item}
@@ -232,12 +230,12 @@ const AfterlifeProfile = () => {
             </div>
 
             <div className="space-y-2">
-              <p className="text-[15px] font-semibold uppercase tracking-widest text-[#5F6F7E]">Service Comparison</p>
+              <p className="text-[15px] font-semibold uppercase tracking-widest text-[#5F6F7E]">{t("afterlifeProfile.serviceComparison")}</p>
               <div className="grid grid-cols-2 gap-3">
                 <div className="rounded-xl border border-[#D4BFE8] bg-white p-3.5 space-y-2">
-                  <h3 className="text-[16px] font-bold text-[#5F6F7E]">Without Guidance</h3>
+                  <h3 className="text-[16px] font-bold text-[#5F6F7E]">{t("afterlifeProfile.withoutGuidance")}</h3>
                   <ul className="space-y-1">
-                    {["Overwhelming options", "No clear process", "Emotional burden", "Last-minute decisions"].map((item) => (
+                    {[t("afterlifeProfile.without1"), t("afterlifeProfile.without2"), t("afterlifeProfile.without3"), t("afterlifeProfile.without4")].map((item) => (
                       <li key={item} className="flex items-center gap-2 text-[15px] text-[#5F6F7E]">
                         <X className="h-3.5 w-3.5 shrink-0 text-[#b0bec5]" />
                         {item}
@@ -246,9 +244,9 @@ const AfterlifeProfile = () => {
                   </ul>
                 </div>
                 <div className="rounded-xl border border-[#8B5CB8]/20 bg-[#F0E6F8] p-3.5 space-y-2 shadow-[0_2px_12px_rgba(139,92,184,0.1)]">
-                  <h3 className="text-[16px] font-bold text-[#12385B]">Nirvana Model</h3>
+                  <h3 className="text-[16px] font-bold text-[#12385B]">{t("afterlifeProfile.nirvanaModel")}</h3>
                   <ul className="space-y-1">
-                    {["Guided planning", "Clear process", "Emotional support", "Advance arrangements"].map((item) => (
+                    {[t("afterlifeProfile.nirvana1"), t("afterlifeProfile.nirvana2"), t("afterlifeProfile.nirvana3"), t("afterlifeProfile.nirvana4")].map((item) => (
                       <li key={item} className="flex items-center gap-2 text-[15px] text-[#12385B]">
                         <Check className="h-3.5 w-3.5 shrink-0 text-[#8B5CB8]" />
                         {item}
@@ -265,15 +263,15 @@ const AfterlifeProfile = () => {
       {/* Bottom CTA */}
       <section className="py-8 px-4">
         <div className="max-w-3xl mx-auto text-center space-y-4">
-          <h2 className="text-2xl font-bold text-[#12385B]">Need guidance or support?</h2>
-          <p className="text-[17px] text-[#5F6F7E]">Reach out to our team for a compassionate, no-obligation conversation.</p>
+          <h2 className="text-2xl font-bold text-[#12385B]">{t("afterlifeProfile.needGuidance")}</h2>
+          <p className="text-[17px] text-[#5F6F7E]">{t("afterlifeProfile.needGuidanceDesc")}</p>
           <Button
             size="lg"
             className="bg-gradient-to-r from-[#8B5CB8] to-[#7548A0] hover:from-[#7548A0] hover:to-[#633E8A] text-white font-semibold shadow-[0_2px_8px_rgba(139,92,184,0.3)]"
             onClick={() => setShowIntakeModal(true)}
           >
             <ClipboardList className="mr-2 h-5 w-5" />
-            Enquire Now
+            {t("afterlifeProfile.enquireNow")}
           </Button>
         </div>
       </section>
@@ -283,14 +281,9 @@ const AfterlifeProfile = () => {
         onOpenChange={setShowIntakeModal}
         serviceName="Nirvana"
         serviceType="afterlife"
-        concernLabel="How can we help? *"
-        concernPlaceholder="e.g. Memorial planning, pre-need arrangement, bereavement support..."
-        disclaimerItems={[
-          "Submitting this form does not confirm any arrangement.",
-          "A Nirvana advisor will contact you to discuss your needs.",
-          "All conversations are confidential and handled with care.",
-          "ClynicQ facilitates the connection only.",
-        ]}
+        concernLabel={t("afterlifeProfile.fakeField.serviceType") + " *"}
+        concernPlaceholder={t("afterlifeProfile.fakeField.serviceTypeVal")}
+        disclaimerItems={[]}
         icon={<Heart className="h-5 w-5 text-[#8B5CB8]" />}
       />
 

@@ -2,17 +2,20 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import AfterlifeCard from "@/components/AfterlifeCard";
 import { Heart, Flower2, Shield } from "lucide-react";
-
-const providers = [
-  {
-    slug: "nirvana",
-    name: "Nirvana",
-    subtitle: "Memorial & Afterlife Services",
-    description: "Comprehensive memorial planning, bereavement support, and afterlife services.",
-  },
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const AfterlifeServicesPage = () => {
+  const { t } = useLanguage();
+
+  const providers = [
+    {
+      slug: "nirvana",
+      name: "Nirvana",
+      subtitle: t("afterlife.badge"),
+      description: t("afterlife.desc"),
+    },
+  ];
+
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -21,14 +24,14 @@ const AfterlifeServicesPage = () => {
         <div className="max-w-6xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F0E6F8] text-[#8B5CB8] mb-6">
             <Heart className="h-4 w-4" />
-            <span className="text-sm font-medium">After Life Services</span>
+            <span className="text-sm font-medium">{t("afterlife.badge")}</span>
           </div>
 
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            After Life Services
+            {t("afterlife.title")}
           </h1>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
-            Compassionate end-of-life planning, memorial services, and bereavement support for families.
+            {t("afterlife.desc")}
           </p>
         </div>
       </section>
@@ -41,8 +44,8 @@ const AfterlifeServicesPage = () => {
                 <Heart className="h-5 w-5 text-[#8B5CB8]" />
               </div>
               <div>
-                <p className="font-medium text-foreground">Compassionate Care</p>
-                <p className="text-sm text-muted-foreground">Dignified & respectful services</p>
+                <p className="font-medium text-foreground">{t("afterlife.compassionateCare")}</p>
+                <p className="text-sm text-muted-foreground">{t("afterlife.compassionateCareDesc")}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-4 rounded-lg bg-card/50">
@@ -50,8 +53,8 @@ const AfterlifeServicesPage = () => {
                 <Shield className="h-5 w-5 text-[#8B5CB8]" />
               </div>
               <div>
-                <p className="font-medium text-foreground">Pre-Planning</p>
-                <p className="text-sm text-muted-foreground">Advance arrangements available</p>
+                <p className="font-medium text-foreground">{t("afterlife.prePlanning")}</p>
+                <p className="text-sm text-muted-foreground">{t("afterlife.prePlanningDesc")}</p>
               </div>
             </div>
             <div className="flex items-center gap-3 p-4 rounded-lg bg-card/50">
@@ -59,8 +62,8 @@ const AfterlifeServicesPage = () => {
                 <Flower2 className="h-5 w-5 text-[#8B5CB8]" />
               </div>
               <div>
-                <p className="font-medium text-foreground">Family Support</p>
-                <p className="text-sm text-muted-foreground">Bereavement & grief counselling</p>
+                <p className="font-medium text-foreground">{t("afterlife.familySupport")}</p>
+                <p className="text-sm text-muted-foreground">{t("afterlife.familySupportDesc")}</p>
               </div>
             </div>
           </div>
