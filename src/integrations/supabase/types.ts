@@ -208,6 +208,36 @@ export type Database = {
         }
         Relationships: []
       }
+      clinic_onboarding_requests: {
+        Row: {
+          clinic_name: string
+          clinic_type: string
+          contact_person: string
+          created_at: string
+          id: string
+          phone: string
+          website: string | null
+        }
+        Insert: {
+          clinic_name: string
+          clinic_type: string
+          contact_person: string
+          created_at?: string
+          id?: string
+          phone: string
+          website?: string | null
+        }
+        Update: {
+          clinic_name?: string
+          clinic_type?: string
+          contact_person?: string
+          created_at?: string
+          id?: string
+          phone?: string
+          website?: string | null
+        }
+        Relationships: []
+      }
       clinics: {
         Row: {
           address: string

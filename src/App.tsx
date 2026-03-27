@@ -29,6 +29,7 @@ import SpeakersTrainers from "./pages/SpeakersTrainers";
 import SpeakerProfile from "./pages/SpeakerProfile";
 import AfterlifeServicesPage from "./pages/AfterlifeServices";
 import AfterlifeProfile from "./pages/AfterlifeProfile";
+import ForClinics from "./pages/ForClinics";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -66,6 +67,7 @@ const App = () => (
             <Route path="/speakers/ouch-pte-ltd" element={<SpeakerProfile />} />
             <Route path="/afterlife" element={<AfterlifeServicesPage />} />
             <Route path="/afterlife/nirvana" element={<AfterlifeProfile />} />
+            <Route path="/for-clinics" element={<ForClinics />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
