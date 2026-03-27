@@ -51,12 +51,20 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       setFilteredClinics(
         clinics.filter((clinic) => {
           const clinicType = clinic.type?.toLowerCase();
-          const filterKey = activeCategory.toLowerCase();
-          // Handle "specialists" filter matching "Specialist" type
-          if (filterKey === "specialists" || filterKey === "specialist") {
-            return clinicType === "specialist";
+          switch (activeCategory) {
+            case "gp_specialist":
+              return ["gp", "specialist"].includes(clinicType);
+            case "dental":
+              return clinicType === "dental";
+            case "therapy_rehab":
+              return ["physiotherapy", "podiatry", "occupational therapy", "chiropractic", "rehab", "therapy"].includes(clinicType);
+            case "mental_wellness":
+              return ["psychiatrist", "psychologist", "counselling", "mental health"].includes(clinicType);
+            case "traditional_medicine":
+              return ["tcm", "sowa rigpa", "traditional medicine"].includes(clinicType);
+            default:
+              return true;
           }
-          return clinicType === filterKey;
         })
       );
     }
