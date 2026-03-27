@@ -19,11 +19,12 @@ export const SearchFilters = ({ defaultCategory = "all", onCategoryChange }: Sea
   }, [defaultCategory]);
 
   const categories = [
-    { key: "all", label: t("search.all") },
-    { key: "gp", label: t("search.gp") },
-    { key: "tcm", label: t("search.tcm") },
-    { key: "allied_health", label: "Allied Health" },
-    { key: "mental_health", label: "Mental Health" }
+    { key: "all", label: "All Clinics" },
+    { key: "gp_specialist", label: "GP & Specialist Care" },
+    { key: "dental", label: "Dental Care" },
+    { key: "therapy_rehab", label: "Therapy & Rehab" },
+    { key: "mental_wellness", label: "Mental Wellness" },
+    { key: "traditional_medicine", label: "Traditional Medicine" },
   ];
 
   const handleCategoryClick = (key: string) => {
