@@ -55,15 +55,18 @@ const ForClinics = () => {
             </div>
           ) : (
             <>
-              <div className="text-center mb-8">
+              <div className="text-center mb-6">
                 <h1 className="text-2xl sm:text-3xl font-bold text-foreground mb-2">
-                  Apply to Join ClynicQ
+                  Improve patient flow without changing your current system
                 </h1>
-                <p className="text-muted-foreground text-[15px] leading-relaxed">
-                  We are onboarding a small group of clinics for our pilot.
-                  <br />
-                  No change to your existing workflow.
+                <p className="text-muted-foreground text-[15px] leading-relaxed mb-4">
+                  ClynicQ helps clinics reduce front desk interruptions, manage walk-ins, and give patients visibility before they arrive.
                 </p>
+                <ul className="text-left max-w-sm mx-auto space-y-2 text-[14px] text-muted-foreground mb-2">
+                  <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span>Reduce repeated queue questions and front desk interruptions</li>
+                  <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span>Let patients check queue load before arriving</li>
+                  <li className="flex items-start gap-2"><span className="text-primary mt-0.5">•</span>Maintain your existing booking and clinic workflow</li>
+                </ul>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
@@ -140,6 +143,7 @@ const ForClinics = () => {
                     "Submit Request"
                   )}
                 </Button>
+                <p className="text-xs text-muted-foreground text-center mt-3">We will review your request and reach out to you shortly.</p>
               </form>
             </>
           )}

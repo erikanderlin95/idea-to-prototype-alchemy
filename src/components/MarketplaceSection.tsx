@@ -143,13 +143,15 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
 
           {/* Clinic onboarding CTA */}
           <div className="mt-12 text-center py-8 border-t border-border">
-            <h3 className="text-xl font-bold text-foreground mb-2">Are you a clinic?</h3>
-            <p className="text-muted-foreground text-[15px] mb-4 max-w-md mx-auto">
-              Join ClynicQ to improve patient flow and reduce front desk interruptions.
+            <h3 className="text-xl font-bold text-foreground mb-2">Reduce front desk interruptions and manage walk-ins better</h3>
+            <p className="text-muted-foreground text-[15px] mb-4 max-w-lg mx-auto">
+              Let patients check queue load before arriving, reduce repeated "how long" questions, and improve patient flow — without changing your current workflow.
             </p>
+            <p className="text-xs text-muted-foreground mb-3">Suitable for clinics with regular walk-ins or queue congestion.</p>
             <Button variant="outline" onClick={() => navigate("/for-clinics")}>
-              Apply to Join
+              Submit Clinic Request
             </Button>
+            <p className="text-xs text-muted-foreground mt-3">We review each request to ensure fit.</p>
           </div>
         </div>
       </div>
