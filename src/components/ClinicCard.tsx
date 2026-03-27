@@ -431,7 +431,7 @@ export const ClinicCard = ({
         <div className="flex-1 flex flex-col gap-1.5 mt-1.5">
         {hasDigitalQueue && (
           myQueueEntry ? (
-            <div className="flex items-center gap-2 py-1.5 px-2 rounded border cursor-pointer"
+            <div className="flex items-center gap-2 py-2 px-2.5 rounded-lg border cursor-pointer"
               style={{ 
                 background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.08))',
                 borderColor: 'hsl(var(--ai-purple)/0.25)'
@@ -443,14 +443,14 @@ export const ClinicCard = ({
                 toast.success("Queue link copied!");
               }}
             >
-              <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
-                <Copy className="h-3 w-3 text-primary" />
+              <div className="h-7 w-7 rounded bg-primary/20 flex items-center justify-center shrink-0">
+                <Copy className="h-3.5 w-3.5 text-primary" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-xs text-muted-foreground font-medium leading-none">Save your queue link</p>
-                <p className="text-[11px] text-primary font-semibold leading-tight truncate">{window.location.origin}/queue/{id}</p>
+                <p className="text-sm font-medium text-muted-foreground leading-none mb-0.5">Save your queue link</p>
+                <p className="text-xs text-primary font-semibold leading-tight truncate">{window.location.origin}/queue/{id}</p>
               </div>
-              <Copy className="h-3.5 w-3.5 text-primary/60 shrink-0" />
+              <Copy className="h-4 w-4 text-primary/50 shrink-0" />
             </div>
           ) : (
             <div className="flex items-center gap-2 py-1 px-2 rounded border"
