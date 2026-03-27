@@ -430,20 +430,44 @@ export const ClinicCard = ({
         {/* === MIDDLE SECTION === */}
         <div className="flex-1 flex flex-col gap-1.5 mt-1.5">
         {hasDigitalQueue && (
-          <div className="flex items-center gap-2 py-1 px-2 rounded border"
-            style={{ 
-              background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
-              borderColor: 'hsl(var(--ai-cyan)/0.2)'
-            }}
-          >
-            <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
-              <Users className="h-3 w-3 text-primary" />
+          myQueueEntry ? (
+            <div className="flex items-center gap-2 py-1.5 px-2 rounded border cursor-pointer"
+              style={{ 
+                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.1), hsl(var(--ai-blue)/0.08))',
+                borderColor: 'hsl(var(--ai-purple)/0.25)'
+              }}
+              onClick={(e) => {
+                e.stopPropagation();
+                const queueUrl = `${window.location.origin}/queue/${id}`;
+                navigator.clipboard.writeText(queueUrl);
+                toast.success("Queue link copied!");
+              }}
+            >
+              <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
+                <Copy className="h-3 w-3 text-primary" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-xs text-muted-foreground font-medium leading-none">Save your queue link</p>
+                <p className="text-[11px] text-primary font-semibold leading-tight truncate">{window.location.origin}/queue/{id}</p>
+              </div>
+              <Copy className="h-3.5 w-3.5 text-primary/60 shrink-0" />
             </div>
-            <div>
-              <p className="text-xs text-muted-foreground font-medium leading-none">{t("clinicCard.inQueue")}</p>
-              <p className="text-sm font-bold leading-tight">{queueCount} {t("clinicCard.people")}</p>
+          ) : (
+            <div className="flex items-center gap-2 py-1 px-2 rounded border"
+              style={{ 
+                background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
+                borderColor: 'hsl(var(--ai-cyan)/0.2)'
+              }}
+            >
+              <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
+                <Users className="h-3 w-3 text-primary" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground font-medium leading-none">{t("clinicCard.inQueue")}</p>
+                <p className="text-sm font-bold leading-tight">{queueCount} {t("clinicCard.people")}</p>
+              </div>
             </div>
-          </div>
+          )
         )}
         {!hasDigitalQueue && (
           <div className="space-y-1.5">
