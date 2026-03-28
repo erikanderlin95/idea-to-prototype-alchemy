@@ -478,7 +478,7 @@ export default function Queue() {
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-primary" />
-                You're in Queue
+                You're in the queue
               </CardTitle>
             </CardHeader>
             <CardContent>
@@ -488,10 +488,10 @@ export default function Queue() {
                     <p className="text-sm text-muted-foreground mb-1">Queue Number</p>
                     <p className="text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
                   </div>
-                  <div className="text-center">
-                    <p className="text-sm text-muted-foreground mb-1">Position</p>
+                   <div className="text-center">
+                    <p className="text-sm text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
                     <p className="text-3xl font-semibold">
-                      {myPosition}/{queueData.length}
+                      {myPosition ? Math.max(0, myPosition - 1) : 0} ahead
                     </p>
                   </div>
                 </div>
@@ -599,8 +599,8 @@ export default function Queue() {
 
         <Card className="mt-6">
           <CardHeader>
-            <CardTitle>Current Queue Status</CardTitle>
-            <CardDescription>Real-time queue updates</CardDescription>
+            <CardTitle>Live Queue</CardTitle>
+            <CardDescription>{queueData.length} people ahead right now</CardDescription>
           </CardHeader>
           <CardContent>
             {queueData.length === 0 ? (
@@ -629,7 +629,7 @@ export default function Queue() {
                       )}
                     </div>
                     <span className="text-sm text-muted-foreground">
-                      {index === 0 ? "Now serving" : `${index} ahead`}
+                      {index === 0 ? "Now serving" : `${index} people ahead of you`}
                     </span>
                   </div>
                 ))}
