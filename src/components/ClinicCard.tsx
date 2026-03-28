@@ -677,7 +677,7 @@ export const ClinicCard = ({
         <DialogHeader>
           <DialogTitle className="text-base">Secure Your Spot</DialogTitle>
           <DialogDescription className="text-xs">
-            Join the queue. Arrive within {parseInt(waitTime) || 15} mins when called.
+            Join the queue. <span className="font-bold text-red-700">Arrive within 30 seconds when called.</span>
           </DialogDescription>
         </DialogHeader>
 
