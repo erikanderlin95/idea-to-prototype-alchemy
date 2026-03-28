@@ -675,9 +675,9 @@ export const ClinicCard = ({
     <Dialog open={showDisclaimer} onOpenChange={(open) => { setShowDisclaimer(open); if (!open) { setJoinError(""); setDisclaimerAgreed(false); } }}>
       <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle className="text-base">Secure Your Spot</DialogTitle>
-          <DialogDescription className="text-xs">
-            Join the queue. <span className="font-bold text-red-700">Arrive within 30 seconds when called.</span>
+          <DialogTitle className="text-base text-foreground">Join Queue</DialogTitle>
+          <DialogDescription className="text-xs text-center font-bold text-red-700">
+            Arrive within 30 seconds when called.
           </DialogDescription>
         </DialogHeader>
 
