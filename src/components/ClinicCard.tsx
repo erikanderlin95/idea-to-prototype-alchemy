@@ -584,7 +584,7 @@ export const ClinicCard = ({
                    <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
                      <Users className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
                    </div>
-                    <p className="text-base font-bold text-foreground">{t("clinicCard.joinVirtual")}</p>
+                    <p className="text-base font-bold text-foreground">{t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
                  </div>
                 
                 <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
@@ -675,9 +675,9 @@ export const ClinicCard = ({
     <Dialog open={showDisclaimer} onOpenChange={(open) => { setShowDisclaimer(open); if (!open) { setJoinError(""); setDisclaimerAgreed(false); } }}>
       <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle className="text-base text-foreground">Join Queue</DialogTitle>
+          <DialogTitle className="text-base text-foreground">Join Queue Remotely</DialogTitle>
           <DialogDescription className="text-xs text-center font-bold text-red-700">
-            Arrive within 30 seconds when called.
+            Arrive when your turn is near. No need to wait at the clinic.
           </DialogDescription>
         </DialogHeader>
 
@@ -750,7 +750,7 @@ export const ClinicCard = ({
     <Dialog open={showBookingLead} onOpenChange={(open) => { setShowBookingLead(open); if (!open) setLeadDisclaimerAgreed(false); }}>
       <DialogContent className="max-w-sm max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-base">Book Appointment</DialogTitle>
+          <DialogTitle className="text-base">Continue to Clinic Booking</DialogTitle>
           <DialogDescription className="text-xs">Enter your details to proceed</DialogDescription>
         </DialogHeader>
         <div className="space-y-3">
@@ -811,7 +811,7 @@ export const ClinicCard = ({
         <DialogHeader>
           <DialogTitle className="text-base flex items-center gap-2">
             <CheckCircle className="h-5 w-5 text-emerald-500" />
-            Request Recorded
+            Redirecting to Clinic Booking
           </DialogTitle>
         </DialogHeader>
         <div className="space-y-3">

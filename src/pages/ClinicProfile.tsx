@@ -210,7 +210,7 @@ const ClinicProfile = () => {
                   <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
                 </div>
                 <div>
-                  <p className="text-xs sm:text-base font-bold text-foreground mb-0.5">{t('clinicProfile.currentQueue')}</p>
+                   <p className="text-xs sm:text-base font-bold text-foreground mb-0.5">{t('clinicProfile.currentQueue')}</p>
                   <p className="font-black text-xl sm:text-2xl text-primary">{queue.length} {t('clinicProfile.waiting')}</p>
                 </div>
               </div>

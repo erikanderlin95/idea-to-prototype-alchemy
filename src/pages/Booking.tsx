@@ -62,7 +62,7 @@ const Booking = () => {
       <main className="container px-4 md:px-6 py-8 max-w-lg">
         <div className="space-y-6 text-center mt-8">
           <div className="space-y-1">
-            <h1 className="text-2xl font-bold text-foreground">Book Your Appointment</h1>
+            <h1 className="text-2xl font-bold text-foreground">Continue to Clinic Booking</h1>
             <p className="text-sm text-muted-foreground">{clinic.name}</p>
           </div>
 
@@ -86,19 +86,19 @@ const Booking = () => {
           <div className="space-y-3">
             {clinic.booking_url ? (
               <>
-                <Button onClick={handleBookAppointment} size="lg" className="w-full text-sm h-12">
+                <Button onClick={handleBookAppointment} size="lg" className="w-full text-sm h-12" variant="outline">
                   <Calendar className="mr-2 h-5 w-5" />
-                  Book Appointment
+                  Continue to Clinic Booking
                 </Button>
                 <p className="text-xs text-muted-foreground">
-                  Bookings are handled by the clinic's existing system.
+                  You'll be redirected to the clinic's own booking system.
                 </p>
               </>
             ) : (
               <>
-                <Button size="lg" className="w-full text-sm h-12" disabled>
+                <Button size="lg" className="w-full text-sm h-12" variant="outline" disabled>
                   <Calendar className="mr-2 h-5 w-5" />
-                  Book Appointment
+                  Continue to Clinic Booking
                 </Button>
                 <p className="text-xs text-muted-foreground">
                   Online booking is not yet available for this clinic.

@@ -47,12 +47,12 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero
     "hero.badge": "Check Queue • Book • Connect",
-    "hero.title1": "Know Before",
-    "hero.title2": "You Go",
-    "hero.subtitle": "See queues, availability, and nearby care options before you decide where to go.",
+    "hero.title1": "See the Queue",
+    "hero.title2": "Before You Go",
+    "hero.subtitle": "Check how many people are ahead before heading to the clinic.",
     "hero.trustLine": "",
-    "hero.findClinics": "Check Clinics Near Me",
-    "hero.findMyQueue": "View My Queue Status",
+    "hero.findClinics": "Check Queue Near Me",
+    "hero.findMyQueue": "Explore Clinics & Treatments",
     "hero.learnMore": "Learn More",
     "hero.queueTitle": "Queue Visibility",
     "hero.queueDesc": "Check estimated queue status before arrival",
@@ -310,7 +310,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.checkIn": "Check In",
     "clinicCard.leaveQueue": "Leave Queue",
     "clinicCard.readyToSkip": "Check Queue",
-    "clinicCard.joinVirtual": "See how many people are ahead",
+    "clinicCard.joinVirtual": "{count} people ahead right now",
     "clinicCard.visitType": "Visit Type",
     "clinicCard.generalConsultation": "General Consultation",
     "clinicCard.followUp": "Follow-up",
@@ -332,8 +332,8 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.joinedQueue": "You've joined the queue! Save your link to revisit anytime.",
     
     // MarketplaceSection
-    "marketplace.title": "Find Your Clinic",
-    "marketplace.subtitle": "Browse clinics near you, check estimated queue status, and plan your visit with less waiting",
+    "marketplace.title": "Clinics Near You (Live Queue)",
+    "marketplace.subtitle": "See how busy nearby clinics are before deciding where to go.",
     "marketplace.loading": "Loading clinics...",
     
     // SearchFilters
@@ -419,8 +419,8 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicProfile.phone": "Phone",
     "clinicProfile.email": "Email",
     "clinicProfile.notAvailable": "Not available",
-    "clinicProfile.currentQueue": "Current Queue",
-    "clinicProfile.waiting": "waiting",
+    "clinicProfile.currentQueue": "People Ahead",
+    "clinicProfile.waiting": "right now",
     "clinicProfile.doctors": "Doctors",
     "clinicProfile.awards": "Awards",
     "clinicProfile.operatingHours": "Operating Hours",
@@ -886,8 +886,8 @@ const translations: Record<Language, Record<string, string>> = {
     "search.category.traditional_medicine": "Traditional Medicine",
 
     // GP, TCM, Wellness page titles
-    "gpClinics.title": "Book a GP Appointment",
-    "gpClinics.subtitle": "Find trusted general practitioners near you with real-time availability and digital queue management.",
+    "gpClinics.title": "GP Clinics Near You (Live Queue)",
+    "gpClinics.subtitle": "See how busy nearby GP clinics are before deciding where to go.",
     "tcmClinics.title": "Find Trusted TCM Clinics",
     "tcmClinics.subtitle": "Discover experienced Traditional Chinese Medicine practitioners for acupuncture, herbal medicine, and holistic care.",
     "wellnessClinics.title": "Wellness & Health Services",
@@ -938,11 +938,11 @@ const translations: Record<Language, Record<string, string>> = {
     // Hero
     "hero.badge": "查看排队 • 预约 • 连接",
     "hero.title1": "出发前",
-    "hero.title2": "先了解",
-    "hero.subtitle": "在决定去哪里之前，先查看排队、可用性和附近的护理选项。",
+    "hero.title2": "先看排队",
+    "hero.subtitle": "去诊所前，先看看前面有多少人在排队。",
     "hero.trustLine": "",
-    "hero.findClinics": "查看附近诊所",
-    "hero.findMyQueue": "查看我的排队状态",
+    "hero.findClinics": "查看附近排队",
+    "hero.findMyQueue": "浏览诊所与服务",
     "hero.learnMore": "了解更多",
     "hero.queueTitle": "排队可见",
     "hero.queueDesc": "到达前查看预计排队状况",
@@ -1200,7 +1200,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.checkIn": "签到",
     "clinicCard.leaveQueue": "离开排队",
     "clinicCard.readyToSkip": "查看排队",
-    "clinicCard.joinVirtual": "查看前面有多少人",
+    "clinicCard.joinVirtual": "目前前方有{count}人",
     "clinicCard.visitType": "就诊类型",
     "clinicCard.generalConsultation": "一般咨询",
     "clinicCard.followUp": "复诊",
@@ -1222,8 +1222,8 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.joinedQueue": "您已加入排队！保存链接随时查看。",
     
     // MarketplaceSection
-    "marketplace.title": "寻找您的诊所",
-    "marketplace.subtitle": "浏览附近的诊所，查看预计排队状况，规划您的就诊以减少等待",
+    "marketplace.title": "附近诊所（实时排队）",
+    "marketplace.subtitle": "出发前看看附近诊所有多忙。",
     "marketplace.loading": "加载诊所中...",
     
     // SearchFilters
@@ -1309,8 +1309,8 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicProfile.phone": "电话",
     "clinicProfile.email": "电邮",
     "clinicProfile.notAvailable": "暂无",
-    "clinicProfile.currentQueue": "当前排队",
-    "clinicProfile.waiting": "等待中",
+    "clinicProfile.currentQueue": "前方人数",
+    "clinicProfile.waiting": "人在排队",
     "clinicProfile.doctors": "医生",
     "clinicProfile.awards": "奖项",
     "clinicProfile.operatingHours": "营业时间",
@@ -1776,8 +1776,8 @@ const translations: Record<Language, Record<string, string>> = {
     "search.category.traditional_medicine": "传统医学",
 
     // GP, TCM, Wellness page titles
-    "gpClinics.title": "预约全科医生",
-    "gpClinics.subtitle": "查找您附近值得信赖的全科医生，实时可用性和数字排队管理。",
+    "gpClinics.title": "附近全科诊所（实时排队）",
+    "gpClinics.subtitle": "出发前看看附近全科诊所有多忙。",
     "tcmClinics.title": "查找值得信赖的中医诊所",
     "tcmClinics.subtitle": "发现经验丰富的中医执业者，提供针灸、草药和整体护理。",
     "wellnessClinics.title": "健康与养生服务",
