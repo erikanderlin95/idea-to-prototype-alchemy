@@ -56,12 +56,12 @@ export const Hero = () => {
               {t("hero.findClinics")}
             </Button>
             <Button 
-              size="sm" 
+              size="lg" 
               variant="outline" 
-              className="text-xs sm:text-sm px-3 sm:px-5 py-1.5 sm:py-2 h-8 sm:h-9 hover:bg-secondary/50 transition-all gap-1"
+              className="text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 h-10 sm:h-12 border-2 border-border bg-background text-foreground font-semibold shadow-sm hover:bg-secondary/50 transition-all gap-1.5"
               onClick={() => setShowQueueFinder(true)}
             >
-              <Phone className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
+              <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
               {t("hero.findMyQueue")}
             </Button>
           </div>
