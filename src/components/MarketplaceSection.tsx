@@ -131,7 +131,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   }
 
   return (
-    <section id="marketplace" className="pt-16 pb-12 bg-background onboarding-clinics">
+    <section id="marketplace" className="pt-8 pb-8 bg-background onboarding-clinics">
       <div className="container px-4 md:px-6">
         <div className="px-2 sm:px-0 space-y-10">
           <div className="text-center mb-10">

@@ -40,7 +40,7 @@ export const Features = () => {
   ];
 
   return (
-    <section id="features" className="py-16 bg-gradient-to-b from-background to-secondary/10">
+    <section id="features" className="py-8 bg-gradient-to-b from-background to-secondary/10">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-10">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">{t("features.title")}</h2>
