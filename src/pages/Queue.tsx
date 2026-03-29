@@ -405,11 +405,11 @@ export default function Queue() {
         </div>
 
         <Card className="mb-6 bg-gradient-to-r from-card to-primary/5">
-          <CardHeader>
+          <CardHeader className="px-4 sm:px-6 pb-3">
             <div className="flex items-start justify-between">
               <div>
-                <CardTitle className="text-2xl">{clinic?.name}</CardTitle>
-                <CardDescription className="mt-1">{clinic?.address}</CardDescription>
+                <CardTitle className="text-xl sm:text-2xl">{clinic?.name}</CardTitle>
+                <CardDescription className="mt-1 text-sm">{clinic?.address}</CardDescription>
               </div>
               {myQueueEntry && (
                 <Button
@@ -433,41 +433,33 @@ export default function Queue() {
               )}
             </div>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-background/50">
-                <div className="h-12 w-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Users className="h-6 w-6 text-primary" />
+          <CardContent className="px-4 sm:px-6">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-background/50">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-primary/10 flex items-center justify-center">
+                  <Users className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground font-medium">{t("queue.inQueue")}</p>
-                  <p className="text-2xl font-bold">{queueData.length}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground font-medium">{t("queue.inQueue")}</p>
+                  <p className="text-xl sm:text-2xl font-bold">{queueData.length}</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 p-4 rounded-xl bg-background/50">
-                <div className="h-12 w-12 rounded-xl bg-accent/10 flex items-center justify-center">
-                  <Clock className="h-6 w-6 text-accent" />
+              <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-background/50">
+                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-accent/10 flex items-center justify-center">
+                  <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
                 </div>
                 <div>
-                  <p className="text-xs text-muted-foreground font-medium">Status</p>
-                  <p className="text-2xl font-bold">{clinic?.is_open ? "Open" : "Closed"}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground font-medium">Status</p>
+                  <p className="text-xl sm:text-2xl font-bold">{clinic?.is_open ? "Open" : "Closed"}</p>
                 </div>
               </div>
             </div>
             
             {myQueueEntry && notificationPermission !== "granted" && (
-              <div className="mt-4 p-4 bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-800 rounded-xl">
-                <div className="flex items-start gap-3">
-                  <Bell className="h-5 w-5 text-amber-600 dark:text-amber-400 mt-0.5" />
-                  <div className="flex-1">
-                    <p className="text-sm font-semibold text-amber-900 dark:text-amber-100">
-                      {t("queue.enableNotifications")}
-                    </p>
-                    <p className="text-xs text-amber-700 dark:text-amber-300 mt-1">
-                      {t("queue.notificationDesc")}
-                    </p>
-                  </div>
-                </div>
+              <div className="mt-4 p-3 sm:p-4 bg-destructive/5 border border-destructive/30 rounded-xl">
+                <p className="text-sm sm:text-base text-destructive font-semibold leading-relaxed">
+                  Please stay nearby and keep this page open, when it's your turn, check in at counter within 30 seconds.
+                </p>
               </div>
             )}
           </CardContent>
@@ -475,22 +467,22 @@ export default function Queue() {
 
         {myQueueEntry ? (
           <Card className="mb-6 border-primary bg-gradient-to-br from-primary/5 to-accent/5">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
+            <CardHeader className="px-4 sm:px-6 pb-3">
+              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
                 <CheckCircle2 className="h-5 w-5 text-primary" />
                 You're in the queue
               </CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="text-center">
-                    <p className="text-sm text-muted-foreground mb-1">Queue Number</p>
-                    <p className="text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
+            <CardContent className="px-4 sm:px-6">
+              <div className="space-y-5">
+                <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                  <div className="text-center p-3 sm:p-4 rounded-lg bg-background/50">
+                    <p className="text-sm sm:text-base text-muted-foreground mb-1">Queue Number</p>
+                    <p className="text-3xl sm:text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
                   </div>
-                   <div className="text-center">
-                    <p className="text-sm text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
-                    <p className="text-3xl font-semibold">
+                   <div className="text-center p-3 sm:p-4 rounded-lg bg-background/50">
+                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
+                    <p className="text-2xl sm:text-3xl font-semibold">
                       {myPosition ? Math.max(0, myPosition - 1) : 0} ahead
                     </p>
                   </div>
@@ -498,10 +490,10 @@ export default function Queue() {
 
                 {/* Check-in Code */}
                 {myQueueEntry.check_in_code && myQueueEntry.status === 'waiting' && (
-                  <div className="text-center p-4 border-2 border-primary/30 rounded-lg bg-primary/5">
-                    <p className="text-xs text-muted-foreground font-medium uppercase tracking-wide mb-1">Check-in Code</p>
-                    <p className="text-3xl font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</p>
-                    <p className="text-xs text-foreground font-medium mt-2">
+                  <div className="text-center p-4 sm:p-5 border-2 border-primary/30 rounded-lg bg-primary/5">
+                    <p className="text-xs sm:text-sm text-muted-foreground font-medium uppercase tracking-wide mb-1">Check-in Code</p>
+                    <p className="text-2xl sm:text-3xl font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</p>
+                    <p className="text-xs sm:text-sm text-foreground font-medium mt-2">
                       Show this code at the clinic counter when you arrive.
                     </p>
                   </div>
@@ -514,19 +506,19 @@ export default function Queue() {
                 )}
 
                 {myQueueEntry.status === 'waiting' && myPosition === 1 && (
-                  <Badge variant="default" className="w-full justify-center py-3 text-sm bg-accent">
+                  <Badge variant="default" className="w-full justify-center py-3 text-sm sm:text-base bg-accent">
                     🎉 You're next! Please check in when you arrive
                   </Badge>
                 )}
 
                 {myQueueEntry.status === 'waiting' && myPosition && myPosition > 1 && myPosition <= 3 && (
-                  <Badge variant="secondary" className="w-full justify-center py-3 text-sm">
+                  <Badge variant="secondary" className="w-full justify-center py-3 text-sm sm:text-base">
                     ⏰ Almost your turn! Get ready to head to the clinic
                   </Badge>
                 )}
 
                 {myQueueEntry.status === 'waiting' && myPosition && myPosition > 3 && (
-                  <Badge variant="outline" className="w-full justify-center py-3 text-sm">
+                  <Badge variant="outline" className="w-full justify-center py-3 text-sm sm:text-base">
                     📱 We'll notify you when it's almost your turn
                   </Badge>
                 )}
@@ -536,7 +528,7 @@ export default function Queue() {
                     <>
                       <Button 
                         onClick={checkIn} 
-                        className="flex-1 bg-accent hover:bg-accent/90"
+                        className="flex-1 bg-accent hover:bg-accent/90 text-sm sm:text-base"
                         size="lg"
                         disabled={checkInLoading}
                       >
@@ -546,7 +538,7 @@ export default function Queue() {
                       <Button 
                         onClick={cancelQueue} 
                         variant="outline"
-                        className="flex-1 border-destructive text-destructive hover:bg-destructive/10"
+                        className="flex-1 border-destructive text-destructive hover:bg-destructive/10 text-sm sm:text-base"
                         size="lg"
                       >
                         <LogOut className="mr-2 h-5 w-5" />
@@ -555,7 +547,7 @@ export default function Queue() {
                     </>
                   )}
                   {myQueueEntry.status === 'checked_in' && (
-                    <div className="w-full p-6 bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 rounded-lg">
+                    <div className="w-full p-5 sm:p-6 bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 rounded-lg">
                       <div className="flex items-center justify-center gap-2 mb-2">
                         <CheckCircle2 className="h-6 w-6 text-emerald-700 dark:text-emerald-300" />
                         <p className="text-center text-emerald-700 dark:text-emerald-300 font-semibold text-lg">
