@@ -394,7 +394,7 @@ export const ClinicCard = ({
         {/* Row 1: Name + type + status + rating */}
         <div className="flex items-center justify-between gap-1">
           <div className="flex items-center gap-1.5 flex-wrap flex-1 min-w-0">
-            <h3 className="text-[15px] sm:text-base font-bold group-hover:text-primary transition-colors truncate">{name}</h3>
+            <h3 className="text-base sm:text-lg font-semibold group-hover:text-primary transition-colors truncate">{name}</h3>
             <Badge variant="secondary" className="text-xs font-medium px-1.5 py-0 h-[20px] shrink-0">
               {type}
             </Badge>
