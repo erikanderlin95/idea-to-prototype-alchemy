@@ -675,9 +675,9 @@ export const ClinicCard = ({
     <Dialog open={showDisclaimer} onOpenChange={(open) => { setShowDisclaimer(open); if (!open) { setJoinError(""); setDisclaimerAgreed(false); } }}>
       <DialogContent className="max-w-sm">
         <DialogHeader>
-          <DialogTitle className="text-base text-foreground">Join Queue Remotely</DialogTitle>
+          <DialogTitle className="text-base text-foreground">Join Queue</DialogTitle>
           <DialogDescription className="text-xs text-center font-bold text-red-700">
-            Arrive when your turn is near. No need to wait at the clinic.
+            Arrive within 30 seconds when called.
           </DialogDescription>
         </DialogHeader>
 
