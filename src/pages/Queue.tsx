@@ -456,11 +456,22 @@ export default function Queue() {
             </div>
             
             {myQueueEntry && notificationPermission !== "granted" && (
-              <div className="mt-4 p-3 sm:p-4 bg-destructive/5 border border-destructive/30 rounded-xl">
-                <p className="text-sm sm:text-base text-destructive font-semibold leading-relaxed">
-                  Please stay nearby and keep this page open, when it's your turn, check in at counter within 30 seconds.
-                </p>
-              </div>
+              <>
+                <div className="mt-4 p-3 sm:p-4 bg-destructive/5 border border-destructive/30 rounded-xl">
+                  <p className="text-sm sm:text-base text-destructive font-semibold leading-relaxed">
+                    Please stay nearby and keep this page open, when it's your turn, check in at counter within 30 seconds.
+                  </p>
+                </div>
+                <div className="mt-3 p-3 sm:p-4 bg-muted/50 rounded-lg">
+                  <p className="text-xs sm:text-sm font-semibold text-muted-foreground mb-2">Patient Notice</p>
+                  <ul className="space-y-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    <li>• Queue order is managed by clinic staff and may change.</li>
+                    <li>• Number of patients ahead is provided for visibility only.</li>
+                    <li>• Urgent cases, walk-ins, and clinic prioritization may affect queue movement.</li>
+                    <li>• ClynicQ does not guarantee exact waiting time.</li>
+                  </ul>
+                </div>
+              </>
             )}
           </CardContent>
         </Card>
