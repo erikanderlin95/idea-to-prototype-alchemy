@@ -434,26 +434,6 @@ export default function Queue() {
             </div>
           </CardHeader>
           <CardContent className="px-4 sm:px-6">
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-background/50">
-                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <Users className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
-                </div>
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground font-medium">{t("queue.inQueue")}</p>
-                  <p className="text-xl sm:text-2xl font-bold">{queueData.length}</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 p-3 sm:p-4 rounded-xl bg-background/50">
-                <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-xl bg-accent/10 flex items-center justify-center">
-                  <Clock className="h-5 w-5 sm:h-6 sm:w-6 text-accent" />
-                </div>
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground font-medium">Status</p>
-                  <p className="text-xl sm:text-2xl font-bold">{clinic?.is_open ? "Open" : "Closed"}</p>
-                </div>
-              </div>
-            </div>
             
             {myQueueEntry && notificationPermission !== "granted" && (
               <>
