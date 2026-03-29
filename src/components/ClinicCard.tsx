@@ -909,7 +909,7 @@ export const ClinicCard = ({
           
           <Alert className="py-2">
             <AlertDescription className="text-[11px]">
-              Please stay nearby and keep this page open. You'll be notified when it's your turn.
+              Please stay nearby and keep this page open. When it's your turn, <span className="text-destructive font-bold">check in at counter within 30 seconds</span>.
             </AlertDescription>
           </Alert>
         </div>
