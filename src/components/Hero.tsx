@@ -59,9 +59,9 @@ export const Hero = () => {
               size="sm" 
               variant="outline" 
               className="text-xs sm:text-sm px-3 sm:px-5 py-1.5 sm:py-2 h-8 sm:h-9 hover:bg-secondary/50 transition-all gap-1"
-              onClick={() => document.getElementById('marketplace')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => setShowQueueFinder(true)}
             >
-              <Search className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
+              <Phone className="h-2.5 w-2.5 sm:h-3 sm:w-3 shrink-0" />
               {t("hero.findMyQueue")}
             </Button>
           </div>

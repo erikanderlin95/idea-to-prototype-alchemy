@@ -51,8 +51,8 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.title2": "Before You Go",
     "hero.subtitle": "Check how many people are ahead before heading to the clinic.",
     "hero.trustLine": "",
-    "hero.findClinics": "Check Queue Near Me",
-    "hero.findMyQueue": "Explore Clinics & Treatments",
+    "hero.findClinics": "Explore Clinics",
+    "hero.findMyQueue": "View My Queue Status",
     "hero.learnMore": "Learn More",
     "hero.queueTitle": "Queue Visibility",
     "hero.queueDesc": "Check estimated queue status before arrival",
@@ -60,25 +60,25 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.bookDesc": "Instant appointments across all clinics",
     "hero.connectTitle": "Connect",
     "hero.connectDesc": "AI health assistant & support",
-    "hero.activityTitle": "🟢 Live queue activity",
-    "hero.activityDesc": "Multiple clinics updating now",
+    "hero.activityTitle": "🟢 Live clinic activity",
+    "hero.activityDesc": "Queue and availability updates",
     
     // Features
     "features.badge": "Features",
-    "features.title": "What patients can do on ClynicQ",
+    "features.title": "What you can do on ClynicQ",
     "features.subtitle": "",
     "features.queue.title": "Queue Visibility",
     "features.queue.subtitle": "",
     "features.queue.description": "See how many patients are ahead before joining.",
-    "features.book.title": "Book or Contact",
+    "features.book.title": "Go to Clinic Booking",
     "features.book.subtitle": "",
     "features.book.description": "Use the clinic's available booking or contact flow without extra app installs.",
-    "features.connect.title": "Guided Care Support",
+    "features.connect.title": "Get Help Choosing Care",
     "features.connect.subtitle": "",
     "features.connect.description": "If you are unsure where to start, request guided routing to the right provider.",
     "features.secondary1.title": "Practitioner Profiles",
-    "features.secondary2.title": "Nearby Options",
-    "features.secondary3.title": "Multi-clinic Discovery",
+    "features.secondary2.title": "Explore Clinics",
+    "features.secondary3.title": "Compare Clinics",
     
     // Queue Page
     "queue.title": "Queue Status",
@@ -332,8 +332,8 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.joinedQueue": "You've joined the queue! Save your link to revisit anytime.",
     
     // MarketplaceSection
-    "marketplace.title": "Clinics Near You (Live Queue)",
-    "marketplace.subtitle": "See how busy nearby clinics are before deciding where to go.",
+    "marketplace.title": "Browse Clinics",
+    "marketplace.subtitle": "See how busy they are or book directly",
     "marketplace.loading": "Loading clinics...",
     
     // SearchFilters
@@ -941,8 +941,8 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.title2": "先看排队",
     "hero.subtitle": "去诊所前，先看看前面有多少人在排队。",
     "hero.trustLine": "",
-    "hero.findClinics": "查看附近排队",
-    "hero.findMyQueue": "浏览诊所与服务",
+    "hero.findClinics": "浏览诊所",
+    "hero.findMyQueue": "查看我的排队状态",
     "hero.learnMore": "了解更多",
     "hero.queueTitle": "排队可见",
     "hero.queueDesc": "到达前查看预计排队状况",
@@ -950,25 +950,25 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.bookDesc": "所有诊所的即时预约",
     "hero.connectTitle": "连接",
     "hero.connectDesc": "AI健康助手和支持",
-    "hero.activityTitle": "🟢 实时排队动态",
-    "hero.activityDesc": "多家诊所正在更新中",
+    "hero.activityTitle": "🟢 实时诊所动态",
+    "hero.activityDesc": "排队和可用性更新",
     
     // Features
     "features.badge": "功能特色",
-    "features.title": "患者可以在ClynicQ上做什么",
+    "features.title": "您可以在ClynicQ上做什么",
     "features.subtitle": "",
     "features.queue.title": "排队可见",
     "features.queue.subtitle": "",
     "features.queue.description": "加入前查看前面有多少患者。",
-    "features.book.title": "预约或联系",
+    "features.book.title": "前往诊所预约",
     "features.book.subtitle": "",
     "features.book.description": "使用诊所的预约或联系流程，无需安装额外应用。",
-    "features.connect.title": "引导护理支持",
+    "features.connect.title": "获取选择护理帮助",
     "features.connect.subtitle": "",
     "features.connect.description": "如果您不确定从哪里开始，请求引导到合适的医疗服务提供者。",
     "features.secondary1.title": "医师简介",
-    "features.secondary2.title": "附近选项",
-    "features.secondary3.title": "多诊所发现",
+    "features.secondary2.title": "浏览诊所",
+    "features.secondary3.title": "比较诊所",
     
     // Queue Page
     "queue.title": "排队状况",
@@ -1222,8 +1222,8 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.joinedQueue": "您已加入排队！保存链接随时查看。",
     
     // MarketplaceSection
-    "marketplace.title": "附近诊所（实时排队）",
-    "marketplace.subtitle": "出发前看看附近诊所有多忙。",
+    "marketplace.title": "浏览诊所",
+    "marketplace.subtitle": "查看忙碌程度或直接预约",
     "marketplace.loading": "加载诊所中...",
     
     // SearchFilters
