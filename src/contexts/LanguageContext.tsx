@@ -47,9 +47,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero
     "hero.badge": "Check Queue • Book • Connect",
-    "hero.title1": "See the Queue",
-    "hero.title2": "Before You Go",
-    "hero.subtitle": "Check how many people are ahead before heading to the clinic.",
+    "hero.title1": "Join Queue",
+    "hero.title2": "From Anywhere",
+    "hero.subtitle": "See how many are ahead or book ahead, less waiting in the clinic.",
     "hero.trustLine": "",
     "hero.findClinics": "Explore Clinics",
     "hero.findMyQueue": "View My Queue Status",
@@ -937,9 +937,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Hero
     "hero.badge": "查看排队 • 预约 • 连接",
-    "hero.title1": "出发前",
-    "hero.title2": "先看排队",
-    "hero.subtitle": "去诊所前，先看看前面有多少人在排队。",
+    "hero.title1": "随时随地",
+    "hero.title2": "加入排队",
+    "hero.subtitle": "查看前面有多少人或提前预约，减少在诊所的等待时间。",
     "hero.trustLine": "",
     "hero.findClinics": "浏览诊所",
     "hero.findMyQueue": "查看我的排队状态",
