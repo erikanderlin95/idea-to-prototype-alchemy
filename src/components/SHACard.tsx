@@ -20,7 +20,7 @@ const SHACard = () => {
 
           {/* Title */}
           <h3 className="text-[17px] font-bold text-[#0E2E4A] mb-0.5">
-            SG Healthcare Alliance
+            Singapore Healthcare Alliance
           </h3>
           <p className="text-[13px] text-[#5A7089] mb-2.5">
             Panel of Specialists
