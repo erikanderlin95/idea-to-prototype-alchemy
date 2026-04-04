@@ -1492,7 +1492,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sha.whatsappContact": "WhatsApp联系",
     "sha.hospitalLocations": "医院位置",
     "sha.specialistDisciplines": "专科学科",
-    "sha.specialistDesc": "可用的专科学科包括外科、内科和跨多个领域的亚专科护理。",
+    "sha.specialistDesc": "可用的专科学科包括（但不限于）外科、内科和跨多个领域的亚专科护理。",
     "sha.keyProcedures": "主要手术与服务",
     "sha.procedure1": "结肠镜和胃镜检查",
     "sha.procedure2": "胃袖手术",
