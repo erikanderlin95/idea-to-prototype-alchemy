@@ -1517,7 +1517,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sha.fakeField.urgencyVal": "一周内",
     "sha.fakeField.contact": "联系方式",
     "sha.careCoordination": "护理协调",
-    "sha.careCoordDesc": "由郭瑞强医生领导的护理协调。",
+    "sha.careCoordDesc": "由顾问领导的护理协调。",
     "sha.noCoordinators": "目前没有可用的协调员。",
     "sha.availableCareAreas": "可用护理领域",
     "sha.carePathways": "护理路径",
