@@ -627,7 +627,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sha.fakeField.urgencyVal": "Within a week",
     "sha.fakeField.contact": "Contact",
     "sha.careCoordination": "Care Coordination",
-    "sha.careCoordDesc": "Care coordination led by Dr Richard Kwok.",
+    "sha.careCoordDesc": "Care coordination led by Consultant.",
     "sha.noCoordinators": "No coordinators available at this time.",
     "sha.availableCareAreas": "Available Care Areas",
     "sha.carePathways": "Care Pathways",
