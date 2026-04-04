@@ -615,7 +615,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sha.journeyStep1": "Describe your condition",
     "sha.journeyStep2": "Contact via WhatsApp",
     "sha.journeyStep3": "Receive specialist guidance",
-    "sha.startWithDr": "Start with Dr Richard Kwok →",
+    "sha.startWithDr": "Start with Consultant →",
     "sha.noAppNeeded": "No app download needed. Contact is made directly via WhatsApp.",
     "sha.intakeDesc": "Describe your condition and we will connect you to the appropriate specialist.",
     "sha.exampleIntakePreview": "Example intake preview",
