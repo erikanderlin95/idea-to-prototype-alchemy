@@ -1505,7 +1505,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sha.journeyStep1": "描述您的病情",
     "sha.journeyStep2": "通过WhatsApp联系",
     "sha.journeyStep3": "获得专科指导",
-    "sha.startWithDr": "联系郭医生 →",
+    "sha.startWithDr": "联系顾问 →",
     "sha.noAppNeeded": "无需下载应用。直接通过WhatsApp联系。",
     "sha.intakeDesc": "描述您的病情，我们将为您连接到合适的专科医生。",
     "sha.exampleIntakePreview": "示例申请预览",
