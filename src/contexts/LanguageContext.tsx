@@ -602,7 +602,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sha.whatsappContact": "WhatsApp Contact",
     "sha.hospitalLocations": "Hospital Locations",
     "sha.specialistDisciplines": "Specialist Disciplines",
-    "sha.specialistDesc": "Specialist disciplines available include surgical, medical and sub-specialty care across multiple fields.",
+    "sha.specialistDesc": "Specialist disciplines available include (but not limited to) surgical, medical and sub-specialty care across multiple fields.",
     "sha.keyProcedures": "Key Procedures & Services",
     "sha.procedure1": "Colonoscopy and gastroscopy",
     "sha.procedure2": "Gastric sleeve surgery",
