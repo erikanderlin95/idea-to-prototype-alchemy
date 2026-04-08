@@ -1,7 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Sparkles } from "lucide-react";
 import OrganizationCard from "@/components/OrganizationCard";
-import SHACard from "@/components/SHACard";
 
 export const FeaturedConsultants = () => {
   const { t } = useLanguage();
@@ -24,9 +23,8 @@ export const FeaturedConsultants = () => {
         </div>
 
         {/* Organization Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 max-w-3xl mx-auto px-2 sm:px-0">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 max-w-md mx-auto px-2 sm:px-0">
           <OrganizationCard />
-          <SHACard />
         </div>
       </div>
     </section>

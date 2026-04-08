@@ -24,7 +24,7 @@ import TCMClinics from "./pages/TCMClinics";
 import WellnessClinics from "./pages/WellnessClinics";
 import ManagedCareRequest from "./pages/ManagedCareRequest";
 import OrganizationProfile from "./pages/OrganizationProfile";
-import SHAProfile from "./pages/SHAProfile";
+
 import SpeakersTrainers from "./pages/SpeakersTrainers";
 import SpeakerProfile from "./pages/SpeakerProfile";
 import AfterlifeServicesPage from "./pages/AfterlifeServices";
@@ -61,7 +61,7 @@ const App = () => (
             <Route path="/tcm" element={<TCMClinics />} />
             <Route path="/wellness" element={<WellnessClinics />} />
             <Route path="/managed-care-request/:id" element={<ManagedCareRequest />} />
-            <Route path="/organization/sha" element={<SHAProfile />} />
+            
             <Route path="/organization/nymg" element={<OrganizationProfile />} />
             <Route path="/speakers" element={<SpeakersTrainers />} />
             <Route path="/speakers/ouch-pte-ltd" element={<SpeakerProfile />} />
