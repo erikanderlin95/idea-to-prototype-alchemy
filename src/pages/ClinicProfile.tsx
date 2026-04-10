@@ -128,8 +128,8 @@ const ClinicProfile = () => {
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
               <div className="space-y-2">
                 <div className="flex items-center gap-2.5 flex-wrap">
-                  <div className="w-10 h-10 sm:w-14 sm:h-14 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                    <span className="text-sm sm:text-xl font-bold text-primary leading-none">{clinic.name.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase()}</span>
+                  <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-xl bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+                    <span className="text-base sm:text-2xl font-bold text-primary leading-none">{clinic.name.split(' ').map((w: string) => w[0]).join('').slice(0, 2).toUpperCase()}</span>
                   </div>
                   <h1 className="text-xl sm:text-4xl font-bold">{clinic.name}</h1>
                   <Badge variant="secondary" className="text-xs sm:text-sm px-2 py-0.5">{clinic.type}</Badge>
