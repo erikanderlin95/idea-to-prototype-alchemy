@@ -1505,7 +1505,7 @@ const translations: Record<Language, Record<string, string>> = {
     "org.otherOfferings": "其他服务",
     "org.otherOfferingsSubtitle": "网络内提供的额外服务",
     "org.offering.talks.title": "健康讲座",
-    "org.offering.talks.desc": "面向个人和组织的教育课程和健康讲座。",
+    "org.offering.talks.desc": "教育性健康与保健课程。",
     "org.offering.space.title": "活动空间",
     "org.offering.space.desc": "可用于医疗活动和社区会议的诊所空间。",
     "org.contactCoordinator": "联系协调员",
