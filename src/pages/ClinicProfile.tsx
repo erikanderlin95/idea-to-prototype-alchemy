@@ -11,12 +11,34 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { isManagedCareType, NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
+
+const DEFAULT_SERVICES = [
+  { icon: Stethoscope, label: "GP Consult" },
+  { icon: Syringe, label: "Vaccination" },
+  { icon: HeartPulse, label: "Chronic Care" },
+  { icon: Baby, label: "Women's Health" },
+  { icon: Scan, label: "Health Screening" },
+  { icon: Brain, label: "Teleconsult" },
+];
+
+const SERVICE_ICON_MAP: Record<string, any> = {
+  "gp consult": Stethoscope,
+  "vaccination": Syringe,
+  "chronic care": HeartPulse,
+  "women's health": Baby,
+  "health screening": Scan,
+  "teleconsult": Brain,
+  "rehabilitation": Activity,
+  "mental wellness": Brain,
+  "specialist referral": Shield,
+  "medication": Pill,
+};
 
 const ClinicProfile = () => {
   const { id } = useParams();
