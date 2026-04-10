@@ -170,12 +170,12 @@ const ClinicProfile = () => {
           </Card>
 
           {/* Action Buttons */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-            <Button className="w-full text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 h-auto" onClick={handleBookAppointment}>
-              {isManagedCareType(clinic.type) ? <Shield className="mr-2 h-4 w-4 sm:h-5 sm:w-5" /> : <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />}
-              {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
-            </Button>
-            {clinic.has_digital_queue && (
+          {clinic.has_digital_queue ? (
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+              <Button className="w-full text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 h-auto" onClick={handleBookAppointment}>
+                {isManagedCareType(clinic.type) ? <Shield className="mr-2 h-4 w-4 sm:h-5 sm:w-5" /> : <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />}
+                {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
+              </Button>
               <Button 
                 variant="outline"
                 className="w-full text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 h-auto"
@@ -184,21 +184,26 @@ const ClinicProfile = () => {
                 <Users className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />
                 {t('clinicProfile.joinQueue')}
               </Button>
-            )}
-            {clinic.has_digital_queue && (
-              <Card className="p-3 sm:p-5 border-4 border-primary/50 shadow-lg bg-gradient-to-br from-primary/5 to-accent/5">
-                <div className="flex items-center gap-2.5 sm:gap-4">
-                  <div className="p-2 sm:p-3 bg-gradient-to-br from-primary to-accent rounded-lg shadow-md">
+              <Card className="p-3 sm:p-5 border-4 border-primary/50 shadow-lg bg-gradient-to-br from-primary/5 to-accent/5 flex items-center">
+                <div className="flex items-center gap-2.5 sm:gap-4 w-full">
+                  <div className="p-2 sm:p-3 bg-gradient-to-br from-primary to-accent rounded-lg shadow-md shrink-0">
                     <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
                   </div>
                   <div>
-                     <p className="text-xs sm:text-base font-bold text-foreground mb-0.5">{t('clinicProfile.currentQueue')}</p>
+                    <p className="text-xs sm:text-base font-bold text-foreground mb-0.5">{t('clinicProfile.currentQueue')}</p>
                     <p className="font-black text-xl sm:text-2xl text-primary">{queue.length} {t('clinicProfile.waiting')}</p>
                   </div>
                 </div>
               </Card>
-            )}
-          </div>
+            </div>
+          ) : (
+            <div className="flex justify-center">
+              <Button className="text-sm sm:text-base px-8 sm:px-12 py-3 sm:py-4 h-auto" onClick={handleBookAppointment}>
+                {isManagedCareType(clinic.type) ? <Shield className="mr-2 h-4 w-4 sm:h-5 sm:w-5" /> : <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />}
+                {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
+              </Button>
+            </div>
+          )}
 
           {/* Tabs */}
           <Tabs defaultValue="doctors" className="w-full">
