@@ -199,35 +199,40 @@ const ClinicProfile = () => {
             </div>
           </Card>
 
-          {/* Clinic Photos - Secondary/Trust Element */}
+          {/* Clinic Photos - Always show if photos exist */}
           {clinic.photos && clinic.photos.length > 0 && (
-            <div>
+            <Card className="p-3 sm:p-4">
               <h2 className="text-sm sm:text-base font-bold mb-1.5 sm:mb-2 text-foreground">Clinic Photos</h2>
-              <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-1 snap-x snap-mandatory">
+              <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-1 snap-x snap-mandatory sm:overflow-visible sm:grid sm:grid-cols-2">
                 {clinic.photos.slice(0, 2).map((photo: string, index: number) => (
-                  <div key={index} className="w-36 h-27 sm:w-44 sm:h-33 aspect-[4/3] rounded-lg overflow-hidden bg-muted flex-shrink-0 snap-start border border-border/40 shadow-sm">
+                  <div key={index} className="aspect-[4/3] min-w-[9rem] sm:min-w-0 rounded-lg overflow-hidden bg-muted flex-shrink-0 snap-start border border-border/40 shadow-sm">
                     <img src={photo} alt={`${clinic.name} photo ${index + 1}`} className="w-full h-full object-cover" />
                   </div>
                 ))}
               </div>
-            </div>
+            </Card>
           )}
 
-          {/* CTA Action Buttons */}
+          {/* CTA Action Cards — unified system */}
           {clinic.has_digital_queue ? (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
-              {/* Book Appointment - Secondary */}
-              <Button 
-                variant="outline"
-                className="w-full text-sm sm:text-base px-4 sm:px-6 py-3 sm:py-4 h-auto border-border"
+              {/* Book Appointment */}
+              <button
+                className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
                 onClick={handleBookAppointment}
               >
-                {isManagedCareType(clinic.type) ? <Shield className="mr-2 h-4 w-4 sm:h-5 sm:w-5" /> : <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />}
-                {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
-              </Button>
-              {/* Join Queue - Primary action, styled like People Ahead */}
+                <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
+                  {isManagedCareType(clinic.type) 
+                    ? <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" /> 
+                    : <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />}
+                </div>
+                <span className="text-sm sm:text-base font-bold text-foreground">
+                  {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
+                </span>
+              </button>
+              {/* Join Queue */}
               <button
-                className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer disabled:opacity-50"
+                className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
                 onClick={() => navigate(`/queue?clinic=${id}`)}
               >
                 <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
@@ -235,8 +240,8 @@ const ClinicProfile = () => {
                 </div>
                 <span className="text-sm sm:text-base font-bold text-foreground">{t('clinicProfile.joinQueue')}</span>
               </button>
-              {/* People Ahead - Informational */}
-              <div className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10">
+              {/* People Ahead */}
+              <div className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10">
                 <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
                   <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
                 </div>
@@ -248,10 +253,19 @@ const ClinicProfile = () => {
             </div>
           ) : (
             <div className="flex justify-center">
-              <Button className="text-sm sm:text-base px-8 sm:px-12 py-3 sm:py-4 h-auto" onClick={handleBookAppointment}>
-                {isManagedCareType(clinic.type) ? <Shield className="mr-2 h-4 w-4 sm:h-5 sm:w-5" /> : <Calendar className="mr-2 h-4 w-4 sm:h-5 sm:w-5" />}
-                {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
-              </Button>
+              <button
+                className="flex items-center gap-2.5 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
+                onClick={handleBookAppointment}
+              >
+                <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
+                  {isManagedCareType(clinic.type)
+                    ? <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
+                    : <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />}
+                </div>
+                <span className="text-sm sm:text-base font-bold text-foreground">
+                  {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
+                </span>
+              </button>
             </div>
           )}
 
