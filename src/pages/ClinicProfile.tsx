@@ -207,17 +207,19 @@ const ClinicProfile = () => {
                 </div>
               </div>
             </Card>
-            <Card className="p-3 sm:p-5 border-4 border-primary/50 shadow-lg bg-gradient-to-br from-primary/5 to-accent/5">
-              <div className="flex items-center gap-2.5 sm:gap-4">
-                <div className="p-2 sm:p-3 bg-gradient-to-br from-primary to-accent rounded-lg shadow-md">
-                  <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
+            {clinic.has_digital_queue && (
+              <Card className="p-3 sm:p-5 border-4 border-primary/50 shadow-lg bg-gradient-to-br from-primary/5 to-accent/5">
+                <div className="flex items-center gap-2.5 sm:gap-4">
+                  <div className="p-2 sm:p-3 bg-gradient-to-br from-primary to-accent rounded-lg shadow-md">
+                    <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
+                  </div>
+                  <div>
+                     <p className="text-xs sm:text-base font-bold text-foreground mb-0.5">{t('clinicProfile.currentQueue')}</p>
+                    <p className="font-black text-xl sm:text-2xl text-primary">{queue.length} {t('clinicProfile.waiting')}</p>
+                  </div>
                 </div>
-                <div>
-                   <p className="text-xs sm:text-base font-bold text-foreground mb-0.5">{t('clinicProfile.currentQueue')}</p>
-                  <p className="font-black text-xl sm:text-2xl text-primary">{queue.length} {t('clinicProfile.waiting')}</p>
-                </div>
-              </div>
-            </Card>
+              </Card>
+            )}
           </div>
 
           {/* Tabs */}
