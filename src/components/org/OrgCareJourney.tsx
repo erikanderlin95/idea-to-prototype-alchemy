@@ -19,7 +19,11 @@ export const OrgCareJourney = () => {
               <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text={t("org.intakeStep3")} />
             </div>
 
-            <p className="mt-4 text-[15px] leading-relaxed text-[#6B7D8E]">
+            <p className="mt-2 text-[14px] font-medium text-[#18B7C9]">
+              {t("org.whatsappReinforce")}
+            </p>
+
+            <p className="mt-2 text-[15px] leading-relaxed text-[#6B7D8E]">
               {t("org.intakeNote")}
             </p>
           </div>
