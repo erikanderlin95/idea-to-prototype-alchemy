@@ -145,21 +145,7 @@ const ClinicProfile = () => {
                   </div>
                 </div>
               </div>
-              <div className="flex flex-col sm:flex-row gap-2">
-                <Button size="sm" className="text-xs sm:text-sm px-3 sm:px-6 py-2 sm:py-4 h-auto" onClick={handleBookAppointment}>
-                  {isManagedCareType(clinic.type) ? <Shield className="mr-1.5 h-3.5 w-3.5 sm:h-5 sm:w-5" /> : <Calendar className="mr-1.5 h-3.5 w-3.5 sm:h-5 sm:w-5" />}
-                  {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
-                </Button>
-                <Button 
-                  size="sm" 
-                  variant="outline"
-                  className="text-xs sm:text-sm px-3 sm:px-6 py-2 sm:py-4 h-auto"
-                  onClick={() => navigate(`/queue?clinic=${id}`)}
-                >
-                  <Users className="mr-1.5 h-3.5 w-3.5 sm:h-5 sm:w-5" />
-                  {t('clinicProfile.joinQueue')}
-                </Button>
-              </div>
+            
             </div>
 
             <p className="text-sm sm:text-base text-foreground/90 font-medium">{clinic.description}</p>
