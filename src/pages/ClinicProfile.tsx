@@ -237,7 +237,7 @@ const ClinicProfile = () => {
                 <h2 className="text-sm sm:text-base font-bold mb-1.5 sm:mb-2 text-foreground">Clinic Photos</h2>
                 <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-1 snap-x snap-mandatory sm:overflow-visible sm:grid sm:grid-cols-2">
                   {displayPhotos.map((photo: string, index: number) => (
-                    <div key={index} className="aspect-[4/3] min-w-[9rem] sm:min-w-0 rounded-lg overflow-hidden bg-muted flex-shrink-0 snap-start border border-border/40 shadow-sm">
+                    <div key={index} className="aspect-[4/3] min-w-[7rem] sm:min-w-0 rounded-lg overflow-hidden bg-muted flex-shrink-0 snap-start border border-border/40 shadow-sm">
                       <img src={photo} alt={`${clinic.name} photo ${index + 1}`} className="w-full h-full object-cover" />
                     </div>
                   ))}
