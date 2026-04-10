@@ -31,7 +31,7 @@ const OrganizationProfile = () => {
         .select("id, name, title, photo_url, short_bio")
         .eq("is_active", true)
         .order("name");
-      if (data) setConcierges(data);
+      if (data) setConcierges(data.filter(c => c.name.toLowerCase().includes("aellan")));
       setLoading(false);
     };
     fetchConcierges();
