@@ -42,7 +42,7 @@ const OrganizationProfile = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <OrgHero />
+      <OrgHero onStartIntake={() => setShowIntakeModal(true)} />
 
       <OrgCareJourney />
 

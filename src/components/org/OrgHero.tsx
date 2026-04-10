@@ -1,11 +1,16 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Building2, Network, Stethoscope, Shield, ClipboardList, UserCheck, MessageCircle, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-export const OrgHero = () => {
+interface OrgHeroProps {
+  onStartIntake?: () => void;
+}
+
+export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
   const { t } = useLanguage();
 
   return (
-    <section className="pt-24 pb-6 px-4 relative overflow-hidden">
+    <section className="pt-24 pb-8 px-4 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-[#F4F8FB]" />
 
       <div className="max-w-5xl mx-auto relative">
@@ -22,14 +27,25 @@ export const OrgHero = () => {
               {t("org.name")}
             </h1>
 
-            <p className="text-[19px] text-[#5F6F7E] leading-relaxed max-w-lg">
+            <p className="text-[18px] text-[#5F6F7E] leading-relaxed max-w-lg">
               {t("org.heroDesc")}
             </p>
-            <p className="text-[17px] font-semibold text-[#12385B]">
+
+            <p className="text-[18px] font-bold text-[#12385B]">
               {t("org.heroSubline")}
             </p>
 
-            <div className="flex items-center gap-0 pt-1">
+            {onStartIntake && (
+              <Button
+                onClick={onStartIntake}
+                className="h-11 px-6 text-[15px] font-semibold rounded-full bg-[#18B7C9] hover:bg-[#149dab] text-white shadow-[0_2px_8px_rgba(24,183,201,0.3)] active:scale-[0.97] transition-all"
+              >
+                <ClipboardList className="h-4 w-4 mr-2" />
+                {t("org.startIntake")}
+              </Button>
+            )}
+
+            <div className="flex items-center gap-0 pt-1 flex-wrap">
               <div className="flex items-center gap-2 rounded-lg bg-[#E6F7FA] px-3 py-2">
                 <div className="w-6 h-6 rounded-full bg-[#18B7C9]/20 flex items-center justify-center text-[#18B7C9]">
                   <ClipboardList className="h-3 w-3" />
@@ -51,7 +67,6 @@ export const OrgHero = () => {
                 <span className="text-[15px] font-bold text-[#12385B]">{t("org.weFollowUp")}</span>
               </div>
             </div>
-
           </div>
 
           <div className="lg:col-span-2">
