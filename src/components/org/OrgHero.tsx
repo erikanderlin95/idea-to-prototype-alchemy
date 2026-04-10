@@ -35,15 +35,6 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
               {t("org.heroSubline")}
             </p>
 
-            {onStartIntake && (
-              <Button
-                onClick={onStartIntake}
-                className="h-11 px-6 text-[15px] font-semibold rounded-full bg-[#18B7C9] hover:bg-[#149dab] text-white shadow-[0_2px_8px_rgba(24,183,201,0.3)] active:scale-[0.97] transition-all"
-              >
-                <ClipboardList className="h-4 w-4 mr-2" />
-                {t("org.startIntake")}
-              </Button>
-            )}
 
             <div className="flex items-center gap-0 pt-1 flex-wrap">
               <div className="flex items-center gap-2 rounded-lg bg-[#E6F7FA] px-3 py-2">
