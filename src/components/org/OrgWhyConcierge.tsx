@@ -15,14 +15,6 @@ export const OrgWhyConcierge = () => {
             <p className="text-[17px] text-[#5F6F7E] leading-relaxed max-w-lg">
               {t("org.whyConciergeDesc")}
             </p>
-            <ul className="space-y-1.5 pl-1">
-              {[t("org.whyConcierge.oneIntake"), t("org.whyConcierge.guidedMatching"), t("org.whyConcierge.continuousFollowUp")].map((item) => (
-                <li key={item} className="flex items-center gap-2 text-[17px] text-[#12385B]">
-                  <Check className="h-4 w-4 text-[#18B7C9] shrink-0" />
-                  {item}
-                </li>
-              ))}
-            </ul>
           </div>
 
           <div className="space-y-2">
