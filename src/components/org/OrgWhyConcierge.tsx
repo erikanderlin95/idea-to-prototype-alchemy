@@ -12,10 +12,9 @@ export const OrgWhyConcierge = () => {
             <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
               {t("org.whyConciergeTitle")}
             </h2>
-            <p className="text-[18px] text-[#5F6F7E] leading-relaxed max-w-lg">
+            <p className="text-[17px] text-[#5F6F7E] leading-relaxed max-w-lg">
               {t("org.whyConciergeDesc")}
             </p>
-            <p className="text-[18px] text-[#12385B] font-medium">{t("org.whyConciergeSimplifies")}</p>
             <ul className="space-y-1.5 pl-1">
               {[t("org.whyConcierge.oneIntake"), t("org.whyConcierge.guidedMatching"), t("org.whyConcierge.continuousFollowUp")].map((item) => (
                 <li key={item} className="flex items-center gap-2 text-[17px] text-[#12385B]">

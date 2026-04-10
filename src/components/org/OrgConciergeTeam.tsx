@@ -22,6 +22,9 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
   return (
     <section className="py-6 px-4 bg-[#F4F8FB]">
       <div className="max-w-5xl mx-auto space-y-1 text-center">
+        <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">
+          {t("org.yourCareCoordinator")}
+        </p>
         <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
           {t("org.careCoordTeam")}
         </h2>
@@ -54,7 +57,7 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
                   </div>
 
                   <h3 className="text-[16px] font-semibold text-[#12385B] leading-tight truncate w-full">
-                    {person.name}
+                    {t("org.speakTo")} {person.name}
                   </h3>
                   <p className="text-[14px] text-[#5F6F7E] mt-0.5 truncate w-full">
                     {person.title}

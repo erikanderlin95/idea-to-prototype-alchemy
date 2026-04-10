@@ -9,6 +9,7 @@ import { OrgWhyConcierge } from "@/components/org/OrgWhyConcierge";
 import { OrgConciergeTeam } from "@/components/org/OrgConciergeTeam";
 import { OrgCareJourney } from "@/components/org/OrgCareJourney";
 import { OrgServices } from "@/components/org/OrgServices";
+import { OrgOtherOfferings } from "@/components/org/OrgOtherOfferings";
 
 interface Concierge {
   id: string;
@@ -52,6 +53,8 @@ const OrganizationProfile = () => {
         loading={loading}
         onConnect={() => setShowIntakeModal(true)}
       />
+
+      <OrgOtherOfferings />
 
       <OrgServices />
 

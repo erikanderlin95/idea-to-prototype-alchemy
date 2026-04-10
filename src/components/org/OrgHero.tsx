@@ -25,6 +25,9 @@ export const OrgHero = () => {
             <p className="text-[19px] text-[#5F6F7E] leading-relaxed max-w-lg">
               {t("org.heroDesc")}
             </p>
+            <p className="text-[17px] font-semibold text-[#12385B]">
+              {t("org.heroSubline")}
+            </p>
 
             <div className="flex items-center gap-0 pt-1">
               <div className="flex items-center gap-2 rounded-lg bg-[#E6F7FA] px-3 py-2">
