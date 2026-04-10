@@ -5,9 +5,9 @@ export const OrgCareJourney = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="py-8 px-4 bg-[#F0FAFB]">
+    <section className="py-6 px-4 bg-[#F0FAFB]">
       <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 items-start">
           <div className="space-y-3">
             <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
               {t("org.intakeFlowTitle")}
