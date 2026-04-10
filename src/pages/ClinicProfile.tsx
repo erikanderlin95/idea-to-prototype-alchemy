@@ -11,12 +11,34 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { isManagedCareType, NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
+
+const DEFAULT_SERVICES = [
+  { icon: Stethoscope, label: "GP Consult" },
+  { icon: Syringe, label: "Vaccination" },
+  { icon: HeartPulse, label: "Chronic Care" },
+  { icon: Baby, label: "Women's Health" },
+  { icon: Scan, label: "Health Screening" },
+  { icon: Brain, label: "Teleconsult" },
+];
+
+const SERVICE_ICON_MAP: Record<string, any> = {
+  "gp consult": Stethoscope,
+  "vaccination": Syringe,
+  "chronic care": HeartPulse,
+  "women's health": Baby,
+  "health screening": Scan,
+  "teleconsult": Brain,
+  "rehabilitation": Activity,
+  "mental wellness": Brain,
+  "specialist referral": Shield,
+  "medication": Pill,
+};
 
 const ClinicProfile = () => {
   const { id } = useParams();
@@ -151,23 +173,42 @@ const ClinicProfile = () => {
             <p className="text-sm sm:text-base text-foreground/90 font-medium">{clinic.description}</p>
           </div>
 
-          {/* Photo Gallery */}
+          {/* Services Offered - Primary Block */}
           <Card className="p-3 sm:p-4">
-            <h2 className="text-lg sm:text-2xl font-bold mb-2 sm:mb-3">{t('clinicProfile.clinicPhotos')}</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-4">
-              {clinic.photos && clinic.photos.length > 0 ? (
-                clinic.photos.map((photo: string, index: number) => (
-                  <div key={index} className="aspect-square rounded-lg overflow-hidden bg-muted">
-                    <img src={photo} alt={`${clinic.name} photo ${index + 1}`} className="w-full h-full object-cover" />
+            <h2 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">Services Offered</h2>
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 sm:gap-3">
+              {(() => {
+                const services = clinic.services && clinic.services.length > 0
+                  ? clinic.services.map((s: string) => ({
+                      icon: SERVICE_ICON_MAP[s.toLowerCase()] || Stethoscope,
+                      label: s,
+                    }))
+                  : DEFAULT_SERVICES;
+                return services.slice(0, 8).map((service: any, index: number) => (
+                  <div
+                    key={index}
+                    className="flex flex-col items-center gap-1.5 p-2 sm:p-3 rounded-lg border border-border/60 bg-muted/30 hover:bg-primary/5 hover:border-primary/30 transition-all cursor-default"
+                  >
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+                      <service.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                    </div>
+                    <span className="text-[10px] sm:text-xs font-semibold text-foreground text-center leading-tight">{service.label}</span>
                   </div>
-                ))
-              ) : (
-                <div className="col-span-full text-center py-4 text-muted-foreground">
-                  <p className="text-sm sm:text-base">{t('clinicProfile.photoGalleryComingSoon')}</p>
-                </div>
-              )}
+                ));
+              })()}
             </div>
           </Card>
+
+          {/* Clinic Photos - Secondary/Minimized */}
+          {clinic.photos && clinic.photos.length > 0 && (
+            <div className="flex gap-2 sm:gap-3 overflow-x-auto pb-1">
+              {clinic.photos.slice(0, 2).map((photo: string, index: number) => (
+                <div key={index} className="w-32 h-20 sm:w-48 sm:h-28 rounded-lg overflow-hidden bg-muted flex-shrink-0">
+                  <img src={photo} alt={`${clinic.name} photo ${index + 1}`} className="w-full h-full object-cover" />
+                </div>
+              ))}
+            </div>
+          )}
 
           {/* Action Buttons */}
           {clinic.has_digital_queue ? (
