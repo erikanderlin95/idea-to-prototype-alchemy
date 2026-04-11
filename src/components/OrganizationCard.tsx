@@ -12,7 +12,7 @@ const OrganizationCard = () => {
       <CardContent className="p-4">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
-          <div className="w-14 h-14 rounded-lg overflow-hidden bg-white mb-2.5 ring-1 ring-[#B0C8DA]/40 shadow-[0_1px_6px_rgba(13,46,74,0.08)] group-hover:shadow-[0_2px_12px_rgba(13,46,74,0.12)] transition-all flex items-center justify-center p-1">
+          <div className="w-[4.5rem] h-[4.5rem] rounded-lg overflow-hidden bg-white mb-2.5 ring-1 ring-[#B0C8DA]/40 shadow-[0_1px_6px_rgba(13,46,74,0.08)] group-hover:shadow-[0_2px_12px_rgba(13,46,74,0.12)] transition-all flex items-center justify-center p-1.5">
             <img src={nymgLogo} alt="Nanyang Medical Group" className="w-full h-full object-contain" />
           </div>
 
