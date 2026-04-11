@@ -386,148 +386,6 @@ export const ClinicCard = ({
     setBookingRedirectType("");
   };
 
-  // === NMG MANAGED CARE CONVERSION CARD ===
-  if (isNmgAffiliated) {
-    return (
-      <>
-        <Card className="group flex flex-col px-3 py-3 hover:shadow-[0_6px_24px_rgba(14,154,171,0.12)] hover:-translate-y-0.5 transition-all duration-300 border border-border/40 hover:border-primary/30 cursor-pointer bg-white h-full" onClick={() => id && navigate(`/clinic/${id}`)}>
-          {/* Row 1: Name + type + open + rating */}
-          <div className="flex items-center justify-between gap-1.5">
-            <div className="flex items-center gap-2 flex-wrap flex-1 min-w-0">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                <span className="text-[15px] font-bold text-primary leading-none">{name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}</span>
-              </div>
-              <h3 className="text-base sm:text-lg font-semibold group-hover:text-primary transition-colors truncate">{name}</h3>
-              <Badge variant="secondary" className="text-xs font-medium px-1.5 py-0 h-[20px] shrink-0">
-                {type}
-              </Badge>
-              {isOpen ? (
-                <Badge variant="outline" className="text-xs border-accent text-accent px-1.5 py-0 h-[20px] shrink-0">
-                  {t("clinicCard.open")}
-                </Badge>
-              ) : (
-                <Badge variant="outline" className="text-xs border-muted text-muted-foreground px-1.5 py-0 h-[20px] shrink-0">
-                  {t("clinicCard.closed")}
-                </Badge>
-              )}
-            </div>
-            <div className="flex items-center gap-0.5 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded shrink-0">
-              <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-              <span className="text-[13px] font-bold">{rating}</span>
-            </div>
-          </div>
-
-          {/* Managed Care highlight strip */}
-          <div className="mt-2 px-2.5 py-2 rounded-lg border border-primary/20 bg-primary/5">
-            <div className="flex items-center gap-1.5">
-              <Shield className="h-3.5 w-3.5 text-primary shrink-0" />
-              <span className="text-[13px] font-bold text-primary">Managed Healthcare Provider</span>
-            </div>
-            <p className="text-[12px] text-muted-foreground mt-0.5 leading-snug">Coordinated care across GP, specialists, and referrals</p>
-          </div>
-
-          {/* CTA */}
-          <div className="mt-2.5 space-y-1.5" onClick={(e) => e.stopPropagation()}>
-            <Button
-              className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/30 border-0 h-10 hover:scale-[1.02] transition-transform"
-              disabled={!isOpen}
-              onClick={() => { resetManagedCareModal(); setShowManagedCareModal(true); }}
-            >
-              <Shield className="mr-1.5 h-4 w-4" strokeWidth={3} />
-              Request Managed Care
-            </Button>
-            <button
-              className="w-full text-center text-xs text-muted-foreground hover:text-primary font-medium py-1 transition-colors"
-              onClick={() => id && navigate(`/clinic/${id}`)}
-            >
-              View Details →
-            </button>
-          </div>
-        </Card>
-
-        {/* NMG Managed Care Request Modal */}
-        <Dialog open={showManagedCareModal} onOpenChange={(open) => { setShowManagedCareModal(open); if (!open) resetManagedCareModal(); }}>
-          <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <DialogTitle>Request Managed Care Support</DialogTitle>
-              <DialogDescription>Complete this form and a care coordinator will contact you shortly.</DialogDescription>
-            </DialogHeader>
-            {!mcSubmitted ? (
-              <div className="space-y-4">
-                <div className="space-y-2">
-                  <Label htmlFor="mc-concern-nmg">Condition / Concern *</Label>
-                  <Input id="mc-concern-nmg" value={mcConcern} onChange={(e) => setMcConcern(e.target.value)} placeholder="e.g. Knee pain, skin rash" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="mc-location-nmg">Preferred Location</Label>
-                  <Input id="mc-location-nmg" value={mcLocation} onChange={(e) => setMcLocation(e.target.value)} placeholder="e.g. Central, East Singapore" />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="mc-timing-nmg">Preferred Appointment Timing</Label>
-                  <Input id="mc-timing-nmg" value={mcTiming} onChange={(e) => setMcTiming(e.target.value)} placeholder="e.g. Weekday mornings, ASAP" />
-                </div>
-                <div className="space-y-2">
-                  <Label>Urgency Level *</Label>
-                  <RadioGroup value={mcUrgency} onValueChange={setMcUrgency} className="flex gap-3">
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="urgent" id="urg-urgent-nmg" />
-                      <Label htmlFor="urg-urgent-nmg" className="font-normal cursor-pointer">Urgent</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="soon" id="urg-soon-nmg" />
-                      <Label htmlFor="urg-soon-nmg" className="font-normal cursor-pointer">Soon</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="flexible" id="urg-flexible-nmg" />
-                      <Label htmlFor="urg-flexible-nmg" className="font-normal cursor-pointer">Flexible</Label>
-                    </div>
-                  </RadioGroup>
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="mc-name-nmg">Name *</Label>
-                  <Input id="mc-name-nmg" value={mcName} onChange={(e) => setMcName(e.target.value)} placeholder="Your full name" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="mc-phone-nmg">Contact Number *</Label>
-                  <Input id="mc-phone-nmg" type="tel" value={mcPhone} onChange={(e) => setMcPhone(e.target.value)} placeholder="e.g. +6591234567" required />
-                </div>
-                <p className="text-xs text-muted-foreground">{NMG_ATTRIBUTION_TAG}</p>
-                <Button className="w-full" onClick={handleManagedCareSubmit} disabled={mcSubmitting}>
-                  <Shield className="mr-2 h-4 w-4" />
-                  {mcSubmitting ? "Submitting..." : "Submit Request"}
-                </Button>
-              </div>
-            ) : (
-              <div className="text-center space-y-4 py-4">
-                <CheckCircle className="h-12 w-12 text-primary mx-auto" />
-                <p className="text-lg font-semibold text-foreground">Request Received</p>
-                <p className="text-sm text-muted-foreground">
-                  Your request has been received. A care coordinator will review your case and contact you shortly.
-                </p>
-                <div className="bg-muted rounded-lg p-3">
-                  <p className="text-xs text-muted-foreground">Case Reference</p>
-                  <p className="text-lg font-mono font-bold text-foreground">{mcCaseId}</p>
-                </div>
-                <Button
-                  className="w-full"
-                  onClick={() => {
-                    const message = encodeURIComponent(`Hi, I have a managed care request. My Case ID is: ${mcCaseId}. Please assist me.`);
-                    window.open(`https://wa.me/?text=${message}`, "_blank");
-                  }}
-                >
-                  <MessageCircle className="mr-2 h-4 w-4" />
-                  Chat with Care Coordinator
-                </Button>
-                <Button variant="outline" className="w-full" onClick={() => setShowManagedCareModal(false)}>Close</Button>
-              </div>
-            )}
-          </DialogContent>
-        </Dialog>
-      </>
-    );
-  }
-
-  // === STANDARD CLINIC CARD ===
   return (
     <>
       <Card className="group flex flex-col px-2.5 py-2 sm:px-3 sm:py-2 hover:shadow-lg transition-all duration-300 border border-border/40 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue h-full" onClick={() => id && navigate(`/clinic/${id}`)}>
@@ -550,6 +408,12 @@ export const ClinicCard = ({
             ) : (
               <Badge variant="outline" className="text-xs border-muted text-muted-foreground px-1.5 py-0 h-[20px] shrink-0">
                 {t("clinicCard.closed")}
+              </Badge>
+            )}
+            {isNmgAffiliated && (
+              <Badge className="text-xs bg-primary/15 text-primary border border-primary/30 px-1.5 py-0 h-[20px] shrink-0">
+                <Shield className="h-2.5 w-2.5 mr-0.5" />
+                Managed Care
               </Badge>
             )}
           </div>
@@ -746,7 +610,7 @@ export const ClinicCard = ({
             
             {/* Buttons — anchored bottom */}
             <div className="space-y-1.5">
-            <div className="flex gap-1.5">
+            <div className={`flex gap-1.5 ${isNmgAffiliated && isManagedCareType(type) ? 'flex-col' : ''}`}>
               {/* Join Queue button — shown when clinic has digital queue */}
               {hasDigitalQueue && (
                 <Button 
@@ -760,18 +624,29 @@ export const ClinicCard = ({
               )}
               {/* Book button — shown when clinic does NOT have digital queue, OR specifically for Harmony TCM Centre */}
               {(!hasDigitalQueue || name === "Harmony TCM Centre") && (
-                <Button 
-                  variant={hasDigitalQueue ? "outline" : "default"}
-                  className={hasDigitalQueue 
-                    ? "flex-1 font-bold text-sm border border-primary/30 hover:bg-primary/20 hover:border-primary h-10 hover:scale-[1.02] transition-transform"
-                    : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform"
-                  }
-                  disabled={!isOpen}
-                  onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
-                >
-                  <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
-                  {isManagedCareType(type) ? "Request" : "Book"}
-                </Button>
+                isNmgAffiliated && isManagedCareType(type) ? (
+                  <Button 
+                    className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform" 
+                    disabled={!isOpen}
+                    onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
+                  >
+                    <Shield className="mr-1.5 h-4 w-4" strokeWidth={3} />
+                    Request Managed Care Support
+                  </Button>
+                ) : (
+                  <Button 
+                    variant={hasDigitalQueue ? "outline" : "default"}
+                    className={hasDigitalQueue 
+                      ? "flex-1 font-bold text-sm border border-primary/30 hover:bg-primary/20 hover:border-primary h-10 hover:scale-[1.02] transition-transform"
+                      : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform"
+                    }
+                    disabled={!isOpen}
+                    onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
+                  >
+                    <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
+                    {isManagedCareType(type) ? "Request" : "Book"}
+                  </Button>
+                )
               )}
             </div>
             {/* View Details — secondary action */}
@@ -782,6 +657,16 @@ export const ClinicCard = ({
             >
               {t("clinicCard.viewDetails")}
             </Button>
+            {isNmgAffiliated && !isManagedCareType(type) && (
+              <Button
+                variant="outline"
+                className="w-full border border-primary/30 text-primary hover:bg-primary/10 font-semibold h-10 text-sm"
+                onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
+              >
+                <Shield className="mr-1.5 h-3.5 w-3.5" />
+                Request Managed Care Support
+              </Button>
+            )}
             </div>
           </div>
         )}
