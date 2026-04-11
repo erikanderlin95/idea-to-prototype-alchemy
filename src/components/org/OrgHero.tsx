@@ -115,7 +115,7 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
 
 const TrustStat = ({ value, label }: { value: string; label: string }) => (
   <div className="text-center">
-    <p className="text-xl font-bold text-[#12385B]">{value}</p>
-    <p className="text-[11px] text-[#5F6F7E] font-medium mt-0.5">{label}</p>
+    <p className="text-[22px] font-extrabold text-[#12385B] tracking-tight">{value}</p>
+    <p className="text-[10px] text-[#5F6F7E]/70 font-medium mt-1 uppercase tracking-wide">{label}</p>
   </div>
 );
