@@ -62,14 +62,15 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
 
           <div className="lg:col-span-2">
             <div className="rounded-2xl bg-white border border-[#DCE8EF] shadow-[0_8px_32px_rgba(18,56,91,0.12)] overflow-hidden">
-              <div className="px-5 py-3 bg-[#F0F5FA] border-b border-[#DCE8EF]">
-                <span className="text-[15px] font-bold text-[#12385B] uppercase tracking-widest">{t("org.networkCapabilities")}</span>
+              <div className="px-5 py-3.5 bg-[#F0F5FA] border-b border-[#DCE8EF]">
+                <span className="text-[15px] font-bold text-[#12385B] leading-snug">Your Trusted Guide to Private Healthcare in Singapore</span>
               </div>
 
-              <div className="p-3 space-y-0.5">
-                <CapabilityChip icon={<Network className="h-4 w-4" />} label={t("org.clinicNetwork")} />
-                <CapabilityChip icon={<Stethoscope className="h-4 w-4" />} label={t("org.specialistAccess")} />
-                <CapabilityChip icon={<Shield className="h-4 w-4" />} label={t("org.coverageSupport")} />
+              <div className="p-4 grid grid-cols-2 gap-3">
+                <TrustStat value="10,000+" label="Patients Assisted" />
+                <TrustStat value="100+" label="Specialist Partners" />
+                <TrustStat value="24/7" label="Concierge Support" />
+                <TrustStat value="4.9 ★" label="Patient Rating" />
               </div>
             </div>
           </div>
@@ -79,11 +80,9 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
   );
 };
 
-const CapabilityChip = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <div className="flex items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-[#E6F7FA] transition-colors duration-200">
-    <div className="w-8 h-8 rounded-lg bg-[#E6F7FA] flex items-center justify-center text-[#18B7C9] flex-shrink-0">
-      {icon}
-    </div>
-    <p className="text-[17px] font-semibold text-[#12385B] leading-tight">{label}</p>
+const TrustStat = ({ value, label }: { value: string; label: string }) => (
+  <div className="text-center py-2">
+    <p className="text-xl font-bold text-[#12385B]">{value}</p>
+    <p className="text-[13px] text-[#5F6F7E] font-medium mt-0.5">{label}</p>
   </div>
 );
