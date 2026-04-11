@@ -97,7 +97,7 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
                   <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
                 </div>
                 <div className="relative overflow-hidden rounded-xl">
-                  <img src={healthcareCoordination} alt="Care coordination" className="w-full h-full object-cover aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" width={640} height={640} />
+                  <img src={healthcareCoordination} alt="Care coordination" className="w-full h-full object-cover object-top aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" width={640} height={640} />
                   <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
                 </div>
                 <div className="relative overflow-hidden rounded-xl">
