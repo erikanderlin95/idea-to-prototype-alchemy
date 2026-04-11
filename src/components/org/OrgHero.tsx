@@ -63,7 +63,7 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
           <div className="lg:col-span-2">
             <div className="rounded-2xl bg-white border border-[#DCE8EF] shadow-[0_8px_32px_rgba(18,56,91,0.12)] overflow-hidden">
               <div className="px-5 py-3.5 bg-[#F0F5FA] border-b border-[#DCE8EF]">
-                <span className="text-[15px] font-bold text-[#12385B] leading-snug">Your Trusted Guide to Private Healthcare in Singapore</span>
+                <span className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight leading-snug">Your Trusted Guide to Private Healthcare in Singapore</span>
               </div>
 
               <div className="p-4 grid grid-cols-2 gap-3">
