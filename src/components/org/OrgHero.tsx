@@ -106,7 +106,6 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
                 </div>
               </div>
             </div>
-            </div>
           </div>
         </div>
       </div>
