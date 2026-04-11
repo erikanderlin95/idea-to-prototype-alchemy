@@ -5,17 +5,17 @@ export const OrgCareJourney = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="py-6 px-4 bg-[#F0FAFB]">
+    <section className="py-6 px-4 bg-[#E8F5F7]">
       <div className="max-w-5xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-[minmax(0,23rem)_minmax(0,1fr)] gap-3 md:gap-2 items-start">
           <div className="space-y-3">
-            <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
+            <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#0D2E4A] tracking-tight">
               {t("org.intakeFlowTitle")}
             </h2>
 
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#E6F7FA] border border-[#18B7C9]/15">
-              <Clock className="h-3 w-3 text-[#18B7C9]" />
-              <span className="text-[13px] font-semibold text-[#12385B]">{t("org.intakeTimeCue")}</span>
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#D4F1F5] border border-[#0E9AAB]/15">
+              <Clock className="h-3 w-3 text-[#0E9AAB]" />
+              <span className="text-[13px] font-semibold text-[#0D2E4A]">{t("org.intakeTimeCue")}</span>
             </div>
 
             <div className="space-y-2.5">
@@ -24,20 +24,20 @@ export const OrgCareJourney = () => {
               <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text={t("org.intakeStep3")} />
             </div>
 
-            <p className="mt-2 text-[15px] leading-relaxed text-[#6B7D8E]">
+            <p className="mt-2 text-[15px] leading-relaxed text-[#4A5D6E]">
               {t("org.intakeNote")}
             </p>
           </div>
 
-          <div className="rounded-xl bg-white border-2 border-[#DCE8EF] shadow-[0_4px_20px_rgba(18,56,91,0.1)] p-4 space-y-2.5 relative">
-            <div className="flex items-center justify-between pb-2 border-b border-[#DCE8EF]">
+          <div className="rounded-xl bg-white border-2 border-[#D0DCE6] shadow-[0_4px_20px_rgba(13,46,74,0.1)] p-4 space-y-2.5 relative">
+            <div className="flex items-center justify-between pb-2 border-b border-[#D0DCE6]">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[hsl(0,50%,65%)]" />
                 <div className="w-2 h-2 rounded-full bg-[hsl(45,60%,60%)]" />
                 <div className="w-2 h-2 rounded-full bg-[hsl(155,45%,55%)]" />
-                <span className="text-[14px] text-[#5F6F7E] ml-2 font-mono">care-intake</span>
+                <span className="text-[14px] text-[#4A5D6E] ml-2 font-mono">care-intake</span>
               </div>
-              <span className="text-[12px] text-[#5F6F7E]/60 italic">{t("org.exampleIntakePreview")}</span>
+              <span className="text-[12px] text-[#4A5D6E]/60 italic">{t("org.exampleIntakePreview")}</span>
             </div>
 
             <div className="space-y-2">
@@ -55,18 +55,18 @@ export const OrgCareJourney = () => {
 
 const JourneyStep = ({ icon, text }: { icon: React.ReactNode; text: string }) => (
   <div className="flex items-center gap-3">
-    <div className="w-7 h-7 rounded-lg bg-[#E6F7FA] flex items-center justify-center text-[#18B7C9] flex-shrink-0">
+    <div className="w-7 h-7 rounded-lg bg-[#D4F1F5] flex items-center justify-center text-[#0E9AAB] flex-shrink-0">
       {icon}
     </div>
-    <p className="text-[17px] font-medium text-[#12385B]">{text}</p>
+    <p className="text-[17px] font-medium text-[#0D2E4A]">{text}</p>
   </div>
 );
 
 const FakeField = ({ label, value }: { label: string; value: string }) => (
   <div className="space-y-0.5">
-    <span className="text-[14px] font-medium text-[#5F6F7E] uppercase tracking-wider">{label}</span>
-    <div className="h-8 rounded-md bg-[#F4F8FB] border border-[#DCE8EF] flex items-center px-3">
-      <span className="text-[15px] text-[#12385B]">{value}</span>
+    <span className="text-[14px] font-medium text-[#4A5D6E] uppercase tracking-wider">{label}</span>
+    <div className="h-8 rounded-md bg-[#F4F8FB] border border-[#D0DCE6] flex items-center px-3">
+      <span className="text-[15px] text-[#0D2E4A]">{value}</span>
     </div>
   </div>
 );

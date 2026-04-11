@@ -20,15 +20,15 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
   const { t } = useLanguage();
 
   return (
-    <section className="py-6 px-4 bg-[#F4F8FB]">
+    <section className="py-6 px-4 bg-[#EDF3F8]">
       <div className="max-w-5xl mx-auto space-y-1 text-center">
-        <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">
+        <p className="text-[13px] font-semibold uppercase tracking-widest text-[#4A5D6E]">
           {t("org.yourCareCoordinator")}
         </p>
-        <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
+        <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#0D2E4A] tracking-tight">
           {t("org.careCoordTeam")}
         </h2>
-        <p className="text-[17px] text-[#5F6F7E]">
+        <p className="text-[17px] text-[#4A5D6E]">
           {t("org.careCoordDesc")}
         </p>
 
@@ -36,7 +36,7 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
           {loading ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="h-48 rounded-2xl bg-[#DCE8EF] animate-pulse" />
+                <div key={i} className="h-48 rounded-2xl bg-[#D0DCE6] animate-pulse" />
               ))}
             </div>
           ) : concierges.length > 0 ? (
@@ -44,26 +44,26 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
               {concierges.map((person) => (
                 <div
                   key={person.id}
-                  className="group rounded-2xl bg-white border border-[#DCE8EF] p-4 shadow-[0_2px_8px_rgba(18,56,91,0.06)] hover:shadow-[0_6px_20px_rgba(18,56,91,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col items-center text-center w-52 aspect-square justify-center"
+                  className="group rounded-2xl bg-white border border-[#D0DCE6] p-4 shadow-[0_2px_8px_rgba(13,46,74,0.06)] hover:shadow-[0_8px_24px_rgba(14,154,171,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center w-52 aspect-square justify-center"
                 >
-                  <div className="w-12 h-12 rounded-full overflow-hidden bg-[#F0F5FA] ring-2 ring-[#DCE8EF] group-hover:ring-[#18B7C9]/30 transition-all mb-2.5">
+                  <div className="w-12 h-12 rounded-full overflow-hidden bg-[#F0F5FA] ring-2 ring-[#D0DCE6] group-hover:ring-[#0E9AAB]/40 transition-all mb-2.5">
                     {person.photo_url ? (
                       <img src={person.photo_url} alt={person.name} className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-[#F0F5FA]">
-                        <User className="h-5 w-5 text-[#5F6F7E]" />
+                        <User className="h-5 w-5 text-[#4A5D6E]" />
                       </div>
                     )}
                   </div>
 
-                  <h3 className="text-[16px] font-semibold text-[#12385B] leading-tight truncate w-full">
+                  <h3 className="text-[16px] font-semibold text-[#0D2E4A] leading-tight truncate w-full">
                     {t("org.speakTo")} {person.name}
                   </h3>
-                  <p className="text-[14px] text-[#5F6F7E] mt-0.5 truncate w-full">
+                  <p className="text-[14px] text-[#4A5D6E] mt-0.5 truncate w-full">
                     {person.title}
                   </p>
                   {person.short_bio && (
-                    <p className="text-[13px] text-[#5F6F7E]/70 mt-0.5 truncate w-full leading-tight">
+                    <p className="text-[13px] text-[#4A5D6E]/70 mt-0.5 truncate w-full leading-tight">
                       {person.short_bio}
                     </p>
                   )}
@@ -75,7 +75,7 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
                     </span>
                     <Button
                       size="sm"
-                      className="h-7 px-3.5 text-[14px] rounded-full bg-[#18B7C9] hover:bg-[#149dab] text-white active:scale-[0.96] transition-all shadow-sm gap-1"
+                      className="h-7 px-3.5 text-[14px] rounded-full bg-[#0E9AAB] hover:bg-[#0C8595] text-white active:scale-[0.96] transition-all shadow-sm gap-1"
                       onClick={onConnect}
                     >
                       <MessageCircle className="h-3 w-3" />
@@ -86,7 +86,7 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
               ))}
             </div>
           ) : (
-            <p className="text-[#5F6F7E] text-[17px]">{t("org.noConciergesAvailable")}</p>
+            <p className="text-[#4A5D6E] text-[17px]">{t("org.noConciergesAvailable")}</p>
           )}
         </div>
       </div>
