@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Building2, Network, Stethoscope, ArrowRight, GitBranch } from "lucide-react";
+import { Network, Stethoscope, ArrowRight, GitBranch } from "lucide-react";
+import nymgLogo from "@/assets/nymg-logo.jpg";
 
 const OrganizationCard = () => {
   const navigate = useNavigate();
@@ -11,11 +12,8 @@ const OrganizationCard = () => {
       <CardContent className="p-4">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
-          <div className="w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-[#D4F2F6] to-[#B8E8EF] mb-2.5 ring-1 ring-[#0E9AAB]/30 shadow-[0_0_10px_rgba(14,154,171,0.15)] group-hover:shadow-[0_0_18px_rgba(14,154,171,0.3)] group-hover:ring-[#0E9AAB]/50 transition-all flex items-center justify-center">
-            <div className="flex flex-col items-center gap-0">
-              <Building2 className="h-5.5 w-5.5 text-[#0E9AAB]" strokeWidth={2.2} />
-              <span className="text-[6px] font-extrabold text-[#0E9AAB] tracking-widest uppercase leading-none">NYMG</span>
-            </div>
+          <div className="w-14 h-14 rounded-lg overflow-hidden bg-white mb-2.5 ring-1 ring-[#B0C8DA]/40 shadow-[0_1px_6px_rgba(13,46,74,0.08)] group-hover:shadow-[0_2px_12px_rgba(13,46,74,0.12)] transition-all flex items-center justify-center p-1">
+            <img src={nymgLogo} alt="Nanyang Medical Group" className="w-full h-full object-contain" />
           </div>
 
           {/* Title */}
