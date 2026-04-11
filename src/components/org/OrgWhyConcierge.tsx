@@ -51,17 +51,17 @@ export const OrgWhyConcierge = () => {
 
         {/* Specialist Coverage */}
         <div className="text-center space-y-2">
-          <h3 className="text-[14px] md:text-[15px] font-bold text-[#12385B]">
+          <h3 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
             {t("org.why.coverageTitle")}
           </h3>
-          <p className="text-[12px] text-[#5F6F7E] max-w-2xl mx-auto">
+          <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
             {t("org.why.coverageDesc")}
           </p>
-          <div className="flex flex-wrap justify-center gap-1.5 max-w-3xl mx-auto">
+          <div className="flex flex-wrap justify-center gap-1.5 max-w-3xl mx-auto pt-1">
             {specialties.map((s) => (
               <span
                 key={s}
-                className="px-2.5 py-1 rounded-full bg-white border border-[#DCE8EF] text-[11px] text-[#12385B] font-medium"
+                className="px-3 py-1.5 rounded-full bg-white border border-[#DCE8EF] text-[13px] text-[#12385B] font-medium"
               >
                 {s}
               </span>
