@@ -44,7 +44,7 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
               {concierges.map((person) => (
                 <div
                   key={person.id}
-                  className="group rounded-2xl bg-white border border-[#DCE8EF] p-3.5 pb-3 shadow-[0_2px_8px_rgba(18,56,91,0.06)] hover:shadow-[0_6px_20px_rgba(18,56,91,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col items-center text-center"
+                  className="group rounded-2xl bg-white border border-[#DCE8EF] p-4 shadow-[0_2px_8px_rgba(18,56,91,0.06)] hover:shadow-[0_6px_20px_rgba(18,56,91,0.12)] hover:-translate-y-0.5 transition-all duration-300 flex flex-col items-center text-center w-52 aspect-square justify-center"
                 >
                   <div className="w-12 h-12 rounded-full overflow-hidden bg-[#F0F5FA] ring-2 ring-[#DCE8EF] group-hover:ring-[#18B7C9]/30 transition-all mb-2.5">
                     {person.photo_url ? (
