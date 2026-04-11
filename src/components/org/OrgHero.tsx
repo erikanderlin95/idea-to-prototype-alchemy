@@ -1,6 +1,9 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Building2, Network, Stethoscope, Shield, ClipboardList, UserCheck, MessageCircle, ChevronRight } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Building2, ClipboardList, UserCheck, MessageCircle, ChevronRight } from "lucide-react";
+import healthcareConsultation from "@/assets/healthcare-consultation.jpg";
+import healthcareClinic from "@/assets/healthcare-clinic.jpg";
+import healthcareCoordination from "@/assets/healthcare-coordination.jpg";
+import healthcarePatient from "@/assets/healthcare-patient.jpg";
 
 interface OrgHeroProps {
   onStartIntake?: () => void;
@@ -35,7 +38,6 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
               {t("org.heroSubline")}
             </p>
 
-
             <div className="flex items-center gap-0 pt-1 flex-wrap">
               <div className="flex items-center gap-2 rounded-lg bg-[#E6F7FA] px-3 py-2">
                 <div className="w-6 h-6 rounded-full bg-[#18B7C9]/20 flex items-center justify-center text-[#18B7C9]">
@@ -61,16 +63,38 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
           </div>
 
           <div className="lg:col-span-2">
-            <div className="rounded-2xl bg-white border border-[#DCE8EF] shadow-[0_8px_32px_rgba(18,56,91,0.12)] overflow-hidden">
-              <div className="px-5 py-3.5 bg-[#F0F5FA] border-b border-[#DCE8EF]">
-                <span className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight leading-snug">Your Trusted Guide to Private Healthcare in Singapore</span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              {/* Stats box - left half */}
+              <div className="rounded-2xl bg-white border border-[#DCE8EF] shadow-[0_8px_32px_rgba(18,56,91,0.12)] overflow-hidden">
+                <div className="px-4 py-3 bg-[#F0F5FA] border-b border-[#DCE8EF]">
+                  <span className="text-base md:text-lg font-bold text-[#12385B] tracking-tight leading-snug">Your Trusted Guide to Private Healthcare in Singapore</span>
+                </div>
+                <div className="p-3 grid grid-cols-2 gap-2">
+                  <TrustStat value="10,000+" label="Patients Assisted" />
+                  <TrustStat value="100+" label="Specialist Partners" />
+                  <TrustStat value="24/7" label="Concierge Support" />
+                  <TrustStat value="4.9 ★" label="Patient Rating" />
+                </div>
               </div>
 
-              <div className="p-4 grid grid-cols-2 gap-3">
-                <TrustStat value="10,000+" label="Patients Assisted" />
-                <TrustStat value="100+" label="Specialist Partners" />
-                <TrustStat value="24/7" label="Concierge Support" />
-                <TrustStat value="4.9 ★" label="Patient Rating" />
+              {/* Photo grid - right half */}
+              <div className="grid grid-cols-2 gap-1.5 rounded-2xl overflow-hidden">
+                <div className="relative aspect-square overflow-hidden rounded-xl">
+                  <img src={healthcareConsultation} alt="Doctor consultation" className="w-full h-full object-cover" loading="lazy" width={640} height={640} />
+                  <div className="absolute inset-0 bg-[#12385B]/10 mix-blend-multiply" />
+                </div>
+                <div className="relative aspect-square overflow-hidden rounded-xl">
+                  <img src={healthcareClinic} alt="Modern clinic interior" className="w-full h-full object-cover" loading="lazy" width={640} height={640} />
+                  <div className="absolute inset-0 bg-[#12385B]/10 mix-blend-multiply" />
+                </div>
+                <div className="relative aspect-square overflow-hidden rounded-xl">
+                  <img src={healthcareCoordination} alt="Care coordination" className="w-full h-full object-cover" loading="lazy" width={640} height={640} />
+                  <div className="absolute inset-0 bg-[#12385B]/10 mix-blend-multiply" />
+                </div>
+                <div className="relative aspect-square overflow-hidden rounded-xl">
+                  <img src={healthcarePatient} alt="Patient care" className="w-full h-full object-cover" loading="lazy" width={640} height={640} />
+                  <div className="absolute inset-0 bg-[#12385B]/10 mix-blend-multiply" />
+                </div>
               </div>
             </div>
           </div>
@@ -81,8 +105,8 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
 };
 
 const TrustStat = ({ value, label }: { value: string; label: string }) => (
-  <div className="text-center py-2">
-    <p className="text-xl font-bold text-[#12385B]">{value}</p>
-    <p className="text-[13px] text-[#5F6F7E] font-medium mt-0.5">{label}</p>
+  <div className="text-center py-1.5">
+    <p className="text-lg font-bold text-[#12385B]">{value}</p>
+    <p className="text-[12px] text-[#5F6F7E] font-medium mt-0.5">{label}</p>
   </div>
 );
