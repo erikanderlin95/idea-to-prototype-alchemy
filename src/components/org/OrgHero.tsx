@@ -1,9 +1,9 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { Building2, ClipboardList, UserCheck, MessageCircle, ChevronRight } from "lucide-react";
-import healthcareConsultation from "@/assets/healthcare-consultation.jpg";
-import healthcareClinic from "@/assets/healthcare-clinic.jpg";
-import healthcareCoordination from "@/assets/healthcare-coordination.jpg";
-import healthcarePatient from "@/assets/healthcare-patient.jpg";
+import healthcareConsultation from "@/assets/nymg-photo1.jpg";
+import healthcareClinic from "@/assets/nymg-photo2.jpg";
+import healthcareCoordination from "@/assets/nymg-photo3.jpg";
+import healthcarePatient from "@/assets/nymg-photo4.jpg";
 
 interface OrgHeroProps {
   onStartIntake?: () => void;
