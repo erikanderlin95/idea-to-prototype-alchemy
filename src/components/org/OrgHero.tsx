@@ -78,7 +78,7 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
                     <TrustStat value="100+" label="Specialist Partners" />
                   </div>
                   <div className="border-r border-[#D0DCE6]/50 py-1 px-1">
-                    <TrustStat value="24/7" label="Concierge Support" />
+                    <TrustStat value="24/7" label="Round-the-clock Assistance" />
                   </div>
                   <div className="py-1 px-1">
                     <TrustStat value="4.9 ★" label="Patient Rating" />

@@ -10,13 +10,6 @@ const benefits = [
   { icon: Zap, titleKey: "org.why.turnaround", textKey: "org.why.turnaroundDesc" },
 ];
 
-const stats = [
-  { value: "24/7", labelKey: "org.why.stat247" },
-  { value: "< 4 Hrs", labelKey: "org.why.statLeadTime" },
-  { value: "100+", labelKey: "org.why.statSpecialists" },
-  { value: "4.9 ★", labelKey: "org.why.statRating" },
-];
-
 const specialties = [
   "Cardiology", "Neurology", "Orthopaedics", "Gastroenterology",
   "Thoracic Surgery", "Urology", "Endocrinology", "Rheumatology",
@@ -40,38 +33,20 @@ export const OrgWhyConcierge = () => {
           </p>
         </div>
 
-        {/* Benefits + Stats */}
-        <div className="flex flex-col md:flex-row gap-4">
-          {/* Benefits Grid - 60% */}
-          <div className="md:w-[60%] grid grid-cols-2 gap-2">
-            {benefits.map((b) => (
-              <div
-                key={b.titleKey}
-                className="rounded-xl bg-white border border-[#E8EEF3] p-3 flex flex-col gap-1"
-              >
-                <div className="flex items-center gap-1.5">
-                  <b.icon className="h-4 w-4 text-[#18B7C9] shrink-0" />
-                  <h3 className="text-[13px] font-bold text-[#12385B]">{t(b.titleKey)}</h3>
-                </div>
-                <p className="text-[12px] text-[#5F6F7E] leading-snug">{t(b.textKey)}</p>
+        {/* Benefits Grid - full width, 3 columns */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+          {benefits.map((b) => (
+            <div
+              key={b.titleKey}
+              className="rounded-xl bg-white border border-[#E8EEF3] p-3 flex flex-col gap-1"
+            >
+              <div className="flex items-center gap-1.5">
+                <b.icon className="h-4 w-4 text-[#18B7C9] shrink-0" />
+                <h3 className="text-[13px] font-bold text-[#12385B]">{t(b.titleKey)}</h3>
               </div>
-            ))}
-          </div>
-
-          {/* Stats - 40% */}
-          <div className="md:w-[40%] grid grid-cols-2 gap-2">
-            {stats.map((s) => (
-              <div
-                key={s.labelKey}
-                className="rounded-xl bg-white border border-[#E8EEF3] p-3 flex flex-col items-center justify-center text-center"
-              >
-                <span className="text-[1.4rem] md:text-[1.6rem] font-extrabold text-[#12385B] leading-none">
-                  {s.value}
-                </span>
-                <span className="text-[11px] text-[#5F6F7E] mt-1">{t(s.labelKey)}</span>
-              </div>
-            ))}
-          </div>
+              <p className="text-[12px] text-[#5F6F7E] leading-snug">{t(b.textKey)}</p>
+            </div>
+          ))}
         </div>
 
         {/* Specialist Coverage */}
