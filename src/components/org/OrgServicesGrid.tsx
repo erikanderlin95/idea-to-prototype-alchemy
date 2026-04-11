@@ -17,8 +17,9 @@ export const OrgServicesGrid = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="py-6 px-3 bg-white">
+    <section className="pt-3 pb-6 px-3 bg-[#F4F8FB]">
       <div className="max-w-6xl mx-auto space-y-4">
+        <div className="w-20 mx-auto border-t border-[#DCE8EF] mb-1" />
         <div className="text-center space-y-1">
           <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
             {t("org.svc.title")}

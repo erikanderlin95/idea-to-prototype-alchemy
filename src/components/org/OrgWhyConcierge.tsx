@@ -21,7 +21,7 @@ export const OrgWhyConcierge = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="py-6 px-3 bg-[#F4F8FB]">
+    <section className="py-6 pb-3 px-3 bg-[#F4F8FB]">
       <div className="max-w-6xl mx-auto space-y-5">
         {/* Header */}
         <div className="text-center space-y-1">
