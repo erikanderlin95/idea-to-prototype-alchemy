@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Network, Stethoscope, ArrowRight, GitBranch } from "lucide-react";
+import { Receipt, Stethoscope, ArrowRight, GitBranch } from "lucide-react";
 import nymgLogo from "@/assets/nymg-logo.jpg";
 
 const OrganizationCard = () => {
