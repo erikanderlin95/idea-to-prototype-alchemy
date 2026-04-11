@@ -23,10 +23,10 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
               <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#12385B] to-[#1a4a72] flex items-center justify-center shadow-sm">
                 <Building2 className="h-3.5 w-3.5 text-white" />
               </div>
-              <span className="text-[15px] font-semibold text-[#5F6F7E] uppercase tracking-widest">{t("org.subtitle")}</span>
+              <span className="text-[11px] md:text-[15px] font-semibold text-[#5F6F7E] uppercase tracking-widest">{t("org.subtitle")}</span>
             </div>
 
-            <h1 className="text-[2.75rem] md:text-[3.1rem] lg:text-[3.4rem] font-bold text-[#0D2E4A] leading-[1.1] tracking-tight">
+            <h1 className="text-[2rem] md:text-[3.1rem] lg:text-[3.4rem] font-bold text-[#0D2E4A] leading-[1.1] tracking-tight">
               {t("org.name")}
             </h1>
 
