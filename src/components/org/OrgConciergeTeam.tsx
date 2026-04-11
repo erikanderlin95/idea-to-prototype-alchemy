@@ -40,7 +40,7 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
               ))}
             </div>
           ) : concierges.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2.5">
+            <div className="flex flex-wrap justify-center gap-2.5">
               {concierges.map((person) => (
                 <div
                   key={person.id}
