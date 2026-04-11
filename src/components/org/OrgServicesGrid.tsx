@@ -1,9 +1,9 @@
-import { UserCheck, CalendarClock, Receipt, HeartPulse, Plane, ShieldAlert, FileText, Users, Activity } from "lucide-react";
+import { UserCheck, Receipt, HeartPulse, Plane, ShieldAlert, FileText, Users, Activity } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const services = [
   { icon: UserCheck, titleKey: "org.svc.referral", textKey: "org.svc.referralDesc" },
-  { icon: CalendarClock, titleKey: "org.svc.booking", textKey: "org.svc.bookingDesc" },
+  
   { icon: Receipt, titleKey: "org.svc.insurance", textKey: "org.svc.insuranceDesc" },
   { icon: HeartPulse, titleKey: "org.svc.screening", textKey: "org.svc.screeningDesc" },
   { icon: Plane, titleKey: "org.svc.travel", textKey: "org.svc.travelDesc" },
