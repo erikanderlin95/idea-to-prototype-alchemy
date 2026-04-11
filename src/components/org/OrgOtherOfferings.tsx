@@ -21,12 +21,12 @@ export const OrgOtherOfferings = () => {
     <section className="py-6 px-4">
       <div className="max-w-5xl mx-auto space-y-2">
         <div className="text-center">
-          <h2 className="text-lg md:text-xl font-bold text-[#5F6F7E] tracking-tight">
-            {t("org.otherOfferings")}
-          </h2>
-          <p className="text-[14px] text-[#5F6F7E]/70 mt-0.5">
+          <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">
             {t("org.otherOfferingsSubtitle")}
           </p>
+          <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight mt-0.5">
+            {t("org.otherOfferings")}
+          </h2>
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
