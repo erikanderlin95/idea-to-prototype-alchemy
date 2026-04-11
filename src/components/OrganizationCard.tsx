@@ -32,8 +32,8 @@ const OrganizationCard = () => {
           {/* Capability pills */}
           <div className="flex flex-wrap gap-1 justify-center mb-2.5">
             <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#0E9AAB] bg-[#E0F4F7] border border-[#0E9AAB]/15 rounded-full px-2 py-[2px]">
-              <Network className="h-2.5 w-2.5" strokeWidth={2.5} />
-              Multi-Clinic Access
+              <Receipt className="h-2.5 w-2.5" strokeWidth={2.5} />
+              Insurance & Billing
             </span>
             <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#0E9AAB] bg-[#E0F4F7] border border-[#0E9AAB]/15 rounded-full px-2 py-[2px]">
               <Stethoscope className="h-2.5 w-2.5" strokeWidth={2.5} />
