@@ -25,10 +25,10 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
         <p className="text-[13px] font-semibold uppercase tracking-widest text-[#4A5D6E]">
           {t("org.yourCareCoordinator")}
         </p>
-        <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#0D2E4A] tracking-tight">
+        <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#0D2E4A] tracking-tight">
           {t("org.careCoordTeam")}
         </h2>
-        <p className="text-[17px] text-[#4A5D6E]">
+        <p className="text-[14px] md:text-[15px] text-[#4A5D6E]">
           {t("org.careCoordDesc")}
         </p>
 
