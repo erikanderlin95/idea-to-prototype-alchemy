@@ -38,26 +38,26 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
               {t("org.heroSubline")}
             </p>
 
-            <div className="flex items-center gap-0 pt-1 flex-wrap">
-              <div className="flex items-center gap-2 rounded-lg bg-[#E6F7FA] px-3 py-2">
-                <div className="w-6 h-6 rounded-full bg-[#18B7C9]/20 flex items-center justify-center text-[#18B7C9]">
-                  <ClipboardList className="h-3 w-3" />
+            <div className="flex items-center gap-0 pt-1 flex-wrap gap-y-1.5">
+              <div className="flex items-center gap-1.5 rounded-lg bg-[#E6F7FA] px-2.5 py-1.5 md:px-3 md:py-2">
+                <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#18B7C9]/20 flex items-center justify-center text-[#18B7C9]">
+                  <ClipboardList className="h-2.5 w-2.5 md:h-3 md:w-3" />
                 </div>
-                <span className="text-[15px] font-bold text-[#12385B]">{t("org.oneEntry")}</span>
+                <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">{t("org.oneEntry")}</span>
               </div>
-              <ChevronRight className="h-4 w-4 text-[#18B7C9]/40 mx-1 flex-shrink-0" />
-              <div className="flex items-center gap-2 rounded-lg bg-[#E6F7FA] px-3 py-2">
-                <div className="w-6 h-6 rounded-full bg-[#18B7C9]/20 flex items-center justify-center text-[#18B7C9]">
-                  <UserCheck className="h-3 w-3" />
+              <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4 text-[#18B7C9]/40 mx-0.5 md:mx-1 flex-shrink-0" />
+              <div className="flex items-center gap-1.5 rounded-lg bg-[#E6F7FA] px-2.5 py-1.5 md:px-3 md:py-2">
+                <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#18B7C9]/20 flex items-center justify-center text-[#18B7C9]">
+                  <UserCheck className="h-2.5 w-2.5 md:h-3 md:w-3" />
                 </div>
-                <span className="text-[15px] font-bold text-[#12385B]">{t("org.weMatchYou")}</span>
+                <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">{t("org.weMatchYou")}</span>
               </div>
-              <ChevronRight className="h-4 w-4 text-[#18B7C9]/40 mx-1 flex-shrink-0" />
-              <div className="flex items-center gap-2 rounded-lg bg-[#E6F7FA] px-3 py-2">
-                <div className="w-6 h-6 rounded-full bg-[#18B7C9]/20 flex items-center justify-center text-[#18B7C9]">
-                  <MessageCircle className="h-3 w-3" />
+              <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4 text-[#18B7C9]/40 mx-0.5 md:mx-1 flex-shrink-0" />
+              <div className="flex items-center gap-1.5 rounded-lg bg-[#E6F7FA] px-2.5 py-1.5 md:px-3 md:py-2">
+                <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#18B7C9]/20 flex items-center justify-center text-[#18B7C9]">
+                  <MessageCircle className="h-2.5 w-2.5 md:h-3 md:w-3" />
                 </div>
-                <span className="text-[15px] font-bold text-[#12385B]">{t("org.weFollowUp")}</span>
+                <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">{t("org.weFollowUp")}</span>
               </div>
             </div>
           </div>
@@ -67,8 +67,8 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
               {/* Stats box - left */}
               <div className="rounded-3xl bg-[#F6F9FC] border border-[#DCE8EF] shadow-[0_8px_32px_rgba(18,56,91,0.12)] overflow-hidden flex flex-col">
                 <div className="px-4 py-3 bg-gradient-to-br from-[#D6E3F0] to-[#E4EDF5] shadow-[0_1px_3px_rgba(18,56,91,0.08)]">
-                  <h3 className="text-[17px] md:text-lg font-extrabold text-[#12385B] tracking-tight leading-snug text-left">Your Trusted Guide to Private Healthcare in Singapore</h3>
-                  <p className="text-[11px] md:text-[12px] text-[#5F6F7E]/75 mt-1 leading-tight text-left">Access trusted clinics, coordinated care, and seamless referrals — all in one place.</p>
+                  <h3 className="text-[1.25rem] md:text-[1.5rem] font-extrabold text-[#12385B] tracking-tight leading-snug text-left">Your Trusted Guide to Private Healthcare in Singapore</h3>
+                  <p className="text-[13px] md:text-[14px] text-[#5F6F7E]/75 mt-1 leading-tight text-left">Access trusted clinics, coordinated care, and seamless referrals — all in one place.</p>
                 </div>
                 <div className="px-2.5 py-1 grid grid-cols-2 gap-0 flex-1 items-center">
                   <div className="border-r border-b border-[#D0DCE6]/50 py-1 px-1">
