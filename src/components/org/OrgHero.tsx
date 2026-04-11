@@ -66,21 +66,21 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
             <div className="grid grid-cols-1 md:grid-cols-[45%_55%] gap-2 items-stretch">
               {/* Stats box - left */}
               <div className="rounded-3xl bg-[#F6F9FC] border border-[#DCE8EF] shadow-[0_8px_32px_rgba(18,56,91,0.12)] overflow-hidden flex flex-col">
-                <div className="px-4 py-4 bg-gradient-to-br from-[#D6E3F0] to-[#E4EDF5] shadow-[0_1px_3px_rgba(18,56,91,0.08)]">
+                <div className="px-4 py-3 bg-gradient-to-br from-[#D6E3F0] to-[#E4EDF5] shadow-[0_1px_3px_rgba(18,56,91,0.08)]">
                   <h3 className="text-[17px] md:text-lg font-extrabold text-[#12385B] tracking-tight leading-snug text-left">Your Trusted Guide to Private Healthcare in Singapore</h3>
-                  <p className="text-[11px] md:text-[12px] text-[#5F6F7E]/75 mt-1.5 leading-tight text-left">Access trusted clinics, coordinated care, and seamless referrals — all in one place.</p>
+                  <p className="text-[11px] md:text-[12px] text-[#5F6F7E]/75 mt-1 leading-tight text-left">Access trusted clinics, coordinated care, and seamless referrals — all in one place.</p>
                 </div>
-                <div className="px-3 py-1.5 grid grid-cols-2 gap-0 flex-1 items-center">
-                  <div className="border-r border-b border-[#D0DCE6]/50 py-1.5 px-1">
+                <div className="px-2.5 py-1 grid grid-cols-2 gap-0 flex-1 items-center">
+                  <div className="border-r border-b border-[#D0DCE6]/50 py-1 px-1">
                     <TrustStat value="10,000+" label="Patients Assisted" />
                   </div>
-                  <div className="border-b border-[#D0DCE6]/50 py-1.5 px-1">
+                  <div className="border-b border-[#D0DCE6]/50 py-1 px-1">
                     <TrustStat value="100+" label="Specialist Partners" />
                   </div>
-                  <div className="border-r border-[#D0DCE6]/50 py-1.5 px-1">
+                  <div className="border-r border-[#D0DCE6]/50 py-1 px-1">
                     <TrustStat value="24/7" label="Concierge Support" />
                   </div>
-                  <div className="py-1.5 px-1">
+                  <div className="py-1 px-1">
                     <TrustStat value="4.9 ★" label="Patient Rating" />
                   </div>
                 </div>
@@ -89,19 +89,19 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
               {/* Photo grid - right */}
               <div className="grid grid-cols-2 gap-1.5 rounded-3xl overflow-hidden">
                 <div className="relative overflow-hidden rounded-xl">
-                  <img src={healthcareConsultation} alt="Doctor consultation" className="w-full h-full object-cover aspect-square" loading="lazy" width={640} height={640} />
+                  <img src={healthcareConsultation} alt="Doctor consultation" className="w-full h-full object-cover aspect-[4/3]" loading="lazy" width={640} height={640} />
                   <div className="absolute inset-0 bg-[#12385B]/10 mix-blend-multiply" />
                 </div>
                 <div className="relative overflow-hidden rounded-xl">
-                  <img src={healthcareClinic} alt="Modern clinic interior" className="w-full h-full object-cover aspect-square" loading="lazy" width={640} height={640} />
+                  <img src={healthcareClinic} alt="Modern clinic interior" className="w-full h-full object-cover aspect-[4/3]" loading="lazy" width={640} height={640} />
                   <div className="absolute inset-0 bg-[#12385B]/10 mix-blend-multiply" />
                 </div>
                 <div className="relative overflow-hidden rounded-xl">
-                  <img src={healthcareCoordination} alt="Care coordination" className="w-full h-full object-cover aspect-square" loading="lazy" width={640} height={640} />
+                  <img src={healthcareCoordination} alt="Care coordination" className="w-full h-full object-cover aspect-[4/3]" loading="lazy" width={640} height={640} />
                   <div className="absolute inset-0 bg-[#12385B]/10 mix-blend-multiply" />
                 </div>
                 <div className="relative overflow-hidden rounded-xl">
-                  <img src={healthcarePatient} alt="Patient care" className="w-full h-full object-cover aspect-square" loading="lazy" width={640} height={640} />
+                  <img src={healthcarePatient} alt="Patient care" className="w-full h-full object-cover aspect-[4/3]" loading="lazy" width={640} height={640} />
                   <div className="absolute inset-0 bg-[#12385B]/10 mix-blend-multiply" />
                 </div>
               </div>
