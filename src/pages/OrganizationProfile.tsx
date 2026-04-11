@@ -8,7 +8,7 @@ import { OrgHero } from "@/components/org/OrgHero";
 import { OrgWhyConcierge } from "@/components/org/OrgWhyConcierge";
 import { OrgConciergeTeam } from "@/components/org/OrgConciergeTeam";
 import { OrgCareJourney } from "@/components/org/OrgCareJourney";
-import { OrgServices } from "@/components/org/OrgServices";
+
 import { OrgOtherOfferings } from "@/components/org/OrgOtherOfferings";
 
 interface Concierge {
@@ -56,7 +56,7 @@ const OrganizationProfile = () => {
 
       <OrgOtherOfferings />
 
-      <OrgServices />
+      
 
       <ManagedCareModal
         open={showIntakeModal}
