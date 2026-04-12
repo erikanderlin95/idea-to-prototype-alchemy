@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { User, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import aellanPhoto from "@/assets/aellan-photo.jpg";
 
 interface Concierge {
   id: string;
@@ -47,7 +48,9 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
                   className="group rounded-2xl bg-white border border-[#D0DCE6] p-4 shadow-[0_2px_8px_rgba(13,46,74,0.06)] hover:shadow-[0_8px_24px_rgba(14,154,171,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center w-52 aspect-square justify-center"
                 >
                   <div className="w-12 h-12 rounded-full overflow-hidden bg-[#F0F5FA] ring-2 ring-[#D0DCE6] group-hover:ring-[#0E9AAB]/40 transition-all mb-2.5">
-                    {person.photo_url ? (
+                    {person.name.toLowerCase().includes("aellan") ? (
+                      <img src={aellanPhoto} alt={person.name} className="w-full h-full object-cover" />
+                    ) : person.photo_url ? (
                       <img src={person.photo_url} alt={person.name} className="w-full h-full object-cover" />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center bg-[#F0F5FA]">
