@@ -137,49 +137,6 @@ const SpeakerProfile = () => {
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-6 px-4 bg-[#FFF5EB]">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-[minmax(0,23rem)_minmax(0,1fr)] gap-3 md:gap-2 items-start">
-            <div className="space-y-3">
-              <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#12385B] tracking-tight">
-                How It Works
-              </h2>
-
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#FFE0B2] border border-[#F57C00]/15">
-                <Clock className="h-3 w-3 text-[#F57C00]" />
-                <span className="text-[13px] font-semibold text-[#12385B]">Flexible scheduling. Tailored to your audience.</span>
-              </div>
-
-              <div className="space-y-2.5">
-                <JourneyStep icon={<ClipboardList className="h-4 w-4" />} text="Submit your enquiry or event details" />
-                <JourneyStep icon={<UserCheck className="h-4 w-4" />} text="Receive a customised programme proposal" />
-                <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text="Confirm and we deliver on-site" />
-              </div>
-            </div>
-
-            {/* Enquiry preview */}
-            <div className="rounded-xl bg-white border-2 border-[#F0C8A0] shadow-[0_4px_20px_rgba(245,124,0,0.1)] p-4 space-y-2.5 relative">
-              <div className="flex items-center justify-between pb-2 border-b border-[#F0C8A0]">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-[hsl(0,50%,65%)]" />
-                  <div className="w-2 h-2 rounded-full bg-[hsl(45,60%,60%)]" />
-                  <div className="w-2 h-2 rounded-full bg-[hsl(155,45%,55%)]" />
-                  <span className="text-[14px] text-[#5F6F7E] ml-2 font-mono">workshop-enquiry</span>
-                </div>
-                <span className="text-[12px] text-[#5F6F7E]/60 italic">Example enquiry</span>
-              </div>
-              <div className="space-y-2">
-                <FakeField label="Workshop Type" value="Corporate Wellness / TCM Self-Care" />
-                <FakeField label="Audience" value="Office employees, 30–50 pax" />
-                <FakeField label="Format" value="90 min on-site interactive session" />
-                <FakeField label="Contact" value="+65 ●●●● ●●48" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Why Choose Ouch */}
       <section className="py-6 pb-3 px-3 bg-[#FEF6EE]">
         <div className="max-w-6xl mx-auto space-y-5">
