@@ -166,12 +166,13 @@ const SpeakerProfile = () => {
         </div>
       </section>
 
-      {/* Service Areas (chips) */}
+      {/* What We Cover (chips) */}
       <section className="py-6 px-4 bg-[#FFFAF5]">
-        <div className="max-w-5xl mx-auto space-y-2">
-          <div className="text-center">
-            <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">What We Cover</p>
-            <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#12385B] tracking-tight mt-0.5">Service Areas</h2>
+        <div className="max-w-5xl mx-auto space-y-3">
+          <div className="text-center space-y-1">
+            <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
+              What We Cover
+            </h2>
           </div>
           <div className="flex flex-wrap justify-center gap-2">
             {serviceAreaChips.map((chip) => (
