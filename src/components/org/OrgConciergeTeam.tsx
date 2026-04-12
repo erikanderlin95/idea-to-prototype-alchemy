@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { User, MessageCircle } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import aellanPhoto from "@/assets/aellan-photo.jpg";
 
 interface Concierge {
   id: string;
