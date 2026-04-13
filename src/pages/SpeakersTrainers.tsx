@@ -23,10 +23,6 @@ const SpeakersTrainers = () => {
 
       <section className="relative pt-24 pb-12 px-4 bg-gradient-to-b from-[#FFF8F0] via-[#FDEBD0] to-[#FDF0DC]">
         <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FDF2E0] text-[#D4860A] mb-6">
-            <Mic className="h-4 w-4" />
-            <span className="text-sm font-medium">{t("speakers.badge")}</span>
-          </div>
 
           <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
             {t("speakers.title")}
