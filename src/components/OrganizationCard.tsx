@@ -8,7 +8,7 @@ const OrganizationCard = () => {
   const navigate = useNavigate();
 
   return (
-    <Card className="group hover:shadow-[0_16px_48px_rgba(13,46,74,0.2)] hover:-translate-y-1 transition-all duration-300 border-[#B0C8DA] shadow-[0_6px_24px_rgba(13,46,74,0.12)] bg-gradient-to-b from-[#E8F0F6] via-[#F0F6FA] to-[#F6F9FC] overflow-hidden">
+    <Card className="group hover:shadow-[0_16px_48px_rgba(13,46,74,0.2)] hover:-translate-y-1 transition-all duration-300 border-[#B0C8DA] shadow-[0_6px_24px_rgba(13,46,74,0.12)] bg-gradient-to-b from-[#E8F0F6] via-[#F0F6FA] to-[#F6F9FC] overflow-hidden rounded-2xl aspect-square max-w-[320px] mx-auto flex items-center">
       <CardContent className="p-4">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
