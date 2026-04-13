@@ -173,32 +173,6 @@ const ClinicProfile = () => {
             <p className="text-sm sm:text-base text-foreground/90 font-medium">{clinic.description}</p>
           </div>
 
-          {/* Services Offered - Primary Block */}
-          <Card className="p-3 sm:p-4">
-            <h2 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">Services Offered</h2>
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2 sm:gap-3">
-              {(() => {
-                const services = clinic.services && clinic.services.length > 0
-                  ? clinic.services.map((s: string) => ({
-                      icon: SERVICE_ICON_MAP[s.toLowerCase()] || Stethoscope,
-                      label: s,
-                    }))
-                  : DEFAULT_SERVICES;
-                return services.slice(0, 8).map((service: any, index: number) => (
-                  <div
-                    key={index}
-                    className="flex flex-col items-center gap-1.5 p-2 sm:p-3 rounded-lg border border-border/60 bg-muted/30 hover:bg-primary/5 hover:border-primary/30 transition-all cursor-default"
-                  >
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <service.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-                    </div>
-                    <span className="text-[10px] sm:text-xs font-semibold text-foreground text-center leading-tight">{service.label}</span>
-                  </div>
-                ));
-              })()}
-            </div>
-          </Card>
-
           {/* Clinic Photos - Show from DB or demo fallback */}
           {(() => {
             const photos = clinic.photos || clinic.images || clinic.gallery || null;
