@@ -220,7 +220,38 @@ const ClinicProfile = () => {
             );
           })()}
 
-          {/* CTA Action Cards — unified system */}
+          {/* Services Offered */}
+          <Card className="p-3 sm:p-4">
+            <h2 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">Services Offered</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 sm:gap-3">
+              {(() => {
+                const services = clinic.services && clinic.services.length > 0
+                  ? clinic.services.map((s: string) => ({
+                      icon: SERVICE_ICON_MAP[s.toLowerCase()] || Stethoscope,
+                      label: s,
+                      desc: "",
+                    }))
+                  : DEFAULT_SERVICES;
+                return services.slice(0, 8).map((service: any, index: number) => (
+                  <div
+                    key={index}
+                    className="flex items-start gap-2.5 p-2.5 sm:p-3 rounded-lg border border-border/60 bg-muted/30 hover:bg-primary/5 hover:border-primary/30 transition-all cursor-default"
+                  >
+                    <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
+                      <service.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                    </div>
+                    <div className="min-w-0">
+                      <span className="text-xs sm:text-sm font-semibold text-foreground leading-tight">{service.label}</span>
+                      {service.desc && (
+                        <p className="text-[10px] sm:text-xs text-muted-foreground leading-snug mt-0.5">{service.desc}</p>
+                      )}
+                    </div>
+                  </div>
+                ));
+              })()}
+            </div>
+          </Card>
+
           {clinic.has_digital_queue ? (
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 sm:gap-3">
               {/* Book Appointment */}
