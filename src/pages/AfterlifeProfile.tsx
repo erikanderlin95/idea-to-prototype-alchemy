@@ -11,6 +11,10 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import nirvanaLogo from "@/assets/nirvana-logo.jpg";
+import nirvanaFuneral from "@/assets/nirvana-funeral.jpg";
+import nirvanaPedestals from "@/assets/nirvana-pedestals.jpg";
+import nirvanaLegacy from "@/assets/nirvana-legacy.jpg";
+import nirvanaBanner from "@/assets/nirvana-banner.jpg";
 
 const AfterlifeProfile = () => {
   const { t } = useLanguage();
