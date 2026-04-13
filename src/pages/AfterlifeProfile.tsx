@@ -121,16 +121,6 @@ const AfterlifeProfile = () => {
                   <p className="text-[15px] text-[#12385B] font-medium">8.30am – 5pm</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#F0E6F8] flex items-center justify-center text-[#8B5CB8] shrink-0 mt-0.5">
-                  <User className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-[13px] font-semibold text-[#5F6F7E] uppercase tracking-wider">Contact Person</p>
-                  <p className="text-[15px] text-[#12385B] font-medium">Pan Lina (Certified Thanatologist)</p>
-                  <p className="text-[13px] text-[#5F6F7E]">Co-founder and Managing Director</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
@@ -146,7 +136,7 @@ const AfterlifeProfile = () => {
             <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
               Upholding core values of Love, Integrity, Focus, and Empathy (LIFE).
             </p>
-          </div>
+            </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
             {whyChooseCards.map((b) => (
@@ -206,9 +196,10 @@ const AfterlifeProfile = () => {
             <blockquote className="text-[16px] md:text-[18px] text-[#12385B] font-medium italic leading-relaxed max-w-2xl mx-auto">
               "We're here to empower you to honour your loved ones with dignity, ensuring a lasting tribute that reflects their legacy."
             </blockquote>
-            <p className="text-[14px] text-[#5F6F7E]">
-              — <span className="font-semibold text-[#12385B]">Lina Pan</span>, Co-founder & Managing Director (Certified Thanatologist)
-            </p>
+            <div className="text-center">
+              <p className="text-[15px] font-semibold text-[#12385B]">Lina Pan</p>
+              <p className="text-[13px] text-[#5F6F7E]">Co-founder & Managing Director (Certified Thanatologist)</p>
+            </div>
           </div>
         </div>
       </section>
