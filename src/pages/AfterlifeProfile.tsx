@@ -4,7 +4,8 @@ import { Footer } from "@/components/Footer";
 import { ServiceIntakeModal } from "@/components/ServiceIntakeModal";
 import {
   Heart, Flower2, Shield, Users, ClipboardList, UserCheck, MessageCircle,
-  ChevronRight, MapPin, Clock, Phone, User, Sparkles, HandHeart, Target
+  ChevronRight, MapPin, Clock, Phone, User, Sparkles, HandHeart, Target,
+  CreditCard, Building2, Package, Calendar
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -40,7 +41,7 @@ const AfterlifeProfile = () => {
               </div>
 
               <p className="text-[18px] text-[#5F6F7E] leading-relaxed max-w-lg">
-                {t("afterlifeProfile.heroDesc")}
+                Guided by a "Caring for Life" philosophy, Nirvana provides compassionate, seamless support during life's most tender moments. Every service is a heartfelt tribute — a lasting reflection of love, legacy, and the bond between generations.
               </p>
 
               <div className="flex items-center gap-0 pt-1 flex-wrap gap-y-1.5">
@@ -78,24 +79,24 @@ const AfterlifeProfile = () => {
             <div className="rounded-3xl bg-white border border-[#D4BFE8] shadow-[0_8px_32px_rgba(139,92,184,0.14)] overflow-hidden flex flex-col">
               <div className="px-4 py-3 bg-gradient-to-br from-[#E8D8F4] to-[#F6F0FA] shadow-[0_1px_3px_rgba(139,92,184,0.08)]">
                 <h3 className="text-[1.25rem] md:text-[1.5rem] font-extrabold text-[#12385B] tracking-tight leading-snug text-left">
-                  Compassionate End-of-Life Services
+                  Caring For Life
                 </h3>
                 <p className="text-[13px] md:text-[14px] text-[#5F6F7E] mt-1 leading-tight text-left">
-                  Authorised agency providing dignified memorial, columbarium, and funeral services.
+                  Authorised Nirvana Memorial agency — compassionate bereavement care with over three decades of experience.
                 </p>
               </div>
               <div className="px-2.5 py-1 grid grid-cols-2 gap-0 flex-1 items-center">
                 <div className="border-r border-b border-[#D4BFE8]/50 py-1 px-1">
-                  <TrustStat value="Authorised" label="Nirvana Memorial Agency" />
+                  <TrustStat value="0% Interest" label="Low downpayment options" />
                 </div>
                 <div className="border-b border-[#D4BFE8]/50 py-1 px-1">
-                  <TrustStat value="Joyful Life" label="Agency 613" />
+                  <TrustStat value="Modern" label="Facilities & expert services" />
                 </div>
                 <div className="border-r border-[#D4BFE8]/50 py-1 px-1">
-                  <TrustStat value="Full Service" label="Columbarium · Tablet · Funeral" />
+                  <TrustStat value="All-in-One" label="Funeral packages" />
                 </div>
                 <div className="py-1 px-1">
-                  <TrustStat value="Compassionate" label="Personalised guidance & care" />
+                  <TrustStat value="99-Year" label="Lease, extend till 2098" />
                 </div>
               </div>
             </div>
@@ -126,7 +127,8 @@ const AfterlifeProfile = () => {
                 </div>
                 <div>
                   <p className="text-[13px] font-semibold text-[#5F6F7E] uppercase tracking-wider">Contact Person</p>
-                  <p className="text-[15px] text-[#12385B] font-medium">Pan Lina</p>
+                  <p className="text-[15px] text-[#12385B] font-medium">Pan Lina (Certified Thanatologist)</p>
+                  <p className="text-[13px] text-[#5F6F7E]">Co-founder and Managing Director</p>
                 </div>
               </div>
             </div>
@@ -134,15 +136,15 @@ const AfterlifeProfile = () => {
         </div>
       </section>
 
-      {/* Why Choose Nirvana */}
+      {/* Why Us */}
       <section className="py-6 pb-3 px-3 bg-[#F6F0FA]">
         <div className="max-w-6xl mx-auto space-y-5">
           <div className="text-center space-y-1">
             <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
-              {t("afterlifeProfile.whyNirvana")}
+              Why Choose Nirvana?
             </h2>
             <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
-              {t("afterlifeProfile.whyNirvanaDesc")}
+              Upholding core values of Love, Integrity, Focus, and Empathy (LIFE).
             </p>
           </div>
 
@@ -163,7 +165,7 @@ const AfterlifeProfile = () => {
         </div>
       </section>
 
-      {/* Services Offered (grid) */}
+      {/* Services Offered */}
       <section className="py-6 px-3 bg-[#FAF5FF]">
         <div className="max-w-6xl mx-auto space-y-4">
           <div className="text-center space-y-1">
@@ -171,7 +173,7 @@ const AfterlifeProfile = () => {
               Services Offered
             </h2>
             <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
-              Comprehensive memorial and funeral services for your peace of mind.
+              Comprehensive memorial and funeral services — transparent pricing, personalised care.
             </p>
           </div>
 
@@ -194,42 +196,54 @@ const AfterlifeProfile = () => {
         </div>
       </section>
 
-      {/* Contact Person */}
-      <section className="py-6 px-4 bg-[#F6F0FA]">
-        <div className="max-w-5xl mx-auto space-y-1 text-center">
-          <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">
-            Your Dedicated Advisor
-          </p>
-          <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
-            Contact Person
-          </h2>
-
-          <div className="pt-3 flex justify-center">
-            <div className="group rounded-2xl bg-white border border-[#D4BFE8] p-4 shadow-[0_2px_8px_rgba(139,92,184,0.06)] hover:shadow-[0_8px_24px_rgba(139,92,184,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center w-56">
-              <div className="w-16 h-16 rounded-full bg-gradient-to-br from-[#E8D8F4] to-[#D4BFE8] flex items-center justify-center ring-2 ring-[#8B5CB8]/20 group-hover:ring-[#8B5CB8]/40 transition-all mb-2.5">
-                <User className="h-8 w-8 text-[#8B5CB8]/60" />
-              </div>
-              <h3 className="text-[16px] font-semibold text-[#12385B] leading-tight">Pan Lina</h3>
-              <p className="text-[14px] text-[#5F6F7E] mt-0.5">Afterlife Services Advisor</p>
-              <p className="text-[13px] text-[#5F6F7E]/70 mt-0.5 leading-tight">
-                Providing compassionate guidance for memorial and funeral arrangements.
-              </p>
-
-              <div className="flex items-center gap-2 mt-3">
-                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full bg-[#F0E6F8] text-[12px] font-semibold text-[#6B4A8A]">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#8B5CB8]" />
-                  Active
-                </span>
-                <Button
-                  size="sm"
-                  className="h-7 px-3.5 text-[14px] rounded-full bg-[#8B5CB8] hover:bg-[#7548A0] text-white active:scale-[0.96] transition-all shadow-sm gap-1"
-                  onClick={() => setShowIntakeModal(true)}
-                >
-                  <MessageCircle className="h-3 w-3" />
-                  Connect
-                </Button>
-              </div>
+      {/* Co-founder Quote */}
+      <section className="py-6 px-4 bg-white">
+        <div className="max-w-4xl mx-auto">
+          <div className="rounded-2xl bg-gradient-to-br from-[#F6F0FA] to-[#EDE4F5] border border-[#D4BFE8] p-5 md:p-8 text-center space-y-3">
+            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#E8D8F4] to-[#D4BFE8] flex items-center justify-center mx-auto ring-2 ring-[#8B5CB8]/20">
+              <User className="h-7 w-7 text-[#8B5CB8]/60" />
             </div>
+            <blockquote className="text-[16px] md:text-[18px] text-[#12385B] font-medium italic leading-relaxed max-w-2xl mx-auto">
+              "We're here to empower you to honour your loved ones with dignity, ensuring a lasting tribute that reflects their legacy."
+            </blockquote>
+            <p className="text-[14px] text-[#5F6F7E]">
+              — <span className="font-semibold text-[#12385B]">Lina Pan</span>, Co-founder & Managing Director (Certified Thanatologist)
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Transparent Pricing */}
+      <section className="py-6 px-4 bg-[#F6F0FA]">
+        <div className="max-w-5xl mx-auto space-y-4">
+          <div className="text-center space-y-1">
+            <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
+              Transparent Pricing
+            </h2>
+            <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
+              Flexible funeral services with upfront, transparent pricing — no hidden costs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+            {funeralPackages.map((pkg) => (
+              <div key={pkg.name} className="rounded-xl bg-white border border-[#D4BFE8] p-3 text-center shadow-[0_1px_4px_rgba(139,92,184,0.04)] hover:shadow-[0_4px_16px_rgba(139,92,184,0.1)] hover:-translate-y-0.5 transition-all duration-200">
+                <p className="text-[13px] font-bold text-[#12385B]">{pkg.name}</p>
+                <p className="text-[11px] text-[#5F6F7E] mt-0.5">{pkg.chinese}</p>
+                <p className="text-[18px] font-extrabold text-[#8B5CB8] mt-1">{pkg.price}</p>
+                <p className="text-[10px] text-[#5F6F7E]">inclusive of GST</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Button
+              className="bg-gradient-to-r from-[#8B5CB8] to-[#7548A0] hover:from-[#7548A0] hover:to-[#633E8A] text-white font-semibold shadow-[0_2px_8px_rgba(139,92,184,0.3)]"
+              onClick={() => setShowIntakeModal(true)}
+            >
+              <ClipboardList className="mr-2 h-4 w-4" />
+              Enquire About Packages
+            </Button>
           </div>
         </div>
       </section>
@@ -238,7 +252,9 @@ const AfterlifeProfile = () => {
       <section className="py-8 px-4">
         <div className="max-w-3xl mx-auto text-center space-y-4">
           <h2 className="text-2xl font-bold text-[#12385B]">{t("afterlifeProfile.needGuidance")}</h2>
-          <p className="text-[17px] text-[#5F6F7E]">{t("afterlifeProfile.needGuidanceDesc")}</p>
+          <p className="text-[17px] text-[#5F6F7E]">
+            By pre-planning, you can alleviate financial stress, choose your preferences in advance, and offer peace of mind to your loved ones.
+          </p>
           <Button
             size="lg"
             className="bg-gradient-to-r from-[#8B5CB8] to-[#7548A0] hover:from-[#7548A0] hover:to-[#633E8A] text-white font-semibold shadow-[0_2px_8px_rgba(139,92,184,0.3)]"
@@ -269,21 +285,28 @@ const AfterlifeProfile = () => {
 /* Data */
 
 const whyChooseCards = [
-  { icon: Heart, title: "Compassionate Care", desc: "Every family receives personalised, empathetic guidance through difficult times." },
-  { icon: Shield, title: "Authorised Agency", desc: "Official Nirvana Memorial authorised agency — Joyful Life 613." },
-  { icon: Target, title: "Comprehensive Services", desc: "From columbarium niches to full funeral packages, all under one roof." },
-  { icon: Sparkles, title: "Dignified Arrangements", desc: "Respectful and meaningful memorial services honouring your loved ones." },
-  { icon: HandHeart, title: "Family-First Approach", desc: "We walk alongside families, handling every detail with care." },
-  { icon: Users, title: "Trusted Guidance", desc: "Experienced advisors who understand cultural and religious traditions." },
+  { icon: CreditCard, title: "0% Interest & Low Downpayment", desc: "Honour your loved ones with ease through 0% instalments and low downpayment options." },
+  { icon: Building2, title: "Modern Facilities", desc: "Our modern facilities and compassionate services ensure a peaceful, respectful experience." },
+  { icon: Package, title: "All-in-One Packages", desc: "All-inclusive funeral packages providing a seamless, supportive experience from planning to execution." },
+  { icon: Calendar, title: "99-Year Lease", desc: "Peace of mind with a 99-year lease extending till 2098 for a lasting tribute." },
+  { icon: HandHeart, title: "Caring for Life Philosophy", desc: "Upholding core values of Love, Integrity, Focus, and Empathy (LIFE) in everything we do." },
+  { icon: Users, title: "All Faiths & Beliefs", desc: "Services tailored to suit all faiths and beliefs, preserving rich cultural heritage." },
 ];
 
 const serviceCards = [
-  { icon: Flower2, title: "Columbarium Niche", desc: "Premium niches at Nirvana Memorial Garden for a peaceful resting place." },
-  { icon: Shield, title: "Ancestral Tablet", desc: "Sacred ancestral tablets for honouring and remembering loved ones." },
-  { icon: Heart, title: "Funeral Service Package", desc: "Complete funeral arrangements with dignity, respect, and cultural sensitivity." },
-  { icon: Users, title: "Pre-Planning Services", desc: "Plan ahead to ease the burden on your family during difficult times." },
-  { icon: HandHeart, title: "Bereavement Support", desc: "Compassionate support and guidance for families navigating grief." },
-  { icon: ClipboardList, title: "Personalised Arrangements", desc: "Customised services tailored to your family's wishes and traditions." },
+  { icon: Heart, title: "Funeral Service Packages", desc: "Customisable pre-arranged funeral plans for all budgets and faiths, supported by our professional team." },
+  { icon: Flower2, title: "Columbarium Niche", desc: "Uniquely designed, spacious compartments at Nirvana Memorial Garden blending tradition and modernity." },
+  { icon: Shield, title: "Ancestral Tablet & Pedestals", desc: "Prestigious pedestals on sanctified altars dedicated to deities and enlightened beings." },
+  { icon: Sparkles, title: "Journey with Love", desc: "Asia's first signature spa treatment for the departed — a dignified, compassionate farewell." },
+  { icon: Target, title: "Pre-Planning Services", desc: "Lock in today's prices and plan ahead to ease the burden on your family." },
+  { icon: ClipboardList, title: "Personalised Arrangements", desc: "Customised services tailored to your family's wishes, cultural and religious traditions." },
+];
+
+const funeralPackages = [
+  { name: "NV Grace", chinese: "富贵恩典", price: "$16,132" },
+  { name: "NV Longevity", chinese: "富贵安康", price: "$17,222" },
+  { name: "NV Supreme", chinese: "富贵满堂", price: "$27,032" },
+  { name: "NV Legacy", chinese: "富贵传承", price: "$29,212" },
 ];
 
 /* Shared subcomponents */
