@@ -62,48 +62,45 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
           </div>
         </div>
 
-        {/* Trust + Photos row - stacked on mobile, side-by-side on desktop */}
-        <div className="grid grid-cols-1 lg:grid-cols-[2fr_3fr] gap-3 items-stretch">
-          {/* Stats box */}
-          <div className="rounded-2xl bg-white border border-[#D0DCE6] shadow-[0_8px_32px_rgba(18,56,91,0.14)] overflow-hidden flex flex-col">
-            <div className="px-4 py-3 bg-gradient-to-br from-[#C8D8E8] to-[#DDE8F2] shadow-[0_1px_3px_rgba(18,56,91,0.08)]">
-              <h3 className="text-[1.1rem] md:text-[1.25rem] font-extrabold text-[#0D2E4A] tracking-tight leading-snug text-left">Your Trusted Guide to Private Healthcare in Singapore</h3>
-              <p className="text-[12px] md:text-[13px] text-[#4A5D6E] mt-1 leading-tight text-left">Access trusted clinics, coordinated care, and seamless referrals — all in one place.</p>
+        {/* Trust guide - full width on desktop */}
+        <div className="rounded-2xl bg-white border border-[#D0DCE6] shadow-[0_8px_32px_rgba(18,56,91,0.14)] overflow-hidden">
+          <div className="px-5 py-4 bg-gradient-to-br from-[#C8D8E8] to-[#DDE8F2] shadow-[0_1px_3px_rgba(18,56,91,0.08)]">
+            <h3 className="text-[1.2rem] md:text-[1.4rem] font-extrabold text-[#0D2E4A] tracking-tight leading-snug">Your Trusted Guide to Private Healthcare in Singapore</h3>
+            <p className="text-[13px] md:text-[14px] text-[#4A5D6E] mt-1 leading-tight">Access trusted clinics, coordinated care, and seamless referrals — all in one place.</p>
+          </div>
+          <div className="px-4 py-2 grid grid-cols-2 lg:grid-cols-4 gap-0">
+            <div className="border-r border-b lg:border-b-0 border-[#D0DCE6]/50 py-2 px-2">
+              <TrustStat value="10,000+" label="Patients Assisted" />
             </div>
-            <div className="px-2.5 py-1 grid grid-cols-2 gap-0 flex-1 items-center">
-              <div className="border-r border-b border-[#D0DCE6]/50 py-1 px-1">
-                <TrustStat value="10,000+" label="Patients Assisted" />
-              </div>
-              <div className="border-b border-[#D0DCE6]/50 py-1 px-1">
-                <TrustStat value="100+" label="Specialist Partners" />
-              </div>
-              <div className="border-r border-[#D0DCE6]/50 py-1 px-1">
-                <TrustStat value="24/7" label="Round-the-clock Assistance" />
-              </div>
-              <div className="py-1 px-1">
-                <TrustStat value="4.9 ★" label="Patient Rating" />
-              </div>
+            <div className="border-b lg:border-b-0 lg:border-r border-[#D0DCE6]/50 py-2 px-2">
+              <TrustStat value="100+" label="Specialist Partners" />
+            </div>
+            <div className="border-r border-[#D0DCE6]/50 py-2 px-2">
+              <TrustStat value="24/7" label="Round-the-clock Assistance" />
+            </div>
+            <div className="py-2 px-2">
+              <TrustStat value="4.9 ★" label="Patient Rating" />
             </div>
           </div>
+        </div>
 
-          {/* Photo grid */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5">
-            <div className="relative overflow-hidden rounded-xl">
-              <img src={healthcareConsultation} alt="Doctor consultation" className="w-full h-full object-cover aspect-[4/3] lg:aspect-[3/4] contrast-[1.05] saturate-[1.1]" loading="lazy" width={640} height={640} />
-              <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
-            </div>
-            <div className="relative overflow-hidden rounded-xl">
-              <img src={healthcareClinic} alt="Modern clinic interior" className="w-full h-full object-cover aspect-[4/3] lg:aspect-[3/4] contrast-[1.05] saturate-[1.1]" loading="lazy" width={640} height={640} />
-              <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
-            </div>
-            <div className="relative overflow-hidden rounded-xl">
-              <img src={healthcareCoordination} alt="Care coordination" className="w-full h-full object-cover object-top aspect-[4/3] lg:aspect-[3/4] contrast-[1.05] saturate-[1.1]" loading="lazy" width={640} height={640} />
-              <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
-            </div>
-            <div className="relative overflow-hidden rounded-xl">
-              <img src={healthcarePatient} alt="Patient care" className="w-full h-full object-cover aspect-[4/3] lg:aspect-[3/4] contrast-[1.05] saturate-[1.1]" loading="lazy" width={640} height={640} />
-              <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
-            </div>
+        {/* Photo grid - 2x2 on mobile, 4 columns on desktop, square uncropped */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+          <div className="relative overflow-hidden rounded-xl">
+            <img src={healthcareConsultation} alt="Doctor consultation" className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1]" loading="lazy" width={640} height={640} />
+            <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
+          </div>
+          <div className="relative overflow-hidden rounded-xl">
+            <img src={healthcareClinic} alt="Modern clinic interior" className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1]" loading="lazy" width={640} height={640} />
+            <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
+          </div>
+          <div className="relative overflow-hidden rounded-xl">
+            <img src={healthcareCoordination} alt="Care coordination" className="w-full aspect-square object-cover object-top contrast-[1.05] saturate-[1.1]" loading="lazy" width={640} height={640} />
+            <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
+          </div>
+          <div className="relative overflow-hidden rounded-xl">
+            <img src={healthcarePatient} alt="Patient care" className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1]" loading="lazy" width={640} height={640} />
+            <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
           </div>
         </div>
       </div>
