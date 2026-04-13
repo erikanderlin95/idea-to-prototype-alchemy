@@ -20,16 +20,13 @@ export const OrgOtherOfferings = () => {
   return (
     <section className="py-6 px-4 bg-white">
       <div className="max-w-5xl mx-auto space-y-2">
-        <div className="text-center space-y-1">
-          <p className="text-[13px] font-semibold uppercase tracking-widest text-[#4A5D6E]">
-            {t("org.otherOfferingsSubtitle")}
-          </p>
-          <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#0D2E4A] tracking-tight">
-            Additional Services Available Within the Network
+        <div className="text-center">
+          <h2 className="text-[1.3rem] md:text-[1.5rem] font-bold text-[#0D2E4A] tracking-tight">
+            Additional Services Within the Network
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1 max-w-2xl mx-auto">
           {offerings.map((o) => (
             <div
               key={o.titleKey}
