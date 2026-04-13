@@ -21,7 +21,7 @@ export const OrgOtherOfferings = () => {
     <section className="py-6 px-4 bg-white">
       <div className="max-w-5xl mx-auto space-y-2">
         <div className="text-center">
-          <h2 className="text-[1.3rem] md:text-[1.5rem] font-bold text-[#0D2E4A] tracking-tight">
+          <h2 className="text-[1.1rem] md:text-[1.25rem] font-bold text-[#0D2E4A] tracking-tight">
             Additional Services Within the Network
           </h2>
         </div>
