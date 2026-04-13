@@ -19,12 +19,12 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { isManagedCareType, NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
 
 const DEFAULT_SERVICES = [
-  { icon: Stethoscope, label: "GP Consult" },
-  { icon: Syringe, label: "Vaccination" },
-  { icon: HeartPulse, label: "Chronic Care" },
-  { icon: Baby, label: "Women's Health" },
-  { icon: Scan, label: "Health Screening" },
-  { icon: Brain, label: "Teleconsult" },
+  { icon: Stethoscope, label: "GP Consult", desc: "General practice consultations for everyday health concerns" },
+  { icon: Syringe, label: "Vaccination", desc: "Routine and travel vaccinations for all ages" },
+  { icon: HeartPulse, label: "Chronic Care", desc: "Ongoing management of chronic conditions" },
+  { icon: Baby, label: "Women's Health", desc: "Comprehensive women's health and wellness services" },
+  { icon: Scan, label: "Health Screening", desc: "Preventive health check-ups and screenings" },
+  { icon: Brain, label: "Teleconsult", desc: "Virtual consultations from the comfort of home" },
 ];
 
 const SERVICE_ICON_MAP: Record<string, any> = {
