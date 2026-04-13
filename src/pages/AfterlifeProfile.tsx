@@ -11,6 +11,10 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import nirvanaLogo from "@/assets/nirvana-logo.jpg";
+import nirvanaFuneral from "@/assets/nirvana-funeral.jpg";
+import nirvanaPedestals from "@/assets/nirvana-pedestals.jpg";
+import nirvanaLegacy from "@/assets/nirvana-legacy.jpg";
+import nirvanaBanner from "@/assets/nirvana-banner.jpg";
 
 const AfterlifeProfile = () => {
   const { t } = useLanguage();
@@ -99,27 +103,37 @@ const AfterlifeProfile = () => {
                   <TrustStat value="99-Year" label="Lease, extend till 2098" />
                 </div>
               </div>
-            </div>
 
-            {/* Clinic details card */}
-            <div className="rounded-3xl bg-white border border-[#D4BFE8] shadow-[0_4px_16px_rgba(139,92,184,0.08)] p-5 space-y-3 flex flex-col justify-center">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#F0E6F8] flex items-center justify-center text-[#8B5CB8] shrink-0 mt-0.5">
-                  <MapPin className="h-4 w-4" />
+              {/* Address & Hours */}
+              <div className="px-4 py-2.5 border-t border-[#D4BFE8]/50 space-y-1.5">
+                <div className="flex items-center gap-2">
+                  <MapPin className="h-3.5 w-3.5 text-[#8B5CB8] shrink-0" />
+                  <p className="text-[13px] text-[#12385B] font-medium">950 Old Choa Chu Kang Road S699816</p>
                 </div>
-                <div>
-                  <p className="text-[13px] font-semibold text-[#5F6F7E] uppercase tracking-wider">Address</p>
-                  <p className="text-[15px] text-[#12385B] font-medium">950 Old Choa Chu Kang Road S699816</p>
+                <div className="flex items-center gap-2">
+                  <Clock className="h-3.5 w-3.5 text-[#8B5CB8] shrink-0" />
+                  <p className="text-[13px] text-[#12385B] font-medium">8.30am – 5pm</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#F0E6F8] flex items-center justify-center text-[#8B5CB8] shrink-0 mt-0.5">
-                  <Clock className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-[13px] font-semibold text-[#5F6F7E] uppercase tracking-wider">Operating Hours</p>
-                  <p className="text-[15px] text-[#12385B] font-medium">8.30am – 5pm</p>
-                </div>
+            </div>
+
+            {/* Photo grid */}
+            <div className="grid grid-cols-2 gap-1.5 rounded-3xl overflow-hidden">
+              <div className="relative overflow-hidden rounded-xl">
+                <img src={nirvanaBanner} alt="Nirvana Memorial Garden" className="w-full h-full object-cover object-center aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" />
+                <div className="absolute inset-0 bg-[#3A005F]/5 mix-blend-multiply" />
+              </div>
+              <div className="relative overflow-hidden rounded-xl">
+                <img src={nirvanaFuneral} alt="Funeral services" className="w-full h-full object-cover object-center aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" />
+                <div className="absolute inset-0 bg-[#3A005F]/5 mix-blend-multiply" />
+              </div>
+              <div className="relative overflow-hidden rounded-xl">
+                <img src={nirvanaPedestals} alt="Ancestral pedestals" className="w-full h-full object-cover object-center aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" />
+                <div className="absolute inset-0 bg-[#3A005F]/5 mix-blend-multiply" />
+              </div>
+              <div className="relative overflow-hidden rounded-xl">
+                <img src={nirvanaLegacy} alt="Legacy of love services" className="w-full h-full object-cover object-center aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" />
+                <div className="absolute inset-0 bg-[#3A005F]/5 mix-blend-multiply" />
               </div>
             </div>
           </div>
