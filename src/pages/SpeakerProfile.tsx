@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import ouchLogo from "@/assets/ouch-logo.jpg";
 import ouchWorkshopRaffles from "@/assets/ouch-workshop-raffles.jpg";
 import ouchTeamPwc from "@/assets/ouch-team-pwc.jpg";
 import ouchSeniors from "@/assets/ouch-seniors.jpg";
@@ -36,9 +37,12 @@ const SpeakerProfile = () => {
                 <span className="text-[11px] md:text-[15px] font-semibold text-[#5F6F7E] uppercase tracking-widest">{t("speakerProfile.badge")}</span>
               </div>
 
-              <h1 className="text-[2rem] md:text-[3.1rem] lg:text-[3.4rem] font-bold text-[#12385B] leading-[1.1] tracking-tight">
-                Ouch Pte Ltd
-              </h1>
+              <div className="flex items-center gap-3">
+                <img src={ouchLogo} alt="Ouch Pte Ltd logo" className="w-10 h-10 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-xl object-cover shadow-sm ring-1 ring-[#F0C8A0]" />
+                <h1 className="text-[2rem] md:text-[3.1rem] lg:text-[3.4rem] font-bold text-[#12385B] leading-[1.1] tracking-tight">
+                  Ouch Pte Ltd
+                </h1>
+              </div>
 
               <p className="text-[18px] text-[#5F6F7E] leading-relaxed max-w-lg">
                 {t("speakerProfile.heroDesc")}
