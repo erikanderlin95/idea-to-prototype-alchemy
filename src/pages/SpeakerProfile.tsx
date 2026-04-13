@@ -166,31 +166,12 @@ const SpeakerProfile = () => {
         </div>
       </section>
 
-      {/* What We Cover (chips) */}
-      <section className="py-6 px-4 bg-[#FFFAF5]">
-        <div className="max-w-5xl mx-auto space-y-3">
+      {/* What We Cover (grid) */}
+      <section className="py-6 px-3 bg-[#FFF8F0]">
+        <div className="max-w-6xl mx-auto space-y-4">
           <div className="text-center space-y-1">
             <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
               What We Cover
-            </h2>
-          </div>
-          <div className="flex flex-wrap justify-center gap-2">
-            {serviceAreaChips.map((chip) => (
-              <div key={chip} className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white border border-[#F0C8A0] shadow-[0_1px_4px_rgba(245,124,0,0.05)] hover:shadow-[0_3px_12px_rgba(245,124,0,0.1)] hover:border-[#F57C00]/30 transition-all duration-200 cursor-default">
-                <span className="text-[15px] font-semibold text-[#12385B]">{chip}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Our Services (grid) */}
-      <section className="pt-3 pb-6 px-3 bg-[#FFF8F0]">
-        <div className="max-w-6xl mx-auto space-y-4">
-          <div className="w-20 mx-auto border-t border-[#F0C8A0] mb-1" />
-          <div className="text-center space-y-1">
-            <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
-              Our Services
             </h2>
             <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
               Programmes designed to educate, engage, and empower.
