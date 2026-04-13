@@ -73,14 +73,14 @@ const SpeakerProfile = () => {
             </div>
 
             <div className="lg:col-span-2">
-              <div className="rounded-2xl bg-white border border-[#F0C8A0] shadow-[0_8px_32px_rgba(245,124,0,0.12)] overflow-hidden">
-                <div className="px-5 py-3 bg-[#FFF5EB] border-b border-[#F0C8A0]">
-                  <span className="text-[15px] font-bold text-[#12385B] uppercase tracking-widest">{t("speakerProfile.capabilities")}</span>
+              <div className="rounded-xl bg-white border border-[#F0C8A0] shadow-[0_4px_16px_rgba(245,124,0,0.1)] overflow-hidden">
+                <div className="px-3 py-1.5 bg-[#FFF5EB] border-b border-[#F0C8A0]">
+                  <span className="text-[12px] font-bold text-[#12385B] uppercase tracking-widest">{t("speakerProfile.capabilities")}</span>
                 </div>
-                <div className="p-3 space-y-0.5">
-                  <CapabilityChip icon={<Mic className="h-4 w-4" />} label={t("speakerProfile.tcmHealthTalks")} />
-                  <CapabilityChip icon={<Presentation className="h-4 w-4" />} label={t("speakerProfile.b2bWorkshops")} />
-                  <CapabilityChip icon={<Award className="h-4 w-4" />} label={t("speakerProfile.corporateTraining")} />
+                <div className="p-1.5 space-y-0">
+                  <CapabilityChip icon={<Mic className="h-3.5 w-3.5" />} label={t("speakerProfile.tcmHealthTalks")} />
+                  <CapabilityChip icon={<Presentation className="h-3.5 w-3.5" />} label={t("speakerProfile.b2bWorkshops")} />
+                  <CapabilityChip icon={<Award className="h-3.5 w-3.5" />} label={t("speakerProfile.corporateTraining")} />
                 </div>
               </div>
             </div>
@@ -300,11 +300,11 @@ const serviceCards = [
 /* Shared subcomponents */
 
 const CapabilityChip = ({ icon, label }: { icon: React.ReactNode; label: string }) => (
-  <div className="flex items-center gap-3 rounded-lg px-3 py-2.5 hover:bg-[#FFF3E0] transition-colors duration-200">
-    <div className="w-8 h-8 rounded-lg bg-[#FFF3E0] flex items-center justify-center text-[#F57C00] flex-shrink-0">
+  <div className="flex items-center gap-2 rounded-md px-2 py-1.5 hover:bg-[#FFF3E0] transition-colors duration-200">
+    <div className="w-6 h-6 rounded-md bg-[#FFF3E0] flex items-center justify-center text-[#F57C00] flex-shrink-0">
       {icon}
     </div>
-    <p className="text-[17px] font-semibold text-[#12385B] leading-tight">{label}</p>
+    <p className="text-[14px] font-semibold text-[#12385B] leading-tight">{label}</p>
   </div>
 );
 
