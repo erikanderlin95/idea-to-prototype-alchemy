@@ -29,7 +29,7 @@ export const OrgCareJourney = () => {
             </p>
           </div>
 
-          <div className="rounded-xl bg-white border-2 border-[#D0DCE6] shadow-[0_4px_20px_rgba(13,46,74,0.1)] p-4 space-y-2.5 relative">
+          <div className="rounded-2xl bg-white border-2 border-[#D0DCE6] shadow-[0_4px_20px_rgba(13,46,74,0.1)] p-4 space-y-2.5 relative aspect-square md:aspect-auto max-w-[22rem]">
             <div className="flex items-center justify-between pb-2 border-b border-[#D0DCE6]">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[hsl(0,50%,65%)]" />
