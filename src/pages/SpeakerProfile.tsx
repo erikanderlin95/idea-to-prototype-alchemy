@@ -69,6 +69,8 @@ const SpeakerProfile = () => {
                   </div>
                   <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">Corporate Training</span>
                 </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
