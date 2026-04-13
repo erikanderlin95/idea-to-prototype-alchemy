@@ -21,7 +21,7 @@ const SpeakersTrainers = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <section className="relative pt-24 pb-12 px-4 bg-gradient-to-br from-[#FDF0DC] via-[#FEF5E8] to-[#FFF3E0]">
+      <section className="relative pt-24 pb-12 px-4 bg-gradient-to-b from-[#FFF8F0] via-[#FDEBD0] to-[#FDF0DC]">
         <div className="max-w-6xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#FDF2E0] text-[#D4860A] mb-6">
             <Mic className="h-4 w-4" />
