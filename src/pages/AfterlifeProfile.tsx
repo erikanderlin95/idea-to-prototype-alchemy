@@ -136,7 +136,7 @@ const AfterlifeProfile = () => {
             <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
               Upholding core values of Love, Integrity, Focus, and Empathy (LIFE).
             </p>
-          </div>
+            </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
             {whyChooseCards.map((b) => (
@@ -196,9 +196,10 @@ const AfterlifeProfile = () => {
             <blockquote className="text-[16px] md:text-[18px] text-[#12385B] font-medium italic leading-relaxed max-w-2xl mx-auto">
               "We're here to empower you to honour your loved ones with dignity, ensuring a lasting tribute that reflects their legacy."
             </blockquote>
-            <p className="text-[14px] text-[#5F6F7E]">
-              — <span className="font-semibold text-[#12385B]">Lina Pan</span>, Co-founder & Managing Director (Certified Thanatologist)
-            </p>
+            <div className="text-center">
+              <p className="text-[15px] font-semibold text-[#12385B]">Lina Pan</p>
+              <p className="text-[13px] text-[#5F6F7E]">Co-founder & Managing Director (Certified Thanatologist)</p>
+            </div>
           </div>
         </div>
       </section>
