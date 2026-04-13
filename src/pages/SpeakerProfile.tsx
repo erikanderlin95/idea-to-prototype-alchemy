@@ -51,39 +51,24 @@ const SpeakerProfile = () => {
               <div className="flex items-center gap-0 pt-1 flex-wrap gap-y-1.5">
                 <div className="flex items-center gap-1.5 rounded-lg bg-[#FFF3E0] px-2.5 py-1.5 md:px-3 md:py-2">
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
-                    <ClipboardList className="h-2.5 w-2.5 md:h-3 md:w-3" />
+                    <Mic className="h-2.5 w-2.5 md:h-3 md:w-3" />
                   </div>
-                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">{t("speakerProfile.enquire")}</span>
+                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">TCM Health Talks</span>
                 </div>
                 <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4 text-[#F57C00]/40 mx-0.5 md:mx-1 flex-shrink-0" />
                 <div className="flex items-center gap-1.5 rounded-lg bg-[#FFF3E0] px-2.5 py-1.5 md:px-3 md:py-2">
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
-                    <UserCheck className="h-2.5 w-2.5 md:h-3 md:w-3" />
+                    <Presentation className="h-2.5 w-2.5 md:h-3 md:w-3" />
                   </div>
-                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">{t("speakerProfile.weCustomise")}</span>
+                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">B2B & B2C Workshops</span>
                 </div>
                 <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4 text-[#F57C00]/40 mx-0.5 md:mx-1 flex-shrink-0" />
                 <div className="flex items-center gap-1.5 rounded-lg bg-[#FFF3E0] px-2.5 py-1.5 md:px-3 md:py-2">
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
-                    <MessageCircle className="h-2.5 w-2.5 md:h-3 md:w-3" />
+                    <Award className="h-2.5 w-2.5 md:h-3 md:w-3" />
                   </div>
-                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">{t("speakerProfile.weDeliver")}</span>
+                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">Corporate Training</span>
                 </div>
-              </div>
-            </div>
-
-            <div className="lg:col-span-2">
-              <div className="rounded-xl bg-white border border-[#F0C8A0] shadow-[0_4px_16px_rgba(245,124,0,0.1)] overflow-hidden">
-                <div className="px-3 py-1.5 bg-[#FFF5EB] border-b border-[#F0C8A0]">
-                  <span className="text-[12px] font-bold text-[#12385B] uppercase tracking-widest">{t("speakerProfile.capabilities")}</span>
-                </div>
-                <div className="p-1.5 space-y-0">
-                  <CapabilityChip icon={<Mic className="h-3.5 w-3.5" />} label={t("speakerProfile.tcmHealthTalks")} />
-                  <CapabilityChip icon={<Presentation className="h-3.5 w-3.5" />} label={t("speakerProfile.b2bWorkshops")} />
-                  <CapabilityChip icon={<Award className="h-3.5 w-3.5" />} label={t("speakerProfile.corporateTraining")} />
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
