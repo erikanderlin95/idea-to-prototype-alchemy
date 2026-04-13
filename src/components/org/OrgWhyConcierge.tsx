@@ -22,7 +22,7 @@ export const OrgWhyConcierge = () => {
 
   return (
     <section className="py-6 pb-3 px-3 bg-[#EDF3F8]">
-      <div className="max-w-6xl mx-auto space-y-5">
+      <div className="max-w-4xl mx-auto space-y-5">
         {/* Header */}
         <div className="text-center space-y-1">
           <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#0D2E4A] tracking-tight">
