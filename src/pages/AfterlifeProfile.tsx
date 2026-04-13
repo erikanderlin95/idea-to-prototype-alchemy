@@ -136,7 +136,7 @@ const AfterlifeProfile = () => {
             <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
               Upholding core values of Love, Integrity, Focus, and Empathy (LIFE).
             </p>
-            </div>
+          </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
             {whyChooseCards.map((b) => (
