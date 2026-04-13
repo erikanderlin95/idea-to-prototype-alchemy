@@ -121,16 +121,6 @@ const AfterlifeProfile = () => {
                   <p className="text-[15px] text-[#12385B] font-medium">8.30am – 5pm</p>
                 </div>
               </div>
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-[#F0E6F8] flex items-center justify-center text-[#8B5CB8] shrink-0 mt-0.5">
-                  <User className="h-4 w-4" />
-                </div>
-                <div>
-                  <p className="text-[13px] font-semibold text-[#5F6F7E] uppercase tracking-wider">Contact Person</p>
-                  <p className="text-[15px] text-[#12385B] font-medium">Pan Lina (Certified Thanatologist)</p>
-                  <p className="text-[13px] text-[#5F6F7E]">Co-founder and Managing Director</p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
