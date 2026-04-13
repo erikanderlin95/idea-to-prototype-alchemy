@@ -9,6 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
+import ouchLogo from "@/assets/ouch-logo.jpg";
 import ouchWorkshopRaffles from "@/assets/ouch-workshop-raffles.jpg";
 import ouchTeamPwc from "@/assets/ouch-team-pwc.jpg";
 import ouchSeniors from "@/assets/ouch-seniors.jpg";
