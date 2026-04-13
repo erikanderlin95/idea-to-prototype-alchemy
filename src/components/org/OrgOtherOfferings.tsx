@@ -20,12 +20,12 @@ export const OrgOtherOfferings = () => {
   return (
     <section className="py-6 px-4 bg-white">
       <div className="max-w-5xl mx-auto space-y-2">
-        <div className="text-center">
+        <div className="text-center space-y-1">
           <p className="text-[13px] font-semibold uppercase tracking-widest text-[#4A5D6E]">
             {t("org.otherOfferingsSubtitle")}
           </p>
-          <h2 className="text-2xl md:text-[1.7rem] font-bold text-[#0D2E4A] tracking-tight mt-0.5">
-            {t("org.otherOfferings")}
+          <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#0D2E4A] tracking-tight">
+            Additional Services Available Within the Network
           </h2>
         </div>
 

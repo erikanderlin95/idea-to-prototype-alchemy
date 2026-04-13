@@ -7,7 +7,7 @@ export const OrgCareJourney = () => {
   return (
     <section className="py-6 px-4 bg-[#E8F5F7]">
       <div className="max-w-5xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-[minmax(0,23rem)_minmax(0,1fr)] gap-3 md:gap-2 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-6 items-center max-w-4xl mx-auto">
           <div className="space-y-3">
             <h2 className="text-[1.7rem] md:text-[1.9rem] font-bold text-[#0D2E4A] tracking-tight">
               {t("org.intakeFlowTitle")}
@@ -29,7 +29,7 @@ export const OrgCareJourney = () => {
             </p>
           </div>
 
-          <div className="rounded-2xl bg-white border-2 border-[#D0DCE6] shadow-[0_4px_20px_rgba(13,46,74,0.1)] p-4 space-y-2.5 relative aspect-square md:aspect-auto max-w-[22rem]">
+          <div className="rounded-2xl bg-white border-2 border-[#D0DCE6] shadow-[0_4px_20px_rgba(13,46,74,0.1)] p-4 space-y-2.5 relative">
             <div className="flex items-center justify-between pb-2 border-b border-[#D0DCE6]">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[hsl(0,50%,65%)]" />
