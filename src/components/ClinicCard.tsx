@@ -590,6 +590,7 @@ export const ClinicCard = ({
                     <p className="text-base font-bold text-foreground">{t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
                  </div>
                 
+                {type !== "GP" && (
                 <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
                   <label className="text-sm font-medium text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
@@ -605,6 +606,7 @@ export const ClinicCard = ({
                     </SelectContent>
                   </Select>
                 </div>
+                )}
               </div>
             )}
             </div>
@@ -709,13 +711,15 @@ export const ClinicCard = ({
             <p className="text-[10px] text-muted-foreground mt-0.5">8-15 digits, country code optional</p>
           </div>
           <div>
-            <Label htmlFor="q-reason" className="text-xs font-medium">Visit Reason</Label>
+            <Label htmlFor="q-reason" className="text-xs font-medium">
+              {type === "GP" ? "Visit Reason" : "Remarks (optional)"}
+            </Label>
             <Input
               id="q-reason"
               type="text"
               value={visitReason}
               onChange={(e) => setVisitReason(e.target.value)}
-              placeholder="e.g. Cold, flu, fever"
+              placeholder={type === "GP" ? "e.g. Cold, flu, fever" : "Any additional remarks..."}
               className="mt-1 h-9 text-sm"
             />
           </div>
