@@ -180,37 +180,50 @@ const ClinicProfile = () => {
               "Harmony TCM Centre": [
                 "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80",
                 "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=600&q=80",
+                "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=600&q=80",
+                "https://images.unsplash.com/photo-1583912267550-d6c2a8e5c7a1?w=600&q=80",
               ],
               "Unity Health Clinic": [
                 "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=600&q=80",
                 "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=80",
+                "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&q=80",
+                "https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=600&q=80",
               ],
               "Wellness Plus Clinic": [
                 "https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=600&q=80",
                 "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&q=80",
+                "https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=600&q=80",
+                "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=80",
               ],
               "NMG Family Clinic": [
                 "https://images.unsplash.com/photo-1629909615184-74f495363b67?w=600&q=80",
                 "https://images.unsplash.com/photo-1581056771107-24ca5f033842?w=600&q=80",
+                "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=600&q=80",
+                "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&q=80",
               ],
               "ABC Specialist Clinic": [
                 "https://images.unsplash.com/photo-1516549655169-df83a0774514?w=600&q=80",
                 "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=600&q=80",
+                "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=600&q=80",
+                "https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=600&q=80",
               ],
             };
             const DEFAULT_CLINIC_PHOTOS = [
               "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80",
               "https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=600&q=80",
+              "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&q=80",
+              "https://images.unsplash.com/photo-1551190822-a9333d879b1f?w=600&q=80",
             ];
             const displayPhotos = (photos && photos.length > 0)
-              ? photos.slice(0, 2)
+              ? photos.slice(0, 4)
               : (DEMO_PHOTOS[clinic.name] || DEFAULT_CLINIC_PHOTOS);
 
             return (
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
                 {displayPhotos.map((photo: string, index: number) => (
                   <div key={index} className="relative overflow-hidden rounded-xl">
-                    <img src={photo} alt={`${clinic.name} photo ${index + 1}`} className="w-full aspect-square object-cover" loading="lazy" />
+                    <img src={photo} alt={`${clinic.name} photo ${index + 1}`} className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1]" loading="lazy" width={640} height={640} />
+                    <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
                   </div>
                 ))}
               </div>
