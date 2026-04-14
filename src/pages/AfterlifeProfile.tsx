@@ -53,7 +53,7 @@ const AfterlifeProfile = () => {
               </div>
 
               <p className="text-[18px] text-[#7A6B8A] leading-relaxed max-w-lg">
-                Guided by a "Caring for Life" philosophy, Nirvana provides compassionate, seamless support during life's most tender moments. Every service is a heartfelt tribute — a lasting reflection of love, legacy, and the bond between generations.
+                Guided by a "Caring for Life" philosophy, Nirvana offers compassionate, seamless support during life's most tender moments—honouring love, legacy, and lasting bonds.
               </p>
 
               <div className="flex items-center gap-0 pt-1 flex-wrap gap-y-1.5">
