@@ -213,7 +213,7 @@ const AfterlifeProfile = () => {
         <div className="max-w-4xl mx-auto">
           <div className="rounded-2xl bg-gradient-to-br from-[#F5EEF8] to-[#EDE4F5] border border-[#DDD0EA] p-5 md:p-8 text-center space-y-3">
             <div className="w-20 h-20 rounded-full overflow-hidden mx-auto ring-2 ring-[#C9A84C]/20 shadow-md">
-              <img src={linaPanPhoto} alt="Lina Pan" className="w-full h-full object-cover object-top" />
+              <img src={linaPanPhoto} alt="Lina Pan" className="w-full h-full object-cover object-center scale-[1.35]" />
             </div>
             <blockquote className="text-[16px] md:text-[18px] text-[#2D1B4E] font-medium italic leading-relaxed max-w-2xl mx-auto">
               "We're here to empower you to honour your loved ones with dignity, ensuring a lasting tribute that reflects their legacy."
