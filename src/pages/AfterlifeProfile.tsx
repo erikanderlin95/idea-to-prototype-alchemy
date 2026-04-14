@@ -212,8 +212,8 @@ const AfterlifeProfile = () => {
       <section className="py-8 px-4 bg-gradient-to-b from-[#FAF7FC] to-[#F5EEF8]">
         <div className="max-w-4xl mx-auto">
           <div className="rounded-2xl bg-gradient-to-br from-[#F5EEF8] to-[#EDE4F5] border border-[#DDD0EA] p-5 md:p-8 text-center space-y-3">
-            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#EDE4F5] to-[#DDD0EA] flex items-center justify-center mx-auto ring-2 ring-[#C9A84C]/15">
-              <User className="h-7 w-7 text-[#9B7DB8]/60" />
+            <div className="w-20 h-20 rounded-full overflow-hidden mx-auto ring-2 ring-[#C9A84C]/20 shadow-md">
+              <img src={linaPanPhoto} alt="Lina Pan" className="w-full h-full object-cover object-top" />
             </div>
             <blockquote className="text-[16px] md:text-[18px] text-[#2D1B4E] font-medium italic leading-relaxed max-w-2xl mx-auto">
               "We're here to empower you to honour your loved ones with dignity, ensuring a lasting tribute that reflects their legacy."
