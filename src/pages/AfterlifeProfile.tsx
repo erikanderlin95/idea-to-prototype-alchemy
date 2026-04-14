@@ -102,7 +102,7 @@ const AfterlifeProfile = () => {
                   <TrustStat value="0% Interest" label="Low downpayment options" />
                 </div>
                 <div className="border-b border-[#E8DDF0]/50 py-1 px-1">
-                  <TrustStat value="Modern" label="Facilities & expert services" />
+                  <TrustStat value="All Faiths & Beliefs" label="Inclusive & respectful services" />
                 </div>
                 <div className="border-r border-[#E8DDF0]/50 py-1 px-1">
                   <TrustStat value="All-in-One" label="Funeral packages" />
