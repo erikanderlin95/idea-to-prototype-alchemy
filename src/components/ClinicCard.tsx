@@ -714,14 +714,14 @@ export const ClinicCard = ({
           </div>
           <div>
             <Label htmlFor="q-reason" className="text-xs font-medium">
-              {type === "GP" ? "Visit Reason" : "Remarks (optional)"}
+              {(type === "GP" || type === "TCM") ? "Visit Reason" : "Remarks (optional)"}
             </Label>
             <Input
               id="q-reason"
               type="text"
               value={visitReason}
               onChange={(e) => setVisitReason(e.target.value)}
-              placeholder={type === "GP" ? "e.g. Cold, flu, fever" : "Any additional remarks..."}
+              placeholder={(type === "GP" || type === "TCM") ? "e.g. Cold, flu, fever" : "Any additional remarks..."}
               className="mt-1 h-9 text-sm"
             />
           </div>
@@ -775,7 +775,7 @@ export const ClinicCard = ({
         </DialogHeader>
         <div className="space-y-3">
           <div>
-            <Label htmlFor="lead-name" className="text-xs font-medium">Full Name *</Label>
+            <Label htmlFor="lead-name" className="text-xs font-medium">Patient Name *</Label>
             <Input id="lead-name" type="text" value={leadName} onChange={(e) => setLeadName(e.target.value)} placeholder="Your full name" className="mt-1 h-9 text-sm" />
           </div>
           <div>
