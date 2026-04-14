@@ -229,14 +229,11 @@ const AfterlifeProfile = () => {
       {/* Funeral Service Packages */}
       <section className="py-8 px-4 bg-[#FDFBFE]">
         <div className="max-w-5xl mx-auto space-y-4">
-          <div className="text-center space-y-1">
+          <div className="text-center space-y-0.5">
             <p className="text-[13px] md:text-[14px] text-[#C9A84C] italic font-medium">Nirvana Funeral Service Packages</p>
             <h2 className="text-[1.5rem] md:text-[2rem] font-bold text-[#2D1B4E] tracking-tight">
               Tailor Your Tribute
             </h2>
-            <p className="text-[14px] md:text-[15px] text-[#7A6B8A] max-w-2xl mx-auto">
-              Peace of Mind in Your Time of Need
-            </p>
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
