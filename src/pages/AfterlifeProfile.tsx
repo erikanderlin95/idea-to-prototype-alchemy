@@ -7,6 +7,11 @@ import {
   ChevronRight, MapPin, Clock, Phone, User, Sparkles, HandHeart, Target,
   CreditCard, Building2, Package, Calendar
 } from "lucide-react";
+
+import nvGraceImg from "@/assets/nv-grace.jpg";
+import nvLongevityImg from "@/assets/nv-longevity.jpg";
+import nvSupremeImg from "@/assets/nv-supreme.jpg";
+import nvLegacyImg from "@/assets/nv-legacy-pkg.jpg";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -218,25 +223,30 @@ const AfterlifeProfile = () => {
         </div>
       </section>
 
-      {/* Transparent Pricing */}
+      {/* Funeral Service Packages */}
       <section className="py-6 px-4 bg-[#F6F0FA]">
         <div className="max-w-5xl mx-auto space-y-4">
           <div className="text-center space-y-1">
-            <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
-              Transparent Pricing
+            <p className="text-[13px] md:text-[14px] text-[#8B5CB8] italic font-medium">Nirvana Funeral Service Packages</p>
+            <h2 className="text-[1.5rem] md:text-[2rem] font-bold text-[#12385B] tracking-tight">
+              Tailor Your Tribute
             </h2>
             <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
-              Flexible funeral services with upfront, transparent pricing — no hidden costs.
+              Peace of Mind in Your Time of Need
             </p>
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-3">
             {funeralPackages.map((pkg) => (
-              <div key={pkg.name} className="rounded-xl bg-white border border-[#D4BFE8] p-3 text-center shadow-[0_1px_4px_rgba(139,92,184,0.04)] hover:shadow-[0_4px_16px_rgba(139,92,184,0.1)] hover:-translate-y-0.5 transition-all duration-200">
-                <p className="text-[13px] font-bold text-[#12385B]">{pkg.name}</p>
-                <p className="text-[11px] text-[#5F6F7E] mt-0.5">{pkg.chinese}</p>
-                <p className="text-[18px] font-extrabold text-[#8B5CB8] mt-1">{pkg.price}</p>
-                <p className="text-[10px] text-[#5F6F7E]">inclusive of GST</p>
+              <div key={pkg.name} className="rounded-xl bg-white border border-[#D4BFE8] overflow-hidden text-center shadow-[0_1px_4px_rgba(139,92,184,0.04)] hover:shadow-[0_4px_16px_rgba(139,92,184,0.1)] hover:-translate-y-0.5 transition-all duration-200">
+                <div className="aspect-[3/4] overflow-hidden">
+                  <img src={pkg.img} alt={pkg.name} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+                <div className="p-2.5">
+                  <p className="text-[13px] font-bold text-[#12385B]">{pkg.name} {pkg.chinese}</p>
+                  <p className="text-[18px] font-extrabold text-[#8B5CB8] mt-1">{pkg.price}</p>
+                  <p className="text-[10px] text-[#5F6F7E]">(inclusive of GST)</p>
+                </div>
               </div>
             ))}
           </div>
@@ -308,10 +318,10 @@ const serviceCards = [
 ];
 
 const funeralPackages = [
-  { name: "NV Grace", chinese: "富贵恩典", price: "$16,132" },
-  { name: "NV Longevity", chinese: "富贵安康", price: "$17,222" },
-  { name: "NV Supreme", chinese: "富贵满堂", price: "$27,032" },
-  { name: "NV Legacy", chinese: "富贵传承", price: "$29,212" },
+  { name: "NV Grace", chinese: "富贵恩典", price: "$16,132", img: nvGraceImg },
+  { name: "NV Longevity", chinese: "富贵安康", price: "$17,222", img: nvLongevityImg },
+  { name: "NV Supreme", chinese: "富贵满堂", price: "$27,032", img: nvSupremeImg },
+  { name: "NV Legacy", chinese: "富贵传承", price: "$29,212", img: nvLegacyImg },
 ];
 
 /* Shared subcomponents */
