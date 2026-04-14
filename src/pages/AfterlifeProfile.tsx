@@ -20,6 +20,7 @@ import nirvanaFuneral from "@/assets/nirvana-funeral.jpg";
 import nirvanaPedestals from "@/assets/nirvana-pedestals.jpg";
 import nirvanaLegacy from "@/assets/nirvana-legacy.jpg";
 import nirvanaBanner from "@/assets/nirvana-banner.jpg";
+import linaPanPhoto from "@/assets/lina-pan-photo.jpg";
 
 const AfterlifeProfile = () => {
   const { t } = useLanguage();
