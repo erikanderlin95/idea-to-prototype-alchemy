@@ -326,11 +326,14 @@ const funeralPackages = [
 
 /* Shared subcomponents */
 
-const TrustStat = ({ value, label }: { value: string; label: string }) => (
-  <div className="text-center">
-    <p className="text-[20px] md:text-[24px] font-extrabold text-[#9B7DB8] tracking-tight">{value}</p>
-    <p className="text-[10px] text-[#8A7A9A] font-medium mt-1 uppercase tracking-wide">{label}</p>
-  </div>
-);
+const TrustStat = ({ value, label }: { value: string; label: string }) => {
+  const isLong = value.length > 10;
+  return (
+    <div className="text-center">
+      <p className={`${isLong ? 'text-[14px] md:text-[18px]' : 'text-[20px] md:text-[24px]'} font-extrabold text-[#9B7DB8] tracking-tight whitespace-nowrap`}>{value}</p>
+      <p className="text-[10px] text-[#8A7A9A] font-medium mt-1 uppercase tracking-wide">{label}</p>
+    </div>
+  );
+};
 
 export default AfterlifeProfile;
