@@ -686,7 +686,7 @@ export const ClinicCard = ({
 
         <div className="space-y-3">
           <div>
-            <Label htmlFor="q-name" className="text-xs font-medium">Name</Label>
+            <Label htmlFor="q-name" className="text-xs font-medium">Patient Name</Label>
             <Input
               id="q-name"
               type="text"
