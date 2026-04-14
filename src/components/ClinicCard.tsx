@@ -590,7 +590,7 @@ export const ClinicCard = ({
                     <p className="text-base font-bold text-foreground">{t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
                  </div>
                 
-                {type !== "GP" && (
+                {type !== "GP" && type !== "TCM" && (
                 <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
                   <label className="text-sm font-medium text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
