@@ -90,6 +90,7 @@ export const ClinicCard = ({
   const [leadPrefTime, setLeadPrefTime] = useState("");
   const [leadNotes, setLeadNotes] = useState("");
   const [leadDisclaimerAgreed, setLeadDisclaimerAgreed] = useState(false);
+  const [leadVisitType, setLeadVisitType] = useState("");
   const [leadSubmitting, setLeadSubmitting] = useState(false);
   const [bookingCaseId, setBookingCaseId] = useState("");
   const [bookingRedirectUrl, setBookingRedirectUrl] = useState("");
@@ -377,6 +378,7 @@ export const ClinicCard = ({
 
   const resetBookingLead = () => {
     setLeadName("");
+    setLeadVisitType("");
     setLeadMobile("");
     setLeadPrefDate("");
     setLeadPrefTime("");
@@ -780,6 +782,20 @@ export const ClinicCard = ({
             <Label htmlFor="lead-mobile" className="text-xs font-medium">Mobile Number *</Label>
             <Input id="lead-mobile" type="tel" value={leadMobile} onChange={(e) => setLeadMobile(e.target.value)} placeholder="e.g. +6591234567" className="mt-1 h-9 text-sm" />
             <p className="text-[10px] text-muted-foreground mt-0.5">8-15 digits, country code optional</p>
+          </div>
+          <div>
+            <Label htmlFor="lead-visit-type" className="text-xs font-medium">Visit Type</Label>
+            <Select value={leadVisitType} onValueChange={setLeadVisitType}>
+              <SelectTrigger className="mt-1 w-full h-9 text-sm">
+                <SelectValue placeholder="Select visit type" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="Acupuncture">Acupuncture</SelectItem>
+                <SelectItem value="Consultation">Consultation</SelectItem>
+                <SelectItem value="Follow Up">Follow Up</SelectItem>
+                <SelectItem value="Others">Others</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <div>
             <Label htmlFor="lead-notes" className="text-xs font-medium">Notes</Label>
