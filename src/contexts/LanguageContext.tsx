@@ -869,11 +869,11 @@ const translations: Record<Language, Record<string, string>> = {
     "forClinics.others": "Others",
 
     // Marketplace CTA
-    "marketplace.ctaTitle": "Reduce front desk interruptions.\nManage walk-ins more efficiently.",
-    "marketplace.ctaDesc": "Let patients check queue load before arriving and reduce repeated \"how long\" questions — works alongside your existing workflow.",
-    "marketplace.ctaBullet1": "Reduce repeated queue questions",
-    "marketplace.ctaBullet2": "Let patients check before arriving",
-    "marketplace.ctaBullet3": "No system replacement required",
+    "marketplace.ctaTitle": "Reduce 'how long more?' questions.\nLet patients check themselves.",
+    "marketplace.ctaDesc": "",
+    "marketplace.ctaBullet1": "Patients check queue on their own phone",
+    "marketplace.ctaBullet2": "Staff stop repeating the same answers",
+    "marketplace.ctaBullet3": "No change to your current system",
     "marketplace.ctaSuitable": "Suitable for clinics with regular walk-ins or queue congestion.",
     "marketplace.ctaButton": "Submit Clinic Request",
     "marketplace.ctaReview": "We review each request to ensure fit.",
