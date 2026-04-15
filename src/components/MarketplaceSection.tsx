@@ -154,11 +154,6 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             <h3 className="text-xl sm:text-2xl font-extrabold text-foreground mb-3 leading-snug max-w-xl mx-auto" style={{ whiteSpace: 'pre-line' }}>
               {t("marketplace.ctaTitle")}
             </h3>
-            {t("marketplace.ctaDesc") && (
-              <p className="text-foreground/70 text-base leading-relaxed mb-6 max-w-lg mx-auto">
-                {t("marketplace.ctaDesc")}
-              </p>
-            )}
 
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-8 text-[15px] text-foreground/90">
               <span className="flex items-center gap-1.5"><span className="text-primary font-bold">✓</span> {t("marketplace.ctaBullet1")}</span>
