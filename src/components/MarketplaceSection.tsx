@@ -150,7 +150,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           </div>
 
           {/* Clinic onboarding CTA */}
-          <div className="mt-16 text-center py-12 px-6 rounded-2xl bg-gradient-to-br from-primary/5 via-accent/30 to-primary/10 border border-primary/10">
+          <div className="mt-16 text-center py-16 sm:py-20 px-8 sm:px-12 rounded-2xl bg-gradient-to-br from-primary/5 via-accent/30 to-primary/10 border border-primary/10">
             <h3 className="text-xl sm:text-2xl font-extrabold text-foreground mb-3 leading-snug max-w-xl mx-auto" style={{ whiteSpace: 'pre-line' }}>
               {t("marketplace.ctaTitle")}
             </h3>
