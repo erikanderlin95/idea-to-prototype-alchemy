@@ -10,10 +10,10 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 import ouchLogo from "@/assets/ouch-logo.jpg";
-import ouchWorkshopRaffles from "@/assets/ouch-workshop-raffles.jpg";
-import ouchTeamPwc from "@/assets/ouch-team-pwc.jpg";
-import ouchSeniors from "@/assets/ouch-seniors.jpg";
-import ouchEnergizer from "@/assets/ouch-energizer.jpg";
+import ouchWorkshopRaffles from "@/assets/ouch-photo-1.jpg";
+import ouchTeamPwc from "@/assets/ouch-photo-2.jpg";
+import ouchSeniors from "@/assets/ouch-photo-3.jpg";
+import ouchEnergizer from "@/assets/ouch-photo-4.jpg";
 import ouchHuifang from "@/assets/ouch-huifang.jpg";
 
 const SpeakerProfile = () => {
@@ -98,19 +98,19 @@ const SpeakerProfile = () => {
             {/* Photo grid */}
             <div className="grid grid-cols-2 gap-1.5 rounded-3xl overflow-hidden">
               <div className="relative overflow-hidden rounded-xl">
-                <img src={ouchWorkshopRaffles} alt="Corporate workshop at Raffles Quay" className="w-full h-full object-cover object-top aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" />
+                <img src={ouchWorkshopRaffles} alt="TCM self-care workshop with seniors" className="w-full h-full object-cover object-center aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" />
                 <div className="absolute inset-0 bg-[#5F3A00]/5 mix-blend-multiply" />
               </div>
               <div className="relative overflow-hidden rounded-xl">
-                <img src={ouchTeamPwc} alt="Team bonding with PwC" className="w-full h-full object-cover object-top aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" />
+                <img src={ouchTeamPwc} alt="Group wellness movement session" className="w-full h-full object-cover object-center aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" />
                 <div className="absolute inset-0 bg-[#5F3A00]/5 mix-blend-multiply" />
               </div>
               <div className="relative overflow-hidden rounded-xl">
-                <img src={ouchSeniors} alt="Seniors wellness session" className="w-full h-full object-cover object-top aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" />
+                <img src={ouchSeniors} alt="Hands-on TCM guidance" className="w-full h-full object-cover object-center aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" />
                 <div className="absolute inset-0 bg-[#5F3A00]/5 mix-blend-multiply" />
               </div>
               <div className="relative overflow-hidden rounded-xl">
-                <img src={ouchEnergizer} alt="Energizer breaks session" className="w-full h-full object-cover object-center aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" />
+                <img src={ouchEnergizer} alt="Interactive wellness programme" className="w-full h-full object-cover object-center aspect-[4/3] contrast-[1.05] saturate-[1.1]" loading="lazy" />
                 <div className="absolute inset-0 bg-[#5F3A00]/5 mix-blend-multiply" />
               </div>
             </div>
