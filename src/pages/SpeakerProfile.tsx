@@ -259,12 +259,12 @@ const SpeakerProfile = () => {
 /* Data */
 
 const whyChooseCards = [
-  { icon: Leaf, title: "TCM Self-Care Expertise", desc: "Rooted in Traditional Chinese Medicine principles for practical daily wellness." },
-  { icon: Award, title: "Corporate & Community Experience", desc: "Trusted by leading organisations and community groups since 2006." },
-  { icon: Target, title: "Customised Programmes", desc: "Every session is tailored to your audience, goals, and setting." },
-  { icon: Sparkles, title: "Interactive Delivery", desc: "Hands-on, high-energy sessions that keep participants engaged." },
-  { icon: Lightbulb, title: "Evidence-Based & Practical", desc: "Techniques grounded in research and immediately applicable." },
-  { icon: HandHeart, title: "Engaging, Hands-On Sessions", desc: "Participants leave with actionable self-care skills they can use right away." },
+  { icon: Leaf, title: "Simple Self-Care", desc: "Practical TCM techniques anyone can apply." },
+  { icon: Sparkles, title: "Immediate Results", desc: "Relieve tension, pain, and fatigue quickly." },
+  { icon: HandHeart, title: "Engaging Experience", desc: "High-energy, hands-on sessions that participants enjoy." },
+  { icon: Target, title: "Workplace Relevance", desc: "Designed for modern stress and digital fatigue." },
+  { icon: Heart, title: "Ageing Focus", desc: "Supports healthy ageing and long-term wellbeing." },
+  { icon: Award, title: "Trusted Delivery", desc: "Nearly two decades across sectors and audiences." },
 ];
 
 const serviceAreaChips = [
@@ -272,12 +272,12 @@ const serviceAreaChips = [
 ];
 
 const serviceCards = [
-  { icon: Presentation, title: "Corporate Wellness Programmes", desc: "On-site sessions designed for workplace health and productivity." },
-  { icon: Mic, title: "TCM Health Talks", desc: "Engaging talks on TCM self-care, prevention, and daily wellness." },
-  { icon: Users, title: "Team Bonding Workshops", desc: "Fun, interactive workshops that build team spirit through wellness." },
-  { icon: Heart, title: "Caregiver Support Sessions", desc: "Practical self-care techniques for caregivers managing stress and fatigue." },
-  { icon: HandHeart, title: "Senior Wellness Workshops", desc: "Gentle, accessible TCM self-care for healthy ageing." },
-  { icon: Target, title: "Custom Programme Design", desc: "Bespoke programmes tailored to your organisation's specific needs." },
+  { icon: Presentation, title: "Live Workshops", desc: "Interactive TCM sessions for immediate self-care application." },
+  { icon: Lightbulb, title: "Digital Access", desc: "Bite-sized learning for ongoing self-care practice." },
+  { icon: HandHeart, title: "Wellness Kits", desc: "Simple tools to support daily self-care routines." },
+  { icon: Users, title: "Corporate Programmes", desc: "Wellness solutions for teams, clients, and members." },
+  { icon: Heart, title: "Caregiver & Senior Sessions", desc: "Practical support for ageing and caregiving needs." },
+  { icon: Target, title: "Customised Solutions", desc: "Tailored programmes aligned to your goals." },
 ];
 
 /* Shared subcomponents */
