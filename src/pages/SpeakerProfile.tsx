@@ -181,7 +181,7 @@ const SpeakerProfile = () => {
       {/* Lead Speaker */}
       <section className="py-6 px-4 bg-[#FEF6EE]">
         <div className="max-w-5xl mx-auto space-y-1 text-center">
-          <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">
+          <p className="text-[15px] md:text-[17px] font-bold uppercase tracking-widest text-[#F57C00]">
             Your Workshop Facilitator
           </p>
 
