@@ -76,24 +76,24 @@ const SpeakerProfile = () => {
             <div className="rounded-3xl bg-white border border-[#F0C8A0] shadow-[0_8px_32px_rgba(245,124,0,0.14)] overflow-hidden flex flex-col">
               <div className="px-4 py-3 bg-gradient-to-br from-[#FFE0B2] to-[#FFF3E0] shadow-[0_1px_3px_rgba(245,124,0,0.08)]">
                 <h3 className="text-[1.25rem] md:text-[1.5rem] font-extrabold text-[#12385B] tracking-tight leading-snug text-left">
-                  Empowering Wellness Through TCM Self-Care
+                  Empowering Ageing Without Pain Through Simple TCM Self-Care
                 </h3>
                 <p className="text-[13px] md:text-[14px] text-[#5F6F7E] mt-1 leading-tight text-left">
-                  Interactive workshops, corporate wellness, and community health programmes — since 2006.
+                  Interactive wellness programmes for corporate and community (caregivers & seniors).
                 </p>
               </div>
               <div className="px-2.5 py-1 grid grid-cols-2 gap-0 flex-1 items-center">
                 <div className="border-r border-b border-[#F0C8A0]/50 py-1 px-1">
-                  <TrustStat value="Since 2006" label="Delivering TCM self-care programmes" />
+                  <TrustStat value="Practical Self-Care" label="Simple techniques for daily self-care" />
                 </div>
                 <div className="border-b border-[#F0C8A0]/50 py-1 px-1">
-                  <TrustStat value="Corporate" label="& Community Clients" />
+                  <TrustStat value="Interactive Learning" label="Hands-on sessions that keep participants engaged" />
                 </div>
                 <div className="border-r border-[#F0C8A0]/50 py-1 px-1">
-                  <TrustStat value="Customised" label="Tailored to audience & objectives" />
+                  <TrustStat value="Customised Programmes" label="Tailored to your audience and goals" />
                 </div>
                 <div className="py-1 px-1">
-                  <TrustStat value="Interactive" label="Hands-on, engaging delivery" />
+                  <TrustStat value="Proven Experience" label="Trusted across corporates, communities, and seniors" />
                 </div>
               </div>
             </div>
