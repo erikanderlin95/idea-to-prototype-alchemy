@@ -187,9 +187,6 @@ const SpeakerProfile = () => {
           <p className="text-[13px] font-semibold uppercase tracking-widest text-[#5F6F7E]">
             Your Workshop Facilitator
           </p>
-          <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
-            Lead Trainer
-          </h2>
 
           <div className="pt-3 flex justify-center">
             <div className="group rounded-2xl bg-white border border-[#F0C8A0] p-4 shadow-[0_2px_8px_rgba(245,124,0,0.06)] hover:shadow-[0_8px_24px_rgba(245,124,0,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center w-56">
