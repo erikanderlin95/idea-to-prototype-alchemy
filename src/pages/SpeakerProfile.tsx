@@ -50,24 +50,17 @@ const SpeakerProfile = () => {
 
               <div className="flex items-center gap-0 pt-1 flex-wrap gap-y-1.5">
                 <div className="flex items-center gap-1.5 rounded-lg bg-[#FFF3E0] px-2.5 py-1.5 md:px-3 md:py-2">
-                  <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
-                    <Mic className="h-2.5 w-2.5 md:h-3 md:w-3" />
-                  </div>
-                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">TCM Health Talks</span>
-                </div>
-                <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4 text-[#F57C00]/40 mx-0.5 md:mx-1 flex-shrink-0" />
-                <div className="flex items-center gap-1.5 rounded-lg bg-[#FFF3E0] px-2.5 py-1.5 md:px-3 md:py-2">
-                  <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
+                <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
                     <Presentation className="h-2.5 w-2.5 md:h-3 md:w-3" />
                   </div>
-                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">B2B & B2C Workshops</span>
+                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">Corporate Wellness (talks & workshops)</span>
                 </div>
                 <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4 text-[#F57C00]/40 mx-0.5 md:mx-1 flex-shrink-0" />
                 <div className="flex items-center gap-1.5 rounded-lg bg-[#FFF3E0] px-2.5 py-1.5 md:px-3 md:py-2">
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
-                    <Award className="h-2.5 w-2.5 md:h-3 md:w-3" />
+                    <HandHeart className="h-2.5 w-2.5 md:h-3 md:w-3" />
                   </div>
-                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">Corporate Training</span>
+                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">Community Wellness (caregivers & seniors)</span>
                 </div>
               </div>
             </div>
@@ -83,24 +76,24 @@ const SpeakerProfile = () => {
             <div className="rounded-3xl bg-white border border-[#F0C8A0] shadow-[0_8px_32px_rgba(245,124,0,0.14)] overflow-hidden flex flex-col">
               <div className="px-4 py-3 bg-gradient-to-br from-[#FFE0B2] to-[#FFF3E0] shadow-[0_1px_3px_rgba(245,124,0,0.08)]">
                 <h3 className="text-[1.25rem] md:text-[1.5rem] font-extrabold text-[#12385B] tracking-tight leading-snug text-left">
-                  Empowering Wellness Through TCM Self-Care
+                  Empowering Ageing Without Pain Through Simple TCM Self-Care
                 </h3>
                 <p className="text-[13px] md:text-[14px] text-[#5F6F7E] mt-1 leading-tight text-left">
-                  Interactive workshops, corporate wellness, and community health programmes — since 2006.
+                  Interactive wellness programmes for corporate and community (caregivers & seniors).
                 </p>
               </div>
               <div className="px-2.5 py-1 grid grid-cols-2 gap-0 flex-1 items-center">
                 <div className="border-r border-b border-[#F0C8A0]/50 py-1 px-1">
-                  <TrustStat value="Since 2006" label="Delivering TCM self-care programmes" />
+                  <TrustStat value="Practical Self-Care" label="Simple techniques for daily self-care" />
                 </div>
                 <div className="border-b border-[#F0C8A0]/50 py-1 px-1">
-                  <TrustStat value="Corporate" label="& Community Clients" />
+                  <TrustStat value="Interactive Learning" label="Hands-on sessions that keep participants engaged" />
                 </div>
                 <div className="border-r border-[#F0C8A0]/50 py-1 px-1">
-                  <TrustStat value="Customised" label="Tailored to audience & objectives" />
+                  <TrustStat value="Customised Programmes" label="Tailored to your audience and goals" />
                 </div>
                 <div className="py-1 px-1">
-                  <TrustStat value="Interactive" label="Hands-on, engaging delivery" />
+                  <TrustStat value="Proven Experience" label="Trusted across corporates, communities, and seniors" />
                 </div>
               </div>
             </div>
@@ -136,7 +129,7 @@ const SpeakerProfile = () => {
               Why Choose Ouch Pte Ltd?
             </h2>
             <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
-              Practical TCM self-care, delivered with energy and expertise.
+              Practical TCM self-care your people can apply immediately.
             </p>
           </div>
 
@@ -162,10 +155,13 @@ const SpeakerProfile = () => {
         <div className="max-w-6xl mx-auto space-y-4">
           <div className="text-center space-y-1">
             <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
-              What We Cover
+              What We Offer
             </h2>
+            <p className="text-[13px] md:text-[14px] font-semibold text-[#F57C00] tracking-wide">
+              Workshops · Digital Access · Wellness Kits
+            </p>
             <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
-              Programmes designed to educate, engage, and empower.
+              Practical TCM self-care for everyday wellbeing.
             </p>
           </div>
 
@@ -195,18 +191,18 @@ const SpeakerProfile = () => {
             Your Workshop Facilitator
           </p>
           <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
-            Lead Speaker
+            Lead Trainer
           </h2>
 
           <div className="pt-3 flex justify-center">
             <div className="group rounded-2xl bg-white border border-[#F0C8A0] p-4 shadow-[0_2px_8px_rgba(245,124,0,0.06)] hover:shadow-[0_8px_24px_rgba(245,124,0,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center w-56">
               <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-[#F57C00]/20 group-hover:ring-[#F57C00]/40 transition-all mb-2.5">
-                <img src={ouchHuifang} alt="Hui Fang" className="w-full h-full object-cover object-top" />
+                <img src={ouchHuifang} alt="Lee Hui Fang" className="w-full h-full object-cover object-top" />
               </div>
-              <h3 className="text-[16px] font-semibold text-[#12385B] leading-tight">Hui Fang</h3>
-              <p className="text-[14px] text-[#5F6F7E] mt-0.5">Lead Speaker & TCM Educator</p>
+              <h3 className="text-[16px] font-semibold text-[#12385B] leading-tight">Lee Hui Fang</h3>
+              <p className="text-[14px] text-[#5F6F7E] mt-0.5">Lead Trainer</p>
               <p className="text-[13px] text-[#5F6F7E]/70 mt-0.5 leading-tight">
-                Delivering practical TCM self-care through engaging workshops.
+                Delivering practical, hands-on TCM self-care programmes since 2006.
               </p>
 
               <div className="flex items-center gap-2 mt-3">
@@ -263,12 +259,12 @@ const SpeakerProfile = () => {
 /* Data */
 
 const whyChooseCards = [
-  { icon: Leaf, title: "TCM Self-Care Expertise", desc: "Rooted in Traditional Chinese Medicine principles for practical daily wellness." },
-  { icon: Award, title: "Corporate & Community Experience", desc: "Trusted by leading organisations and community groups since 2006." },
-  { icon: Target, title: "Customised Programmes", desc: "Every session is tailored to your audience, goals, and setting." },
-  { icon: Sparkles, title: "Interactive Delivery", desc: "Hands-on, high-energy sessions that keep participants engaged." },
-  { icon: Lightbulb, title: "Evidence-Based & Practical", desc: "Techniques grounded in research and immediately applicable." },
-  { icon: HandHeart, title: "Engaging, Hands-On Sessions", desc: "Participants leave with actionable self-care skills they can use right away." },
+  { icon: Leaf, title: "Simple Self-Care", desc: "Practical TCM techniques anyone can apply." },
+  { icon: Sparkles, title: "Immediate Results", desc: "Relieve tension, pain, and fatigue quickly." },
+  { icon: HandHeart, title: "Engaging Experience", desc: "High-energy, hands-on sessions that participants enjoy." },
+  { icon: Target, title: "Workplace Relevance", desc: "Designed for modern stress and digital fatigue." },
+  { icon: Heart, title: "Ageing Focus", desc: "Supports healthy ageing and long-term wellbeing." },
+  { icon: Award, title: "Trusted Delivery", desc: "Nearly two decades across sectors and audiences." },
 ];
 
 const serviceAreaChips = [
@@ -276,12 +272,12 @@ const serviceAreaChips = [
 ];
 
 const serviceCards = [
-  { icon: Presentation, title: "Corporate Wellness Programmes", desc: "On-site sessions designed for workplace health and productivity." },
-  { icon: Mic, title: "TCM Health Talks", desc: "Engaging talks on TCM self-care, prevention, and daily wellness." },
-  { icon: Users, title: "Team Bonding Workshops", desc: "Fun, interactive workshops that build team spirit through wellness." },
-  { icon: Heart, title: "Caregiver Support Sessions", desc: "Practical self-care techniques for caregivers managing stress and fatigue." },
-  { icon: HandHeart, title: "Senior Wellness Workshops", desc: "Gentle, accessible TCM self-care for healthy ageing." },
-  { icon: Target, title: "Custom Programme Design", desc: "Bespoke programmes tailored to your organisation's specific needs." },
+  { icon: Presentation, title: "Live Workshops", desc: "Interactive TCM sessions for immediate self-care application." },
+  { icon: Lightbulb, title: "Digital Access", desc: "Bite-sized learning for ongoing self-care practice." },
+  { icon: HandHeart, title: "Wellness Kits", desc: "Simple tools to support daily self-care routines." },
+  { icon: Users, title: "Corporate Programmes", desc: "Wellness solutions for teams, clients, and members." },
+  { icon: Heart, title: "Caregiver & Senior Sessions", desc: "Practical support for ageing and caregiving needs." },
+  { icon: Target, title: "Customised Solutions", desc: "Tailored programmes aligned to your goals." },
 ];
 
 /* Shared subcomponents */
