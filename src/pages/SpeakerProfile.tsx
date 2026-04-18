@@ -44,9 +44,6 @@ const SpeakerProfile = () => {
                 </h1>
               </div>
 
-              <p className="text-[18px] text-[#5F6F7E] leading-relaxed max-w-lg">
-                {t("speakerProfile.heroDesc")}
-              </p>
 
               <div className="flex items-center gap-0 pt-1 flex-wrap gap-y-1.5">
                 <div className="flex items-center gap-1.5 rounded-lg bg-[#FFF3E0] px-2.5 py-1.5 md:px-3 md:py-2">
