@@ -129,7 +129,7 @@ const SpeakerProfile = () => {
               Why Choose Ouch Pte Ltd?
             </h2>
             <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
-              Practical TCM self-care, delivered with energy and expertise.
+              Practical TCM self-care your people can apply immediately.
             </p>
           </div>
 
