@@ -50,24 +50,17 @@ const SpeakerProfile = () => {
 
               <div className="flex items-center gap-0 pt-1 flex-wrap gap-y-1.5">
                 <div className="flex items-center gap-1.5 rounded-lg bg-[#FFF3E0] px-2.5 py-1.5 md:px-3 md:py-2">
-                  <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
-                    <Mic className="h-2.5 w-2.5 md:h-3 md:w-3" />
-                  </div>
-                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">TCM Health Talks</span>
-                </div>
-                <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4 text-[#F57C00]/40 mx-0.5 md:mx-1 flex-shrink-0" />
-                <div className="flex items-center gap-1.5 rounded-lg bg-[#FFF3E0] px-2.5 py-1.5 md:px-3 md:py-2">
-                  <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
+                <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
                     <Presentation className="h-2.5 w-2.5 md:h-3 md:w-3" />
                   </div>
-                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">B2B & B2C Workshops</span>
+                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">Corporate Wellness (talks & workshops)</span>
                 </div>
                 <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4 text-[#F57C00]/40 mx-0.5 md:mx-1 flex-shrink-0" />
                 <div className="flex items-center gap-1.5 rounded-lg bg-[#FFF3E0] px-2.5 py-1.5 md:px-3 md:py-2">
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#F57C00]/20 flex items-center justify-center text-[#F57C00]">
-                    <Award className="h-2.5 w-2.5 md:h-3 md:w-3" />
+                    <HandHeart className="h-2.5 w-2.5 md:h-3 md:w-3" />
                   </div>
-                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">Corporate Training</span>
+                  <span className="text-[13px] md:text-[15px] font-bold text-[#12385B]">Community Wellness (caregivers & seniors)</span>
                 </div>
               </div>
             </div>
