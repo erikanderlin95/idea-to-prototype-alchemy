@@ -154,9 +154,6 @@ const SpeakerProfile = () => {
             <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
               What We Offer
             </h2>
-            <p className="text-[13px] md:text-[14px] font-semibold text-[#F57C00] tracking-wide">
-              Workshops · Digital Access · Wellness Kits
-            </p>
             <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
               Practical TCM self-care for everyday wellbeing.
             </p>
