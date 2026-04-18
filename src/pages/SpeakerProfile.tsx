@@ -191,18 +191,18 @@ const SpeakerProfile = () => {
             Your Workshop Facilitator
           </p>
           <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
-            Lead Speaker
+            Lead Trainer
           </h2>
 
           <div className="pt-3 flex justify-center">
             <div className="group rounded-2xl bg-white border border-[#F0C8A0] p-4 shadow-[0_2px_8px_rgba(245,124,0,0.06)] hover:shadow-[0_8px_24px_rgba(245,124,0,0.12)] hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center w-56">
               <div className="w-16 h-16 rounded-full overflow-hidden ring-2 ring-[#F57C00]/20 group-hover:ring-[#F57C00]/40 transition-all mb-2.5">
-                <img src={ouchHuifang} alt="Hui Fang" className="w-full h-full object-cover object-top" />
+                <img src={ouchHuifang} alt="Lee Hui Fang" className="w-full h-full object-cover object-top" />
               </div>
-              <h3 className="text-[16px] font-semibold text-[#12385B] leading-tight">Hui Fang</h3>
-              <p className="text-[14px] text-[#5F6F7E] mt-0.5">Lead Speaker & TCM Educator</p>
+              <h3 className="text-[16px] font-semibold text-[#12385B] leading-tight">Lee Hui Fang</h3>
+              <p className="text-[14px] text-[#5F6F7E] mt-0.5">Lead Trainer</p>
               <p className="text-[13px] text-[#5F6F7E]/70 mt-0.5 leading-tight">
-                Delivering practical TCM self-care through engaging workshops.
+                Delivering practical, hands-on TCM self-care programmes since 2006.
               </p>
 
               <div className="flex items-center gap-2 mt-3">
