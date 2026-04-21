@@ -475,54 +475,24 @@ export const ClinicCard = ({
           )
         )}
         {!hasDigitalQueue && (
-          <div className="space-y-1.5">
-            <div className="py-2 px-2.5 rounded border"
-              style={{ 
-                background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
-                borderColor: 'hsl(var(--ai-cyan)/0.2)'
-              }}
-            >
-              <div className="flex items-center gap-1.5 mb-1.5">
-                <Clock className="h-3.5 w-3.5 text-foreground" />
-                <p className="text-[13px] text-foreground font-semibold">{t("clinicCard.availabilitiesToday")}</p>
-              </div>
-              <div className="flex gap-1.5 flex-wrap">
-                {["2:30 PM", "4:00 PM", "5:30 PM"].map((time) => (
-                  <button key={time}
-                    className="px-2.5 py-1 text-[13px] font-semibold rounded-full bg-primary/10 text-foreground border border-primary/30 hover:bg-primary/20 transition-colors"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    {time}
-                  </button>
-                ))}
-              </div>
+          <div className="py-2 px-2.5 rounded border"
+            style={{ 
+              background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.05))',
+              borderColor: 'hsl(var(--ai-purple)/0.2)'
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-1.5 mb-1.5">
+              <Star className="h-3.5 w-3.5 text-foreground" />
+              <p className="text-[13px] text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
             </div>
-            <div className="py-2 px-2.5 rounded border"
-              style={{ 
-                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.05))',
-                borderColor: 'hsl(var(--ai-purple)/0.2)'
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="space-y-1">
-                <div className="flex items-center gap-1.5">
-                  <Star className="h-3.5 w-3.5 text-foreground" />
-                  <p className="text-[13px] text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
-                </div>
-                <Select defaultValue="massage">
-                  <SelectTrigger className="w-full bg-background/50 border-border/50 h-8 text-[13px]">
-                    <SelectValue placeholder="Select a service" />
-                  </SelectTrigger>
-                  <SelectContent className="bg-popover z-50">
-                    <SelectItem value="massage">Massage Therapy</SelectItem>
-                    <SelectItem value="acupuncture">Acupuncture</SelectItem>
-                    <SelectItem value="aromatherapy">Aromatherapy</SelectItem>
-                    <SelectItem value="reflexology">Reflexology</SelectItem>
-                    <SelectItem value="cupping">Cupping Therapy</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
+            <ul className="space-y-0.5 text-[13px] text-foreground/90 list-disc pl-4">
+              <li>Massage Therapy</li>
+              <li>Acupuncture</li>
+              <li>Aromatherapy</li>
+              <li>Reflexology</li>
+              <li>Cupping Therapy</li>
+            </ul>
           </div>
         )}
 
