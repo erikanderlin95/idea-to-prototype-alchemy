@@ -486,7 +486,7 @@ export const ClinicCard = ({
               <Star className="h-3.5 w-3.5 text-foreground" />
               <p className="text-[13px] text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
             </div>
-            <ul className="space-y-0.5 text-[13px] text-foreground/90 list-disc pl-4">
+            <ul className="grid grid-cols-2 gap-x-2 gap-y-0.5 text-[13px] text-foreground/90 list-disc pl-4">
               <li>Massage Therapy</li>
               <li>Acupuncture</li>
               <li>Aromatherapy</li>
