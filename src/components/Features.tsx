@@ -11,6 +11,7 @@ export const Features = () => {
       title: "See Queue First",
       desc: "Check how many patients are ahead before you go.",
       accent: PURPLE,
+      accentSolid: PURPLE,
       tintBg: `linear-gradient(180deg, ${PURPLE.replace(")", "/0.05)")}, #ffffff)`,
       borderLeft: `3px solid ${PURPLE}`,
       iconBg: `linear-gradient(135deg, ${PURPLE}, ${PURPLE.replace(")", "/0.78)")})`,
@@ -22,11 +23,13 @@ export const Features = () => {
       icon: Layers,
       title: "Choose Better",
       desc: "Compare nearby clinics and go where the queue is shorter.",
-      accent: TEAL,
+      accent: `linear-gradient(90deg, ${PURPLE}, ${TEAL})`,
+      accentSolid: TEAL,
       tintBg: "#ffffff",
-      borderLeft: `3px solid ${TEAL}`,
-      iconBg: TEAL.replace(")", "/0.14)"),
-      iconColor: TEAL,
+      borderLeft: `3px solid transparent`,
+      borderImage: `linear-gradient(180deg, ${PURPLE}, ${TEAL}) 1`,
+      iconBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.16)")}, ${TEAL.replace(")", "/0.18)")})`,
+      iconColor: PURPLE,
       iconFill: "none",
     },
     {
@@ -35,12 +38,12 @@ export const Features = () => {
       title: "Join or Book",
       desc: "Join the queue or book directly with the clinic.",
       accent: TEAL,
-      tintBg: "#ffffff",
-      borderLeft: `3px solid transparent`,
-      borderImage: `linear-gradient(180deg, ${PURPLE}, ${TEAL}) 1`,
-      iconBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.18)")}, ${TEAL.replace(")", "/0.20)")})`,
-      iconColor: TEAL,
-      iconFill: "none",
+      accentSolid: TEAL,
+      tintBg: `linear-gradient(180deg, ${TEAL.replace(")", "/0.05)")}, #ffffff)`,
+      borderLeft: `3px solid ${TEAL}`,
+      iconBg: `linear-gradient(135deg, ${TEAL}, ${TEAL.replace(")", "/0.78)")})`,
+      iconColor: "#fff",
+      iconFill: "rgba(255,255,255,0.18)",
     },
   ];
 
@@ -53,13 +56,13 @@ export const Features = () => {
           </h2>
         </div>
 
-        <div className="w-[88%] max-w-[1320px] mx-auto flex flex-col md:flex-row items-stretch justify-center gap-3 md:gap-3">
+        <div className="w-[88%] md:w-[72%] max-w-[1080px] mx-auto flex flex-col md:flex-row items-stretch justify-center gap-3 md:gap-4">
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
               <div key={i} className="flex flex-col md:flex-row items-center flex-1 max-w-[420px] mx-auto md:mx-0 w-full gap-3">
                 <div
-                  className="group flex-1 w-full rounded-xl px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 flex flex-col"
+                  className="group flex-1 w-full rounded-xl px-5 py-6 md:py-7 transition-all duration-300 hover:-translate-y-0.5 flex flex-col"
                   style={{
                     background: s.tintBg,
                     borderLeft: s.borderLeft,
@@ -80,8 +83,8 @@ export const Features = () => {
                       />
                     </div>
                     <span
-                      className="text-[10.5px] font-medium tracking-[0.14em] uppercase"
-                      style={{ color: s.accent }}
+                      className="text-[10.5px] font-semibold tracking-[0.16em] uppercase"
+                      style={{ color: (s as any).accentSolid || s.accent }}
                     >
                       {s.step}
                     </span>
@@ -103,8 +106,8 @@ export const Features = () => {
                 {i < steps.length - 1 && (
                   <div className="hidden md:flex items-center justify-center flex-shrink-0">
                     <ArrowRight
-                      className="h-4 w-4"
-                      style={{ stroke: "url(#flowGradient)" }}
+                      className="h-6 w-6"
+                      style={{ stroke: "url(#flowGradient)", strokeWidth: 2.25 }}
                       aria-hidden="true"
                     />
                   </div>
