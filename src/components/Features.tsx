@@ -37,12 +37,12 @@ export const Features = () => {
       title: "Join or Book",
       desc: "Join the queue or book directly with the clinic.",
       accent: TEAL,
-      tintBg: "#ffffff",
-      borderLeft: `3px solid transparent`,
-      borderImage: `linear-gradient(180deg, ${PURPLE}, ${TEAL}) 1`,
-      iconBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.18)")}, ${TEAL.replace(")", "/0.20)")})`,
-      iconColor: TEAL,
-      iconFill: "none",
+      accentSolid: TEAL,
+      tintBg: `linear-gradient(180deg, ${TEAL.replace(")", "/0.05)")}, #ffffff)`,
+      borderLeft: `3px solid ${TEAL}`,
+      iconBg: `linear-gradient(135deg, ${TEAL}, ${TEAL.replace(")", "/0.78)")})`,
+      iconColor: "#fff",
+      iconFill: "rgba(255,255,255,0.18)",
     },
   ];
 
