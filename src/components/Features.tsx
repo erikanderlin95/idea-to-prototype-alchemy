@@ -11,10 +11,11 @@ export const Features = () => {
       title: "See Queue First",
       desc: "Check how many patients are ahead before you go.",
       accent: PURPLE,
-      tintBg: `linear-gradient(180deg, ${PURPLE.replace(")", "/0.07)")}, hsl(var(--card)))`,
-      borderColor: PURPLE.replace(")", "/0.30)"),
-      iconBg: `linear-gradient(135deg, ${PURPLE}, ${PURPLE.replace(")", "/0.75)")})`,
+      tintBg: `linear-gradient(180deg, ${PURPLE.replace(")", "/0.05)")}, #ffffff)`,
+      borderLeft: `3px solid ${PURPLE}`,
+      iconBg: `linear-gradient(135deg, ${PURPLE}, ${PURPLE.replace(")", "/0.78)")})`,
       iconColor: "#fff",
+      iconFill: "rgba(255,255,255,0.18)",
     },
     {
       step: "Step 2",
@@ -22,10 +23,11 @@ export const Features = () => {
       title: "Choose Better",
       desc: "Compare nearby clinics and go where the queue is shorter.",
       accent: TEAL,
-      tintBg: "hsl(var(--card))",
-      borderColor: "hsl(var(--border))",
-      iconBg: TEAL.replace(")", "/0.12)"),
+      tintBg: "#ffffff",
+      borderLeft: `3px solid ${TEAL}`,
+      iconBg: TEAL.replace(")", "/0.14)"),
       iconColor: TEAL,
+      iconFill: "none",
     },
     {
       step: "Step 3",
@@ -33,10 +35,12 @@ export const Features = () => {
       title: "Join or Book",
       desc: "Join the queue or book directly with the clinic.",
       accent: TEAL,
-      tintBg: "hsl(var(--card))",
-      borderColor: "hsl(var(--border))",
-      iconBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.15)")}, ${TEAL.replace(")", "/0.18)")})`,
+      tintBg: "#ffffff",
+      borderLeft: `3px solid transparent`,
+      borderImage: `linear-gradient(180deg, ${PURPLE}, ${TEAL}) 1`,
+      iconBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.18)")}, ${TEAL.replace(")", "/0.20)")})`,
       iconColor: TEAL,
+      iconFill: "none",
     },
   ];
 
@@ -49,46 +53,47 @@ export const Features = () => {
           </h2>
         </div>
 
-        <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-stretch gap-4 md:gap-3">
+        <div className="w-[88%] max-w-[1320px] mx-auto flex flex-col md:flex-row items-stretch justify-center gap-3 md:gap-3">
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
-              <div key={i} className="flex flex-col md:flex-row items-center flex-1 gap-4 md:gap-3">
+              <div key={i} className="flex flex-col md:flex-row items-center flex-1 max-w-[420px] mx-auto md:mx-0 w-full gap-3">
                 <div
-                  className="group flex-1 w-full rounded-2xl p-6 border transition-all duration-300 hover:-translate-y-0.5 flex flex-col"
+                  className="group flex-1 w-full rounded-xl px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 flex flex-col"
                   style={{
-                    borderColor: s.borderColor,
                     background: s.tintBg,
-                    boxShadow: "0 1px 2px rgba(16,24,40,0.04), 0 8px 24px -12px rgba(16,24,40,0.10)",
+                    borderLeft: s.borderLeft,
+                    borderImage: (s as any).borderImage,
+                    boxShadow: "0 1px 2px rgba(16,24,40,0.04), 0 6px 18px -10px rgba(16,24,40,0.10)",
                   }}
                 >
-                  <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-center justify-between mb-3">
                     <div
-                      className="h-11 w-11 rounded-xl flex items-center justify-center"
+                      className="h-10 w-10 rounded-lg flex items-center justify-center"
                       style={{ background: s.iconBg }}
                     >
                       <Icon
-                        className="h-[22px] w-[22px]"
+                        className="h-[20px] w-[20px]"
                         style={{ color: s.iconColor }}
                         strokeWidth={2.25}
-                        fill={i === 0 ? "rgba(255,255,255,0.18)" : "none"}
+                        fill={s.iconFill as any}
                       />
                     </div>
                     <span
                       className="text-[10.5px] font-medium tracking-[0.14em] uppercase"
-                      style={{ color: s.accent, opacity: 0.85 }}
+                      style={{ color: s.accent }}
                     >
                       {s.step}
                     </span>
                   </div>
                   <h3
-                    className="text-[17px] md:text-[18px] font-semibold mb-1.5"
+                    className="text-[16.5px] md:text-[17px] font-semibold mb-1"
                     style={{ color: "hsl(220 18% 18%)" }}
                   >
                     {s.title}
                   </h3>
                   <p
-                    className="text-[13.5px] leading-relaxed truncate"
+                    className="text-[13px] leading-snug"
                     style={{ color: "hsl(220 9% 46%)" }}
                   >
                     {s.desc}
@@ -98,11 +103,8 @@ export const Features = () => {
                 {i < steps.length - 1 && (
                   <div className="hidden md:flex items-center justify-center flex-shrink-0">
                     <ArrowRight
-                      className="h-5 w-5"
-                      style={{
-                        stroke: "url(#flowGradient)",
-                        color: TEAL,
-                      }}
+                      className="h-4 w-4"
+                      style={{ stroke: "url(#flowGradient)" }}
                       aria-hidden="true"
                     />
                   </div>
@@ -112,7 +114,6 @@ export const Features = () => {
           })}
         </div>
 
-        {/* SVG gradient definition for arrow stroke */}
         <svg width="0" height="0" className="absolute">
           <defs>
             <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
