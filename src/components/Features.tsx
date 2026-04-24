@@ -83,8 +83,8 @@ export const Features = () => {
                       />
                     </div>
                     <span
-                      className="text-[10.5px] font-medium tracking-[0.14em] uppercase"
-                      style={{ color: s.accent }}
+                      className="text-[10.5px] font-semibold tracking-[0.16em] uppercase"
+                      style={{ color: (s as any).accentSolid || s.accent }}
                     >
                       {s.step}
                     </span>
