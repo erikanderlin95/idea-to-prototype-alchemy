@@ -56,7 +56,7 @@ export const Features = () => {
           </h2>
         </div>
 
-        <div className="w-[88%] max-w-[1320px] mx-auto flex flex-col md:flex-row items-stretch justify-center gap-3 md:gap-3">
+        <div className="w-[88%] md:w-[72%] max-w-[1080px] mx-auto flex flex-col md:flex-row items-stretch justify-center gap-3 md:gap-4">
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
