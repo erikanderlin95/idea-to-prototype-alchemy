@@ -11,6 +11,7 @@ export const Features = () => {
       title: "See Queue First",
       desc: "Check how many patients are ahead before you go.",
       accent: PURPLE,
+      accentSolid: PURPLE,
       tintBg: `linear-gradient(180deg, ${PURPLE.replace(")", "/0.05)")}, #ffffff)`,
       borderLeft: `3px solid ${PURPLE}`,
       iconBg: `linear-gradient(135deg, ${PURPLE}, ${PURPLE.replace(")", "/0.78)")})`,
