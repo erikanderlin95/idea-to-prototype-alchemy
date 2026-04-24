@@ -1,89 +1,77 @@
-import { User, MapPin, Building2 } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
-import { QueueIcon, AppointmentsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { Eye, GitCompareArrows, ArrowRight } from "lucide-react";
 
 export const Features = () => {
-  const { t } = useLanguage();
-  
-  const mainFeatures = [
-    {
-      icon: "queue",
-      title: t("features.queue.title"),
-      description: t("features.queue.description"),
-    },
-    {
-      icon: "book",
-      title: t("features.book.title"),
-      description: t("features.book.description"),
-    },
-    {
-      icon: "connect",
-      title: t("features.connect.title"),
-      description: t("features.connect.description"),
-    },
-  ];
-
-  const secondaryFeatures = [
-    {
-      icon: User,
-      title: t("features.secondary1.title"),
-    },
-    {
-      icon: MapPin,
-      title: t("features.secondary2.title"),
-    },
-    {
-      icon: Building2,
-      title: t("features.secondary3.title"),
-    },
-  ];
-
   return (
-    <section id="features" className="py-8 bg-gradient-to-b from-background to-secondary/10">
+    <section id="features" className="py-12 md:py-16 bg-gradient-to-b from-background to-secondary/10">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3">{t("features.title")}</h2>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
+            How ClynicQ helps you
+          </h2>
         </div>
 
-        {/* Main Features - Queue, Book, Connect */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5 mb-8 px-2 sm:px-0">
-          {mainFeatures.map((feature, index) => (
-            <div
-              key={index}
-              className="group relative overflow-hidden bg-gradient-to-br from-ai-purple/5 via-ai-blue/5 to-ai-cyan/5 p-6 rounded-xl border border-ai-purple/20 hover:border-ai-blue/50 transition-all duration-300 hover:shadow-lg hover:scale-[1.02] backdrop-blur-sm"
-              style={{ 
-                background: index === 0 ? 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-blue)/0.05))' :
-                           index === 1 ? 'linear-gradient(135deg, hsl(var(--ai-blue)/0.08), hsl(var(--ai-cyan)/0.05))' :
-                           'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-violet)/0.05))'
-              }}
-            >
-              <div className="flex justify-center mb-3">
-                {feature.icon === "queue" && <QueueIcon size="md" />}
-                {feature.icon === "book" && <AppointmentsIcon size="md" />}
-                {feature.icon === "connect" && <ChatbotIcon size="md" />}
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-center">{feature.title}</h3>
-              <p className="text-base text-muted-foreground leading-relaxed text-center">{feature.description}</p>
-            </div>
-          ))}
-        </div>
-
-        {/* Secondary Features */}
-        <div className="grid grid-cols-3 gap-3 sm:gap-4 px-2 sm:px-0">
-          {secondaryFeatures.map((feature, index) => (
-            <div
-              key={index}
-              className="group bg-card p-4 rounded-lg border border-ai-indigo/20 hover:border-ai-purple/40 transition-all duration-300 hover:shadow-md hover:shadow-ai-purple/10 text-center"
-            >
-              <div className="h-10 w-10 rounded-lg flex items-center justify-center mb-3 mx-auto group-hover:scale-110 transition-transform"
-                style={{ background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.25), hsl(var(--ai-blue)/0.15))' }}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5 max-w-5xl mx-auto items-stretch">
+          {/* Card 1 — PRIMARY */}
+          <div
+            className="md:col-span-6 relative overflow-hidden rounded-2xl p-6 md:p-8 border-2 border-ai-purple/40 shadow-lg shadow-ai-purple/10 hover:shadow-xl transition-all"
+            style={{
+              background:
+                "linear-gradient(135deg, hsl(var(--ai-purple)/0.15), hsl(var(--ai-blue)/0.10))",
+            }}
+          >
+            <span className="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wide uppercase text-ai-purple bg-ai-purple/15 border border-ai-purple/30 mb-3">
+              Start here
+            </span>
+            <div className="flex items-center gap-3 mb-3">
+              <div
+                className="h-12 w-12 rounded-xl flex items-center justify-center"
+                style={{
+                  background:
+                    "linear-gradient(135deg, hsl(var(--ai-purple)), hsl(var(--ai-blue)))",
+                }}
               >
-                <feature.icon className="h-5 w-5 text-ai-purple" />
+                <Eye className="h-6 w-6 text-white" />
               </div>
-              <h3 className="text-sm sm:text-base font-bold">{feature.title}</h3>
+              <h3 className="text-xl md:text-2xl font-bold text-foreground">
+                See Queue First
+              </h3>
             </div>
-          ))}
+            <p className="text-base text-muted-foreground leading-relaxed">
+              Check how many patients are ahead before you go.
+            </p>
+          </div>
+
+          {/* Card 2 — DECISION */}
+          <div className="md:col-span-3 rounded-2xl p-5 md:p-6 border border-border bg-card hover:border-ai-blue/40 transition-all">
+            <div
+              className="h-10 w-10 rounded-lg flex items-center justify-center mb-3"
+              style={{ background: "hsl(var(--ai-blue)/0.12)" }}
+            >
+              <GitCompareArrows className="h-5 w-5 text-ai-blue" />
+            </div>
+            <h3 className="text-base md:text-lg font-semibold text-foreground mb-1.5">
+              Choose Better
+            </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Compare nearby clinics and go where the queue is shorter.
+            </p>
+          </div>
+
+          {/* Card 3 — ACTION (secondary) */}
+          <div className="md:col-span-3 rounded-2xl p-5 md:p-6 border border-border bg-card hover:border-ai-cyan/40 transition-all">
+            <div
+              className="h-10 w-10 rounded-lg flex items-center justify-center mb-3"
+              style={{ background: "hsl(var(--ai-cyan)/0.12)" }}
+            >
+              <ArrowRight className="h-5 w-5 text-ai-cyan" />
+            </div>
+            <h3 className="text-base md:text-lg font-semibold text-foreground mb-1.5">
+              Join or Book
+            </h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              Join the queue or book directly with the clinic.
+            </p>
+          </div>
         </div>
       </div>
     </section>
