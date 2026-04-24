@@ -62,7 +62,7 @@ export const Features = () => {
             return (
               <div key={i} className="flex flex-col md:flex-row items-center flex-1 max-w-[420px] mx-auto md:mx-0 w-full gap-3">
                 <div
-                  className="group flex-1 w-full rounded-xl px-5 py-4 transition-all duration-300 hover:-translate-y-0.5 flex flex-col"
+                  className="group flex-1 w-full rounded-xl px-5 py-6 md:py-7 transition-all duration-300 hover:-translate-y-0.5 flex flex-col"
                   style={{
                     background: s.tintBg,
                     borderLeft: s.borderLeft,
