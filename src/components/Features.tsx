@@ -106,8 +106,8 @@ export const Features = () => {
                 {i < steps.length - 1 && (
                   <div className="hidden md:flex items-center justify-center flex-shrink-0">
                     <ArrowRight
-                      className="h-4 w-4"
-                      style={{ stroke: "url(#flowGradient)" }}
+                      className="h-6 w-6"
+                      style={{ stroke: "url(#flowGradient)", strokeWidth: 2.25 }}
                       aria-hidden="true"
                     />
                   </div>
