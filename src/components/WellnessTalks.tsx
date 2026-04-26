@@ -35,7 +35,7 @@ export const WellnessTalks = () => {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        <div className="max-w-2xl mx-auto grid grid-cols-1 gap-4 md:gap-5">
           {talks.map((talk, i) => (
             <div
               key={i}
