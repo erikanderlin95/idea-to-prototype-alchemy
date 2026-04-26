@@ -10,10 +10,7 @@ export const Features = () => {
       icon: Eye,
       title: "See Queue First",
       desc: "Check how many patients are ahead before you go.",
-      accent: PURPLE,
       accentSolid: PURPLE,
-      tintBg: `linear-gradient(180deg, ${PURPLE.replace(")", "/0.05)")}, #ffffff)`,
-      borderLeft: `3px solid ${PURPLE}`,
       iconBg: `linear-gradient(135deg, ${PURPLE}, ${PURPLE.replace(")", "/0.78)")})`,
       iconColor: "#fff",
       iconFill: "rgba(255,255,255,0.18)",
@@ -23,11 +20,7 @@ export const Features = () => {
       icon: Layers,
       title: "Choose Better",
       desc: "Compare nearby clinics and go where the queue is shorter.",
-      accent: `linear-gradient(90deg, ${PURPLE}, ${TEAL})`,
       accentSolid: TEAL,
-      tintBg: "#ffffff",
-      borderLeft: `3px solid transparent`,
-      borderImage: `linear-gradient(180deg, ${PURPLE}, ${TEAL}) 1`,
       iconBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.16)")}, ${TEAL.replace(")", "/0.18)")})`,
       iconColor: PURPLE,
       iconFill: "none",
@@ -37,15 +30,14 @@ export const Features = () => {
       icon: CheckCircle2,
       title: "Join or Book",
       desc: "Join the queue or book directly with the clinic.",
-      accent: TEAL,
       accentSolid: TEAL,
-      tintBg: `linear-gradient(180deg, ${TEAL.replace(")", "/0.05)")}, #ffffff)`,
-      borderLeft: `3px solid ${TEAL}`,
       iconBg: `linear-gradient(135deg, ${TEAL}, ${TEAL.replace(")", "/0.78)")})`,
       iconColor: "#fff",
       iconFill: "rgba(255,255,255,0.18)",
     },
   ];
+
+  const gradientBorder = `linear-gradient(135deg, ${PURPLE}, ${TEAL})`;
 
   return (
     <section id="features" className="py-12 md:py-16 bg-gradient-to-b from-background to-secondary/10">
