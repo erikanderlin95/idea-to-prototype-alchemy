@@ -103,7 +103,7 @@ export const WellnessTalks = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [activeTalk, setActiveTalk] = useState<typeof talks[number] | null>(null);
+  const [activeTalk, setActiveTalk] = useState<FeaturedTalk | null>(null);
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -124,7 +124,7 @@ export const WellnessTalks = () => {
     notes: "",
   });
 
-  const openReserve = (talk: typeof talks[number]) => {
+  const openReserve = (talk: FeaturedTalk) => {
     setActiveTalk(talk);
     setSubmitted(false);
     setForm({ name: "", phone: "", email: "", attendees: "1", notes: "" });
