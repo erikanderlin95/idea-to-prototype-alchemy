@@ -2,8 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Smartphone, MessageSquareOff, Settings2, ArrowRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const PURPLE = "hsl(var(--ai-purple))";
-const TEAL = "hsl(var(--ai-cyan))";
+// Healthcare blue-led palette
+const BLUE = "#1d4ed8";
+const BLUE_DARK = "#1e40af";
+const TEAL = "#0d9488";
+// Toned purple for CTA only
+const PURPLE_SOFT = "#8b5cf6";
 
 export const ClinicConversion = () => {
   const navigate = useNavigate();
@@ -26,25 +30,27 @@ export const ClinicConversion = () => {
     },
   ];
 
+  const iconGradient = `linear-gradient(135deg, ${BLUE}, ${TEAL})`;
+
   return (
-    <section className="relative py-12 md:py-16 overflow-hidden">
+    <section className="relative py-12 md:py-16 pb-16 md:pb-24 overflow-hidden">
       <div
         className="absolute inset-0 -z-10"
         style={{
-          background: `linear-gradient(135deg, hsl(var(--ai-purple) / 0.06) 0%, hsl(var(--background)) 45%, hsl(var(--ai-cyan) / 0.06) 100%)`,
+          background: `linear-gradient(135deg, rgba(29,78,216,0.05) 0%, hsl(var(--background)) 45%, rgba(13,148,136,0.05) 100%)`,
         }}
       />
-      <div className="absolute top-0 left-1/4 w-72 h-72 rounded-full -z-10 blur-[100px] opacity-40" style={{ background: PURPLE }} />
-      <div className="absolute bottom-0 right-1/4 w-72 h-72 rounded-full -z-10 blur-[100px] opacity-30" style={{ background: TEAL }} />
+      <div className="absolute top-0 left-1/4 w-72 h-72 rounded-full -z-10 blur-[100px] opacity-30" style={{ background: BLUE }} />
+      <div className="absolute bottom-0 right-1/4 w-72 h-72 rounded-full -z-10 blur-[100px] opacity-25" style={{ background: TEAL }} />
 
       <div className="container px-4 md:px-6">
         <div className="max-w-5xl mx-auto">
           <div
             className="rounded-2xl p-6 md:p-10 backdrop-blur-sm"
             style={{
-              background: "hsl(var(--card) / 0.8)",
+              background: "hsl(var(--card) / 0.85)",
               border: "1px solid hsl(var(--border))",
-              boxShadow: "0 10px 40px -15px hsl(var(--ai-purple) / 0.15)",
+              boxShadow: "0 10px 40px -15px rgba(29,78,216,0.15)",
             }}
           >
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
@@ -52,8 +58,9 @@ export const ClinicConversion = () => {
                 <span
                   className="inline-block text-[10.5px] font-semibold tracking-[0.16em] uppercase mb-2 px-2.5 py-1 rounded-full"
                   style={{
-                    color: PURPLE,
-                    background: `linear-gradient(90deg, hsl(var(--ai-purple) / 0.1), hsl(var(--ai-cyan) / 0.1))`,
+                    color: BLUE_DARK,
+                    background: "rgba(29,78,216,0.10)",
+                    border: "1px solid rgba(29,78,216,0.30)",
                   }}
                 >
                   For Clinic Owners
@@ -66,7 +73,7 @@ export const ClinicConversion = () => {
                 size="lg"
                 className="shrink-0 gap-2 font-semibold shadow-md hover:shadow-lg transition-all hover:scale-[1.02]"
                 style={{
-                  background: `linear-gradient(135deg, #7c3aed, #2563eb)`,
+                  background: `linear-gradient(135deg, ${PURPLE_SOFT} 0%, ${BLUE} 60%, ${BLUE_DARK} 100%)`,
                   color: "#fff",
                 }}
                 onClick={() => navigate("/for-clinics")}
@@ -79,19 +86,19 @@ export const ClinicConversion = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 mt-6">
               {points.map((p, i) => {
                 const Icon = p.icon;
-                const accent = i === 0 ? PURPLE : i === 2 ? TEAL : `linear-gradient(135deg, ${PURPLE}, ${TEAL})`;
                 return (
                   <div
                     key={i}
                     className="rounded-xl p-4 md:p-5 transition-all duration-300 hover:-translate-y-0.5"
                     style={{
-                      background: "hsl(var(--background) / 0.6)",
-                      border: "1px solid hsl(var(--border))",
+                      background: "hsl(var(--background) / 0.7)",
+                      border: "1px solid rgba(29,78,216,0.15)",
+                      boxShadow: "0 1px 2px rgba(16,24,40,0.04), 0 4px 12px -8px rgba(29,78,216,0.10)",
                     }}
                   >
                     <div
                       className="h-9 w-9 rounded-lg flex items-center justify-center mb-3"
-                      style={{ background: accent }}
+                      style={{ background: iconGradient }}
                     >
                       <Icon className="h-[18px] w-[18px] text-white" strokeWidth={2.25} />
                     </div>
