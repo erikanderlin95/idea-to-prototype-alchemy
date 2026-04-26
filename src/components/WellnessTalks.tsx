@@ -378,6 +378,127 @@ export const WellnessTalks = () => {
           )}
         </DialogContent>
       </Dialog>
+
+      <Dialog open={hostOpen} onOpenChange={setHostOpen}>
+        <DialogContent className="sm:max-w-[500px] max-h-[90vh] overflow-y-auto">
+          {hostSubmitted ? (
+            <div className="py-6 text-center space-y-3">
+              <CheckCircle2 className="h-12 w-12 mx-auto" style={{ color: TEAL }} />
+              <h3 className="text-xl font-semibold text-foreground">Request received</h3>
+              <p className="text-sm text-muted-foreground">
+                Thanks for your interest in hosting a talk with ClynicQ. Our team will reach out shortly to discuss next steps.
+              </p>
+              <Button onClick={() => setHostOpen(false)} className="mt-2" style={{ background: TEAL, color: "#fff" }}>
+                Done
+              </Button>
+            </div>
+          ) : (
+            <form onSubmit={handleHostSubmit}>
+              <DialogHeader>
+                <DialogTitle>Host a Talk with Us</DialogTitle>
+                <DialogDescription>
+                  Tell us about your organisation and the talk you'd like to deliver.
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="space-y-3 py-4">
+                <div className="space-y-1.5">
+                  <Label htmlFor="ht-org">Organisation Name *</Label>
+                  <Input
+                    id="ht-org"
+                    value={hostForm.orgName}
+                    onChange={(e) => setHostForm({ ...hostForm, orgName: e.target.value })}
+                    maxLength={120}
+                    placeholder="e.g. Wellness Partners Pte Ltd"
+                    required
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="ht-contact">Contact Person *</Label>
+                  <Input
+                    id="ht-contact"
+                    value={hostForm.contactName}
+                    onChange={(e) => setHostForm({ ...hostForm, contactName: e.target.value })}
+                    maxLength={80}
+                    placeholder="Your full name"
+                    required
+                  />
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="space-y-1.5">
+                    <Label htmlFor="ht-phone">Mobile Number *</Label>
+                    <Input
+                      id="ht-phone"
+                      type="tel"
+                      value={hostForm.phone}
+                      onChange={(e) => setHostForm({ ...hostForm, phone: e.target.value })}
+                      maxLength={15}
+                      placeholder="+65 9123 4567"
+                      required
+                    />
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label htmlFor="ht-email">Email *</Label>
+                    <Input
+                      id="ht-email"
+                      type="email"
+                      value={hostForm.email}
+                      onChange={(e) => setHostForm({ ...hostForm, email: e.target.value })}
+                      maxLength={255}
+                      placeholder="you@example.com"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="ht-topic">Talk Topic / Expertise *</Label>
+                  <Input
+                    id="ht-topic"
+                    value={hostForm.topic}
+                    onChange={(e) => setHostForm({ ...hostForm, topic: e.target.value })}
+                    maxLength={150}
+                    placeholder="e.g. Stress management, TCM wellness"
+                    required
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="ht-audience">Expected Audience Size *</Label>
+                  <Input
+                    id="ht-audience"
+                    type="number"
+                    min={1}
+                    max={99999}
+                    value={hostForm.audienceSize}
+                    onChange={(e) => setHostForm({ ...hostForm, audienceSize: e.target.value })}
+                    placeholder="e.g. 30"
+                    required
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="ht-notes">Notes (optional)</Label>
+                  <Textarea
+                    id="ht-notes"
+                    value={hostForm.notes}
+                    onChange={(e) => setHostForm({ ...hostForm, notes: e.target.value })}
+                    maxLength={500}
+                    placeholder="Preferred dates, format (online / in-person), or anything else."
+                    rows={3}
+                  />
+                </div>
+              </div>
+
+              <DialogFooter className="gap-2">
+                <Button type="button" variant="outline" onClick={() => setHostOpen(false)}>
+                  Cancel
+                </Button>
+                <Button type="submit" style={{ background: TEAL, color: "#fff" }}>
+                  Submit Request
+                </Button>
+              </DialogFooter>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
