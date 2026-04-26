@@ -49,9 +49,9 @@ export const ContinuityServices = () => {
     <section id="continuity" className="py-8 bg-gradient-to-b from-background via-secondary/20 to-background">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ai-cyan/10 text-ai-cyan mb-4">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ai-purple/10 text-ai-purple border border-ai-purple/20 mb-4">
             <Sparkles className="h-4 w-4" />
-            <span className="text-sm font-medium">{t("continuity.badge")}</span>
+            <span className="text-xs font-bold tracking-[0.16em] uppercase">For Providers</span>
           </div>
           <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-foreground mb-3">
             {t("continuity.title")}
@@ -69,11 +69,6 @@ export const ContinuityServices = () => {
               onClick={() => service.clickable && navigate(service.route)}
             >
               <CardContent className="p-2.5 sm:p-5 flex flex-col items-center text-center space-y-1.5 sm:space-y-3 relative">
-                {service.label && (
-                  <span className="absolute top-1.5 right-1.5 sm:top-2 sm:right-2 text-[8px] sm:text-[9px] font-semibold tracking-wider uppercase px-1.5 py-0.5 rounded-full bg-ai-purple/10 text-ai-purple border border-ai-purple/20">
-                    {service.label}
-                  </span>
-                )}
                 <div className={`h-9 w-9 sm:h-12 sm:w-12 rounded-xl bg-gradient-to-br ${service.iconBg} flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform`}>
                   <service.icon className="h-4 w-4 sm:h-6 sm:w-6 text-white" />
                 </div>
