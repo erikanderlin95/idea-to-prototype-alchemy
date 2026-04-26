@@ -171,7 +171,7 @@ export const WellnessTalks = () => {
     <section className="pt-4 pb-12 md:pt-6 md:pb-16 bg-gradient-to-b from-background via-secondary/20 to-background">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-10 max-w-2xl mx-auto">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-2">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2" style={{ color: 'hsl(180 60% 20%)' }}>
             Featured Upcoming Wellness Talks
           </h2>
           <p className="text-[15px] text-muted-foreground">
