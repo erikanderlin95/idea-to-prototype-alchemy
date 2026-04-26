@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, MapPin, ArrowRight, Users, CheckCircle2 } from "lucide-react";
+import { Calendar, Clock, MapPin, ArrowRight, Users, CheckCircle2, CalendarX } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
@@ -64,6 +65,7 @@ const reserveSchema = z.object({
 });
 
 export const WellnessTalks = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [activeTalk, setActiveTalk] = useState<typeof talks[number] | null>(null);
@@ -105,62 +107,104 @@ export const WellnessTalks = () => {
           </p>
         </div>
 
-        <div className="max-w-2xl mx-auto grid grid-cols-1 gap-4 md:gap-5">
-          {talks.map((talk, i) => (
+        <div className="max-w-2xl mx-auto grid grid-cols-1 gap-4 md:gap-5 min-h-[280px]">
+          {talks.length === 0 ? (
             <div
-              key={i}
-              className="group relative rounded-2xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+              className="rounded-2xl p-8 md:p-10 text-center flex flex-col items-center justify-center"
               style={{
-                background: talk.gradient,
-                border: `1px solid ${talk.border}`,
-                boxShadow: "0 4px 20px -8px hsl(var(--ai-cyan) / 0.18)",
+                background: `linear-gradient(135deg, hsl(var(--ai-cyan) / 0.06), hsl(var(--ai-cyan) / 0.02))`,
+                border: `1px dashed hsl(var(--ai-cyan) / 0.35)`,
               }}
             >
-              <div className="flex items-start justify-between mb-4">
-                <span
-                  className="text-[10.5px] font-bold tracking-[0.14em] uppercase px-2.5 py-1 rounded-full"
-                  style={{ color: "#fff", background: talk.accent }}
-                >
-                  {talk.badge}
-                </span>
-                <span className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
-                  <Users className="h-3 w-3" />
-                  {talk.seats}
-                </span>
-              </div>
-
-              <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2 leading-snug">
-                {talk.title}
-              </h3>
-              <p className="text-[13.5px] text-muted-foreground leading-snug mb-5">
-                {talk.desc}
-              </p>
-
-              <div className="flex flex-wrap gap-x-4 gap-y-2 mb-5 text-[12.5px] text-foreground/80">
-                <span className="inline-flex items-center gap-1.5">
-                  <Calendar className="h-3.5 w-3.5" style={{ color: talk.accent }} />
-                  {talk.date}
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <Clock className="h-3.5 w-3.5" style={{ color: talk.accent }} />
-                  {talk.time}
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <MapPin className="h-3.5 w-3.5" style={{ color: talk.accent }} />
-                  {talk.location}
-                </span>
-              </div>
-
-              <Button
-                className="w-full sm:w-auto gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
-                style={{ background: talk.accent, color: "#fff" }}
-                onClick={() => openReserve(talk)}
+              <div
+                className="h-14 w-14 rounded-2xl flex items-center justify-center mb-4"
+                style={{ background: `hsl(var(--ai-cyan) / 0.12)` }}
               >
-                Reserve a Slot
-                <ArrowRight className="h-4 w-4" />
-              </Button>
+                <CalendarX className="h-7 w-7" style={{ color: TEAL }} strokeWidth={2} />
+              </div>
+              <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2">
+                No upcoming talks right now
+              </h3>
+              <p className="text-[13.5px] md:text-sm text-muted-foreground max-w-md mb-6 leading-relaxed">
+                We're preparing the next sessions. In the meantime, explore clinics or partner with us to host one.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto items-stretch sm:items-center justify-center">
+                <Button
+                  className="gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
+                  style={{ background: TEAL, color: "#fff" }}
+                  onClick={() =>
+                    document.getElementById("marketplace")?.scrollIntoView({ behavior: "smooth" })
+                  }
+                >
+                  Explore Clinics
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+                <Button
+                  variant="ghost"
+                  className="font-medium text-muted-foreground hover:text-foreground"
+                  onClick={() => navigate("/speakers")}
+                >
+                  Host a Talk with Us
+                </Button>
+              </div>
             </div>
-          ))}
+          ) : (
+            talks.map((talk, i) => (
+              <div
+                key={i}
+                className="group relative rounded-2xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                style={{
+                  background: talk.gradient,
+                  border: `1px solid ${talk.border}`,
+                  boxShadow: "0 4px 20px -8px hsl(var(--ai-cyan) / 0.18)",
+                }}
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <span
+                    className="text-[10.5px] font-bold tracking-[0.14em] uppercase px-2.5 py-1 rounded-full"
+                    style={{ color: "#fff", background: talk.accent }}
+                  >
+                    {talk.badge}
+                  </span>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
+                    <Users className="h-3 w-3" />
+                    {talk.seats}
+                  </span>
+                </div>
+
+                <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2 leading-snug">
+                  {talk.title}
+                </h3>
+                <p className="text-[13.5px] text-muted-foreground leading-snug mb-5">
+                  {talk.desc}
+                </p>
+
+                <div className="flex flex-wrap gap-x-4 gap-y-2 mb-5 text-[12.5px] text-foreground/80">
+                  <span className="inline-flex items-center gap-1.5">
+                    <Calendar className="h-3.5 w-3.5" style={{ color: talk.accent }} />
+                    {talk.date}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <Clock className="h-3.5 w-3.5" style={{ color: talk.accent }} />
+                    {talk.time}
+                  </span>
+                  <span className="inline-flex items-center gap-1.5">
+                    <MapPin className="h-3.5 w-3.5" style={{ color: talk.accent }} />
+                    {talk.location}
+                  </span>
+                </div>
+
+                <Button
+                  className="w-full sm:w-auto gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
+                  style={{ background: talk.accent, color: "#fff" }}
+                  onClick={() => openReserve(talk)}
+                >
+                  Reserve a Slot
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </div>
+            ))
+          )}
         </div>
       </div>
 
