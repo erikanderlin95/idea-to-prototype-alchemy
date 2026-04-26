@@ -62,6 +62,45 @@ const reserveSchema = z.object({
     .or(z.literal("")),
 });
 
+const hostSchema = z.object({
+  orgName: z
+    .string()
+    .trim()
+    .min(2, { message: "Please enter your organisation name" })
+    .max(120, { message: "Organisation name must be less than 120 characters" }),
+  contactName: z
+    .string()
+    .trim()
+    .min(2, { message: "Please enter the contact person's name" })
+    .max(80, { message: "Name must be less than 80 characters" }),
+  phone: z
+    .string()
+    .trim()
+    .min(8, { message: "Phone number must be at least 8 digits" })
+    .max(15, { message: "Phone number must be less than 15 digits" })
+    .regex(/^[0-9+\-\s()]+$/, { message: "Invalid phone number format" }),
+  email: z
+    .string()
+    .trim()
+    .email({ message: "Invalid email address" })
+    .max(255),
+  topic: z
+    .string()
+    .trim()
+    .min(2, { message: "Please share the talk topic or area of expertise" })
+    .max(150, { message: "Topic must be less than 150 characters" }),
+  audienceSize: z
+    .string()
+    .trim()
+    .regex(/^[1-9][0-9]{0,4}$/, { message: "Enter an audience size between 1 and 99999" }),
+  notes: z
+    .string()
+    .trim()
+    .max(500, { message: "Notes must be less than 500 characters" })
+    .optional()
+    .or(z.literal("")),
+});
+
 export const WellnessTalks = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
@@ -75,11 +114,37 @@ export const WellnessTalks = () => {
     notes: "",
   });
 
+  const [hostOpen, setHostOpen] = useState(false);
+  const [hostSubmitted, setHostSubmitted] = useState(false);
+  const [hostForm, setHostForm] = useState({
+    orgName: "",
+    contactName: "",
+    phone: "",
+    email: "",
+    topic: "",
+    audienceSize: "",
+    notes: "",
+  });
+
   const openReserve = (talk: typeof talks[number]) => {
     setActiveTalk(talk);
     setSubmitted(false);
     setForm({ name: "", phone: "", email: "", attendees: "1", notes: "" });
     setOpen(true);
+  };
+
+  const openHost = () => {
+    setHostSubmitted(false);
+    setHostForm({
+      orgName: "",
+      contactName: "",
+      phone: "",
+      email: "",
+      topic: "",
+      audienceSize: "",
+      notes: "",
+    });
+    setHostOpen(true);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -91,6 +156,17 @@ export const WellnessTalks = () => {
     }
     setSubmitted(true);
     toast.success("Reservation request received");
+  };
+
+  const handleHostSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const result = hostSchema.safeParse(hostForm);
+    if (!result.success) {
+      toast.error(result.error.issues[0].message);
+      return;
+    }
+    setHostSubmitted(true);
+    toast.success("Request received");
   };
 
   return (
