@@ -18,18 +18,6 @@ const talks = [
     gradient: `linear-gradient(135deg, hsl(var(--ai-purple) / 0.12), hsl(var(--ai-cyan) / 0.08))`,
     border: `hsl(var(--ai-purple) / 0.25)`,
   },
-  {
-    title: "Family Health & Preventive Care",
-    desc: "What every household should know about staying ahead of illness.",
-    date: "Sat, 24 May",
-    time: "2:00 PM",
-    location: "Community Hall",
-    seats: "Limited seats",
-    badge: "Featured",
-    accent: TEAL,
-    gradient: `linear-gradient(135deg, hsl(var(--ai-cyan) / 0.12), hsl(var(--ai-purple) / 0.08))`,
-    border: `hsl(var(--ai-cyan) / 0.25)`,
-  },
 ];
 
 export const WellnessTalks = () => {
@@ -47,7 +35,7 @@ export const WellnessTalks = () => {
           </p>
         </div>
 
-        <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+        <div className="max-w-2xl mx-auto grid grid-cols-1 gap-4 md:gap-5">
           {talks.map((talk, i) => (
             <div
               key={i}
