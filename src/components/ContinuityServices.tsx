@@ -15,16 +15,7 @@ const services = [
     borderColor: "border-ai-purple/20 hover:border-ai-purple/40",
     route: "/speakers",
     clickable: true,
-  },
-  {
-    icon: Heart,
-    titleKey: "continuity.afterlife.title",
-    descKey: "continuity.afterlife.desc",
-    gradient: "from-ai-blue/15 to-ai-cyan/10",
-    iconBg: "from-ai-blue to-ai-cyan",
-    borderColor: "border-ai-blue/20 hover:border-ai-blue/40",
-    route: "/afterlife",
-    clickable: true,
+    label: "For Providers",
   },
   {
     icon: Building2,
@@ -35,6 +26,18 @@ const services = [
     borderColor: "border-ai-cyan/20 hover:border-ai-cyan/40",
     route: "",
     clickable: false,
+    label: null,
+  },
+  {
+    icon: Heart,
+    titleKey: "continuity.afterlife.title",
+    descKey: "continuity.afterlife.desc",
+    gradient: "from-ai-blue/15 to-ai-cyan/10",
+    iconBg: "from-ai-blue to-ai-cyan",
+    borderColor: "border-ai-blue/20 hover:border-ai-blue/40",
+    route: "/afterlife",
+    clickable: true,
+    label: null,
   },
 ];
 
