@@ -1,7 +1,7 @@
 import { Users, MapPin, CalendarCheck } from "lucide-react";
 
-const PURPLE = "hsl(var(--ai-purple))";
-const TEAL = "hsl(var(--ai-cyan))";
+const DARK_BLUE = "#1e3a8a"; // dark blue
+const TEAL = "#14b8a6"; // teal
 
 export const Features = () => {
   const steps = [
@@ -10,10 +10,10 @@ export const Features = () => {
       icon: Users,
       title: "See Queue First",
       desc: "Check how many patients are ahead before you go.",
-      accentSolid: PURPLE,
-      iconBg: `linear-gradient(135deg, ${PURPLE}, ${TEAL})`,
-      badgeBg: "linear-gradient(135deg, rgba(139,92,246,0.10), rgba(139,92,246,0.04))",
-      badgeBorder: "rgba(139,92,246,0.35)",
+      accentSolid: DARK_BLUE,
+      iconBg: `linear-gradient(135deg, ${DARK_BLUE}, ${TEAL})`,
+      badgeBg: "linear-gradient(135deg, rgba(30,58,138,0.10), rgba(30,58,138,0.04))",
+      badgeBorder: "rgba(30,58,138,0.35)",
     },
     {
       step: "STEP 2",
@@ -21,8 +21,8 @@ export const Features = () => {
       title: "Choose Better",
       desc: "Compare nearby clinics and go where the queue is shorter.",
       accentSolid: TEAL,
-      iconBg: `linear-gradient(135deg, ${PURPLE}, ${TEAL})`,
-      badgeBg: "linear-gradient(135deg, rgba(139,92,246,0.08), rgba(20,184,166,0.10))",
+      iconBg: `linear-gradient(135deg, ${DARK_BLUE}, ${TEAL})`,
+      badgeBg: "linear-gradient(135deg, rgba(30,58,138,0.08), rgba(20,184,166,0.10))",
       badgeBorder: "rgba(20,184,166,0.40)",
     },
     {
@@ -31,13 +31,13 @@ export const Features = () => {
       title: "Join or Book",
       desc: "Join the queue or book directly with the clinic.",
       accentSolid: TEAL,
-      iconBg: `linear-gradient(135deg, ${PURPLE}, ${TEAL})`,
+      iconBg: `linear-gradient(135deg, ${DARK_BLUE}, ${TEAL})`,
       badgeBg: "linear-gradient(135deg, rgba(20,184,166,0.10), rgba(20,184,166,0.04))",
       badgeBorder: "rgba(20,184,166,0.40)",
     },
   ];
 
-  const gradientBorder = `linear-gradient(135deg, ${PURPLE}, ${TEAL})`;
+  const gradientBorder = `linear-gradient(135deg, ${DARK_BLUE}, ${TEAL})`;
 
   return (
     <section id="features" className="py-12 md:py-16 bg-gradient-to-b from-background to-secondary/10">
