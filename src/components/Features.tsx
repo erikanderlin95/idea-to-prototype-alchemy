@@ -80,7 +80,7 @@ export const Features = () => {
                   >
                     <Icon
                       className="h-6 w-6"
-                      style={{ color: s.iconColor }}
+                      style={{ color: "#fff" }}
                       strokeWidth={2.25}
                     />
                   </div>
