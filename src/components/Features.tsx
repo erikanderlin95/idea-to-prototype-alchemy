@@ -56,13 +56,13 @@ export const Features = () => {
           </h2>
         </div>
 
-        <div className="w-[88%] md:w-[72%] max-w-[1080px] mx-auto flex flex-col md:flex-row items-stretch justify-center gap-3 md:gap-4">
+        <div className="w-[90%] md:w-[88%] max-w-[1280px] mx-auto flex flex-col md:flex-row items-stretch justify-center gap-4 md:gap-5">
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
-              <div key={i} className="flex flex-col md:flex-row items-center flex-1 max-w-[420px] mx-auto md:mx-0 w-full gap-3">
+              <div key={i} className="flex flex-col md:flex-row items-center flex-1 max-w-[460px] md:max-w-none mx-auto md:mx-0 w-full gap-4">
                 <div
-                  className="group flex-1 w-full rounded-xl px-5 py-6 md:py-7 transition-all duration-300 hover:-translate-y-0.5 flex flex-col"
+                  className="group flex-1 w-full rounded-xl px-6 py-7 md:px-7 md:py-8 transition-all duration-300 hover:-translate-y-0.5 flex flex-col"
                   style={{
                     background: s.tintBg,
                     borderLeft: s.borderLeft,
