@@ -1,7 +1,9 @@
 import { Users, MapPin, CalendarCheck } from "lucide-react";
 
-const DARK_BLUE = "#1e3a8a"; // dark blue
-const TEAL = "#14b8a6"; // teal
+// Healthcare blue-led palette
+const BLUE = "#2563eb"; // medical blue
+const BLUE_DARK = "#1d4ed8"; // for badge text
+const TEAL = "#14b8a6"; // light teal accent
 
 export const Features = () => {
   const steps = [
@@ -10,34 +12,25 @@ export const Features = () => {
       icon: Users,
       title: "See Queue First",
       desc: "Check how many patients are ahead before you go.",
-      accentSolid: DARK_BLUE,
-      iconBg: `linear-gradient(135deg, ${DARK_BLUE}, ${TEAL})`,
-      badgeBg: "linear-gradient(135deg, rgba(30,58,138,0.10), rgba(30,58,138,0.04))",
-      badgeBorder: "rgba(30,58,138,0.35)",
     },
     {
       step: "STEP 2",
       icon: MapPin,
       title: "Choose Better",
       desc: "Compare nearby clinics and go where the queue is shorter.",
-      accentSolid: TEAL,
-      iconBg: `linear-gradient(135deg, ${DARK_BLUE}, ${TEAL})`,
-      badgeBg: "linear-gradient(135deg, rgba(30,58,138,0.08), rgba(20,184,166,0.10))",
-      badgeBorder: "rgba(20,184,166,0.40)",
     },
     {
       step: "STEP 3",
       icon: CalendarCheck,
       title: "Join or Book",
       desc: "Join the queue or book directly with the clinic.",
-      accentSolid: TEAL,
-      iconBg: `linear-gradient(135deg, ${DARK_BLUE}, ${TEAL})`,
-      badgeBg: "linear-gradient(135deg, rgba(20,184,166,0.10), rgba(20,184,166,0.04))",
-      badgeBorder: "rgba(20,184,166,0.40)",
     },
   ];
 
-  const gradientBorder = `linear-gradient(135deg, ${DARK_BLUE}, ${TEAL})`;
+  const gradientBorder = `linear-gradient(135deg, ${BLUE}, ${TEAL})`;
+  const iconBg = `linear-gradient(135deg, ${BLUE}, ${TEAL})`;
+  const badgeBg = "linear-gradient(135deg, rgba(37,99,235,0.10), rgba(20,184,166,0.08))";
+  const badgeBorder = "rgba(37,99,235,0.35)";
 
   return (
     <section id="features" className="py-12 md:py-16 bg-gradient-to-b from-background to-secondary/10">
@@ -65,9 +58,9 @@ export const Features = () => {
                   <span
                     className="inline-flex items-center rounded-full px-3 py-1 text-[11px] font-bold tracking-[0.18em] uppercase mb-4"
                     style={{
-                      background: s.badgeBg,
-                      border: `1px solid ${s.badgeBorder}`,
-                      color: s.accentSolid,
+                      background: badgeBg,
+                      border: `1px solid ${badgeBorder}`,
+                      color: BLUE_DARK,
                     }}
                   >
                     {s.step}
@@ -76,7 +69,7 @@ export const Features = () => {
                   {/* Icon */}
                   <div
                     className="h-12 w-12 rounded-xl flex items-center justify-center mb-4"
-                    style={{ background: s.iconBg }}
+                    style={{ background: iconBg }}
                   >
                     <Icon
                       className="h-6 w-6"
