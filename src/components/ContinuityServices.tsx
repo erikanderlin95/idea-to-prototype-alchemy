@@ -48,17 +48,14 @@ export const ContinuityServices = () => {
   return (
     <section id="continuity" className="py-8 bg-gradient-to-b from-background via-secondary/20 to-background">
       <div className="container px-4 md:px-6">
-        <div className="text-center mb-10">
+        <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ai-purple/10 text-ai-purple border border-ai-purple/20 mb-4">
             <Sparkles className="h-4 w-4" />
             <span className="text-xs font-bold tracking-[0.16em] uppercase">For Providers</span>
           </div>
-          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-foreground mb-3">
-            {t("continuity.title")}
-          </h2>
-          <p className="text-[15px] text-muted-foreground max-w-2xl mx-auto">
+          <h2 className="text-xl sm:text-2xl md:text-4xl font-bold text-foreground">
             {t("continuity.subtitle")}
-          </p>
+          </h2>
         </div>
 
         <div className="grid grid-cols-3 gap-2 sm:gap-4 max-w-4xl mx-auto px-1 sm:px-0">
