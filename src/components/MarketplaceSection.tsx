@@ -149,24 +149,6 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             ))}
           </div>
 
-          {/* Clinic onboarding CTA */}
-          <div className="mt-16 text-center py-16 sm:py-20 px-8 sm:px-12 rounded-2xl bg-gradient-to-br from-primary/5 via-accent/30 to-primary/10 border border-primary/10">
-            <h3 className="text-2xl sm:text-3xl font-extrabold text-foreground mb-4 leading-snug max-w-2xl mx-auto" style={{ whiteSpace: 'pre-line' }}>
-              {t("marketplace.ctaTitle")}
-            </h3>
-
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-6 mb-10 text-base sm:text-lg text-foreground/90">
-              <span className="flex items-center gap-1.5"><span className="text-primary font-bold">✓</span> {t("marketplace.ctaBullet1")}</span>
-              <span className="flex items-center gap-1.5"><span className="text-primary font-bold">✓</span> {t("marketplace.ctaBullet2")}</span>
-              <span className="flex items-center gap-1.5"><span className="text-primary font-bold">✓</span> {t("marketplace.ctaBullet3")}</span>
-            </div>
-
-            <p className="text-base text-foreground/60 mb-5">{t("marketplace.ctaSuitable")}</p>
-            <Button size="lg" className="text-lg px-10 py-3" onClick={() => navigate("/for-clinics")}>
-              {t("marketplace.ctaButton")}
-            </Button>
-            <p className="text-base text-foreground/60 mt-5">{t("marketplace.ctaReview")}</p>
-          </div>
         </div>
       </div>
     </section>
