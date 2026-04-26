@@ -22,11 +22,11 @@ const Index = () => {
       <Navbar onRestartTour={startOnboarding} />
       <main>
         <Hero />
-        <ClinicConversion />
-        <WellnessTalks />
         <Features />
         <FeaturedConsultants />
         <MarketplaceSection defaultCategory={defaultCategory} />
+        <WellnessTalks />
+        <ClinicConversion />
         <ContinuityServices />
         <MyClynicQPlugin />
       </main>
