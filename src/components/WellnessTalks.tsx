@@ -18,18 +18,16 @@ import { toast } from "sonner";
 
 const TEAL = "hsl(var(--ai-cyan))";
 
-const talks: Array<{
+type FeaturedTalk = {
   title: string;
   desc: string;
   date: string;
   time: string;
-  location: string;
-  seats: string;
-  badge: string;
-  accent: string;
-  gradient: string;
-  border: string;
-}> = [];
+  image: string;
+  partner?: string;
+};
+
+const featuredTalks: FeaturedTalk[] = [];
 
 const reserveSchema = z.object({
   name: z
