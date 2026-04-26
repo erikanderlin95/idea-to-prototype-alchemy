@@ -205,10 +205,10 @@ export const WellnessTalks = () => {
                   className="gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
                   style={{ background: TEAL, color: "#fff" }}
                   onClick={() =>
-                    document.getElementById("marketplace")?.scrollIntoView({ behavior: "smooth" })
+                    document.getElementById("continuity")?.scrollIntoView({ behavior: "smooth" })
                   }
                 >
-                  Explore Clinics
+                  Explore Partners
                   <ArrowRight className="h-4 w-4" />
                 </Button>
                 <Button
