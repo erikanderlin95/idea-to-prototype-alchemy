@@ -1,4 +1,4 @@
-import { Eye, Layers, CheckCircle2, ArrowRight } from "lucide-react";
+import { Eye, Layers, CheckCircle2 } from "lucide-react";
 
 const PURPLE = "hsl(var(--ai-purple))";
 const TEAL = "hsl(var(--ai-cyan))";
