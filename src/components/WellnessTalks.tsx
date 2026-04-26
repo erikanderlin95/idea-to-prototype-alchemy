@@ -18,20 +18,18 @@ import { toast } from "sonner";
 
 const TEAL = "hsl(var(--ai-cyan))";
 
-const talks = [
-  {
-    title: "Managing Stress & Sleep in Modern Life",
-    desc: "Practical strategies from licensed wellness practitioners.",
-    date: "Sat, 17 May",
-    time: "10:00 AM",
-    location: "Online + In-person",
-    seats: "Limited seats",
-    badge: "Next session",
-    accent: TEAL,
-    gradient: `linear-gradient(135deg, hsl(var(--ai-cyan) / 0.12), hsl(var(--ai-cyan) / 0.06))`,
-    border: `hsl(var(--ai-cyan) / 0.28)`,
-  },
-];
+const talks: Array<{
+  title: string;
+  desc: string;
+  date: string;
+  time: string;
+  location: string;
+  seats: string;
+  badge: string;
+  accent: string;
+  gradient: string;
+  border: string;
+}> = [];
 
 const reserveSchema = z.object({
   name: z
