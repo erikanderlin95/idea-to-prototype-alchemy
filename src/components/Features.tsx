@@ -11,10 +11,9 @@ export const Features = () => {
       title: "See Queue First",
       desc: "Check how many patients are ahead before you go.",
       accentSolid: PURPLE,
-      iconBg: `linear-gradient(135deg, ${PURPLE}, ${PURPLE.replace(")", "/0.78)")})`,
-      iconColor: "#fff",
-      badgeBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.10)")}, ${PURPLE.replace(")", "/0.04)")})`,
-      badgeBorder: PURPLE.replace(")", "/0.35)"),
+      iconBg: `linear-gradient(135deg, ${PURPLE}, ${TEAL})`,
+      badgeBg: "linear-gradient(135deg, rgba(139,92,246,0.10), rgba(139,92,246,0.04))",
+      badgeBorder: "rgba(139,92,246,0.35)",
     },
     {
       step: "STEP 2",
@@ -22,10 +21,9 @@ export const Features = () => {
       title: "Choose Better",
       desc: "Compare nearby clinics and go where the queue is shorter.",
       accentSolid: TEAL,
-      iconBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.85)")}, ${TEAL.replace(")", "/0.95)")})`,
-      iconColor: "#fff",
-      badgeBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.08)")}, ${TEAL.replace(")", "/0.10)")})`,
-      badgeBorder: TEAL.replace(")", "/0.40)"),
+      iconBg: `linear-gradient(135deg, ${PURPLE}, ${TEAL})`,
+      badgeBg: "linear-gradient(135deg, rgba(139,92,246,0.08), rgba(20,184,166,0.10))",
+      badgeBorder: "rgba(20,184,166,0.40)",
     },
     {
       step: "STEP 3",
@@ -33,10 +31,9 @@ export const Features = () => {
       title: "Join or Book",
       desc: "Join the queue or book directly with the clinic.",
       accentSolid: TEAL,
-      iconBg: `linear-gradient(135deg, ${TEAL}, ${TEAL.replace(")", "/0.78)")})`,
-      iconColor: "#fff",
-      badgeBg: `linear-gradient(135deg, ${TEAL.replace(")", "/0.10)")}, ${TEAL.replace(")", "/0.04)")})`,
-      badgeBorder: TEAL.replace(")", "/0.40)"),
+      iconBg: `linear-gradient(135deg, ${PURPLE}, ${TEAL})`,
+      badgeBg: "linear-gradient(135deg, rgba(20,184,166,0.10), rgba(20,184,166,0.04))",
+      badgeBorder: "rgba(20,184,166,0.40)",
     },
   ];
 
@@ -83,7 +80,7 @@ export const Features = () => {
                   >
                     <Icon
                       className="h-6 w-6"
-                      style={{ color: s.iconColor }}
+                      style={{ color: "#fff" }}
                       strokeWidth={2.25}
                     />
                   </div>
