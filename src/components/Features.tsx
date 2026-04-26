@@ -36,7 +36,7 @@ export const Features = () => {
     <section id="features" className="py-12 md:py-16 bg-gradient-to-b from-background to-secondary/10">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-foreground">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground">
             How ClynicQ helps you
           </h2>
         </div>
