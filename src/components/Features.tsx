@@ -48,19 +48,20 @@ export const Features = () => {
           </h2>
         </div>
 
-        <div className="w-[90%] md:w-[88%] max-w-[1280px] mx-auto flex flex-col md:flex-row items-stretch justify-center gap-4 md:gap-5">
+        <div className="w-[90%] md:w-[88%] max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 items-stretch gap-4 md:gap-5">
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
-              <div key={i} className="flex flex-col md:flex-row items-center flex-1 max-w-[460px] md:max-w-none mx-auto md:mx-0 w-full gap-4">
+              <div
+                key={i}
+                className="group relative rounded-xl p-[1.5px] transition-all duration-300 hover:-translate-y-0.5 h-full"
+                style={{
+                  background: gradientBorder,
+                  boxShadow: "0 1px 2px rgba(16,24,40,0.04), 0 6px 18px -10px rgba(16,24,40,0.10)",
+                }}
+              >
                 <div
-                  className="group flex-1 w-full rounded-xl px-6 py-7 md:px-7 md:py-8 transition-all duration-300 hover:-translate-y-0.5 flex flex-col"
-                  style={{
-                    background: s.tintBg,
-                    borderLeft: s.borderLeft,
-                    borderImage: (s as any).borderImage,
-                    boxShadow: "0 1px 2px rgba(16,24,40,0.04), 0 6px 18px -10px rgba(16,24,40,0.10)",
-                  }}
+                  className="rounded-[10px] bg-white px-6 py-7 md:px-7 md:py-8 h-full flex flex-col"
                 >
                   <div className="flex items-center justify-between mb-3">
                     <div
@@ -76,7 +77,7 @@ export const Features = () => {
                     </div>
                     <span
                       className="text-[10.5px] font-semibold tracking-[0.16em] uppercase"
-                      style={{ color: (s as any).accentSolid || s.accent }}
+                      style={{ color: s.accentSolid }}
                     >
                       {s.step}
                     </span>
@@ -88,22 +89,12 @@ export const Features = () => {
                     {s.title}
                   </h3>
                   <p
-                    className="text-[13px] leading-snug"
+                    className="text-[13px] leading-snug min-h-[40px]"
                     style={{ color: "hsl(220 9% 46%)" }}
                   >
                     {s.desc}
                   </p>
                 </div>
-
-                {i < steps.length - 1 && (
-                  <div className="hidden md:flex items-center justify-center flex-shrink-0">
-                    <ArrowRight
-                      className="h-6 w-6"
-                      style={{ stroke: "url(#flowGradient)", strokeWidth: 2.25 }}
-                      aria-hidden="true"
-                    />
-                  </div>
-                )}
               </div>
             );
           })}
