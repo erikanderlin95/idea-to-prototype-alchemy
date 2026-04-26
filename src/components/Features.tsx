@@ -58,9 +58,9 @@ export const Features = () => {
                   <span
                     className="inline-flex items-center rounded-full px-3 py-1 text-[11px] font-bold tracking-[0.18em] uppercase mb-4"
                     style={{
-                      background: s.badgeBg,
-                      border: `1px solid ${s.badgeBorder}`,
-                      color: s.accentSolid,
+                      background: badgeBg,
+                      border: `1px solid ${badgeBorder}`,
+                      color: BLUE_DARK,
                     }}
                   >
                     {s.step}
@@ -69,7 +69,7 @@ export const Features = () => {
                   {/* Icon */}
                   <div
                     className="h-12 w-12 rounded-xl flex items-center justify-center mb-4"
-                    style={{ background: s.iconBg }}
+                    style={{ background: iconBg }}
                   >
                     <Icon
                       className="h-6 w-6"
