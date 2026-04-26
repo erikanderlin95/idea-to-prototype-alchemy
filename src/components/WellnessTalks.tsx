@@ -495,6 +495,10 @@ export const WellnessTalks = () => {
                 </div>
               </div>
 
+              <p className="text-sm font-bold text-muted-foreground text-center px-2 pb-3">
+                Submissions are reviewed. Selected talks may be featured on the platform. Featured placements are chargeable.
+              </p>
+
               <DialogFooter className="gap-2">
                 <Button type="button" variant="outline" onClick={() => setHostOpen(false)}>
                   Cancel
