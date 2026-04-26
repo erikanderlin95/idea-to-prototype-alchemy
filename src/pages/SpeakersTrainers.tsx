@@ -24,11 +24,11 @@ const SpeakersTrainers = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <section className="relative pt-24 pb-12 px-4 overflow-hidden bg-gradient-to-br from-ai-purple/10 via-background to-ai-cyan/10">
-        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-[120px] opacity-30 bg-ai-purple pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-[120px] opacity-25 bg-ai-cyan pointer-events-none" />
+      <section className="relative pt-24 pb-12 px-4 overflow-hidden bg-gradient-to-br from-[#FFF8F0] via-[#FDEBD0] to-[#FDF0DC]">
+        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-[120px] opacity-40 bg-[#D4860A] pointer-events-none" />
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-[120px] opacity-30 bg-[#F4B860] pointer-events-none" />
         <div className="max-w-3xl mx-auto text-center relative z-10">
-          <span className="inline-block text-[10.5px] font-semibold tracking-[0.16em] uppercase mb-3 px-3 py-1 rounded-full bg-ai-purple/10 text-ai-purple border border-ai-purple/20">
+          <span className="inline-block text-[10.5px] font-semibold tracking-[0.16em] uppercase mb-3 px-3 py-1 rounded-full bg-[#D4860A]/10 text-[#D4860A] border border-[#D4860A]/25">
             ClynicQ Partners
           </span>
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-3">
@@ -39,7 +39,7 @@ const SpeakersTrainers = () => {
           </p>
           <Button
             variant="outline"
-            className="gap-2 font-semibold border-ai-purple/30 hover:bg-ai-purple/5"
+            className="gap-2 font-semibold border-[#D4860A]/30 text-[#D4860A] hover:bg-[#D4860A]/10 hover:text-[#D4860A]"
             onClick={() => navigate("/for-clinics")}
           >
             For Providers: Partner With Us
