@@ -271,8 +271,8 @@ export const WellnessTalks = () => {
 
         <div className="max-w-2xl mx-auto mt-6 flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center justify-center">
           <Button
-            className="gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
-            style={{ background: TEAL, color: "#fff" }}
+            variant="outline"
+            className="gap-2 font-semibold shadow-sm hover:shadow-md transition-all bg-white border-[hsl(var(--ai-cyan)/0.4)] text-foreground hover:bg-white/90"
             onClick={() =>
               document.getElementById("continuity")?.scrollIntoView({ behavior: "smooth" })
             }
@@ -281,8 +281,8 @@ export const WellnessTalks = () => {
             <ArrowRight className="h-4 w-4" />
           </Button>
           <Button
-            variant="outline"
-            className="font-medium border-[hsl(var(--ai-cyan)/0.4)] text-foreground hover:bg-[hsl(var(--ai-cyan)/0.08)]"
+            className="font-semibold shadow-sm hover:shadow-md transition-all"
+            style={{ background: TEAL, color: "#fff" }}
             onClick={openHost}
           >
             Host a Talk with Us
