@@ -66,7 +66,7 @@ export const ClinicConversion = () => {
                 size="lg"
                 className="shrink-0 gap-2 font-semibold shadow-md hover:shadow-lg transition-all hover:scale-[1.02]"
                 style={{
-                  background: `linear-gradient(135deg, ${PURPLE}, ${TEAL})`,
+                  background: `linear-gradient(135deg, #7c3aed, #2563eb)`,
                   color: "#fff",
                 }}
                 onClick={() => navigate("/for-clinics")}

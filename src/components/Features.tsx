@@ -1,9 +1,9 @@
 import { Users, MapPin, CalendarCheck } from "lucide-react";
 
-// Healthcare blue-led palette
-const BLUE = "#2563eb"; // medical blue
-const BLUE_DARK = "#1d4ed8"; // for badge text
-const TEAL = "#14b8a6"; // light teal accent
+// Healthcare blue-led palette (clearer contrast)
+const BLUE = "#1d4ed8"; // medical blue (saturated)
+const BLUE_DARK = "#1e40af"; // badge text
+const TEAL = "#0d9488"; // deeper teal accent
 
 export const Features = () => {
   const steps = [
@@ -29,8 +29,8 @@ export const Features = () => {
 
   const gradientBorder = `linear-gradient(135deg, ${BLUE}, ${TEAL})`;
   const iconBg = `linear-gradient(135deg, ${BLUE}, ${TEAL})`;
-  const badgeBg = "linear-gradient(135deg, rgba(37,99,235,0.10), rgba(20,184,166,0.08))";
-  const badgeBorder = "rgba(37,99,235,0.35)";
+  const badgeBg = "linear-gradient(135deg, rgba(29,78,216,0.14), rgba(13,148,136,0.10))";
+  const badgeBorder = "rgba(29,78,216,0.50)";
 
   return (
     <section id="features" className="py-12 md:py-16 bg-gradient-to-b from-background to-secondary/10">
@@ -47,7 +47,7 @@ export const Features = () => {
             return (
               <div
                 key={i}
-                className="group relative rounded-xl p-[1.5px] transition-all duration-300 hover:-translate-y-0.5 h-full"
+                className="group relative rounded-xl p-[2px] transition-all duration-300 hover:-translate-y-0.5 h-full"
                 style={{
                   background: gradientBorder,
                   boxShadow: "0 1px 2px rgba(16,24,40,0.04), 0 6px 18px -10px rgba(16,24,40,0.10)",
