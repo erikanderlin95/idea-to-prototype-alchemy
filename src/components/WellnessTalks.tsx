@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, MapPin, ArrowRight, Users, CheckCircle2 } from "lucide-react";
+import { Calendar, Clock, MapPin, ArrowRight, Users, CheckCircle2, CalendarX } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import {
   Dialog,
   DialogContent,
