@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, MapPin, ArrowRight, Users, CheckCircle2, CalendarX } from "lucide-react";
+import { Calendar, Clock, ArrowRight, CheckCircle2, CalendarX } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import {
   Dialog,
@@ -18,18 +18,16 @@ import { toast } from "sonner";
 
 const TEAL = "hsl(var(--ai-cyan))";
 
-const talks: Array<{
+type FeaturedTalk = {
   title: string;
   desc: string;
   date: string;
   time: string;
-  location: string;
-  seats: string;
-  badge: string;
-  accent: string;
-  gradient: string;
-  border: string;
-}> = [];
+  image: string;
+  partner?: string;
+};
+
+const featuredTalks: FeaturedTalk[] = [];
 
 const reserveSchema = z.object({
   name: z
@@ -105,7 +103,7 @@ export const WellnessTalks = () => {
   const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-  const [activeTalk, setActiveTalk] = useState<typeof talks[number] | null>(null);
+  const [activeTalk, setActiveTalk] = useState<FeaturedTalk | null>(null);
   const [form, setForm] = useState({
     name: "",
     phone: "",
@@ -126,7 +124,7 @@ export const WellnessTalks = () => {
     notes: "",
   });
 
-  const openReserve = (talk: typeof talks[number]) => {
+  const openReserve = (talk: FeaturedTalk) => {
     setActiveTalk(talk);
     setSubmitted(false);
     setForm({ name: "", phone: "", email: "", attendees: "1", notes: "" });
@@ -182,7 +180,7 @@ export const WellnessTalks = () => {
         </div>
 
         <div className="max-w-2xl mx-auto grid grid-cols-1 gap-4 md:gap-5 min-h-[280px]">
-          {talks.length === 0 ? (
+          {featuredTalks.length === 0 ? (
             <div
               className="rounded-2xl p-8 md:p-10 text-center flex flex-col items-center justify-center"
               style={{
@@ -206,78 +204,87 @@ export const WellnessTalks = () => {
                 <Button
                   className="gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
                   style={{ background: TEAL, color: "#fff" }}
-                  onClick={openHost}
+                  onClick={() =>
+                    document.getElementById("marketplace")?.scrollIntoView({ behavior: "smooth" })
+                  }
                 >
-                  Host a Talk with Us
+                  Explore Clinics
                   <ArrowRight className="h-4 w-4" />
                 </Button>
                 <Button
-                  variant="ghost"
-                  className="font-medium text-muted-foreground hover:text-foreground"
-                  onClick={() =>
-                    document.getElementById("continuity")?.scrollIntoView({ behavior: "smooth" })
-                  }
+                  variant="outline"
+                  className="font-medium border-[hsl(var(--ai-cyan)/0.4)] text-foreground hover:bg-[hsl(var(--ai-cyan)/0.08)]"
+                  onClick={openHost}
                 >
-                  Explore Partners
+                  Host a Talk with Us
                 </Button>
               </div>
             </div>
           ) : (
-            talks.map((talk, i) => (
-              <div
-                key={i}
-                className="group relative rounded-2xl p-6 md:p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-                style={{
-                  background: talk.gradient,
-                  border: `1px solid ${talk.border}`,
-                  boxShadow: "0 4px 20px -8px hsl(var(--ai-cyan) / 0.18)",
-                }}
-              >
-                <div className="flex items-start justify-between mb-4">
-                  <span
-                    className="text-[10.5px] font-bold tracking-[0.14em] uppercase px-2.5 py-1 rounded-full"
-                    style={{ color: "#fff", background: talk.accent }}
-                  >
-                    {talk.badge}
-                  </span>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-medium text-muted-foreground">
-                    <Users className="h-3 w-3" />
-                    {talk.seats}
-                  </span>
-                </div>
-
-                <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2 leading-snug">
-                  {talk.title}
-                </h3>
-                <p className="text-[13.5px] text-muted-foreground leading-snug mb-5">
-                  {talk.desc}
-                </p>
-
-                <div className="flex flex-wrap gap-x-4 gap-y-2 mb-5 text-[12.5px] text-foreground/80">
-                  <span className="inline-flex items-center gap-1.5">
-                    <Calendar className="h-3.5 w-3.5" style={{ color: talk.accent }} />
-                    {talk.date}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <Clock className="h-3.5 w-3.5" style={{ color: talk.accent }} />
-                    {talk.time}
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <MapPin className="h-3.5 w-3.5" style={{ color: talk.accent }} />
-                    {talk.location}
-                  </span>
-                </div>
-
-                <Button
-                  className="w-full sm:w-auto gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
-                  style={{ background: talk.accent, color: "#fff" }}
-                  onClick={() => openReserve(talk)}
+            (() => {
+              const talk = featuredTalks[0];
+              return (
+                <div
+                  className="group relative rounded-2xl overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
+                  style={{
+                    background: "hsl(var(--card))",
+                    border: `1px solid hsl(var(--ai-cyan) / 0.28)`,
+                    boxShadow: "0 4px 20px -8px hsl(var(--ai-cyan) / 0.18)",
+                  }}
                 >
-                  Reserve a Slot
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-              </div>
-            ))
+                  <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
+                    <img
+                      src={talk.image}
+                      alt={talk.title}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                      loading="lazy"
+                    />
+                    <span
+                      className="absolute top-3 left-3 text-[10.5px] font-bold tracking-[0.14em] uppercase px-2.5 py-1 rounded-full shadow-md"
+                      style={{ color: "#fff", background: TEAL }}
+                    >
+                      Featured Partner
+                    </span>
+                  </div>
+
+                  <div className="p-6 md:p-7">
+                    <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2 leading-snug">
+                      {talk.title}
+                    </h3>
+                    <p className="text-[13.5px] text-muted-foreground leading-snug mb-4">
+                      {talk.desc}
+                    </p>
+
+                    <div className="flex flex-wrap gap-x-4 gap-y-2 mb-5 text-[12.5px] text-foreground/80">
+                      <span className="inline-flex items-center gap-1.5">
+                        <Calendar className="h-3.5 w-3.5" style={{ color: TEAL }} />
+                        {talk.date}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5">
+                        <Clock className="h-3.5 w-3.5" style={{ color: TEAL }} />
+                        {talk.time}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center justify-between gap-3 flex-wrap">
+                      <Button
+                        className="gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
+                        style={{ background: TEAL, color: "#fff" }}
+                        onClick={() => openReserve(talk)}
+                      >
+                        Reserve a Slot
+                        <ArrowRight className="h-4 w-4" />
+                      </Button>
+                      {talk.partner && (
+                        <span className="text-[11.5px] text-muted-foreground">
+                          by <span className="font-medium text-foreground">{talk.partner}</span>
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              );
+            })()
           )}
         </div>
       </div>
