@@ -206,7 +206,7 @@ export const WellnessTalks = () => {
                 <Button
                   className="gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
                   style={{ background: TEAL, color: "#fff" }}
-                  onClick={() => navigate("/speakers")}
+                  onClick={openHost}
                 >
                   Host a Talk with Us
                   <ArrowRight className="h-4 w-4" />
