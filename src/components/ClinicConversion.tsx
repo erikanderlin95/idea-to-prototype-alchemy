@@ -33,7 +33,7 @@ export const ClinicConversion = () => {
   const iconGradient = `linear-gradient(135deg, ${BLUE}, ${TEAL})`;
 
   return (
-    <section className="relative py-12 md:py-16 pb-16 md:pb-24 overflow-hidden">
+    <section className="relative pt-12 md:pt-16 pb-6 md:pb-8 overflow-hidden">
       <div
         className="absolute inset-0 -z-10"
         style={{
