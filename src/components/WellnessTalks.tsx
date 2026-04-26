@@ -14,9 +14,9 @@ const talks = [
     location: "Online + In-person",
     seats: "Limited seats",
     badge: "Next session",
-    accent: PURPLE,
-    gradient: `linear-gradient(135deg, hsl(var(--ai-purple) / 0.12), hsl(var(--ai-cyan) / 0.08))`,
-    border: `hsl(var(--ai-purple) / 0.25)`,
+    accent: TEAL,
+    gradient: `linear-gradient(135deg, hsl(var(--ai-cyan) / 0.12), hsl(var(--ai-cyan) / 0.06))`,
+    border: `hsl(var(--ai-cyan) / 0.28)`,
   },
 ];
 
