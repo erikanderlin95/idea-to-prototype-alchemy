@@ -179,10 +179,10 @@ export const WellnessTalks = () => {
           </p>
         </div>
 
-        <div className="max-w-2xl mx-auto grid grid-cols-1 gap-4 md:gap-5 min-h-[280px]">
+        <div className="max-w-md mx-auto grid grid-cols-1 gap-4 md:gap-5">
           {featuredTalks.length === 0 ? (
             <div
-              className="rounded-2xl p-8 md:p-10 text-center flex flex-col items-center justify-center"
+              className="rounded-2xl p-6 md:p-8 text-center flex flex-col items-center justify-center aspect-square w-full"
               style={{
                 background: `linear-gradient(135deg, hsl(var(--ai-cyan) / 0.06), hsl(var(--ai-cyan) / 0.02))`,
                 border: `1px dashed hsl(var(--ai-cyan) / 0.35)`,
