@@ -18,18 +18,6 @@ const talks = [
     gradient: `linear-gradient(135deg, hsl(var(--ai-purple) / 0.12), hsl(var(--ai-cyan) / 0.08))`,
     border: `hsl(var(--ai-purple) / 0.25)`,
   },
-  {
-    title: "Family Health & Preventive Care",
-    desc: "What every household should know about staying ahead of illness.",
-    date: "Sat, 24 May",
-    time: "2:00 PM",
-    location: "Community Hall",
-    seats: "Limited seats",
-    badge: "Featured",
-    accent: TEAL,
-    gradient: `linear-gradient(135deg, hsl(var(--ai-cyan) / 0.12), hsl(var(--ai-purple) / 0.08))`,
-    border: `hsl(var(--ai-cyan) / 0.25)`,
-  },
 ];
 
 export const WellnessTalks = () => {
