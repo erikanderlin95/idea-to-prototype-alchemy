@@ -47,7 +47,7 @@ export const Features = () => {
             return (
               <div
                 key={i}
-                className="group relative rounded-xl p-[1.5px] transition-all duration-300 hover:-translate-y-0.5 h-full"
+                className="group relative rounded-xl p-[2px] transition-all duration-300 hover:-translate-y-0.5 h-full"
                 style={{
                   background: gradientBorder,
                   boxShadow: "0 1px 2px rgba(16,24,40,0.04), 0 6px 18px -10px rgba(16,24,40,0.10)",
