@@ -46,7 +46,7 @@ export const ContinuityServices = () => {
   const navigate = useNavigate();
 
   return (
-    <section className="py-8 bg-gradient-to-b from-background via-secondary/20 to-background">
+    <section id="continuity" className="py-8 bg-gradient-to-b from-background via-secondary/20 to-background">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-10">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-ai-cyan/10 text-ai-cyan mb-4">
