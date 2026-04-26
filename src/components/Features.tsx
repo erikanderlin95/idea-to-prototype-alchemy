@@ -1,4 +1,4 @@
-import { Eye, Layers, CheckCircle2, ArrowRight } from "lucide-react";
+import { Eye, Layers, CheckCircle2 } from "lucide-react";
 
 const PURPLE = "hsl(var(--ai-purple))";
 const TEAL = "hsl(var(--ai-cyan))";
@@ -10,10 +10,7 @@ export const Features = () => {
       icon: Eye,
       title: "See Queue First",
       desc: "Check how many patients are ahead before you go.",
-      accent: PURPLE,
       accentSolid: PURPLE,
-      tintBg: `linear-gradient(180deg, ${PURPLE.replace(")", "/0.05)")}, #ffffff)`,
-      borderLeft: `3px solid ${PURPLE}`,
       iconBg: `linear-gradient(135deg, ${PURPLE}, ${PURPLE.replace(")", "/0.78)")})`,
       iconColor: "#fff",
       iconFill: "rgba(255,255,255,0.18)",
@@ -23,11 +20,7 @@ export const Features = () => {
       icon: Layers,
       title: "Choose Better",
       desc: "Compare nearby clinics and go where the queue is shorter.",
-      accent: `linear-gradient(90deg, ${PURPLE}, ${TEAL})`,
       accentSolid: TEAL,
-      tintBg: "#ffffff",
-      borderLeft: `3px solid transparent`,
-      borderImage: `linear-gradient(180deg, ${PURPLE}, ${TEAL}) 1`,
       iconBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.16)")}, ${TEAL.replace(")", "/0.18)")})`,
       iconColor: PURPLE,
       iconFill: "none",
@@ -37,15 +30,14 @@ export const Features = () => {
       icon: CheckCircle2,
       title: "Join or Book",
       desc: "Join the queue or book directly with the clinic.",
-      accent: TEAL,
       accentSolid: TEAL,
-      tintBg: `linear-gradient(180deg, ${TEAL.replace(")", "/0.05)")}, #ffffff)`,
-      borderLeft: `3px solid ${TEAL}`,
       iconBg: `linear-gradient(135deg, ${TEAL}, ${TEAL.replace(")", "/0.78)")})`,
       iconColor: "#fff",
       iconFill: "rgba(255,255,255,0.18)",
     },
   ];
+
+  const gradientBorder = `linear-gradient(135deg, ${PURPLE}, ${TEAL})`;
 
   return (
     <section id="features" className="py-12 md:py-16 bg-gradient-to-b from-background to-secondary/10">
@@ -56,19 +48,20 @@ export const Features = () => {
           </h2>
         </div>
 
-        <div className="w-[90%] md:w-[88%] max-w-[1280px] mx-auto flex flex-col md:flex-row items-stretch justify-center gap-4 md:gap-5">
+        <div className="w-[90%] md:w-[88%] max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 items-stretch gap-4 md:gap-5">
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
-              <div key={i} className="flex flex-col md:flex-row items-center flex-1 max-w-[460px] md:max-w-none mx-auto md:mx-0 w-full gap-4">
+              <div
+                key={i}
+                className="group relative rounded-xl p-[1.5px] transition-all duration-300 hover:-translate-y-0.5 h-full"
+                style={{
+                  background: gradientBorder,
+                  boxShadow: "0 1px 2px rgba(16,24,40,0.04), 0 6px 18px -10px rgba(16,24,40,0.10)",
+                }}
+              >
                 <div
-                  className="group flex-1 w-full rounded-xl px-6 py-7 md:px-7 md:py-8 transition-all duration-300 hover:-translate-y-0.5 flex flex-col"
-                  style={{
-                    background: s.tintBg,
-                    borderLeft: s.borderLeft,
-                    borderImage: (s as any).borderImage,
-                    boxShadow: "0 1px 2px rgba(16,24,40,0.04), 0 6px 18px -10px rgba(16,24,40,0.10)",
-                  }}
+                  className="rounded-[10px] bg-white px-6 py-7 md:px-7 md:py-8 h-full flex flex-col"
                 >
                   <div className="flex items-center justify-between mb-3">
                     <div
@@ -84,7 +77,7 @@ export const Features = () => {
                     </div>
                     <span
                       className="text-[10.5px] font-semibold tracking-[0.16em] uppercase"
-                      style={{ color: (s as any).accentSolid || s.accent }}
+                      style={{ color: s.accentSolid }}
                     >
                       {s.step}
                     </span>
@@ -96,35 +89,17 @@ export const Features = () => {
                     {s.title}
                   </h3>
                   <p
-                    className="text-[13px] leading-snug"
+                    className="text-[13px] leading-snug min-h-[40px]"
                     style={{ color: "hsl(220 9% 46%)" }}
                   >
                     {s.desc}
                   </p>
                 </div>
-
-                {i < steps.length - 1 && (
-                  <div className="hidden md:flex items-center justify-center flex-shrink-0">
-                    <ArrowRight
-                      className="h-6 w-6"
-                      style={{ stroke: "url(#flowGradient)", strokeWidth: 2.25 }}
-                      aria-hidden="true"
-                    />
-                  </div>
-                )}
               </div>
             );
           })}
         </div>
 
-        <svg width="0" height="0" className="absolute">
-          <defs>
-            <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor={PURPLE} />
-              <stop offset="100%" stopColor={TEAL} />
-            </linearGradient>
-          </defs>
-        </svg>
       </div>
     </section>
   );
