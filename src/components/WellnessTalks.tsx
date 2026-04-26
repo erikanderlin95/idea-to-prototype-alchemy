@@ -197,29 +197,32 @@ export const WellnessTalks = () => {
               <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2">
                 No upcoming talks right now
               </h3>
-              <p className="text-[13.5px] md:text-sm text-muted-foreground max-w-md mb-6 leading-relaxed">
-                We're preparing the next sessions. In the meantime, explore clinics or partner with us to host one.
+              <p className="text-[13.5px] md:text-sm text-muted-foreground max-w-md leading-relaxed">
+                We're preparing the next sessions. Stay tuned for upcoming partner-led talks.
               </p>
-              <div className="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto items-stretch sm:items-center justify-center">
-                <Button
-                  className="gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
-                  style={{ background: TEAL, color: "#fff" }}
-                  onClick={() =>
-                    document.getElementById("continuity")?.scrollIntoView({ behavior: "smooth" })
-                  }
-                >
-                  Explore Partners
-                  <ArrowRight className="h-4 w-4" />
-                </Button>
-                <Button
-                  variant="outline"
-                  className="font-medium border-[hsl(var(--ai-cyan)/0.4)] text-foreground hover:bg-[hsl(var(--ai-cyan)/0.08)]"
-                  onClick={openHost}
-                >
-                  Host a Talk with Us
-                </Button>
-              </div>
             </div>
+          )}
+        </div>
+
+        <div className="max-w-2xl mx-auto mt-6 flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center justify-center">
+          <Button
+            className="gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
+            style={{ background: TEAL, color: "#fff" }}
+            onClick={() =>
+              document.getElementById("continuity")?.scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            Explore Partners
+            <ArrowRight className="h-4 w-4" />
+          </Button>
+          <Button
+            variant="outline"
+            className="font-medium border-[hsl(var(--ai-cyan)/0.4)] text-foreground hover:bg-[hsl(var(--ai-cyan)/0.08)]"
+            onClick={openHost}
+          >
+            Host a Talk with Us
+          </Button>
+        </div>
           ) : (
             (() => {
               const talk = featuredTalks[0];
