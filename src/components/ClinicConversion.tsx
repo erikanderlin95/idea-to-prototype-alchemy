@@ -49,8 +49,8 @@ export const ClinicConversion = () => {
             className="rounded-2xl p-6 md:p-10 backdrop-blur-sm"
             style={{
               background: "hsl(var(--card) / 0.85)",
-              border: "1px solid hsl(var(--border))",
-              boxShadow: "0 10px 40px -15px rgba(29,78,216,0.15)",
+              border: `1.5px solid ${BLUE}`,
+              boxShadow: "0 10px 40px -15px rgba(29,78,216,0.25)",
             }}
           >
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-6">
