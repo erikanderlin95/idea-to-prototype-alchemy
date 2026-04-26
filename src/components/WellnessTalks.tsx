@@ -1,8 +1,20 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Calendar, Clock, MapPin, Sparkles, ArrowRight, Users } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Calendar, Clock, MapPin, ArrowRight, Users, CheckCircle2 } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { z } from "zod";
+import { toast } from "sonner";
 
-const PURPLE = "hsl(var(--ai-purple))";
 const TEAL = "hsl(var(--ai-cyan))";
 
 const talks = [
@@ -20,8 +32,66 @@ const talks = [
   },
 ];
 
+const reserveSchema = z.object({
+  name: z
+    .string()
+    .trim()
+    .min(2, { message: "Please enter your full name" })
+    .max(80, { message: "Name must be less than 80 characters" }),
+  phone: z
+    .string()
+    .trim()
+    .min(8, { message: "Phone number must be at least 8 digits" })
+    .max(15, { message: "Phone number must be less than 15 digits" })
+    .regex(/^[0-9+\-\s()]+$/, { message: "Invalid phone number format" }),
+  email: z
+    .string()
+    .trim()
+    .email({ message: "Invalid email address" })
+    .max(255)
+    .optional()
+    .or(z.literal("")),
+  attendees: z
+    .string()
+    .trim()
+    .regex(/^[1-9][0-9]?$/, { message: "Enter a number between 1 and 99" }),
+  notes: z
+    .string()
+    .trim()
+    .max(300, { message: "Notes must be less than 300 characters" })
+    .optional()
+    .or(z.literal("")),
+});
+
 export const WellnessTalks = () => {
-  const navigate = useNavigate();
+  const [open, setOpen] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+  const [activeTalk, setActiveTalk] = useState<typeof talks[number] | null>(null);
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    attendees: "1",
+    notes: "",
+  });
+
+  const openReserve = (talk: typeof talks[number]) => {
+    setActiveTalk(talk);
+    setSubmitted(false);
+    setForm({ name: "", phone: "", email: "", attendees: "1", notes: "" });
+    setOpen(true);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const result = reserveSchema.safeParse(form);
+    if (!result.success) {
+      toast.error(result.error.issues[0].message);
+      return;
+    }
+    setSubmitted(true);
+    toast.success("Reservation request received");
+  };
 
   return (
     <section className="py-12 md:py-16 bg-gradient-to-b from-background via-secondary/20 to-background">
@@ -43,16 +113,13 @@ export const WellnessTalks = () => {
               style={{
                 background: talk.gradient,
                 border: `1px solid ${talk.border}`,
-                boxShadow: "0 4px 20px -8px hsl(var(--ai-purple) / 0.15)",
+                boxShadow: "0 4px 20px -8px hsl(var(--ai-cyan) / 0.18)",
               }}
             >
               <div className="flex items-start justify-between mb-4">
                 <span
                   className="text-[10.5px] font-bold tracking-[0.14em] uppercase px-2.5 py-1 rounded-full"
-                  style={{
-                    color: "#fff",
-                    background: talk.accent,
-                  }}
+                  style={{ color: "#fff", background: talk.accent }}
                 >
                   {talk.badge}
                 </span>
@@ -86,11 +153,8 @@ export const WellnessTalks = () => {
 
               <Button
                 className="w-full sm:w-auto gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
-                style={{
-                  background: talk.accent,
-                  color: "#fff",
-                }}
-                onClick={() => navigate("/speakers")}
+                style={{ background: talk.accent, color: "#fff" }}
+                onClick={() => openReserve(talk)}
               >
                 Reserve a Slot
                 <ArrowRight className="h-4 w-4" />
@@ -99,6 +163,103 @@ export const WellnessTalks = () => {
           ))}
         </div>
       </div>
+
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-[460px]">
+          {submitted ? (
+            <div className="py-6 text-center space-y-3">
+              <CheckCircle2 className="h-12 w-12 mx-auto" style={{ color: TEAL }} />
+              <h3 className="text-xl font-semibold text-foreground">Reservation received</h3>
+              <p className="text-sm text-muted-foreground">
+                We've noted your reservation for{" "}
+                <span className="font-medium text-foreground">{activeTalk?.title}</span>. We'll
+                contact you with confirmation details.
+              </p>
+              <Button onClick={() => setOpen(false)} className="mt-2" style={{ background: TEAL, color: "#fff" }}>
+                Done
+              </Button>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit}>
+              <DialogHeader>
+                <DialogTitle>Reserve your slot</DialogTitle>
+                <DialogDescription>
+                  {activeTalk?.title} — {activeTalk?.date}, {activeTalk?.time}
+                </DialogDescription>
+              </DialogHeader>
+
+              <div className="space-y-3 py-4">
+                <div className="space-y-1.5">
+                  <Label htmlFor="rt-name">Full Name *</Label>
+                  <Input
+                    id="rt-name"
+                    value={form.name}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    maxLength={80}
+                    placeholder="Your full name"
+                    required
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="rt-phone">Mobile Number *</Label>
+                  <Input
+                    id="rt-phone"
+                    type="tel"
+                    value={form.phone}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    maxLength={15}
+                    placeholder="+65 9123 4567"
+                    required
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="rt-email">Email (optional)</Label>
+                  <Input
+                    id="rt-email"
+                    type="email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    maxLength={255}
+                    placeholder="you@example.com"
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="rt-attendees">Number of attendees *</Label>
+                  <Input
+                    id="rt-attendees"
+                    type="number"
+                    min={1}
+                    max={99}
+                    value={form.attendees}
+                    onChange={(e) => setForm({ ...form, attendees: e.target.value })}
+                    required
+                  />
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="rt-notes">Notes (optional)</Label>
+                  <Textarea
+                    id="rt-notes"
+                    value={form.notes}
+                    onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                    maxLength={300}
+                    placeholder="Any questions or special requests?"
+                    rows={3}
+                  />
+                </div>
+              </div>
+
+              <DialogFooter className="gap-2">
+                <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+                  Cancel
+                </Button>
+                <Button type="submit" style={{ background: TEAL, color: "#fff" }}>
+                  Reserve Slot
+                </Button>
+              </DialogFooter>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };
