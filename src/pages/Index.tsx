@@ -1,6 +1,8 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
+import { WellnessTalks } from "@/components/WellnessTalks";
+import { ClinicConversion } from "@/components/ClinicConversion";
 import { MarketplaceSection } from "@/components/MarketplaceSection";
 import { FeaturedConsultants } from "@/components/FeaturedConsultants";
 import { ContinuityServices } from "@/components/ContinuityServices";
@@ -20,9 +22,11 @@ const Index = () => {
       <Navbar onRestartTour={startOnboarding} />
       <main>
         <Hero />
+        <WellnessTalks />
         <Features />
         <FeaturedConsultants />
         <MarketplaceSection defaultCategory={defaultCategory} />
+        <ClinicConversion />
         <ContinuityServices />
         <MyClynicQPlugin />
       </main>
