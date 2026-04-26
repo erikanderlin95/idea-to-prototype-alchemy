@@ -1,4 +1,4 @@
-import { Eye, Layers, CheckCircle2 } from "lucide-react";
+import { Users, MapPin, CalendarCheck } from "lucide-react";
 
 const PURPLE = "hsl(var(--ai-purple))";
 const TEAL = "hsl(var(--ai-cyan))";
@@ -6,34 +6,37 @@ const TEAL = "hsl(var(--ai-cyan))";
 export const Features = () => {
   const steps = [
     {
-      step: "Step 1",
-      icon: Eye,
+      step: "STEP 1",
+      icon: Users,
       title: "See Queue First",
       desc: "Check how many patients are ahead before you go.",
       accentSolid: PURPLE,
       iconBg: `linear-gradient(135deg, ${PURPLE}, ${PURPLE.replace(")", "/0.78)")})`,
       iconColor: "#fff",
-      iconFill: "rgba(255,255,255,0.18)",
+      badgeBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.10)")}, ${PURPLE.replace(")", "/0.04)")})`,
+      badgeBorder: PURPLE.replace(")", "/0.35)"),
     },
     {
-      step: "Step 2",
-      icon: Layers,
+      step: "STEP 2",
+      icon: MapPin,
       title: "Choose Better",
       desc: "Compare nearby clinics and go where the queue is shorter.",
       accentSolid: TEAL,
-      iconBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.16)")}, ${TEAL.replace(")", "/0.18)")})`,
-      iconColor: PURPLE,
-      iconFill: "none",
+      iconBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.85)")}, ${TEAL.replace(")", "/0.95)")})`,
+      iconColor: "#fff",
+      badgeBg: `linear-gradient(135deg, ${PURPLE.replace(")", "/0.08)")}, ${TEAL.replace(")", "/0.10)")})`,
+      badgeBorder: TEAL.replace(")", "/0.40)"),
     },
     {
-      step: "Step 3",
-      icon: CheckCircle2,
+      step: "STEP 3",
+      icon: CalendarCheck,
       title: "Join or Book",
       desc: "Join the queue or book directly with the clinic.",
       accentSolid: TEAL,
       iconBg: `linear-gradient(135deg, ${TEAL}, ${TEAL.replace(")", "/0.78)")})`,
       iconColor: "#fff",
-      iconFill: "rgba(255,255,255,0.18)",
+      badgeBg: `linear-gradient(135deg, ${TEAL.replace(")", "/0.10)")}, ${TEAL.replace(")", "/0.04)")})`,
+      badgeBorder: TEAL.replace(")", "/0.40)"),
     },
   ];
 
@@ -60,34 +63,40 @@ export const Features = () => {
                   boxShadow: "0 1px 2px rgba(16,24,40,0.04), 0 6px 18px -10px rgba(16,24,40,0.10)",
                 }}
               >
-                <div
-                  className="rounded-[10px] bg-white px-6 py-7 md:px-7 md:py-8 h-full flex flex-col"
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <div
-                      className="h-10 w-10 rounded-lg flex items-center justify-center"
-                      style={{ background: s.iconBg }}
-                    >
-                      <Icon
-                        className="h-[20px] w-[20px]"
-                        style={{ color: s.iconColor }}
-                        strokeWidth={2.25}
-                        fill={s.iconFill as any}
-                      />
-                    </div>
-                    <span
-                      className="text-[10.5px] font-semibold tracking-[0.16em] uppercase"
-                      style={{ color: s.accentSolid }}
-                    >
-                      {s.step}
-                    </span>
+                <div className="rounded-[10px] bg-white px-6 py-7 md:px-7 md:py-8 h-full flex flex-col items-start">
+                  {/* Step badge */}
+                  <span
+                    className="inline-flex items-center rounded-full px-3 py-1 text-[11px] font-bold tracking-[0.18em] uppercase mb-4"
+                    style={{
+                      background: s.badgeBg,
+                      border: `1px solid ${s.badgeBorder}`,
+                      color: s.accentSolid,
+                    }}
+                  >
+                    {s.step}
+                  </span>
+
+                  {/* Icon */}
+                  <div
+                    className="h-12 w-12 rounded-xl flex items-center justify-center mb-4"
+                    style={{ background: s.iconBg }}
+                  >
+                    <Icon
+                      className="h-6 w-6"
+                      style={{ color: s.iconColor }}
+                      strokeWidth={2.25}
+                    />
                   </div>
+
+                  {/* Title */}
                   <h3
                     className="text-[16.5px] md:text-[17px] font-semibold mb-1"
                     style={{ color: "hsl(220 18% 18%)" }}
                   >
                     {s.title}
                   </h3>
+
+                  {/* Description */}
                   <p
                     className="text-[13px] leading-snug min-h-[40px]"
                     style={{ color: "hsl(220 9% 46%)" }}
@@ -99,7 +108,6 @@ export const Features = () => {
             );
           })}
         </div>
-
       </div>
     </section>
   );
