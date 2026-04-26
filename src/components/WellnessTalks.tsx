@@ -39,18 +39,6 @@ export const WellnessTalks = () => {
     <section className="py-12 md:py-16 bg-gradient-to-b from-background via-secondary/20 to-background">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-10 max-w-2xl mx-auto">
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full mb-3"
-            style={{
-              background: `linear-gradient(90deg, hsl(var(--ai-purple) / 0.1), hsl(var(--ai-cyan) / 0.1))`,
-              border: `1px solid hsl(var(--ai-purple) / 0.2)`,
-            }}
-          >
-            <Sparkles className="h-3.5 w-3.5" style={{ color: PURPLE }} />
-            <span className="text-[11px] font-semibold tracking-wider uppercase" style={{ color: PURPLE }}>
-              Free to attend
-            </span>
-          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-2">
             Upcoming Wellness Talks
           </h2>
