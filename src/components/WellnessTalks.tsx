@@ -130,19 +130,19 @@ export const WellnessTalks = () => {
                 <Button
                   className="gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
                   style={{ background: TEAL, color: "#fff" }}
-                  onClick={() =>
-                    document.getElementById("marketplace")?.scrollIntoView({ behavior: "smooth" })
-                  }
+                  onClick={() => navigate("/speakers")}
                 >
-                  Explore Clinics
+                  Host a Talk with Us
                   <ArrowRight className="h-4 w-4" />
                 </Button>
                 <Button
                   variant="ghost"
                   className="font-medium text-muted-foreground hover:text-foreground"
-                  onClick={() => navigate("/speakers")}
+                  onClick={() =>
+                    document.getElementById("continuity")?.scrollIntoView({ behavior: "smooth" })
+                  }
                 >
-                  Host a Talk with Us
+                  Explore Partners
                 </Button>
               </div>
             </div>
