@@ -391,7 +391,7 @@ export const ClinicCard = ({
 
   return (
     <>
-      <Card className="group flex flex-col px-2.5 py-2 sm:px-3 sm:py-2 hover:shadow-lg transition-all duration-300 border border-border/40 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue h-full" onClick={() => id && navigate(`/clinic/${id}`)}>
+      <Card className="group flex flex-col px-3 py-3 sm:px-3.5 sm:py-3 hover:shadow-lg transition-all duration-300 border border-border/40 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue w-full max-w-[360px] mx-auto h-full min-h-[420px] aspect-square" onClick={() => id && navigate(`/clinic/${id}`)}>
         {/* === TOP SECTION (fixed) === */}
         <div className="space-y-1">
         {/* Row 1: Name + type + status + rating */}
