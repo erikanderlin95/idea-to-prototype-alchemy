@@ -615,7 +615,7 @@ export const ClinicCard = ({
               {(!hasDigitalQueue || name === "Harmony TCM Centre") && (
                 isNmgAffiliated && isManagedCareType(type) ? (
                   <Button 
-                    className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-[#0e7490] h-10 hover:scale-[1.02] transition-transform" 
+                    className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-emerald-600 h-10 hover:scale-[1.02] transition-transform" 
                     disabled={!isOpen}
                     onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
                   >
