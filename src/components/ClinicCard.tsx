@@ -434,7 +434,7 @@ export const ClinicCard = ({
         </div>
 
         {/* === MIDDLE SECTION === */}
-        <div className="flex-1 flex flex-col gap-1.5 mt-1.5">
+        <div className="flex-1 min-h-0 flex flex-col gap-1.5 mt-1.5">
         {hasDigitalQueue && (
           myQueueEntry ? (
             <div className="flex items-center justify-between gap-2 px-2.5 py-2 rounded-lg cursor-pointer text-xs border-2"
