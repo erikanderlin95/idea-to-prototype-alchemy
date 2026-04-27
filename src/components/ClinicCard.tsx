@@ -545,17 +545,17 @@ export const ClinicCard = ({
             </div>
           </div>
         ) : (
-          <div className="flex-1 flex flex-col justify-between gap-1.5">
-            <div className="flex-1 flex flex-col gap-1.5">
+          <div className={`flex flex-col justify-between gap-1.5 ${hasDigitalQueue ? 'flex-1' : ''}`}>
+            <div className={`flex flex-col gap-1.5 ${hasDigitalQueue ? 'flex-1' : ''}`}>
             {hasDigitalQueue && (
-              <div className="flex-1 flex flex-col justify-center p-2.5 rounded border"
+              <div className="flex-1 p-2.5 rounded border"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
                   borderColor: 'hsl(var(--ai-purple)/0.2)'
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                 <div className="flex items-center gap-2.5 mb-2.5">
+                 <div className={`flex items-center gap-2.5 ${type !== "GP" && type !== "TCM" ? "mb-2.5" : ""}`}>
                    <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
                      <Users className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
                    </div>
