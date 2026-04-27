@@ -548,7 +548,7 @@ export const ClinicCard = ({
           <div className="flex-1 flex flex-col justify-between gap-1.5">
             <div className="flex-1 flex flex-col gap-1.5">
             {hasDigitalQueue && (
-              <div className="p-2.5 rounded border"
+              <div className="flex-1 p-2.5 rounded border"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
                   borderColor: 'hsl(var(--ai-purple)/0.2)'
