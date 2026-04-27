@@ -626,8 +626,8 @@ export const ClinicCard = ({
                   <Button 
                     variant={hasDigitalQueue ? "outline" : "default"}
                     className={hasDigitalQueue 
-                      ? "flex-1 font-bold text-sm border border-primary/30 hover:bg-primary/20 hover:border-primary h-10 hover:scale-[1.02] transition-transform"
-                      : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-0 h-10 hover:scale-[1.02] transition-transform"
+                      ? "flex-1 font-bold text-sm border-2 border-[#4b5563] text-foreground hover:bg-muted h-10 hover:scale-[1.02] transition-transform"
+                      : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-[#0e7490] h-10 hover:scale-[1.02] transition-transform"
                     }
                     disabled={!isOpen}
                     onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
