@@ -482,7 +482,7 @@ export const ClinicCard = ({
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center justify-center gap-1.5 mb-2.5">
+            <div className="flex items-center gap-1.5 mb-2.5">
               <Star className="h-4 w-4 text-foreground" />
               <p className="text-sm text-foreground font-bold">{t("clinicCard.servicesOffered")}</p>
             </div>
@@ -582,7 +582,7 @@ export const ClinicCard = ({
 
                 {/* Services Offered list — fills remaining space, vertically centered */}
                 <div className="flex-1 flex flex-col justify-center pt-2 border-t border-border/30">
-                  <div className="flex items-center justify-center gap-1.5 mb-2">
+                  <div className="flex items-center gap-1.5 mb-2">
                     <Star className="h-4 w-4 text-foreground" />
                     <p className="text-sm text-foreground font-bold">{t("clinicCard.servicesOffered")}</p>
                   </div>
