@@ -400,7 +400,7 @@ export const ClinicCard = ({
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
               <span className="text-[15px] font-bold text-primary leading-none">{name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}</span>
             </div>
-            <h3 className="text-base sm:text-lg font-semibold group-hover:text-primary transition-colors truncate">{name}</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-primary transition-colors truncate">{name}</h3>
             <Badge variant="secondary" className="text-xs font-medium px-1.5 py-0 h-[20px] shrink-0">
               {type}
             </Badge>
