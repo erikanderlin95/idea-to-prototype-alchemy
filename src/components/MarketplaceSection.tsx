@@ -143,7 +143,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
 
           <SearchFilters defaultCategory={defaultCategory} onCategoryChange={handleCategoryChange} />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-[1cm] mt-8 lg:max-w-[calc(1080px+2cm)] lg:mx-auto">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-[1cm] mt-8 md:max-w-[calc(1080px+2cm)] md:mx-auto">
             {filteredClinics.map((clinic, index) => (
               <ClinicCard key={clinic.id || index} {...clinic} />
             ))}
