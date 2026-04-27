@@ -603,7 +603,7 @@ export const ClinicCard = ({
               {/* Join Queue button — shown when clinic has digital queue */}
               {hasDigitalQueue && (
                 <Button 
-                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-[#0e7490] h-10 hover:scale-[1.02] transition-transform" 
+                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-emerald-600 h-10 hover:scale-[1.02] transition-transform" 
                   disabled={!isOpen || isJoining}
                   onClick={handleJoinQueue}
                 >
@@ -615,7 +615,7 @@ export const ClinicCard = ({
               {(!hasDigitalQueue || name === "Harmony TCM Centre") && (
                 isNmgAffiliated && isManagedCareType(type) ? (
                   <Button 
-                    className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-[#0e7490] h-10 hover:scale-[1.02] transition-transform" 
+                    className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-emerald-600 h-10 hover:scale-[1.02] transition-transform" 
                     disabled={!isOpen}
                     onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
                   >
@@ -626,8 +626,8 @@ export const ClinicCard = ({
                   <Button 
                     variant={hasDigitalQueue ? "outline" : "default"}
                     className={hasDigitalQueue 
-                      ? "flex-1 font-bold text-sm border-2 border-[#4b5563] text-foreground hover:bg-muted h-10 hover:scale-[1.02] transition-transform"
-                      : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-[#0e7490] h-10 hover:scale-[1.02] transition-transform"
+                      ? "flex-1 font-bold text-sm border-2 border-emerald-600 text-foreground hover:bg-emerald-50 h-10 hover:scale-[1.02] transition-transform"
+                      : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-emerald-600 h-10 hover:scale-[1.02] transition-transform"
                     }
                     disabled={!isOpen}
                     onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
@@ -641,7 +641,7 @@ export const ClinicCard = ({
             {/* View Details — secondary CTA */}
             <Button 
               variant="outline"
-              className="w-full text-sm font-bold h-9 bg-white text-[#1d4ed8] border-2 border-[#1d4ed8] hover:bg-[#1d4ed8]/10 hover:border-[#1d4ed8]"
+              className="w-full text-sm font-bold h-9 bg-white text-emerald-700 border-2 border-emerald-600 hover:bg-emerald-50 hover:border-emerald-700"
               onClick={(e) => { e.stopPropagation(); id && navigate(`/clinic/${id}`); }}
             >
               {t("clinicCard.viewDetails")}
@@ -649,7 +649,7 @@ export const ClinicCard = ({
             {isNmgAffiliated && !isManagedCareType(type) && (
               <Button
                 variant="outline"
-                className="w-full border border-primary/30 text-primary hover:bg-primary/10 font-semibold h-10 text-sm"
+                className="w-full border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-semibold h-10 text-sm"
                 onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
               >
                 <Shield className="mr-1.5 h-3.5 w-3.5" />
