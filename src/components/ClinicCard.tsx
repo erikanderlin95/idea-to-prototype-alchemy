@@ -400,7 +400,7 @@ export const ClinicCard = ({
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
               <span className="text-[15px] font-bold text-primary leading-none">{name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}</span>
             </div>
-            <h3 className="text-base sm:text-lg font-semibold group-hover:text-primary transition-colors truncate">{name}</h3>
+            <h3 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-primary transition-colors truncate">{name}</h3>
             <Badge variant="secondary" className="text-xs font-medium px-1.5 py-0 h-[20px] shrink-0">
               {type}
             </Badge>
@@ -427,9 +427,9 @@ export const ClinicCard = ({
         </div>
 
         {/* Row 2: Address */}
-        <div className="flex items-center gap-1 text-sm text-muted-foreground -mt-0.5">
-          <MapPin className="h-3 w-3 flex-shrink-0" />
-          <span className="line-clamp-1">{address}</span>
+        <div className="flex items-center gap-1 text-[15px] text-muted-foreground -mt-0.5">
+          <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
+          <span className="line-clamp-1 font-medium">{address}</span>
         </div>
         </div>
 
@@ -548,23 +548,23 @@ export const ClinicCard = ({
           <div className={`flex flex-col justify-between gap-1.5 ${hasDigitalQueue ? 'flex-1' : ''}`}>
             <div className={`flex flex-col gap-1.5 ${hasDigitalQueue ? 'flex-1' : ''}`}>
             {hasDigitalQueue && (
-              <div className="flex-1 p-2.5 rounded border"
+              <div className="flex-1 flex flex-col gap-2 p-2.5 rounded border"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
                   borderColor: 'hsl(var(--ai-purple)/0.2)'
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                 <div className={`flex items-center gap-2.5 ${type !== "GP" && type !== "TCM" ? "mb-2.5" : ""}`}>
-                   <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20">
+                 <div className="flex items-center gap-2.5">
+                   <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20 shrink-0">
                      <Users className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
                    </div>
-                    <p className="text-base font-bold text-foreground">{t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
+                    <p className="text-[15px] font-bold text-foreground">{t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
                  </div>
-                
+
                 {type !== "GP" && type !== "TCM" && (
                 <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
-                  <label className="text-sm font-medium text-foreground">{t("clinicCard.visitType")}</label>
+                  <label className="text-sm font-semibold text-foreground">{t("clinicCard.visitType")}</label>
                   <Select value={visitType} onValueChange={setVisitType}>
                     <SelectTrigger className="w-full h-9 text-sm">
                       <SelectValue />
@@ -579,6 +579,20 @@ export const ClinicCard = ({
                   </Select>
                 </div>
                 )}
+
+                {/* Services Offered list — fills remaining space, matches non-digital-queue cards */}
+                <div className="flex-1 flex flex-col pt-1 border-t border-border/30">
+                  <div className="flex items-center gap-1.5 mb-1.5">
+                    <Star className="h-3.5 w-3.5 text-foreground" />
+                    <p className="text-[13px] text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
+                  </div>
+                  <ul className="grid grid-cols-2 gap-x-2 gap-y-0.5 text-[13px] text-foreground/90 list-disc pl-4">
+                    <li>General Consultation</li>
+                    <li>Health Screening</li>
+                    <li>Vaccination</li>
+                    <li>Chronic Care</li>
+                  </ul>
+                </div>
               </div>
             )}
             </div>
@@ -624,10 +638,10 @@ export const ClinicCard = ({
                 )
               )}
             </div>
-            {/* View Details — secondary action */}
+            {/* View Details — secondary CTA */}
             <Button 
               variant="outline"
-              className="w-full text-xs text-foreground font-semibold h-8 bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200/60 hover:from-sky-100 hover:to-blue-100 hover:border-sky-300/60"
+              className="w-full text-sm font-bold h-9 bg-white text-[#1d4ed8] border-2 border-[#1d4ed8] hover:bg-[#1d4ed8]/10 hover:border-[#1d4ed8]"
               onClick={(e) => { e.stopPropagation(); id && navigate(`/clinic/${id}`); }}
             >
               {t("clinicCard.viewDetails")}
