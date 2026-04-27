@@ -376,6 +376,13 @@ export const ClinicCard = ({
     setShowBookingConfirm(false);
   };
 
+  const clinicNameSizeClass =
+    name.length > 32
+      ? "text-base sm:text-[17px] md:text-lg"
+      : name.length > 24
+        ? "text-[17px] sm:text-lg md:text-[19px]"
+        : "text-lg sm:text-xl md:text-xl";
+
   const resetBookingLead = () => {
     setLeadName("");
     setLeadVisitType("");
@@ -400,7 +407,7 @@ export const ClinicCard = ({
             <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
               <span className="text-[15px] font-bold text-primary leading-none">{name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}</span>
             </div>
-            <h3 className="text-base sm:text-[17px] md:text-lg font-bold text-foreground group-hover:text-primary transition-colors whitespace-nowrap leading-tight min-w-0">{name}</h3>
+            <h3 className={`${clinicNameSizeClass} font-bold text-foreground group-hover:text-primary transition-colors whitespace-nowrap leading-tight min-w-0`}>{name}</h3>
           </div>
           <div className="flex items-center gap-0.5 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded shrink-0">
             <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
