@@ -395,13 +395,13 @@ export const ClinicCard = ({
         {/* === TOP SECTION (fixed) === */}
         <div className="space-y-1">
         {/* Row 1: Name + type + status + rating */}
-        <div className="flex items-start justify-between gap-1.5">
+        <div className="flex items-start justify-between gap-2 md:gap-1.5">
           <div className="flex items-center gap-2 flex-wrap flex-1 min-w-0">
-            <div className="flex items-center gap-2 min-w-0 flex-shrink-0">
+            <div className="flex items-center gap-2 min-w-0 flex-1">
               <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
                 <span className="text-[15px] font-bold text-primary leading-none">{name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}</span>
               </div>
-              <h3 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-primary transition-colors truncate">{name}</h3>
+              <h3 className="min-w-0 flex-1 text-lg sm:text-xl md:text-lg font-bold text-foreground group-hover:text-primary transition-colors truncate">{name}</h3>
             </div>
             <Badge variant="secondary" className="text-xs font-medium px-1.5 py-0 h-[20px] shrink-0">
               {type}
@@ -422,9 +422,9 @@ export const ClinicCard = ({
               </Badge>
             )}
           </div>
-          <div className="flex items-center gap-0.5 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded shrink-0">
-            <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-            <span className="text-[13px] font-bold">{rating}</span>
+          <div className="flex items-center gap-0.5 bg-amber-50 dark:bg-amber-950/20 px-1.5 md:px-1 py-0.5 rounded shrink-0">
+            <Star className="h-3 w-3 md:h-2.5 md:w-2.5 fill-amber-400 text-amber-400" />
+            <span className="text-[13px] md:text-[12px] font-bold leading-none">{rating}</span>
           </div>
         </div>
 
@@ -502,7 +502,7 @@ export const ClinicCard = ({
                 <Star className="h-4 w-4 text-foreground" />
                 <p className="text-sm text-foreground font-bold">{t("clinicCard.servicesOffered")}</p>
               </div>
-              <ul className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-[14px] text-foreground/90 list-disc pl-5">
+              <ul className="grid grid-cols-2 md:grid-cols-1 gap-x-3 gap-y-1 md:gap-y-0.5 text-[14px] md:text-[13px] text-foreground/90 list-disc pl-5 md:pl-4 marker:text-foreground/70">
                 <li>Massage Therapy</li>
                 <li>Acupuncture</li>
                 <li>Aromatherapy</li>
@@ -603,7 +603,7 @@ export const ClinicCard = ({
                     <Star className="h-4 w-4 text-foreground" />
                     <p className="text-sm text-foreground font-bold">{t("clinicCard.servicesOffered")}</p>
                   </div>
-                  <ul className="grid grid-cols-2 gap-x-3 gap-y-1 text-[14px] text-foreground/90 list-disc pl-5">
+                  <ul className="grid grid-cols-2 md:grid-cols-1 gap-x-3 gap-y-1 md:gap-y-0.5 text-[14px] md:text-[13px] text-foreground/90 list-disc pl-5 md:pl-4 marker:text-foreground/70">
                     <li>General Consultation</li>
                     <li>Health Screening</li>
                     <li>Vaccination</li>
