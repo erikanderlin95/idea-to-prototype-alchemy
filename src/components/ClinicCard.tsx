@@ -580,13 +580,13 @@ export const ClinicCard = ({
                 </div>
                 )}
 
-                {/* Services Offered list — fills remaining space, matches non-digital-queue cards */}
-                <div className="flex-1 flex flex-col pt-1 border-t border-border/30">
-                  <div className="flex items-center gap-1.5 mb-1.5">
-                    <Star className="h-3.5 w-3.5 text-foreground" />
-                    <p className="text-[13px] text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
+                {/* Services Offered list — fills remaining space, vertically centered */}
+                <div className="flex-1 flex flex-col justify-center pt-2 border-t border-border/30">
+                  <div className="flex items-center justify-center gap-1.5 mb-2">
+                    <Star className="h-4 w-4 text-foreground" />
+                    <p className="text-sm text-foreground font-bold">{t("clinicCard.servicesOffered")}</p>
                   </div>
-                  <ul className="grid grid-cols-2 gap-x-2 gap-y-0.5 text-[13px] text-foreground/90 list-disc pl-4">
+                  <ul className="grid grid-cols-2 gap-x-3 gap-y-1 text-[14px] text-foreground/90 list-disc pl-5">
                     <li>General Consultation</li>
                     <li>Health Screening</li>
                     <li>Vaccination</li>
