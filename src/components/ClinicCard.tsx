@@ -545,8 +545,8 @@ export const ClinicCard = ({
             </div>
           </div>
         ) : (
-          <div className="flex-1 flex flex-col justify-between gap-1.5">
-            <div className="flex-1 flex flex-col gap-1.5">
+          <div className={`flex flex-col justify-between gap-1.5 ${hasDigitalQueue ? 'flex-1' : ''}`}>
+            <div className={`flex flex-col gap-1.5 ${hasDigitalQueue ? 'flex-1' : ''}`}>
             {hasDigitalQueue && (
               <div className="flex-1 p-2.5 rounded border"
                 style={{ 
