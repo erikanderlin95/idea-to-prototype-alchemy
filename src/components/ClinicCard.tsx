@@ -641,7 +641,7 @@ export const ClinicCard = ({
             {/* View Details — secondary CTA */}
             <Button 
               variant="outline"
-              className="w-full text-sm font-bold h-9 bg-white text-[#1d4ed8] border-2 border-[#1d4ed8] hover:bg-[#1d4ed8]/10 hover:border-[#1d4ed8]"
+              className="w-full text-sm font-bold h-9 bg-white text-emerald-700 border-2 border-emerald-600 hover:bg-emerald-50 hover:border-emerald-700"
               onClick={(e) => { e.stopPropagation(); id && navigate(`/clinic/${id}`); }}
             >
               {t("clinicCard.viewDetails")}
