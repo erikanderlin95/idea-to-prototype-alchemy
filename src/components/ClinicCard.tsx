@@ -475,19 +475,40 @@ export const ClinicCard = ({
           )
         )}
         {!hasDigitalQueue && (
-          <div className="flex items-center gap-2 py-1 px-2 rounded border"
-            style={{ 
-              background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
-              borderColor: 'hsl(var(--ai-cyan)/0.2)'
-            }}
-          >
-            <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
-              <Calendar className="h-3 w-3 text-primary" />
+          <>
+            <div className="flex items-center gap-2 py-1 px-2 rounded border"
+              style={{ 
+                background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
+                borderColor: 'hsl(var(--ai-cyan)/0.2)'
+              }}
+            >
+              <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
+                <Calendar className="h-3 w-3 text-primary" />
+              </div>
+              <div>
+                <p className="text-base font-bold text-foreground leading-tight">Appointment Basis</p>
+              </div>
             </div>
-            <div>
-              <p className="text-base font-bold text-foreground leading-tight">Appointment Basis</p>
+            <div className="flex-1 flex flex-col justify-center py-2.5 px-2.5 rounded border"
+              style={{ 
+                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.05))',
+                borderColor: 'hsl(var(--ai-purple)/0.2)'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center gap-1.5 mb-2.5">
+                <Star className="h-4 w-4 text-foreground" />
+                <p className="text-sm text-foreground font-bold">{t("clinicCard.servicesOffered")}</p>
+              </div>
+              <ul className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-[14px] text-foreground/90 list-disc pl-5">
+                <li>Massage Therapy</li>
+                <li>Acupuncture</li>
+                <li>Aromatherapy</li>
+                <li>Reflexology</li>
+                <li>Cupping Therapy</li>
+              </ul>
             </div>
-          </div>
+          </>
         )}
 
         {myQueueEntry ? (
