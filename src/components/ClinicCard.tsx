@@ -394,15 +394,22 @@ export const ClinicCard = ({
       <Card className="group flex flex-col px-3 py-3 sm:px-3.5 sm:py-3 hover:shadow-lg transition-all duration-300 border border-emerald-300/70 hover:border-emerald-400 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue w-full max-w-[360px] md:max-w-[420px] mx-auto h-full min-h-[420px]" onClick={() => id && navigate(`/clinic/${id}`)}>
         {/* === TOP SECTION (fixed) === */}
         <div className="space-y-1">
-        {/* Row 1: Name + type + status + rating */}
-        <div className="flex items-start justify-between gap-1.5">
-          <div className="flex items-center gap-2 flex-wrap flex-1 min-w-0">
-            <div className="flex items-center gap-2 min-w-0 flex-shrink-0">
-              <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
-                <span className="text-[15px] font-bold text-primary leading-none">{name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}</span>
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-foreground group-hover:text-primary transition-colors truncate">{name}</h3>
+        {/* Row 1: Name + rating */}
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex items-center gap-2 flex-1 min-w-0">
+            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-primary/10 border border-primary/20 flex items-center justify-center shrink-0">
+              <span className="text-[15px] font-bold text-primary leading-none">{name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase()}</span>
             </div>
+            <h3 className="text-[15px] sm:text-base md:text-[17px] font-bold text-foreground group-hover:text-primary transition-colors whitespace-nowrap leading-tight min-w-0">{name}</h3>
+          </div>
+          <div className="flex items-center gap-0.5 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded shrink-0">
+            <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+            <span className="text-[13px] font-bold">{rating}</span>
+          </div>
+        </div>
+
+        {/* Row 1b: Type + status badges */}
+        <div className="flex items-center gap-1.5 flex-wrap">
             <Badge variant="secondary" className="text-xs font-medium px-1.5 py-0 h-[20px] shrink-0">
               {type}
             </Badge>
@@ -421,11 +428,6 @@ export const ClinicCard = ({
                 Managed Care
               </Badge>
             )}
-          </div>
-          <div className="flex items-center gap-0.5 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded shrink-0">
-            <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-            <span className="text-[13px] font-bold">{rating}</span>
-          </div>
         </div>
 
         {/* Row 2: Address */}
