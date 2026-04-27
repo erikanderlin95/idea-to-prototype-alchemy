@@ -391,7 +391,7 @@ export const ClinicCard = ({
 
   return (
     <>
-      <Card className="group flex flex-col px-3 py-3 sm:px-3.5 sm:py-3 hover:shadow-lg transition-all duration-300 border border-border/40 hover:border-primary/30 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue w-full max-w-[360px] mx-auto h-full min-h-[420px] lg:min-h-0 lg:h-auto lg:aspect-square" onClick={() => id && navigate(`/clinic/${id}`)}>
+      <Card className="group flex flex-col px-3 py-3 sm:px-3.5 sm:py-3 hover:shadow-lg transition-all duration-300 border-2 border-[#4b5563] hover:border-primary/60 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue w-full max-w-[360px] mx-auto h-full min-h-[420px] lg:min-h-0 lg:h-auto lg:aspect-square" onClick={() => id && navigate(`/clinic/${id}`)}>
         {/* === TOP SECTION (fixed) === */}
         <div className="space-y-1">
         {/* Row 1: Name + type + status + rating */}
@@ -469,7 +469,7 @@ export const ClinicCard = ({
                 <Users className="h-3 w-3 text-primary" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground leading-tight">Live Queue</p>
+                <p className="text-base font-bold text-foreground leading-tight">Live Queue</p>
               </div>
             </div>
           )
@@ -559,7 +559,7 @@ export const ClinicCard = ({
                    <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20 shrink-0">
                      <Users className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
                    </div>
-                    <p className="text-[15px] font-bold text-foreground">{t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
+                    <p className="text-base sm:text-[17px] font-bold text-foreground">{t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
                  </div>
 
                 {type !== "GP" && type !== "TCM" && (
