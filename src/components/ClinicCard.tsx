@@ -475,18 +475,18 @@ export const ClinicCard = ({
           )
         )}
         {!hasDigitalQueue && (
-          <div className="py-2 px-2.5 rounded border"
+          <div className="flex-1 flex flex-col justify-center py-2.5 px-2.5 rounded border"
             style={{ 
               background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.08), hsl(var(--ai-cyan)/0.05))',
               borderColor: 'hsl(var(--ai-purple)/0.2)'
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center gap-1.5 mb-1.5">
+            <div className="flex items-center gap-1.5 mb-2">
               <Star className="h-3.5 w-3.5 text-foreground" />
               <p className="text-[13px] text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
             </div>
-            <ul className="grid grid-cols-2 gap-x-2 gap-y-0.5 text-[13px] text-foreground/90 list-disc pl-4">
+            <ul className="grid grid-cols-2 gap-x-2 gap-y-1 text-[13px] text-foreground/90 list-disc pl-4">
               <li>Massage Therapy</li>
               <li>Acupuncture</li>
               <li>Aromatherapy</li>
