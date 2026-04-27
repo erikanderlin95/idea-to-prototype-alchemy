@@ -482,11 +482,11 @@ export const ClinicCard = ({
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center gap-1.5 mb-2">
-              <Star className="h-3.5 w-3.5 text-foreground" />
-              <p className="text-[13px] text-foreground font-semibold">{t("clinicCard.servicesOffered")}</p>
+            <div className="flex items-center justify-center gap-1.5 mb-2.5">
+              <Star className="h-4 w-4 text-foreground" />
+              <p className="text-sm text-foreground font-bold">{t("clinicCard.servicesOffered")}</p>
             </div>
-            <ul className="grid grid-cols-2 gap-x-2 gap-y-1 text-[13px] text-foreground/90 list-disc pl-4">
+            <ul className="grid grid-cols-2 gap-x-3 gap-y-1.5 text-[14px] text-foreground/90 list-disc pl-5">
               <li>Massage Therapy</li>
               <li>Acupuncture</li>
               <li>Aromatherapy</li>
