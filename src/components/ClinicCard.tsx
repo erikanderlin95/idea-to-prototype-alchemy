@@ -498,8 +498,8 @@ export const ClinicCard = ({
 
         {myQueueEntry ? (
           <div className="flex-1 flex flex-col justify-between gap-1.5" onClick={(e) => e.stopPropagation()}>
-            <div className="flex-1 flex flex-col gap-1.5">
-              <div className="flex-1 flex items-center justify-between px-2.5 py-2.5 rounded-lg border-2"
+            <div className="flex flex-col gap-1.5">
+              <div className="flex items-center justify-between px-2.5 py-2 rounded-lg border-2"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.12), hsl(var(--ai-blue)/0.1))',
                   borderColor: 'hsl(var(--ai-purple)/0.3)'
@@ -509,16 +509,16 @@ export const ClinicCard = ({
                   <Users className="h-4 w-4 text-primary" />
                   <span className="text-sm font-semibold text-foreground">People Ahead</span>
                 </div>
-                <span className="text-3xl font-bold tabular-nums text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
+                <span className="text-2xl font-bold tabular-nums text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
               </div>
 
               {myQueueEntry.check_in_code && (
-                <div className="flex-1 flex items-center justify-between px-2.5 py-2 bg-muted/50 rounded-lg border border-border/30">
+                <div className="flex items-center justify-between px-2.5 py-2 bg-muted/50 rounded-lg border border-border/30">
                   <div className="flex items-center gap-1.5">
                     <Shield className="h-3.5 w-3.5 text-primary" />
                     <span className="text-sm font-medium text-muted-foreground">Check-in Code</span>
                   </div>
-                  <span className="text-xl font-mono font-bold tracking-[0.15em] text-primary">{myQueueEntry.check_in_code}</span>
+                  <span className="text-lg font-mono font-bold tracking-[0.15em] text-primary">{myQueueEntry.check_in_code}</span>
                 </div>
               )}
             </div>
