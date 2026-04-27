@@ -378,10 +378,10 @@ export const ClinicCard = ({
 
   const clinicNameSizeClass =
     name.length > 32
-      ? "text-base sm:text-[17px] md:text-lg"
+      ? "text-base sm:text-[17px] md:text-[15px]"
       : name.length > 24
-        ? "text-[17px] sm:text-lg md:text-[19px]"
-        : "text-lg sm:text-xl md:text-xl";
+        ? "text-[17px] sm:text-lg md:text-base"
+        : "text-lg sm:text-xl md:text-[17px]";
 
   const resetBookingLead = () => {
     setLeadName("");
