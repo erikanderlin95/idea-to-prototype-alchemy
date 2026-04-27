@@ -646,16 +646,6 @@ export const ClinicCard = ({
             >
               {t("clinicCard.viewDetails")}
             </Button>
-            {isNmgAffiliated && !isManagedCareType(type) && (
-              <Button
-                variant="outline"
-                className="w-full border-2 border-emerald-600 text-emerald-700 hover:bg-emerald-50 font-semibold h-10 text-sm"
-                onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
-              >
-                <Shield className="mr-1.5 h-3.5 w-3.5" />
-                Request Managed Care Support
-              </Button>
-            )}
             </div>
           </div>
         )}
