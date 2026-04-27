@@ -469,7 +469,7 @@ export const ClinicCard = ({
                 <Users className="h-3 w-3 text-primary" />
               </div>
               <div>
-                <p className="text-sm font-semibold text-foreground leading-tight">Live Queue</p>
+                <p className="text-base font-bold text-foreground leading-tight">Live Queue</p>
               </div>
             </div>
           )
