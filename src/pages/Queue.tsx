@@ -45,6 +45,7 @@ export default function Queue() {
   const [showQueueShiftAlert, setShowQueueShiftAlert] = useState(false);
   const [checkInLoading, setCheckInLoading] = useState(false);
   const [now, setNow] = useState(() => Date.now());
+  const [showLeaveDialog, setShowLeaveDialog] = useState(false);
 
   useEffect(() => {
     if (!myQueueEntry || myQueueEntry.status !== "waiting") return;
