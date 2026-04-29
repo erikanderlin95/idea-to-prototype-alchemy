@@ -685,7 +685,7 @@ export const ClinicCard = ({
     </Card>
 
     {/* Queue Join with Disclaimer + Checkbox */}
-    <Dialog open={showDisclaimer} onOpenChange={(open) => { setShowDisclaimer(open); if (!open) { setJoinError(""); setDisclaimerAgreed(false); } }}>
+    <Dialog open={showDisclaimer} onOpenChange={(open) => { setShowDisclaimer(open); if (!open) { setJoinError(""); setDisclaimerAgreed(false); setPdpaConsent(false); } }}>
       <DialogContent className="max-w-sm">
         <DialogHeader>
           <DialogTitle className="text-base text-foreground">Join Queue Remotely</DialogTitle>
