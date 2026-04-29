@@ -580,6 +580,48 @@ export type Database = {
           },
         ]
       }
+      queue_leave_logs: {
+        Row: {
+          clinic_id: string | null
+          clinic_name: string | null
+          created_at: string
+          id: string
+          mobile_number: string | null
+          other_reason: string | null
+          patient_name: string | null
+          queue_entry_id: string | null
+          queue_number: number | null
+          reason: string
+          status: string
+        }
+        Insert: {
+          clinic_id?: string | null
+          clinic_name?: string | null
+          created_at?: string
+          id?: string
+          mobile_number?: string | null
+          other_reason?: string | null
+          patient_name?: string | null
+          queue_entry_id?: string | null
+          queue_number?: number | null
+          reason: string
+          status?: string
+        }
+        Update: {
+          clinic_id?: string | null
+          clinic_name?: string | null
+          created_at?: string
+          id?: string
+          mobile_number?: string | null
+          other_reason?: string | null
+          patient_name?: string | null
+          queue_entry_id?: string | null
+          queue_number?: number | null
+          reason?: string
+          status?: string
+        }
+        Relationships: []
+      }
       queue_notifications: {
         Row: {
           clinic_id: string
