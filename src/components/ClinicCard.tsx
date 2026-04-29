@@ -807,7 +807,7 @@ export const ClinicCard = ({
     </Dialog>
 
     {/* Booking Lead Capture Dialog — Full Intake */}
-    <Dialog open={showBookingLead} onOpenChange={(open) => { setShowBookingLead(open); if (!open) setLeadDisclaimerAgreed(false); }}>
+    <Dialog open={showBookingLead} onOpenChange={(open) => { setShowBookingLead(open); if (!open) { setLeadDisclaimerAgreed(false); setLeadPdpaConsent(false); } }}>
       <DialogContent className="max-w-sm max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-base">Continue to Clinic Booking</DialogTitle>
