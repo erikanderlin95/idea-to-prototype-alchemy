@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getBookingRoute, isManagedCareType, NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
+import { LeaveQueueDialog } from "@/components/LeaveQueueDialog";
 
 const sanitizeMobileNumber = (mobile: string): string => {
   const hasPlus = mobile.trim().startsWith('+');
