@@ -237,6 +237,7 @@ export const ClinicCard = ({
     if (!id) return;
     setShowDisclaimer(true);
     setDisclaimerAgreed(false);
+    setPdpaConsent(false);
     setJoinError("");
   };
 
