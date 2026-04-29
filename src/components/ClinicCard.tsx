@@ -1072,5 +1072,17 @@ export const ClinicCard = ({
         )}
       </DialogContent>
     </Dialog>
+
+    <LeaveQueueDialog
+      open={showLeaveDialog}
+      onOpenChange={setShowLeaveDialog}
+      onConfirm={performCancelQueue}
+      patientName={myQueueEntry?.patient_name}
+      mobileNumber={myQueueEntry?.mobile_number || (id ? localStorage.getItem(`queue_mobile_${id}`) || undefined : undefined)}
+      clinicId={id}
+      clinicName={name}
+      queueEntryId={myQueueEntry?.id}
+      queueNumber={myQueueEntry?.queue_number}
+    />
   </>);
 };
