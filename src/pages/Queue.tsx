@@ -695,6 +695,18 @@ export default function Queue() {
         </DialogContent>
       </Dialog>
 
+      <LeaveQueueDialog
+        open={showLeaveDialog}
+        onOpenChange={setShowLeaveDialog}
+        onConfirm={performCancelQueue}
+        patientName={myQueueEntry?.patient_name}
+        mobileNumber={myQueueEntry?.mobile_number || mobileNumber || undefined}
+        clinicId={clinicId || undefined}
+        clinicName={clinic?.name}
+        queueEntryId={myQueueEntry?.id}
+        queueNumber={myQueueEntry?.queue_number}
+      />
+
       <Footer />
     </div>
   );
