@@ -815,8 +815,8 @@ export const ClinicCard = ({
         </DialogHeader>
         <div className="space-y-3">
           <div>
-            <Label htmlFor="lead-name" className="text-xs font-medium">Patient Name *</Label>
-            <Input id="lead-name" type="text" value={leadName} onChange={(e) => setLeadName(e.target.value)} placeholder="Your full name" className="mt-1 h-9 text-sm" />
+            <Label htmlFor="lead-name" className="text-xs font-medium">Patient Name <span className="text-muted-foreground font-normal">(as per NRIC)</span> *</Label>
+            <Input id="lead-name" type="text" value={leadName} onChange={(e) => setLeadName(e.target.value)} placeholder="Enter Patient Full Name" className="mt-1 h-9 text-sm" />
           </div>
           <div>
             <Label htmlFor="lead-mobile" className="text-xs font-medium">Mobile Number *</Label>
