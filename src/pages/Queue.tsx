@@ -5,6 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useQueueNotifications } from "@/hooks/useQueueNotifications";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { StaffNotifications } from "@/components/StaffNotifications";
+import { LeaveQueueDialog } from "@/components/LeaveQueueDialog";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
