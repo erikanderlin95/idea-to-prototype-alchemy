@@ -23,8 +23,8 @@ const Index = () => {
       <main>
         <Hero />
         <Features />
-        <FeaturedConsultants />
         <MarketplaceSection defaultCategory={defaultCategory} />
+        <FeaturedConsultants />
         <ClinicConversion />
         <WellnessTalks />
         <ContinuityServices />
