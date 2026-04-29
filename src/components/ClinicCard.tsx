@@ -69,6 +69,7 @@ export const ClinicCard = ({
   const [newQueueNumber, setNewQueueNumber] = useState<number | null>(null);
   const [newCheckInCode, setNewCheckInCode] = useState("");
   const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
+  const [pdpaConsent, setPdpaConsent] = useState(false);
   const [showManagedCareModal, setShowManagedCareModal] = useState(false);
   const [mcName, setMcName] = useState("");
   const [mcPhone, setMcPhone] = useState("");
