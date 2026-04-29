@@ -93,6 +93,7 @@ export const ClinicCard = ({
   const [leadPrefTime, setLeadPrefTime] = useState("");
   const [leadNotes, setLeadNotes] = useState("");
   const [leadDisclaimerAgreed, setLeadDisclaimerAgreed] = useState(false);
+  const [leadPdpaConsent, setLeadPdpaConsent] = useState(false);
   const [leadVisitType, setLeadVisitType] = useState("");
   const [leadSubmitting, setLeadSubmitting] = useState(false);
   const [bookingCaseId, setBookingCaseId] = useState("");
@@ -331,6 +332,10 @@ export const ClinicCard = ({
       toast.error("Please agree to the disclaimer to continue");
       return;
     }
+    if (!leadPdpaConsent) {
+      toast.error("Please provide consent to proceed");
+      return;
+    }
     setLeadSubmitting(true);
     try {
       const sanitizedMobile = sanitizeMobileNumber(leadMobile);
@@ -404,6 +409,7 @@ export const ClinicCard = ({
     setLeadPrefTime("");
     setLeadNotes("");
     setLeadDisclaimerAgreed(false);
+    setLeadPdpaConsent(false);
     setBookingCaseId("");
     setBookingRedirectUrl("");
     setBookingRedirectType("");
@@ -802,7 +808,7 @@ export const ClinicCard = ({
     </Dialog>
 
     {/* Booking Lead Capture Dialog — Full Intake */}
-    <Dialog open={showBookingLead} onOpenChange={(open) => { setShowBookingLead(open); if (!open) setLeadDisclaimerAgreed(false); }}>
+    <Dialog open={showBookingLead} onOpenChange={(open) => { setShowBookingLead(open); if (!open) { setLeadDisclaimerAgreed(false); setLeadPdpaConsent(false); } }}>
       <DialogContent className="max-w-sm max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle className="text-base">Continue to Clinic Booking</DialogTitle>
@@ -810,8 +816,8 @@ export const ClinicCard = ({
         </DialogHeader>
         <div className="space-y-3">
           <div>
-            <Label htmlFor="lead-name" className="text-xs font-medium">Patient Name *</Label>
-            <Input id="lead-name" type="text" value={leadName} onChange={(e) => setLeadName(e.target.value)} placeholder="Your full name" className="mt-1 h-9 text-sm" />
+            <Label htmlFor="lead-name" className="text-xs font-medium">Patient Name <span className="text-muted-foreground font-normal">(as per NRIC)</span> *</Label>
+            <Input id="lead-name" type="text" value={leadName} onChange={(e) => setLeadName(e.target.value)} placeholder="Enter Patient Full Name" className="mt-1 h-9 text-sm" />
           </div>
           <div>
             <Label htmlFor="lead-mobile" className="text-xs font-medium">Mobile Number *</Label>
@@ -841,10 +847,10 @@ export const ClinicCard = ({
           <div className="p-2.5 rounded-md bg-muted/50 border border-border/40 space-y-1.5">
             <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide">Please Note</p>
             <ul className="space-y-1 text-[11px] text-muted-foreground list-disc pl-3.5">
-              <li>Submitting this form does not confirm your appointment.</li>
-              <li>The clinic will confirm availability directly with you.</li>
-              <li>Appointment slots depend on the clinic's own system.</li>
-              <li>ClynicQ does not guarantee booking confirmation.</li>
+              <li>This submission sends your request to the clinic for booking</li>
+              <li>The clinic will contact you to confirm your appointment</li>
+              <li>Appointment timing and availability are managed by the clinic</li>
+              <li>Please ensure your contact details are accurate and reachable</li>
             </ul>
           </div>
 
@@ -859,13 +865,34 @@ export const ClinicCard = ({
               I understand and agree
             </Label>
           </div>
+
+          {/* PDPA Consent */}
+          <div className="space-y-1.5">
+            <div className="flex items-start gap-2" onClick={(e) => e.stopPropagation()}>
+              <Checkbox
+                id="lead-pdpa-consent"
+                checked={leadPdpaConsent}
+                onCheckedChange={(checked) => setLeadPdpaConsent(checked === true)}
+                className="mt-0.5"
+              />
+              <Label htmlFor="lead-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-tight">
+                I consent to the collection, use and disclosure of my information by the clinic for booking coordination and patient care, and to be contacted for this request.
+              </Label>
+            </div>
+            <p className="text-[10px] text-muted-foreground leading-tight">
+              Information is submitted via ClynicQ and shared with the clinic for this purpose.
+            </p>
+            <p className="text-[10px] text-muted-foreground leading-tight">
+              This is not for medical emergencies. Please visit A&amp;E or call emergency services if urgent.
+            </p>
+          </div>
         </div>
         <DialogFooter className="gap-2 pt-1">
           <Button variant="outline" size="sm" onClick={() => setShowBookingLead(false)}>Cancel</Button>
           <Button 
             size="sm" 
             onClick={handleSaveBookingLead} 
-            disabled={leadSubmitting || !leadDisclaimerAgreed}
+            disabled={leadSubmitting || !leadDisclaimerAgreed || !leadPdpaConsent}
             className="bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold"
           >
             {leadSubmitting ? "Processing..." : "Proceed to Booking"}
