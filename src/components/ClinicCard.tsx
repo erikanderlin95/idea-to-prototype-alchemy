@@ -753,6 +753,27 @@ export const ClinicCard = ({
             </Label>
           </div>
 
+          {/* Mandatory PDPA Consent */}
+          <div className="space-y-1.5">
+            <div className="flex items-start gap-2" onClick={(e) => e.stopPropagation()}>
+              <Checkbox
+                id="pdpa-consent"
+                checked={pdpaConsent}
+                onCheckedChange={(checked) => setPdpaConsent(checked === true)}
+                className="mt-0.5"
+              />
+              <Label htmlFor="pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
+                I consent to the collection, use and disclosure of my information by the clinic for queue management and patient care, and to be contacted for my visit.
+              </Label>
+            </div>
+            <p className="text-[10px] text-muted-foreground leading-snug pl-6">
+              Information is submitted via ClynicQ and shared with the clinic for this purpose.
+            </p>
+            <p className="text-[10px] text-muted-foreground leading-snug pl-6">
+              This is not for medical emergencies. Please visit A&amp;E or call emergency services if urgent.
+            </p>
+          </div>
+
           {joinError && (
             <p className="text-xs text-destructive font-medium">{joinError}</p>
           )}
@@ -762,7 +783,7 @@ export const ClinicCard = ({
             <Button 
               size="sm" 
               onClick={handleSecureSpot} 
-              disabled={joinLoading || !disclaimerAgreed}
+              disabled={joinLoading || !disclaimerAgreed || !pdpaConsent}
               className="bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold"
             >
               {joinLoading ? "Joining..." : "Secure My Spot"}
