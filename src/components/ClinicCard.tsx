@@ -732,6 +732,7 @@ export const ClinicCard = ({
             <ul className="space-y-1.5 text-xs text-foreground font-medium list-disc pl-3.5">
               <li>Queue order is managed by clinic staff</li>
               <li>Waiting time and position may change</li>
+              <li>We highly recommend you make your way down when there are 3–4 patients ahead of you to account for travelling time</li>
             </ul>
           </div>
 
