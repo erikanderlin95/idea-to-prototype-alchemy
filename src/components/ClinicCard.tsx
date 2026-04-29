@@ -409,6 +409,7 @@ export const ClinicCard = ({
     setLeadPrefTime("");
     setLeadNotes("");
     setLeadDisclaimerAgreed(false);
+    setLeadPdpaConsent(false);
     setBookingCaseId("");
     setBookingRedirectUrl("");
     setBookingRedirectType("");
