@@ -258,6 +258,10 @@ export const ClinicCard = ({
       setJoinError("Please agree to the disclaimer to continue");
       return;
     }
+    if (!pdpaConsent) {
+      setJoinError("Please provide consent to proceed");
+      return;
+    }
 
     setJoinLoading(true);
     setJoinError("");
