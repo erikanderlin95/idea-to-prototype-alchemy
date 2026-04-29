@@ -696,13 +696,13 @@ export const ClinicCard = ({
 
         <div className="space-y-3">
           <div>
-            <Label htmlFor="q-name" className="text-xs font-medium">Patient Name</Label>
+            <Label htmlFor="q-name" className="text-xs font-medium">Patient Name <span className="text-muted-foreground font-normal">(as per NRIC)</span></Label>
             <Input
               id="q-name"
               type="text"
               value={patientName}
               onChange={(e) => setPatientName(e.target.value)}
-              placeholder="Enter your name"
+              placeholder="Enter Patient Full Name"
               className="mt-1 h-9 text-sm"
             />
           </div>
