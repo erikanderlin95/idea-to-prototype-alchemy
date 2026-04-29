@@ -281,7 +281,12 @@ export default function Queue() {
     setShowPreConsultDialog(true);
   };
 
-  const cancelQueue = async () => {
+  const cancelQueue = () => {
+    if (!myQueueEntry) return;
+    setShowLeaveDialog(true);
+  };
+
+  const performCancelQueue = async () => {
     if (!myQueueEntry) return;
 
     try {
@@ -312,10 +317,10 @@ export default function Queue() {
         localStorage.removeItem(`queue_mobile_${clinicId}`);
       }
 
-      toast.success(t("queue.leaveQueue"));
       setMyQueueEntry(null);
     } catch (error: any) {
       toast.error(error.message || "Failed to cancel queue");
+      throw error;
     }
   };
 
