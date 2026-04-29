@@ -17,6 +17,7 @@ import { toast } from "sonner";
 import { useState, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getBookingRoute, isManagedCareType, NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
+import { LeaveQueueDialog } from "@/components/LeaveQueueDialog";
 
 const sanitizeMobileNumber = (mobile: string): string => {
   const hasPlus = mobile.trim().startsWith('+');
@@ -82,6 +83,7 @@ export const ClinicCard = ({
   const [mcCaseId, setMcCaseId] = useState("");
   const [joinLoading, setJoinLoading] = useState(false);
   const [joinError, setJoinError] = useState("");
+  const [showLeaveDialog, setShowLeaveDialog] = useState(false);
   // Booking lead capture state
   const [showBookingLead, setShowBookingLead] = useState(false);
   const [showBookingConfirm, setShowBookingConfirm] = useState(false);
@@ -184,8 +186,13 @@ export const ClinicCard = ({
     } catch (err) { console.warn("checkQueueStatus exception", err); }
   };
 
-  const handleCancelQueue = async (e: React.MouseEvent) => {
+  const handleCancelQueue = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (!myQueueEntry) return;
+    setShowLeaveDialog(true);
+  };
+
+  const performCancelQueue = async () => {
     if (!myQueueEntry) return;
     setIsLoading(true);
     try {
@@ -201,10 +208,10 @@ export const ClinicCard = ({
         if (error) throw error;
       }
       if (id) localStorage.removeItem(`queue_mobile_${id}`);
-      toast.success(t("clinicCard.leftQueue"));
       setMyQueueEntry(null);
     } catch (error: any) {
       toast.error(error.message || t("clinicCard.failedToLeave"));
+      throw error;
     } finally { setIsLoading(false); }
   };
 
@@ -1065,5 +1072,17 @@ export const ClinicCard = ({
         )}
       </DialogContent>
     </Dialog>
+
+    <LeaveQueueDialog
+      open={showLeaveDialog}
+      onOpenChange={setShowLeaveDialog}
+      onConfirm={performCancelQueue}
+      patientName={myQueueEntry?.patient_name}
+      mobileNumber={myQueueEntry?.mobile_number || (id ? localStorage.getItem(`queue_mobile_${id}`) || undefined : undefined)}
+      clinicId={id}
+      clinicName={name}
+      queueEntryId={myQueueEntry?.id}
+      queueNumber={myQueueEntry?.queue_number}
+    />
   </>);
 };

@@ -5,6 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useQueueNotifications } from "@/hooks/useQueueNotifications";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { StaffNotifications } from "@/components/StaffNotifications";
+import { LeaveQueueDialog } from "@/components/LeaveQueueDialog";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -44,6 +45,7 @@ export default function Queue() {
   const [showQueueShiftAlert, setShowQueueShiftAlert] = useState(false);
   const [checkInLoading, setCheckInLoading] = useState(false);
   const [now, setNow] = useState(() => Date.now());
+  const [showLeaveDialog, setShowLeaveDialog] = useState(false);
 
   useEffect(() => {
     if (!myQueueEntry || myQueueEntry.status !== "waiting") return;
@@ -279,7 +281,12 @@ export default function Queue() {
     setShowPreConsultDialog(true);
   };
 
-  const cancelQueue = async () => {
+  const cancelQueue = () => {
+    if (!myQueueEntry) return;
+    setShowLeaveDialog(true);
+  };
+
+  const performCancelQueue = async () => {
     if (!myQueueEntry) return;
 
     try {
@@ -310,10 +317,10 @@ export default function Queue() {
         localStorage.removeItem(`queue_mobile_${clinicId}`);
       }
 
-      toast.success(t("queue.leaveQueue"));
       setMyQueueEntry(null);
     } catch (error: any) {
       toast.error(error.message || "Failed to cancel queue");
+      throw error;
     }
   };
 
@@ -687,6 +694,18 @@ export default function Queue() {
           </div>
         </DialogContent>
       </Dialog>
+
+      <LeaveQueueDialog
+        open={showLeaveDialog}
+        onOpenChange={setShowLeaveDialog}
+        onConfirm={performCancelQueue}
+        patientName={myQueueEntry?.patient_name}
+        mobileNumber={myQueueEntry?.mobile_number || mobileNumber || undefined}
+        clinicId={clinicId || undefined}
+        clinicName={clinic?.name}
+        queueEntryId={myQueueEntry?.id}
+        queueNumber={myQueueEntry?.queue_number}
+      />
 
       <Footer />
     </div>
