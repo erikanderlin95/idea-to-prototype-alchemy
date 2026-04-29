@@ -82,6 +82,7 @@ export const ClinicCard = ({
   const [mcCaseId, setMcCaseId] = useState("");
   const [joinLoading, setJoinLoading] = useState(false);
   const [joinError, setJoinError] = useState("");
+  const [showLeaveDialog, setShowLeaveDialog] = useState(false);
   // Booking lead capture state
   const [showBookingLead, setShowBookingLead] = useState(false);
   const [showBookingConfirm, setShowBookingConfirm] = useState(false);
