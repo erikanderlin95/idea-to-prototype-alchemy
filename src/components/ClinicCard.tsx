@@ -332,6 +332,10 @@ export const ClinicCard = ({
       toast.error("Please agree to the disclaimer to continue");
       return;
     }
+    if (!leadPdpaConsent) {
+      toast.error("Please provide consent to proceed");
+      return;
+    }
     setLeadSubmitting(true);
     try {
       const sanitizedMobile = sanitizeMobileNumber(leadMobile);
