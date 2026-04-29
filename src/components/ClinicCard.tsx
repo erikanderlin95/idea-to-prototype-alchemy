@@ -93,6 +93,7 @@ export const ClinicCard = ({
   const [leadPrefTime, setLeadPrefTime] = useState("");
   const [leadNotes, setLeadNotes] = useState("");
   const [leadDisclaimerAgreed, setLeadDisclaimerAgreed] = useState(false);
+  const [leadPdpaConsent, setLeadPdpaConsent] = useState(false);
   const [leadVisitType, setLeadVisitType] = useState("");
   const [leadSubmitting, setLeadSubmitting] = useState(false);
   const [bookingCaseId, setBookingCaseId] = useState("");
