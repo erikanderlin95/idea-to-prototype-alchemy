@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Shield, ArrowLeft, CheckCircle2, MessageCircle } from "lucide-react";
 import { NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
@@ -33,12 +34,10 @@ const ManagedCareRequest = () => {
   const [caseId, setCaseId] = useState("");
 
   // Form fields
-  const [concern, setConcern] = useState("");
-  const [location, setLocation] = useState("");
-  const [timing, setTiming] = useState("");
   const [urgency, setUrgency] = useState("flexible");
   const [contactName, setContactName] = useState("");
   const [contactNumber, setContactNumber] = useState("");
+  const [pdpaConsent, setPdpaConsent] = useState(false);
 
   useEffect(() => {
     const fetchClinic = async () => {
@@ -57,12 +56,16 @@ const ManagedCareRequest = () => {
   };
 
   const handleSubmitRequest = async () => {
-    if (!contactName.trim() || !contactNumber.trim() || !concern.trim()) {
-      toast.error("Please fill in Name, Contact Number and Condition/Concern");
+    if (!contactName.trim() || !contactNumber.trim()) {
+      toast.error("Please fill in Name and Contact Number");
       return;
     }
     if (!isValidMobileNumber(contactNumber)) {
       toast.error("Please enter a valid contact number");
+      return;
+    }
+    if (!pdpaConsent) {
+      toast.error("Please provide consent to proceed");
       return;
     }
     setSubmitting(true);
@@ -74,9 +77,6 @@ const ManagedCareRequest = () => {
         clinic_name: clinic?.name || null,
         patient_name: contactName.trim(),
         contact_number: sanitizeMobileNumber(contactNumber),
-        condition_concern: concern.trim(),
-        preferred_location: location.trim() || null,
-        preferred_timing: timing.trim() || null,
         urgency,
         source: "marketplace",
         case_type: "managed_care",
@@ -124,18 +124,6 @@ const ManagedCareRequest = () => {
           {!submitted ? (
             <Card className="p-6 space-y-5">
               <div className="space-y-2">
-                <Label htmlFor="concern">Condition / Concern *</Label>
-                <Input id="concern" value={concern} onChange={(e) => setConcern(e.target.value)} placeholder="e.g. Knee pain, skin rash" required />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="location">Preferred Location</Label>
-                <Input id="location" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. Central, East Singapore" />
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="timing">Preferred Appointment Timing</Label>
-                <Input id="timing" value={timing} onChange={(e) => setTiming(e.target.value)} placeholder="e.g. Weekday mornings, ASAP" />
-              </div>
-              <div className="space-y-2">
                 <Label>Urgency Level *</Label>
                 <RadioGroup value={urgency} onValueChange={setUrgency} className="flex gap-3">
                   <div className="flex items-center space-x-2">
@@ -161,13 +149,28 @@ const ManagedCareRequest = () => {
                 <Input id="contact-number" type="tel" value={contactNumber} onChange={(e) => setContactNumber(e.target.value)} placeholder="e.g. +6591234567" required />
               </div>
 
+              <div className="flex items-start gap-2 pt-1">
+                <Checkbox
+                  id="mc-page-pdpa-consent"
+                  checked={pdpaConsent}
+                  onCheckedChange={(checked) => setPdpaConsent(checked === true)}
+                  className="mt-0.5"
+                />
+                <Label htmlFor="mc-page-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
+                  I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic for my visit. I understand how my data is handled as described in the{" "}
+                  <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary">
+                    Privacy Policy
+                  </a>.
+                </Label>
+              </div>
+
               <div className="border-t pt-4">
                 <p className="text-xs text-muted-foreground mb-4">{NMG_ATTRIBUTION_TAG}</p>
                 <Button
                   size="lg"
                   className="w-full text-lg py-6"
                   onClick={handleSubmitRequest}
-                  disabled={submitting}
+                  disabled={submitting || !pdpaConsent}
                 >
                   <Shield className="mr-2 h-5 w-5" />
                   {submitting ? "Submitting..." : "Submit Request"}

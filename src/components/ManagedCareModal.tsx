@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Shield, CheckCircle2, MessageCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
@@ -45,10 +46,8 @@ export const ManagedCareModal = ({
 }: ManagedCareModalProps) => {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [concern, setConcern] = useState("");
-  const [location, setLocation] = useState("");
-  const [timing, setTiming] = useState("");
   const [urgency, setUrgency] = useState("flexible");
+  const [pdpaConsent, setPdpaConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [caseId, setCaseId] = useState("");
@@ -56,22 +55,24 @@ export const ManagedCareModal = ({
   const reset = () => {
     setName("");
     setPhone("");
-    setConcern("");
-    setLocation("");
-    setTiming("");
     setUrgency("flexible");
+    setPdpaConsent(false);
     setSubmitted(false);
     setSubmitting(false);
     setCaseId("");
   };
 
   const handleSubmit = async () => {
-    if (!name.trim() || !phone.trim() || !concern.trim()) {
-      toast.error("Please fill in Name, Contact Number and Condition/Concern");
+    if (!name.trim() || !phone.trim()) {
+      toast.error("Please fill in Name and Contact Number");
       return;
     }
     if (!isValidMobileNumber(phone)) {
       toast.error("Please enter a valid contact number");
+      return;
+    }
+    if (!pdpaConsent) {
+      toast.error("Please provide consent to proceed");
       return;
     }
     setSubmitting(true);
@@ -83,9 +84,6 @@ export const ManagedCareModal = ({
         clinic_name: clinicName || null,
         patient_name: name.trim(),
         contact_number: sanitizeMobileNumber(phone),
-        condition_concern: concern.trim(),
-        preferred_location: location.trim() || null,
-        preferred_timing: timing.trim() || null,
         urgency,
         source,
         case_type: "managed_care",
@@ -122,18 +120,6 @@ export const ManagedCareModal = ({
             <Badge variant="secondary" className="text-xs">Managed Care Pathway</Badge>
 
             <div className="space-y-2">
-              <Label htmlFor="mc-concern">Condition / Concern *</Label>
-              <Input id="mc-concern" value={concern} onChange={(e) => setConcern(e.target.value)} placeholder="e.g. Knee pain, skin rash" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="mc-location">Preferred Location</Label>
-              <Input id="mc-location" value={location} onChange={(e) => setLocation(e.target.value)} placeholder="e.g. Central, East Singapore" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="mc-timing">Preferred Appointment Timing</Label>
-              <Input id="mc-timing" value={timing} onChange={(e) => setTiming(e.target.value)} placeholder="e.g. Weekday mornings, ASAP" />
-            </div>
-            <div className="space-y-2">
               <Label>Urgency Level *</Label>
               <RadioGroup value={urgency} onValueChange={setUrgency} className="flex gap-3">
                 <div className="flex items-center space-x-2">
@@ -159,9 +145,24 @@ export const ManagedCareModal = ({
               <Input id="mc-phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="e.g. +6591234567" />
             </div>
 
+            <div className="flex items-start gap-2 pt-1">
+              <Checkbox
+                id="mc-pdpa-consent"
+                checked={pdpaConsent}
+                onCheckedChange={(checked) => setPdpaConsent(checked === true)}
+                className="mt-0.5"
+              />
+              <Label htmlFor="mc-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
+                I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic for my visit. I understand how my data is handled as described in the{" "}
+                <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary" onClick={(e) => e.stopPropagation()}>
+                  Privacy Policy
+                </a>.
+              </Label>
+            </div>
+
             <div className="border-t pt-4">
               <p className="text-xs text-muted-foreground mb-3">{NMG_ATTRIBUTION_TAG}</p>
-              <Button className="w-full" onClick={handleSubmit} disabled={submitting}>
+              <Button className="w-full" onClick={handleSubmit} disabled={submitting || !pdpaConsent}>
                 <Shield className="mr-2 h-4 w-4" />
                 {submitting ? "Submitting..." : "Submit Request"}
               </Button>
