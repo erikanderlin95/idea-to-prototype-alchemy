@@ -58,6 +58,7 @@ export const ServiceIntakeModal = ({
   const [concern, setConcern] = useState("");
   const [notes, setNotes] = useState("");
   const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
+  const [pdpaConsent, setPdpaConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [caseId, setCaseId] = useState("");
@@ -70,6 +71,7 @@ export const ServiceIntakeModal = ({
     setConcern("");
     setNotes("");
     setDisclaimerAgreed(false);
+    setPdpaConsent(false);
     setSubmitted(false);
     setSubmitting(false);
     setCaseId("");
@@ -82,6 +84,9 @@ export const ServiceIntakeModal = ({
     }
     if (!isValidMobileNumber(phone)) {
       toast.error("Please enter a valid contact number");
+      return;
+    if (!pdpaConsent) {
+      toast.error("Please provide consent to proceed");
       return;
     }
     setSubmitting(true);
