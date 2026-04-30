@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { supabase } from "@/integrations/supabase/client";
 import { CheckCircle, Loader2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -19,6 +20,7 @@ const ForClinics = () => {
   const { t } = useLanguage();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [pdpaConsent, setPdpaConsent] = useState(false);
   const [form, setForm] = useState({
     clinicName: "",
     contactPerson: "",
@@ -30,6 +32,7 @@ const ForClinics = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.clinicName || !form.contactPerson || !form.phone || !form.clinicType) return;
+    if (!pdpaConsent) return;
     setLoading(true);
     try {
       await supabase.functions.invoke("clinic-onboarding", {
@@ -135,7 +138,22 @@ const ForClinics = () => {
                   />
                 </div>
 
-                <Button type="submit" className="w-full" size="lg" disabled={loading}>
+                <div className="flex items-start gap-2 pt-1">
+                  <Checkbox
+                    id="fc-pdpa-consent"
+                    checked={pdpaConsent}
+                    onCheckedChange={(checked) => setPdpaConsent(checked === true)}
+                    className="mt-0.5"
+                  />
+                  <Label htmlFor="fc-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
+                    I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic and partner for my visit. I understand how my data is handled as described in the{" "}
+                    <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary">
+                      Privacy Policy
+                    </a>.
+                  </Label>
+                </div>
+
+                <Button type="submit" className="w-full" size="lg" disabled={loading || !pdpaConsent}>
                   {loading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
