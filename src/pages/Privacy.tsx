@@ -11,22 +11,32 @@ const Privacy = () => {
         <section className="space-y-6 text-foreground text-sm leading-relaxed">
           <div>
             <h2 className="text-lg font-semibold mb-2">1. What We Collect</h2>
-            <p>We collect personal information such as your name and contact details when you join a queue or submit a booking request through ClynicQ.</p>
+            <p className="mb-2">We collect personal information such as your name, contact details, and submitted information when you:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>Join a queue or submit a booking request</li>
+              <li>Submit a clinic listing, partnership, or event request</li>
+            </ul>
           </div>
 
           <div>
             <h2 className="text-lg font-semibold mb-2">2. How We Use Your Information</h2>
             <p className="mb-2">Your information is used to:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Facilitate queue management and clinic booking</li>
-              <li>Coordinate your visit with the selected clinic</li>
-              <li>Contact you regarding your visit if required</li>
+              <li>Facilitate queue management and appointment coordination</li>
+              <li>Process clinic listings, partnership requests, and event collaborations</li>
+              <li>Communicate with you regarding your submission or request</li>
+              <li>Support operational and follow-up purposes</li>
             </ul>
           </div>
 
           <div>
             <h2 className="text-lg font-semibold mb-2">3. Who We Share It With</h2>
-            <p>Your information is shared only with the clinic you selected for the purpose of managing your visit.</p>
+            <p className="mb-2">Your information may be shared:</p>
+            <ul className="list-disc pl-5 space-y-1">
+              <li>With the clinic you selected for managing your visit</li>
+              <li>Internally for coordination of listings, partnerships, or events</li>
+            </ul>
+            <p className="mt-2">We do not share your data for unrelated purposes without consent.</p>
           </div>
 
           <div>
