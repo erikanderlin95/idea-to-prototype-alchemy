@@ -10,7 +10,7 @@ import { toast } from "sonner";
 const REASONS = [
   { value: "wait_too_long", label: "Wait is too long" },
   { value: "another_clinic", label: "Decided to visit another clinic" },
-  { value: "no_longer_need", label: "No longer need to see doctor" },
+  { value: "no_longer_need", label: "Changed Plans" },
   { value: "other", label: "Other" },
 ];
 
