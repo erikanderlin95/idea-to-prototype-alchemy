@@ -777,7 +777,7 @@ export const ClinicCard = ({
                 className="mt-0.5"
               />
               <Label htmlFor="pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
-                I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic for my visit. I understand how my data is handled as described in the{" "}
+                I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic and partner for my visit. I understand how my data is handled as described in the{" "}
                 <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary" onClick={(e) => e.stopPropagation()}>
                   Privacy Policy
                 </a>.
@@ -879,7 +879,7 @@ export const ClinicCard = ({
                 className="mt-0.5"
               />
               <Label htmlFor="lead-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-tight">
-                I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic for my visit. I understand how my data is handled as described in the{" "}
+                I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic and partner for my visit. I understand how my data is handled as described in the{" "}
                 <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary" onClick={(e) => e.stopPropagation()}>
                   Privacy Policy
                 </a>.
