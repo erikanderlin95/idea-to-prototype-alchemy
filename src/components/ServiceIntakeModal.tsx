@@ -58,6 +58,7 @@ export const ServiceIntakeModal = ({
   const [concern, setConcern] = useState("");
   const [notes, setNotes] = useState("");
   const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
+  const [pdpaConsent, setPdpaConsent] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [caseId, setCaseId] = useState("");
@@ -70,6 +71,7 @@ export const ServiceIntakeModal = ({
     setConcern("");
     setNotes("");
     setDisclaimerAgreed(false);
+    setPdpaConsent(false);
     setSubmitted(false);
     setSubmitting(false);
     setCaseId("");
@@ -82,6 +84,10 @@ export const ServiceIntakeModal = ({
     }
     if (!isValidMobileNumber(phone)) {
       toast.error("Please enter a valid contact number");
+      return;
+    }
+    if (!pdpaConsent) {
+      toast.error("Please provide consent to proceed");
       return;
     }
     setSubmitting(true);
@@ -174,10 +180,25 @@ export const ServiceIntakeModal = ({
               </Label>
             </div>
 
+            <div className="flex items-start gap-2" onClick={(e) => e.stopPropagation()}>
+              <Checkbox
+                id="si-pdpa-consent"
+                checked={pdpaConsent}
+                onCheckedChange={(checked) => setPdpaConsent(checked === true)}
+                className="mt-0.5"
+              />
+              <Label htmlFor="si-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
+                I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic and partner for my visit. I understand how my data is handled as described in the{" "}
+                <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary" onClick={(e) => e.stopPropagation()}>
+                  Privacy Policy
+                </a>.
+              </Label>
+            </div>
+
             <Button
               className="w-full bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold h-10"
               onClick={handleSubmit}
-              disabled={submitting || !disclaimerAgreed}
+              disabled={submitting || !disclaimerAgreed || !pdpaConsent}
             >
               {submitting ? "Submitting..." : "Submit Enquiry"}
             </Button>

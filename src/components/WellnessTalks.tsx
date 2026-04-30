@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { z } from "zod";
 import { toast } from "sonner";
 
@@ -111,6 +112,7 @@ export const WellnessTalks = () => {
     attendees: "1",
     notes: "",
   });
+  const [reservePdpaConsent, setReservePdpaConsent] = useState(false);
 
   const [hostOpen, setHostOpen] = useState(false);
   const [hostSubmitted, setHostSubmitted] = useState(false);
@@ -123,11 +125,13 @@ export const WellnessTalks = () => {
     audienceSize: "",
     notes: "",
   });
+  const [hostPdpaConsent, setHostPdpaConsent] = useState(false);
 
   const openReserve = (talk: FeaturedTalk) => {
     setActiveTalk(talk);
     setSubmitted(false);
     setForm({ name: "", phone: "", email: "", attendees: "1", notes: "" });
+    setReservePdpaConsent(false);
     setOpen(true);
   };
 
@@ -142,6 +146,7 @@ export const WellnessTalks = () => {
       audienceSize: "",
       notes: "",
     });
+    setHostPdpaConsent(false);
     setHostOpen(true);
   };
 
@@ -150,6 +155,10 @@ export const WellnessTalks = () => {
     const result = reserveSchema.safeParse(form);
     if (!result.success) {
       toast.error(result.error.issues[0].message);
+      return;
+    }
+    if (!reservePdpaConsent) {
+      toast.error("Please provide consent to proceed");
       return;
     }
     setSubmitted(true);
@@ -161,6 +170,10 @@ export const WellnessTalks = () => {
     const result = hostSchema.safeParse(hostForm);
     if (!result.success) {
       toast.error(result.error.issues[0].message);
+      return;
+    }
+    if (!hostPdpaConsent) {
+      toast.error("Please provide consent to proceed");
       return;
     }
     setHostSubmitted(true);
@@ -372,13 +385,28 @@ export const WellnessTalks = () => {
                     rows={3}
                   />
                 </div>
+
+                <div className="flex items-start gap-2 pt-1">
+                  <Checkbox
+                    id="rt-pdpa-consent"
+                    checked={reservePdpaConsent}
+                    onCheckedChange={(checked) => setReservePdpaConsent(checked === true)}
+                    className="mt-0.5"
+                  />
+                  <Label htmlFor="rt-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
+                    I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic and partner for my visit. I understand how my data is handled as described in the{" "}
+                    <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary">
+                      Privacy Policy
+                    </a>.
+                  </Label>
+                </div>
               </div>
 
               <DialogFooter className="gap-2">
                 <Button type="button" variant="outline" onClick={() => setOpen(false)}>
                   Cancel
                 </Button>
-                <Button type="submit" style={{ background: TEAL, color: "#fff" }}>
+                <Button type="submit" disabled={!reservePdpaConsent} style={{ background: TEAL, color: "#fff" }}>
                   Reserve Slot
                 </Button>
               </DialogFooter>
@@ -493,6 +521,21 @@ export const WellnessTalks = () => {
                     rows={3}
                   />
                 </div>
+
+                <div className="flex items-start gap-2 pt-1">
+                  <Checkbox
+                    id="ht-pdpa-consent"
+                    checked={hostPdpaConsent}
+                    onCheckedChange={(checked) => setHostPdpaConsent(checked === true)}
+                    className="mt-0.5"
+                  />
+                  <Label htmlFor="ht-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
+                    I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic and partner for my visit. I understand how my data is handled as described in the{" "}
+                    <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary">
+                      Privacy Policy
+                    </a>.
+                  </Label>
+                </div>
               </div>
 
               <p className="text-sm font-bold text-muted-foreground text-center px-2 pb-3">
@@ -503,7 +546,7 @@ export const WellnessTalks = () => {
                 <Button type="button" variant="outline" onClick={() => setHostOpen(false)}>
                   Cancel
                 </Button>
-                <Button type="submit" style={{ background: TEAL, color: "#fff" }}>
+                <Button type="submit" disabled={!hostPdpaConsent} style={{ background: TEAL, color: "#fff" }}>
                   Submit Request
                 </Button>
               </DialogFooter>
