@@ -784,9 +784,6 @@ export const ClinicCard = ({
               </Label>
             </div>
             <p className="text-[10px] text-muted-foreground leading-snug pl-6">
-              Information is submitted via ClynicQ and shared with the clinic for this purpose.
-            </p>
-            <p className="text-[10px] text-muted-foreground leading-snug pl-6">
               This is not for medical emergencies. Please visit A&amp;E or call emergency services if urgent.
             </p>
           </div>
