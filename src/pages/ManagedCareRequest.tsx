@@ -124,23 +124,6 @@ const ManagedCareRequest = () => {
           {!submitted ? (
             <Card className="p-6 space-y-5">
               <div className="space-y-2">
-                <Label>Urgency Level *</Label>
-                <RadioGroup value={urgency} onValueChange={setUrgency} className="flex gap-3">
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="urgent" id="page-urg-urgent" />
-                    <Label htmlFor="page-urg-urgent" className="font-normal cursor-pointer">Urgent</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="soon" id="page-urg-soon" />
-                    <Label htmlFor="page-urg-soon" className="font-normal cursor-pointer">Soon</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="flexible" id="page-urg-flexible" />
-                    <Label htmlFor="page-urg-flexible" className="font-normal cursor-pointer">Flexible</Label>
-                  </div>
-                </RadioGroup>
-              </div>
-              <div className="space-y-2">
                 <Label htmlFor="contact-name">Name *</Label>
                 <Input id="contact-name" value={contactName} onChange={(e) => setContactName(e.target.value)} placeholder="Your full name" required />
               </div>
