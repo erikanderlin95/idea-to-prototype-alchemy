@@ -385,13 +385,28 @@ export const WellnessTalks = () => {
                     rows={3}
                   />
                 </div>
+
+                <div className="flex items-start gap-2 pt-1">
+                  <Checkbox
+                    id="rt-pdpa-consent"
+                    checked={reservePdpaConsent}
+                    onCheckedChange={(checked) => setReservePdpaConsent(checked === true)}
+                    className="mt-0.5"
+                  />
+                  <Label htmlFor="rt-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
+                    I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic and partner for my visit. I understand how my data is handled as described in the{" "}
+                    <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary">
+                      Privacy Policy
+                    </a>.
+                  </Label>
+                </div>
               </div>
 
               <DialogFooter className="gap-2">
                 <Button type="button" variant="outline" onClick={() => setOpen(false)}>
                   Cancel
                 </Button>
-                <Button type="submit" style={{ background: TEAL, color: "#fff" }}>
+                <Button type="submit" disabled={!reservePdpaConsent} style={{ background: TEAL, color: "#fff" }}>
                   Reserve Slot
                 </Button>
               </DialogFooter>
