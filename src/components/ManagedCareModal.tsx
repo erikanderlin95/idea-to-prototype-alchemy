@@ -120,23 +120,6 @@ export const ManagedCareModal = ({
             <Badge variant="secondary" className="text-xs">Managed Care Pathway</Badge>
 
             <div className="space-y-2">
-              <Label>Urgency Level *</Label>
-              <RadioGroup value={urgency} onValueChange={setUrgency} className="flex gap-3">
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="urgent" id="mc-modal-urgent" />
-                  <Label htmlFor="mc-modal-urgent" className="font-normal cursor-pointer">Urgent</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="soon" id="mc-modal-soon" />
-                  <Label htmlFor="mc-modal-soon" className="font-normal cursor-pointer">Soon</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="flexible" id="mc-modal-flexible" />
-                  <Label htmlFor="mc-modal-flexible" className="font-normal cursor-pointer">Flexible</Label>
-                </div>
-              </RadioGroup>
-            </div>
-            <div className="space-y-2">
               <Label htmlFor="mc-name">Name *</Label>
               <Input id="mc-name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Your full name" />
             </div>
