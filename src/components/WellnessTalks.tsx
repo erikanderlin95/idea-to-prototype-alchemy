@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { Checkbox } from "@/components/ui/checkbox";
 import { z } from "zod";
 import { toast } from "sonner";
 
@@ -111,6 +112,7 @@ export const WellnessTalks = () => {
     attendees: "1",
     notes: "",
   });
+  const [reservePdpaConsent, setReservePdpaConsent] = useState(false);
 
   const [hostOpen, setHostOpen] = useState(false);
   const [hostSubmitted, setHostSubmitted] = useState(false);
@@ -123,11 +125,13 @@ export const WellnessTalks = () => {
     audienceSize: "",
     notes: "",
   });
+  const [hostPdpaConsent, setHostPdpaConsent] = useState(false);
 
   const openReserve = (talk: FeaturedTalk) => {
     setActiveTalk(talk);
     setSubmitted(false);
     setForm({ name: "", phone: "", email: "", attendees: "1", notes: "" });
+    setReservePdpaConsent(false);
     setOpen(true);
   };
 
@@ -142,6 +146,7 @@ export const WellnessTalks = () => {
       audienceSize: "",
       notes: "",
     });
+    setHostPdpaConsent(false);
     setHostOpen(true);
   };
 
@@ -150,6 +155,10 @@ export const WellnessTalks = () => {
     const result = reserveSchema.safeParse(form);
     if (!result.success) {
       toast.error(result.error.issues[0].message);
+      return;
+    }
+    if (!reservePdpaConsent) {
+      toast.error("Please provide consent to proceed");
       return;
     }
     setSubmitted(true);
@@ -161,6 +170,10 @@ export const WellnessTalks = () => {
     const result = hostSchema.safeParse(hostForm);
     if (!result.success) {
       toast.error(result.error.issues[0].message);
+      return;
+    }
+    if (!hostPdpaConsent) {
+      toast.error("Please provide consent to proceed");
       return;
     }
     setHostSubmitted(true);
