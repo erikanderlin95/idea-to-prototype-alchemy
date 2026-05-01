@@ -17,6 +17,8 @@ import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { isManagedCareType, NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
+import { JoinQueueIntakeDialog } from "@/components/intake/JoinQueueIntakeDialog";
+import { BookingIntakeDialog } from "@/components/intake/BookingIntakeDialog";
 
 const DEFAULT_SERVICES = [
   { icon: Stethoscope, label: "GP Consult", desc: "General practice consultations for everyday health concerns" },
@@ -58,6 +60,8 @@ const ClinicProfile = () => {
   const [mcConcern, setMcConcern] = useState("");
   const [mcSubmitting, setMcSubmitting] = useState(false);
   const [expandedAward, setExpandedAward] = useState<number | null>(null);
+  const [showJoinQueue, setShowJoinQueue] = useState(false);
+  const [showBookingIntake, setShowBookingIntake] = useState(false);
 
   useEffect(() => {
     fetchClinicData();
@@ -97,7 +101,7 @@ const ClinicProfile = () => {
       setMcTiming("");
       setMcConcern("");
     } else {
-      navigate(`/booking/${id}`);
+      setShowBookingIntake(true);
     }
   };
 
