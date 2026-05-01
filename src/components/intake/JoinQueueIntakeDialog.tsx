@@ -142,7 +142,7 @@ export const JoinQueueIntakeDialog = ({
           <DialogHeader>
             <DialogTitle className="text-base text-foreground">Join Queue Remotely — {clinicName}</DialogTitle>
             <DialogDescription className="text-xs text-center font-bold text-red-700">
-              Arrive within 30 seconds when called.
+              Arrive within 1 minute when called.
             </DialogDescription>
           </DialogHeader>
 
