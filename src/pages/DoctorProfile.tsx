@@ -18,7 +18,6 @@ export default function DoctorProfile() {
   const [doctor, setDoctor] = useState<any>(null);
   const [clinic, setClinic] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [showBookingIntake, setShowBookingIntake] = useState(false);
 
   useEffect(() => {
     loadDoctorProfile();
