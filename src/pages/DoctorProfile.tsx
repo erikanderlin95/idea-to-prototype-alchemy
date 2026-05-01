@@ -205,17 +205,8 @@ export default function DoctorProfile() {
           </Card>
         )}
 
-        <div className="flex gap-3 sm:gap-4">
-          <Button
-            className="flex-1 text-xs sm:text-base"
-            size="sm"
-            disabled={!clinic}
-            onClick={() => setShowBookingIntake(true)}
-          >
-            <Calendar className="mr-1.5 h-3.5 w-3.5 sm:h-4 sm:w-4" />
-            {language === 'en' ? t('doctorProfile.bookAppointment') : t('doctorProfile.bookAppointmentZh')}
-          </Button>
-          {clinic && (
+        {clinic && (
+          <div className="flex gap-3 sm:gap-4">
             <Button
               variant="outline"
               size="sm"
@@ -224,19 +215,9 @@ export default function DoctorProfile() {
             >
               {language === 'en' ? t('doctorProfile.viewClinic') : t('doctorProfile.viewClinicZh')}
             </Button>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-
-      {clinic && (
-        <BookingIntakeDialog
-          open={showBookingIntake}
-          onOpenChange={setShowBookingIntake}
-          clinicId={clinic.id}
-          clinicName={clinic.name}
-          doctorName={doctor?.name}
-        />
-      )}
 
       <Footer />
     </div>
