@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
 import { Calendar, Clock, Languages, Award, CheckCircle2, Building2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { BookingIntakeDialog } from "@/components/intake/BookingIntakeDialog";
 
 export default function DoctorProfile() {
   const { id } = useParams();
@@ -18,6 +19,7 @@ export default function DoctorProfile() {
   const [doctor, setDoctor] = useState<any>(null);
   const [clinic, setClinic] = useState<any>(null);
   const [loading, setLoading] = useState(true);
+  const [showBookingIntake, setShowBookingIntake] = useState(false);
 
   useEffect(() => {
     loadDoctorProfile();
@@ -204,17 +206,18 @@ export default function DoctorProfile() {
         )}
 
         <div className="flex gap-3 sm:gap-4">
-          <Button 
-            className="flex-1 text-xs sm:text-base" 
+          <Button
+            className="flex-1 text-xs sm:text-base"
             size="sm"
-            onClick={() => navigate(`/booking?clinic=${clinic?.id}&doctor=${doctor.id}`)}
+            disabled={!clinic}
+            onClick={() => setShowBookingIntake(true)}
           >
             <Calendar className="mr-1.5 h-3.5 w-3.5 sm:h-4 sm:w-4" />
             {language === 'en' ? t('doctorProfile.bookAppointment') : t('doctorProfile.bookAppointmentZh')}
           </Button>
           {clinic && (
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="sm"
               className="text-xs sm:text-base"
               onClick={() => navigate(`/clinic/${clinic.id}`)}
@@ -224,6 +227,16 @@ export default function DoctorProfile() {
           )}
         </div>
       </div>
+
+      {clinic && (
+        <BookingIntakeDialog
+          open={showBookingIntake}
+          onOpenChange={setShowBookingIntake}
+          clinicId={clinic.id}
+          clinicName={clinic.name}
+          doctorName={doctor?.name}
+        />
+      )}
 
       <Footer />
     </div>
