@@ -289,7 +289,7 @@ const ClinicProfile = () => {
               {/* Join Queue */}
               <button
                 className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
-                onClick={() => navigate(`/queue?clinic=${id}`)}
+                onClick={() => setShowJoinQueue(true)}
               >
                 <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
                   <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
@@ -561,6 +561,27 @@ const ClinicProfile = () => {
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Shared Join Queue intake (matches ClinicCard) */}
+      {clinic && id && (
+        <JoinQueueIntakeDialog
+          open={showJoinQueue}
+          onOpenChange={setShowJoinQueue}
+          clinicId={id}
+          clinicName={clinic.name}
+          clinicType={clinic.type}
+        />
+      )}
+
+      {/* Shared Booking intake (matches ClinicCard) */}
+      {clinic && id && (
+        <BookingIntakeDialog
+          open={showBookingIntake}
+          onOpenChange={setShowBookingIntake}
+          clinicId={id}
+          clinicName={clinic.name}
+        />
+      )}
     </div>
   );
 };
