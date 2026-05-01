@@ -8,9 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { toast } from "sonner";
-import { Calendar, Clock, Languages, Award, CheckCircle2, Building2 } from "lucide-react";
+import { Clock, Languages, Award, CheckCircle2, Building2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { BookingIntakeDialog } from "@/components/intake/BookingIntakeDialog";
 
 export default function DoctorProfile() {
   const { id } = useParams();
