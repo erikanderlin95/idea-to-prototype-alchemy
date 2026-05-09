@@ -94,7 +94,6 @@ export const JoinQueueIntakeDialog = ({
           clinic_id: clinicId,
           mobile_number: sanitizedMobile,
           patient_name: patientName.trim(),
-          visit_type: "General Consultation",
           estimated_wait_time: estimatedWaitMinutes,
           device_fingerprint: getDeviceFingerprint(),
         },
