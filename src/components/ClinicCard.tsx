@@ -153,6 +153,7 @@ export const ClinicCard = ({
     setMcSubmitted(false);
     setMcSubmitting(false);
     setMcCaseId("");
+    setMcPdpaConsent(false);
   };
 
   useEffect(() => {
