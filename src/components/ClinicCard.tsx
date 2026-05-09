@@ -79,6 +79,7 @@ export const ClinicCard = ({
   const [mcSubmitted, setMcSubmitted] = useState(false);
   const [mcSubmitting, setMcSubmitting] = useState(false);
   const [mcCaseId, setMcCaseId] = useState("");
+  const [mcPdpaConsent, setMcPdpaConsent] = useState(false);
   const [joinLoading, setJoinLoading] = useState(false);
   const [joinError, setJoinError] = useState("");
   const [showLeaveDialog, setShowLeaveDialog] = useState(false);
