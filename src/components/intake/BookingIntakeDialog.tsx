@@ -38,7 +38,6 @@ export const BookingIntakeDialog = ({
 }: BookingIntakeDialogProps) => {
   const [leadName, setLeadName] = useState("");
   const [leadMobile, setLeadMobile] = useState("");
-  const [leadVisitType, setLeadVisitType] = useState("");
   const [leadPrefDate, setLeadPrefDate] = useState("");
   const [leadPrefTime, setLeadPrefTime] = useState("");
   const [leadNotes, setLeadNotes] = useState("");
