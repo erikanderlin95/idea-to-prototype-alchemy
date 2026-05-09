@@ -5,7 +5,6 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { CheckCircle, Copy, Calendar, MessageCircle } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
@@ -39,7 +38,6 @@ export const BookingIntakeDialog = ({
 }: BookingIntakeDialogProps) => {
   const [leadName, setLeadName] = useState("");
   const [leadMobile, setLeadMobile] = useState("");
-  const [leadVisitType, setLeadVisitType] = useState("");
   const [leadPrefDate, setLeadPrefDate] = useState("");
   const [leadPrefTime, setLeadPrefTime] = useState("");
   const [leadNotes, setLeadNotes] = useState("");
@@ -55,7 +53,6 @@ export const BookingIntakeDialog = ({
   const reset = () => {
     setLeadName("");
     setLeadMobile("");
-    setLeadVisitType("");
     setLeadPrefDate("");
     setLeadPrefTime("");
     setLeadNotes("");
@@ -191,21 +188,6 @@ export const BookingIntakeDialog = ({
                 className="mt-1 h-9 text-sm"
               />
               <p className="text-[10px] text-muted-foreground mt-0.5">8-15 digits, country code optional</p>
-            </div>
-            <div>
-              <Label htmlFor="lead-visit-type" className="text-xs font-medium">Visit Type</Label>
-              <Select value={leadVisitType} onValueChange={setLeadVisitType}>
-                <SelectTrigger className="mt-1 w-full h-9 text-sm">
-                  <SelectValue placeholder="Select visit type" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="Consultation">Consultation</SelectItem>
-                  <SelectItem value="Follow Up">Follow Up</SelectItem>
-                  <SelectItem value="Health Screening">Health Screening</SelectItem>
-                  <SelectItem value="Vaccination">Vaccination</SelectItem>
-                  <SelectItem value="Others">Others</SelectItem>
-                </SelectContent>
-              </Select>
             </div>
             <div>
               <Label htmlFor="lead-notes" className="text-xs font-medium">Notes</Label>

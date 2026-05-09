@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Input } from "@/components/ui/input";
@@ -61,7 +60,6 @@ export const ClinicCard = ({
   const [isJoining, setIsJoining] = useState(false);
   const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [visitType, setVisitType] = useState(t("clinicCard.generalConsultation"));
   const [visitReason, setVisitReason] = useState("");
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [showQueueCard, setShowQueueCard] = useState(false);
@@ -94,7 +92,6 @@ export const ClinicCard = ({
   const [leadNotes, setLeadNotes] = useState("");
   const [leadDisclaimerAgreed, setLeadDisclaimerAgreed] = useState(false);
   const [leadPdpaConsent, setLeadPdpaConsent] = useState(false);
-  const [leadVisitType, setLeadVisitType] = useState("");
   const [leadSubmitting, setLeadSubmitting] = useState(false);
   const [bookingCaseId, setBookingCaseId] = useState("");
   const [bookingRedirectUrl, setBookingRedirectUrl] = useState("");
@@ -282,7 +279,6 @@ export const ClinicCard = ({
           clinic_id: id,
           mobile_number: sanitizedMobile,
           patient_name: patientName.trim(),
-          visit_type: visitType,
           estimated_wait_time: parseInt(waitTime) || 15,
           device_fingerprint: getDeviceFingerprint(),
         },
@@ -403,7 +399,6 @@ export const ClinicCard = ({
 
   const resetBookingLead = () => {
     setLeadName("");
-    setLeadVisitType("");
     setLeadMobile("");
     setLeadPrefDate("");
     setLeadPrefTime("");
@@ -607,24 +602,6 @@ export const ClinicCard = ({
                     <p className="text-[17px] sm:text-lg font-bold text-foreground">{t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
                  </div>
 
-                {type !== "GP" && type !== "TCM" && (
-                <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
-                  <label className="text-sm font-semibold text-foreground">{t("clinicCard.visitType")}</label>
-                  <Select value={visitType} onValueChange={setVisitType}>
-                    <SelectTrigger className="w-full h-9 text-sm">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value={t("clinicCard.generalConsultation")}>{t("clinicCard.generalConsultation")}</SelectItem>
-                      <SelectItem value={t("clinicCard.followUp")}>{t("clinicCard.followUp")}</SelectItem>
-                      <SelectItem value={t("clinicCard.emergency")}>{t("clinicCard.emergency")}</SelectItem>
-                      <SelectItem value={t("clinicCard.vaccination")}>{t("clinicCard.vaccination")}</SelectItem>
-                      <SelectItem value={t("clinicCard.healthScreening")}>{t("clinicCard.healthScreening")}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                )}
-
                 {/* Services Offered list — fills remaining space, vertically centered */}
                 <div className="flex-1 flex flex-col justify-center pt-2 border-t border-border/30">
                   <div className="flex items-center gap-1.5 mb-2">
@@ -823,20 +800,6 @@ export const ClinicCard = ({
             <Label htmlFor="lead-mobile" className="text-xs font-medium">Mobile Number *</Label>
             <Input id="lead-mobile" type="tel" value={leadMobile} onChange={(e) => setLeadMobile(e.target.value)} placeholder="e.g. +6591234567" className="mt-1 h-9 text-sm" />
             <p className="text-[10px] text-muted-foreground mt-0.5">8-15 digits, country code optional</p>
-          </div>
-          <div>
-            <Label htmlFor="lead-visit-type" className="text-xs font-medium">Visit Type</Label>
-            <Select value={leadVisitType} onValueChange={setLeadVisitType}>
-              <SelectTrigger className="mt-1 w-full h-9 text-sm">
-                <SelectValue placeholder="Select visit type" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="Acupuncture">Acupuncture</SelectItem>
-                <SelectItem value="Consultation">Consultation</SelectItem>
-                <SelectItem value="Follow Up">Follow Up</SelectItem>
-                <SelectItem value="Others">Others</SelectItem>
-              </SelectContent>
-            </Select>
           </div>
           <div>
             <Label htmlFor="lead-notes" className="text-xs font-medium">Notes</Label>
