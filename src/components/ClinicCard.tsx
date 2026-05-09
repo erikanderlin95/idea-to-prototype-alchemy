@@ -106,12 +106,16 @@ export const ClinicCard = ({
   };
 
   const handleManagedCareSubmit = async () => {
-    if (!mcName.trim() || !mcPhone.trim() || !mcConcern.trim()) {
-      toast.error("Please fill in Name, Contact Number and Condition/Concern");
+    if (!mcName.trim() || !mcPhone.trim()) {
+      toast.error("Please fill in Name and Contact Number");
       return;
     }
     if (!isValidMobileNumber(mcPhone)) {
       toast.error("Please enter a valid contact number");
+      return;
+    }
+    if (!mcPdpaConsent) {
+      toast.error("Please provide consent to proceed");
       return;
     }
     setMcSubmitting(true);
