@@ -53,7 +53,6 @@ export const BookingIntakeDialog = ({
   const reset = () => {
     setLeadName("");
     setLeadMobile("");
-    setLeadVisitType("");
     setLeadPrefDate("");
     setLeadPrefTime("");
     setLeadNotes("");
