@@ -605,24 +605,6 @@ export const ClinicCard = ({
                     <p className="text-[17px] sm:text-lg font-bold text-foreground">{t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
                  </div>
 
-                {type !== "GP" && type !== "TCM" && (
-                <div className="space-y-1" onClick={(e) => e.stopPropagation()}>
-                  <label className="text-sm font-semibold text-foreground">{t("clinicCard.visitType")}</label>
-                  <Select value={visitType} onValueChange={setVisitType}>
-                    <SelectTrigger className="w-full h-9 text-sm">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value={t("clinicCard.generalConsultation")}>{t("clinicCard.generalConsultation")}</SelectItem>
-                      <SelectItem value={t("clinicCard.followUp")}>{t("clinicCard.followUp")}</SelectItem>
-                      <SelectItem value={t("clinicCard.emergency")}>{t("clinicCard.emergency")}</SelectItem>
-                      <SelectItem value={t("clinicCard.vaccination")}>{t("clinicCard.vaccination")}</SelectItem>
-                      <SelectItem value={t("clinicCard.healthScreening")}>{t("clinicCard.healthScreening")}</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                )}
-
                 {/* Services Offered list — fills remaining space, vertically centered */}
                 <div className="flex-1 flex flex-col justify-center pt-2 border-t border-border/30">
                   <div className="flex items-center gap-1.5 mb-2">
