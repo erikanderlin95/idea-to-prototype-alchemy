@@ -61,7 +61,6 @@ export const ClinicCard = ({
   const [isJoining, setIsJoining] = useState(false);
   const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [visitType, setVisitType] = useState(t("clinicCard.generalConsultation"));
   const [visitReason, setVisitReason] = useState("");
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [showQueueCard, setShowQueueCard] = useState(false);
