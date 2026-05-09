@@ -991,64 +991,57 @@ export const ClinicCard = ({
     <Dialog open={showManagedCareModal} onOpenChange={(open) => { setShowManagedCareModal(open); if (!open) resetManagedCareModal(); }}>
       <DialogContent className="max-w-md max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Request Managed Care Support</DialogTitle>
-          <DialogDescription>Complete this form and a care coordinator will contact you shortly.</DialogDescription>
+          <DialogTitle className="flex items-center gap-2">
+            <Shield className="h-5 w-5 text-primary" />
+            Request Managed Care Support
+          </DialogTitle>
         </DialogHeader>
         {!mcSubmitted ? (
           <div className="space-y-4">
-            <div className="space-y-2">
-              <Label htmlFor="mc-concern">Condition / Concern *</Label>
-              <Input id="mc-concern" value={mcConcern} onChange={(e) => setMcConcern(e.target.value)} placeholder="e.g. Knee pain, skin rash" required />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="mc-location">Preferred Location</Label>
-              <Input id="mc-location" value={mcLocation} onChange={(e) => setMcLocation(e.target.value)} placeholder="e.g. Central, East Singapore" />
-            </div>
-            <div className="space-y-2">
-              <Label htmlFor="mc-timing">Preferred Appointment Timing</Label>
-              <Input id="mc-timing" value={mcTiming} onChange={(e) => setMcTiming(e.target.value)} placeholder="e.g. Weekday mornings, ASAP" />
-            </div>
-            <div className="space-y-2">
-              <Label>Urgency Level *</Label>
-              <RadioGroup value={mcUrgency} onValueChange={setMcUrgency} className="flex gap-3">
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="urgent" id="urg-urgent" />
-                  <Label htmlFor="urg-urgent" className="font-normal cursor-pointer">Urgent</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="soon" id="urg-soon" />
-                  <Label htmlFor="urg-soon" className="font-normal cursor-pointer">Soon</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="flexible" id="urg-flexible" />
-                  <Label htmlFor="urg-flexible" className="font-normal cursor-pointer">Flexible</Label>
-                </div>
-              </RadioGroup>
-            </div>
+            <Badge variant="secondary" className="text-xs">Managed Care Pathway</Badge>
+
             <div className="space-y-2">
               <Label htmlFor="mc-name">Name *</Label>
-              <Input id="mc-name" value={mcName} onChange={(e) => setMcName(e.target.value)} placeholder="Your full name" required />
+              <Input id="mc-name" value={mcName} onChange={(e) => setMcName(e.target.value)} placeholder="Your full name" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="mc-phone">Contact Number *</Label>
-              <Input id="mc-phone" type="tel" value={mcPhone} onChange={(e) => setMcPhone(e.target.value)} placeholder="e.g. +6591234567" required />
+              <Input id="mc-phone" type="tel" value={mcPhone} onChange={(e) => setMcPhone(e.target.value)} placeholder="e.g. +6591234567" />
             </div>
-            <p className="text-xs text-muted-foreground">{NMG_ATTRIBUTION_TAG}</p>
-            <Button className="w-full" onClick={handleManagedCareSubmit} disabled={mcSubmitting}>
-              <Shield className="mr-2 h-4 w-4" />
-              {mcSubmitting ? "Submitting..." : "Submit Request"}
-            </Button>
+
+            <div className="flex items-start gap-2 pt-1">
+              <Checkbox
+                id="mc-card-pdpa-consent"
+                checked={mcPdpaConsent}
+                onCheckedChange={(checked) => setMcPdpaConsent(checked === true)}
+                className="mt-0.5"
+              />
+              <Label htmlFor="mc-card-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
+                I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic and partner for my visit. I understand how my data is handled as described in the{" "}
+                <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary" onClick={(e) => e.stopPropagation()}>
+                  Privacy Policy
+                </a>.
+              </Label>
+            </div>
+
+            <div className="border-t pt-4">
+              <p className="text-xs text-muted-foreground mb-3">{NMG_ATTRIBUTION_TAG}</p>
+              <Button className="w-full" onClick={handleManagedCareSubmit} disabled={mcSubmitting || !mcPdpaConsent}>
+                <Shield className="mr-2 h-4 w-4" />
+                {mcSubmitting ? "Submitting..." : "Submit Request"}
+              </Button>
+            </div>
           </div>
         ) : (
           <div className="text-center space-y-4 py-4">
-            <CheckCircle className="h-12 w-12 text-primary mx-auto" />
-            <p className="text-lg font-semibold text-foreground">Request Received</p>
+            <CheckCircle className="h-14 w-14 text-primary mx-auto" />
+            <h3 className="text-xl font-bold text-foreground">Request Received</h3>
             <p className="text-sm text-muted-foreground">
-              Your request has been received. A care coordinator will review your case and contact you shortly.
+              Your request has been received. A care coordinator will review your case and contact you shortly to recommend the most suitable provider.
             </p>
             <div className="bg-muted rounded-lg p-3">
               <p className="text-xs text-muted-foreground">Case Reference</p>
-              <p className="text-lg font-mono font-bold text-foreground">{mcCaseId}</p>
+              <p className="text-xl font-mono font-bold text-foreground">{mcCaseId}</p>
             </div>
             <Button
               className="w-full"
@@ -1060,7 +1053,7 @@ export const ClinicCard = ({
               <MessageCircle className="mr-2 h-4 w-4" />
               Chat with Care Coordinator
             </Button>
-            <Button variant="outline" className="w-full" onClick={() => setShowManagedCareModal(false)}>Close</Button>
+            <p className="text-xs text-muted-foreground">{NMG_ATTRIBUTION_TAG}</p>
           </div>
         )}
       </DialogContent>
