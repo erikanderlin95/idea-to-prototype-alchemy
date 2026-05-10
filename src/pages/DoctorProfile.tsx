@@ -97,7 +97,7 @@ export default function DoctorProfile() {
                 <div className="flex items-center gap-1.5 sm:gap-2 mb-1.5 sm:mb-2">
                   <h1 className="text-xl sm:text-3xl font-bold">{doctor.name}</h1>
                   {doctor.is_verified && (
-                    <CheckCircle2 className="h-4 w-4 sm:h-6 sm:w-6 text-primary" />
+                    <CheckCircle2 className="h-3 w-3 sm:h-4 sm:w-4 text-primary" />
                   )}
                 </div>
                 
