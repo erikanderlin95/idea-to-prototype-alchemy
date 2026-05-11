@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import SpeakerCard from "@/components/SpeakerCard";
+import { Button } from "@/components/ui/button";
+import PartnerIntakeDialog from "@/components/intake/PartnerIntakeDialog";
 
-import { Mic, Sparkles } from "lucide-react";
+import { Mic, Sparkles, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const SpeakersTrainers = () => {
   const { t } = useLanguage();
+  const [partnerOpen, setPartnerOpen] = useState(false);
 
   const speakers = [
     {
@@ -32,11 +36,28 @@ const SpeakersTrainers = () => {
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-3">
             Healthcare Speakers & Trainers
           </h1>
-          <p className="text-[15px] md:text-base text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-[15px] md:text-base text-muted-foreground max-w-2xl mx-auto mb-6">
             Explore partners who run wellness talks and programs through ClynicQ. Join an upcoming session or invite them to your community.
           </p>
+          <Button
+            variant="outline"
+            className="gap-2 font-semibold border-[#D4860A]/30 text-[#D4860A] hover:bg-[#D4860A]/10 hover:text-[#D4860A]"
+            onClick={() => setPartnerOpen(true)}
+          >
+            For Providers: Partner With Us
+            <ArrowRight className="h-4 w-4" />
+          </Button>
         </div>
       </section>
+
+      <PartnerIntakeDialog
+        open={partnerOpen}
+        onOpenChange={setPartnerOpen}
+        partnerType="speaker_trainer"
+        title="Partner With Us"
+        description="Run wellness talks or training with ClynicQ. Share your details and we'll reach out."
+        accentClassName="bg-[#D4860A] hover:bg-[#B8720A] text-white"
+      />
 
       <section className="py-8 px-4 border-b border-border/50">
         <div className="max-w-6xl mx-auto">

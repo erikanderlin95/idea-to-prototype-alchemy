@@ -1,11 +1,15 @@
+import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import AfterlifeCard from "@/components/AfterlifeCard";
-import { Heart, Flower2, Shield, Sparkles } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import PartnerIntakeDialog from "@/components/intake/PartnerIntakeDialog";
+import { Heart, Flower2, Shield, Sparkles, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const AfterlifeServicesPage = () => {
   const { t } = useLanguage();
+  const [partnerOpen, setPartnerOpen] = useState(false);
 
   const providers = [
     {
@@ -38,11 +42,28 @@ const AfterlifeServicesPage = () => {
           <h1 className="text-3xl md:text-4xl font-bold text-[#2D1B4E] mb-4 tracking-tight">
             {t("afterlife.title")}
           </h1>
-          <p className="text-[16px] md:text-lg text-[#7A6B8A] max-w-2xl mx-auto leading-relaxed">
+          <p className="text-[16px] md:text-lg text-[#7A6B8A] max-w-2xl mx-auto leading-relaxed mb-6">
             {t("afterlife.desc")}
           </p>
+          <Button
+            variant="outline"
+            className="gap-2 font-semibold border-[#9B7DB8]/30 text-[#9B7DB8] hover:bg-[#9B7DB8]/10 hover:text-[#9B7DB8]"
+            onClick={() => setPartnerOpen(true)}
+          >
+            For Providers: Partner With Us
+            <ArrowRight className="h-4 w-4" />
+          </Button>
         </div>
       </section>
+
+      <PartnerIntakeDialog
+        open={partnerOpen}
+        onOpenChange={setPartnerOpen}
+        partnerType="afterlife_provider"
+        title="Partner With Us"
+        description="Offer afterlife and pre-planning services through ClynicQ. Share your details and we'll reach out."
+        accentClassName="bg-[#9B7DB8] hover:bg-[#8A6BAA] text-white"
+      />
 
       {/* Value pillars */}
       <section className="py-8 px-4 border-b border-[#E8DDF0]/60">
