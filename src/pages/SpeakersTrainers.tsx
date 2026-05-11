@@ -32,17 +32,9 @@ const SpeakersTrainers = () => {
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-3">
             Healthcare Speakers & Trainers
           </h1>
-          <p className="text-[15px] md:text-base text-muted-foreground max-w-2xl mx-auto mb-6">
+          <p className="text-[15px] md:text-base text-muted-foreground max-w-2xl mx-auto">
             Explore partners who run wellness talks and programs through ClynicQ. Join an upcoming session or invite them to your community.
           </p>
-          <Button
-            variant="outline"
-            className="gap-2 font-semibold border-[#D4860A]/30 text-[#D4860A] hover:bg-[#D4860A]/10 hover:text-[#D4860A]"
-            onClick={() => navigate("/for-clinics")}
-          >
-            For Providers: Partner With Us
-            <ArrowRight className="h-4 w-4" />
-          </Button>
         </div>
       </section>
 
