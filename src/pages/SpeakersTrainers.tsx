@@ -2,13 +2,11 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import SpeakerCard from "@/components/SpeakerCard";
 import { Button } from "@/components/ui/button";
-import { Mic, Sparkles, ArrowRight } from "lucide-react";
+import { Mic, Sparkles } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useNavigate } from "react-router-dom";
 
 const SpeakersTrainers = () => {
   const { t } = useLanguage();
-  const navigate = useNavigate();
 
   const speakers = [
     {
