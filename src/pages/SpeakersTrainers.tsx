@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import SpeakerCard from "@/components/SpeakerCard";
+import { Button } from "@/components/ui/button";
+import PartnerIntakeDialog from "@/components/intake/PartnerIntakeDialog";
 
-import { Mic, Sparkles } from "lucide-react";
+import { Mic, Sparkles, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const SpeakersTrainers = () => {
   const { t } = useLanguage();
+  const [partnerOpen, setPartnerOpen] = useState(false);
 
   const speakers = [
     {
