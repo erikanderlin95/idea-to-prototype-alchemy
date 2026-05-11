@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import SpeakerCard from "@/components/SpeakerCard";
-import { Button } from "@/components/ui/button";
+
 import { Mic, Sparkles } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
