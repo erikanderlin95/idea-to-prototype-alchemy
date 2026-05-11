@@ -426,10 +426,6 @@ export const ClinicCard = ({
             </div>
             <h3 className={`${clinicNameSizeClass} font-bold text-foreground group-hover:text-primary transition-colors whitespace-nowrap leading-tight min-w-0`}>{name}</h3>
           </div>
-          <div className="flex items-center gap-0.5 bg-amber-50 dark:bg-amber-950/20 px-1.5 py-0.5 rounded shrink-0">
-            <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
-            <span className="text-[13px] font-bold">{rating}</span>
-          </div>
         </div>
 
         {/* Row 1b: Type + status badges */}
