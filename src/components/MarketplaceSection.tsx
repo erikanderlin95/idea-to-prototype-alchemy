@@ -148,11 +148,61 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
 
           <SearchFilters defaultCategory={defaultCategory} onCategoryChange={handleCategoryChange} />
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-[0.4cm] mt-8 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
-            {filteredClinics.map((clinic, index) => (
-              <ClinicCard key={clinic.id || index} {...clinic} />
-            ))}
-          </div>
+          {(() => {
+            const totalPages = Math.max(1, Math.ceil(filteredClinics.length / CLINICS_PER_PAGE));
+            const safePage = Math.min(currentPage, totalPages);
+            const start = (safePage - 1) * CLINICS_PER_PAGE;
+            const pageClinics = filteredClinics.slice(start, start + CLINICS_PER_PAGE);
+            return (
+              <>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-[0.4cm] mt-8 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
+                  {pageClinics.map((clinic, index) => (
+                    <ClinicCard key={clinic.id || index} {...clinic} />
+                  ))}
+                </div>
+
+                {filteredClinics.length > 0 && (
+                  <div className="flex items-center justify-center gap-3 mt-8">
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                      disabled={safePage === 1}
+                      aria-label="Previous page"
+                    >
+                      <ChevronLeft className="h-4 w-4" />
+                    </Button>
+                    <div className="flex items-center gap-1.5">
+                      {Array.from({ length: totalPages }).map((_, i) => (
+                        <button
+                          key={i}
+                          onClick={() => setCurrentPage(i + 1)}
+                          aria-label={`Page ${i + 1}`}
+                          className={`h-2.5 rounded-full transition-all ${
+                            safePage === i + 1
+                              ? "w-6 bg-primary"
+                              : "w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                          }`}
+                        />
+                      ))}
+                    </div>
+                    <span className="text-sm text-muted-foreground tabular-nums ml-1">
+                      {safePage} / {totalPages}
+                    </span>
+                    <Button
+                      variant="outline"
+                      size="icon"
+                      onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                      disabled={safePage === totalPages}
+                      aria-label="Next page"
+                    >
+                      <ChevronRight className="h-4 w-4" />
+                    </Button>
+                  </div>
+                )}
+              </>
+            );
+          })()}
 
         </div>
       </div>
