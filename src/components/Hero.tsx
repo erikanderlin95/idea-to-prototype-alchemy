@@ -29,8 +29,10 @@ export const Hero = () => {
   
   return (
     <section className="relative py-16 flex items-center justify-center overflow-hidden bg-white">
-      <div className="absolute inset-0 bg-[linear-gradient(90deg,hsl(172,55%,95%)_0%,hsl(0,0%,100%)_18%,hsl(0,0%,100%)_78%,hsl(190,60%,96%)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_95%_48%_at_50%_100%,hsl(202,90%,95%,0.95),transparent_62%),radial-gradient(ellipse_55%_65%_at_100%_58%,hsl(188,70%,92%,0.58),transparent_68%),radial-gradient(ellipse_45%_60%_at_0%_62%,hsl(178,60%,93%,0.42),transparent_70%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,hsl(180,60%,92%)_0%,hsl(0,0%,100%)_22%,hsl(0,0%,100%)_75%,hsl(190,65%,92%)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_0%_55%,hsl(180,65%,88%,0.55),transparent_65%),radial-gradient(ellipse_70%_55%_at_100%_55%,hsl(190,70%,88%,0.55),transparent_65%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_40%_at_0%_0%,hsl(178,60%,90%,0.5),transparent_60%),radial-gradient(ellipse_50%_40%_at_100%_0%,hsl(192,65%,90%,0.5),transparent_60%),radial-gradient(ellipse_55%_45%_at_0%_100%,hsl(185,65%,88%,0.55),transparent_62%),radial-gradient(ellipse_55%_45%_at_100%_100%,hsl(195,65%,88%,0.55),transparent_62%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_50%,hsl(0,0%,100%,0.7),transparent_70%)]" />
       
       <div className="container px-4 md:px-6 relative z-10">
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
