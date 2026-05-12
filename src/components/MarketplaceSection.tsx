@@ -72,6 +72,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         })
       );
     }
+    setCurrentPage(1);
   }, [activeCategory, clinics]);
 
   const fetchClinics = async () => {
