@@ -17,7 +17,7 @@ export const MyClynicQPlugin = () => {
             Optional Add-On
           </span>
           <h2 className="text-2xl md:text-4xl font-bold text-[#1B2430] tracking-tight">
-            Phase 2: WhatsApp Automation
+            Coming soon
           </h2>
           <p className="text-sm text-[#555E6C] max-w-xl mx-auto">
             Automated updates, reminders, and communication to support both patients and clinic teams.
