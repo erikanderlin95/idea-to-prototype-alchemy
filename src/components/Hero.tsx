@@ -37,11 +37,11 @@ export const Hero = () => {
           <div className="space-y-3">
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold">
               {t("hero.title1")}
-              <span className="block mt-2 bg-gradient-to-r from-ai-purple via-ai-blue to-ai-cyan bg-clip-text text-transparent">
+              <span className="block mt-2 bg-gradient-to-r from-[hsl(210,55%,55%)] via-[hsl(195,50%,50%)] to-[hsl(185,45%,50%)] bg-clip-text text-transparent">
                 {t("hero.title2")}
               </span>
             </h1>
-            <p className="text-xl md:text-2xl font-medium text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl font-medium text-foreground/80 max-w-2xl mx-auto leading-relaxed">
               {t("hero.subtitle")}
             </p>
           </div>
