@@ -193,6 +193,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
                     <Button
                       variant="outline"
                       size="icon"
+                      className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary"
                       onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
                       disabled={safePage === totalPages}
                       aria-label="Next page"
