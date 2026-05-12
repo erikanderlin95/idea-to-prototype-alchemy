@@ -28,10 +28,9 @@ export const Hero = () => {
   const [isSearching, setIsSearching] = useState(false);
   
   return (
-    <section className="relative py-16 flex items-center justify-center overflow-hidden bg-white">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_0%_30%,hsl(185,60%,82%,0.45),transparent_60%),radial-gradient(ellipse_70%_60%_at_100%_30%,hsl(190,60%,82%,0.42),transparent_60%),radial-gradient(ellipse_80%_45%_at_50%_0%,hsl(195,55%,88%,0.30),transparent_65%)]" />
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,transparent_55%,hsl(0,0%,100%,0.85)_92%,hsl(0,0%,100%,1)_100%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_45%,hsl(0,0%,100%,0.75),transparent_70%)]" />
+    <section className="relative py-16 flex items-center justify-center overflow-hidden bg-[hsl(185,55%,90%)]">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,hsl(180,55%,80%,0.55),transparent_60%),radial-gradient(ellipse_at_right,hsl(190,55%,82%,0.50),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_45%,hsl(0,0%,100%,0.55),transparent_75%)]" />
       
       <div className="container px-4 md:px-6 relative z-10">
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
