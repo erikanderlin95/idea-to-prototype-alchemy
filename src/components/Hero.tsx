@@ -28,9 +28,9 @@ export const Hero = () => {
   const [isSearching, setIsSearching] = useState(false);
   
   return (
-    <section className="relative py-16 flex items-center justify-center overflow-hidden bg-gradient-to-br from-[hsl(203,70%,96%)]/50 via-[hsl(190,55%,97%)]/30 to-background">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_25%_20%,hsl(200,60%,94%,0.28),transparent_58%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_58%,hsl(0,0%,100%,0.6),transparent_40%),radial-gradient(ellipse_at_80%_82%,hsl(170,50%,93%,0.18),transparent_55%)]" />
+    <section className="relative py-16 flex items-center justify-center overflow-hidden bg-gradient-to-br from-[hsl(192,70%,91%)]/85 via-[hsl(180,55%,95%)]/55 to-background">
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_22%_18%,hsl(190,65%,88%,0.40),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_56%,hsl(170,50%,96%,0.70),transparent_38%),radial-gradient(ellipse_at_82%_80%,hsl(165,55%,86%,0.35),transparent_50%)]" />
       
       <div className="container px-4 md:px-6 relative z-10">
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
