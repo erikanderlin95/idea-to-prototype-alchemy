@@ -29,19 +29,19 @@ export const Hero = () => {
   
   return (
     <section className="relative py-16 flex items-center justify-center overflow-hidden bg-white">
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,hsl(190,65%,86%,0.55),transparent_45%),radial-gradient(ellipse_at_bottom_right,hsl(170,55%,85%,0.50),transparent_45%),radial-gradient(ellipse_at_top_right,hsl(200,60%,90%,0.30),transparent_50%),radial-gradient(ellipse_at_bottom_left,hsl(180,50%,90%,0.30),transparent_50%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_55%,hsl(0,0%,100%,0.92),hsl(0,0%,100%,0.55)_40%,transparent_75%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_left,hsl(180,55%,82%,0.65),transparent_55%),radial-gradient(ellipse_at_right,hsl(185,55%,82%,0.60),transparent_55%),radial-gradient(ellipse_at_top,hsl(195,55%,88%,0.40),transparent_60%),radial-gradient(ellipse_at_bottom,hsl(175,50%,86%,0.45),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_55%_45%_at_50%_50%,hsl(0,0%,100%,0.85),hsl(0,0%,100%,0.45)_45%,transparent_75%)]" />
       
       <div className="container px-4 md:px-6 relative z-10">
         <div className="flex flex-col items-center text-center space-y-8 max-w-4xl mx-auto">
           <div className="space-y-3">
             <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold">
               {t("hero.title1")}
-              <span className="block mt-2 bg-gradient-to-r from-[hsl(210,55%,55%)] via-[hsl(195,50%,50%)] to-[hsl(185,45%,50%)] bg-clip-text text-transparent">
+              <span className="block mt-2 bg-gradient-to-r from-[hsl(220,90%,58%)] via-[hsl(215,90%,55%)] to-[hsl(210,90%,55%)] bg-clip-text text-transparent">
                 {t("hero.title2")}
               </span>
             </h1>
-            <p className="text-xl md:text-2xl font-medium text-foreground/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-xl md:text-2xl font-medium text-foreground/75 max-w-2xl mx-auto leading-relaxed">
               {t("hero.subtitle")}
             </p>
           </div>
