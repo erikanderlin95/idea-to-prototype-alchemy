@@ -41,7 +41,7 @@ export const Features = () => {
           </h2>
         </div>
 
-        <div className="w-[90%] md:w-[88%] max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 items-stretch gap-4 md:gap-5">
+        <div className="w-[90%] md:w-[88%] max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-3 items-stretch gap-3 md:gap-5">
           {steps.map((s, i) => {
             const Icon = s.icon;
             return (
@@ -53,46 +53,49 @@ export const Features = () => {
                   boxShadow: "0 1px 2px rgba(16,24,40,0.04), 0 6px 18px -10px rgba(16,24,40,0.10)",
                 }}
               >
-                <div className="rounded-[10px] bg-white px-6 py-7 md:px-7 md:py-8 h-full flex flex-col items-start">
-                  {/* Step badge */}
-                  <span
-                    className="inline-flex items-center rounded-full px-3 py-1 text-[11px] font-bold tracking-[0.18em] uppercase mb-4"
-                    style={{
-                      background: badgeBg,
-                      border: `1px solid ${badgeBorder}`,
-                      color: BLUE_DARK,
-                    }}
-                  >
-                    {s.step}
-                  </span>
+                <div className="rounded-[10px] bg-white px-4 py-4 md:px-7 md:py-8 h-full flex flex-row md:flex-col items-center md:items-start gap-3 md:gap-0">
+                  {/* Icon + step badge inline on mobile */}
+                  <div className="flex flex-col items-center md:items-start gap-2 md:gap-0 shrink-0">
+                    {/* Step badge */}
+                    <span
+                      className="hidden md:inline-flex items-center rounded-full px-3 py-1 text-[11px] font-bold tracking-[0.18em] uppercase mb-4"
+                      style={{
+                        background: badgeBg,
+                        border: `1px solid ${badgeBorder}`,
+                        color: BLUE_DARK,
+                      }}
+                    >
+                      {s.step}
+                    </span>
 
-                  {/* Icon */}
-                  <div
-                    className="h-12 w-12 rounded-xl flex items-center justify-center mb-4"
-                    style={{ background: iconBg }}
-                  >
-                    <Icon
-                      className="h-6 w-6"
-                      style={{ color: "#fff" }}
-                      strokeWidth={2.25}
-                    />
+                    {/* Icon */}
+                    <div
+                      className="h-10 w-10 md:h-12 md:w-12 rounded-xl flex items-center justify-center md:mb-4"
+                      style={{ background: iconBg }}
+                    >
+                      <Icon
+                        className="h-5 w-5 md:h-6 md:w-6"
+                        style={{ color: "#fff" }}
+                        strokeWidth={2.25}
+                      />
+                    </div>
                   </div>
 
-                  {/* Title */}
-                  <h3
-                    className="text-[16.5px] md:text-[17px] font-semibold mb-1"
-                    style={{ color: "hsl(220 18% 18%)" }}
-                  >
-                    {s.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p
-                    className="text-[13px] leading-snug min-h-[40px]"
-                    style={{ color: "hsl(220 9% 46%)" }}
-                  >
-                    {s.desc}
-                  </p>
+                  {/* Text */}
+                  <div className="text-left min-w-0">
+                    <h3
+                      className="text-[15px] md:text-[17px] font-semibold mb-0.5 md:mb-1"
+                      style={{ color: "hsl(220 18% 18%)" }}
+                    >
+                      {s.title}
+                    </h3>
+                    <p
+                      className="text-[12.5px] md:text-[13px] leading-snug"
+                      style={{ color: "hsl(220 9% 46%)" }}
+                    >
+                      {s.desc}
+                    </p>
+                  </div>
                 </div>
               </div>
             );
