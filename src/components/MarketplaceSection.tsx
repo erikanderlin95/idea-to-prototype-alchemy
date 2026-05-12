@@ -22,6 +22,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const [filteredClinics, setFilteredClinics] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     fetchClinics();
