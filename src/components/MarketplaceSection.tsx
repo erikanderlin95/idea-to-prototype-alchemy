@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+
+const CLINICS_PER_PAGE = 10;
 
 interface MarketplaceSectionProps {
   defaultCategory?: string;
