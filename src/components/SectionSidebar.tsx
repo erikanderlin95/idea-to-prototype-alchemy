@@ -35,14 +35,6 @@ export const SectionSidebar = () => {
     }
   }, []);
 
-  // Subtle periodic nudge animation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setNudge(true);
-      setTimeout(() => setNudge(false), 1200);
-    }, 6000);
-    return () => clearInterval(interval);
-  }, []);
 
   const handleClick = (item: typeof sections[number]) => {
     setOpen(false);
