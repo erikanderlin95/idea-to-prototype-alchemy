@@ -17,7 +17,6 @@ const FIRST_VISIT_KEY = "clynicq_sidebar_hint_shown";
 
 export const SectionSidebar = () => {
   const [open, setOpen] = useState(false);
-  const [nudge, setNudge] = useState(false);
   const navigate = useNavigate();
 
   // First-visit auto-expand hint
