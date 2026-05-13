@@ -26,9 +26,9 @@ const Index = () => {
         <Features />
         <MarketplaceSection defaultCategory={defaultCategory} />
         <FeaturedConsultants />
-        <ClinicConversion />
         <WellnessTalks />
         <ContinuityServices />
+        <ClinicConversion />
         <MyClynicQPlugin />
       </main>
       <Footer />
