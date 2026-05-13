@@ -32,6 +32,7 @@ const Index = () => {
         <MyClynicQPlugin />
       </main>
       <Footer />
+      <SectionSidebar />
       
       {/* Onboarding Tour */}
       {showOnboarding && <OnboardingTour onComplete={completeOnboarding} />}
