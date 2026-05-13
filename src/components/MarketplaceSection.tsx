@@ -7,7 +7,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const CLINICS_PER_PAGE = 10;
+const CLINICS_PER_PAGE = 3;
 
 interface MarketplaceSectionProps {
   defaultCategory?: string;
@@ -155,7 +155,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             const pageClinics = filteredClinics.slice(start, start + CLINICS_PER_PAGE);
             return (
               <>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-[0.4cm] mt-8 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm] mt-8 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
                   {pageClinics.map((clinic, index) => (
                     <ClinicCard key={clinic.id || index} {...clinic} />
                   ))}
