@@ -30,11 +30,16 @@ export const SectionSidebar = () => {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <Button
-          size="icon"
-          className="fixed bottom-5 right-5 z-40 h-12 w-12 rounded-full shadow-lg bg-primary text-primary-foreground hover:bg-primary/90"
+          className="fixed top-1/2 -translate-y-1/2 right-0 z-40 h-auto py-3 px-2 rounded-l-xl rounded-r-none shadow-xl bg-primary text-primary-foreground hover:bg-primary/90 hover:px-3 transition-all flex flex-col items-center gap-1.5 border-2 border-r-0 border-primary-foreground/20"
           aria-label="Open sections menu"
         >
-          <LayoutList className="h-5 w-5" />
+          <LayoutList className="h-4 w-4" />
+          <span
+            className="text-[11px] font-semibold tracking-wider uppercase"
+            style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+          >
+            Sections
+          </span>
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="w-72 p-0">
