@@ -63,12 +63,7 @@ export const SectionSidebar = () => {
             "hover:pl-4 hover:pr-3 hover:shadow-[0_12px_32px_-6px_hsl(var(--primary)/0.7)]",
             "active:scale-[0.97]",
             "min-h-[120px] min-w-[44px]",
-            nudge && "animate-[sidebar-nudge_1.2s_ease-in-out]"
           )}
-          style={{
-            animation: nudge ? "sidebar-nudge 1.2s ease-in-out" : undefined,
-          }}
-        >
           {/* Pulse halo */}
           <span className="pointer-events-none absolute inset-0 rounded-l-2xl bg-primary/40 opacity-0 group-hover:opacity-0 animate-[sidebar-pulse_2.8s_ease-in-out_infinite]" />
 
