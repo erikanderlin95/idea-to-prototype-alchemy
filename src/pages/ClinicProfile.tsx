@@ -270,39 +270,19 @@ const ClinicProfile = () => {
             })()}
           </Card>
 
-          {clinic.has_digital_queue ? (
-            <div className={`grid grid-cols-1 ${(!isManagedCareType(clinic.type) && clinic.booking_url && clinic.phone) ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3'} gap-2.5 sm:gap-3`}>
-              {/* WhatsApp Clinic */}
-              {!isManagedCareType(clinic.type) && clinic.phone && (
+          {(() => {
+            const isManagedCare = isManagedCareType(clinic.type);
+            const isManagedCareNmg = clinic.is_nmg_affiliated && isManagedCare;
+            const showBookingButtons = !clinic.has_digital_queue || clinic.name === "Harmony TCM Centre";
+            const showWhatsApp = showBookingButtons && !isManagedCare && clinic.phone && clinic.name !== "Harmony TCM Centre";
+            const showBook = showBookingButtons && !isManagedCare && (clinic.phone || clinic.booking_url);
+            const showRequest = showBookingButtons && isManagedCare;
+
+            const ctas: React.ReactNode[] = [];
+            if (clinic.has_digital_queue) {
+              ctas.push(
                 <button
-                  className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
-                  onClick={handleBookAppointment}
-                >
-                  <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
-                    <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
-                  </div>
-                  <span className="text-sm sm:text-base font-bold text-foreground">{t('clinicProfile.bookWhatsApp')}</span>
-                </button>
-              )}
-              {/* Book Appointment */}
-              {(isManagedCareType(clinic.type) || clinic.booking_url || !clinic.phone) && (
-                <button
-                  className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
-                  onClick={handleBookAppointment}
-                >
-                  <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
-                    {isManagedCareType(clinic.type) 
-                      ? <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" /> 
-                      : <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />}
-                  </div>
-                  <span className="text-sm sm:text-base font-bold text-foreground">
-                    {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
-                  </span>
-                </button>
-              )}
-              {/* Join Queue */}
-              {clinic.has_digital_queue && (
-                <button
+                  key="join"
                   className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
                   onClick={() => setShowJoinQueue(true)}
                 >
@@ -311,10 +291,53 @@ const ClinicProfile = () => {
                   </div>
                   <span className="text-sm sm:text-base font-bold text-foreground">{t('clinicProfile.joinQueue')}</span>
                 </button>
-              )}
-              {/* People Ahead */}
-              {clinic.has_digital_queue && (
-                <div className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10">
+              );
+            }
+            if (showWhatsApp) {
+              ctas.push(
+                <button
+                  key="whatsapp"
+                  className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
+                  onClick={handleBookAppointment}
+                >
+                  <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
+                    <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
+                  </div>
+                  <span className="text-sm sm:text-base font-bold text-foreground">{t('clinicProfile.bookWhatsApp')}</span>
+                </button>
+              );
+            }
+            if (showBook) {
+              ctas.push(
+                <button
+                  key="book"
+                  className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
+                  onClick={handleBookAppointment}
+                >
+                  <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
+                    <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
+                  </div>
+                  <span className="text-sm sm:text-base font-bold text-foreground">{t('clinicProfile.bookAppointment')}</span>
+                </button>
+              );
+            }
+            if (showRequest) {
+              ctas.push(
+                <button
+                  key="request"
+                  className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
+                  onClick={handleBookAppointment}
+                >
+                  <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
+                    <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
+                  </div>
+                  <span className="text-sm sm:text-base font-bold text-foreground">{t('clinicProfile.requestManagedCare')}</span>
+                </button>
+              );
+            }
+            if (clinic.has_digital_queue) {
+              ctas.push(
+                <div key="ahead" className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10">
                   <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
                     <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
                   </div>
@@ -323,38 +346,14 @@ const ClinicProfile = () => {
                     <p className="font-black text-lg sm:text-xl text-primary">{queue.length} {t('clinicProfile.waiting')}</p>
                   </div>
                 </div>
-              )}
-            </div>
-          ) : (
-            <div className={`flex ${(!isManagedCareType(clinic.type) && clinic.booking_url && clinic.phone) ? 'flex-col sm:flex-row justify-center gap-3' : 'justify-center'}`}>
-              {!isManagedCareType(clinic.type) && clinic.phone && (
-                <button
-                  className="flex items-center gap-2.5 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
-                  onClick={handleBookAppointment}
-                >
-                  <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
-                    <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
-                  </div>
-                  <span className="text-sm sm:text-base font-bold text-foreground">{t('clinicProfile.bookWhatsApp')}</span>
-                </button>
-              )}
-              {(isManagedCareType(clinic.type) || clinic.booking_url || !clinic.phone) && (
-                <button
-                  className="flex items-center gap-2.5 sm:gap-3 px-6 sm:px-10 py-3 sm:py-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
-                  onClick={handleBookAppointment}
-                >
-                  <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
-                    {isManagedCareType(clinic.type)
-                      ? <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
-                      : <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />}
-                  </div>
-                  <span className="text-sm sm:text-base font-bold text-foreground">
-                    {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
-                  </span>
-                </button>
-              )}
-            </div>
-          )}
+              );
+            }
+
+            const cols = ctas.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : ctas.length === 3 ? 'sm:grid-cols-3' : ctas.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-1';
+            return (
+              <div className={`grid grid-cols-1 ${cols} gap-2.5 sm:gap-3`}>{ctas}</div>
+            );
+          })()}
           {!isManagedCareType(clinic.type) && (clinic.booking_url || clinic.phone) && (
             <p className="text-[11px] text-center text-muted-foreground mt-1">
               {t("clinicProfile.appointmentHandledByClinic")}
