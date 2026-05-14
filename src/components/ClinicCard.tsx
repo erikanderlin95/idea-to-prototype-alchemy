@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { MapPin, Clock, Users, Star, CheckCircle, XCircle, AlertTriangle, Copy, Calendar, Shield, MessageCircle } from "lucide-react";
+import { MapPin, Clock, Users, Star, CheckCircle, XCircle, AlertTriangle, Copy, Calendar, Shield, MessageCircle, ExternalLink } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -97,6 +97,8 @@ export const ClinicCard = ({
   const [bookingCaseId, setBookingCaseId] = useState("");
   const [bookingRedirectUrl, setBookingRedirectUrl] = useState("");
   const [bookingRedirectType, setBookingRedirectType] = useState("");
+  const [bookingUrl, setBookingUrl] = useState<string | null>(null);
+  const [clinicPhone, setClinicPhone] = useState<string>("");
 
   const generateCaseId = () => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -168,6 +170,15 @@ export const ClinicCard = ({
         )
         .subscribe();
       return () => { supabase.removeChannel(channel); };
+    }
+  }, [id]);
+
+  useEffect(() => {
+    if (id) {
+      supabase.from("clinics").select("booking_url, phone").eq("id", id).single().then(({ data }) => {
+        setBookingUrl(data?.booking_url || null);
+        setClinicPhone(data?.phone?.replace(/\D/g, '') || "");
+      });
     }
   }, [id]);
 
@@ -653,12 +664,24 @@ export const ClinicCard = ({
                     disabled={!isOpen}
                     onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
                   >
-                    <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
-                    {isManagedCareType(type) ? "Request" : "Book"}
+                    {isManagedCareType(type) ? (
+                      <><Shield className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />Request</>
+                    ) : bookingUrl ? (
+                      <><ExternalLink className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />{t("clinicCard.bookOnClinicSite")}</>
+                    ) : clinicPhone ? (
+                      <><MessageCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />{t("clinicCard.bookWhatsApp")}</>
+                    ) : (
+                      <><Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />Book</>
+                    )}
                   </Button>
                 )
               )}
             </div>
+            {!isManagedCareType(type) && (bookingUrl || clinicPhone) && (!hasDigitalQueue || name === "Harmony TCM Centre") && (
+              <p className="text-[10px] text-center text-muted-foreground -mt-0.5">
+                {t("clinicCard.appointmentHandledByClinic")}
+              </p>
+            )}
             {/* View Details — secondary CTA */}
             <Button 
               variant="outline"

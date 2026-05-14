@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill, ExternalLink, MessageCircle } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -280,10 +280,20 @@ const ClinicProfile = () => {
                 <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
                   {isManagedCareType(clinic.type) 
                     ? <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" /> 
-                    : <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />}
+                    : clinic.booking_url 
+                      ? <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
+                      : clinic.phone
+                        ? <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
+                        : <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />}
                 </div>
                 <span className="text-sm sm:text-base font-bold text-foreground">
-                  {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
+                  {isManagedCareType(clinic.type) 
+                    ? t('clinicProfile.requestManagedCare') 
+                    : clinic.booking_url 
+                      ? t('clinicProfile.bookOnClinicSite')
+                      : clinic.phone
+                        ? t('clinicProfile.bookWhatsApp')
+                        : t('clinicProfile.bookAppointment')}
                 </span>
               </button>
               {/* Join Queue */}
@@ -316,13 +326,28 @@ const ClinicProfile = () => {
                 <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
                   {isManagedCareType(clinic.type)
                     ? <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
-                    : <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />}
+                    : clinic.booking_url
+                      ? <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
+                      : clinic.phone
+                        ? <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
+                        : <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />}
                 </div>
                 <span className="text-sm sm:text-base font-bold text-foreground">
-                  {isManagedCareType(clinic.type) ? t('clinicProfile.requestManagedCare') : t('clinicProfile.bookAppointment')}
+                  {isManagedCareType(clinic.type) 
+                    ? t('clinicProfile.requestManagedCare') 
+                    : clinic.booking_url
+                      ? t('clinicProfile.bookOnClinicSite')
+                      : clinic.phone
+                        ? t('clinicProfile.bookWhatsApp')
+                        : t('clinicProfile.bookAppointment')}
                 </span>
               </button>
             </div>
+          )}
+          {!isManagedCareType(clinic.type) && (clinic.booking_url || clinic.phone) && (
+            <p className="text-[11px] text-center text-muted-foreground mt-1">
+              {t("clinicProfile.appointmentHandledByClinic")}
+            </p>
           )}
 
           {/* Tabs */}

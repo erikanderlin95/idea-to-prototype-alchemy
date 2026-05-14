@@ -330,6 +330,9 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.availabilitiesToday": "Availabilities Today",
     "clinicCard.servicesOffered": "Services Offered",
     "clinicCard.joinedQueue": "You've joined the queue! Save your link to revisit anytime.",
+    "clinicCard.bookWhatsApp": "WhatsApp Clinic",
+    "clinicCard.bookOnClinicSite": "Book on Clinic Site",
+    "clinicCard.appointmentHandledByClinic": "Appointment handled directly by clinic",
     
     // MarketplaceSection
     "marketplace.title": "Browse Clinics",
@@ -413,6 +416,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // ClinicProfile
     "clinicProfile.bookAppointment": "Book Appointment",
+    "clinicProfile.bookWhatsApp": "WhatsApp Clinic",
+    "clinicProfile.bookOnClinicSite": "Book on Clinic Site",
+    "clinicProfile.appointmentHandledByClinic": "Appointment handled directly by clinic",
     "clinicProfile.joinQueue": "Join Queue",
     "clinicProfile.clinicPhotos": "Clinic Photos",
     "clinicProfile.photoGalleryComingSoon": "Photo gallery coming soon",
@@ -1273,6 +1279,9 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.availabilitiesToday": "今日可预约时段",
     "clinicCard.servicesOffered": "提供的服务",
     "clinicCard.joinedQueue": "您已加入排队！保存链接随时查看。",
+    "clinicCard.bookWhatsApp": "WhatsApp 诊所",
+    "clinicCard.bookOnClinicSite": "在诊所网站预约",
+    "clinicCard.appointmentHandledByClinic": "预约由诊所直接处理",
     
     // MarketplaceSection
     "marketplace.title": "浏览诊所",
@@ -1356,6 +1365,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // ClinicProfile
     "clinicProfile.bookAppointment": "预约挂号",
+    "clinicProfile.bookWhatsApp": "WhatsApp 诊所",
+    "clinicProfile.bookOnClinicSite": "在诊所网站预约",
+    "clinicProfile.appointmentHandledByClinic": "预约由诊所直接处理",
     "clinicProfile.joinQueue": "加入排队",
     "clinicProfile.clinicPhotos": "诊所照片",
     "clinicProfile.photoGalleryComingSoon": "照片库即将推出",
