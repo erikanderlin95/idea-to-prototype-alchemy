@@ -170,7 +170,7 @@ export const BookingIntakeDialog = ({
       >
         <DialogContent className="max-w-sm max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-base">Continue to Clinic Booking — {clinicName}</DialogTitle>
+            <DialogTitle className="text-base">{preferWhatsApp ? "Continue to Clinic WhatsApp" : "Continue to Clinic Booking"} — {clinicName}</DialogTitle>
             <DialogDescription className="text-xs">Enter your details to proceed</DialogDescription>
           </DialogHeader>
           <div className="space-y-3">
