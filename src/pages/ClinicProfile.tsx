@@ -617,6 +617,7 @@ const ClinicProfile = () => {
           onOpenChange={setShowBookingIntake}
           clinicId={id}
           clinicName={clinic.name}
+          preferWhatsApp={bookingPreferWhatsApp}
         />
       )}
     </div>
