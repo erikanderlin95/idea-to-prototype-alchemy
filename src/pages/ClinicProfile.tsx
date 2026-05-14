@@ -92,7 +92,7 @@ const ClinicProfile = () => {
     }
   };
 
-  const handleBookAppointment = () => {
+  const handleBookAppointment = (preferWhatsApp = false) => {
     if (!clinic) return;
     if (isManagedCareType(clinic.type)) {
       setShowManagedCareModal(true);
@@ -102,6 +102,7 @@ const ClinicProfile = () => {
       setMcTiming("");
       setMcConcern("");
     } else {
+      setBookingPreferWhatsApp(preferWhatsApp);
       setShowBookingIntake(true);
     }
   };
