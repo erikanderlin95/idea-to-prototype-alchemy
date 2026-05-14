@@ -92,7 +92,8 @@ export const BookingIntakeDialog = ({
 
       const bookingUrl = clinicData?.booking_url || null;
       const clinicPhone = clinicData?.phone?.replace(/\D/g, "") || "";
-      const redirectType = bookingUrl ? "web" : clinicPhone ? "whatsapp" : "web";
+      const useWhatsApp = preferWhatsApp && !!clinicPhone;
+      const redirectType = useWhatsApp ? "whatsapp" : (bookingUrl ? "web" : clinicPhone ? "whatsapp" : "web");
 
       const composedNotes = [
         doctorName ? `Preferred doctor: ${doctorName}` : null,
@@ -110,7 +111,7 @@ export const BookingIntakeDialog = ({
           clinic_name: clinicName,
           booking_type: "external",
           redirect_type: redirectType,
-          redirect_url: bookingUrl || null,
+          redirect_url: useWhatsApp ? null : (bookingUrl || null),
           preferred_date: leadPrefDate || null,
           preferred_time: leadPrefTime || null,
           notes: composedNotes || null,
@@ -120,7 +121,13 @@ export const BookingIntakeDialog = ({
       const caseId = response?.case_id || "";
       setBookingCaseId(caseId);
 
-      if (bookingUrl) {
+      if (useWhatsApp) {
+        const message = encodeURIComponent(
+          `Hi, I'd like to book an appointment.\nName: ${leadName.trim()}\nCase ID: ${caseId}`,
+        );
+        setBookingRedirectUrl(`https://wa.me/${clinicPhone}?text=${message}`);
+        setBookingRedirectType("whatsapp");
+      } else if (bookingUrl) {
         const separator = bookingUrl.includes("?") ? "&" : "?";
         setBookingRedirectUrl(`${bookingUrl}${separator}case_id=${encodeURIComponent(caseId)}`);
         setBookingRedirectType("web");
