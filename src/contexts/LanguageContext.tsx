@@ -332,6 +332,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.joinedQueue": "You've joined the queue! Save your link to revisit anytime.",
     "clinicCard.bookWhatsApp": "WhatsApp Clinic",
     "clinicCard.bookOnClinicSite": "Book on Clinic Site",
+    "clinicCard.bookAppointment": "Book Appointment",
     "clinicCard.appointmentHandledByClinic": "Appointment handled directly by clinic",
     
     // MarketplaceSection
@@ -1281,6 +1282,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.joinedQueue": "您已加入排队！保存链接随时查看。",
     "clinicCard.bookWhatsApp": "WhatsApp 诊所",
     "clinicCard.bookOnClinicSite": "在诊所网站预约",
+    "clinicCard.bookAppointment": "预约挂号",
     "clinicCard.appointmentHandledByClinic": "预约由诊所直接处理",
     
     // MarketplaceSection
