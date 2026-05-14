@@ -330,6 +330,9 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.availabilitiesToday": "Availabilities Today",
     "clinicCard.servicesOffered": "Services Offered",
     "clinicCard.joinedQueue": "You've joined the queue! Save your link to revisit anytime.",
+    "clinicCard.bookWhatsApp": "WhatsApp Clinic",
+    "clinicCard.bookOnClinicSite": "Book on Clinic Site",
+    "clinicCard.appointmentHandledByClinic": "Appointment handled directly by clinic",
     
     // MarketplaceSection
     "marketplace.title": "Browse Clinics",
