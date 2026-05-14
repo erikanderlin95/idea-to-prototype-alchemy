@@ -173,6 +173,15 @@ export const ClinicCard = ({
     }
   }, [id]);
 
+  useEffect(() => {
+    if (id) {
+      supabase.from("clinics").select("booking_url, phone").eq("id", id).single().then(({ data }) => {
+        setBookingUrl(data?.booking_url || null);
+        setClinicPhone(data?.phone?.replace(/\D/g, '') || "");
+      });
+    }
+  }, [id]);
+
   const checkQueueStatus = async () => {
     if (!id) return;
     const storedMobile = localStorage.getItem(`queue_mobile_${id}`);
