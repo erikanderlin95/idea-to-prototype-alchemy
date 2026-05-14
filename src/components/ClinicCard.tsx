@@ -97,6 +97,8 @@ export const ClinicCard = ({
   const [bookingCaseId, setBookingCaseId] = useState("");
   const [bookingRedirectUrl, setBookingRedirectUrl] = useState("");
   const [bookingRedirectType, setBookingRedirectType] = useState("");
+  const [bookingUrl, setBookingUrl] = useState<string | null>(null);
+  const [clinicPhone, setClinicPhone] = useState<string>("");
 
   const generateCaseId = () => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
