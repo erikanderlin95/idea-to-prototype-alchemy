@@ -416,6 +416,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // ClinicProfile
     "clinicProfile.bookAppointment": "Book Appointment",
+    "clinicProfile.bookWhatsApp": "WhatsApp Clinic",
+    "clinicProfile.bookOnClinicSite": "Book on Clinic Site",
+    "clinicProfile.appointmentHandledByClinic": "Appointment handled directly by clinic",
     "clinicProfile.joinQueue": "Join Queue",
     "clinicProfile.clinicPhotos": "Clinic Photos",
     "clinicProfile.photoGalleryComingSoon": "Photo gallery coming soon",
@@ -1362,6 +1365,9 @@ const translations: Record<Language, Record<string, string>> = {
     
     // ClinicProfile
     "clinicProfile.bookAppointment": "预约挂号",
+    "clinicProfile.bookWhatsApp": "WhatsApp 诊所",
+    "clinicProfile.bookOnClinicSite": "在诊所网站预约",
+    "clinicProfile.appointmentHandledByClinic": "预约由诊所直接处理",
     "clinicProfile.joinQueue": "加入排队",
     "clinicProfile.clinicPhotos": "诊所照片",
     "clinicProfile.photoGalleryComingSoon": "照片库即将推出",
