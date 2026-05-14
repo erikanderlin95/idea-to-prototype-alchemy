@@ -657,7 +657,7 @@ export const ClinicCard = ({
 
               const bookingBtnClass = "flex-1 font-bold text-sm border-2 border-emerald-600 text-foreground hover:bg-emerald-50 h-10 hover:scale-[1.02] transition-transform";
               const bookingBtnVariant = "outline" as const;
-              const openLead = (e: React.MouseEvent) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } };
+              const openLead = (e: React.MouseEvent, preferWhatsApp = false) => { e.stopPropagation(); if (id) { resetBookingLead(); setBookingPreferWhatsApp(preferWhatsApp); setShowBookingLead(true); } };
 
               let bookingButtons: React.ReactNode = null;
               if (showBookingButtons) {
