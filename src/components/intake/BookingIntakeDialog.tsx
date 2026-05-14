@@ -37,6 +37,7 @@ export const BookingIntakeDialog = ({
   clinicId,
   clinicName,
   doctorName,
+  preferWhatsApp = false,
 }: BookingIntakeDialogProps) => {
   const [leadName, setLeadName] = useState("");
   const [leadMobile, setLeadMobile] = useState("");
