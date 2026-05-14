@@ -20,11 +20,13 @@ interface MarketplaceSectionProps {
 export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }: MarketplaceSectionProps) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const [clinics, setClinics] = useState<any[]>([]);
   const [filteredClinics, setFilteredClinics] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
   const [currentPage, setCurrentPage] = useState(1);
+  const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
 
   useEffect(() => {
     fetchClinics();
