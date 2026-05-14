@@ -330,7 +330,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.availabilitiesToday": "Availabilities Today",
     "clinicCard.servicesOffered": "Services Offered",
     "clinicCard.joinedQueue": "You've joined the queue! Save your link to revisit anytime.",
-    "clinicCard.bookWhatsApp": "WhatsApp Clinic",
+    "clinicCard.bookWhatsApp": "WhatsApp",
     "clinicCard.bookOnClinicSite": "Book on Clinic Site",
     "clinicCard.bookAppointment": "Book Appointment",
     "clinicCard.appointmentHandledByClinic": "Appointment handled directly by clinic",
@@ -417,7 +417,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // ClinicProfile
     "clinicProfile.bookAppointment": "Book Appointment",
-    "clinicProfile.bookWhatsApp": "WhatsApp Clinic",
+    "clinicProfile.bookWhatsApp": "WhatsApp",
     "clinicProfile.bookOnClinicSite": "Book on Clinic Site",
     "clinicProfile.appointmentHandledByClinic": "Appointment handled directly by clinic",
     "clinicProfile.joinQueue": "Join Queue",
@@ -1280,7 +1280,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.availabilitiesToday": "今日可预约时段",
     "clinicCard.servicesOffered": "提供的服务",
     "clinicCard.joinedQueue": "您已加入排队！保存链接随时查看。",
-    "clinicCard.bookWhatsApp": "WhatsApp 诊所",
+    "clinicCard.bookWhatsApp": "WhatsApp",
     "clinicCard.bookOnClinicSite": "在诊所网站预约",
     "clinicCard.bookAppointment": "预约挂号",
     "clinicCard.appointmentHandledByClinic": "预约由诊所直接处理",
@@ -1367,7 +1367,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // ClinicProfile
     "clinicProfile.bookAppointment": "预约挂号",
-    "clinicProfile.bookWhatsApp": "WhatsApp 诊所",
+    "clinicProfile.bookWhatsApp": "WhatsApp",
     "clinicProfile.bookOnClinicSite": "在诊所网站预约",
     "clinicProfile.appointmentHandledByClinic": "预约由诊所直接处理",
     "clinicProfile.joinQueue": "加入排队",
