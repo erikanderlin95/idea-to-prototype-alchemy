@@ -1276,6 +1276,9 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.availabilitiesToday": "今日可预约时段",
     "clinicCard.servicesOffered": "提供的服务",
     "clinicCard.joinedQueue": "您已加入排队！保存链接随时查看。",
+    "clinicCard.bookWhatsApp": "WhatsApp 诊所",
+    "clinicCard.bookOnClinicSite": "在诊所网站预约",
+    "clinicCard.appointmentHandledByClinic": "预约由诊所直接处理",
     
     // MarketplaceSection
     "marketplace.title": "浏览诊所",
