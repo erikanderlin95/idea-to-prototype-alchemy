@@ -650,10 +650,8 @@ export const ClinicCard = ({
                 </Button>
               );
 
-              const bookingBtnClass = hasDigitalQueue
-                ? "flex-1 font-bold text-sm border-2 border-emerald-600 text-foreground hover:bg-emerald-50 h-10 hover:scale-[1.02] transition-transform"
-                : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-emerald-600 h-10 hover:scale-[1.02] transition-transform";
-              const bookingBtnVariant = hasDigitalQueue ? "outline" : "default";
+              const bookingBtnClass = "flex-1 font-bold text-sm border-2 border-emerald-600 text-foreground hover:bg-emerald-50 h-10 hover:scale-[1.02] transition-transform";
+              const bookingBtnVariant = "outline" as const;
               const openLead = (e: React.MouseEvent) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } };
 
               let bookingButtons: React.ReactNode = null;
