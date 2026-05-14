@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const CLINICS_PER_PAGE = 3;
+const CLINICS_PER_PAGE_MOBILE = 3;
+const CLINICS_PER_PAGE_DESKTOP = 6;
 
 interface MarketplaceSectionProps {
   defaultCategory?: string;
@@ -18,11 +20,13 @@ interface MarketplaceSectionProps {
 export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }: MarketplaceSectionProps) => {
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const isMobile = useIsMobile();
   const [clinics, setClinics] = useState<any[]>([]);
   const [filteredClinics, setFilteredClinics] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
   const [currentPage, setCurrentPage] = useState(1);
+  const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
 
   useEffect(() => {
     fetchClinics();
@@ -149,10 +153,10 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           <SearchFilters defaultCategory={defaultCategory} onCategoryChange={handleCategoryChange} />
 
           {(() => {
-            const totalPages = Math.max(1, Math.ceil(filteredClinics.length / CLINICS_PER_PAGE));
+            const totalPages = Math.max(1, Math.ceil(filteredClinics.length / clinicsPerPage));
             const safePage = Math.min(currentPage, totalPages);
-            const start = (safePage - 1) * CLINICS_PER_PAGE;
-            const pageClinics = filteredClinics.slice(start, start + CLINICS_PER_PAGE);
+            const start = (safePage - 1) * clinicsPerPage;
+            const pageClinics = filteredClinics.slice(start, start + clinicsPerPage);
             return (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm] mt-8 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
