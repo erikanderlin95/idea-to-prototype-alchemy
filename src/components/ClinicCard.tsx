@@ -854,7 +854,7 @@ export const ClinicCard = ({
     <Dialog open={showBookingLead} onOpenChange={(open) => { setShowBookingLead(open); if (!open) { setLeadDisclaimerAgreed(false); setLeadPdpaConsent(false); } }}>
       <DialogContent className="max-w-sm max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-base">Continue to Clinic Booking</DialogTitle>
+          <DialogTitle className="text-base">{bookingPreferWhatsApp ? "Continue to Clinic WhatsApp" : "Continue to Clinic Booking"}</DialogTitle>
           <DialogDescription className="text-xs">Enter your details to proceed</DialogDescription>
         </DialogHeader>
         <div className="space-y-3">
