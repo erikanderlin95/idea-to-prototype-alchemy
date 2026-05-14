@@ -97,6 +97,7 @@ export const ClinicCard = ({
   const [bookingCaseId, setBookingCaseId] = useState("");
   const [bookingRedirectUrl, setBookingRedirectUrl] = useState("");
   const [bookingRedirectType, setBookingRedirectType] = useState("");
+  const [bookingPreferWhatsApp, setBookingPreferWhatsApp] = useState(false);
   const [bookingUrl, setBookingUrl] = useState<string | null>(null);
   const [clinicPhone, setClinicPhone] = useState<string>("");
 
@@ -354,7 +355,8 @@ export const ClinicCard = ({
       
       const bookingUrl = clinicData?.booking_url || null;
       const clinicPhone = clinicData?.phone?.replace(/\D/g, '') || "";
-      const redirectType = bookingUrl ? "web" : (clinicPhone ? "whatsapp" : "web");
+      const useWhatsApp = bookingPreferWhatsApp && !!clinicPhone;
+      const redirectType = useWhatsApp ? "whatsapp" : (bookingUrl ? "web" : (clinicPhone ? "whatsapp" : "web"));
 
       const { data: response } = await supabase.functions.invoke("queue-lookup", {
         body: { 
@@ -365,7 +367,7 @@ export const ClinicCard = ({
           clinic_name: name, 
           booking_type: "external",
           redirect_type: redirectType,
-          redirect_url: bookingUrl || null,
+          redirect_url: useWhatsApp ? null : (bookingUrl || null),
           preferred_date: leadPrefDate || null,
           preferred_time: leadPrefTime || null,
           notes: leadNotes.trim() || null,
@@ -376,7 +378,11 @@ export const ClinicCard = ({
       setBookingCaseId(caseId);
       
       // Prepare redirect info for confirmation screen
-      if (bookingUrl) {
+      if (useWhatsApp) {
+        const message = encodeURIComponent(`Hi, I'd like to book an appointment.\nName: ${leadName.trim()}\nCase ID: ${caseId}`);
+        setBookingRedirectUrl(`https://wa.me/${clinicPhone}?text=${message}`);
+        setBookingRedirectType("whatsapp");
+      } else if (bookingUrl) {
         const separator = bookingUrl.includes("?") ? "&" : "?";
         setBookingRedirectUrl(`${bookingUrl}${separator}case_id=${encodeURIComponent(caseId)}`);
         setBookingRedirectType("web");
@@ -651,7 +657,7 @@ export const ClinicCard = ({
 
               const bookingBtnClass = "flex-1 font-bold text-sm border-2 border-emerald-600 text-foreground hover:bg-emerald-50 h-10 hover:scale-[1.02] transition-transform";
               const bookingBtnVariant = "outline" as const;
-              const openLead = (e: React.MouseEvent) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } };
+              const openLead = (e: React.MouseEvent, preferWhatsApp = false) => { e.stopPropagation(); if (id) { resetBookingLead(); setBookingPreferWhatsApp(preferWhatsApp); setShowBookingLead(true); } };
 
               let bookingButtons: React.ReactNode = null;
               if (showBookingButtons) {
@@ -677,7 +683,7 @@ export const ClinicCard = ({
                   bookingButtons = (
                     <>
                       {clinicPhone && name !== "Harmony TCM Centre" && (
-                        <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={openLead}>
+                        <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={(e) => openLead(e, true)}>
                           <MessageCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
                           {t("clinicCard.bookWhatsApp")}
                         </Button>

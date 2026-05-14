@@ -62,6 +62,7 @@ const ClinicProfile = () => {
   const [expandedAward, setExpandedAward] = useState<number | null>(null);
   const [showJoinQueue, setShowJoinQueue] = useState(false);
   const [showBookingIntake, setShowBookingIntake] = useState(false);
+  const [bookingPreferWhatsApp, setBookingPreferWhatsApp] = useState(false);
 
   useEffect(() => {
     fetchClinicData();
@@ -91,7 +92,7 @@ const ClinicProfile = () => {
     }
   };
 
-  const handleBookAppointment = () => {
+  const handleBookAppointment = (preferWhatsApp = false) => {
     if (!clinic) return;
     if (isManagedCareType(clinic.type)) {
       setShowManagedCareModal(true);
@@ -101,6 +102,7 @@ const ClinicProfile = () => {
       setMcTiming("");
       setMcConcern("");
     } else {
+      setBookingPreferWhatsApp(preferWhatsApp);
       setShowBookingIntake(true);
     }
   };
@@ -298,7 +300,7 @@ const ClinicProfile = () => {
                 <button
                   key="whatsapp"
                   className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
-                  onClick={handleBookAppointment}
+                  onClick={() => handleBookAppointment(true)}
                 >
                   <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
                     <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
@@ -312,7 +314,7 @@ const ClinicProfile = () => {
                 <button
                   key="book"
                   className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
-                  onClick={handleBookAppointment}
+                  onClick={() => handleBookAppointment()}
                 >
                   <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
                     <Calendar className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
@@ -326,7 +328,7 @@ const ClinicProfile = () => {
                 <button
                   key="request"
                   className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10 hover:bg-accent/20 active:bg-accent/25 transition-all cursor-pointer"
-                  onClick={handleBookAppointment}
+                  onClick={() => handleBookAppointment()}
                 >
                   <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
                     <Shield className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
@@ -615,6 +617,7 @@ const ClinicProfile = () => {
           onOpenChange={setShowBookingIntake}
           clinicId={id}
           clinicName={clinic.name}
+          preferWhatsApp={bookingPreferWhatsApp}
         />
       )}
     </div>
