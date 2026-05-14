@@ -684,6 +684,8 @@ export const ClinicCard = ({
                     <>
                       {clinicPhone && name !== "Harmony TCM Centre" && (
                         <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={(e) => openLead(e, true)}>
+                          <MessageCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
+                          {t("clinicCard.bookWhatsApp")}
                         </Button>
                       )}
                       {(bookingUrl || clinicPhone) && (
