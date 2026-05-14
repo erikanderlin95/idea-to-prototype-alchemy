@@ -5,9 +5,11 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
-const CLINICS_PER_PAGE = 3;
+const CLINICS_PER_PAGE_MOBILE = 3;
+const CLINICS_PER_PAGE_DESKTOP = 6;
 
 interface MarketplaceSectionProps {
   defaultCategory?: string;
