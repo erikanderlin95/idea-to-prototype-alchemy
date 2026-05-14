@@ -685,7 +685,7 @@ export const ClinicCard = ({
                           {t("clinicCard.bookWhatsApp")}
                         </Button>
                       )}
-                      {bookingUrl && (
+                      {(bookingUrl || (name === "Wellness Plus Clinic" && clinicPhone)) && (
                         <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={openLead}>
                           <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
                           {t("clinicCard.bookAppointment")}
