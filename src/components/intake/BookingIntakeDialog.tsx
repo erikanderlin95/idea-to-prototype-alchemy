@@ -27,6 +27,8 @@ interface BookingIntakeDialogProps {
   clinicName: string;
   /** Optional doctor preselect — sent in notes */
   doctorName?: string;
+  /** Force the redirect to WhatsApp (for the WhatsApp CTA) */
+  preferWhatsApp?: boolean;
 }
 
 export const BookingIntakeDialog = ({
