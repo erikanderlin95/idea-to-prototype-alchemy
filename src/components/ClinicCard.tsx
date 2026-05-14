@@ -635,8 +635,8 @@ export const ClinicCard = ({
               const showBookingButtons = !hasDigitalQueue || name === "Harmony TCM Centre";
               const isManagedCareNmg = isNmgAffiliated && isManagedCareType(type);
               const isManagedCare = isManagedCareType(type);
-              const hasBothBooking = !!clinicPhone && !!bookingUrl;
-              // Stack vertically when join-queue + two booking buttons would otherwise crowd the row
+              const hasBothBooking = !!clinicPhone || !!bookingUrl;
+              // Stack vertically when join-queue + booking buttons would otherwise crowd the row
               const stackVertical = isManagedCareNmg || (hasDigitalQueue && showBookingButtons && !isManagedCare && hasBothBooking);
 
               const joinQueueBtn = hasDigitalQueue && (
@@ -683,7 +683,7 @@ export const ClinicCard = ({
                           {t("clinicCard.bookWhatsApp")}
                         </Button>
                       )}
-                      {(bookingUrl || (name === "Wellness Plus Clinic" && clinicPhone)) && (
+                      {(bookingUrl || clinicPhone) && (
                         <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={openLead}>
                           <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
                           {t("clinicCard.bookAppointment")}
