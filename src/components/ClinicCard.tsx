@@ -643,7 +643,7 @@ export const ClinicCard = ({
                   {isJoining ? t("clinicCard.joining") : t("clinicCard.joinQueue")}
                 </Button>
               )}
-              {/* Book button — shown when clinic does NOT have digital queue, OR specifically for Harmony TCM Centre */}
+              {/* Book button(s) — shown when clinic does NOT have digital queue, OR specifically for Harmony TCM Centre */}
               {(!hasDigitalQueue || name === "Harmony TCM Centre") && (
                 isNmgAffiliated && isManagedCareType(type) ? (
                   <Button 
@@ -655,25 +655,50 @@ export const ClinicCard = ({
                     Request Managed Care Support
                   </Button>
                 ) : (
-                  <Button 
-                    variant={hasDigitalQueue ? "outline" : "default"}
-                    className={hasDigitalQueue 
-                      ? "flex-1 font-bold text-sm border-2 border-emerald-600 text-foreground hover:bg-emerald-50 h-10 hover:scale-[1.02] transition-transform"
-                      : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-emerald-600 h-10 hover:scale-[1.02] transition-transform"
-                    }
-                    disabled={!isOpen}
-                    onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
-                  >
-                    {isManagedCareType(type) ? (
-                      <><Shield className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />Request</>
-                    ) : bookingUrl ? (
-                      <><ExternalLink className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />{t("clinicCard.bookOnClinicSite")}</>
-                    ) : clinicPhone ? (
-                      <><MessageCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />{t("clinicCard.bookWhatsApp")}</>
-                    ) : (
-                      <><Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />Book</>
+                  <>
+                    {clinicPhone && (
+                      <Button 
+                        variant={hasDigitalQueue ? "outline" : "default"}
+                        className={hasDigitalQueue 
+                          ? "flex-1 font-bold text-sm border-2 border-emerald-600 text-foreground hover:bg-emerald-50 h-10 hover:scale-[1.02] transition-transform"
+                          : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-emerald-600 h-10 hover:scale-[1.02] transition-transform"
+                        }
+                        disabled={!isOpen}
+                        onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
+                      >
+                        <MessageCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
+                        {t("clinicCard.bookWhatsApp")}
+                      </Button>
                     )}
-                  </Button>
+                    {bookingUrl && (
+                      <Button 
+                        variant={hasDigitalQueue ? "outline" : "default"}
+                        className={hasDigitalQueue 
+                          ? "flex-1 font-bold text-sm border-2 border-emerald-600 text-foreground hover:bg-emerald-50 h-10 hover:scale-[1.02] transition-transform"
+                          : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-emerald-600 h-10 hover:scale-[1.02] transition-transform"
+                        }
+                        disabled={!isOpen}
+                        onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
+                      >
+                        <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
+                        {t("clinicCard.bookAppointment")}
+                      </Button>
+                    )}
+                    {!bookingUrl && !clinicPhone && (
+                      <Button 
+                        variant={hasDigitalQueue ? "outline" : "default"}
+                        className={hasDigitalQueue 
+                          ? "flex-1 font-bold text-sm border-2 border-emerald-600 text-foreground hover:bg-emerald-50 h-10 hover:scale-[1.02] transition-transform"
+                          : "flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-emerald-600 h-10 hover:scale-[1.02] transition-transform"
+                        }
+                        disabled={!isOpen}
+                        onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
+                      >
+                        <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
+                        Book
+                      </Button>
+                    )}
+                  </>
                 )
               )}
             </div>
