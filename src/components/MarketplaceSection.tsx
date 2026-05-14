@@ -153,10 +153,10 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           <SearchFilters defaultCategory={defaultCategory} onCategoryChange={handleCategoryChange} />
 
           {(() => {
-            const totalPages = Math.max(1, Math.ceil(filteredClinics.length / CLINICS_PER_PAGE));
+            const totalPages = Math.max(1, Math.ceil(filteredClinics.length / clinicsPerPage));
             const safePage = Math.min(currentPage, totalPages);
-            const start = (safePage - 1) * CLINICS_PER_PAGE;
-            const pageClinics = filteredClinics.slice(start, start + CLINICS_PER_PAGE);
+            const start = (safePage - 1) * clinicsPerPage;
+            const pageClinics = filteredClinics.slice(start, start + clinicsPerPage);
             return (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm] mt-8 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
