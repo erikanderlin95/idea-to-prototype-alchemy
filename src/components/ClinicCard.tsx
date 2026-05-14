@@ -635,9 +635,8 @@ export const ClinicCard = ({
               const showBookingButtons = !hasDigitalQueue || name === "Harmony TCM Centre";
               const isManagedCareNmg = isNmgAffiliated && isManagedCareType(type);
               const isManagedCare = isManagedCareType(type);
-              const hasBothBooking = !!clinicPhone || !!bookingUrl;
-              // Stack vertically when join-queue + booking buttons would otherwise crowd the row
-              const stackVertical = isManagedCareNmg || (hasDigitalQueue && showBookingButtons && !isManagedCare && hasBothBooking);
+              // Stack vertically only for managed-care NMG full-width CTA
+              const stackVertical = isManagedCareNmg;
 
               const joinQueueBtn = hasDigitalQueue && (
                 <Button
