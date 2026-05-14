@@ -62,6 +62,7 @@ const ClinicProfile = () => {
   const [expandedAward, setExpandedAward] = useState<number | null>(null);
   const [showJoinQueue, setShowJoinQueue] = useState(false);
   const [showBookingIntake, setShowBookingIntake] = useState(false);
+  const [bookingPreferWhatsApp, setBookingPreferWhatsApp] = useState(false);
 
   useEffect(() => {
     fetchClinicData();
