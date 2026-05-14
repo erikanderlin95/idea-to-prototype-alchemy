@@ -664,12 +664,24 @@ export const ClinicCard = ({
                     disabled={!isOpen}
                     onClick={(e) => { e.stopPropagation(); if (id) { resetBookingLead(); setShowBookingLead(true); } }}
                   >
-                    <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
-                    {isManagedCareType(type) ? "Request" : "Book"}
+                    {isManagedCareType(type) ? (
+                      <><Shield className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />Request</>
+                    ) : bookingUrl ? (
+                      <><ExternalLink className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />{t("clinicCard.bookOnClinicSite")}</>
+                    ) : clinicPhone ? (
+                      <><MessageCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />{t("clinicCard.bookWhatsApp")}</>
+                    ) : (
+                      <><Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />Book</>
+                    )}
                   </Button>
                 )
               )}
             </div>
+            {!isManagedCareType(type) && (bookingUrl || clinicPhone) && (!hasDigitalQueue || name === "Harmony TCM Centre") && (
+              <p className="text-[10px] text-center text-muted-foreground -mt-0.5">
+                {t("clinicCard.appointmentHandledByClinic")}
+              </p>
+            )}
             {/* View Details — secondary CTA */}
             <Button 
               variant="outline"
