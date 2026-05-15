@@ -607,10 +607,7 @@ export const ClinicCard = ({
             <div className="space-y-1.5">
             {(() => {
               const showBookingButtons = !hasDigitalQueue || name === "Harmony TCM Centre";
-              const isManagedCareNmg = isNmgAffiliated && isManagedCareType(type);
-              const isManagedCare = isManagedCareType(type);
-              // Stack vertically only for managed-care NMG full-width CTA
-              const stackVertical = isManagedCareNmg;
+              const stackVertical = false;
 
               const joinQueueBtn = hasDigitalQueue && (
                 <Button
@@ -629,48 +626,28 @@ export const ClinicCard = ({
 
               let bookingButtons: React.ReactNode = null;
               if (showBookingButtons) {
-                if (isManagedCareNmg) {
-                  bookingButtons = (
-                    <Button
-                      className="w-full bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-emerald-600 h-10 hover:scale-[1.02] transition-transform"
-                      disabled={!isOpen}
-                      onClick={(e) => { e.stopPropagation(); resetManagedCareModal(); setShowManagedCareModal(true); }}
-                    >
-                      <Shield className="mr-1.5 h-4 w-4" strokeWidth={3} />
-                      Request Managed Care Support
-                    </Button>
-                  );
-                } else if (isManagedCare) {
-                  bookingButtons = (
-                    <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={openLead}>
-                      <Shield className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
-                      Request
-                    </Button>
-                  );
-                } else {
-                  bookingButtons = (
-                    <>
-                      {clinicPhone && name !== "Harmony TCM Centre" && (
-                        <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={(e) => openLead(e, true)}>
-                          <MessageCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
-                          {t("clinicCard.bookWhatsApp")}
-                        </Button>
-                      )}
-                      {(bookingUrl || clinicPhone) && (
-                        <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={openLead}>
-                          <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
-                          {t("clinicCard.bookAppointment")}
-                        </Button>
-                      )}
-                      {!bookingUrl && !clinicPhone && (
-                        <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={openLead}>
-                          <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
-                          Book
-                        </Button>
-                      )}
-                    </>
-                  );
-                }
+                bookingButtons = (
+                  <>
+                    {clinicPhone && name !== "Harmony TCM Centre" && (
+                      <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={(e) => openLead(e, true)}>
+                        <MessageCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
+                        {t("clinicCard.bookWhatsApp")}
+                      </Button>
+                    )}
+                    {(bookingUrl || clinicPhone) && (
+                      <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={openLead}>
+                        <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
+                        {t("clinicCard.bookAppointment")}
+                      </Button>
+                    )}
+                    {!bookingUrl && !clinicPhone && (
+                      <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={openLead}>
+                        <Calendar className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
+                        Book
+                      </Button>
+                    )}
+                  </>
+                );
               }
 
               if (stackVertical) {
