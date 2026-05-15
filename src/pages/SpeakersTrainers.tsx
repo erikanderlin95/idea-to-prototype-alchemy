@@ -59,41 +59,7 @@ const SpeakersTrainers = () => {
         accentClassName="bg-[#D4860A] hover:bg-[#B8720A] text-white"
       />
 
-      <section className="py-8 px-4 border-b border-border/50">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="flex items-center gap-3 p-4 rounded-lg bg-card/50">
-              <div className="p-2 rounded-full bg-[#FDF2E0]">
-                <Mic className="h-5 w-5 text-[#D4860A]" />
-              </div>
-              <div>
-                <p className="font-medium text-foreground">{t("speakers.expertSpeakers")}</p>
-                <p className="text-sm text-muted-foreground">{t("speakers.expertSpeakersDesc")}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-4 rounded-lg bg-card/50">
-              <div className="p-2 rounded-full bg-[#FDF2E0]">
-                <Sparkles className="h-5 w-5 text-[#D4860A]" />
-              </div>
-              <div>
-                <p className="font-medium text-foreground">{t("speakers.customProgrammes")}</p>
-                <p className="text-sm text-muted-foreground">{t("speakers.customProgrammesDesc")}</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 p-4 rounded-lg bg-card/50">
-              <div className="p-2 rounded-full bg-[#FDF2E0]">
-                <Mic className="h-5 w-5 text-[#D4860A]" />
-              </div>
-              <div>
-                <p className="font-medium text-foreground">{t("speakers.corporateCommunity")}</p>
-                <p className="text-sm text-muted-foreground">{t("speakers.corporateCommunityDesc")}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="py-12 px-4">
+      <section className="py-6 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {speakers.map((speaker) => (

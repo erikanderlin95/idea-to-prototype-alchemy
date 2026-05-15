@@ -65,31 +65,8 @@ const AfterlifeServicesPage = () => {
         accentClassName="bg-[#9B7DB8] hover:bg-[#8A6BAA] text-white"
       />
 
-      {/* Value pillars */}
-      <section className="py-8 px-4 border-b border-[#E8DDF0]/60">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-            {[
-              { icon: Heart, label: t("afterlife.compassionateCare"), desc: t("afterlife.compassionateCareDesc") },
-              { icon: Shield, label: t("afterlife.prePlanning"), desc: t("afterlife.prePlanningDesc") },
-              { icon: Flower2, label: t("afterlife.familySupport"), desc: t("afterlife.familySupportDesc") },
-            ].map((item) => (
-              <div key={item.label} className="flex items-center gap-3 p-4 rounded-xl bg-gradient-to-br from-[#FAF7FC] to-[#F5EEF8]/50 border border-[#E8DDF0]/40">
-                <div className="p-2.5 rounded-full bg-gradient-to-br from-[#F0E6F8] to-[#E8D5F5] shadow-sm">
-                  <item.icon className="h-5 w-5 text-[#9B7DB8]" />
-                </div>
-                <div>
-                  <p className="font-medium text-[#2D1B4E]">{item.label}</p>
-                  <p className="text-sm text-[#8A7A9A]">{item.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Provider cards */}
-      <section className="py-14 px-4">
+      <section className="py-6 px-4">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {providers.map((provider) => (
