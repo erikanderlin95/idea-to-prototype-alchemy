@@ -99,8 +99,16 @@ export const JoinQueueIntakeDialog = ({
         },
       });
 
-      if (error) throw error;
-      if (response?.error) {
+      // Extract structured error body from non-2xx responses (e.g. 429 cooldown)
+      let payload: any = response;
+      if (error && (error as any).context?.json) {
+        try { payload = await (error as any).context.json(); } catch { /* ignore */ }
+      } else if (error && (error as any).context?.text) {
+        try { payload = JSON.parse(await (error as any).context.text()); } catch { /* ignore */ }
+      }
+
+      if (payload?.error) {
+        const response = payload;
         if (response.code === "ALREADY_IN_QUEUE") {
           setJoinError("You already have an active queue entry at this clinic");
         } else if (response.code === "COOLDOWN") {
