@@ -681,11 +681,6 @@ export const ClinicCard = ({
               );
             })()}
 
-            {(bookingUrl || clinicPhone) && (!hasDigitalQueue || name === "Harmony TCM Centre") && (
-              <p className="text-[10px] text-center text-muted-foreground -mt-0.5">
-                {t("clinicCard.appointmentHandledByClinic")}
-              </p>
-            )}
             {/* View Details — secondary CTA */}
             <Button 
               variant="outline"
