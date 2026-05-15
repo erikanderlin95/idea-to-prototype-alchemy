@@ -459,12 +459,6 @@ export const ClinicCard = ({
                 {t("clinicCard.closed")}
               </Badge>
             )}
-            {isNmgAffiliated && (
-              <Badge className="text-xs bg-primary/15 text-primary border border-primary/30 px-1.5 py-0 h-[20px] shrink-0">
-                <Shield className="h-2.5 w-2.5 mr-0.5" />
-                Managed Care
-              </Badge>
-            )}
         </div>
 
         {/* Row 2: Address */}
