@@ -339,6 +339,7 @@ const translations: Record<Language, Record<string, string>> = {
     "marketplace.title": "Browse Clinics",
     "marketplace.subtitle": "See how busy they are or book directly",
     "marketplace.loading": "Loading clinics...",
+    "marketplace.loadMore": "Load More",
     
     // SearchFilters
     "search.placeholder": "Search clinics, doctors, or specialties...",
@@ -1289,6 +1290,7 @@ const translations: Record<Language, Record<string, string>> = {
     "marketplace.title": "浏览诊所",
     "marketplace.subtitle": "查看忙碌程度或直接预约",
     "marketplace.loading": "加载诊所中...",
+    "marketplace.loadMore": "加载更多",
     
     // SearchFilters
     "search.placeholder": "搜索诊所、医生或专科...",
