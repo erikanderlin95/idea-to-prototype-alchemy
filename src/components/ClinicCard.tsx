@@ -510,18 +510,39 @@ export const ClinicCard = ({
           )
         )}
         {!hasDigitalQueue && (
-          <div className="flex flex-col gap-1" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center gap-1.5 flex-wrap">
-              <Badge variant="outline" className="text-[11px] font-semibold px-1.5 py-0 h-[20px] border-primary/30 text-primary bg-primary/5">
-                <Calendar className="h-2.5 w-2.5 mr-0.5" />
-                Appointment Only
-              </Badge>
+          <>
+            <div className="flex items-center gap-2 py-1 px-2 rounded border"
+              style={{
+                background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
+                borderColor: 'hsl(var(--ai-cyan)/0.2)'
+              }}
+            >
+              <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
+                <Calendar className="h-3 w-3 text-primary" />
+              </div>
+              <div>
+                <p className="text-base font-bold text-foreground leading-tight">Appointment Only</p>
+              </div>
             </div>
-            <p className="text-[12px] text-foreground/80 leading-snug line-clamp-1">
-              <Star className="inline h-3 w-3 text-foreground/70 mr-1 -mt-0.5" />
-              Massage Therapy • Acupuncture • Aromatherapy <span className="text-muted-foreground">+2 more</span>
-            </p>
-          </div>
+            <div className="flex flex-col gap-1.5 py-1.5 px-2 rounded border"
+              style={{
+                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
+                borderColor: 'hsl(var(--ai-purple)/0.2)'
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="flex items-center gap-2">
+                <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20 shrink-0">
+                  <Calendar className="h-3.5 w-3.5 text-primary-foreground" strokeWidth={3} />
+                </div>
+                <p className="text-[15px] sm:text-base font-bold text-foreground leading-tight">Book directly with clinic</p>
+              </div>
+              <p className="text-[12px] text-foreground/80 leading-snug line-clamp-1">
+                <Star className="inline h-3 w-3 text-foreground/70 mr-1 -mt-0.5" />
+                Massage Therapy • Acupuncture • Aromatherapy <span className="text-muted-foreground">+2 more</span>
+              </p>
+            </div>
+          </>
         )}
 
         {myQueueEntry ? (
@@ -660,11 +681,6 @@ export const ClinicCard = ({
               );
             })()}
 
-            {(bookingUrl || clinicPhone) && (!hasDigitalQueue || name === "Harmony TCM Centre") && (
-              <p className="text-[10px] text-center text-muted-foreground -mt-0.5">
-                {t("clinicCard.appointmentHandledByClinic")}
-              </p>
-            )}
             {/* View Details — secondary CTA */}
             <Button 
               variant="outline"
