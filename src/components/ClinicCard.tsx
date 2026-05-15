@@ -531,9 +531,9 @@ export const ClinicCard = ({
               }}
               onClick={(e) => e.stopPropagation()}
             >
-              <p className="text-[12px] text-foreground/80 leading-snug line-clamp-1">
+              <p className="text-[12px] text-foreground/80 leading-snug line-clamp-2">
                 <Star className="inline h-3 w-3 text-foreground/70 mr-1 -mt-0.5" />
-                Massage Therapy • Acupuncture • Aromatherapy <span className="text-muted-foreground">+2 more</span>
+                Massage Therapy • Acupuncture • Aromatherapy • Reflexology • Cupping <span className="text-muted-foreground">+3 more</span>
               </p>
             </div>
           </>
