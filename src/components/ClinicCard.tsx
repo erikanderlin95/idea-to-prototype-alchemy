@@ -666,7 +666,7 @@ export const ClinicCard = ({
               );
             })()}
 
-            {!isManagedCareType(type) && (bookingUrl || clinicPhone) && (!hasDigitalQueue || name === "Harmony TCM Centre") && (
+            {(bookingUrl || clinicPhone) && (!hasDigitalQueue || name === "Harmony TCM Centre") && (
               <p className="text-[10px] text-center text-muted-foreground -mt-0.5">
                 {t("clinicCard.appointmentHandledByClinic")}
               </p>
