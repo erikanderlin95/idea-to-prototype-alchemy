@@ -531,12 +531,6 @@ export const ClinicCard = ({
               }}
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="flex items-center gap-2">
-                <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20 shrink-0">
-                  <Calendar className="h-3.5 w-3.5 text-primary-foreground" strokeWidth={3} />
-                </div>
-                <p className="text-[15px] sm:text-base font-bold text-foreground leading-tight">Book directly with clinic</p>
-              </div>
               <p className="text-[12px] text-foreground/80 leading-snug line-clamp-1">
                 <Star className="inline h-3 w-3 text-foreground/70 mr-1 -mt-0.5" />
                 Massage Therapy • Acupuncture • Aromatherapy <span className="text-muted-foreground">+2 more</span>
