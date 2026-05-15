@@ -155,8 +155,12 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           {(() => {
             const totalPages = Math.max(1, Math.ceil(filteredClinics.length / clinicsPerPage));
             const safePage = Math.min(currentPage, totalPages);
-            const start = (safePage - 1) * clinicsPerPage;
-            const pageClinics = filteredClinics.slice(start, start + clinicsPerPage);
+            const visibleCount = isMobile ? safePage * clinicsPerPage : clinicsPerPage;
+            const start = isMobile ? 0 : (safePage - 1) * clinicsPerPage;
+            const pageClinics = isMobile
+              ? filteredClinics.slice(0, visibleCount)
+              : filteredClinics.slice(start, start + clinicsPerPage);
+            const hasMore = isMobile && visibleCount < filteredClinics.length;
             return (
               <>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm] mt-8 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
@@ -165,7 +169,19 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
                   ))}
                 </div>
 
-                {filteredClinics.length > 0 && (
+                {isMobile && hasMore && (
+                  <div className="flex justify-center mt-6">
+                    <Button
+                      variant="outline"
+                      className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary font-bold px-8 h-11"
+                      onClick={() => setCurrentPage((p) => p + 1)}
+                    >
+                      {t("marketplace.loadMore") || "Load More"}
+                    </Button>
+                  </div>
+                )}
+
+                {!isMobile && filteredClinics.length > 0 && totalPages > 1 && (
                   <div className="flex items-center justify-center gap-3 mt-8">
                     <Button
                       variant="outline"
