@@ -339,6 +339,7 @@ const translations: Record<Language, Record<string, string>> = {
     "marketplace.title": "Browse Clinics",
     "marketplace.subtitle": "See how busy they are or book directly",
     "marketplace.loading": "Loading clinics...",
+    "marketplace.loadMore": "Load More",
     
     // SearchFilters
     "search.placeholder": "Search clinics, doctors, or specialties...",
