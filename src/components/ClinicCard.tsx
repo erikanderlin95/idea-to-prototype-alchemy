@@ -582,33 +582,23 @@ export const ClinicCard = ({
           <div className={`flex flex-col justify-between gap-1.5 ${hasDigitalQueue ? 'flex-1' : ''}`}>
             <div className={`flex flex-col gap-1.5 ${hasDigitalQueue ? 'flex-1' : ''}`}>
             {hasDigitalQueue && (
-              <div className="flex-1 flex flex-col gap-2 p-2.5 rounded border"
+              <div className="flex flex-col gap-1.5 py-1.5 px-2 rounded border"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
                   borderColor: 'hsl(var(--ai-purple)/0.2)'
                 }}
                 onClick={(e) => e.stopPropagation()}
               >
-                 <div className="flex items-center gap-2.5">
-                   <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20 shrink-0">
-                     <Users className="h-4 w-4 text-primary-foreground" strokeWidth={3} />
-                   </div>
-                    <p className="text-[17px] sm:text-lg font-bold text-foreground">{t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
-                 </div>
-
-                {/* Services Offered list — fills remaining space, vertically centered */}
-                <div className="flex-1 flex flex-col justify-center pt-2 border-t border-border/30">
-                  <div className="flex items-center gap-1.5 mb-2">
-                    <Star className="h-4 w-4 text-foreground" />
-                    <p className="text-sm text-foreground font-bold">{t("clinicCard.servicesOffered")}</p>
+                <div className="flex items-center gap-2">
+                  <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20 shrink-0">
+                    <Users className="h-3.5 w-3.5 text-primary-foreground" strokeWidth={3} />
                   </div>
-                  <ul className="grid grid-cols-2 gap-x-3 gap-y-1 text-[14px] text-foreground/90 list-disc pl-5">
-                    <li>General Consultation</li>
-                    <li>Health Screening</li>
-                    <li>Vaccination</li>
-                    <li>Chronic Care</li>
-                  </ul>
+                  <p className="text-[15px] sm:text-base font-bold text-foreground leading-tight">{t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
                 </div>
+                <p className="text-[12px] text-foreground/80 leading-snug line-clamp-1">
+                  <Star className="inline h-3 w-3 text-foreground/70 mr-1 -mt-0.5" />
+                  General Consultation • Health Screening • Vaccination <span className="text-muted-foreground">+1 more</span>
+                </p>
               </div>
             )}
             </div>
