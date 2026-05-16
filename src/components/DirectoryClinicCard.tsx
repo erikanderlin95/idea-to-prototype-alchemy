@@ -75,7 +75,7 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
             disabled={!phone}
           >
             <Phone className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
-            {t("clinicCard.callClinic") || "Call"}
+            Call Clinic
           </Button>
           <Button
             variant="outline"
@@ -83,7 +83,7 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
             onClick={handleDirections}
           >
             <Navigation className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
-            {t("clinicCard.directions") || "Directions"}
+            Directions
           </Button>
         </div>
         <Button
@@ -92,7 +92,7 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
           onClick={handleDetails}
         >
           <ExternalLink className="mr-1 h-3 w-3" />
-          {t("clinicCard.viewDetails") || "View Details"}
+          View Details
         </Button>
       </div>
     </Card>
