@@ -228,7 +228,18 @@ const ClinicProfile = () => {
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
                 {displayPhotos.map((photo: string, index: number) => (
                   <div key={index} className="relative overflow-hidden rounded-xl">
-                    <img src={photo} alt={`${clinic.name} photo ${index + 1}`} className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1]" loading="lazy" width={640} height={640} />
+                    <img
+                      src={photo}
+                      alt={`${clinic.name} photo ${index + 1}`}
+                      className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1]"
+                      loading="lazy"
+                      width={640}
+                      height={640}
+                      onError={(e) => {
+                        const wrapper = (e.currentTarget.parentElement as HTMLElement | null);
+                        if (wrapper) wrapper.style.display = "none";
+                      }}
+                    />
                     <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
                   </div>
                 ))}
