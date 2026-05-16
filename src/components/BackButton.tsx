@@ -1,7 +1,5 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { useLanguage } from "@/contexts/LanguageContext";
 
 /**
  * Non-disruptive back button shown on all routes except the home page.
@@ -10,7 +8,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 export const BackButton = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { t } = useLanguage();
 
   if (location.pathname === "/") return null;
 
@@ -22,26 +19,17 @@ export const BackButton = () => {
     }
   };
 
-  const label = (() => {
-    try {
-      return t("nav.back") || "Back";
-    } catch {
-      return "Back";
-    }
-  })();
-
   return (
-    <div className="container px-3 md:px-6 pt-2">
-      <Button
-        variant="ghost"
-        size="sm"
+    <div className="container px-3 md:px-6 pt-3">
+      <button
+        type="button"
         onClick={handleBack}
-        className="h-8 px-2 text-primary hover:text-primary hover:bg-primary/10 gap-1"
-        aria-label={label}
+        aria-label="Back"
+        className="group inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-sm font-semibold text-primary shadow-sm transition-all hover:bg-primary/10 hover:border-primary/40 hover:shadow active:scale-95"
       >
-        <ArrowLeft className="h-4 w-4" />
-        <span className="text-xs font-medium">{label}</span>
-      </Button>
+        <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+        <span>Back</span>
+      </button>
     </div>
   );
 };
