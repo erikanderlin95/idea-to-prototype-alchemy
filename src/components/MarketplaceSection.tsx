@@ -169,28 +169,15 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
                   ))}
                 </div>
 
-                {isMobile && (hasMore || safePage > 1) && (
-                  <div className="flex justify-center items-center gap-3 mt-6">
-                    {safePage > 1 && (
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-muted-foreground hover:text-primary font-medium h-9"
-                        onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
-                      >
-                        <ChevronLeft className="h-4 w-4 mr-1" />
-                        {t("marketplace.showLess") || "Show Less"}
-                      </Button>
-                    )}
-                    {hasMore && (
-                      <Button
-                        variant="outline"
-                        className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary font-bold px-8 h-11"
-                        onClick={() => setCurrentPage((p) => p + 1)}
-                      >
-                        {t("marketplace.loadMore") || "Load More"}
-                      </Button>
-                    )}
+                {isMobile && hasMore && (
+                  <div className="flex justify-center mt-6">
+                    <Button
+                      variant="outline"
+                      className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary font-bold px-8 h-11"
+                      onClick={() => setCurrentPage((p) => p + 1)}
+                    >
+                      {t("marketplace.loadMore") || "Load More"}
+                    </Button>
                   </div>
                 )}
 
