@@ -36,7 +36,7 @@ export const BackButton = () => {
         variant="ghost"
         size="sm"
         onClick={handleBack}
-        className="h-8 px-2 text-muted-foreground hover:text-foreground gap-1"
+        className="h-8 px-2 text-primary hover:text-primary hover:bg-primary/10 gap-1"
         aria-label={label}
       >
         <ArrowLeft className="h-4 w-4" />
