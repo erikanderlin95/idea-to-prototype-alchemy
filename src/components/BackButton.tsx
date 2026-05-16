@@ -20,12 +20,12 @@ export const BackButton = () => {
   };
 
   return (
-    <div className="container px-3 md:px-6 pt-3">
+    <div className="fixed bottom-4 left-4 z-50">
       <button
         type="button"
         onClick={handleBack}
         aria-label="Back"
-        className="group inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-sm font-semibold text-primary shadow-sm transition-all hover:bg-primary/10 hover:border-primary/40 hover:shadow active:scale-95"
+        className="group inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-background/95 backdrop-blur px-3.5 py-2 text-sm font-semibold text-primary shadow-lg transition-all hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-95"
       >
         <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
         <span>Back</span>
