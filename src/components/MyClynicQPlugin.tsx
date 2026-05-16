@@ -13,9 +13,6 @@ export const MyClynicQPlugin = () => {
       <div className="container px-4 md:px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16 space-y-4">
-          <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium tracking-wide text-[#667085] bg-white/60 border border-white/40 backdrop-blur-sm">
-            Optional Add-On
-          </span>
           <h2 className="text-2xl md:text-4xl font-bold text-[#1B2430] tracking-tight">
             Coming soon
           </h2>
