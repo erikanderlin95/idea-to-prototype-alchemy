@@ -51,12 +51,6 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
           <Badge variant="secondary" className="text-xs font-medium px-1.5 py-0 h-[20px] shrink-0">
             {type}
           </Badge>
-          <Badge
-            variant="outline"
-            className="text-[10px] font-medium px-1.5 py-0 h-[20px] shrink-0 border-muted-foreground/30 text-muted-foreground"
-          >
-            {t("clinicCard.directoryListing") || "Directory Listing"}
-          </Badge>
         </div>
 
         <div className="flex items-center gap-1 text-[15px] text-muted-foreground -mt-0.5">
