@@ -1,8 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Navigation, ExternalLink } from "lucide-react";
-import { useLanguage } from "@/contexts/LanguageContext";
+import { MapPin, Phone, Navigation } from "lucide-react";
 
 export interface DirectoryClinicCardProps {
   name: string;
@@ -12,20 +11,12 @@ export interface DirectoryClinicCardProps {
 }
 
 export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryClinicCardProps) => {
-  const { t } = useLanguage();
-
   const handleCall = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (phone) window.location.href = `tel:${phone}`;
   };
 
   const handleDirections = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const q = encodeURIComponent(`${name} ${address}`);
-    window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, "_blank");
-  };
-
-  const handleDetails = (e: React.MouseEvent) => {
     e.stopPropagation();
     const q = encodeURIComponent(`${name} ${address}`);
     window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, "_blank");
@@ -57,13 +48,6 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
           <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
           <span className="line-clamp-1 font-medium">{address}</span>
         </div>
-
-        {phone && (
-          <div className="flex items-center gap-1 text-[13px] text-muted-foreground">
-            <Phone className="h-3.5 w-3.5 flex-shrink-0" />
-            <span className="font-medium">{phone}</span>
-          </div>
-        )}
       </div>
 
       <div className="flex-1 flex flex-col justify-end gap-1.5 mt-2.5">
@@ -86,14 +70,6 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
             Directions
           </Button>
         </div>
-        <Button
-          variant="ghost"
-          className="w-full h-8 text-xs font-semibold text-muted-foreground hover:bg-muted"
-          onClick={handleDetails}
-        >
-          <ExternalLink className="mr-1 h-3 w-3" />
-          View Details
-        </Button>
       </div>
     </Card>
   );
