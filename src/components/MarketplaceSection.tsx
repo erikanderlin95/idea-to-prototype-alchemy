@@ -28,6 +28,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
   const [currentPage, setCurrentPage] = useState(1);
+  const [directoryVisible, setDirectoryVisible] = useState(3);
   const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
 
   useEffect(() => {
@@ -79,6 +80,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       );
     }
     setCurrentPage(1);
+    setDirectoryVisible(3);
   }, [activeCategory, clinics]);
 
   const fetchClinics = async () => {
@@ -233,6 +235,8 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
               ? DIRECTORY_CLINICS
               : DIRECTORY_CLINICS.filter((c) => c.category === activeCategory);
             if (directory.length === 0) return null;
+            const visible = directory.slice(0, directoryVisible);
+            const hasMore = directoryVisible < directory.length;
             return (
               <div className="mt-10 pt-6 border-t border-border/50 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
                 <div className="mb-3 text-center">
@@ -244,7 +248,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm]">
-                  {directory.map((c) => (
+                  {visible.map((c) => (
                     <DirectoryClinicCard
                       key={c.id}
                       name={c.name}
@@ -254,6 +258,17 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
                     />
                   ))}
                 </div>
+                {hasMore && (
+                  <div className="flex justify-center mt-5">
+                    <Button
+                      variant="outline"
+                      className="border-border text-muted-foreground hover:bg-muted font-semibold h-9 px-6 text-xs"
+                      onClick={() => setDirectoryVisible((n) => n + 3)}
+                    >
+                      Load More
+                    </Button>
+                  </div>
+                )}
               </div>
             );
           })()}
