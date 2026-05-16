@@ -28,6 +28,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
   const [currentPage, setCurrentPage] = useState(1);
+  const [directoryVisible, setDirectoryVisible] = useState(3);
   const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
 
   useEffect(() => {
