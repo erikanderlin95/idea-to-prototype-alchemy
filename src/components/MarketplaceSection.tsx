@@ -237,10 +237,10 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
               <div className="mt-10 pt-6 border-t border-border/50 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
                 <div className="mb-3 text-center">
                   <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">
-                    {t("marketplace.directoryHeading") || "More clinics in your area"}
+                    More Clinics Nearby
                   </p>
                   <p className="text-[11px] text-muted-foreground/80 mt-0.5">
-                    {t("marketplace.directorySubheading") || "Informational listings · not yet on ClynicQ"}
+                    Other clinics in the area you may find useful
                   </p>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm]">

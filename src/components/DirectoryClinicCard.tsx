@@ -28,7 +28,7 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
   const handleDetails = (e: React.MouseEvent) => {
     e.stopPropagation();
     const q = encodeURIComponent(`${name} ${address}`);
-    window.open(`https://www.google.com/search?q=${q}`, "_blank");
+    window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, "_blank");
   };
 
   const initials = name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
@@ -50,12 +50,6 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
         <div className="flex items-center gap-1.5 flex-wrap">
           <Badge variant="secondary" className="text-xs font-medium px-1.5 py-0 h-[20px] shrink-0">
             {type}
-          </Badge>
-          <Badge
-            variant="outline"
-            className="text-[10px] font-medium px-1.5 py-0 h-[20px] shrink-0 border-muted-foreground/30 text-muted-foreground"
-          >
-            {t("clinicCard.directoryListing") || "Directory Listing"}
           </Badge>
         </div>
 
@@ -81,7 +75,7 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
             disabled={!phone}
           >
             <Phone className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
-            {t("clinicCard.callClinic") || "Call"}
+            Call Clinic
           </Button>
           <Button
             variant="outline"
@@ -89,7 +83,7 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
             onClick={handleDirections}
           >
             <Navigation className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
-            {t("clinicCard.directions") || "Directions"}
+            Directions
           </Button>
         </div>
         <Button
@@ -98,7 +92,7 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
           onClick={handleDetails}
         >
           <ExternalLink className="mr-1 h-3 w-3" />
-          {t("clinicCard.viewDetails") || "View Details"}
+          View Details
         </Button>
       </div>
     </Card>
