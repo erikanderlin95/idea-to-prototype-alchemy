@@ -1,9 +1,9 @@
 import { useNavigate, useLocation } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 
 /**
- * Non-disruptive back button shown on all routes except the home page.
- * Uses browser history when available, otherwise falls back to "/".
+ * Minimal top-left back navigation shown on all routes except home.
+ * Sits inline at the top of the page (below the navbar), not floating.
  */
 export const BackButton = () => {
   const navigate = useNavigate();
@@ -20,14 +20,14 @@ export const BackButton = () => {
   };
 
   return (
-    <div className="fixed bottom-4 left-4 z-50">
+    <div className="container px-3 md:px-6 pt-2">
       <button
         type="button"
         onClick={handleBack}
         aria-label="Back"
-        className="group inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-background/95 backdrop-blur px-3.5 py-2 text-sm font-semibold text-primary shadow-lg transition-all hover:bg-primary hover:text-primary-foreground hover:border-primary active:scale-95"
+        className="inline-flex items-center gap-1 -ml-1 px-2 py-1 text-sm font-medium text-primary hover:text-primary/80 transition-colors rounded-md hover:bg-primary/5"
       >
-        <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-0.5" />
+        <ChevronLeft className="h-4 w-4" />
         <span>Back</span>
       </button>
     </div>
