@@ -28,7 +28,7 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
   const handleDetails = (e: React.MouseEvent) => {
     e.stopPropagation();
     const q = encodeURIComponent(`${name} ${address}`);
-    window.open(`https://www.google.com/search?q=${q}`, "_blank");
+    window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, "_blank");
   };
 
   const initials = name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
