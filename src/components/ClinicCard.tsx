@@ -450,6 +450,9 @@ export const ClinicCard = ({
             <Badge variant="secondary" className="text-xs font-medium px-1.5 py-0 h-[20px] shrink-0">
               {type}
             </Badge>
+            <Badge className="text-[10px] font-semibold px-1.5 py-0 h-[20px] shrink-0 bg-emerald-100 text-emerald-700 border border-emerald-300 hover:bg-emerald-100">
+              {hasDigitalQueue ? "Live Queue" : "Available on ClynicQ"}
+            </Badge>
             {isOpen ? (
               <Badge variant="outline" className="text-xs border-accent text-accent px-1.5 py-0 h-[20px] shrink-0">
                 {t("clinicCard.open")}
