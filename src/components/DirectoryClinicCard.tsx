@@ -45,7 +45,7 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
           onClick={handleDirections}
         >
           <Navigation className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
-          Open in Maps
+          Open in Google Maps
         </Button>
       </div>
     </Card>
