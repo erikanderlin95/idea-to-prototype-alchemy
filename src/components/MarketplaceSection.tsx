@@ -28,7 +28,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
   const [currentPage, setCurrentPage] = useState(1);
-  const [directoryVisible, setDirectoryVisible] = useState(3);
+  const [directoryExpanded, setDirectoryExpanded] = useState(false);
   const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
 
   useEffect(() => {
@@ -80,7 +80,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       );
     }
     setCurrentPage(1);
-    setDirectoryVisible(3);
+    setDirectoryExpanded(false);
   }, [activeCategory, clinics]);
 
   const fetchClinics = async () => {
@@ -235,7 +235,10 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
               ? DIRECTORY_CLINICS
               : DIRECTORY_CLINICS.filter((c) => c.category === activeCategory);
             if (directory.length === 0) return null;
-            const visible = directory.slice(0, 5);
+            const capped = directory.slice(0, 6);
+            const mobileInitial = 3;
+            const visible = isMobile && !directoryExpanded ? capped.slice(0, mobileInitial) : capped;
+            const canExpand = isMobile && capped.length > mobileInitial && !directoryExpanded;
             return (
               <div className="mt-10 pt-6 border-t border-border/50 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
                 <div className="mb-4 text-center">
@@ -254,6 +257,18 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
                     />
                   ))}
                 </div>
+                {canExpand && (
+                  <div className="flex justify-center mt-4">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      className="h-8 text-xs font-medium text-muted-foreground hover:text-foreground"
+                      onClick={() => setDirectoryExpanded(true)}
+                    >
+                      View More Nearby Clinics
+                    </Button>
+                  </div>
+                )}
               </div>
             );
           })()}
