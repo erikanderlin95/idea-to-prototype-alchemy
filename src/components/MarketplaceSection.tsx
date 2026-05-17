@@ -57,7 +57,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
 
   useEffect(() => {
     if (activeCategory === "all") {
-      setFilteredClinics(clinics);
+      setFilteredClinics(clinics.filter((c) => c.hasDigitalQueue));
     } else {
       setFilteredClinics(
         clinics.filter((clinic) => {

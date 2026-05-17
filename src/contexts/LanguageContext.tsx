@@ -939,7 +939,7 @@ const translations: Record<Language, Record<string, string>> = {
     "serviceIntake.continueWhatsApp": "Continue via WhatsApp",
 
     // Search Filters categories
-    "search.category.all": "All Clinics",
+    "search.category.all": "Digital Queue",
     "search.category.gp_specialist": "GP & Specialist Care",
     "search.category.dental": "Dental Care",
     "search.category.therapy_rehab": "Therapy & Rehab",
@@ -1890,7 +1890,7 @@ const translations: Record<Language, Record<string, string>> = {
     "serviceIntake.continueWhatsApp": "通过WhatsApp继续",
 
     // Search Filters categories
-    "search.category.all": "所有诊所",
+    "search.category.all": "电子排队",
     "search.category.gp_specialist": "全科与专科护理",
     "search.category.dental": "牙科护理",
     "search.category.therapy_rehab": "治疗与康复",
