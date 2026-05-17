@@ -11,11 +11,6 @@ export interface DirectoryClinicCardProps {
 }
 
 export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryClinicCardProps) => {
-  const handleCall = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (phone) window.location.href = `tel:${phone}`;
-  };
-
   const handleDirections = (e: React.MouseEvent) => {
     e.stopPropagation();
     const q = encodeURIComponent(`${name} ${address}`);
