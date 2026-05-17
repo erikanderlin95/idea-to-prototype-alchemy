@@ -615,10 +615,11 @@ export const ClinicCard = ({
             {/* Buttons — anchored bottom */}
             <div className="space-y-1.5">
             {(() => {
-              const showBookingButtons = !hasDigitalQueue || name === "Harmony TCM Centre";
+              const isOtherTCM = type === "TCM" && name !== "Harmony TCM Centre";
+              const showBookingButtons = !hasDigitalQueue || name === "Harmony TCM Centre" || isOtherTCM;
               const stackVertical = false;
 
-              const joinQueueBtn = hasDigitalQueue && (
+              const joinQueueBtn = hasDigitalQueue && !isOtherTCM && (
                 <Button
                   className="flex-1 bg-gradient-to-r from-primary via-accent to-primary hover:from-primary/90 hover:via-accent/90 hover:to-primary/90 text-primary-foreground font-black text-sm shadow-lg shadow-primary/40 border-2 border-emerald-600 h-10 hover:scale-[1.02] transition-transform"
                   disabled={!isOpen || isJoining}
