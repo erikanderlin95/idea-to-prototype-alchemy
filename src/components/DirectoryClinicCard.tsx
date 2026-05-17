@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Navigation } from "lucide-react";
+import { MapPin, Navigation } from "lucide-react";
 
 export interface DirectoryClinicCardProps {
   name: string;
@@ -44,25 +44,14 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
       </div>
 
       <div className="flex-1 flex flex-col justify-end gap-1.5 mt-2.5">
-        <div className="flex gap-1.5">
-          <Button
-            variant="outline"
-            className="flex-1 h-9 text-xs font-semibold border-border hover:bg-muted"
-            onClick={handleCall}
-            disabled={!phone}
-          >
-            <Phone className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
-            Call Clinic
-          </Button>
-          <Button
-            variant="outline"
-            className="flex-1 h-9 text-xs font-semibold border-border hover:bg-muted"
-            onClick={handleDirections}
-          >
-            <Navigation className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
-            Directions
-          </Button>
-        </div>
+        <Button
+          variant="outline"
+          className="w-full h-9 text-xs font-semibold border-border hover:bg-muted"
+          onClick={handleDirections}
+        >
+          <Navigation className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
+          Open in Maps
+        </Button>
       </div>
     </Card>
   );
