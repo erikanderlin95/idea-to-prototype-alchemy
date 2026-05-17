@@ -22,20 +22,13 @@ export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryCli
     window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, "_blank");
   };
 
-  const initials = name.split(" ").map((w) => w[0]).join("").slice(0, 2).toUpperCase();
-
   return (
     <Card className="group flex flex-col px-3 py-2.5 sm:px-3.5 sm:py-3 hover:shadow-md transition-all duration-300 border border-border/60 hover:border-muted-foreground/40 bg-card w-full max-w-[360px] md:max-w-[420px] mx-auto h-full">
       <div className="space-y-1">
         <div className="flex items-start justify-between gap-2">
-          <div className="flex items-center gap-2 flex-1 min-w-0">
-            <div className="w-10 h-10 rounded-lg bg-muted border border-border flex items-center justify-center shrink-0">
-              <span className="text-[15px] font-bold text-muted-foreground leading-none">{initials}</span>
-            </div>
-            <h3 className="text-lg sm:text-xl md:text-[17px] font-bold text-foreground whitespace-nowrap leading-tight min-w-0 truncate">
-              {name}
-            </h3>
-          </div>
+          <h3 className="text-lg sm:text-xl md:text-[17px] font-bold text-foreground leading-tight min-w-0 truncate flex-1">
+            {name}
+          </h3>
         </div>
 
         <div className="flex items-center gap-1.5 flex-wrap">
