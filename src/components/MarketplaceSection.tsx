@@ -80,7 +80,6 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       );
     }
     setCurrentPage(1);
-    setDirectoryExpanded(false);
   }, [activeCategory, clinics]);
 
   const fetchClinics = async () => {
