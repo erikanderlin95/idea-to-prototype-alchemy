@@ -235,8 +235,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
               ? DIRECTORY_CLINICS
               : DIRECTORY_CLINICS.filter((c) => c.category === activeCategory);
             if (directory.length === 0) return null;
-            const visible = directory.slice(0, directoryVisible);
-            const hasMore = directoryVisible < directory.length;
+            const visible = directory.slice(0, 5);
             return (
               <div className="mt-10 pt-6 border-t border-border/50 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
                 <div className="mb-4 text-center">
@@ -255,17 +254,6 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
                     />
                   ))}
                 </div>
-                {hasMore && (
-                  <div className="flex justify-center mt-5">
-                    <Button
-                      variant="outline"
-                      className="border-border text-muted-foreground hover:bg-muted font-semibold h-9 px-6 text-xs"
-                      onClick={() => setDirectoryVisible((n) => n + 3)}
-                    >
-                      Load More
-                    </Button>
-                  </div>
-                )}
               </div>
             );
           })()}
