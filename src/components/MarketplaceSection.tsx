@@ -254,7 +254,7 @@ const DirectorySection = ({ isMobile, loadMoreLabel }: { isMobile: boolean; load
   return (
     <div className="mt-10 pt-6 border-t border-border/50 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
       <div className="mb-4 text-center">
-        <p className="text-base sm:text-lg font-bold uppercase tracking-wide text-foreground">
+        <p className="text-lg sm:text-xl font-bold uppercase tracking-wide text-foreground">
           24hr Clinics Across Singapore
         </p>
       </div>
