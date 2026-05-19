@@ -274,7 +274,7 @@ const DirectorySection = ({ isMobile, loadMoreLabel }: { isMobile: boolean; load
         <div className="flex justify-center mt-6">
           <Button
             variant="outline"
-            className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary font-bold px-8 h-11"
+            className="border border-border/60 text-muted-foreground hover:text-foreground hover:bg-muted bg-muted/30 font-medium px-8 h-10"
             onClick={() => setMobileCount((c) => c + DIRECTORY_PAGE_SIZE)}
           >
             {loadMoreLabel}
