@@ -1,7 +1,7 @@
 import { SearchFilters } from "./SearchFilters";
 import { ClinicCard } from "./ClinicCard";
 import { DirectoryClinicCard } from "./DirectoryClinicCard";
-import { DIRECTORY_CLINICS } from "@/data/directoryClinics";
+import { TWENTY_FOUR_HR_CLINICS } from "@/data/twentyFourHrClinics";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -229,36 +229,87 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             );
           })()}
 
-          {(() => {
-            const directory = activeCategory === "all"
-              ? DIRECTORY_CLINICS
-              : DIRECTORY_CLINICS.filter((c) => c.category === activeCategory);
-            if (directory.length === 0) return null;
-            const visible = directory.slice(0, 4);
-            return (
-              <div className="mt-10 pt-6 border-t border-border/50 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
-                <div className="mb-4 text-center">
-                  <p className="text-base sm:text-lg font-bold uppercase tracking-wide text-foreground">
-                    Other Clinics Around the Area
-                  </p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-[0.4cm]">
-                  {visible.map((c) => (
-                    <DirectoryClinicCard
-                      key={c.id}
-                      name={c.name}
-                      type={c.type}
-                      address={c.address}
-                      phone={c.phone}
-                    />
-                  ))}
-                </div>
-              </div>
-            );
-          })()}
+          <DirectorySection isMobile={isMobile} loadMoreLabel={t("marketplace.loadMore") || "Load More"} />
+
 
         </div>
       </div>
     </section>
   );
 };
+
+const DIRECTORY_PAGE_SIZE = 6;
+
+const DirectorySection = ({ isMobile, loadMoreLabel }: { isMobile: boolean; loadMoreLabel: string }) => {
+  const [mobileCount, setMobileCount] = useState(DIRECTORY_PAGE_SIZE);
+  const [page, setPage] = useState(0);
+  const all = TWENTY_FOUR_HR_CLINICS;
+  const totalPages = Math.max(1, Math.ceil(all.length / DIRECTORY_PAGE_SIZE));
+  const desktopStart = page * DIRECTORY_PAGE_SIZE;
+  const visible = isMobile
+    ? all.slice(0, mobileCount)
+    : all.slice(desktopStart, desktopStart + DIRECTORY_PAGE_SIZE);
+  const hasMoreMobile = isMobile && mobileCount < all.length;
+
+  return (
+    <div className="mt-10 pt-6 border-t border-border/50 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
+      <div className="mb-4 text-center">
+        <p className="text-base sm:text-lg font-bold uppercase tracking-wide text-foreground">
+          24hr Clinics Across Singapore
+        </p>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm]">
+        {visible.map((c) => (
+          <DirectoryClinicCard
+            key={c.id}
+            name={c.name}
+            type={c.area ? `24HR · ${c.area}` : "24HR"}
+            address={c.address}
+            mapsUrl={c.mapsUrl}
+          />
+        ))}
+      </div>
+
+      {isMobile && hasMoreMobile && (
+        <div className="flex justify-center mt-6">
+          <Button
+            variant="outline"
+            className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary font-bold px-8 h-11"
+            onClick={() => setMobileCount((c) => c + DIRECTORY_PAGE_SIZE)}
+          >
+            {loadMoreLabel}
+          </Button>
+        </div>
+      )}
+
+      {!isMobile && totalPages > 1 && (
+        <div className="flex items-center justify-center gap-3 mt-6">
+          <Button
+            variant="outline"
+            size="icon"
+            className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary"
+            onClick={() => setPage((p) => Math.max(0, p - 1))}
+            disabled={page === 0}
+            aria-label="Previous page"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+          <span className="text-sm text-muted-foreground tabular-nums">
+            {page + 1} / {totalPages}
+          </span>
+          <Button
+            variant="outline"
+            size="icon"
+            className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary"
+            onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+            disabled={page === totalPages - 1}
+            aria-label="Next page"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      )}
+    </div>
+  );
+};
+
