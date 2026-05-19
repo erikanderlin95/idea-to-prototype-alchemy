@@ -1,7 +1,7 @@
 import { SearchFilters } from "./SearchFilters";
 import { ClinicCard } from "./ClinicCard";
 import { DirectoryClinicCard } from "./DirectoryClinicCard";
-import { DIRECTORY_CLINICS } from "@/data/directoryClinics";
+import { TWENTY_FOUR_HR_CLINICS } from "@/data/twentyFourHrClinics";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
