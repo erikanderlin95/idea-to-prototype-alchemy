@@ -7,12 +7,17 @@ export interface DirectoryClinicCardProps {
   name: string;
   type: string;
   address: string;
-  phone: string;
+  phone?: string;
+  mapsUrl?: string;
 }
 
-export const DirectoryClinicCard = ({ name, type, address, phone }: DirectoryClinicCardProps) => {
+export const DirectoryClinicCard = ({ name, type, address, mapsUrl }: DirectoryClinicCardProps) => {
   const handleDirections = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (mapsUrl) {
+      window.open(mapsUrl, "_blank");
+      return;
+    }
     const q = encodeURIComponent(`${name} ${address}`);
     window.open(`https://www.google.com/maps/search/?api=1&query=${q}`, "_blank");
   };
