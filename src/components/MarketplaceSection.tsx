@@ -229,33 +229,8 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             );
           })()}
 
-          {(() => {
-            const directory = activeCategory === "all"
-              ? DIRECTORY_CLINICS
-              : DIRECTORY_CLINICS.filter((c) => c.category === activeCategory);
-            if (directory.length === 0) return null;
-            const visible = directory.slice(0, 4);
-            return (
-              <div className="mt-10 pt-6 border-t border-border/50 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
-                <div className="mb-4 text-center">
-                  <p className="text-base sm:text-lg font-bold uppercase tracking-wide text-foreground">
-                    Other Clinics Around the Area
-                  </p>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-[0.4cm]">
-                  {visible.map((c) => (
-                    <DirectoryClinicCard
-                      key={c.id}
-                      name={c.name}
-                      type={c.type}
-                      address={c.address}
-                      phone={c.phone}
-                    />
-                  ))}
-                </div>
-              </div>
-            );
-          })()}
+          <DirectorySection isMobile={isMobile} loadMoreLabel={t("marketplace.loadMore") || "Load More"} />
+
 
         </div>
       </div>
