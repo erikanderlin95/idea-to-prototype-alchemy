@@ -46,13 +46,13 @@ export const LaunchPartners = () => {
             {clinicLogos.map((logo) => (
               <div
                 key={logo.name}
-                className="flex items-center justify-center h-12 sm:h-14 md:h-16 shrink"
+                className="flex items-center justify-center h-[50px] sm:h-[58px] md:h-[66px] shrink"
               >
                 <img
                   src={logo.src}
                   alt={logo.name}
                   loading="lazy"
-                  className="max-h-full max-w-[72px] sm:max-w-[110px] md:max-w-[140px] w-auto object-contain"
+                  className="max-h-full max-w-[76px] sm:max-w-[118px] md:max-w-[150px] w-auto object-contain"
                 />
               </div>
             ))}
