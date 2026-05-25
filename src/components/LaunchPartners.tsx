@@ -19,9 +19,12 @@ export const LaunchPartners = () => {
         <div className="max-w-5xl mx-auto h-px bg-border/40 mb-5 md:mb-6" />
 
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 md:mb-5">
+          <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2">
             Launch Partners
           </h2>
+          <p className="text-center text-sm md:text-base text-muted-foreground mb-4 md:mb-5">
+            Early clinics and partners supporting ClynicQ.
+          </p>
 
           {/* Top row — Azaas */}
           <div className="flex justify-center mb-2 md:mb-3">
