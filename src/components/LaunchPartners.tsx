@@ -13,21 +13,24 @@ const clinicLogos = [
 
 export const LaunchPartners = () => {
   return (
-    <section className="py-12 md:py-16 bg-background">
+    <section className="pt-10 pb-8 md:pt-12 md:pb-10 bg-background">
       <div className="container px-4 md:px-6">
-        <div className="max-w-5xl mx-auto">
-          <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-8 md:mb-10">
+        {/* Soft divider above */}
+        <div className="max-w-5xl mx-auto h-px bg-border/40 mb-8 md:mb-10" />
+
+        <div className="max-w-3xl mx-auto">
+          <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-5 md:mb-6">
             Launch Partners
           </h2>
 
           {/* Top row — Azaas */}
-          <div className="flex justify-center mb-5 md:mb-6">
+          <div className="flex justify-center mb-3 md:mb-4">
             <a
               href="https://www.azaas.com/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit Azaas"
-              className="block transition-opacity hover:opacity-80"
+              className="block opacity-90 transition-opacity duration-300 hover:opacity-60"
             >
               <img
                 src={azaas}
@@ -38,8 +41,8 @@ export const LaunchPartners = () => {
             </a>
           </div>
 
-          {/* Bottom row — clinic logos in one horizontal row */}
-          <div className="flex flex-row flex-nowrap items-center justify-center gap-4 sm:gap-8 md:gap-12">
+          {/* Bottom row — clinic logos tightly grouped */}
+          <div className="flex flex-row flex-nowrap items-center justify-center gap-3 sm:gap-6 md:gap-8">
             {clinicLogos.map((logo) => (
               <div
                 key={logo.name}
@@ -49,7 +52,7 @@ export const LaunchPartners = () => {
                   src={logo.src}
                   alt={logo.name}
                   loading="lazy"
-                  className="max-h-full max-w-[80px] sm:max-w-[120px] md:max-w-[150px] w-auto object-contain transition-opacity hover:opacity-80"
+                  className="max-h-full max-w-[72px] sm:max-w-[110px] md:max-w-[140px] w-auto object-contain opacity-75"
                 />
               </div>
             ))}
