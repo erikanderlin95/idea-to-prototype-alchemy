@@ -181,9 +181,9 @@ export const WellnessTalks = () => {
   };
 
   return (
-    <section id="wellness-talks" className="pt-4 pb-12 md:pt-6 md:pb-16 bg-gradient-to-b from-background via-secondary/20 to-background">
+    <section id="wellness-talks" className="pt-5 pb-12 md:pt-8 md:pb-16 bg-gradient-to-b from-background via-secondary/20 to-background">
       <div className="container px-4 md:px-6">
-        <div className="text-center mb-10 max-w-2xl mx-auto">
+        <div className="text-center mb-5 md:mb-6 max-w-2xl mx-auto">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2" style={{ color: 'hsl(180 60% 20%)' }}>
             Featured Upcoming Wellness Talks
           </h2>
