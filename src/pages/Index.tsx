@@ -5,6 +5,7 @@ import { WellnessTalks } from "@/components/WellnessTalks";
 import { ClinicConversion } from "@/components/ClinicConversion";
 import { MarketplaceSection } from "@/components/MarketplaceSection";
 import { FeaturedConsultants } from "@/components/FeaturedConsultants";
+import { LaunchPartners } from "@/components/LaunchPartners";
 import { ContinuityServices } from "@/components/ContinuityServices";
 import { MyClynicQPlugin } from "@/components/MyClynicQPlugin";
 import { Footer } from "@/components/Footer";
@@ -26,6 +27,7 @@ const Index = () => {
         <Features />
         <MarketplaceSection defaultCategory={defaultCategory} />
         <FeaturedConsultants />
+        <LaunchPartners />
         <WellnessTalks />
         <ContinuityServices />
         <ClinicConversion />
