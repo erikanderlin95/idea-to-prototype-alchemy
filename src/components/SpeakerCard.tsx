@@ -20,11 +20,11 @@ const SpeakerCard = ({ slug, name, subtitle, speakerName, description }: Speaker
   const navigate = useNavigate();
 
   return (
-    <Card className="group hover:shadow-[0_16px_48px_rgba(212,134,10,0.2)] hover:-translate-y-1 transition-all duration-300 border-[#D4B07A] shadow-[0_6px_24px_rgba(212,134,10,0.12)] bg-gradient-to-b from-[#FDF6EE] via-[#FEF8F2] to-[#F8EFE3] overflow-hidden rounded-2xl aspect-square max-w-[380px] mx-auto flex items-center">
+    <Card className="group hover:shadow-[0_16px_48px_rgba(14,165,233,0.2)] hover:-translate-y-1 transition-all duration-300 border-[#7DD3FC] shadow-[0_6px_24px_rgba(14,165,233,0.12)] bg-gradient-to-b from-[#F0F9FF] via-[#F0F9FF] to-[#E0F2FE] overflow-hidden rounded-2xl aspect-square max-w-[380px] mx-auto flex items-center">
       <CardContent className="p-4">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
-          <div className="w-[5rem] h-[5rem] rounded-lg overflow-hidden bg-[#F5F0EA] mb-2.5 ring-1 ring-[#D4B07A]/40 shadow-[0_1px_6px_rgba(212,134,10,0.08)] group-hover:shadow-[0_2px_12px_rgba(212,134,10,0.12)] transition-all flex items-center justify-center p-1.5">
+          <div className="w-[5rem] h-[5rem] rounded-lg overflow-hidden bg-[#E0F2FE] mb-2.5 ring-1 ring-[#7DD3FC]/50 shadow-[0_1px_6px_rgba(14,165,233,0.08)] group-hover:shadow-[0_2px_12px_rgba(14,165,233,0.12)] transition-all flex items-center justify-center p-1.5">
             <img src={ouchLogo} alt="Ouch Pte Ltd" className="w-full h-full object-contain" />
           </div>
 
@@ -43,15 +43,15 @@ const SpeakerCard = ({ slug, name, subtitle, speakerName, description }: Speaker
 
           {/* Capability pills */}
           <div className="flex flex-wrap gap-1 justify-center mb-2.5">
-            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#9B6B1A] bg-[#FDF2E0] border border-[#D4860A]/15 rounded-full px-2 py-[2px]">
+            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#0369A1] bg-[#E0F2FE] border border-[#0EA5E9]/20 rounded-full px-2 py-[2px]">
               <Mic className="h-2.5 w-2.5" strokeWidth={2.5} />
               Speaker: {speakerName}
             </span>
-            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#9B6B1A] bg-[#FDF2E0] border border-[#D4860A]/15 rounded-full px-2 py-[2px]">
+            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#0369A1] bg-[#E0F2FE] border border-[#0EA5E9]/20 rounded-full px-2 py-[2px]">
               <Presentation className="h-2.5 w-2.5" strokeWidth={2.5} />
               Workshops
             </span>
-            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#9B6B1A] bg-[#FDF2E0] border border-[#D4860A]/15 rounded-full px-2 py-[2px]">
+            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#0369A1] bg-[#E0F2FE] border border-[#0EA5E9]/20 rounded-full px-2 py-[2px]">
               <Award className="h-2.5 w-2.5" strokeWidth={2.5} />
               Corporate Training
             </span>
@@ -59,7 +59,7 @@ const SpeakerCard = ({ slug, name, subtitle, speakerName, description }: Speaker
 
           {/* CTA */}
           <Button
-            className="w-full h-9 bg-gradient-to-r from-[#D4860A] to-[#B8720A] hover:from-[#B8720A] hover:to-[#9C5F08] text-white font-bold text-[14px] tracking-wide shadow-[0_3px_12px_rgba(212,134,10,0.35)] hover:shadow-[0_5px_18px_rgba(212,134,10,0.45)] transition-all group-hover:-translate-y-px active:scale-[0.97]"
+            className="w-full h-9 bg-gradient-to-r from-[#0EA5E9] to-[#0284C7] hover:from-[#0284C7] hover:to-[#0369A1] text-white font-bold text-[14px] tracking-wide shadow-[0_3px_12px_rgba(14,165,233,0.35)] hover:shadow-[0_5px_18px_rgba(14,165,233,0.45)] transition-all group-hover:-translate-y-px active:scale-[0.97]"
             onClick={() => navigate(`/speakers/${slug}`)}
           >
             View Profile
