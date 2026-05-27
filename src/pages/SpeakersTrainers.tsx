@@ -34,10 +34,10 @@ const SpeakersTrainers = () => {
             ClynicQ Partners
           </span>
           <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-3">
-            Healthcare Speakers & Trainers
+            Corporate & Community Health
           </h1>
           <p className="text-[15px] md:text-base text-muted-foreground max-w-2xl mx-auto mb-6">
-            Explore partners who run wellness talks and programs through ClynicQ. Join an upcoming session or invite them to your community.
+            Explore partners delivering corporate wellness, community health initiatives, wellness talks, healthcare education, and support services through ClynicQ.
           </p>
           <Button
             variant="outline"
@@ -55,7 +55,7 @@ const SpeakersTrainers = () => {
         onOpenChange={setPartnerOpen}
         partnerType="speaker_trainer"
         title="Partner With Us"
-        description="Run wellness talks or training with ClynicQ. Share your details and we'll reach out."
+        description="Partner with ClynicQ on corporate wellness, community health, and healthcare education. Share your details and we'll reach out."
         accentClassName="bg-[#D4860A] hover:bg-[#B8720A] text-white"
       />
 
