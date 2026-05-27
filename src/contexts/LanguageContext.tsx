@@ -31,8 +31,8 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.badge": "Continuity & Support",
     "continuity.title": "Continuity & Support Services",
     "continuity.subtitle": "Beyond the clinic — services that support every stage of your healthcare journey.",
-    "continuity.speakers.title": "Healthcare Speakers & Trainers",
-    "continuity.speakers.desc": "Connect with experienced healthcare educators and trainers for workshops, talks, and professional development.",
+    "continuity.speakers.title": "Corporate & Community Health",
+    "continuity.speakers.desc": "Explore corporate wellness, community health initiatives, wellness talks, healthcare education, and support services.",
     "continuity.afterlife.title": "After Life Services",
     "continuity.afterlife.desc": "Compassionate support and guidance for end-of-life planning, bereavement, and memorial services.",
     "continuity.endOfService.title": "Corporate & Community Health",
@@ -701,9 +701,9 @@ const translations: Record<Language, Record<string, string>> = {
     "sha.start": "Start",
 
     // Speakers & Trainers
-    "speakers.badge": "Healthcare Speakers & Trainers",
-    "speakers.title": "Healthcare Speakers & Trainers",
-    "speakers.desc": "Connect with experienced healthcare speakers and trainers for corporate wellness, community health, and professional development.",
+    "speakers.badge": "Corporate & Community Health",
+    "speakers.title": "Corporate & Community Health",
+    "speakers.desc": "Explore corporate wellness, community health initiatives, wellness talks, healthcare education, and support services.",
     "speakers.expertSpeakers": "Expert Speakers",
     "speakers.expertSpeakersDesc": "Industry-experienced professionals",
     "speakers.customProgrammes": "Custom Programmes",
@@ -712,7 +712,7 @@ const translations: Record<Language, Record<string, string>> = {
     "speakers.corporateCommunityDesc": "For workplaces and communities",
 
     // Speaker Profile (Ouch)
-    "speakerProfile.badge": "Healthcare Speaker & Trainer",
+    "speakerProfile.badge": "Corporate & Community Health",
     "speakerProfile.heroDesc": "Corporate health talks, TCM wellness workshops, and healthcare training — led by Hui Fang.",
     "speakerProfile.enquire": "Enquire",
     "speakerProfile.weCustomise": "We Customise",
