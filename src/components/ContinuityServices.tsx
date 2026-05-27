@@ -7,25 +7,14 @@ import { useNavigate } from "react-router-dom";
 
 const services = [
   {
-    icon: Mic,
-    titleKey: "continuity.speakers.title",
-    descKey: "continuity.speakers.desc",
-    gradient: "from-ai-purple/15 to-ai-blue/10",
-    iconBg: "from-ai-purple to-ai-blue",
-    borderColor: "border-ai-purple/20 hover:border-ai-purple/40",
-    route: "/speakers",
-    clickable: true,
-    label: "For Providers",
-  },
-  {
     icon: Building2,
     titleKey: "continuity.endOfService.title",
     descKey: "continuity.endOfService.desc",
     gradient: "from-ai-cyan/15 to-ai-violet/10",
     iconBg: "from-ai-cyan to-ai-violet",
     borderColor: "border-ai-cyan/20 hover:border-ai-cyan/40",
-    route: "",
-    clickable: false,
+    route: "/speakers",
+    clickable: true,
     label: null,
   },
   {
