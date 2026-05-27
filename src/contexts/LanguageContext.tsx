@@ -983,7 +983,7 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.title": "延续与支持服务",
     "continuity.subtitle": "超越诊所——支持您医疗旅程每个阶段的服务。",
     "continuity.speakers.title": "企业与社区健康",
-    "continuity.speakers.desc": "探索企业健康、社区健康倡议、健康讲座、医疗教育及支持服务。"
+    "continuity.speakers.desc": "探索企业健康、社区健康倡议、健康讲座、医疗教育及支持服务。",
     "continuity.afterlife.title": "身后服务",
     "continuity.afterlife.desc": "为临终规划、丧亲辅导和纪念服务提供贴心的支持与指导。",
     "continuity.endOfService.title": "企业与社区健康",
@@ -1654,7 +1654,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Speakers & Trainers
     "speakers.badge": "企业与社区健康",
     "speakers.title": "企业与社区健康",
-    "speakers.desc": "探索企业健康、社区健康倡议、健康讲座、医疗教育及支持服务。"
+    "speakers.desc": "探索企业健康、社区健康倡议、健康讲座、医疗教育及支持服务。",
     "speakers.expertSpeakers": "专业演讲者",
     "speakers.expertSpeakersDesc": "行业经验丰富的专业人士",
     "speakers.customProgrammes": "定制课程",
