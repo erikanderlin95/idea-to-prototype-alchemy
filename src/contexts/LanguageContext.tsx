@@ -982,8 +982,8 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.badge": "延续与支持",
     "continuity.title": "延续与支持服务",
     "continuity.subtitle": "超越诊所——支持您医疗旅程每个阶段的服务。",
-    "continuity.speakers.title": "医疗演讲者与培训师",
-    "continuity.speakers.desc": "联系经验丰富的医疗教育者和培训师，参加研讨会、讲座和专业发展活动。",
+    "continuity.speakers.title": "企业与社区健康",
+    "continuity.speakers.desc": "探索企业健康、社区健康倡议、健康讲座、医疗教育及支持服务。"
     "continuity.afterlife.title": "身后服务",
     "continuity.afterlife.desc": "为临终规划、丧亲辅导和纪念服务提供贴心的支持与指导。",
     "continuity.endOfService.title": "企业与社区健康",
@@ -1652,9 +1652,9 @@ const translations: Record<Language, Record<string, string>> = {
     "sha.start": "开始",
 
     // Speakers & Trainers
-    "speakers.badge": "医疗演讲者与培训师",
-    "speakers.title": "医疗演讲者与培训师",
-    "speakers.desc": "联系经验丰富的医疗演讲者和培训师，参加企业健康、社区卫生和专业发展活动。",
+    "speakers.badge": "企业与社区健康",
+    "speakers.title": "企业与社区健康",
+    "speakers.desc": "探索企业健康、社区健康倡议、健康讲座、医疗教育及支持服务。"
     "speakers.expertSpeakers": "专业演讲者",
     "speakers.expertSpeakersDesc": "行业经验丰富的专业人士",
     "speakers.customProgrammes": "定制课程",
@@ -1663,7 +1663,7 @@ const translations: Record<Language, Record<string, string>> = {
     "speakers.corporateCommunityDesc": "适用于工作场所和社区",
 
     // Speaker Profile (Ouch)
-    "speakerProfile.badge": "医疗演讲者与培训师",
+    "speakerProfile.badge": "企业与社区健康",
     "speakerProfile.heroDesc": "企业健康讲座、中医养生工作坊和医疗培训——由慧芳主讲。",
     "speakerProfile.enquire": "咨询",
     "speakerProfile.weCustomise": "定制方案",
