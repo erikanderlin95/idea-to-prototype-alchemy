@@ -569,14 +569,6 @@ export const ClinicCard = ({
             {/* Action buttons — anchored bottom */}
             <div className="flex gap-1.5">
               <Button 
-                className="flex-1 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white font-bold shadow-sm border-0 h-10 text-sm" 
-                disabled={isLoading}
-                onClick={handleCheckIn}
-              >
-                <CheckCircle className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
-                {t("clinicCard.checkIn")}
-              </Button>
-              <Button 
                 variant="outline"
                 className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-10 text-sm" 
                 disabled={isLoading}
@@ -586,6 +578,7 @@ export const ClinicCard = ({
                 {t("clinicCard.leaveQueue")}
               </Button>
             </div>
+
           </div>
         ) : (
           <div className={`flex flex-col justify-between gap-1.5 ${hasDigitalQueue ? 'flex-1' : ''}`}>
