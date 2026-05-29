@@ -23,12 +23,14 @@ Deno.serve(async (req) => {
     const body = await req.json();
     const { mobile_number, clinic_id, action, patient_name, visit_type, estimated_wait_time, device_fingerprint } = body;
 
-    if (!clinic_id || typeof clinic_id !== "string") {
+    const clinicNotRequired = ["find_my_queue"].includes(action);
+    if (!clinicNotRequired && (!clinic_id || typeof clinic_id !== "string")) {
       return new Response(
         JSON.stringify({ error: "clinic_id is required" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
 
     const needsMobile = !["get_public_queue_list"].includes(action);
     if (needsMobile) {
