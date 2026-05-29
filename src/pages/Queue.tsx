@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Clock, Users, AlertCircle, CheckCircle2, LogOut, LogIn, Bell, BellOff, Star, AlertTriangle } from "lucide-react";
+import { Clock, Users, AlertCircle, CheckCircle2, LogOut, Bell, BellOff, Star, AlertTriangle } from "lucide-react";
 import { format } from "date-fns";
 
 export default function Queue() {
@@ -43,7 +43,7 @@ export default function Queue() {
   const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
   const [previousPosition, setPreviousPosition] = useState<number | null>(null);
   const [showQueueShiftAlert, setShowQueueShiftAlert] = useState(false);
-  const [checkInLoading, setCheckInLoading] = useState(false);
+  
   const [now, setNow] = useState(() => Date.now());
   const [showLeaveDialog, setShowLeaveDialog] = useState(false);
 
@@ -324,48 +324,8 @@ export default function Queue() {
     }
   };
 
-  const checkIn = async () => {
-    if (!myQueueEntry) return;
 
-    setCheckInLoading(true);
-    try {
-      // Use edge function for anonymous users (bypasses RLS)
-      if (mobileNumber) {
-        const { data, error } = await supabase.functions.invoke("queue-lookup", {
-          body: {
-            action: "check_in",
-            clinic_id: clinicId,
-            mobile_number: mobileNumber,
-          },
-        });
 
-        if (error) throw error;
-        if (data?.error) throw new Error(data.error);
-      } else {
-        // Fallback to direct update for authenticated users
-        const { error } = await supabase
-          .from("queue_entries")
-          .update({ status: "checked_in" })
-          .eq("id", myQueueEntry.id);
-
-        if (error) throw error;
-      }
-
-      // Update local state immediately
-      setMyQueueEntry({ ...myQueueEntry, status: "checked_in" });
-      
-      // Clear stored mobile number after check-in
-      if (clinicId) {
-        localStorage.removeItem(`queue_mobile_${clinicId}`);
-      }
-
-      toast.success("✓ Checked In Successfully!");
-    } catch (error: any) {
-      toast.error(error.message || "Failed to check in");
-    } finally {
-      setCheckInLoading(false);
-    }
-  };
 
   const formatCountdown = (ms: number) => {
     const totalSeconds = Math.max(0, Math.ceil(ms / 1000));
@@ -525,15 +485,6 @@ export default function Queue() {
                   {myQueueEntry.status === 'waiting' && (
                     <>
                       <Button 
-                        onClick={checkIn} 
-                        className="flex-1 bg-accent hover:bg-accent/90 text-sm sm:text-base"
-                        size="lg"
-                        disabled={checkInLoading}
-                      >
-                        <LogIn className="mr-2 h-5 w-5" />
-                        {checkInLoading ? "Checking In..." : "Check In at Clinic"}
-                      </Button>
-                      <Button 
                         onClick={cancelQueue} 
                         variant="outline"
                         className="flex-1 border-destructive text-destructive hover:bg-destructive/10 text-sm sm:text-base"
@@ -543,6 +494,7 @@ export default function Queue() {
                         Leave Queue
                       </Button>
                     </>
+
                   )}
                   {myQueueEntry.status === 'checked_in' && (
                     <div className="w-full p-5 sm:p-6 bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 rounded-lg">
