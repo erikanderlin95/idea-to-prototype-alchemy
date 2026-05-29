@@ -43,7 +43,7 @@ export default function Queue() {
   const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
   const [previousPosition, setPreviousPosition] = useState<number | null>(null);
   const [showQueueShiftAlert, setShowQueueShiftAlert] = useState(false);
-  const [checkInLoading, setCheckInLoading] = useState(false);
+  
   const [now, setNow] = useState(() => Date.now());
   const [showLeaveDialog, setShowLeaveDialog] = useState(false);
 
