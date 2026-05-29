@@ -525,15 +525,6 @@ export default function Queue() {
                   {myQueueEntry.status === 'waiting' && (
                     <>
                       <Button 
-                        onClick={checkIn} 
-                        className="flex-1 bg-accent hover:bg-accent/90 text-sm sm:text-base"
-                        size="lg"
-                        disabled={checkInLoading}
-                      >
-                        <LogIn className="mr-2 h-5 w-5" />
-                        {checkInLoading ? "Checking In..." : "Check In at Clinic"}
-                      </Button>
-                      <Button 
                         onClick={cancelQueue} 
                         variant="outline"
                         className="flex-1 border-destructive text-destructive hover:bg-destructive/10 text-sm sm:text-base"
@@ -543,6 +534,7 @@ export default function Queue() {
                         Leave Queue
                       </Button>
                     </>
+
                   )}
                   {myQueueEntry.status === 'checked_in' && (
                     <div className="w-full p-5 sm:p-6 bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 rounded-lg">
