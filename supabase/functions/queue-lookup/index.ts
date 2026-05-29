@@ -422,6 +422,32 @@ Deno.serve(async (req) => {
       );
     }
 
+    // ─── FIND MY QUEUE (across all clinics by mobile) ───
+    if (action === "find_my_queue") {
+      const { data: entry, error: findError } = await supabase
+        .from("queue_entries")
+        .select("id, clinic_id, queue_number, status, check_in_code")
+        .eq("mobile_number", normalizedMobile)
+        .in("status", ["waiting", "checked_in", "serving"])
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (findError) {
+        console.error("Error finding queue entry:", findError);
+        return new Response(
+          JSON.stringify({ error: "Failed to find queue session" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ entry }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+
     return new Response(
       JSON.stringify({ error: "Invalid action" }),
       { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
