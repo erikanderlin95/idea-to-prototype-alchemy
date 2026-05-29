@@ -17,7 +17,7 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Clock, Users, AlertCircle, CheckCircle2, LogOut, LogIn, Bell, BellOff, Star, AlertTriangle } from "lucide-react";
+import { Clock, Users, AlertCircle, CheckCircle2, LogOut, Bell, BellOff, Star, AlertTriangle } from "lucide-react";
 import { format } from "date-fns";
 
 export default function Queue() {
