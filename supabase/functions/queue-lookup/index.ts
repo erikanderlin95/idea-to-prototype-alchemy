@@ -23,12 +23,14 @@ Deno.serve(async (req) => {
     const body = await req.json();
     const { mobile_number, clinic_id, action, patient_name, visit_type, estimated_wait_time, device_fingerprint } = body;
 
-    if (!clinic_id || typeof clinic_id !== "string") {
+    const clinicNotRequired = ["find_my_queue"].includes(action);
+    if (!clinicNotRequired && (!clinic_id || typeof clinic_id !== "string")) {
       return new Response(
         JSON.stringify({ error: "clinic_id is required" }),
         { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
 
     const needsMobile = !["get_public_queue_list"].includes(action);
     if (needsMobile) {
@@ -419,6 +421,32 @@ Deno.serve(async (req) => {
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
+    // ─── FIND MY QUEUE (across all clinics by mobile) ───
+    if (action === "find_my_queue") {
+      const { data: entry, error: findError } = await supabase
+        .from("queue_entries")
+        .select("id, clinic_id, queue_number, status, check_in_code")
+        .eq("mobile_number", normalizedMobile)
+        .in("status", ["waiting", "checked_in", "serving"])
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .maybeSingle();
+
+      if (findError) {
+        console.error("Error finding queue entry:", findError);
+        return new Response(
+          JSON.stringify({ error: "Failed to find queue session" }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      return new Response(
+        JSON.stringify({ entry }),
+        { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
 
     return new Response(
       JSON.stringify({ error: "Invalid action" }),

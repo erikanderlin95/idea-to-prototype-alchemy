@@ -136,43 +136,32 @@ export const Hero = () => {
                   }
 
                   setIsSearching(true);
+                  const sanitizedMobile = phoneNumber.trim().replace(/\s/g, "");
 
-                  // Find user by phone number
-                  const { data: profile, error: profileError } = await supabase
-                    .from("profiles")
-                    .select("id")
-                    .eq("phone", phoneNumber.trim())
-                    .maybeSingle();
+                  // Find active queue entry via edge function (works for zero-auth queue)
+                  const { data, error } = await supabase.functions.invoke("queue-lookup", {
+                    body: {
+                      action: "find_my_queue",
+                      mobile_number: sanitizedMobile,
+                    },
+                  });
 
-                  if (profileError) throw profileError;
+                  if (error) throw error;
+                  if (data?.error) throw new Error(data.error);
 
-                  if (!profile) {
-                    toast.error("No account found with this mobile number");
-                    return;
-                  }
-
-                  // Find active queue entry
-                  const { data: queueEntry, error: queueError } = await supabase
-                    .from("queue_entries")
-                    .select("id, clinic_id, queue_number, status")
-                    .eq("user_id", profile.id)
-                    .eq("status", "waiting")
-                    .order("created_at", { ascending: false })
-                    .limit(1)
-                    .maybeSingle();
-
-                  if (queueError) throw queueError;
-
+                  const queueEntry = data?.entry;
                   if (!queueEntry) {
-                    toast.error("No active queue session found");
+                    toast.error("No active queue session found for this mobile number");
                     return;
                   }
 
-                  // Navigate to queue page
+                  // Persist mobile so Queue page can look up position
+                  localStorage.setItem(`queue_mobile_${queueEntry.clinic_id}`, sanitizedMobile);
+
                   toast.success(`Found your queue! Position #${queueEntry.queue_number}`);
                   setShowQueueFinder(false);
                   setPhoneNumber("");
-                  navigate(`/queue?clinic=${queueEntry.clinic_id}`);
+                  navigate(`/queue?clinic=${queueEntry.clinic_id}&mobile=${encodeURIComponent(sanitizedMobile)}`);
                 } catch (error: any) {
                   toast.error(error.message || "Failed to find queue session");
                 } finally {
@@ -183,6 +172,7 @@ export const Hero = () => {
             >
               {isSearching ? "Searching..." : "Find Queue"}
             </Button>
+
           </DialogFooter>
         </DialogContent>
       </Dialog>
