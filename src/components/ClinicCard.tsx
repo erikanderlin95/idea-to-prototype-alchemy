@@ -228,29 +228,8 @@ export const ClinicCard = ({
     } finally { setIsLoading(false); }
   };
 
-  const handleCheckIn = async (e: React.MouseEvent) => {
-    e.stopPropagation();
-    if (!myQueueEntry) return;
-    setIsLoading(true);
-    try {
-      const storedMobile = id ? localStorage.getItem(`queue_mobile_${id}`) : null;
-      if (storedMobile) {
-        const { data, error } = await supabase.functions.invoke("queue-lookup", {
-          body: { action: "check_in", clinic_id: id, mobile_number: storedMobile },
-        });
-        if (error) throw error;
-        if (data?.error) throw new Error(data.error);
-      } else {
-        const { error } = await supabase.from("queue_entries").update({ status: "checked_in" }).eq("id", myQueueEntry.id);
-        if (error) throw error;
-      }
-      setMyQueueEntry(null);
-      if (id) localStorage.removeItem(`queue_mobile_${id}`);
-      toast.success("✓ Checked In Successfully!");
-    } catch (error: any) {
-      toast.error(error.message || t("clinicCard.failedToJoin"));
-    } finally { setIsLoading(false); }
-  };
+
+
 
   const handleJoinQueue = async (e: React.MouseEvent) => {
     e.stopPropagation();
