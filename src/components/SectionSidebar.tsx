@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { Building2, HeartHandshake, Stethoscope, Mic, Sparkles, Menu, ChevronLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -17,6 +17,7 @@ const FIRST_VISIT_KEY = "clynicq_sidebar_hint_shown";
 export const SectionSidebar = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   // First-visit auto-expand hint
   useEffect(() => {
@@ -38,6 +39,14 @@ export const SectionSidebar = () => {
     setOpen(false);
     if ((item.type as string) === "route") {
       navigate(item.id);
+      return;
+    }
+    if (location.pathname !== "/") {
+      navigate(`/#${item.id}`);
+      setTimeout(() => {
+        const el = document.getElementById(item.id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 400);
     } else {
       const el = document.getElementById(item.id);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });

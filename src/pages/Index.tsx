@@ -9,7 +9,7 @@ import { LaunchPartners } from "@/components/LaunchPartners";
 import { ContinuityServices } from "@/components/ContinuityServices";
 import { MyClynicQPlugin } from "@/components/MyClynicQPlugin";
 import { Footer } from "@/components/Footer";
-import { SectionSidebar } from "@/components/SectionSidebar";
+
 import { OnboardingTour } from "@/components/OnboardingTour";
 import { useOnboarding } from "@/hooks/useOnboarding";
 import { useSearchParams } from "react-router-dom";
@@ -34,7 +34,7 @@ const Index = () => {
         <MyClynicQPlugin />
       </main>
       <Footer />
-      <SectionSidebar />
+      
       
       {/* Onboarding Tour */}
       {showOnboarding && <OnboardingTour onComplete={completeOnboarding} />}
