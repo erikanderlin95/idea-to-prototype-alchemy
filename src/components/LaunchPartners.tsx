@@ -3,12 +3,14 @@ import panhealth from "@/assets/partners/panhealth.jpg";
 import macquarie from "@/assets/partners/macquarie.jpg";
 import ihealth from "@/assets/partners/ihealth.jpg";
 import stayingSane from "@/assets/partners/staying-sane.jpg";
+import beTcm from "@/assets/partners/be-tcm.jpg";
 
 const clinicLogos = [
   { name: "PanHealth Medical", src: panhealth },
   { name: "Macquarie Chiropractic", src: macquarie },
   { name: "I-Health", src: ihealth },
   { name: "Staying Sane 101", src: stayingSane },
+  { name: "Be TCM Clinic", src: beTcm },
 ];
 
 export const LaunchPartners = () => {
