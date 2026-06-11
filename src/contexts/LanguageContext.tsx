@@ -980,8 +980,8 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Continuity & Support Services
     "continuity.badge": "延续与支持",
-    "continuity.title": "延续与支持服务",
-    "continuity.subtitle": "超越诊所——支持您医疗旅程每个阶段的服务。",
+    "continuity.title": "超越诊所",
+    "continuity.subtitle": "支持您医疗旅程每个阶段的服务。",
     "continuity.speakers.title": "企业与社区健康",
     "continuity.speakers.desc": "探索企业健康、社区健康倡议、健康讲座、医疗教育及支持服务。",
     "continuity.afterlife.title": "身后服务",
