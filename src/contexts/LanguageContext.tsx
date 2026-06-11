@@ -29,8 +29,8 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Continuity & Support Services
     "continuity.badge": "Continuity & Support",
-    "continuity.title": "Continuity & Support Services",
-    "continuity.subtitle": "Beyond the clinic — services that support every stage of your healthcare journey.",
+    "continuity.title": "Beyond the Clinic",
+    "continuity.subtitle": "Services that support every stage of your healthcare journey.",
     "continuity.speakers.title": "Corporate & Community Health",
     "continuity.speakers.desc": "Explore corporate wellness, community health initiatives, wellness talks, healthcare education, and support services.",
     "continuity.afterlife.title": "After Life Services",
