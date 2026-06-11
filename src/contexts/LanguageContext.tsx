@@ -34,9 +34,9 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.speakers.title": "Corporate & Community Health",
     "continuity.speakers.desc": "Explore corporate wellness, community health initiatives, wellness talks, healthcare education, and support services.",
     "continuity.afterlife.title": "After Life Services",
-    "continuity.afterlife.desc": "Compassionate support and guidance for end-of-life planning, bereavement, and memorial services.",
+    "continuity.afterlife.desc": "Funeral planning, bereavement support, memorial services, and end-of-life resources.",
     "continuity.endOfService.title": "Corporate & Community Health",
-    "continuity.endOfService.desc": "Workplace health programmes, screenings and coordinated wellness initiatives.",
+    "continuity.endOfService.desc": "Health screenings, workplace wellness, vaccinations, and community healthcare programmes.",
     "continuity.comingSoon": "Coming Soon",
 
     // Featured Consultants
@@ -955,7 +955,7 @@ const translations: Record<Language, Record<string, string>> = {
     "wellnessClinics.subtitle": "Explore wellness centers, spas, and holistic health services to support your wellbeing journey.",
 
     // ContinuityServices
-    "continuity.explore": "Explore",
+    "continuity.explore": "Explore Services",
 
     // ClinicCard queue link
     "clinicCard.saveQueueLink": "Save your queue link",
@@ -985,9 +985,9 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.speakers.title": "企业与社区健康",
     "continuity.speakers.desc": "探索企业健康、社区健康倡议、健康讲座、医疗教育及支持服务。",
     "continuity.afterlife.title": "身后服务",
-    "continuity.afterlife.desc": "为临终规划、丧亲辅导和纪念服务提供贴心的支持与指导。",
+    "continuity.afterlife.desc": "丧礼策划、丧亲辅导、纪念服务及临终资源。",
     "continuity.endOfService.title": "企业与社区健康",
-    "continuity.endOfService.desc": "职场健康计划、健康检查及协调的健康促进活动。",
+    "continuity.endOfService.desc": "健康筛查、职场健康、疫苗接种及社区医疗保健项目。",
     "continuity.comingSoon": "即将推出",
 
     // Featured Consultants
@@ -1906,7 +1906,7 @@ const translations: Record<Language, Record<string, string>> = {
     "wellnessClinics.subtitle": "探索健康中心、水疗和整体健康服务，支持您的健康之旅。",
 
     // ContinuityServices
-    "continuity.explore": "探索",
+    "continuity.explore": "探索服务",
 
     // ClinicCard queue link
     "clinicCard.saveQueueLink": "保存排队链接",
