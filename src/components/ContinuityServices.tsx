@@ -36,7 +36,7 @@ export const ContinuityServices = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="other-providers" className="relative py-14 md:py-20 bg-gradient-to-b from-background via-secondary/30 to-background overflow-hidden">
+    <section id="other-providers" className="relative py-14 md:py-20 bg-white overflow-hidden">
       {/* Subtle healthcare cross pattern background */}
       <svg
         className="absolute inset-0 w-full h-full opacity-[0.035] text-foreground pointer-events-none"
