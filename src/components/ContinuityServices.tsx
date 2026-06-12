@@ -36,7 +36,7 @@ export const ContinuityServices = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="other-providers" className="relative py-14 md:py-20 bg-gradient-to-b from-background via-secondary/30 to-background overflow-hidden">
+    <section id="other-providers" className="relative py-14 md:py-20 bg-white overflow-hidden">
       {/* Subtle healthcare cross pattern background */}
       <svg
         className="absolute inset-0 w-full h-full opacity-[0.035] text-foreground pointer-events-none"
@@ -80,7 +80,7 @@ export const ContinuityServices = () => {
               role="button"
               tabIndex={0}
               onKeyDown={(e) => e.key === "Enter" && navigate(service.route)}
-              className={`group relative flex flex-col overflow-hidden rounded-[20px] border border-border bg-white/60 backdrop-blur-sm p-6 md:p-8 shadow-[0_2px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 active:translate-y-0 active:shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-400 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
+              className={`group relative flex flex-col overflow-hidden rounded-[20px] border border-border bg-white p-6 md:p-8 shadow-[0_2px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 active:translate-y-0 active:shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-400 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
               style={{ transitionDuration: "400ms" }}
             >
               {/* Top accent bar — outline style */}
