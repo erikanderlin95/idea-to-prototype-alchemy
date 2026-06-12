@@ -80,28 +80,28 @@ export const ContinuityServices = () => {
               role="button"
               tabIndex={0}
               onKeyDown={(e) => e.key === "Enter" && navigate(service.route)}
-              className={`group relative flex flex-col overflow-hidden rounded-[20px] border ${service.borderColor} bg-gradient-to-br ${service.cardGradient} p-6 md:p-8 shadow-[0_2px_24px_rgba(0,0,0,0.05)] hover:shadow-[0_16px_56px_rgba(0,0,0,0.12)] hover:-translate-y-2 active:translate-y-0 active:shadow-[0_4px_24px_rgba(0,0,0,0.08)] transition-all duration-400 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
+              className={`group relative flex flex-col overflow-hidden rounded-[20px] border border-border bg-white/60 backdrop-blur-sm p-6 md:p-8 shadow-[0_2px_24px_rgba(0,0,0,0.04)] hover:shadow-[0_12px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5 active:translate-y-0 active:shadow-[0_4px_24px_rgba(0,0,0,0.06)] transition-all duration-400 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
               style={{ transitionDuration: "400ms" }}
             >
-              {/* Subtle top accent bar */}
+              {/* Top accent bar — outline style */}
               <div
-                className="absolute top-0 left-8 right-8 h-[3px] rounded-b-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute top-0 left-8 right-8 h-[2px] rounded-b-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
-                  background: `linear-gradient(90deg, transparent, ${service.accentColor}40, transparent)`,
+                  background: `linear-gradient(90deg, transparent, ${service.accentColor}, transparent)`,
                 }}
               />
 
-              {/* Icon */}
+              {/* Icon — outline style */}
               <div className="relative mb-6 md:mb-7 shrink-0">
                 <div
-                  className={`relative h-[72px] w-[72px] md:h-20 md:w-20 rounded-2xl bg-gradient-to-br ${service.iconBg} flex items-center justify-center shadow-lg ${service.shadowColor} group-hover:scale-105 group-hover:rotate-1 transition-transform duration-300`}
+                  className={`relative h-[72px] w-[72px] md:h-20 md:w-20 rounded-2xl border-2 border-border bg-white flex items-center justify-center shadow-sm group-hover:scale-105 group-hover:rotate-1 transition-transform duration-300`}
                 >
                   <service.icon
-                    className="h-9 w-9 md:h-10 md:w-10 text-white"
+                    className={`h-9 w-9 md:h-10 md:w-10 ${service.accentClass}`}
                     strokeWidth={1.5}
                   />
-                  {/* Small accent badge */}
-                  <div className="absolute -bottom-2 -right-2 h-7 w-7 rounded-full bg-white border-[2.5px] border-white shadow-md flex items-center justify-center">
+                  {/* Small accent badge — outlined */}
+                  <div className="absolute -bottom-2 -right-2 h-7 w-7 rounded-full bg-white border-2 border-border shadow-sm flex items-center justify-center">
                     <service.iconAccent
                       className={`h-3.5 w-3.5 ${service.accentClass}`}
                       strokeWidth={2.5}
@@ -119,10 +119,10 @@ export const ContinuityServices = () => {
                   {t(service.descKey)}
                 </p>
 
-                {/* CTA Pill Button */}
+                {/* CTA — outlined pill button */}
                 <div className="mt-auto">
                   <div
-                    className={`inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r ${service.iconBg} text-white text-sm font-semibold shadow-md ${service.shadowColor} group-hover:shadow-lg group-hover:gap-3.5 transition-all duration-300`}
+                    className={`inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full border border-border bg-white/80 text-foreground text-sm font-semibold group-hover:border-border group-hover:bg-white group-hover:gap-3.5 transition-all duration-300`}
                   >
                     <span>{t("continuity.explore")}</span>
                     <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
