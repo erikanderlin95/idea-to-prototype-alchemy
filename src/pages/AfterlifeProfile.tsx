@@ -30,7 +30,7 @@ const AfterlifeProfile = () => {
       <Navbar />
 
       {/* Hero — soft lavender with gentle radial glow */}
-      <section className="pt-16 pb-4 px-4 relative overflow-hidden">
+      <section className="pt-14 pb-3 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#FAF7FC] via-[#F5EEF8] to-[#EDE4F5]" />
         {/* Subtle warm glow */}
         <div className="absolute top-8 right-1/4 w-40 h-40 bg-gradient-to-br from-[#C9A84C]/6 to-transparent rounded-full blur-3xl" />
