@@ -9,7 +9,8 @@ const services = [
     route: "/speakers",
     icon: Building2,
     iconAccent: Plus,
-    cardGradient: "from-white via-white to-white",
+    cardGradient: "from-[#F0FAFB] via-white to-white",
+    patternId: "tealPattern",
     iconBg: "from-[#0E9AAB] to-[#067A8A]",
     accentColor: "#0E9AAB",
     accentClass: "text-[#0E9AAB]",
@@ -22,7 +23,8 @@ const services = [
     route: "/afterlife",
     icon: Heart,
     iconAccent: Leaf,
-    cardGradient: "from-white via-white to-white",
+    cardGradient: "from-[#F7F3FB] via-white to-white",
+    patternId: "lavenderPattern",
     iconBg: "from-[#B8A0C8] to-[#8A7B9E]",
     accentColor: "#9B7DB8",
     accentClass: "text-[#9B7DB8]",
@@ -30,6 +32,7 @@ const services = [
     shadowColor: "shadow-[#9B7DB8]/20",
   },
 ];
+
 
 export const ContinuityServices = () => {
   const { t } = useLanguage();
