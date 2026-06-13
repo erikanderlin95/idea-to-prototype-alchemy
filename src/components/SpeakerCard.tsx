@@ -25,6 +25,7 @@ interface SpeakerCardProps {
   ctaShadowHover?: string;
   hoverShadow?: string;
   baseShadow?: string;
+  bannerImage?: string;
 }
 
 const SpeakerCard = ({
@@ -44,17 +45,26 @@ const SpeakerCard = ({
   ctaShadowHover = "0 5px 18px rgba(14,154,171,0.45)",
   hoverShadow = "0 16px 48px rgba(14,154,171,0.2)",
   baseShadow = "0 6px 24px rgba(14,154,171,0.08)",
+  bannerImage,
 }: SpeakerCardProps) => {
   const navigate = useNavigate();
 
   return (
     <Card
-      className="group hover:-translate-y-1 transition-all duration-300 border-2 border-gray-200 hover:border-gray-300 bg-white overflow-hidden rounded-2xl aspect-square max-w-[380px] mx-auto flex items-center"
+      className="group hover:-translate-y-1 transition-all duration-300 border-2 border-gray-200 hover:border-gray-300 bg-white overflow-hidden rounded-2xl aspect-square max-w-[380px] mx-auto flex items-center relative"
       style={{ boxShadow: baseShadow }}
       onMouseEnter={(e) => (e.currentTarget.style.boxShadow = hoverShadow)}
       onMouseLeave={(e) => (e.currentTarget.style.boxShadow = baseShadow)}
     >
-      <CardContent className="p-4">
+      {bannerImage && (
+        <div
+          className="absolute top-0 left-0 right-0 h-1/2 bg-cover bg-center opacity-90 pointer-events-none"
+          style={{ backgroundImage: `url(${bannerImage})` }}
+          aria-hidden
+        />
+      )}
+      <CardContent className="p-4 relative z-10">
+
         <div className="flex flex-col items-center text-center">
           {/* Logo — even border */}
           <div className="w-[4.5rem] h-[4.5rem] rounded-xl overflow-hidden mb-3 border border-gray-200">
