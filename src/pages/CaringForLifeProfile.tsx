@@ -42,7 +42,7 @@ const CaringForLifeProfile = () => {
                   <Heart className="h-3.5 w-3.5 text-white" />
                 </div>
                 <span className="text-[11px] md:text-[15px] font-semibold uppercase tracking-widest" style={{ color: CFL.textMuted }}>
-                  Mental Health & Social Support
+                  Non Profit Organizations
                 </span>
               </div>
 
