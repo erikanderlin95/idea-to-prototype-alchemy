@@ -83,10 +83,39 @@ export const ContinuityServices = () => {
               role="button"
               tabIndex={0}
               onKeyDown={(e) => e.key === "Enter" && navigate(service.route)}
-              className={`group relative flex flex-col overflow-hidden rounded-[20px] border ${service.borderColor} bg-gradient-to-br ${service.cardGradient} p-6 md:p-8 shadow-[0_2px_24px_rgba(0,0,0,0.05)] hover:shadow-[0_16px_56px_rgba(0,0,0,0.12)] hover:-translate-y-2 active:translate-y-0 active:shadow-[0_4px_24px_rgba(0,0,0,0.08)] transition-all duration-400 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
-              style={{ transitionDuration: "400ms" }}
+              className={`group relative flex flex-col overflow-hidden rounded-[24px] border ${service.borderColor} bg-gradient-to-br ${service.cardGradient} px-6 md:px-8 py-5 md:py-6 shadow-[0_2px_18px_rgba(0,0,0,0.04)] hover:shadow-[0_14px_44px_rgba(0,0,0,0.10)] hover:-translate-y-1.5 active:translate-y-0 transition-all duration-300 cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-offset-2`}
             >
-              {/* Subtle top accent bar */}
+              {/* Decorative pattern overlay (3-5% opacity) */}
+              <svg
+                className="absolute inset-0 w-full h-full pointer-events-none"
+                style={{ color: service.accentColor, opacity: 0.04 }}
+                aria-hidden="true"
+              >
+                <defs>
+                  <pattern
+                    id={service.patternId}
+                    x="0"
+                    y="0"
+                    width="40"
+                    height="40"
+                    patternUnits="userSpaceOnUse"
+                  >
+                    {service.patternId === "tealPattern" ? (
+                      <path d="M18 12h4v6h6v4h-6v6h-4v-6h-6v-4h6z" fill="currentColor" />
+                    ) : (
+                      <path
+                        d="M0 20 Q10 10 20 20 T40 20"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                      />
+                    )}
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill={`url(#${service.patternId})`} />
+              </svg>
+
+              {/* Top accent bar on hover */}
               <div
                 className="absolute top-0 left-8 right-8 h-[3px] rounded-b-full opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 style={{
@@ -94,46 +123,46 @@ export const ContinuityServices = () => {
                 }}
               />
 
-              {/* Icon */}
-              <div className="relative mb-6 md:mb-7 shrink-0">
+              {/* Icon — reduced ~18% */}
+              <div className="relative mb-3 md:mb-4 shrink-0">
                 <div
-                  className={`relative h-[72px] w-[72px] md:h-20 md:w-20 rounded-2xl bg-gradient-to-br ${service.iconBg} flex items-center justify-center shadow-lg ${service.shadowColor} group-hover:scale-105 group-hover:rotate-1 transition-transform duration-300`}
+                  className={`relative h-[58px] w-[58px] md:h-16 md:w-16 rounded-2xl bg-gradient-to-br ${service.iconBg} flex items-center justify-center shadow-lg ${service.shadowColor} group-hover:scale-105 group-hover:rotate-1 transition-transform duration-300`}
                 >
                   <service.icon
-                    className="h-9 w-9 md:h-10 md:w-10 text-white"
+                    className="h-7 w-7 md:h-8 md:w-8 text-white"
                     strokeWidth={1.5}
                   />
-                  {/* Small accent badge */}
-                  <div className="absolute -bottom-2 -right-2 h-7 w-7 rounded-full bg-white border-[2.5px] border-white shadow-md flex items-center justify-center">
+                  <div className="absolute -bottom-1.5 -right-1.5 h-6 w-6 rounded-full bg-white border-[2.5px] border-white shadow-md flex items-center justify-center">
                     <service.iconAccent
-                      className={`h-3.5 w-3.5 ${service.accentClass}`}
+                      className={`h-3 w-3 ${service.accentClass}`}
                       strokeWidth={2.5}
                     />
                   </div>
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="flex flex-col flex-grow">
-                <h3 className="text-xl md:text-[1.35rem] font-bold text-foreground mb-3 leading-snug tracking-tight">
+              {/* Content — tighter spacing */}
+              <div className="relative flex flex-col flex-grow">
+                <h3 className="text-[1.2rem] md:text-[1.4rem] font-bold text-foreground mb-1.5 leading-tight tracking-tight">
                   {t(service.titleKey)}
                 </h3>
-                <p className="text-sm md:text-[0.95rem] text-muted-foreground/90 leading-[1.7] mb-8 md:mb-10">
+                <p className="text-sm md:text-[0.9rem] text-muted-foreground/85 leading-[1.55] mb-4 md:mb-5 line-clamp-2">
                   {t(service.descKey)}
                 </p>
 
-                {/* CTA Pill Button */}
+                {/* CTA — slightly smaller */}
                 <div className="mt-auto">
                   <div
-                    className={`inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-gradient-to-r ${service.iconBg} text-white text-sm font-semibold shadow-md ${service.shadowColor} group-hover:shadow-lg group-hover:gap-3.5 transition-all duration-300`}
+                    className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r ${service.iconBg} text-white text-[13px] font-semibold shadow-md ${service.shadowColor} group-hover:shadow-lg group-hover:-translate-y-0.5 group-hover:gap-3 active:translate-y-0 transition-all duration-300`}
                   >
                     <span>{t("continuity.explore")}</span>
-                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
+                    <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform duration-300" />
                   </div>
                 </div>
               </div>
             </div>
           ))}
+
         </div>
       </div>
     </section>
