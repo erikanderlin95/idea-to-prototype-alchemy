@@ -1,14 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mic, Presentation, Award, ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import ouchLogo from "@/assets/ouch-logo.jpg";
 
 interface SpeakerCardProps {
   slug: string;
   name: string;
   subtitle: string;
-  speakerName: string;
   description: string;
   color: string;
   colorLight: string;
@@ -16,7 +15,7 @@ interface SpeakerCardProps {
   icon: React.ReactNode;
 }
 
-const SpeakerCard = ({ slug, name, subtitle, speakerName, description }: SpeakerCardProps) => {
+const SpeakerCard = ({ slug, name, subtitle, description }: SpeakerCardProps) => {
   const navigate = useNavigate();
 
   return (
@@ -41,21 +40,6 @@ const SpeakerCard = ({ slug, name, subtitle, speakerName, description }: Speaker
             {description}
           </p>
 
-          {/* Capability pills */}
-          <div className="flex flex-wrap gap-1 justify-center mb-2.5">
-            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#067A8A] bg-[#E0F5F7] border border-[#0E9AAB]/20 rounded-full px-2 py-[2px]">
-              <Mic className="h-2.5 w-2.5" strokeWidth={2.5} />
-              Speaker: {speakerName}
-            </span>
-            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#067A8A] bg-[#E0F5F7] border border-[#0E9AAB]/20 rounded-full px-2 py-[2px]">
-              <Presentation className="h-2.5 w-2.5" strokeWidth={2.5} />
-              Workshops
-            </span>
-            <span className="inline-flex items-center gap-1 text-[10px] font-semibold text-[#067A8A] bg-[#E0F5F7] border border-[#0E9AAB]/20 rounded-full px-2 py-[2px]">
-              <Award className="h-2.5 w-2.5" strokeWidth={2.5} />
-              Corporate Training
-            </span>
-          </div>
 
           {/* CTA */}
           <Button
