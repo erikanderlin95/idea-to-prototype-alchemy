@@ -26,17 +26,22 @@ const SpeakersTrainers = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <section className="relative pt-24 pb-12 px-4 overflow-hidden bg-gradient-to-br from-[#F0F9FF] via-[#E0F2FE] to-[#DBEAFE]">
-        <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-[120px] opacity-40 bg-[#0EA5E9] pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 rounded-full blur-[120px] opacity-30 bg-[#7DD3FC] pointer-events-none" />
-        <div className="max-w-3xl mx-auto text-center relative z-10">
-          <span className="inline-block text-[10.5px] font-semibold tracking-[0.16em] uppercase mb-3 px-3 py-1 rounded-full bg-[#0EA5E9]/10 text-[#0369A1] border border-[#0EA5E9]/25">
-            ClynicQ Partners
-          </span>
-          <h1 className="text-3xl md:text-4xl font-semibold tracking-tight text-foreground mb-3">
+      {/* Hero — soft sky gradient mirroring Afterlife structure */}
+      <section className="relative pt-28 pb-16 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#E8F4FB] via-[#F4FAFD] to-white" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-radial from-[#BFE2F3]/40 via-transparent to-transparent rounded-full blur-3xl" />
+        <div className="absolute top-12 right-1/4 w-32 h-32 bg-gradient-to-br from-[#0EA5E9]/10 to-transparent rounded-full blur-2xl" />
+
+        <div className="max-w-3xl mx-auto text-center relative">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E0F2FE]/70 text-[#0369A1] mb-6 border border-[#BAE6FD]/60 backdrop-blur-sm">
+            <Sparkles className="h-3.5 w-3.5 text-[#0EA5E9]/80" />
+            <span className="text-sm font-medium tracking-wide">ClynicQ Partners</span>
+          </div>
+
+          <h1 className="text-3xl md:text-4xl font-bold text-[#0D2E4A] mb-4 tracking-tight">
             Corporate & Community Health
           </h1>
-          <p className="text-[15px] md:text-base text-muted-foreground max-w-2xl mx-auto mb-6">
+          <p className="text-[16px] md:text-lg text-[#4A6580] max-w-2xl mx-auto leading-relaxed mb-6">
             Explore partners delivering corporate wellness, community health initiatives, wellness talks, healthcare education, and support services through ClynicQ.
           </p>
           <Button
