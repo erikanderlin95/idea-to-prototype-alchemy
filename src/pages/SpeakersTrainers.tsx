@@ -7,12 +7,32 @@ import PartnerIntakeDialog from "@/components/intake/PartnerIntakeDialog";
 
 import { Mic, Sparkles, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import cflLogo from "@/assets/caring-for-life-logo.png";
 
 const SpeakersTrainers = () => {
   const { t } = useLanguage();
   const [partnerOpen, setPartnerOpen] = useState(false);
 
   const speakers = [
+    {
+      slug: "caring-for-life-sg",
+      name: "Caring for Life SG",
+      subtitle: "Corporate & Community Health",
+      description:
+        "Mental wellness programmes, suicide prevention training, public education, and community support resources.",
+      logo: cflLogo,
+      titleColor: "#2F3A20",
+      subtitleColor: "#6B7359",
+      descColor: "#3F4A2A",
+      ctaGradientFrom: "#7D8D54",
+      ctaGradientTo: "#5F6E3E",
+      ctaGradientHoverFrom: "#5F6E3E",
+      ctaGradientHoverTo: "#4A572E",
+      ctaShadow: "0 3px 12px rgba(125,141,84,0.35)",
+      ctaShadowHover: "0 5px 18px rgba(125,141,84,0.45)",
+      hoverShadow: "0 16px 48px rgba(125,141,84,0.22)",
+      baseShadow: "0 6px 24px rgba(125,141,84,0.10)",
+    },
     {
       slug: "ouch-pte-ltd",
       name: "Ouch Pte Ltd",
