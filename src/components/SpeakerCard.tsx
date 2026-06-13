@@ -58,7 +58,7 @@ const SpeakerCard = ({
     >
       {bannerImage && (
         <div
-          className="absolute top-0 left-0 right-0 h-1/2 bg-cover bg-center opacity-90 pointer-events-none"
+          className="absolute top-0 left-0 right-0 h-[15%] bg-cover bg-center opacity-90 pointer-events-none"
           style={{ backgroundImage: `url(${bannerImage})` }}
           aria-hidden
         />
