@@ -8,6 +8,7 @@ import {
 import cflLogo from "@/assets/caring-for-life-logo.jpg";
 import alexYeo from "@/assets/alex-yeo.jpg";
 import cflPillars from "@/assets/cfl-pillars.jpg.asset.json";
+import cflImpact from "@/assets/cfl-impact.jpg.asset.json";
 
 const WHATSAPP_URL = "https://wa.me/6592305967?text=" + encodeURIComponent("Hi Alex, I'd like to learn more about Caring for Life SG programmes.");
 
@@ -106,6 +107,25 @@ const CaringForLifeProfile = () => {
           </div>
         </div>
       </section>
+
+      {/* Our Impact */}
+      <section className="py-6 px-3" style={{ background: CFL.bgSofter }}>
+        <div className="max-w-6xl mx-auto space-y-4">
+          <div className="text-center space-y-1">
+            <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold tracking-tight" style={{ color: CFL.text }}>
+              Our Impact
+            </h2>
+            <p className="text-[13px] md:text-[14px]" style={{ color: CFL.textMuted }}>
+              Measurable outcomes from our community work across Singapore.
+            </p>
+          </div>
+          <div className="rounded-3xl overflow-hidden bg-black flex items-center justify-center p-3">
+            <img src={cflImpact.url} alt="Caring for Life SG impact: 3000+ community carers trained, 90%+ higher confidence in suicide prevention, 90%+ of work in collaboration" className="w-full max-w-md h-auto object-contain" />
+          </div>
+        </div>
+      </section>
+
+
 
       {/* What We Offer */}
       <section className="py-6 px-3" style={{ background: CFL.bgSofter }}>
