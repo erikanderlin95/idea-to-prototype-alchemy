@@ -25,7 +25,7 @@ const SpeakerProfile = () => {
       <Navbar />
 
       {/* Hero */}
-      <section className="pt-16 pb-4 px-4 relative overflow-hidden">
+      <section className="pt-14 pb-3 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-white via-white to-[#FFF5EB]" />
         <div className="max-w-5xl mx-auto relative">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-center">
