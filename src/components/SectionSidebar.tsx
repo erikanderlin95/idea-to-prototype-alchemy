@@ -78,8 +78,6 @@ export const SectionSidebar = () => {
           {/* Occasional attention pulse — 2 quick blinks then rest */}
           <span className="pointer-events-none absolute inset-0 rounded-l-2xl bg-primary/30 animate-[sidebar-peek_5s_ease-in-out_infinite]" />
 
-          {/* Tiny attention dot */}
-          <span className="absolute -top-1 -left-1 h-2.5 w-2.5 rounded-full bg-white shadow-sm ring-2 ring-primary animate-[sidebar-dot_4s_ease-in-out_infinite] z-20" />
 
 
           <Menu className="h-5 w-5 relative z-10" strokeWidth={2.5} />
@@ -99,10 +97,6 @@ export const SectionSidebar = () => {
             @keyframes sidebar-peek {
               0%, 15%, 25%, 100% { opacity: 0; transform: scale(1); }
               18%, 22% { opacity: 0.25; transform: scale(1.06); }
-            }
-            @keyframes sidebar-dot {
-              0%, 80%, 100% { opacity: 1; transform: scale(1); }
-              90% { opacity: 0.5; transform: scale(0.85); }
             }
             @keyframes sidebar-chevron {
               0%, 100% { transform: translateX(0); }
