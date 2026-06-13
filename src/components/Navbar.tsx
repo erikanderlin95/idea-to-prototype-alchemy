@@ -32,9 +32,19 @@ interface NavbarProps {
 export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useLanguage();
   const [isStaff, setIsStaff] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const showBack = location.pathname !== "/";
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
 
   useEffect(() => {
     if (!user) {
