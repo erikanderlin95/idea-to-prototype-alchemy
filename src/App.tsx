@@ -29,6 +29,7 @@ import OrganizationProfile from "./pages/OrganizationProfile";
 
 import SpeakersTrainers from "./pages/SpeakersTrainers";
 import SpeakerProfile from "./pages/SpeakerProfile";
+import CaringForLifeProfile from "./pages/CaringForLifeProfile";
 import AfterlifeServicesPage from "./pages/AfterlifeServices";
 import AfterlifeProfile from "./pages/AfterlifeProfile";
 import ForClinics from "./pages/ForClinics";
@@ -70,6 +71,7 @@ const App = () => (
             <Route path="/organization/nymg" element={<OrganizationProfile />} />
             <Route path="/speakers" element={<SpeakersTrainers />} />
             <Route path="/speakers/ouch-pte-ltd" element={<SpeakerProfile />} />
+            <Route path="/speakers/caring-for-life-sg" element={<CaringForLifeProfile />} />
             <Route path="/afterlife" element={<AfterlifeServicesPage />} />
             <Route path="/afterlife/nirvana" element={<AfterlifeProfile />} />
             <Route path="/for-clinics" element={<ForClinics />} />
