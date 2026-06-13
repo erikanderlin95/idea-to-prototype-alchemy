@@ -81,6 +81,7 @@ export const SectionSidebar = () => {
           {/* Tiny attention dot */}
           <span className="absolute -top-1 -left-1 h-2.5 w-2.5 rounded-full bg-white shadow-sm ring-2 ring-primary animate-[sidebar-dot_4s_ease-in-out_infinite] z-20" />
 
+
           <Menu className="h-5 w-5 relative z-10" strokeWidth={2.5} />
           <span
             className="text-[12px] font-semibold tracking-wider uppercase relative z-10 leading-none"
