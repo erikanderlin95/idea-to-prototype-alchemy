@@ -87,22 +87,7 @@ const SpeakersTrainers = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {speakers.map((speaker) => (
-              <SpeakerCard
-                key={speaker.slug}
-                slug={speaker.slug}
-                name={speaker.name}
-                subtitle={speaker.subtitle}
-                description={speaker.description}
-                color="#D4860A"
-                colorLight="#FDF2E0"
-                colorBorder="#D4B07A"
-                icon={
-                  <div className="flex flex-col items-center gap-0.5">
-                    <Mic className="h-7 w-7 text-[#D4860A]" />
-                    <span className="text-[7px] font-bold text-[#D4860A] tracking-wider uppercase">OUCH</span>
-                  </div>
-                }
-              />
+              <SpeakerCard key={speaker.slug} {...speaker} />
             ))}
           </div>
         </div>
