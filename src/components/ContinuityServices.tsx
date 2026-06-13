@@ -9,11 +9,11 @@ const services = [
     route: "/speakers",
     icon: Building2,
     iconAccent: Plus,
-    cardGradient: "from-[#F0F9FA] via-white to-white",
+    cardGradient: "from-white via-white to-white",
     iconBg: "from-[#0E9AAB] to-[#067A8A]",
     accentColor: "#0E9AAB",
     accentClass: "text-[#0E9AAB]",
-    borderColor: "border-[#0E9AAB]/8 hover:border-[#0E9AAB]/25",
+    borderColor: "border-2 border-[#0E9AAB]/20 hover:border-[#0E9AAB]/60",
     shadowColor: "shadow-[#0E9AAB]/20",
   },
   {
@@ -22,11 +22,11 @@ const services = [
     route: "/afterlife",
     icon: Heart,
     iconAccent: Leaf,
-    cardGradient: "from-[#F8F5FA] via-white to-white",
+    cardGradient: "from-white via-white to-white",
     iconBg: "from-[#B8A0C8] to-[#8A7B9E]",
     accentColor: "#9B7DB8",
     accentClass: "text-[#9B7DB8]",
-    borderColor: "border-[#9B7DB8]/8 hover:border-[#9B7DB8]/25",
+    borderColor: "border-2 border-[#9B7DB8]/20 hover:border-[#9B7DB8]/60",
     shadowColor: "shadow-[#9B7DB8]/20",
   },
 ];
@@ -36,7 +36,7 @@ export const ContinuityServices = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="other-providers" className="relative py-14 md:py-20 bg-gradient-to-b from-background via-secondary/30 to-background overflow-hidden">
+    <section id="other-providers" className="relative py-14 md:py-20 bg-white overflow-hidden">
       {/* Subtle healthcare cross pattern background */}
       <svg
         className="absolute inset-0 w-full h-full opacity-[0.035] text-foreground pointer-events-none"
