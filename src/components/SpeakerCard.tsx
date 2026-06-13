@@ -56,8 +56,8 @@ const SpeakerCard = ({
     >
       <CardContent className="p-4">
         <div className="flex flex-col items-center text-center">
-          {/* Logo — no border */}
-          <div className="w-[4.5rem] h-[4.5rem] rounded-xl overflow-hidden mb-3">
+          {/* Logo — even border */}
+          <div className="w-[4.5rem] h-[4.5rem] rounded-xl overflow-hidden mb-3 border border-gray-200">
             <img src={logo} alt={name} className="w-full h-full object-cover" />
           </div>
 
