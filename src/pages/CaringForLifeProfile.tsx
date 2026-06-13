@@ -174,7 +174,7 @@ const CaringForLifeProfile = () => {
               </p>
 
               <p className="text-[13px] mt-3 leading-relaxed text-left" style={{ color: CFL.textMuted }}>
-                Alex Yeo is the Executive Director and a founding member of Caring for Life SG. A mental health advocate since 2015, he has worked across the public and non-profit sectors, including NCSS, co-founding Mental Connect, and leading community suicide prevention initiatives.
+                A mental health advocate since 2015, he has worked across the public and non-profit sectors, including NCSS, co-founding Mental Connect, and leading community suicide prevention initiatives.
               </p>
               <p className="text-[13px] mt-2 leading-relaxed text-left" style={{ color: CFL.textMuted }}>
                 He is passionate about building stronger support networks through education, early intervention, and community partnerships.
