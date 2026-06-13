@@ -72,8 +72,14 @@ export const SectionSidebar = () => {
             "min-h-[120px] min-w-[44px]"
           )}
         >
-          {/* Pulse halo */}
-          <span className="pointer-events-none absolute inset-0 rounded-l-2xl bg-primary/40 opacity-0 group-hover:opacity-0 animate-[sidebar-pulse_2.8s_ease-in-out_infinite]" />
+          {/* Subtle ambient glow — always on, very gentle */}
+          <span className="pointer-events-none absolute inset-0 rounded-l-2xl bg-white/10 blur-md animate-[sidebar-glow_3s_ease-in-out_infinite]" />
+
+          {/* Occasional attention pulse — 2 quick blinks then rest */}
+          <span className="pointer-events-none absolute inset-0 rounded-l-2xl bg-primary/30 animate-[sidebar-peek_5s_ease-in-out_infinite]" />
+
+          {/* Tiny attention dot */}
+          <span className="absolute -top-1 -left-1 h-2.5 w-2.5 rounded-full bg-white shadow-sm ring-2 ring-primary animate-[sidebar-dot_4s_ease-in-out_infinite] z-20" />
 
           <Menu className="h-5 w-5 relative z-10" strokeWidth={2.5} />
           <span
@@ -82,12 +88,24 @@ export const SectionSidebar = () => {
           >
             Explore
           </span>
-          <ChevronLeft className="h-3.5 w-3.5 relative z-10 opacity-80" strokeWidth={2.5} />
+          <ChevronLeft className="h-3.5 w-3.5 relative z-10 opacity-80 animate-[sidebar-chevron_2.5s_ease-in-out_infinite]" strokeWidth={2.5} />
 
           <style>{`
-            @keyframes sidebar-pulse {
-              0%, 100% { opacity: 0; transform: scale(1); }
-              50% { opacity: 0.35; transform: scale(1.08); }
+            @keyframes sidebar-glow {
+              0%, 100% { opacity: 0.25; transform: scale(1); }
+              50% { opacity: 0.45; transform: scale(1.03); }
+            }
+            @keyframes sidebar-peek {
+              0%, 15%, 25%, 100% { opacity: 0; transform: scale(1); }
+              18%, 22% { opacity: 0.25; transform: scale(1.06); }
+            }
+            @keyframes sidebar-dot {
+              0%, 80%, 100% { opacity: 1; transform: scale(1); }
+              90% { opacity: 0.5; transform: scale(0.85); }
+            }
+            @keyframes sidebar-chevron {
+              0%, 100% { transform: translateX(0); }
+              50% { transform: translateX(-2px); }
             }
           `}</style>
         </button>
