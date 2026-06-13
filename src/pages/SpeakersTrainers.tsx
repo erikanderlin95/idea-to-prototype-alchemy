@@ -17,7 +17,7 @@ const SpeakersTrainers = () => {
     {
       slug: "caring-for-life-sg",
       name: "Caring for Life SG",
-      subtitle: "Corporate & Community Health",
+      subtitle: "Non Profit Organization",
       description:
         "Mental wellness programmes, suicide prevention training, public education, and community support resources.",
       logo: cflLogo,
