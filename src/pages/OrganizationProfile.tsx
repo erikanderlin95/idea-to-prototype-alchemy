@@ -5,10 +5,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ManagedCareModal } from "@/components/ManagedCareModal";
 import { OrgHero } from "@/components/org/OrgHero";
-import { OrgWhyConcierge } from "@/components/org/OrgWhyConcierge";
 import { OrgServicesGrid } from "@/components/org/OrgServicesGrid";
 import { OrgConciergeTeam } from "@/components/org/OrgConciergeTeam";
-import { OrgCareJourney } from "@/components/org/OrgCareJourney";
 
 import { OrgOtherOfferings } from "@/components/org/OrgOtherOfferings";
 
@@ -44,10 +42,6 @@ const OrganizationProfile = () => {
       <Navbar />
 
       <OrgHero onStartIntake={() => setShowIntakeModal(true)} />
-
-      <OrgCareJourney />
-
-      <OrgWhyConcierge />
 
       <OrgServicesGrid />
 
