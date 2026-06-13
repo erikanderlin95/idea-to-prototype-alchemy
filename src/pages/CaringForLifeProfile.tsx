@@ -167,7 +167,7 @@ const CaringForLifeProfile = () => {
                 <img src={alexYeo} alt="Alex Yeo" className="w-full h-full object-cover object-top" />
               </div>
               <h3 className="text-[16px] font-semibold leading-tight" style={{ color: CFL.text }}>Alex Yeo</h3>
-              <p className="text-[14px] mt-0.5" style={{ color: CFL.textMuted }}>Caring for Life SG</p>
+              <p className="text-[14px] mt-0.5" style={{ color: CFL.textMuted }}>Executive Director</p>
               <p className="text-[13px] mt-0.5 leading-tight" style={{ color: `${CFL.textMuted}b3` }}>
                 Reach out about training, talks, or community resource referrals.
               </p>
