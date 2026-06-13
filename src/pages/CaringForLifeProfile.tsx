@@ -7,6 +7,7 @@ import {
 
 import cflLogo from "@/assets/caring-for-life-logo.jpg";
 import alexYeo from "@/assets/alex-yeo.jpg";
+import cflPillars from "@/assets/cfl-pillars.jpg.asset.json";
 
 const WHATSAPP_URL = "https://wa.me/6592305967?text=" + encodeURIComponent("Hi Alex, I'd like to learn more about Caring for Life SG programmes.");
 
@@ -85,19 +86,8 @@ const CaringForLifeProfile = () => {
                   A Singapore charity promoting understanding and a network-based approach to saving lives and building resilience.
                 </p>
               </div>
-              <div className="px-2.5 py-1 grid grid-cols-2 gap-0 flex-1 items-center">
-                <div className="py-1 px-1" style={{ borderRight: `1px solid ${CFL.border}80`, borderBottom: `1px solid ${CFL.border}80` }}>
-                  <TrustStat value="Advocacy" label="Building awareness and reducing stigma around mental health" />
-                </div>
-                <div className="py-1 px-1" style={{ borderBottom: `1px solid ${CFL.border}80` }}>
-                  <TrustStat value="Training" label="Equipping people and organisations with practical intervention knowledge and response skills" />
-                </div>
-                <div className="py-1 px-1" style={{ borderRight: `1px solid ${CFL.border}80` }}>
-                  <TrustStat value="Education" label="Delivering talks and programmes that encourage early help-seeking and understanding" />
-                </div>
-                <div className="py-1 px-1">
-                  <TrustStat value="Resilience" label="Connecting individuals with support networks and resources that strengthen long-term wellbeing" />
-                </div>
+              <div className="px-4 py-4 flex-1 flex items-center justify-center bg-black">
+                <img src={cflPillars.url} alt="Caring for Life pillars: Advocacy, Training, Support, Collaboration" className="max-h-72 w-auto object-contain" />
               </div>
             </div>
 
