@@ -5,7 +5,7 @@ import SpeakerCard from "@/components/SpeakerCard";
 import { Button } from "@/components/ui/button";
 import PartnerIntakeDialog from "@/components/intake/PartnerIntakeDialog";
 
-import { Mic, Sparkles, ArrowRight } from "lucide-react";
+import { Sparkles, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import cflLogo from "@/assets/caring-for-life-logo.png";
 
