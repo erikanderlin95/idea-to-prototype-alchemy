@@ -25,6 +25,7 @@ interface SpeakerCardProps {
   ctaShadowHover?: string;
   hoverShadow?: string;
   baseShadow?: string;
+  bannerImage?: string;
 }
 
 const SpeakerCard = ({
