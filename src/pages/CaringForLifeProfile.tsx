@@ -40,7 +40,7 @@ const CaringForLifeProfile = () => {
                   <Heart className="h-3.5 w-3.5 text-white" />
                 </div>
                 <span className="text-[11px] md:text-[15px] font-semibold uppercase tracking-widest" style={{ color: CFL.textMuted }}>
-                  Mental Wellness & Community Support
+                  Mental Health & Social Support
                 </span>
               </div>
 
@@ -56,14 +56,14 @@ const CaringForLifeProfile = () => {
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center" style={{ background: `${CFL.primary}33`, color: CFL.primaryDark }}>
                     <ShieldCheck className="h-2.5 w-2.5 md:h-3 md:w-3" />
                   </div>
-                  <span className="text-[13px] md:text-[15px] font-bold" style={{ color: CFL.text }}>Suicide Prevention Training</span>
+                  <span className="text-[13px] md:text-[15px] font-bold" style={{ color: CFL.text }}>Training &amp; Intervention</span>
                 </div>
                 <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4 mx-0.5 md:mx-1 flex-shrink-0" style={{ color: `${CFL.primary}66` }} />
                 <div className="flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2" style={{ background: CFL.bgSoft }}>
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center" style={{ background: `${CFL.primary}33`, color: CFL.primaryDark }}>
                     <HandHeart className="h-2.5 w-2.5 md:h-3 md:w-3" />
                   </div>
-                  <span className="text-[13px] md:text-[15px] font-bold" style={{ color: CFL.text }}>Community Support & Awareness</span>
+                  <span className="text-[13px] md:text-[15px] font-bold" style={{ color: CFL.text }}>Support &amp; Outreach</span>
                 </div>
               </div>
             </div>
@@ -82,21 +82,21 @@ const CaringForLifeProfile = () => {
                   Suicide Prevention Is Everyone's Business
                 </h3>
                 <p className="text-[13px] md:text-[14px] mt-1 leading-tight text-left" style={{ color: CFL.textMuted }}>
-                  A Singapore charity advocating greater awareness and a community-based approach to suicide prevention and resilience.
+                  A Singapore charity promoting understanding and a network-based approach to saving lives and building resilience.
                 </p>
               </div>
               <div className="px-2.5 py-1 grid grid-cols-2 gap-0 flex-1 items-center">
                 <div className="py-1 px-1" style={{ borderRight: `1px solid ${CFL.border}80`, borderBottom: `1px solid ${CFL.border}80` }}>
-                  <TrustStat value="Advocacy" label="Greater awareness of suicide prevention" />
+                  <TrustStat value="Advocacy" label="Building awareness and reducing stigma around mental health" />
                 </div>
                 <div className="py-1 px-1" style={{ borderBottom: `1px solid ${CFL.border}80` }}>
-                  <TrustStat value="Training" label="Equipping the community to respond" />
+                  <TrustStat value="Training" label="Equipping people and organisations with practical intervention knowledge and response skills" />
                 </div>
                 <div className="py-1 px-1" style={{ borderRight: `1px solid ${CFL.border}80` }}>
-                  <TrustStat value="Education" label="Public talks that destigmatise help-seeking" />
+                  <TrustStat value="Education" label="Delivering talks and programmes that encourage early help-seeking and understanding" />
                 </div>
                 <div className="py-1 px-1">
-                  <TrustStat value="Resilience" label="Community-based support and referrals" />
+                  <TrustStat value="Resilience" label="Connecting individuals with support networks and resources that strengthen long-term wellbeing" />
                 </div>
               </div>
             </div>
@@ -104,13 +104,13 @@ const CaringForLifeProfile = () => {
             {/* About text panel */}
             <div className="rounded-3xl p-5 md:p-6 flex flex-col justify-center" style={{ background: `linear-gradient(135deg, ${CFL.primary}, ${CFL.primaryDark})` }}>
               <p className="text-[15px] md:text-[17px] text-white leading-relaxed font-medium">
-                Caring for Life is a Singapore charity dedicated to suicide prevention, advocating greater awareness and promoting a community-based approach to suicide prevention and suicide resilience.
+                Caring for Life is a Singapore charity dedicated to strengthening mental wellness through suicide prevention, public education, advocacy, and community-based support that builds resilience and encourages early intervention.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <span className="px-3 py-1 rounded-full text-[12px] font-semibold bg-white/15 text-white backdrop-blur-sm">Mental Wellness</span>
-                <span className="px-3 py-1 rounded-full text-[12px] font-semibold bg-white/15 text-white backdrop-blur-sm">Suicide Prevention</span>
+                <span className="px-3 py-1 rounded-full text-[12px] font-semibold bg-white/15 text-white backdrop-blur-sm">Crisis Prevention</span>
                 <span className="px-3 py-1 rounded-full text-[12px] font-semibold bg-white/15 text-white backdrop-blur-sm">Public Education</span>
-                <span className="px-3 py-1 rounded-full text-[12px] font-semibold bg-white/15 text-white backdrop-blur-sm">Community Referrals</span>
+                <span className="px-3 py-1 rounded-full text-[12px] font-semibold bg-white/15 text-white backdrop-blur-sm">Support Referrals</span>
               </div>
             </div>
           </div>
@@ -125,7 +125,7 @@ const CaringForLifeProfile = () => {
               What We Offer
             </h2>
             <p className="text-[14px] md:text-[15px] max-w-2xl mx-auto" style={{ color: CFL.textMuted }}>
-              Training, education, and community resources to prevent suicide and build resilience.
+              Training, education, and resources that build resilience and strengthen wellbeing.
             </p>
           </div>
 
@@ -153,21 +153,32 @@ const CaringForLifeProfile = () => {
       <section className="py-6 px-4" style={{ background: CFL.bgSoft }}>
         <div className="max-w-5xl mx-auto space-y-1 text-center">
           <p className="text-[15px] md:text-[17px] font-bold uppercase tracking-widest" style={{ color: CFL.primaryDark }}>
-            Your Caring for Life Contact
+            Your Partner Contact
           </p>
 
           <div className="pt-3 flex justify-center">
-            <div className="group rounded-2xl bg-white p-4 transition-all duration-300 flex flex-col items-center text-center w-64" style={{ border: `1px solid ${CFL.border}`, boxShadow: `0 2px 8px ${CFL.primary}10` }}>
+            <div className="group rounded-2xl bg-white p-5 transition-all duration-300 flex flex-col items-center text-center w-full max-w-md" style={{ border: `1px solid ${CFL.border}`, boxShadow: `0 2px 8px ${CFL.primary}10` }}>
               <div className="w-16 h-16 rounded-full overflow-hidden mb-2.5 bg-white" style={{ boxShadow: `0 0 0 2px ${CFL.primary}33` }}>
                 <img src={alexYeo} alt="Alex Yeo" className="w-full h-full object-cover object-top" />
               </div>
               <h3 className="text-[16px] font-semibold leading-tight" style={{ color: CFL.text }}>Alex Yeo</h3>
-              <p className="text-[14px] mt-0.5" style={{ color: CFL.textMuted }}>Executive Director</p>
-              <p className="text-[13px] mt-0.5 leading-tight" style={{ color: `${CFL.textMuted}b3` }}>
-                Reach out about training, talks, or community resource referrals.
+              <p className="text-[14px] mt-0.5" style={{ color: CFL.textMuted }}>Executive Director &amp; Founding Member</p>
+              <p className="text-[13px] mt-2 leading-relaxed text-left" style={{ color: CFL.textMuted }}>
+                Alex is a founding member of Caring for Life (CFL) and currently serves as its Executive Director. A dedicated Mental Health Advocate since 2015, he is passionate about developing innovative community-based approaches that strengthen Singapore's mental health ecosystem.
+              </p>
+              <p className="text-[13px] mt-2 leading-relaxed text-left" style={{ color: CFL.textMuted }}>
+                His experience spans both the public and non-profit sectors, including serving on the National Council of Social Service (NCSS) mental health team, co-founding the Mental Connect directory, and leading suicide prevention initiatives through Caring for Life.
               </p>
 
-              <div className="flex items-center gap-2 mt-3">
+              <div className="w-full mt-3 flex flex-wrap justify-center gap-1.5">
+                {qualifications.map((q) => (
+                  <span key={q} className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white" style={{ color: CFL.primaryDark, border: `1px solid ${CFL.border}` }}>
+                    {q}
+                  </span>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-2 mt-4">
                 <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[12px] font-semibold" style={{ background: `${CFL.primary}26`, color: CFL.primaryDark }}>
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: CFL.primary }} />
                   Active
@@ -194,12 +205,20 @@ const CaringForLifeProfile = () => {
 };
 
 const serviceCards = [
-  { icon: ShieldCheck, title: "Suicide Prevention Training", desc: "Equipping individuals and groups to recognise risk and respond safely." },
-  { icon: BookOpen, title: "Public Education & Awareness Talks", desc: "Destigmatising mental wellness and encouraging help-seeking." },
-  { icon: Phone, title: "Community Resource Referrals", desc: "Connecting people to appropriate support across the community." },
-  { icon: Users, title: "Community Programmes", desc: "Building a resilient, caring community around mental wellness." },
-  { icon: Heart, title: "Advocacy", desc: "Promoting greater awareness of suicide prevention in Singapore." },
-  { icon: Lightbulb, title: "Workshops & Resources", desc: "Practical tools that strengthen community resilience." },
+  { icon: ShieldCheck, title: "Intervention Training", desc: "Equipping individuals and groups to recognise risk and respond safely." },
+  { icon: BookOpen, title: "Public Education Talks", desc: "Destigmatising mental wellness and encouraging help-seeking." },
+  { icon: Phone, title: "Resource Referrals", desc: "Connecting people to appropriate support across the community." },
+  { icon: Users, title: "Peer Programmes", desc: "Building a resilient, caring network around mental wellness." },
+  { icon: Heart, title: "Advocacy", desc: "Promoting greater understanding of prevention in Singapore." },
+  { icon: Lightbulb, title: "Workshops & Resources", desc: "Practical tools that strengthen resilience." },
+];
+
+const qualifications = [
+  "Master of Management",
+  "Graduate Diploma in Non-profit Management",
+  "Red Cross PFA-Advance Certified",
+  "ASIST Certified",
+  "ACLP Certified",
 ];
 
 const TrustStat = ({ value, label }: { value: string; label: string }) => (
