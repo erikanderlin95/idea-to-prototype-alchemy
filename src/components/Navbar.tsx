@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { HelpCircle, Menu } from "lucide-react";
+import { HelpCircle, Menu, ChevronLeft } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -32,9 +32,19 @@ interface NavbarProps {
 export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   const { t } = useLanguage();
   const [isStaff, setIsStaff] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const showBack = location.pathname !== "/";
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      navigate(-1);
+    } else {
+      navigate("/");
+    }
+  };
 
   useEffect(() => {
     if (!user) {
@@ -59,8 +69,20 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
   return (
     <nav className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-12 items-center justify-between gap-3 px-3 md:px-6">
-        <div className="flex items-center cursor-pointer shrink-0" onClick={() => navigate("/")}>
-          <img src={clynicqLogo} alt="ClynicQ - Queue · Book · Connect" className="h-9 md:h-10 w-auto object-contain" />
+        <div className="flex items-center gap-1.5">
+          {showBack && (
+            <button
+              type="button"
+              onClick={handleBack}
+              aria-label="Back"
+              className="inline-flex items-center justify-center h-8 w-8 -ml-1 rounded-md text-primary hover:bg-primary/10 transition-colors shrink-0"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+          )}
+          <div className="flex items-center cursor-pointer shrink-0" onClick={() => navigate("/")}>
+            <img src={clynicqLogo} alt="ClynicQ - Queue · Book · Connect" className="h-9 md:h-10 w-auto object-contain" />
+          </div>
         </div>
 
         {/* For Clinics link - always visible */}
