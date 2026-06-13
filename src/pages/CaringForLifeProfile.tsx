@@ -82,7 +82,7 @@ const CaringForLifeProfile = () => {
                 <h3 className="text-[1.25rem] md:text-[1.5rem] font-extrabold tracking-tight leading-snug text-left" style={{ color: CFL.text }}>
                   Suicide Prevention Is Everyone's Business
                 </h3>
-                <p className="text-[13px] md:text-[14px] mt-1 leading-tight text-left" style={{ color: CFL.textMuted }}>
+                <p className="text-[14px] md:text-[16px] mt-1.5 leading-snug text-left" style={{ color: CFL.textMuted }}>
                   A Singapore charity promoting understanding and a network-based approach to saving lives and building resilience.
                 </p>
               </div>
