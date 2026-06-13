@@ -8,6 +8,8 @@ import PartnerIntakeDialog from "@/components/intake/PartnerIntakeDialog";
 import { Sparkles, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import cflLogo from "@/assets/caring-for-life-logo.jpg";
+import cflBanner from "@/assets/cfl-banner.jpg.asset.json";
+
 
 const SpeakersTrainers = () => {
   const { t } = useLanguage();
@@ -21,6 +23,7 @@ const SpeakersTrainers = () => {
       description:
         "Mental wellness programmes, suicide prevention training, public education, and community support resources.",
       logo: cflLogo,
+      bannerImage: cflBanner.url,
       titleColor: "#2F3A20",
       subtitleColor: "#6B7359",
       descColor: "#3F4A2A",
