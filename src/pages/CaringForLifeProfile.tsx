@@ -104,9 +104,9 @@ const CaringForLifeProfile = () => {
             {/* About text panel */}
             <div className="rounded-3xl p-5 md:p-6 flex flex-col justify-center" style={{ background: `linear-gradient(135deg, ${CFL.primary}, ${CFL.primaryDark})` }}>
               <p className="text-[15px] md:text-[17px] text-white leading-relaxed font-medium">
-                Caring for Life is a Singapore charity dedicated to strengthening mental wellness through suicide prevention, public education, advocacy, and community-based support that builds resilience and encourages early intervention.
+                Caring for Life is a Singapore charity dedicated to strengthening mental wellness through education, suicide prevention, advocacy, and community support that empowers early intervention and resilience.
               </p>
-              <div className="mt-4 flex flex-wrap gap-2">
+              <div className="mt-6 flex flex-wrap gap-2">
                 <span className="px-3 py-1 rounded-full text-[12px] font-semibold bg-white/15 text-white backdrop-blur-sm">Mental Wellness</span>
                 <span className="px-3 py-1 rounded-full text-[12px] font-semibold bg-white/15 text-white backdrop-blur-sm">Crisis Prevention</span>
                 <span className="px-3 py-1 rounded-full text-[12px] font-semibold bg-white/15 text-white backdrop-blur-sm">Public Education</span>
@@ -119,13 +119,13 @@ const CaringForLifeProfile = () => {
 
       {/* What We Offer */}
       <section className="py-6 px-3" style={{ background: CFL.bgSofter }}>
-        <div className="max-w-6xl mx-auto space-y-4">
+        <div className="max-w-6xl mx-auto space-y-6">
           <div className="text-center space-y-1">
             <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold tracking-tight" style={{ color: CFL.text }}>
               What We Offer
             </h2>
             <p className="text-[14px] md:text-[15px] max-w-2xl mx-auto" style={{ color: CFL.textMuted }}>
-              Training, education, and resources that build resilience and strengthen wellbeing.
+              Training, education, and community resources that strengthen resilience and wellbeing.
             </p>
           </div>
 
@@ -235,12 +235,12 @@ const CaringForLifeProfile = () => {
 };
 
 const serviceCards = [
-  { icon: ShieldCheck, title: "Intervention Training", desc: "Equipping individuals and groups to recognise risk and respond safely." },
-  { icon: BookOpen, title: "Public Education Talks", desc: "Destigmatising mental wellness and encouraging help-seeking." },
-  { icon: Phone, title: "Resource Referrals", desc: "Connecting people to appropriate support across the community." },
-  { icon: Users, title: "Peer Programmes", desc: "Building a resilient, caring network around mental wellness." },
-  { icon: Heart, title: "Advocacy", desc: "Promoting greater understanding of prevention in Singapore." },
-  { icon: Lightbulb, title: "Workshops & Resources", desc: "Practical tools that strengthen resilience." },
+  { icon: ShieldCheck, title: "Suicide Intervention Training", desc: "Equip individuals and organisations with practical skills to recognise risk and respond safely." },
+  { icon: BookOpen, title: "Public Education Talks", desc: "Deliver community talks that reduce stigma and encourage early help-seeking." },
+  { icon: Phone, title: "Resource Referrals", desc: "Connect individuals and families with appropriate community support services." },
+  { icon: Users, title: "Community Programmes", desc: "Build resilient communities through outreach, collaboration, and peer support initiatives." },
+  { icon: Heart, title: "Advocacy", desc: "Promote greater understanding of mental health and suicide prevention across Singapore." },
+  { icon: Lightbulb, title: "Workshops & Resources", desc: "Provide practical tools and learning resources that strengthen resilience and community wellbeing." },
 ];
 
 const experience = [
