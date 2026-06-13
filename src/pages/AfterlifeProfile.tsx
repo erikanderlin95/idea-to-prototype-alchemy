@@ -148,36 +148,6 @@ const AfterlifeProfile = () => {
         </div>
       </section>
 
-      {/* Why Us */}
-      <section className="py-8 pb-5 px-3 bg-gradient-to-b from-[#F5EEF8] to-[#FAF7FC]">
-        <div className="max-w-6xl mx-auto space-y-5">
-          <div className="text-center space-y-1">
-            <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#2D1B4E] tracking-tight">
-              Why Choose Nirvana?
-            </h2>
-            <p className="text-[14px] md:text-[15px] text-[#7A6B8A] max-w-2xl mx-auto">
-              Upholding core values of Love, Integrity, Focus, and Empathy (LIFE).
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-            {whyChooseCards.map((b) => (
-              <div
-                key={b.title}
-                className="rounded-xl bg-white/80 backdrop-blur-sm border border-[#DDD0EA] p-3 flex flex-col gap-1 shadow-[0_1px_4px_rgba(45,27,78,0.03)] hover:shadow-[0_4px_16px_rgba(155,125,184,0.1)] hover:-translate-y-0.5 transition-all duration-200"
-              >
-                <div className="flex items-center gap-1.5">
-                  <b.icon className="h-4 w-4 text-[#9B7DB8] shrink-0" />
-                  <h3 className="text-[13px] font-bold text-[#2D1B4E]">{b.title}</h3>
-                </div>
-                <p className="text-[12px] text-[#8A7A9A] leading-snug">{b.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services Offered */}
       <section className="py-8 px-3 bg-[#FDFBFE]">
         <div className="max-w-6xl mx-auto space-y-4">
           <div className="text-center space-y-1">

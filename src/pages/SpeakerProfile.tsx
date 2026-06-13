@@ -118,36 +118,6 @@ const SpeakerProfile = () => {
         </div>
       </section>
 
-      {/* Why Choose Ouch */}
-      <section className="py-6 pb-3 px-3 bg-[#FEF6EE]">
-        <div className="max-w-6xl mx-auto space-y-5">
-          <div className="text-center space-y-1">
-            <h2 className="text-[1.5rem] md:text-[1.8rem] font-bold text-[#12385B] tracking-tight">
-              Why Choose Ouch Pte Ltd?
-            </h2>
-            <p className="text-[14px] md:text-[15px] text-[#5F6F7E] max-w-2xl mx-auto">
-              Practical TCM self-care your people can apply immediately.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
-            {whyChooseCards.map((b) => (
-              <div
-                key={b.title}
-                className="rounded-xl bg-white border border-[#F0C8A0] p-3 flex flex-col gap-1 shadow-[0_1px_4px_rgba(245,124,0,0.04)] hover:shadow-[0_4px_16px_rgba(245,124,0,0.1)] hover:-translate-y-0.5 transition-all duration-200"
-              >
-                <div className="flex items-center gap-1.5">
-                  <b.icon className="h-4 w-4 text-[#F57C00] shrink-0" />
-                  <h3 className="text-[13px] font-bold text-[#12385B]">{b.title}</h3>
-                </div>
-                <p className="text-[12px] text-[#5F6F7E] leading-snug">{b.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* What We Cover (grid) */}
       <section className="py-6 px-3 bg-[#FFF8F0]">
         <div className="max-w-6xl mx-auto space-y-4">
           <div className="text-center space-y-1">
