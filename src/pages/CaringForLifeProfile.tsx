@@ -56,14 +56,14 @@ const CaringForLifeProfile = () => {
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center" style={{ background: `${CFL.primary}33`, color: CFL.primaryDark }}>
                     <ShieldCheck className="h-2.5 w-2.5 md:h-3 md:w-3" />
                   </div>
-                  <span className="text-[13px] md:text-[15px] font-bold" style={{ color: CFL.text }}>Suicide Prevention Training</span>
+                  <span className="text-[13px] md:text-[15px] font-bold" style={{ color: CFL.text }}>Training &amp; Intervention</span>
                 </div>
                 <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4 mx-0.5 md:mx-1 flex-shrink-0" style={{ color: `${CFL.primary}66` }} />
                 <div className="flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 md:px-3 md:py-2" style={{ background: CFL.bgSoft }}>
                   <div className="w-5 h-5 md:w-6 md:h-6 rounded-full flex items-center justify-center" style={{ background: `${CFL.primary}33`, color: CFL.primaryDark }}>
                     <HandHeart className="h-2.5 w-2.5 md:h-3 md:w-3" />
                   </div>
-                  <span className="text-[13px] md:text-[15px] font-bold" style={{ color: CFL.text }}>Community Support & Awareness</span>
+                  <span className="text-[13px] md:text-[15px] font-bold" style={{ color: CFL.text }}>Support &amp; Outreach</span>
                 </div>
               </div>
             </div>
@@ -82,21 +82,21 @@ const CaringForLifeProfile = () => {
                   Suicide Prevention Is Everyone's Business
                 </h3>
                 <p className="text-[13px] md:text-[14px] mt-1 leading-tight text-left" style={{ color: CFL.textMuted }}>
-                  A Singapore charity advocating greater awareness and a community-based approach to suicide prevention and resilience.
+                  A Singapore charity promoting understanding and a network-based approach to saving lives and building resilience.
                 </p>
               </div>
               <div className="px-2.5 py-1 grid grid-cols-2 gap-0 flex-1 items-center">
                 <div className="py-1 px-1" style={{ borderRight: `1px solid ${CFL.border}80`, borderBottom: `1px solid ${CFL.border}80` }}>
-                  <TrustStat value="Advocacy" label="Greater awareness of suicide prevention" />
+                  <TrustStat value="Advocacy" label="Building awareness and reducing stigma around mental health" />
                 </div>
                 <div className="py-1 px-1" style={{ borderBottom: `1px solid ${CFL.border}80` }}>
-                  <TrustStat value="Training" label="Equipping the community to respond" />
+                  <TrustStat value="Training" label="Equipping people and organisations with practical intervention knowledge and response skills" />
                 </div>
                 <div className="py-1 px-1" style={{ borderRight: `1px solid ${CFL.border}80` }}>
-                  <TrustStat value="Education" label="Public talks that destigmatise help-seeking" />
+                  <TrustStat value="Education" label="Delivering talks and programmes that encourage early help-seeking and understanding" />
                 </div>
                 <div className="py-1 px-1">
-                  <TrustStat value="Resilience" label="Community-based support and referrals" />
+                  <TrustStat value="Resilience" label="Connecting individuals with support networks and resources that strengthen long-term wellbeing" />
                 </div>
               </div>
             </div>
@@ -104,7 +104,7 @@ const CaringForLifeProfile = () => {
             {/* About text panel */}
             <div className="rounded-3xl p-5 md:p-6 flex flex-col justify-center" style={{ background: `linear-gradient(135deg, ${CFL.primary}, ${CFL.primaryDark})` }}>
               <p className="text-[15px] md:text-[17px] text-white leading-relaxed font-medium">
-                Caring for Life is a Singapore charity dedicated to suicide prevention, advocating greater awareness and promoting a community-based approach to suicide prevention and suicide resilience.
+                Caring for Life is a Singapore charity dedicated to strengthening mental wellness through suicide prevention, public education, advocacy, and community-based support that builds resilience and encourages early intervention.
               </p>
               <div className="mt-4 flex flex-wrap gap-2">
                 <span className="px-3 py-1 rounded-full text-[12px] font-semibold bg-white/15 text-white backdrop-blur-sm">Mental Wellness</span>
