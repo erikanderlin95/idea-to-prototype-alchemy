@@ -24,8 +24,8 @@ const SpeakerCard = ({ slug, name, subtitle, speakerName, description }: Speaker
       <CardContent className="p-4">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}
-          <div className="w-[5rem] h-[5rem] rounded-lg overflow-hidden bg-[#E0F2FE] mb-2.5 ring-1 ring-[#7DD3FC]/50 shadow-[0_1px_6px_rgba(14,165,233,0.08)] group-hover:shadow-[0_2px_12px_rgba(14,165,233,0.12)] transition-all flex items-center justify-center p-1.5">
-            <img src={ouchLogo} alt="Ouch Pte Ltd" className="w-full h-full object-contain" />
+          <div className="w-[4.5rem] h-[4.5rem] rounded-xl overflow-hidden mb-3 ring-1 ring-[#0EA5E9]/25 shadow-[0_2px_12px_rgba(14,165,233,0.1)]">
+            <img src={ouchLogo} alt="Ouch Pte Ltd" className="w-full h-full object-cover" />
           </div>
 
           {/* Title */}
