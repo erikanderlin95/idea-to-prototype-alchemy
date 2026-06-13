@@ -219,6 +219,7 @@ const SpeakerProfile = () => {
 
 /* Data */
 
+const serviceAreaChips = [
   "Corporate Wellness", "Caregivers", "Seniors", "Self-Care Education", "Team Bonding", "Health Talks",
 ];
 

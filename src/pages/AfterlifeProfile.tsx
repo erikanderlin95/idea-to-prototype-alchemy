@@ -268,6 +268,7 @@ const AfterlifeProfile = () => {
 
 /* Data */
 
+const serviceCards = [
   { icon: Heart, title: "Funeral Service Packages", desc: "Customisable pre-arranged funeral plans for all budgets and faiths, supported by our professional team." },
   { icon: Flower2, title: "Columbarium Niche", desc: "Uniquely designed, spacious compartments at Nirvana Memorial Garden blending tradition and modernity." },
   { icon: Shield, title: "Ancestral Tablet & Pedestals", desc: "Prestigious pedestals on sanctified altars dedicated to deities and enlightened beings." },
