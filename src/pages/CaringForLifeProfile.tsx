@@ -150,49 +150,79 @@ const CaringForLifeProfile = () => {
       </section>
 
       {/* Lead / Connect block */}
-      <section className="py-6 px-4" style={{ background: CFL.bgSoft }}>
-        <div className="max-w-5xl mx-auto space-y-1 text-center">
+      <section className="py-5 px-4" style={{ background: CFL.bgSoft }}>
+        <div className="max-w-5xl mx-auto text-center">
           <p className="text-[15px] md:text-[17px] font-bold uppercase tracking-widest" style={{ color: CFL.primaryDark }}>
             Your Partner Contact
           </p>
 
           <div className="pt-3 flex justify-center">
-            <div className="group rounded-2xl bg-white p-5 transition-all duration-300 flex flex-col items-center text-center w-full max-w-md" style={{ border: `1px solid ${CFL.border}`, boxShadow: `0 2px 8px ${CFL.primary}10` }}>
-              <div className="w-16 h-16 rounded-full overflow-hidden mb-2.5 bg-white" style={{ boxShadow: `0 0 0 2px ${CFL.primary}33` }}>
+            <div
+              className="rounded-2xl bg-white p-5 flex flex-col items-center text-center w-full max-w-md"
+              style={{ border: `1px solid ${CFL.border}`, boxShadow: `0 2px 8px ${CFL.primary}10` }}
+            >
+              <div
+                className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden mb-2 bg-white"
+                style={{ boxShadow: `0 0 0 3px ${CFL.primary}33` }}
+              >
                 <img src={alexYeo} alt="Alex Yeo" className="w-full h-full object-cover object-top" />
               </div>
-              <h3 className="text-[16px] font-semibold leading-tight" style={{ color: CFL.text }}>Alex Yeo</h3>
-              <p className="text-[14px] mt-0.5" style={{ color: CFL.textMuted }}>Executive Director &amp; Founding Member</p>
-              <p className="text-[13px] mt-2 leading-relaxed text-left" style={{ color: CFL.textMuted }}>
-                Alex is a founding member of Caring for Life (CFL) and currently serves as its Executive Director. A dedicated Mental Health Advocate since 2015, he is passionate about developing innovative community-based approaches that strengthen Singapore's mental health ecosystem.
-              </p>
-              <p className="text-[13px] mt-2 leading-relaxed text-left" style={{ color: CFL.textMuted }}>
-                His experience spans both the public and non-profit sectors, including serving on the National Council of Social Service (NCSS) mental health team, co-founding the Mental Connect directory, and leading suicide prevention initiatives through Caring for Life.
+
+              <h3 className="text-[18px] font-bold leading-tight" style={{ color: CFL.text }}>Alex Yeo</h3>
+              <p className="text-[13px] font-medium mt-0.5" style={{ color: CFL.textMuted }}>
+                Executive Director &amp; Founding Member
               </p>
 
-              <div className="w-full mt-3 flex flex-wrap justify-center gap-1.5">
-                {qualifications.map((q) => (
-                  <span key={q} className="px-2.5 py-1 rounded-full text-[11px] font-semibold bg-white" style={{ color: CFL.primaryDark, border: `1px solid ${CFL.border}` }}>
-                    {q}
-                  </span>
-                ))}
-              </div>
+              <p className="text-[13px] mt-3 leading-relaxed text-left" style={{ color: CFL.textMuted }}>
+                Alex Yeo is the Executive Director and a founding member of Caring for Life SG. A mental health advocate since 2015, he has worked across the public and non-profit sectors, including NCSS, co-founding Mental Connect, and leading community suicide prevention initiatives.
+              </p>
+              <p className="text-[13px] mt-2 leading-relaxed text-left" style={{ color: CFL.textMuted }}>
+                He is passionate about building stronger support networks through education, early intervention, and community partnerships.
+              </p>
 
               <div className="flex items-center gap-2 mt-4">
-                <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[12px] font-semibold" style={{ background: `${CFL.primary}26`, color: CFL.primaryDark }}>
-                  <span className="w-1.5 h-1.5 rounded-full" style={{ background: CFL.primary }} />
-                  Active
+                <span className="w-2 h-2 rounded-full" style={{ background: CFL.accent }} />
+                <span className="text-[13px] font-semibold" style={{ color: CFL.primaryDark }}>
+                  Available for Community Partnerships &amp; Training
                 </span>
-                <a
-                  href={WHATSAPP_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center h-7 px-3.5 text-[14px] rounded-full text-white active:scale-[0.96] transition-all shadow-sm gap-1 font-medium"
-                  style={{ background: CFL.primary }}
-                >
-                  <MessageCircle className="h-3 w-3" />
-                  WhatsApp
-                </a>
+              </div>
+
+              <a
+                href={WHATSAPP_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-3 inline-flex items-center h-9 px-6 text-[15px] rounded-full text-white active:scale-[0.96] transition-all shadow-md gap-2 font-semibold"
+                style={{ background: `linear-gradient(to right, ${CFL.primary}, ${CFL.primaryDark})`, boxShadow: `0 4px 12px ${CFL.primary}4d` }}
+              >
+                <MessageCircle className="h-4 w-4" />
+                WhatsApp Alex
+              </a>
+
+              <div className="w-full mt-4 grid grid-cols-2 gap-x-3 gap-y-2 text-left">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-wide mb-1" style={{ color: CFL.primaryDark }}>Experience</p>
+                  {experience.map((e) => (
+                    <span
+                      key={e}
+                      className="inline-block mr-1 mb-1 px-2 py-0.5 rounded text-[11px] font-medium bg-white"
+                      style={{ color: CFL.textMuted, border: `1px solid ${CFL.border}` }}
+                    >
+                      {e}
+                    </span>
+                  ))}
+                </div>
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-wide mb-1" style={{ color: CFL.primaryDark }}>Qualifications</p>
+                  {qualifications.map((q) => (
+                    <span
+                      key={q}
+                      className="inline-block mr-1 mb-1 px-2 py-0.5 rounded text-[11px] font-medium bg-white"
+                      style={{ color: CFL.textMuted, border: `1px solid ${CFL.border}` }}
+                    >
+                      {q}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -213,11 +243,18 @@ const serviceCards = [
   { icon: Lightbulb, title: "Workshops & Resources", desc: "Practical tools that strengthen resilience." },
 ];
 
+const experience = [
+  "Mental Health Advocate since 2015",
+  "Executive Director & Founding Member",
+  "Former NCSS Mental Health Team",
+  "Co-founder, Mental Connect",
+];
+
 const qualifications = [
   "Master of Management",
   "Graduate Diploma in Non-profit Management",
-  "Red Cross PFA-Advance Certified",
   "ASIST Certified",
+  "Red Cross PFA-Advance",
   "ACLP Certified",
 ];
 
