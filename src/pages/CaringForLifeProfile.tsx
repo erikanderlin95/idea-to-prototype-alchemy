@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { ServiceIntakeModal } from "@/components/ServiceIntakeModal";
 import {
-  Mic, Presentation, Users, ClipboardList, MessageCircle,
+  Users, MessageCircle,
   ChevronRight, Heart, Lightbulb, HandHeart, ShieldCheck, BookOpen, Phone,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 import cflLogo from "@/assets/caring-for-life-logo.jpg";
 import alexYeo from "@/assets/alex-yeo.jpg";
