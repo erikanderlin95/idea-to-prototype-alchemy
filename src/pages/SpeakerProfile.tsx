@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import { ServiceIntakeModal } from "@/components/ServiceIntakeModal";
 import {
   Mic, Presentation, Award, Users, ClipboardList, UserCheck, MessageCircle,
-  ChevronRight, Leaf, Heart, Lightbulb, Target, Sparkles, HandHeart, Clock
+  ChevronRight, Heart, Lightbulb, Target, Sparkles, HandHeart, Clock
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -219,16 +219,6 @@ const SpeakerProfile = () => {
 
 /* Data */
 
-const whyChooseCards = [
-  { icon: Leaf, title: "Simple Self-Care", desc: "Practical TCM techniques anyone can apply." },
-  { icon: Sparkles, title: "Immediate Results", desc: "Relieve tension, pain, and fatigue quickly." },
-  { icon: HandHeart, title: "Engaging Experience", desc: "High-energy, hands-on sessions that participants enjoy." },
-  { icon: Target, title: "Workplace Relevance", desc: "Designed for modern stress and digital fatigue." },
-  { icon: Heart, title: "Ageing Focus", desc: "Supports healthy ageing and long-term wellbeing." },
-  { icon: Award, title: "Trusted Delivery", desc: "Nearly two decades across sectors and audiences." },
-];
-
-const serviceAreaChips = [
   "Corporate Wellness", "Caregivers", "Seniors", "Self-Care Education", "Team Bonding", "Health Talks",
 ];
 

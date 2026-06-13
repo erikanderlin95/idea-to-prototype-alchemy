@@ -4,8 +4,7 @@ import { Footer } from "@/components/Footer";
 import { ServiceIntakeModal } from "@/components/ServiceIntakeModal";
 import {
   Heart, Flower2, Shield, Users, ClipboardList, UserCheck, MessageCircle,
-  ChevronRight, MapPin, Clock, Phone, User, Sparkles, HandHeart, Target,
-  CreditCard, Building2, Package, Calendar
+  ChevronRight, MapPin, Clock, Phone, User, Sparkles, HandHeart, Target
 } from "lucide-react";
 
 import nvGraceImg from "@/assets/nv-grace.jpg";
@@ -269,16 +268,6 @@ const AfterlifeProfile = () => {
 
 /* Data */
 
-const whyChooseCards = [
-  { icon: CreditCard, title: "0% Interest & Low Downpayment", desc: "Honour your loved ones with ease through 0% instalments and low downpayment options." },
-  { icon: Building2, title: "Modern Facilities", desc: "Our modern facilities and compassionate services ensure a peaceful, respectful experience." },
-  { icon: Package, title: "All-in-One Packages", desc: "All-inclusive funeral packages providing a seamless, supportive experience from planning to execution." },
-  { icon: Calendar, title: "99-Year Lease", desc: "Peace of mind with a 99-year lease extending till 2098 for a lasting tribute." },
-  { icon: HandHeart, title: "Caring for Life Philosophy", desc: "Upholding core values of Love, Integrity, Focus, and Empathy (LIFE) in everything we do." },
-  { icon: Users, title: "All Faiths & Beliefs", desc: "Services tailored to suit all faiths and beliefs, preserving rich cultural heritage." },
-];
-
-const serviceCards = [
   { icon: Heart, title: "Funeral Service Packages", desc: "Customisable pre-arranged funeral plans for all budgets and faiths, supported by our professional team." },
   { icon: Flower2, title: "Columbarium Niche", desc: "Uniquely designed, spacious compartments at Nirvana Memorial Garden blending tradition and modernity." },
   { icon: Shield, title: "Ancestral Tablet & Pedestals", desc: "Prestigious pedestals on sanctified altars dedicated to deities and enlightened beings." },
