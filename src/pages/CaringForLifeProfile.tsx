@@ -1,12 +1,9 @@
-import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { ServiceIntakeModal } from "@/components/ServiceIntakeModal";
 import {
-  Mic, Presentation, Users, ClipboardList, MessageCircle,
+  Users, MessageCircle,
   ChevronRight, Heart, Lightbulb, HandHeart, ShieldCheck, BookOpen, Phone,
 } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 import cflLogo from "@/assets/caring-for-life-logo.jpg";
 import alexYeo from "@/assets/alex-yeo.jpg";
@@ -28,8 +25,6 @@ const CFL = {
 };
 
 const CaringForLifeProfile = () => {
-  const [showIntakeModal, setShowIntakeModal] = useState(false);
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
@@ -192,36 +187,6 @@ const CaringForLifeProfile = () => {
           </div>
         </div>
       </section>
-
-      {/* Final CTA */}
-      <section className="py-8 px-4">
-        <div className="max-w-3xl mx-auto text-center space-y-4">
-          <h2 className="text-2xl font-bold" style={{ color: CFL.text }}>Ready to plan your programme?</h2>
-          <p className="text-[17px]" style={{ color: CFL.textMuted }}>
-            Share your requirements and we'll be in touch about training, talks, or referrals.
-          </p>
-          <Button
-            size="lg"
-            className="text-white font-semibold"
-            style={{ background: `linear-gradient(to right, ${CFL.primary}, ${CFL.primaryDark})`, boxShadow: `0 2px 8px ${CFL.primary}4d` }}
-            onClick={() => setShowIntakeModal(true)}
-          >
-            <ClipboardList className="mr-2 h-5 w-5" />
-            Enquire Now
-          </Button>
-        </div>
-      </section>
-
-      <ServiceIntakeModal
-        open={showIntakeModal}
-        onOpenChange={setShowIntakeModal}
-        serviceName="Caring for Life SG"
-        serviceType="speaker"
-        concernLabel="Programme / Enquiry Type *"
-        concernPlaceholder="e.g. Suicide Prevention Training, Awareness Talk"
-        disclaimerItems={["Submitting this form does not confirm a booking."]}
-        icon={<Heart className="h-5 w-5" style={{ color: CFL.primary }} />}
-      />
 
       <Footer />
     </div>
