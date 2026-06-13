@@ -7,6 +7,7 @@ import {
 
 import cflLogo from "@/assets/caring-for-life-logo.jpg";
 import alexYeo from "@/assets/alex-yeo.jpg";
+import cflPillars from "@/assets/cfl-pillars.jpg.asset.json";
 
 const WHATSAPP_URL = "https://wa.me/6592305967?text=" + encodeURIComponent("Hi Alex, I'd like to learn more about Caring for Life SG programmes.");
 
