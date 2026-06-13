@@ -36,7 +36,7 @@ const AfterlifeServicesPage = () => {
         <div className="max-w-3xl mx-auto text-center relative">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F0E6F8]/60 text-[#9B7DB8] mb-6 border border-[#E0D0ED]/50 backdrop-blur-sm">
             <Sparkles className="h-3.5 w-3.5 text-[#C9A84C]/70" />
-            <span className="text-sm font-medium tracking-wide">{t("afterlife.badge")}</span>
+            <span className="text-sm font-medium tracking-wide">ClynicQ Partners</span>
           </div>
 
           <h1 className="text-3xl md:text-4xl font-bold text-[#2D1B4E] mb-4 tracking-tight">
