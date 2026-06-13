@@ -20,7 +20,7 @@ const SpeakerCard = ({ slug, name, subtitle, speakerName, description }: Speaker
   const navigate = useNavigate();
 
   return (
-    <Card className="group hover:shadow-[0_16px_48px_rgba(14,165,233,0.2)] hover:-translate-y-1 transition-all duration-300 border-[#7DD3FC] shadow-[0_6px_24px_rgba(14,165,233,0.12)] bg-gradient-to-b from-[#F0F9FF] via-[#F0F9FF] to-[#E0F2FE] overflow-hidden rounded-2xl aspect-square max-w-[380px] mx-auto flex items-center">
+    <Card className="group hover:shadow-[0_16px_48px_rgba(14,165,233,0.2)] hover:-translate-y-1 transition-all duration-300 border-2 border-[#0EA5E9]/40 hover:border-[#0EA5E9]/70 shadow-[0_6px_24px_rgba(14,165,233,0.08)] bg-white overflow-hidden rounded-2xl aspect-square max-w-[380px] mx-auto flex items-center">
       <CardContent className="p-4">
         <div className="flex flex-col items-center text-center">
           {/* Logo */}

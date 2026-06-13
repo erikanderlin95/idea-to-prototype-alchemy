@@ -17,7 +17,7 @@ const AfterlifeCard = ({ slug, name, subtitle, description }: AfterlifeCardProps
   const navigate = useNavigate();
 
   return (
-    <Card className="group hover:shadow-[0_14px_40px_rgba(45,27,78,0.12)] hover:-translate-y-1 transition-all duration-300 border-[#DDD0EA] shadow-[0_4px_20px_rgba(45,27,78,0.06)] bg-gradient-to-b from-[#FAF7FC] via-[#F5EEF8] to-[#EDE4F5] overflow-hidden aspect-square max-w-[380px] mx-auto w-full">
+    <Card className="group hover:shadow-[0_14px_40px_rgba(45,27,78,0.12)] hover:-translate-y-1 transition-all duration-300 border-2 border-[#9B7DB8]/40 hover:border-[#9B7DB8]/70 shadow-[0_4px_20px_rgba(45,27,78,0.04)] bg-white overflow-hidden aspect-square max-w-[380px] mx-auto w-full">
       <CardContent className="p-5 flex flex-col items-center justify-center h-full text-center">
         {/* Subtle gold accent ring */}
         <div className="w-[4.5rem] h-[4.5rem] rounded-xl overflow-hidden mb-3 ring-1 ring-[#C9A84C]/25 shadow-[0_2px_12px_rgba(201,168,76,0.1)]">
