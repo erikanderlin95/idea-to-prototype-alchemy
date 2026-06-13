@@ -29,6 +29,7 @@ import OrganizationProfile from "./pages/OrganizationProfile";
 
 import SpeakersTrainers from "./pages/SpeakersTrainers";
 import SpeakerProfile from "./pages/SpeakerProfile";
+import CaringForLifeProfile from "./pages/CaringForLifeProfile";
 import AfterlifeServicesPage from "./pages/AfterlifeServices";
 import AfterlifeProfile from "./pages/AfterlifeProfile";
 import ForClinics from "./pages/ForClinics";
