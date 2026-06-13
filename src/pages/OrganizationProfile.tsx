@@ -43,10 +43,6 @@ const OrganizationProfile = () => {
 
       <OrgHero onStartIntake={() => setShowIntakeModal(true)} />
 
-      <OrgCareJourney />
-
-      <OrgWhyConcierge />
-
       <OrgServicesGrid />
 
       <OrgConciergeTeam
