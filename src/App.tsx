@@ -33,6 +33,7 @@ import AfterlifeProfile from "./pages/AfterlifeProfile";
 import ForClinics from "./pages/ForClinics";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
+import SectionSidebar from "@/components/SectionSidebar";
 
 const queryClient = new QueryClient();
 
