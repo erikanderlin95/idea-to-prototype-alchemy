@@ -25,8 +25,6 @@ const CFL = {
 };
 
 const CaringForLifeProfile = () => {
-  const [showIntakeModal, setShowIntakeModal] = useState(false);
-
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
