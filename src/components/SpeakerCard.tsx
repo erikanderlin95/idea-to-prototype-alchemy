@@ -57,17 +57,20 @@ const SpeakerCard = ({
       onMouseLeave={(e) => (e.currentTarget.style.boxShadow = baseShadow)}
     >
       {bannerImage && (
-        <div
-          className="absolute top-0 left-0 right-0 h-[15%] bg-cover bg-center opacity-90 pointer-events-none"
-          style={{ backgroundImage: `url(${bannerImage})` }}
-          aria-hidden
-        />
+        <div className="absolute top-0 left-0 right-0 h-[22%] pointer-events-none" aria-hidden>
+          <div
+            className="absolute inset-0 bg-cover bg-center"
+            style={{ backgroundImage: `url(${bannerImage})` }}
+          />
+          {/* Subtle fade into white for seamless transition */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/10 to-white" />
+        </div>
       )}
       <CardContent className="p-4 relative z-10">
 
         <div className="flex flex-col items-center text-center">
-          {/* Logo — even border */}
-          <div className="w-[4.5rem] h-[4.5rem] rounded-xl overflow-hidden mb-3 border border-gray-200">
+          {/* Logo — overlaps banner by ~12px for depth */}
+          <div className="w-[4.5rem] h-[4.5rem] rounded-xl overflow-hidden mb-3 border border-gray-200 -mt-3 bg-white shadow-sm">
             <img src={logo} alt={name} className="w-full h-full object-cover" />
           </div>
 
