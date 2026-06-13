@@ -17,7 +17,6 @@ const SpeakersTrainers = () => {
       slug: "ouch-pte-ltd",
       name: "Ouch Pte Ltd",
       subtitle: t("speakerProfile.badge"),
-      speakerName: "Hui Fang",
       description: t("speakerProfile.heroDesc"),
     },
   ];
@@ -73,7 +72,6 @@ const SpeakersTrainers = () => {
                 slug={speaker.slug}
                 name={speaker.name}
                 subtitle={speaker.subtitle}
-                speakerName={speaker.speakerName}
                 description={speaker.description}
                 color="#D4860A"
                 colorLight="#FDF2E0"
