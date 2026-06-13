@@ -220,15 +220,6 @@ const AfterlifeProfile = () => {
             ))}
           </div>
 
-          <div className="text-center">
-            <Button
-              className="bg-gradient-to-r from-[#9B7DB8] to-[#8A6BAA] hover:from-[#8A6BAA] hover:to-[#7A5B9A] text-white font-semibold shadow-[0_2px_8px_rgba(155,125,184,0.25)]"
-              onClick={() => setShowIntakeModal(true)}
-            >
-              <ClipboardList className="mr-2 h-4 w-4" />
-              Enquire About Packages
-            </Button>
-          </div>
         </div>
       </section>
 
