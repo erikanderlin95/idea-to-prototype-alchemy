@@ -8,7 +8,10 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-import cflLogo from "@/assets/caring-for-life-logo.png";
+import cflLogo from "@/assets/caring-for-life-logo.jpg";
+import alexYeo from "@/assets/alex-yeo.jpg";
+
+const WHATSAPP_URL = "https://wa.me/6592305967?text=" + encodeURIComponent("Hi Alex, I'd like to learn more about Caring for Life SG programmes.");
 
 /* Caring for Life SG palette (from official site) */
 const CFL = {
@@ -155,18 +158,18 @@ const CaringForLifeProfile = () => {
       <section className="py-6 px-4" style={{ background: CFL.bgSoft }}>
         <div className="max-w-5xl mx-auto space-y-1 text-center">
           <p className="text-[15px] md:text-[17px] font-bold uppercase tracking-widest" style={{ color: CFL.primaryDark }}>
-            Partner With Caring for Life
+            Your Caring for Life Contact
           </p>
 
           <div className="pt-3 flex justify-center">
             <div className="group rounded-2xl bg-white p-4 transition-all duration-300 flex flex-col items-center text-center w-64" style={{ border: `1px solid ${CFL.border}`, boxShadow: `0 2px 8px ${CFL.primary}10` }}>
-              <div className="w-16 h-16 rounded-full overflow-hidden mb-2.5 flex items-center justify-center bg-white" style={{ boxShadow: `0 0 0 2px ${CFL.primary}33` }}>
-                <img src={cflLogo} alt="Caring for Life SG" className="w-full h-full object-cover" />
+              <div className="w-16 h-16 rounded-full overflow-hidden mb-2.5 bg-white" style={{ boxShadow: `0 0 0 2px ${CFL.primary}33` }}>
+                <img src={alexYeo} alt="Alex Yeo" className="w-full h-full object-cover object-top" />
               </div>
-              <h3 className="text-[16px] font-semibold leading-tight" style={{ color: CFL.text }}>Caring for Life SG</h3>
-              <p className="text-[14px] mt-0.5" style={{ color: CFL.textMuted }}>Community Partner</p>
+              <h3 className="text-[16px] font-semibold leading-tight" style={{ color: CFL.text }}>Alex Yeo</h3>
+              <p className="text-[14px] mt-0.5" style={{ color: CFL.textMuted }}>Caring for Life SG</p>
               <p className="text-[13px] mt-0.5 leading-tight" style={{ color: `${CFL.textMuted}b3` }}>
-                Suicide prevention training, public education, and community resource referrals.
+                Reach out about training, talks, or community resource referrals.
               </p>
 
               <div className="flex items-center gap-2 mt-3">
@@ -174,15 +177,16 @@ const CaringForLifeProfile = () => {
                   <span className="w-1.5 h-1.5 rounded-full" style={{ background: CFL.primary }} />
                   Active
                 </span>
-                <Button
-                  size="sm"
-                  className="h-7 px-3.5 text-[14px] rounded-full text-white active:scale-[0.96] transition-all shadow-sm gap-1"
+                <a
+                  href={WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center h-7 px-3.5 text-[14px] rounded-full text-white active:scale-[0.96] transition-all shadow-sm gap-1 font-medium"
                   style={{ background: CFL.primary }}
-                  onClick={() => setShowIntakeModal(true)}
                 >
                   <MessageCircle className="h-3 w-3" />
-                  Connect
-                </Button>
+                  WhatsApp
+                </a>
               </div>
             </div>
           </div>

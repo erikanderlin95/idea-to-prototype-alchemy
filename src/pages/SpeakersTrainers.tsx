@@ -7,7 +7,7 @@ import PartnerIntakeDialog from "@/components/intake/PartnerIntakeDialog";
 
 import { Sparkles, ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import cflLogo from "@/assets/caring-for-life-logo.png";
+import cflLogo from "@/assets/caring-for-life-logo.jpg";
 
 const SpeakersTrainers = () => {
   const { t } = useLanguage();
