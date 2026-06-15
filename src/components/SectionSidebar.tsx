@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 const sections = [
   { id: "marketplace", label: "Browse Clinics", icon: Building2, type: "scroll" as const },
   { id: "managed-care", label: "Request Managed Care", icon: HeartHandshake, type: "scroll" as const },
-  { id: "wellness-talks", label: "Wellness Talks", icon: Mic, type: "scroll" as const },
+  { id: "wellness-talks", label: "Community & Wellness Events", icon: Mic, type: "scroll" as const },
   { id: "other-providers", label: "Other Providers", icon: Sparkles, type: "scroll" as const },
   { id: "for-clinics", label: "For Clinics", icon: Stethoscope, type: "scroll" as const },
 ];
