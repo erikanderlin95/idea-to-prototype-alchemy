@@ -185,10 +185,10 @@ export const WellnessTalks = () => {
       <div className="container px-4 md:px-6">
         <div className="text-center mb-5 md:mb-6 max-w-2xl mx-auto">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight mb-2" style={{ color: 'hsl(180 60% 20%)' }}>
-            Featured Upcoming Wellness Talks
+            Featured Community & Wellness Events
           </h2>
           <p className="text-[15px] text-muted-foreground">
-            Learn from healthcare experts. Reserve your seat before it fills up.
+            Discover health talks, screenings, workshops and community initiatives happening near you.
           </p>
         </div>
 
