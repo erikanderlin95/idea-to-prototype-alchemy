@@ -7,7 +7,6 @@ import { MarketplaceSection } from "@/components/MarketplaceSection";
 import { FeaturedConsultants } from "@/components/FeaturedConsultants";
 import { LaunchPartners } from "@/components/LaunchPartners";
 import { ContinuityServices } from "@/components/ContinuityServices";
-import { MyClynicQPlugin } from "@/components/MyClynicQPlugin";
 import { Footer } from "@/components/Footer";
 
 import { OnboardingTour } from "@/components/OnboardingTour";
@@ -31,7 +30,6 @@ const Index = () => {
         <WellnessTalks />
         <ContinuityServices />
         <ClinicConversion />
-        <MyClynicQPlugin />
       </main>
       <Footer />
       
