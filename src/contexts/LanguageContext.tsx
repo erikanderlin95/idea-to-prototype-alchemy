@@ -27,6 +27,10 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.restartTour": "Restart Tour",
     "nav.consultants": "Consultants",
     
+    // Sidebar
+    "sidebar.title": "Jump to section",
+    "sidebar.contactUs": "Contact us",
+    
     // Continuity & Support Services
     "continuity.badge": "Continuity & Support",
     "continuity.title": "Beyond the Clinic",
