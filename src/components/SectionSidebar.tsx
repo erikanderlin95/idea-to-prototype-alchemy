@@ -109,7 +109,7 @@ export const SectionSidebar = () => {
       </SheetTrigger>
       <SheetContent side="right" className="w-80 p-0">
         <SheetHeader className="px-5 pt-5 pb-3 border-b">
-          <SheetTitle className="text-base">Jump to section</SheetTitle>
+          <SheetTitle className="text-base">{t("sidebar.title")}</SheetTitle>
         </SheetHeader>
         <nav className="flex flex-col p-2">
           {sections.slice(0, 3).map((s) => {
@@ -130,7 +130,7 @@ export const SectionSidebar = () => {
 
           <div className="my-2 mx-3 h-px bg-border" />
           <div className="px-3 py-2">
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Contact us</p>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{t("sidebar.contactUs")}</p>
             <a
               href="mailto:hello@ealvon.com"
               className="flex items-center gap-3 py-2 rounded-lg text-sm font-medium text-foreground hover:bg-muted active:bg-muted/70 transition-colors"
