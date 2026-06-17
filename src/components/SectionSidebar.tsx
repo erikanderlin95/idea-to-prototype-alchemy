@@ -105,23 +105,17 @@ export const SectionSidebar = () => {
           `}</style>
         </button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-80 p-0 dark border-l border-border/50">
+      <SheetContent side="right" className="w-80 p-0 border-l border-border/50">
         <div className="relative flex flex-col h-full overflow-hidden bg-background/95 backdrop-blur-xl">
           {/* Decorative glow */}
           <div className="pointer-events-none absolute -top-24 -right-24 w-48 h-48 rounded-full bg-ai-indigo/20 blur-[80px]" />
 
           <SheetHeader className="relative z-10 px-6 pt-8 pb-4">
-            <div className="flex items-center justify-between">
-              <div className="space-y-1">
-                <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-primary">
-                  {t("sidebar.explore")}
-                </p>
-                <SheetTitle className="text-2xl font-bold text-foreground">
-                  {t("sidebar.title")}
-                </SheetTitle>
-              </div>
-            </div>
+            <SheetTitle className="text-2xl font-bold text-foreground">
+              {t("sidebar.title")}
+            </SheetTitle>
           </SheetHeader>
+
 
           <nav className="relative z-10 flex-1 px-4 space-y-2 overflow-y-auto">
             {sections.map((s) => {
