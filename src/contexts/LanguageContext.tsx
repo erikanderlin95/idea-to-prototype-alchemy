@@ -982,6 +982,10 @@ const translations: Record<Language, Record<string, string>> = {
     "nav.restartTour": "重新开始导览",
     "nav.consultants": "健康顾问",
     
+    // Sidebar
+    "sidebar.title": "跳转到",
+    "sidebar.contactUs": "联系我们",
+    
     // Continuity & Support Services
     "continuity.badge": "延续与支持",
     "continuity.title": "超越诊所",
