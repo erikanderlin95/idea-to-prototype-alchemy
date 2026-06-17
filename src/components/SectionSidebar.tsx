@@ -110,7 +110,49 @@ export const SectionSidebar = () => {
           <SheetTitle className="text-base">Jump to section</SheetTitle>
         </SheetHeader>
         <nav className="flex flex-col p-2">
-          {sections.map((s) => {
+          {sections.slice(0, 3).map((s) => {
+            const Icon = s.icon;
+            return (
+              <button
+                key={s.id}
+                onClick={() => handleClick(s)}
+                className="flex items-center gap-3 px-3 py-3.5 rounded-lg text-sm font-medium text-foreground hover:bg-muted active:bg-muted/70 transition-colors text-left"
+              >
+                <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary shrink-0">
+                  <Icon className="h-4 w-4" />
+                </span>
+                <span>{s.label}</span>
+              </button>
+            );
+          })}
+
+          <div className="my-2 mx-3 h-px bg-border" />
+          <div className="px-3 py-2">
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">Contact us</p>
+            <a
+              href="mailto:hello@ealvon.com"
+              className="flex items-center gap-3 py-2 rounded-lg text-sm font-medium text-foreground hover:bg-muted active:bg-muted/70 transition-colors"
+              onClick={() => setOpen(false)}
+            >
+              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary shrink-0">
+                <Mail className="h-4 w-4" />
+              </span>
+              <span>hello@ealvon.com</span>
+            </a>
+            <a
+              href="tel:92206418"
+              className="flex items-center gap-3 py-2 rounded-lg text-sm font-medium text-foreground hover:bg-muted active:bg-muted/70 transition-colors"
+              onClick={() => setOpen(false)}
+            >
+              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary shrink-0">
+                <Phone className="h-4 w-4" />
+              </span>
+              <span>92206418</span>
+            </a>
+          </div>
+          <div className="my-2 mx-3 h-px bg-border" />
+
+          {sections.slice(3).map((s) => {
             const Icon = s.icon;
             return (
               <button
