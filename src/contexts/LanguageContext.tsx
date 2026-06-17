@@ -429,7 +429,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicProfile.notAvailable": "Not available",
     "clinicProfile.currentQueue": "People Ahead",
     "clinicProfile.waiting": "right now",
-    "clinicProfile.doctors": "Doctors",
+    "clinicProfile.doctors": "Professionals",
     "clinicProfile.awards": "Awards",
     "clinicProfile.operatingHours": "Operating Hours",
     "clinicProfile.reviews": "Reviews",
@@ -939,7 +939,7 @@ const translations: Record<Language, Record<string, string>> = {
     "serviceIntake.continueWhatsApp": "Continue via WhatsApp",
 
     // Search Filters categories
-    "search.category.all": "Live Queue",
+    "search.category.all": "All",
     "search.category.gp_specialist": "GP & Specialist Care",
     "search.category.dental": "Dental Care",
     "search.category.therapy_rehab": "Therapy & Rehab",
@@ -1380,7 +1380,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicProfile.notAvailable": "暂无",
     "clinicProfile.currentQueue": "前方人数",
     "clinicProfile.waiting": "人在排队",
-    "clinicProfile.doctors": "医生",
+    "clinicProfile.doctors": "专业人员",
     "clinicProfile.awards": "奖项",
     "clinicProfile.operatingHours": "营业时间",
     "clinicProfile.reviews": "评价",
@@ -1890,7 +1890,7 @@ const translations: Record<Language, Record<string, string>> = {
     "serviceIntake.continueWhatsApp": "通过WhatsApp继续",
 
     // Search Filters categories
-    "search.category.all": "实时排队",
+    "search.category.all": "全部",
     "search.category.gp_specialist": "全科与专科护理",
     "search.category.dental": "牙科护理",
     "search.category.therapy_rehab": "治疗与康复",
