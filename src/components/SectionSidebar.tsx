@@ -142,9 +142,6 @@ export const SectionSidebar = () => {
 
           {/* Contact footer */}
           <div className="relative z-10 p-6 bg-muted/30 border-t border-border/50 mt-auto">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
-              {t("sidebar.contactUs")}
-            </p>
             <a
               href="mailto:hello@ealvon.com"
               className="text-lg font-bold text-foreground hover:text-primary transition-colors"
@@ -154,6 +151,7 @@ export const SectionSidebar = () => {
             </a>
             <div className="mt-6 h-1 w-12 bg-primary rounded-full" />
           </div>
+
 
         </div>
       </SheetContent>
