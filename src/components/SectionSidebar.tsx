@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Building2, HeartHandshake, Stethoscope, Mic, Sparkles, Menu, ChevronLeft, Mail, Phone } from "lucide-react";
+import { Building2, HeartHandshake, Stethoscope, Mic, Sparkles, Menu, ChevronLeft, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 
