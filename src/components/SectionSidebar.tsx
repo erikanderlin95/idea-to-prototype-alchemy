@@ -3,6 +3,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { useNavigate, useLocation } from "react-router-dom";
 import { Building2, HeartHandshake, Stethoscope, Mic, Sparkles, Menu, ChevronLeft, Mail, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const sections = [
   { id: "marketplace", label: "Browse Clinics", icon: Building2, type: "scroll" as const },
