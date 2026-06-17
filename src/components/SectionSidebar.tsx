@@ -19,6 +19,7 @@ export const SectionSidebar = () => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+  const { t } = useLanguage();
 
   // First-visit auto-expand hint
   useEffect(() => {
