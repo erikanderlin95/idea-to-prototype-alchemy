@@ -29,7 +29,14 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Sidebar
     "sidebar.title": "Jump to section",
+    "sidebar.explore": "Explore",
     "sidebar.contactUs": "Contact us",
+    "sidebar.section.browseClinics": "Browse Clinics",
+    "sidebar.section.managedCare": "Request Managed Care",
+    "sidebar.section.wellnessTalks": "Community & Wellness Events",
+    "sidebar.section.otherProviders": "Other Providers",
+    "sidebar.section.forClinics": "For Clinics",
+
     
     // Continuity & Support Services
     "continuity.badge": "Continuity & Support",
@@ -960,7 +967,14 @@ const translations: Record<Language, Record<string, string>> = {
     
     // Sidebar
     "sidebar.title": "跳转到",
+    "sidebar.explore": "探索",
     "sidebar.contactUs": "联系我们",
+    "sidebar.section.browseClinics": "浏览诊所",
+    "sidebar.section.managedCare": "请求管理式医疗",
+    "sidebar.section.wellnessTalks": "社区与健康活动",
+    "sidebar.section.otherProviders": "其他服务提供者",
+    "sidebar.section.forClinics": "诊所专区",
+
     
     // Continuity & Support Services
     "continuity.badge": "延续与支持",
