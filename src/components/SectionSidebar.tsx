@@ -151,18 +151,16 @@ export const SectionSidebar = () => {
             <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
               {t("sidebar.contactUs")}
             </p>
-            <div className="flex flex-col gap-1">
-              <span className="text-sm text-muted-foreground">{t("sidebar.contactUs")}</span>
-              <a
-                href="mailto:hello@ealvon.com"
-                className="text-lg font-bold text-foreground hover:text-primary transition-colors"
-                onClick={() => setOpen(false)}
-              >
-                hello@ealvon.com
-              </a>
-            </div>
+            <a
+              href="mailto:hello@ealvon.com"
+              className="text-lg font-bold text-foreground hover:text-primary transition-colors"
+              onClick={() => setOpen(false)}
+            >
+              hello@ealvon.com
+            </a>
             <div className="mt-6 h-1 w-12 bg-primary rounded-full" />
           </div>
+
         </div>
       </SheetContent>
     </Sheet>
