@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter, DialogTrigger } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -227,21 +227,39 @@ const ClinicProfile = () => {
             return (
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
                 {displayPhotos.map((photo: string, index: number) => (
-                  <div key={index} className="relative overflow-hidden rounded-xl">
-                    <img
-                      src={photo}
-                      alt={`${clinic.name} photo ${index + 1}`}
-                      className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1]"
-                      loading="lazy"
-                      width={640}
-                      height={640}
-                      onError={(e) => {
-                        const wrapper = (e.currentTarget.parentElement as HTMLElement | null);
-                        if (wrapper) wrapper.style.display = "none";
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply" />
-                  </div>
+                  <Dialog key={index}>
+                    <DialogTrigger asChild>
+                      <button
+                        type="button"
+                        className="relative overflow-hidden rounded-xl group focus:outline-none focus:ring-2 focus:ring-primary"
+                        aria-label={`View ${clinic.name} photo ${index + 1}`}
+                      >
+                        <img
+                          src={photo}
+                          alt={`${clinic.name} photo ${index + 1}`}
+                          className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105"
+                          loading="lazy"
+                          width={640}
+                          height={640}
+                          onError={(e) => {
+                            const wrapper = (e.currentTarget.parentElement as HTMLElement | null);
+                            if (wrapper) wrapper.style.display = "none";
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply pointer-events-none" />
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl p-2 sm:p-3 bg-background border-0">
+                      <DialogHeader className="sr-only">
+                        <DialogTitle>{`${clinic.name} photo ${index + 1}`}</DialogTitle>
+                      </DialogHeader>
+                      <img
+                        src={photo.replace(/w=\d+/, 'w=1600')}
+                        alt={`${clinic.name} photo ${index + 1} enlarged`}
+                        className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
+                      />
+                    </DialogContent>
+                  </Dialog>
                 ))}
               </div>
             );
