@@ -7,11 +7,13 @@ import { MarketplaceSection } from "@/components/MarketplaceSection";
 import { FeaturedConsultants } from "@/components/FeaturedConsultants";
 import { LaunchPartners } from "@/components/LaunchPartners";
 import { ContinuityServices } from "@/components/ContinuityServices";
+import { MyClynicQPlugin } from "@/components/MyClynicQPlugin";
 import { Footer } from "@/components/Footer";
 
 import { OnboardingTour } from "@/components/OnboardingTour";
 import { useOnboarding } from "@/hooks/useOnboarding";
 import { useSearchParams } from "react-router-dom";
+
 
 const Index = () => {
   const { showOnboarding, completeOnboarding, startOnboarding } = useOnboarding();
@@ -30,8 +32,10 @@ const Index = () => {
         <WellnessTalks />
         <ContinuityServices />
         <ClinicConversion />
+        <MyClynicQPlugin />
       </main>
       <Footer />
+
       
       
       {/* Onboarding Tour */}

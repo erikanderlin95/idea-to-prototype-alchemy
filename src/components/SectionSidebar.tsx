@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Building2, HeartHandshake, Stethoscope, Mic, Sparkles, Menu, ChevronLeft, Mail, Phone } from "lucide-react";
+import { Building2, HeartHandshake, Stethoscope, Mic, Sparkles, Menu, ChevronLeft, Mail } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -112,7 +112,7 @@ export const SectionSidebar = () => {
           <SheetTitle className="text-base">{t("sidebar.title")}</SheetTitle>
         </SheetHeader>
         <nav className="flex flex-col p-2">
-          {sections.slice(0, 3).map((s) => {
+          {sections.slice(0, 1).map((s) => {
             const Icon = s.icon;
             return (
               <button
@@ -141,20 +141,10 @@ export const SectionSidebar = () => {
               </span>
               <span>hello@ealvon.com</span>
             </a>
-            <a
-              href="tel:92206418"
-              className="flex items-center gap-3 py-2 rounded-lg text-sm font-medium text-foreground hover:bg-muted active:bg-muted/70 transition-colors"
-              onClick={() => setOpen(false)}
-            >
-              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary shrink-0">
-                <Phone className="h-4 w-4" />
-              </span>
-              <span>92206418</span>
-            </a>
           </div>
           <div className="my-2 mx-3 h-px bg-border" />
 
-          {sections.slice(3).map((s) => {
+          {sections.slice(1).map((s) => {
             const Icon = s.icon;
             return (
               <button
@@ -169,6 +159,7 @@ export const SectionSidebar = () => {
               </button>
             );
           })}
+
         </nav>
       </SheetContent>
     </Sheet>
