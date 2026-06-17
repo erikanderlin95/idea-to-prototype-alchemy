@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Building2, HeartHandshake, Stethoscope, Mic, Sparkles, Menu, ChevronLeft, Mail } from "lucide-react";
+import { Building2, HeartHandshake, Stethoscope, Mic, Sparkles, Menu, ChevronLeft, Mail, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const sections = [
-  { id: "marketplace", label: "Browse Clinics", icon: Building2, type: "scroll" as const },
-  { id: "managed-care", label: "Request Managed Care", icon: HeartHandshake, type: "scroll" as const },
-  { id: "wellness-talks", label: "Community & Wellness Events", icon: Mic, type: "scroll" as const },
-  { id: "other-providers", label: "Other Providers", icon: Sparkles, type: "scroll" as const },
-  { id: "for-clinics", label: "For Clinics", icon: Stethoscope, type: "scroll" as const },
+  { id: "marketplace", key: "sidebar.section.browseClinics", icon: Building2, type: "scroll" as const },
+  { id: "managed-care", key: "sidebar.section.managedCare", icon: HeartHandshake, type: "scroll" as const },
+  { id: "wellness-talks", key: "sidebar.section.wellnessTalks", icon: Mic, type: "scroll" as const },
+  { id: "other-providers", key: "sidebar.section.otherProviders", icon: Sparkles, type: "scroll" as const },
+  { id: "for-clinics", key: "sidebar.section.forClinics", icon: Stethoscope, type: "scroll" as const },
 ];
 
 const FIRST_VISIT_KEY = "clynicq_sidebar_hint_shown";
@@ -59,7 +59,7 @@ export const SectionSidebar = () => {
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <button
-          aria-label="Explore sections"
+          aria-label={t("sidebar.explore")}
           className={cn(
             "fixed top-1/2 -translate-y-1/2 right-0 z-40 group",
             "flex flex-col items-center gap-2",
@@ -80,14 +80,12 @@ export const SectionSidebar = () => {
           {/* Occasional attention pulse — 2 quick blinks then rest */}
           <span className="pointer-events-none absolute inset-0 rounded-l-2xl bg-primary/30 animate-[sidebar-peek_5s_ease-in-out_infinite]" />
 
-
-
           <Menu className="h-5 w-5 relative z-10" strokeWidth={2.5} />
           <span
             className="text-[12px] font-semibold tracking-wider uppercase relative z-10 leading-none"
             style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
           >
-            Explore
+            {t("sidebar.explore")}
           </span>
           <ChevronLeft className="h-3.5 w-3.5 relative z-10 opacity-80 animate-[sidebar-chevron_2.5s_ease-in-out_infinite]" strokeWidth={2.5} />
 
@@ -107,44 +105,65 @@ export const SectionSidebar = () => {
           `}</style>
         </button>
       </SheetTrigger>
-      <SheetContent side="right" className="w-80 p-0">
-        <SheetHeader className="px-5 pt-5 pb-3 border-b">
-          <SheetTitle className="text-base">{t("sidebar.title")}</SheetTitle>
-        </SheetHeader>
-        <nav className="flex flex-col p-2">
-          {sections.map((s) => {
-            const Icon = s.icon;
-            return (
-              <button
-                key={s.id}
-                onClick={() => handleClick(s)}
-                className="flex items-center gap-3 px-3 py-3.5 rounded-lg text-sm font-medium text-foreground hover:bg-muted active:bg-muted/70 transition-colors text-left"
+      <SheetContent side="right" className="w-80 p-0 dark border-l border-border/50">
+        <div className="relative flex flex-col h-full overflow-hidden bg-background/95 backdrop-blur-xl">
+          {/* Decorative glow */}
+          <div className="pointer-events-none absolute -top-24 -right-24 w-48 h-48 rounded-full bg-ai-indigo/20 blur-[80px]" />
+
+          <SheetHeader className="relative z-10 px-6 pt-8 pb-4">
+            <div className="flex items-center justify-between">
+              <div className="space-y-1">
+                <p className="text-[10px] font-extrabold uppercase tracking-[0.2em] text-primary">
+                  {t("sidebar.explore")}
+                </p>
+                <SheetTitle className="text-2xl font-bold text-foreground">
+                  {t("sidebar.title")}
+                </SheetTitle>
+              </div>
+            </div>
+          </SheetHeader>
+
+          <nav className="relative z-10 flex-1 px-4 space-y-2 overflow-y-auto">
+            {sections.map((s) => {
+              const Icon = s.icon;
+              return (
+                <button
+                  key={s.id}
+                  onClick={() => handleClick(s)}
+                  className="group w-full flex items-center justify-between p-4 rounded-2xl bg-muted/40 border border-border/50 text-left transition-all hover:bg-muted/60 active:scale-[0.98]"
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary shrink-0">
+                      <Icon className="h-4 w-4" />
+                    </span>
+                    <span className="text-sm font-semibold text-foreground/90 group-hover:text-foreground truncate">
+                      {t(s.key)}
+                    </span>
+                  </div>
+                  <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
+                </button>
+              );
+            })}
+          </nav>
+
+          {/* Contact footer */}
+          <div className="relative z-10 p-6 bg-muted/30 border-t border-border/50 mt-auto">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-3">
+              {t("sidebar.contactUs")}
+            </p>
+            <div className="flex flex-col gap-1">
+              <span className="text-sm text-muted-foreground">{t("sidebar.contactUs")}</span>
+              <a
+                href="mailto:hello@ealvon.com"
+                className="text-lg font-bold text-foreground hover:text-primary transition-colors"
+                onClick={() => setOpen(false)}
               >
-                <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary shrink-0">
-                  <Icon className="h-4 w-4" />
-                </span>
-                <span>{s.label}</span>
-              </button>
-            );
-          })}
-
-          <div className="my-2 mx-3 h-px bg-border" />
-          <div className="px-3 py-2">
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">{t("sidebar.contactUs")}</p>
-            <a
-              href="mailto:hello@ealvon.com"
-              className="flex items-center gap-3 py-2 rounded-lg text-sm font-medium text-foreground hover:bg-muted active:bg-muted/70 transition-colors"
-              onClick={() => setOpen(false)}
-            >
-              <span className="flex h-9 w-9 items-center justify-center rounded-md bg-primary/10 text-primary shrink-0">
-                <Mail className="h-4 w-4" />
-              </span>
-              <span>hello@ealvon.com</span>
-            </a>
+                hello@ealvon.com
+              </a>
+            </div>
+            <div className="mt-6 h-1 w-12 bg-primary rounded-full" />
           </div>
-
-
-        </nav>
+        </div>
       </SheetContent>
     </Sheet>
   );
