@@ -70,18 +70,24 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       base = base.filter((c) => c.hasDigitalQueue);
     } else {
       base = base.filter((clinic) => {
-        const clinicType = clinic.type?.toLowerCase();
+        const clinicType = (clinic.type || "").toLowerCase().trim();
         switch (activeCategory) {
-          case "gp_specialist":
-            return ["gp", "specialist"].includes(clinicType);
+          case "gp":
+            return ["gp", "general practitioner", "family medicine", "family doctor"].includes(clinicType);
+          case "specialist":
+            return ["specialist", "specialist referral"].includes(clinicType);
           case "dental":
-            return clinicType === "dental";
+            return ["dental", "dentist", "dental clinic"].includes(clinicType);
           case "therapy_rehab":
-            return ["physiotherapy", "podiatry", "occupational therapy", "chiropractic", "rehab", "therapy"].includes(clinicType);
+            return ["physiotherapy", "podiatry", "occupational therapy", "chiropractic", "rehab", "therapy", "therapy & rehab"].includes(clinicType);
           case "mental_wellness":
-            return ["psychiatrist", "psychologist", "counselling", "mental health"].includes(clinicType);
-          case "traditional_medicine":
-            return ["tcm", "sowa rigpa", "traditional medicine"].includes(clinicType);
+            return ["psychiatrist", "psychologist", "counselling", "counseling", "mental health", "mental wellness"].includes(clinicType);
+          case "tcm":
+            return ["tcm", "sowa rigpa", "traditional medicine", "chinese medicine"].includes(clinicType);
+          case "vets":
+            return ["vet", "vets", "veterinary", "veterinarian"].includes(clinicType);
+          case "dna_health":
+            return ["dna", "dna & health", "genomics", "health screening", "screening"].includes(clinicType);
           default:
             return true;
         }
