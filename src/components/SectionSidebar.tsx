@@ -130,7 +130,7 @@ export const SectionSidebar = () => {
                     <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary shrink-0">
                       <Icon className="h-4 w-4" />
                     </span>
-                    <span className="text-sm font-semibold text-foreground/90 group-hover:text-foreground truncate">
+                    <span className="text-sm font-semibold text-foreground/90 group-hover:text-foreground break-words leading-snug">
                       {t(s.key)}
                     </span>
                   </div>
