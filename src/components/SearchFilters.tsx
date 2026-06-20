@@ -72,9 +72,9 @@ export const SearchFilters = ({
     onSearchChange?.(value);
   };
 
-  const openSheet = () => {
-    setDraftFilters(filters);
-    setSheetOpen(true);
+  const handleSheetOpenChange = (open: boolean) => {
+    if (open) setDraftFilters(filters);
+    setSheetOpen(open);
   };
 
   const toggleDraft = (key: keyof ClinicFilters) =>
@@ -86,9 +86,7 @@ export const SearchFilters = ({
   };
 
   const clearFilters = () => {
-    const cleared = { openNow: false, queue: false, booking: false };
-    setDraftFilters(cleared);
-    setFilters(cleared);
+    setDraftFilters({ openNow: false, queue: false, booking: false });
   };
 
   const activeFilterCount = [filters.openNow, filters.queue, filters.booking].filter(Boolean).length;
@@ -115,11 +113,10 @@ export const SearchFilters = ({
       </div>
 
       {/* Filter Clinics button */}
-      <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+      <Sheet open={sheetOpen} onOpenChange={handleSheetOpenChange}>
         <SheetTrigger asChild>
           <button
             type="button"
-            onClick={openSheet}
             className="w-full h-11 flex items-center justify-between px-4 rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/15 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
             aria-label={t("search.moreOptions")}
           >
