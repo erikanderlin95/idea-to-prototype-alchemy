@@ -49,11 +49,6 @@ export const SearchFilters = ({
   }, [defaultCategory]);
 
   useEffect(() => {
-    const id = setTimeout(() => onSearchChange?.(searchText), 150);
-    return () => clearTimeout(id);
-  }, [searchText, onSearchChange]);
-
-  useEffect(() => {
     onFiltersChange?.(filters);
   }, [filters, onFiltersChange]);
 
@@ -69,6 +64,12 @@ export const SearchFilters = ({
   const handleCategoryClick = (key: string) => {
     setActiveCategory(key);
     onCategoryChange?.(key);
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchText(value);
+    onSearchChange?.(value);
   };
 
   const openSheet = () => {
@@ -90,6 +91,8 @@ export const SearchFilters = ({
     setFilters(cleared);
   };
 
+  const activeFilterCount = [filters.openNow, filters.queue, filters.booking].filter(Boolean).length;
+
   const filterRows: { key: keyof ClinicFilters; labelKey: string }[] = [
     { key: "openNow", labelKey: "search.filter.openNow" },
     { key: "queue", labelKey: "search.filter.queue" },
@@ -106,7 +109,7 @@ export const SearchFilters = ({
           placeholder={t("search.placeholder")}
           className="h-14 sm:h-16 w-full pl-12 sm:pl-14 pr-4 rounded-full text-base sm:text-lg border border-input bg-background shadow-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           value={searchText}
-          onChange={(e) => setSearchText(e.target.value)}
+          onChange={handleSearchChange}
           aria-label={t("search.placeholder")}
         />
       </div>
@@ -117,14 +120,21 @@ export const SearchFilters = ({
           <button
             type="button"
             onClick={openSheet}
-            className="w-full h-11 flex items-center justify-between px-4 rounded-full bg-primary/10 text-primary hover:bg-primary/15 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
+            className="w-full h-11 flex items-center justify-between px-4 rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/15 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
             aria-label={t("search.moreOptions")}
           >
             <span className="flex items-center gap-2 font-medium text-sm">
               <SlidersHorizontal className="h-4 w-4" />
               {t("search.moreOptions")}
             </span>
-            <ChevronRight className="h-4 w-4" />
+            <span className="flex items-center gap-2">
+              {activeFilterCount > 0 && (
+                <span className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
+                  {activeFilterCount}
+                </span>
+              )}
+              <ChevronRight className="h-4 w-4" />
+            </span>
           </button>
         </SheetTrigger>
         <SheetContent side="bottom" className="rounded-t-2xl">
@@ -149,8 +159,12 @@ export const SearchFilters = ({
               </label>
             ))}
           </div>
-          <SheetFooter className="flex-row gap-2 sm:justify-between">
-            <Button variant="ghost" onClick={clearFilters} className="flex-1">
+          <SheetFooter className="flex-row gap-3 items-center pt-4">
+            <Button
+              variant="ghost"
+              onClick={clearFilters}
+              className="text-muted-foreground hover:text-foreground font-medium"
+            >
               {t("search.filter.clear")}
             </Button>
             <Button onClick={applyFilters} className="flex-1">

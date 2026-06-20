@@ -84,11 +84,20 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
 
     const q = searchText.trim().toLowerCase();
     if (q) {
-      base = base.filter((c) =>
-        [c.name, c.type, c.address].some((v: string | undefined) =>
+      base = base.filter((c) => {
+        const fields = [c.name, c.type, c.address];
+        if (c.services) {
+          if (Array.isArray(c.services)) fields.push(...c.services);
+          else fields.push(String(c.services));
+        }
+        if (c.specialties) {
+          if (Array.isArray(c.specialties)) fields.push(...c.specialties);
+          else fields.push(String(c.specialties));
+        }
+        return fields.some((v: string | undefined) =>
           (v || "").toLowerCase().includes(q)
-        )
-      );
+        );
+      });
     }
 
     if (filters.openNow) base = base.filter((c) => c.isOpen);
@@ -128,6 +137,8 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           name: clinic.name,
           type: clinic.type,
           address: clinic.address,
+          services: clinic.services,
+          specialties: clinic.specialties,
           queueCount,
           waitTime: queueCount === 0 ? "Walk-in" : `${estimatedWait}-${estimatedWait + 15} min`,
           rating: clinic.rating,
