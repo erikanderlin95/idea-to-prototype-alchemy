@@ -11,7 +11,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill, ExternalLink, MessageCircle, Play, Smile, Leaf, Compass } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill, ExternalLink, MessageCircle, Play, Smile, Leaf, Compass, Dna, Bone, Eye, Scissors, Droplets, FlaskConical, Bandage, Thermometer, Sun, Wind, Palette, Ear, PawPrint, Bug, Heart, ClipboardList, Monitor, PhoneCall, Moon, Scale } from "lucide-react";
 
 const DEMO_CLINIC_VIDEO = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4";
 import { useAuth } from "@/hooks/useAuth";
@@ -33,15 +33,119 @@ const DEFAULT_SERVICES = [
 
 const SERVICE_ICON_MAP: Record<string, any> = {
   "gp consult": Stethoscope,
+  "general practice": Stethoscope,
+  "family medicine": Stethoscope,
   "vaccination": Syringe,
+  "immunisation": Syringe,
+  "immunization": Syringe,
+  "travel vaccine": Syringe,
   "chronic care": HeartPulse,
+  "chronic disease": HeartPulse,
+  "diabetes": Droplets,
+  "hypertension": HeartPulse,
+  "high blood pressure": HeartPulse,
   "women's health": Baby,
+  "women health": Baby,
+  "gynaecology": Baby,
+  "gynecology": Baby,
+  "pregnancy": Baby,
+  "men's health": Heart,
+  "men health": Heart,
   "health screening": Scan,
-  "teleconsult": Brain,
+  "screening": Scan,
+  "medical checkup": ClipboardList,
+  "check-up": ClipboardList,
+  "check up": ClipboardList,
+  "teleconsult": Monitor,
+  "telemedicine": Monitor,
+  "video consult": Monitor,
+  "online consult": Monitor,
   "rehabilitation": Activity,
+  "physiotherapy": Activity,
+  "physical therapy": Activity,
+  "podiatry": Activity,
+  "occupational therapy": Activity,
+  "chiropractic": Bone,
+  "sports medicine": Activity,
   "mental wellness": Brain,
+  "mental health": Brain,
+  "psychiatry": Brain,
+  "psychology": Brain,
+  "counselling": Brain,
+  "counseling": Brain,
   "specialist referral": Shield,
+  "specialist": Shield,
   "medication": Pill,
+  "pharmacy": Pill,
+  "dispensary": Pill,
+  "prescription": Pill,
+  "dna & health": Dna,
+  "dna": Dna,
+  "genomics": Dna,
+  "dental": Smile,
+  "dentist": Smile,
+  "orthodontics": Smile,
+  "oral surgery": Smile,
+  "tcm": Leaf,
+  "traditional chinese medicine": Leaf,
+  "acupuncture": Leaf,
+  "herbal medicine": Leaf,
+  "cupping": Leaf,
+  "vet": PawPrint,
+  "vets": PawPrint,
+  "veterinary": PawPrint,
+  "veterinarian": PawPrint,
+  "pet care": PawPrint,
+  "surgery": Scissors,
+  "minor surgery": Scissors,
+  "day surgery": Scissors,
+  "procedure": Scissors,
+  "eye": Eye,
+  "optometry": Eye,
+  "ophthalmology": Eye,
+  "vision": Eye,
+  "ent": Ear,
+  "ear nose throat": Ear,
+  "audiology": Ear,
+  "skin": Sun,
+  "dermatology": Sun,
+  "aesthetics": Palette,
+  "cosmetic": Palette,
+  "beauty": Palette,
+  "blood test": FlaskConical,
+  "lab test": FlaskConical,
+  "laboratory": FlaskConical,
+  "x-ray": Scan,
+  "ultrasound": Scan,
+  "imaging": Scan,
+  "radiology": Scan,
+  "ct scan": Scan,
+  "mri": Scan,
+  "wound care": Bandage,
+  "dressing": Bandage,
+  "first aid": Bandage,
+  "fever": Thermometer,
+  "cold": Thermometer,
+  "flu": Thermometer,
+  "infectious disease": Bug,
+  "std": Bug,
+  "sti": Bug,
+  "travel medicine": Compass,
+  "medical certificate": ClipboardList,
+  "mc": ClipboardList,
+  "house call": PhoneCall,
+  "home visit": PhoneCall,
+  "weight management": Scale,
+  "nutrition": Leaf,
+  "diet": Leaf,
+  "pediatrics": Baby,
+  "child health": Baby,
+  "geriatrics": Users,
+  "elderly care": Users,
+  "asthma": Wind,
+  "respiratory": Wind,
+  "lung": Wind,
+  "sleep": Moon,
 };
 
 const ExploreChip = ({
@@ -446,8 +550,8 @@ const ClinicProfile = () => {
           })()}
 
           {/* Services Offered */}
-          <Card className="p-3 sm:p-4">
-            <h2 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">Services Offered</h2>
+          <Card className="p-4 sm:p-5">
+            <h2 className="text-base sm:text-xl font-bold mb-3 sm:mb-4">Services Offered</h2>
             {(() => {
               const services = clinic.services && clinic.services.length > 0
                 ? clinic.services.map((s: string) => ({
@@ -462,17 +566,17 @@ const ClinicProfile = () => {
               const useTwoCols = items.length > 3;
               return (
                 <>
-                  <div className={`grid gap-2 sm:gap-3 ${useTwoCols ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                  <div className={`grid gap-3 sm:gap-4 ${useTwoCols ? 'grid-cols-2' : 'grid-cols-1'}`}>
                     {items.map((service: any, index: number) => (
                       <div
                         key={index}
-                        className="flex items-start gap-2.5 p-3 sm:p-3.5 rounded-lg border border-border/60 bg-muted/30 hover:bg-primary/5 hover:border-primary/30 transition-all cursor-default h-full"
+                        className="flex items-center gap-3 p-4 sm:p-5 rounded-xl border border-border/40 bg-primary/[0.03] hover:bg-primary/[0.06] hover:border-primary/20 transition-all cursor-default h-full"
                       >
-                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                           <service.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <span className="block text-sm sm:text-base font-semibold text-foreground leading-tight">{service.label}</span>
+                          <span className="block text-sm sm:text-base font-bold text-foreground leading-snug">{service.label}</span>
                           {service.desc && (
                             <p className="text-[11px] sm:text-xs text-muted-foreground leading-snug mt-1 line-clamp-2">{service.desc}</p>
                           )}
@@ -484,7 +588,7 @@ const ClinicProfile = () => {
                     <button
                       type="button"
                       onClick={() => setShowAllServices((v) => !v)}
-                      className="mt-3 inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-primary hover:underline"
+                      className="mt-4 inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-primary hover:underline"
                     >
                       {showAllServices ? "Show less" : `Show more (${services.length - VISIBLE})`}
                       {showAllServices ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
