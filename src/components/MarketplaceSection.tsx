@@ -13,6 +13,12 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 const CLINICS_PER_PAGE_MOBILE = 6;
 const CLINICS_PER_PAGE_DESKTOP = 6;
 
+const isOtherTCMClinic = (clinic: { name?: string; type?: string }) =>
+  clinic.type === "TCM" && clinic.name !== "Harmony TCM Centre";
+
+const hasBookActionVisible = (clinic: { name?: string; hasDigitalQueue?: boolean; type?: string }) =>
+  !clinic.hasDigitalQueue || clinic.name === "Harmony TCM Centre" || isOtherTCMClinic(clinic);
+
 interface MarketplaceSectionProps {
   defaultCategory?: string;
   title?: string;
@@ -100,9 +106,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       });
     }
 
-    if (filters.openNow) base = base.filter((c) => c.isOpen);
-    if (filters.queue) base = base.filter((c) => c.hasDigitalQueue);
-    if (filters.booking) base = base.filter((c) => !!c.bookingUrl);
+    if (filters.openNow) base = base.filter((c) => c.isOpen === true);
+    if (filters.queue) base = base.filter((c) => c.hasJoinQueue === true);
+    if (filters.booking) base = base.filter((c) => c.hasOnlineBooking === true);
 
     setFilteredClinics(base);
     setCurrentPage(1);
@@ -133,7 +139,12 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         const queueCount = Number(stats?.queue_count) || 0;
         const estimatedWait = Number(stats?.estimated_wait_minutes) || 0;
 
-        return {
+        const isOpen = clinic.is_open === true;
+        const hasDigitalQueue = clinic.has_digital_queue === true;
+        const bookingUrl = typeof clinic.booking_url === "string" && clinic.booking_url.trim().length > 0
+          ? clinic.booking_url.trim()
+          : null;
+        const normalizedClinic = {
           name: clinic.name,
           type: clinic.type,
           address: clinic.address,
@@ -142,11 +153,17 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           queueCount,
           waitTime: queueCount === 0 ? "Walk-in" : `${estimatedWait}-${estimatedWait + 15} min`,
           rating: clinic.rating,
-          isOpen: clinic.is_open,
+          isOpen,
           id: clinic.id,
-          hasDigitalQueue: clinic.has_digital_queue !== false,
-          bookingUrl: clinic.booking_url || null,
+          hasDigitalQueue,
+          bookingUrl,
           isNmgAffiliated: clinic.is_nmg_affiliated === true,
+        };
+
+        return {
+          ...normalizedClinic,
+          hasJoinQueue: isOpen && hasDigitalQueue && !isOtherTCMClinic(normalizedClinic),
+          hasOnlineBooking: isOpen && Boolean(bookingUrl) && hasBookActionVisible(normalizedClinic),
         };
       });
 
