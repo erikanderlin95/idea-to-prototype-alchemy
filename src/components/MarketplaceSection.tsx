@@ -171,7 +171,22 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             </p>
           </div>
 
-          <SearchFilters defaultCategory={defaultCategory} onCategoryChange={handleCategoryChange} />
+          <SearchFilters
+            defaultCategory={defaultCategory}
+            onCategoryChange={handleCategoryChange}
+            onSearchChange={setSearchText}
+            onLocationChange={setLocation}
+            locations={Array.from(
+              new Set(
+                clinics
+                  .map((c) => {
+                    const parts = (c.address || "").split(",").map((p: string) => p.trim()).filter(Boolean);
+                    return parts[parts.length - 1] || "";
+                  })
+                  .filter((s: string) => s && !/^singapore$/i.test(s) && !/^\d+$/.test(s))
+              )
+            ).sort()}
+          />
 
           {(() => {
             const totalPages = Math.max(1, Math.ceil(filteredClinics.length / clinicsPerPage));
