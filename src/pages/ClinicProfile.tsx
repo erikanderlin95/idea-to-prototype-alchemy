@@ -134,14 +134,13 @@ const ClinicProfile = () => {
   const [showAllServices, setShowAllServices] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
 
-  const EXPLORE_CHIPS: { key: string; label: string; icon: any; category: string }[] = [
-    { key: "dna_health", label: "DNA + Health", icon: Scan, category: "dna_health" },
-    { key: "gp", label: "GP", icon: Stethoscope, category: "gp" },
-    { key: "dental", label: "Dental", icon: Smile, category: "dental" },
-    { key: "tcm", label: "TCM", icon: Leaf, category: "tcm" },
-    { key: "vets", label: "Vets", icon: HeartPulse, category: "vets" },
-    { key: "therapy_rehab", label: "Therapy & Rehab", icon: Activity, category: "therapy_rehab" },
-  ];
+  const EXPLORE_CHIPS = (() => {
+    const currentCategory = mapClinicTypeToCategory(clinic?.type);
+    return CLYNICQ_CLINIC_TYPES.filter((c) => c.key !== currentCategory);
+  })();
+
+
+  const logExploreEvent = (event: "impression" | "click", chipKey: string, category: string) => {
 
 
   const logExploreEvent = (event: "impression" | "click", chipKey: string, category: string) => {
