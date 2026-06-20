@@ -4,7 +4,7 @@ import macquarie from "@/assets/partners/macquarie.jpg";
 import ihealth from "@/assets/partners/ihealth.jpg";
 import stayingSane from "@/assets/partners/staying-sane.jpg";
 import beTcm from "@/assets/partners/be-tcm.jpg";
-import myDnaAsset from "@/assets/partners/mydna.jpg.asset.json";
+import myDnaAsset from "@/assets/partners/mydna.png.asset.json";
 
 const row1Logos = [
   { name: "PanHealth Medical", src: panhealth },
