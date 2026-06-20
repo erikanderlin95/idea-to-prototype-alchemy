@@ -1,4 +1,4 @@
-import { SearchFilters } from "./SearchFilters";
+import { SearchFilters, type ClinicFilters } from "./SearchFilters";
 import { ClinicCard } from "./ClinicCard";
 import { DirectoryClinicCard } from "./DirectoryClinicCard";
 import { TWENTY_FOUR_HR_CLINICS } from "@/data/twentyFourHrClinics";
