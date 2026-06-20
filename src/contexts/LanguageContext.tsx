@@ -1295,6 +1295,7 @@ const translations: Record<Language, Record<string, string>> = {
     "search.placeholder": "搜索诊所、服务或专科",
     "search.location": "所有地区",
     "search.filters": "筛选",
+    "search.moreOptions": "更多搜索选项",
     "search.all": "全部",
     "search.gp": "全科",
     "search.tcm": "中医",
