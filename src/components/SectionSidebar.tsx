@@ -82,7 +82,7 @@ export const SectionSidebar = () => {
 
           <Menu className="h-5 w-5 relative z-10" strokeWidth={2.5} />
           <span
-            className="text-[12px] font-semibold tracking-wider uppercase relative z-10 leading-none"
+            className="text-[12px] font-semibold tracking-wider uppercase relative z-10 leading-none max-h-[140px] overflow-hidden text-ellipsis"
             style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
           >
             {t("sidebar.explore")}
@@ -130,7 +130,7 @@ export const SectionSidebar = () => {
                     <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary shrink-0">
                       <Icon className="h-4 w-4" />
                     </span>
-                    <span className="text-sm font-semibold text-foreground/90 group-hover:text-foreground truncate">
+                    <span className="text-sm font-semibold text-foreground/90 group-hover:text-foreground break-words leading-snug">
                       {t(s.key)}
                     </span>
                   </div>
