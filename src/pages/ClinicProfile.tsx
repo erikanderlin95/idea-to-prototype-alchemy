@@ -228,7 +228,7 @@ const ClinicProfile = () => {
               ? photos.slice(0, 4)
               : (DEMO_PHOTOS[clinic.name] || DEFAULT_CLINIC_PHOTOS);
 
-            const videoUrl: string | null = clinic.video_url || clinic.video || null;
+            const videoUrl: string = clinic.video_url || clinic.video || DEMO_CLINIC_VIDEO;
 
             return (
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
