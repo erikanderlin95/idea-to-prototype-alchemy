@@ -356,6 +356,7 @@ const translations: Record<Language, Record<string, string>> = {
     "search.placeholder": "Search clinic, service or specialty",
     "search.location": "All locations",
     "search.filters": "Filters",
+    "search.moreOptions": "More Search Options",
     "search.all": "All",
     "search.gp": "GP",
     "search.tcm": "TCM",
