@@ -19,12 +19,16 @@ const row2Logos = [
 ];
 
 const LogoCell = ({ logo }: { logo: { name: string; src: string } }) => (
-  <div className="flex items-center justify-center p-3 sm:p-4 md:p-5">
+  <div className="flex items-center justify-center h-[50px] sm:h-[58px] md:h-[66px]">
     <img
       src={logo.src}
       alt={logo.name}
       loading="lazy"
-      className="h-8 sm:h-10 md:h-12 w-auto max-w-full object-contain"
+      className={`max-h-full w-auto object-contain ${
+        logo.name === "Be TCM Clinic" || logo.name === "myDNA"
+          ? "max-w-[80px] sm:max-w-[138px] md:max-w-[176px]"
+          : "max-w-[70px] sm:max-w-[118px] md:max-w-[150px]"
+      }`}
     />
   </div>
 );
@@ -45,7 +49,7 @@ export const LaunchPartners = () => {
           </p>
 
           {/* Top row — Azaas */}
-          <div className="flex justify-center mb-4 md:mb-5">
+          <div className="flex justify-center mb-2 md:mb-3">
             <a
               href="https://www.azaas.com/"
               target="_blank"
@@ -63,7 +67,7 @@ export const LaunchPartners = () => {
           </div>
 
           {/* 3×2 grid — clinic logos */}
-          <div className="grid grid-cols-3 gap-x-4 gap-y-3 sm:gap-x-8 sm:gap-y-4 md:gap-x-12 md:gap-y-5">
+          <div className="grid grid-cols-3 gap-x-3 gap-y-3 sm:gap-x-6 md:gap-x-8">
             {row1Logos.map((logo) => (
               <LogoCell key={logo.name} logo={logo} />
             ))}
