@@ -27,7 +27,7 @@ export const FeaturedConsultants = () => {
         {/* CTA — same styling as NYMG "Request Managed Care" button */}
         <div className="max-w-md mx-auto px-2 sm:px-0">
           <Button
-            className="w-[60%] mx-auto h-9 bg-gradient-to-r from-[#0E9AAB] to-[#0C8A99] hover:from-[#0B8797] hover:to-[#097A88] text-white font-bold text-[14px] tracking-wide shadow-[0_3px_12px_rgba(14,154,171,0.35)] hover:shadow-[0_5px_18px_rgba(14,154,171,0.45)] transition-all active:scale-[0.97]"
+            className="w-[60%] mx-auto h-9 justify-center bg-gradient-to-r from-[#0E9AAB] to-[#0C8A99] hover:from-[#0B8797] hover:to-[#097A88] text-white font-bold text-[14px] tracking-wide shadow-[0_3px_12px_rgba(14,154,171,0.35)] hover:shadow-[0_5px_18px_rgba(14,154,171,0.45)] transition-all active:scale-[0.97]"
             onClick={() => navigate("/managed-care")}
           >
             {t("featuredConsultants.viewManagedCare") || "View Managed Care"}
