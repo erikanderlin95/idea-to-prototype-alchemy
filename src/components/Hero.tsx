@@ -44,24 +44,24 @@ export const Hero = () => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 w-full max-w-[260px] sm:max-w-none sm:w-auto mx-auto mt-1 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 w-full max-w-sm sm:max-w-none sm:w-auto mx-auto mt-1 justify-center px-2">
             <Button 
               size="lg" 
-              className="text-sm sm:text-base px-6 sm:px-8 py-2.5 sm:py-3 h-10 sm:h-12 shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-1.5 font-bold"
+              className="text-sm sm:text-base px-5 sm:px-8 py-2.5 sm:py-3 min-h-10 sm:min-h-12 h-auto shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-1.5 font-bold whitespace-normal text-center leading-tight"
               onClick={() => document.getElementById('marketplace')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <Search className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
-              {t("hero.findClinics")}
+              <span className="min-w-0 break-words">{t("hero.findClinics")}</span>
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
-              className="text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 h-10 sm:h-12 border-2 border-border bg-background text-foreground font-semibold shadow-sm hover:bg-secondary/50 transition-all gap-1.5"
+              className="text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 min-h-10 sm:min-h-12 h-auto border-2 border-border bg-background text-foreground font-semibold shadow-sm hover:bg-secondary/50 transition-all gap-1.5 whitespace-normal text-center leading-tight"
               onClick={() => document.getElementById('for-clinics')?.scrollIntoView({ behavior: 'smooth' })}
               aria-label={t("hero.findMyQueue")}
             >
               <Building2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
-              {t("hero.findMyQueue")}
+              <span className="min-w-0 break-words">{t("hero.findMyQueue")}</span>
             </Button>
           </div>
 
