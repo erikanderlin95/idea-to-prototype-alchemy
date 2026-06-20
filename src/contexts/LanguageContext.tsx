@@ -999,8 +999,9 @@ const translations: Record<Language, Record<string, string>> = {
     // Featured Consultants
     "featuredConsultants.badge": "管理式医疗",
     "featuredConsultants.title": "不确定从哪里开始？",
-    "featuredConsultants.subtitle": "通过我们的管理式医疗服务提供商，获得合适的医疗指导。",
+    "featuredConsultants.subtitle": "我们的管理式医疗合作伙伴可以帮助您找到合适的医疗服务。",
     "featuredConsultants.viewAll": "查看所有服务提供商",
+    "featuredConsultants.viewManagedCare": "探索管理式医疗 →",
     
     // Hero
     "hero.badge": "查看排队 • 预约 • 连接",
@@ -1936,8 +1937,9 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.comingSoon": "Akan Datang",
     "featuredConsultants.badge": "Penjagaan Kesihatan Terurus",
     "featuredConsultants.title": "Tidak pasti di mana hendak bermula?",
-    "featuredConsultants.subtitle": "Dapatkan panduan kepada penjagaan yang betul dengan Penyedia Penjagaan Kesihatan Terurus kami.",
+    "featuredConsultants.subtitle": "Rakan Kongsi Penjagaan Kesihatan Terurus kami boleh membantu membimbing anda kepada penjagaan yang betul.",
     "featuredConsultants.viewAll": "Lihat Semua Penyedia",
+    "featuredConsultants.viewManagedCare": "Teroka Penjagaan Terurus →",
     "hero.badge": "Semak Giliran • Tempah • Sambung",
     "hero.title1": "Sertai Giliran",
     "hero.title2": "Dari Mana-mana",
@@ -2800,8 +2802,9 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.comingSoon": "விரைவில் வருகிறது",
     "featuredConsultants.badge": "நிர்வகிக்கப்பட்ட சுகாதார பராமரிப்பு",
     "featuredConsultants.title": "எங்கு தொடங்குவது என்று தெரியவில்லையா?",
-    "featuredConsultants.subtitle": "எங்கள் நிர்வகிக்கப்பட்ட சுகாதார வழங்குநர்களுடன் சரியான சிகிச்சைக்கு வழிகாட்டப்படுங்கள்.",
+    "featuredConsultants.subtitle": "எங்கள் நிர்வகிக்கப்பட்ட சுகாதார கூட்டாளர்கள் உங்களுக்கு சரியான பராமரிப்புக்கு வழிகாட்ட உதவ முடியும்.",
     "featuredConsultants.viewAll": "அனைத்து வழங்குநர்களையும் காண்க",
+    "featuredConsultants.viewManagedCare": "நிர்வகிக்கப்பட்ட பராமரிப்பை ஆராயுங்கள் →",
     "hero.badge": "வரிசையை சரிபார்க்கவும் • பதிவு செய்யவும் • இணையவும்",
     "hero.title1": "வரிசையில் சேரவும்",
     "hero.title2": "எங்கிருந்தும்",
