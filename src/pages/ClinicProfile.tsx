@@ -44,6 +44,46 @@ const SERVICE_ICON_MAP: Record<string, any> = {
   "medication": Pill,
 };
 
+const ExploreChip = ({
+  chip,
+  onImpression,
+  onClick,
+}: {
+  chip: { key: string; label: string; icon: any };
+  onImpression: () => void;
+  onClick: () => void;
+}) => {
+  const ref = useRef<HTMLButtonElement | null>(null);
+  const firedRef = useRef(false);
+  useEffect(() => {
+    if (!ref.current || firedRef.current) return;
+    const el = ref.current;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !firedRef.current) {
+          firedRef.current = true;
+          onImpression();
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [onImpression]);
+  const Icon = chip.icon;
+  return (
+    <button
+      ref={ref}
+      type="button"
+      onClick={onClick}
+      className="shrink-0 inline-flex items-center gap-2 h-12 sm:h-[52px] px-4 rounded-full border border-border bg-background hover:bg-primary/5 hover:border-primary/40 active:scale-[0.97] transition-all shadow-sm"
+    >
+      <Icon className="h-4 w-4 text-primary" />
+      <span className="text-sm font-semibold text-foreground whitespace-nowrap">{chip.label}</span>
+    </button>
+  );
+};
+
 const ClinicProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
