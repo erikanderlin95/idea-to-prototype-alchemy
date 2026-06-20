@@ -63,6 +63,8 @@ const ClinicProfile = () => {
   const [showJoinQueue, setShowJoinQueue] = useState(false);
   const [showBookingIntake, setShowBookingIntake] = useState(false);
   const [bookingPreferWhatsApp, setBookingPreferWhatsApp] = useState(false);
+  const [showAllServices, setShowAllServices] = useState(false);
+  const [videoOpen, setVideoOpen] = useState(false);
 
   useEffect(() => {
     fetchClinicData();
