@@ -60,7 +60,7 @@ export const LaunchPartners = () => {
                   alt={logo.name}
                   loading="lazy"
                   className={`max-h-full w-auto object-contain ${
-                    logo.name === "Be TCM Clinic"
+                    logo.name === "Be TCM Clinic" || logo.name === "myDNA"
                       ? "max-w-[88px] sm:max-w-[138px] md:max-w-[176px]"
                       : "max-w-[76px] sm:max-w-[118px] md:max-w-[150px]"
                   }`}
