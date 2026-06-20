@@ -67,6 +67,64 @@ const ClinicProfile = () => {
   const [bookingPreferWhatsApp, setBookingPreferWhatsApp] = useState(false);
   const [showAllServices, setShowAllServices] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
+  const [exploreCategories, setExploreCategories] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    let cancelled = false;
+    supabase.from("clinics").select("type").then(({ data }) => {
+      if (cancelled || !data) return;
+      const types = new Set(
+        (data as any[]).map((c) => String(c.type || "").toLowerCase().trim()).filter(Boolean)
+      );
+      const cats = new Set<string>();
+      types.forEach((tp) => {
+        if (tp === "gp") cats.add("gp");
+        if (tp === "specialist") cats.add("specialist");
+        if (tp === "dental") cats.add("dental");
+        if (["physiotherapy", "podiatry", "occupational therapy", "chiropractic", "rehab", "therapy"].includes(tp)) cats.add("physiotherapy");
+        if (["psychiatrist", "psychologist", "counselling", "mental health"].includes(tp)) cats.add("mental_health");
+        if (["tcm", "sowa rigpa", "traditional medicine"].includes(tp)) cats.add("tcm");
+      });
+      // GP clinics typically offer health screening
+      if (cats.has("gp") || cats.has("specialist")) cats.add("health_screening");
+      setExploreCategories(cats);
+    });
+    return () => { cancelled = true; };
+  }, []);
+
+  const EXPLORE_CHIPS: { key: string; label: string; icon: any; category: string }[] = [
+    { key: "gp", label: "GP", icon: Stethoscope, category: "gp_specialist" },
+    { key: "dental", label: "Dental", icon: Smile, category: "dental" },
+    { key: "mental_health", label: "Mental Health", icon: Brain, category: "mental_wellness" },
+    { key: "physiotherapy", label: "Physiotherapy", icon: Activity, category: "therapy_rehab" },
+    { key: "tcm", label: "TCM", icon: Leaf, category: "traditional_medicine" },
+    { key: "health_screening", label: "Health Screening", icon: HeartPulse, category: "gp_specialist" },
+    { key: "specialist", label: "Specialist", icon: Shield, category: "gp_specialist" },
+  ];
+
+  const logExploreEvent = (event: "impression" | "click", chipKey: string, category: string) => {
+    try {
+      const payload = {
+        event,
+        source: "clinic_profile",
+        source_clinic_id: id,
+        source_clinic_name: clinic?.name,
+        chip: chipKey,
+        destination_category: category,
+        timestamp: new Date().toISOString(),
+      };
+      console.log("[explore_healthcare]", payload);
+      const key = "explore_healthcare_events";
+      const prev = JSON.parse(localStorage.getItem(key) || "[]");
+      prev.push(payload);
+      localStorage.setItem(key, JSON.stringify(prev.slice(-200)));
+    } catch {/* ignore */}
+  };
+
+  const handleExploreClick = (chipKey: string, category: string) => {
+    logExploreEvent("click", chipKey, category);
+    navigate(`/?category=${category}#marketplace`);
+  };
 
   useEffect(() => {
     fetchClinicData();
