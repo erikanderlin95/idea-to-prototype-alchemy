@@ -82,7 +82,7 @@ export const SectionSidebar = () => {
 
           <Menu className="h-5 w-5 relative z-10" strokeWidth={2.5} />
           <span
-            className="text-[12px] font-semibold tracking-wider uppercase relative z-10 leading-none"
+            className="text-[12px] font-semibold tracking-wider uppercase relative z-10 leading-none max-h-[140px] overflow-hidden text-ellipsis"
             style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
           >
             {t("sidebar.explore")}
