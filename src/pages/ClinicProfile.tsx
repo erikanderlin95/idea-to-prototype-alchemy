@@ -407,7 +407,7 @@ const ClinicProfile = () => {
                 <div className="grid grid-cols-2 gap-2">
                   {displayPhotos.map((photo: string, index: number) => {
                     const total = displayPhotos.length;
-                    const spanFull = total === 1 || (total === 3 && index === 2);
+                    const spanFull = total === 1;
                     return (
                       <Dialog key={index}>
                         <DialogTrigger asChild>
@@ -424,7 +424,7 @@ const ClinicProfile = () => {
                               alt={`${clinic.name} photo ${index + 1}`}
                               className={cn(
                                 "w-full object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105",
-                                spanFull && total === 3 ? "aspect-[2/1]" : spanFull ? "aspect-[16/9]" : "aspect-square"
+                                spanFull ? "aspect-[16/9]" : "aspect-square"
                               )}
                               loading="lazy"
                               width={640}
