@@ -353,10 +353,10 @@ const translations: Record<Language, Record<string, string>> = {
     "marketplace.loadMore": "Load More",
     
     // SearchFilters
-    "search.placeholder": "Search clinic, service or specialty",
+    "search.placeholder": "Search clinic, service, specialty or location",
     "search.location": "All locations",
     "search.filters": "Filters",
-    "search.moreOptions": "More Search Options",
+    "search.moreOptions": "Filter Clinics",
     "search.all": "All",
     "search.gp": "GP",
     "search.tcm": "TCM",
