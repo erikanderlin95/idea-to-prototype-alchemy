@@ -144,10 +144,14 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         const bookingUrl = typeof clinic.booking_url === "string" && clinic.booking_url.trim().length > 0
           ? clinic.booking_url.trim()
           : null;
+        const phone = typeof clinic.phone === "string" && clinic.phone.trim().length > 0
+          ? clinic.phone.trim()
+          : null;
         const normalizedClinic = {
           name: clinic.name,
           type: clinic.type,
           address: clinic.address,
+          phone,
           services: (clinic as any).services,
           specialties: (clinic as any).specialties,
           queueCount,
@@ -163,7 +167,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         return {
           ...normalizedClinic,
           hasJoinQueue: isOpen && hasDigitalQueue && !isOtherTCMClinic(normalizedClinic),
-          hasOnlineBooking: isOpen && Boolean(bookingUrl) && hasBookActionVisible(normalizedClinic),
+          hasOnlineBooking: isOpen && hasBookActionVisible(normalizedClinic) && Boolean(bookingUrl || phone),
         };
       });
 
