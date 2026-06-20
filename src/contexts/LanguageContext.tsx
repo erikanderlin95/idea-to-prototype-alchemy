@@ -1,7 +1,7 @@
 // Language context with translations - v2
 import React, { createContext, useContext, useState, useEffect } from "react";
 
-export type Language = "en" | "zh";
+export type Language = "en" | "zh" | "ms" | "ta";
 
 interface LanguageContextType {
   language: Language;
