@@ -133,6 +133,37 @@ const ClinicProfile = () => {
   const [bookingPreferWhatsApp, setBookingPreferWhatsApp] = useState(false);
   const [showAllServices, setShowAllServices] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
+  const [videoStarted, setVideoStarted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const videoMilestonesRef = useRef<Set<number>>(new Set());
+
+  const logVideoEvent = (event: string, extra: Record<string, unknown> = {}) => {
+    try {
+      const payload = {
+        event: `clinic_video_${event}`,
+        clinicId: clinic?.id,
+        clinicName: clinic?.name,
+        timestamp: new Date().toISOString(),
+        ...extra,
+      };
+      const key = "clynicq_video_events";
+      const existing = JSON.parse(localStorage.getItem(key) || "[]");
+      existing.push(payload);
+      localStorage.setItem(key, JSON.stringify(existing.slice(-200)));
+    } catch {}
+  };
+
+  const handleVideoTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const v = e.currentTarget;
+    if (!v.duration || isNaN(v.duration)) return;
+    const pct = (v.currentTime / v.duration) * 100;
+    [25, 50, 75, 100].forEach((m) => {
+      if (pct >= m && !videoMilestonesRef.current.has(m)) {
+        videoMilestonesRef.current.add(m);
+        logVideoEvent(m === 100 ? "complete" : `progress_${m}`);
+      }
+    });
+  };
 
   const EXPLORE_CHIPS = (() => {
     const currentCategory = mapClinicTypeToCategory(clinic?.type);
@@ -325,78 +356,91 @@ const ClinicProfile = () => {
               : (DEMO_PHOTOS[clinic.name] || DEFAULT_CLINIC_PHOTOS);
 
             const videoUrl: string = clinic.video_url || clinic.video || DEMO_CLINIC_VIDEO;
+            const thumbnail = displayPhotos[0];
 
             return (
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
+              <div className="space-y-2">
                 {videoUrl && (
-                  <Dialog open={videoOpen} onOpenChange={setVideoOpen}>
-                    <DialogTrigger asChild>
+                  <div className="relative w-full aspect-square overflow-hidden rounded-xl bg-black">
+                    {!videoStarted ? (
                       <button
                         type="button"
-                        className="relative overflow-hidden rounded-xl group focus:outline-none focus:ring-2 focus:ring-primary"
+                        onClick={() => {
+                          setVideoStarted(true);
+                          logVideoEvent("play");
+                          requestAnimationFrame(() => {
+                            videoRef.current?.play().catch(() => {});
+                          });
+                        }}
+                        className="group absolute inset-0 focus:outline-none focus:ring-2 focus:ring-primary"
                         aria-label={`Play ${clinic.name} intro video`}
                       >
                         <img
-                          src={displayPhotos[0]}
+                          src={thumbnail}
                           alt={`${clinic.name} video preview`}
-                          className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105"
+                          className="w-full h-full object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105"
                           loading="lazy"
                         />
-                        <div className="absolute inset-0 bg-foreground/30 group-hover:bg-foreground/20 transition-colors flex items-center justify-center">
-                          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-background/90 backdrop-blur flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                            <Play className="h-5 w-5 sm:h-6 sm:w-6 text-primary fill-primary ml-0.5" />
+                        <div className="absolute inset-0 bg-foreground/25 group-hover:bg-foreground/15 transition-colors flex items-center justify-center">
+                          <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-background/90 backdrop-blur flex items-center justify-center shadow-xl group-hover:scale-110 transition-transform">
+                            <Play className="h-7 w-7 sm:h-9 sm:w-9 text-primary fill-primary ml-1" />
                           </div>
                         </div>
                       </button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-4xl p-2 sm:p-3 bg-background border-0">
-                      <DialogHeader className="sr-only">
-                        <DialogTitle>{`${clinic.name} video`}</DialogTitle>
-                      </DialogHeader>
+                    ) : (
                       <video
+                        ref={videoRef}
                         src={videoUrl}
+                        poster={thumbnail}
                         controls
-                        autoPlay
-                        className="w-full h-auto max-h-[85vh] rounded-lg"
+                        playsInline
+                        preload="metadata"
+                        onPlay={() => logVideoEvent("play")}
+                        onPause={() => logVideoEvent("pause")}
+                        onTimeUpdate={handleVideoTimeUpdate}
+                        className="w-full h-full object-cover bg-black"
                       />
-                    </DialogContent>
-                  </Dialog>
+                    )}
+                  </div>
                 )}
-                {displayPhotos.slice(0, videoUrl ? 3 : 4).map((photo: string, index: number) => (
-                  <Dialog key={index}>
-                    <DialogTrigger asChild>
-                      <button
-                        type="button"
-                        className="relative overflow-hidden rounded-xl group focus:outline-none focus:ring-2 focus:ring-primary"
-                        aria-label={`View ${clinic.name} photo ${index + 1}`}
-                      >
+
+                <div className="grid grid-cols-2 gap-2">
+                  {displayPhotos.map((photo: string, index: number) => (
+                    <Dialog key={index}>
+                      <DialogTrigger asChild>
+                        <button
+                          type="button"
+                          className="relative overflow-hidden rounded-xl group focus:outline-none focus:ring-2 focus:ring-primary"
+                          aria-label={`View ${clinic.name} photo ${index + 1}`}
+                        >
+                          <img
+                            src={photo}
+                            alt={`${clinic.name} photo ${index + 1}`}
+                            className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105"
+                            loading="lazy"
+                            width={640}
+                            height={640}
+                            onError={(e) => {
+                              const wrapper = (e.currentTarget.parentElement as HTMLElement | null);
+                              if (wrapper) wrapper.style.display = "none";
+                            }}
+                          />
+                          <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply pointer-events-none" />
+                        </button>
+                      </DialogTrigger>
+                      <DialogContent className="max-w-4xl p-2 sm:p-3 bg-background border-0">
+                        <DialogHeader className="sr-only">
+                          <DialogTitle>{`${clinic.name} photo ${index + 1}`}</DialogTitle>
+                        </DialogHeader>
                         <img
-                          src={photo}
-                          alt={`${clinic.name} photo ${index + 1}`}
-                          className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105"
-                          loading="lazy"
-                          width={640}
-                          height={640}
-                          onError={(e) => {
-                            const wrapper = (e.currentTarget.parentElement as HTMLElement | null);
-                            if (wrapper) wrapper.style.display = "none";
-                          }}
+                          src={photo.replace(/w=\d+/, 'w=1600')}
+                          alt={`${clinic.name} photo ${index + 1} enlarged`}
+                          className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
                         />
-                        <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply pointer-events-none" />
-                      </button>
-                    </DialogTrigger>
-                    <DialogContent className="max-w-4xl p-2 sm:p-3 bg-background border-0">
-                      <DialogHeader className="sr-only">
-                        <DialogTitle>{`${clinic.name} photo ${index + 1}`}</DialogTitle>
-                      </DialogHeader>
-                      <img
-                        src={photo.replace(/w=\d+/, 'w=1600')}
-                        alt={`${clinic.name} photo ${index + 1} enlarged`}
-                        className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
-                      />
-                    </DialogContent>
-                  </Dialog>
-                ))}
+                      </DialogContent>
+                    </Dialog>
+                  ))}
+                </div>
               </div>
             );
           })()}
