@@ -86,7 +86,9 @@ export const SearchFilters = ({
   };
 
   const clearFilters = () => {
-    setDraftFilters({ openNow: false, queue: false, booking: false });
+    const clearedFilters = { openNow: false, queue: false, booking: false };
+    setDraftFilters(clearedFilters);
+    setFilters(clearedFilters);
   };
 
   const activeFilterCount = [filters.openNow, filters.queue, filters.booking].filter(Boolean).length;
