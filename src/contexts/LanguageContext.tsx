@@ -353,8 +353,8 @@ const translations: Record<Language, Record<string, string>> = {
     "marketplace.loadMore": "Load More",
     
     // SearchFilters
-    "search.placeholder": "Search clinics, doctors, or specialties...",
-    "search.location": "Location",
+    "search.placeholder": "Search clinic, service or specialty",
+    "search.location": "All locations",
     "search.filters": "Filters",
     "search.all": "All",
     "search.gp": "GP",
@@ -1291,8 +1291,8 @@ const translations: Record<Language, Record<string, string>> = {
     "marketplace.loadMore": "加载更多",
     
     // SearchFilters
-    "search.placeholder": "搜索诊所、医生或专科...",
-    "search.location": "位置",
+    "search.placeholder": "搜索诊所、服务或专科",
+    "search.location": "所有地区",
     "search.filters": "筛选",
     "search.all": "全部",
     "search.gp": "全科",
