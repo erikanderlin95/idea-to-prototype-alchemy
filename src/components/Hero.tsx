@@ -1,32 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Search, Phone } from "lucide-react";
-import { QueueIcon, AppointmentsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
+import { Search, Building2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
-import { z } from "zod";
-
-const phoneSchema = z.object({
-  phone: z.string()
-    .trim()
-    .min(8, { message: "Phone number must be at least 8 digits" })
-    .max(15, { message: "Phone number must be less than 15 digits" })
-    .regex(/^[0-9+\-\s()]+$/, { message: "Invalid phone number format" })
-});
 
 export const Hero = () => {
   const { t } = useLanguage();
-  const navigate = useNavigate();
-  const [showQueueFinder, setShowQueueFinder] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [isSearching, setIsSearching] = useState(false);
-  
+
   return (
     <section className="relative py-16 flex items-center justify-center overflow-hidden bg-white">
       <div className="absolute inset-0 bg-[linear-gradient(105deg,hsl(168,55%,84%)_0%,hsl(175,55%,92%)_22%,hsl(190,50%,97%)_50%,hsl(200,60%,94%)_78%,hsl(210,65%,86%)_100%)]" />
