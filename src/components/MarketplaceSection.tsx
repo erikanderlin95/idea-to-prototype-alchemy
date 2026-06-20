@@ -134,6 +134,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           isOpen: clinic.is_open,
           id: clinic.id,
           hasDigitalQueue: clinic.has_digital_queue !== false,
+          bookingUrl: clinic.booking_url || null,
           isNmgAffiliated: clinic.is_nmg_affiliated === true,
         };
       });
