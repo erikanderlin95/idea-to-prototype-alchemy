@@ -53,12 +53,15 @@ export const SearchFilters = ({
   }, [filters, onFiltersChange]);
 
   const categories = [
-    { key: "all", labelKey: "search.category.all" },
-    { key: "gp_specialist", labelKey: "search.category.gp_specialist" },
-    { key: "dental", labelKey: "search.category.dental" },
-    { key: "therapy_rehab", labelKey: "search.category.therapy_rehab" },
-    { key: "mental_wellness", labelKey: "search.category.mental_wellness" },
-    { key: "traditional_medicine", labelKey: "search.category.traditional_medicine" },
+    { key: "all", label: "All", emoji: "" },
+    { key: "dna_health", label: "DNA & Health", emoji: "🧬" },
+    { key: "dental", label: "Dental", emoji: "🦷" },
+    { key: "gp", label: "General Practitioner", emoji: "🩺" },
+    { key: "mental_wellness", label: "Mental Wellness", emoji: "🧠" },
+    { key: "tcm", label: "TCM", emoji: "🌿" },
+    { key: "therapy_rehab", label: "Therapy & Rehab", emoji: "💪" },
+    { key: "vets", label: "Vets", emoji: "🐾" },
+    { key: "specialist", label: "Specialist", emoji: "👨‍⚕️" },
   ];
 
   const handleCategoryClick = (key: string) => {
@@ -182,7 +185,7 @@ export const SearchFilters = ({
             className="cursor-pointer px-4 py-2 text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => handleCategoryClick(category.key)}
           >
-            {t(category.labelKey)}
+            {category.emoji && <span className="mr-1" aria-hidden="true">{category.emoji}</span>}{category.label}
           </Badge>
         ))}
       </div>
