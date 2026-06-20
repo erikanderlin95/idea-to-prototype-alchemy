@@ -24,11 +24,8 @@ const LogoCell = ({ logo }: { logo: { name: string; src: string } }) => (
       src={logo.src}
       alt={logo.name}
       loading="lazy"
-      className={`max-h-full w-auto object-contain ${
-        logo.name === "Be TCM Clinic" || logo.name === "myDNA"
-          ? "max-w-[80px] sm:max-w-[138px] md:max-w-[176px]"
-          : "max-w-[70px] sm:max-w-[118px] md:max-w-[150px]"
-      }`}
+      className="max-h-full w-auto object-contain max-w-[70px] sm:max-w-[118px] md:max-w-[150px]"
+
     />
   </div>
 );
