@@ -1,23 +1,48 @@
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Switch } from "@/components/ui/switch";
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetFooter,
+} from "@/components/ui/sheet";
 import { Search, SlidersHorizontal, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState, useEffect } from "react";
+
+export interface ClinicFilters {
+  openNow: boolean;
+  queue: boolean;
+  booking: boolean;
+}
 
 interface SearchFiltersProps {
   defaultCategory?: string;
   onCategoryChange?: (category: string) => void;
   onSearchChange?: (text: string) => void;
+  onFiltersChange?: (filters: ClinicFilters) => void;
 }
 
 export const SearchFilters = ({
   defaultCategory = "all",
   onCategoryChange,
   onSearchChange,
+  onFiltersChange,
 }: SearchFiltersProps) => {
   const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
   const [searchText, setSearchText] = useState("");
+  const [sheetOpen, setSheetOpen] = useState(false);
+  const [filters, setFilters] = useState<ClinicFilters>({
+    openNow: false,
+    queue: false,
+    booking: false,
+  });
+  const [draftFilters, setDraftFilters] = useState<ClinicFilters>(filters);
 
   useEffect(() => {
     setActiveCategory(defaultCategory);
@@ -28,8 +53,9 @@ export const SearchFilters = ({
     return () => clearTimeout(id);
   }, [searchText, onSearchChange]);
 
-  const activeFilterCount =
-    (activeCategory !== "all" ? 1 : 0) + (searchText.trim() ? 1 : 0);
+  useEffect(() => {
+    onFiltersChange?.(filters);
+  }, [filters, onFiltersChange]);
 
   const categories = [
     { key: "all", labelKey: "search.category.all" },
@@ -45,10 +71,30 @@ export const SearchFilters = ({
     onCategoryChange?.(key);
   };
 
-  const filtersLabel =
-    activeFilterCount > 0
-      ? `${t("search.moreOptions")} \u2022 ${activeFilterCount}`
-      : t("search.moreOptions");
+  const openSheet = () => {
+    setDraftFilters(filters);
+    setSheetOpen(true);
+  };
+
+  const toggleDraft = (key: keyof ClinicFilters) =>
+    setDraftFilters((d) => ({ ...d, [key]: !d[key] }));
+
+  const applyFilters = () => {
+    setFilters(draftFilters);
+    setSheetOpen(false);
+  };
+
+  const clearFilters = () => {
+    const cleared = { openNow: false, queue: false, booking: false };
+    setDraftFilters(cleared);
+    setFilters(cleared);
+  };
+
+  const filterRows: { key: keyof ClinicFilters; labelKey: string }[] = [
+    { key: "openNow", labelKey: "search.filter.openNow" },
+    { key: "queue", labelKey: "search.filter.queue" },
+    { key: "booking", labelKey: "search.filter.booking" },
+  ];
 
   return (
     <div className="space-y-3">
@@ -66,17 +112,53 @@ export const SearchFilters = ({
       </div>
 
       {/* Filter Clinics button */}
-      <button
-        type="button"
-        className="w-full h-11 flex items-center justify-between px-4 rounded-full bg-primary/10 text-primary hover:bg-primary/15 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
-        aria-label={filtersLabel}
-      >
-        <span className="flex items-center gap-2 font-medium text-sm">
-          <SlidersHorizontal className="h-4 w-4" />
-          {filtersLabel}
-        </span>
-        <ChevronRight className="h-4 w-4" />
-      </button>
+      <Sheet open={sheetOpen} onOpenChange={setSheetOpen}>
+        <SheetTrigger asChild>
+          <button
+            type="button"
+            onClick={openSheet}
+            className="w-full h-11 flex items-center justify-between px-4 rounded-full bg-primary/10 text-primary hover:bg-primary/15 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
+            aria-label={t("search.moreOptions")}
+          >
+            <span className="flex items-center gap-2 font-medium text-sm">
+              <SlidersHorizontal className="h-4 w-4" />
+              {t("search.moreOptions")}
+            </span>
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </SheetTrigger>
+        <SheetContent side="bottom" className="rounded-t-2xl">
+          <SheetHeader>
+            <SheetTitle>{t("search.filter.title")}</SheetTitle>
+          </SheetHeader>
+          <div className="py-4 space-y-1">
+            {filterRows.map((row) => (
+              <label
+                key={row.key}
+                htmlFor={`filter-${row.key}`}
+                className="flex items-center justify-between py-3 cursor-pointer"
+              >
+                <span className="text-base font-medium text-foreground">
+                  {t(row.labelKey)}
+                </span>
+                <Switch
+                  id={`filter-${row.key}`}
+                  checked={draftFilters[row.key]}
+                  onCheckedChange={() => toggleDraft(row.key)}
+                />
+              </label>
+            ))}
+          </div>
+          <SheetFooter className="flex-row gap-2 sm:justify-between">
+            <Button variant="ghost" onClick={clearFilters} className="flex-1">
+              {t("search.filter.clear")}
+            </Button>
+            <Button onClick={applyFilters} className="flex-1">
+              {t("search.filter.apply")}
+            </Button>
+          </SheetFooter>
+        </SheetContent>
+      </Sheet>
 
       {/* Category chips */}
       <div className="flex items-center gap-2 flex-wrap pt-1">

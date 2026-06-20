@@ -1,4 +1,4 @@
-import { SearchFilters } from "./SearchFilters";
+import { SearchFilters, type ClinicFilters } from "./SearchFilters";
 import { ClinicCard } from "./ClinicCard";
 import { DirectoryClinicCard } from "./DirectoryClinicCard";
 import { TWENTY_FOUR_HR_CLINICS } from "@/data/twentyFourHrClinics";
@@ -28,6 +28,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
   const [searchText, setSearchText] = useState("");
+  const [filters, setFilters] = useState<ClinicFilters>({ openNow: false, queue: false, booking: false });
   
   const [currentPage, setCurrentPage] = useState(1);
   
@@ -90,9 +91,13 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       );
     }
 
+    if (filters.openNow) base = base.filter((c) => c.isOpen);
+    if (filters.queue) base = base.filter((c) => c.hasDigitalQueue);
+    if (filters.booking) base = base.filter((c) => !!c.bookingUrl);
+
     setFilteredClinics(base);
     setCurrentPage(1);
-  }, [activeCategory, clinics, searchText]);
+  }, [activeCategory, clinics, searchText, filters]);
 
 
   const fetchClinics = async () => {
@@ -129,6 +134,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           isOpen: clinic.is_open,
           id: clinic.id,
           hasDigitalQueue: clinic.has_digital_queue !== false,
+          bookingUrl: clinic.booking_url || null,
           isNmgAffiliated: clinic.is_nmg_affiliated === true,
         };
       });
@@ -170,6 +176,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             defaultCategory={defaultCategory}
             onCategoryChange={handleCategoryChange}
             onSearchChange={setSearchText}
+            onFiltersChange={setFilters}
           />
 
           {(() => {
