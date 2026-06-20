@@ -11,7 +11,9 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill, ExternalLink, MessageCircle, Play } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill, ExternalLink, MessageCircle, Play, Smile, Leaf, Compass } from "lucide-react";
+
+const DEMO_CLINIC_VIDEO = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
