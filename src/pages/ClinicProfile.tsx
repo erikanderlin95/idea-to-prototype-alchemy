@@ -49,7 +49,7 @@ const ExploreChip = ({
   onImpression,
   onClick,
 }: {
-  chip: { key: string; label: string; icon: any };
+  chip: { key: string; label: string; emoji: string };
   onImpression: () => void;
   onClick: () => void;
 }) => {
@@ -70,7 +70,6 @@ const ExploreChip = ({
     obs.observe(el);
     return () => obs.disconnect();
   }, [onImpression]);
-  const Icon = chip.icon;
   return (
     <button
       ref={ref}
@@ -78,10 +77,37 @@ const ExploreChip = ({
       onClick={onClick}
       className="shrink-0 inline-flex items-center gap-2 h-12 sm:h-[52px] px-4 rounded-full border border-border bg-background hover:bg-primary/5 hover:border-primary/40 active:scale-[0.97] transition-all shadow-sm"
     >
-      <Icon className="h-4 w-4 text-primary" />
+      <span className="text-base leading-none" aria-hidden="true">{chip.emoji}</span>
       <span className="text-sm font-semibold text-foreground whitespace-nowrap">{chip.label}</span>
     </button>
   );
+};
+
+// Canonical ClynicQ clinic types (matches homepage category filter)
+const CLYNICQ_CLINIC_TYPES: { key: string; label: string; emoji: string }[] = [
+  { key: "dna_health", label: "DNA & Health", emoji: "🧬" },
+  { key: "dental", label: "Dental", emoji: "🦷" },
+  { key: "gp", label: "General Practitioner", emoji: "🩺" },
+  { key: "mental_wellness", label: "Mental Wellness", emoji: "🧠" },
+  { key: "tcm", label: "TCM", emoji: "🌿" },
+  { key: "therapy_rehab", label: "Therapy & Rehab", emoji: "💪" },
+  { key: "vets", label: "Vets", emoji: "🐾" },
+  { key: "specialist", label: "Specialist", emoji: "👨‍⚕️" },
+];
+
+// Map a raw clinic.type value from the DB to a ClynicQ category key
+const mapClinicTypeToCategory = (rawType?: string | null): string | null => {
+  if (!rawType) return null;
+  const t = rawType.toLowerCase().trim();
+  if (["gp", "general practitioner", "family medicine", "family doctor"].includes(t)) return "gp";
+  if (["dental", "dentist", "dental clinic"].includes(t)) return "dental";
+  if (["tcm", "sowa rigpa", "traditional medicine", "chinese medicine"].includes(t)) return "tcm";
+  if (["vet", "vets", "veterinary", "veterinarian"].includes(t)) return "vets";
+  if (["physiotherapy", "podiatry", "occupational therapy", "chiropractic", "rehab", "therapy", "therapy_rehab", "therapy & rehab"].includes(t)) return "therapy_rehab";
+  if (["psychiatrist", "psychologist", "counselling", "counseling", "mental health", "mental wellness"].includes(t)) return "mental_wellness";
+  if (["dna", "dna & health", "dna_health", "genomics", "health screening", "screening"].includes(t)) return "dna_health";
+  if (["specialist", "specialist referral"].includes(t)) return "specialist";
+  return null;
 };
 
 const ClinicProfile = () => {
