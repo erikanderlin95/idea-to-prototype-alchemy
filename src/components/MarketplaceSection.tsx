@@ -28,6 +28,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
   const [searchText, setSearchText] = useState("");
+  const [filters, setFilters] = useState<ClinicFilters>({ openNow: false, queue: false, booking: false });
   
   const [currentPage, setCurrentPage] = useState(1);
   
