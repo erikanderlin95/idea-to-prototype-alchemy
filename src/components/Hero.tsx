@@ -70,6 +70,7 @@ export const Hero = () => {
             <p className="text-sm text-muted-foreground">{t("hero.activityDesc")}</p>
           </div>
         </div>
+      </div>
     </section>
   );
 };
