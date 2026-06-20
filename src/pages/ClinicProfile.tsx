@@ -404,28 +404,26 @@ const ClinicProfile = () => {
                   </div>
                 )}
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className={cn(
+                  "grid gap-2",
+                  displayPhotos.length === 1 && "grid-cols-1",
+                  displayPhotos.length === 2 && "grid-cols-2",
+                  displayPhotos.length === 3 && "grid-cols-3",
+                  displayPhotos.length >= 4 && "grid-cols-2"
+                )}>
                   {displayPhotos.map((photo: string, index: number) => {
-                    const total = displayPhotos.length;
-                    const spanFull = total === 1;
                     return (
                       <Dialog key={index}>
                         <DialogTrigger asChild>
                           <button
                             type="button"
-                            className={cn(
-                              "relative overflow-hidden rounded-xl group focus:outline-none focus:ring-2 focus:ring-primary",
-                              spanFull && "col-span-2"
-                            )}
+                            className="relative overflow-hidden rounded-xl group focus:outline-none focus:ring-2 focus:ring-primary"
                             aria-label={`View ${clinic.name} photo ${index + 1}`}
                           >
                             <img
                               src={photo}
                               alt={`${clinic.name} photo ${index + 1}`}
-                              className={cn(
-                                "w-full object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105",
-                                spanFull ? "aspect-[16/9]" : "aspect-square"
-                              )}
+                              className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105"
                               loading="lazy"
                               width={640}
                               height={640}
