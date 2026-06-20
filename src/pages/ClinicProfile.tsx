@@ -226,9 +226,45 @@ const ClinicProfile = () => {
               ? photos.slice(0, 4)
               : (DEMO_PHOTOS[clinic.name] || DEFAULT_CLINIC_PHOTOS);
 
+            const videoUrl: string | null = clinic.video_url || clinic.video || null;
+
             return (
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
-                {displayPhotos.map((photo: string, index: number) => (
+                {videoUrl && (
+                  <Dialog open={videoOpen} onOpenChange={setVideoOpen}>
+                    <DialogTrigger asChild>
+                      <button
+                        type="button"
+                        className="relative overflow-hidden rounded-xl group focus:outline-none focus:ring-2 focus:ring-primary"
+                        aria-label={`Play ${clinic.name} intro video`}
+                      >
+                        <img
+                          src={displayPhotos[0]}
+                          alt={`${clinic.name} video preview`}
+                          className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105"
+                          loading="lazy"
+                        />
+                        <div className="absolute inset-0 bg-foreground/30 group-hover:bg-foreground/20 transition-colors flex items-center justify-center">
+                          <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-background/90 backdrop-blur flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                            <Play className="h-5 w-5 sm:h-6 sm:w-6 text-primary fill-primary ml-0.5" />
+                          </div>
+                        </div>
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-4xl p-2 sm:p-3 bg-background border-0">
+                      <DialogHeader className="sr-only">
+                        <DialogTitle>{`${clinic.name} video`}</DialogTitle>
+                      </DialogHeader>
+                      <video
+                        src={videoUrl}
+                        controls
+                        autoPlay
+                        className="w-full h-auto max-h-[85vh] rounded-lg"
+                      />
+                    </DialogContent>
+                  </Dialog>
+                )}
+                {displayPhotos.slice(0, videoUrl ? 3 : 4).map((photo: string, index: number) => (
                   <Dialog key={index}>
                     <DialogTrigger asChild>
                       <button
@@ -278,27 +314,41 @@ const ClinicProfile = () => {
                     desc: "",
                   }))
                 : DEFAULT_SERVICES;
-              const items = services.slice(0, 8);
+              const VISIBLE = 6;
+              const hasMore = services.length > VISIBLE;
+              const items = showAllServices ? services : services.slice(0, VISIBLE);
               const useTwoCols = items.length > 3;
               return (
-                <div className={`grid gap-2 sm:gap-3 ${useTwoCols ? 'grid-cols-2' : 'grid-cols-1'}`}>
-                  {items.map((service: any, index: number) => (
-                    <div
-                      key={index}
-                      className="flex items-start gap-2.5 p-2.5 sm:p-3 rounded-lg border border-border/60 bg-muted/30 hover:bg-primary/5 hover:border-primary/30 transition-all cursor-default"
+                <>
+                  <div className={`grid gap-2 sm:gap-3 ${useTwoCols ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                    {items.map((service: any, index: number) => (
+                      <div
+                        key={index}
+                        className="flex items-start gap-2.5 p-3 sm:p-3.5 rounded-lg border border-border/60 bg-muted/30 hover:bg-primary/5 hover:border-primary/30 transition-all cursor-default h-full"
+                      >
+                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                          <service.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <span className="block text-sm sm:text-base font-semibold text-foreground leading-tight">{service.label}</span>
+                          {service.desc && (
+                            <p className="text-[11px] sm:text-xs text-muted-foreground leading-snug mt-1 line-clamp-2">{service.desc}</p>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  {hasMore && (
+                    <button
+                      type="button"
+                      onClick={() => setShowAllServices((v) => !v)}
+                      className="mt-3 inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-primary hover:underline"
                     >
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0 mt-0.5">
-                        <service.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
-                      </div>
-                      <div className="min-w-0">
-                        <span className="text-xs sm:text-sm font-semibold text-foreground leading-tight">{service.label}</span>
-                        {service.desc && (
-                          <p className="text-[10px] sm:text-xs text-muted-foreground leading-snug mt-0.5">{service.desc}</p>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
+                      {showAllServices ? "Show less" : `Show more (${services.length - VISIBLE})`}
+                      {showAllServices ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
+                    </button>
+                  )}
+                </>
               );
             })()}
           </Card>
