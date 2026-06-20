@@ -550,8 +550,8 @@ const ClinicProfile = () => {
           })()}
 
           {/* Services Offered */}
-          <Card className="p-3 sm:p-4">
-            <h2 className="text-base sm:text-xl font-bold mb-2 sm:mb-3">Services Offered</h2>
+          <Card className="p-4 sm:p-5">
+            <h2 className="text-base sm:text-xl font-bold mb-3 sm:mb-4">Services Offered</h2>
             {(() => {
               const services = clinic.services && clinic.services.length > 0
                 ? clinic.services.map((s: string) => ({
@@ -566,17 +566,17 @@ const ClinicProfile = () => {
               const useTwoCols = items.length > 3;
               return (
                 <>
-                  <div className={`grid gap-2 sm:gap-3 ${useTwoCols ? 'grid-cols-2' : 'grid-cols-1'}`}>
+                  <div className={`grid gap-3 sm:gap-4 ${useTwoCols ? 'grid-cols-2' : 'grid-cols-1'}`}>
                     {items.map((service: any, index: number) => (
                       <div
                         key={index}
-                        className="flex items-start gap-2.5 p-3 sm:p-3.5 rounded-lg border border-border/60 bg-muted/30 hover:bg-primary/5 hover:border-primary/30 transition-all cursor-default h-full"
+                        className="flex items-center gap-3 p-4 sm:p-5 rounded-xl border border-border/40 bg-primary/[0.03] hover:bg-primary/[0.06] hover:border-primary/20 transition-all cursor-default h-full"
                       >
-                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                        <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-xl bg-primary/10 flex items-center justify-center shrink-0">
                           <service.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <span className="block text-sm sm:text-base font-semibold text-foreground leading-tight">{service.label}</span>
+                          <span className="block text-sm sm:text-base font-bold text-foreground leading-snug">{service.label}</span>
                           {service.desc && (
                             <p className="text-[11px] sm:text-xs text-muted-foreground leading-snug mt-1 line-clamp-2">{service.desc}</p>
                           )}
@@ -588,7 +588,7 @@ const ClinicProfile = () => {
                     <button
                       type="button"
                       onClick={() => setShowAllServices((v) => !v)}
-                      className="mt-3 inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-primary hover:underline"
+                      className="mt-4 inline-flex items-center gap-1 text-xs sm:text-sm font-semibold text-primary hover:underline"
                     >
                       {showAllServices ? "Show less" : `Show more (${services.length - VISIBLE})`}
                       {showAllServices ? <ChevronUp className="h-3.5 w-3.5" /> : <ChevronDown className="h-3.5 w-3.5" />}
