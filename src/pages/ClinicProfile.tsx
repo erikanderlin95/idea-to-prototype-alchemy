@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill, ExternalLink, MessageCircle, Play, Smile, Leaf, Compass } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const DEMO_CLINIC_VIDEO = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4";
 import { useAuth } from "@/hooks/useAuth";
@@ -405,41 +406,48 @@ const ClinicProfile = () => {
                 )}
 
                 <div className="grid grid-cols-2 gap-2">
-                  {displayPhotos.map((photo: string, index: number) => (
-                    <Dialog key={index}>
-                      <DialogTrigger asChild>
-                        <button
-                          type="button"
-                          className="relative overflow-hidden rounded-xl group focus:outline-none focus:ring-2 focus:ring-primary"
-                          aria-label={`View ${clinic.name} photo ${index + 1}`}
-                        >
+                  {displayPhotos.map((photo: string, index: number) => {
+                    const total = displayPhotos.length;
+                    const spanFull = total === 1 || (total === 3 && index === 2);
+                    return (
+                      <Dialog key={index}>
+                        <DialogTrigger asChild>
+                          <button
+                            type="button"
+                            className={cn(
+                              "relative overflow-hidden rounded-xl group focus:outline-none focus:ring-2 focus:ring-primary",
+                              spanFull && "col-span-2"
+                            )}
+                            aria-label={`View ${clinic.name} photo ${index + 1}`}
+                          >
+                            <img
+                              src={photo}
+                              alt={`${clinic.name} photo ${index + 1}`}
+                              className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105"
+                              loading="lazy"
+                              width={640}
+                              height={640}
+                              onError={(e) => {
+                                const wrapper = (e.currentTarget.parentElement as HTMLElement | null);
+                                if (wrapper) wrapper.style.display = "none";
+                              }}
+                            />
+                            <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply pointer-events-none" />
+                          </button>
+                        </DialogTrigger>
+                        <DialogContent className="max-w-4xl p-2 sm:p-3 bg-background border-0">
+                          <DialogHeader className="sr-only">
+                            <DialogTitle>{`${clinic.name} photo ${index + 1}`}</DialogTitle>
+                          </DialogHeader>
                           <img
-                            src={photo}
-                            alt={`${clinic.name} photo ${index + 1}`}
-                            className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105"
-                            loading="lazy"
-                            width={640}
-                            height={640}
-                            onError={(e) => {
-                              const wrapper = (e.currentTarget.parentElement as HTMLElement | null);
-                              if (wrapper) wrapper.style.display = "none";
-                            }}
+                            src={photo.replace(/w=\d+/, 'w=1600')}
+                            alt={`${clinic.name} photo ${index + 1} enlarged`}
+                            className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
                           />
-                          <div className="absolute inset-0 bg-[#12385B]/5 mix-blend-multiply pointer-events-none" />
-                        </button>
-                      </DialogTrigger>
-                      <DialogContent className="max-w-4xl p-2 sm:p-3 bg-background border-0">
-                        <DialogHeader className="sr-only">
-                          <DialogTitle>{`${clinic.name} photo ${index + 1}`}</DialogTitle>
-                        </DialogHeader>
-                        <img
-                          src={photo.replace(/w=\d+/, 'w=1600')}
-                          alt={`${clinic.name} photo ${index + 1} enlarged`}
-                          className="w-full h-auto max-h-[85vh] object-contain rounded-lg"
-                        />
-                      </DialogContent>
-                    </Dialog>
-                  ))}
+                        </DialogContent>
+                      </Dialog>
+                    );
+                  })}
                 </div>
               </div>
             );
