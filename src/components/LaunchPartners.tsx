@@ -4,6 +4,7 @@ import macquarie from "@/assets/partners/macquarie.jpg";
 import ihealth from "@/assets/partners/ihealth.jpg";
 import stayingSane from "@/assets/partners/staying-sane.jpg";
 import beTcm from "@/assets/partners/be-tcm.jpg";
+import myDnaAsset from "@/assets/partners/mydna.jpg.asset.json";
 
 const clinicLogos = [
   { name: "PanHealth Medical", src: panhealth },
@@ -11,6 +12,7 @@ const clinicLogos = [
   { name: "I-Health", src: ihealth },
   { name: "Staying Sane 101", src: stayingSane },
   { name: "Be TCM Clinic", src: beTcm },
+  { name: "myDNA", src: myDnaAsset.url },
 ];
 
 export const LaunchPartners = () => {
