@@ -1902,12 +1902,15 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.peopleAhead": "前面的人数",
     "clinicCard.checkInCode": "签到码",
   },
+  ms: {},
+  ta: {},
 };
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem("language");
-    return (saved === "zh" ? "zh" : "en") as Language;
+    const valid: Language[] = ["en", "zh", "ms", "ta"];
+    return (valid.includes(saved as Language) ? (saved as Language) : "en");
   });
 
   useEffect(() => {
@@ -1919,7 +1922,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const t = (key: string): string => {
-    return translations[language][key] || key;
+    return translations[language][key] || translations["en"][key] || key;
   };
 
   return (
