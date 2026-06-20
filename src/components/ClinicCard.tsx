@@ -430,11 +430,13 @@ export const ClinicCard = ({
               {type}
             </Badge>
             {isOpen ? (
-              <Badge variant="outline" className="text-xs border-accent text-accent px-1.5 py-0 h-[20px] shrink-0">
+              <Badge className="text-xs font-semibold bg-emerald-100 text-emerald-700 border-emerald-300 px-2 py-0 h-[22px] shrink-0 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 {t("clinicCard.open")}
               </Badge>
             ) : (
-              <Badge variant="outline" className="text-xs border-muted text-muted-foreground px-1.5 py-0 h-[20px] shrink-0">
+              <Badge variant="secondary" className="text-xs font-medium px-2 py-0 h-[22px] shrink-0 flex items-center gap-1 text-muted-foreground">
+                <span className="w-1.5 h-1.5 rounded-full bg-muted-foreground/40" />
                 {t("clinicCard.closed")}
               </Badge>
             )}
