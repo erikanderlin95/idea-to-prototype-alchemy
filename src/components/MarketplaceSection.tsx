@@ -90,14 +90,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       );
     }
 
-    if (location !== "all") {
-      const loc = location.toLowerCase();
-      base = base.filter((c) => (c.address || "").toLowerCase().includes(loc));
-    }
-
     setFilteredClinics(base);
     setCurrentPage(1);
-  }, [activeCategory, clinics, searchText, location]);
+  }, [activeCategory, clinics, searchText]);
 
 
   const fetchClinics = async () => {
