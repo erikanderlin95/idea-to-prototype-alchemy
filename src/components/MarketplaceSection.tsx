@@ -91,9 +91,13 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       );
     }
 
+    if (filters.openNow) base = base.filter((c) => c.isOpen);
+    if (filters.queue) base = base.filter((c) => c.hasDigitalQueue);
+    if (filters.booking) base = base.filter((c) => !!c.bookingUrl);
+
     setFilteredClinics(base);
     setCurrentPage(1);
-  }, [activeCategory, clinics, searchText]);
+  }, [activeCategory, clinics, searchText, filters]);
 
 
   const fetchClinics = async () => {
