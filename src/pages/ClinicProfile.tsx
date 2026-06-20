@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
@@ -11,7 +11,9 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill, ExternalLink, MessageCircle, Play } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill, ExternalLink, MessageCircle, Play, Smile, Leaf, Compass } from "lucide-react";
+
+const DEMO_CLINIC_VIDEO = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4";
 import { useAuth } from "@/hooks/useAuth";
 import { toast } from "sonner";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -42,6 +44,46 @@ const SERVICE_ICON_MAP: Record<string, any> = {
   "medication": Pill,
 };
 
+const ExploreChip = ({
+  chip,
+  onImpression,
+  onClick,
+}: {
+  chip: { key: string; label: string; icon: any };
+  onImpression: () => void;
+  onClick: () => void;
+}) => {
+  const ref = useRef<HTMLButtonElement | null>(null);
+  const firedRef = useRef(false);
+  useEffect(() => {
+    if (!ref.current || firedRef.current) return;
+    const el = ref.current;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !firedRef.current) {
+          firedRef.current = true;
+          onImpression();
+          obs.disconnect();
+        }
+      });
+    }, { threshold: 0.5 });
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [onImpression]);
+  const Icon = chip.icon;
+  return (
+    <button
+      ref={ref}
+      type="button"
+      onClick={onClick}
+      className="shrink-0 inline-flex items-center gap-2 h-12 sm:h-[52px] px-4 rounded-full border border-border bg-background hover:bg-primary/5 hover:border-primary/40 active:scale-[0.97] transition-all shadow-sm"
+    >
+      <Icon className="h-4 w-4 text-primary" />
+      <span className="text-sm font-semibold text-foreground whitespace-nowrap">{chip.label}</span>
+    </button>
+  );
+};
+
 const ClinicProfile = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -65,6 +107,64 @@ const ClinicProfile = () => {
   const [bookingPreferWhatsApp, setBookingPreferWhatsApp] = useState(false);
   const [showAllServices, setShowAllServices] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
+  const [exploreCategories, setExploreCategories] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    let cancelled = false;
+    supabase.from("clinics").select("type").then(({ data }) => {
+      if (cancelled || !data) return;
+      const types = new Set(
+        (data as any[]).map((c) => String(c.type || "").toLowerCase().trim()).filter(Boolean)
+      );
+      const cats = new Set<string>();
+      types.forEach((tp) => {
+        if (tp === "gp") cats.add("gp");
+        if (tp === "specialist") cats.add("specialist");
+        if (tp === "dental") cats.add("dental");
+        if (["physiotherapy", "podiatry", "occupational therapy", "chiropractic", "rehab", "therapy"].includes(tp)) cats.add("physiotherapy");
+        if (["psychiatrist", "psychologist", "counselling", "mental health"].includes(tp)) cats.add("mental_health");
+        if (["tcm", "sowa rigpa", "traditional medicine"].includes(tp)) cats.add("tcm");
+      });
+      // GP clinics typically offer health screening
+      if (cats.has("gp") || cats.has("specialist")) cats.add("health_screening");
+      setExploreCategories(cats);
+    });
+    return () => { cancelled = true; };
+  }, []);
+
+  const EXPLORE_CHIPS: { key: string; label: string; icon: any; category: string }[] = [
+    { key: "gp", label: "GP", icon: Stethoscope, category: "gp_specialist" },
+    { key: "dental", label: "Dental", icon: Smile, category: "dental" },
+    { key: "mental_health", label: "Mental Health", icon: Brain, category: "mental_wellness" },
+    { key: "physiotherapy", label: "Physiotherapy", icon: Activity, category: "therapy_rehab" },
+    { key: "tcm", label: "TCM", icon: Leaf, category: "traditional_medicine" },
+    { key: "health_screening", label: "Health Screening", icon: HeartPulse, category: "gp_specialist" },
+    { key: "specialist", label: "Specialist", icon: Shield, category: "gp_specialist" },
+  ];
+
+  const logExploreEvent = (event: "impression" | "click", chipKey: string, category: string) => {
+    try {
+      const payload = {
+        event,
+        source: "clinic_profile",
+        source_clinic_id: id,
+        source_clinic_name: clinic?.name,
+        chip: chipKey,
+        destination_category: category,
+        timestamp: new Date().toISOString(),
+      };
+      console.log("[explore_healthcare]", payload);
+      const key = "explore_healthcare_events";
+      const prev = JSON.parse(localStorage.getItem(key) || "[]");
+      prev.push(payload);
+      localStorage.setItem(key, JSON.stringify(prev.slice(-200)));
+    } catch {/* ignore */}
+  };
+
+  const handleExploreClick = (chipKey: string, category: string) => {
+    logExploreEvent("click", chipKey, category);
+    navigate(`/?category=${category}#marketplace`);
+  };
 
   useEffect(() => {
     fetchClinicData();
@@ -226,7 +326,7 @@ const ClinicProfile = () => {
               ? photos.slice(0, 4)
               : (DEMO_PHOTOS[clinic.name] || DEFAULT_CLINIC_PHOTOS);
 
-            const videoUrl: string | null = clinic.video_url || clinic.video || null;
+            const videoUrl: string = clinic.video_url || clinic.video || DEMO_CLINIC_VIDEO;
 
             return (
               <div className="grid grid-cols-2 lg:grid-cols-4 gap-2">
@@ -442,6 +542,36 @@ const ClinicProfile = () => {
               {t("clinicProfile.appointmentHandledByClinic")}
             </p>
           )}
+
+          {/* Explore Healthcare — compact category navigator */}
+          {(() => {
+            const visibleChips = EXPLORE_CHIPS.filter((c) => exploreCategories.has(c.key));
+            if (visibleChips.length === 0) return null;
+            return (
+              <section aria-labelledby="explore-healthcare-title" className="-mx-3 sm:mx-0">
+                <div className="flex items-center gap-2 px-3 sm:px-0 mb-2">
+                  <Compass className="h-3.5 w-3.5 text-muted-foreground" />
+                  <h2 id="explore-healthcare-title" className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+                    Explore Healthcare
+                  </h2>
+                </div>
+                <div className="overflow-x-auto scrollbar-none">
+                  <div className="flex items-center gap-2 px-3 sm:px-0 pb-1">
+                    {visibleChips.map((chip) => (
+                      <ExploreChip
+                        key={chip.key}
+                        chip={chip}
+                        onImpression={() => logExploreEvent("impression", chip.key, chip.category)}
+                        onClick={() => handleExploreClick(chip.key, chip.category)}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </section>
+            );
+          })()}
+
+
 
           {/* Tabs */}
           <Tabs defaultValue="doctors" className="w-full">
