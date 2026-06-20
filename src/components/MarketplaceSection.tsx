@@ -27,6 +27,8 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const [filteredClinics, setFilteredClinics] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
+  const [searchText, setSearchText] = useState("");
+  const [location, setLocation] = useState("all");
   const [currentPage, setCurrentPage] = useState(1);
   
   const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
@@ -56,31 +58,47 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   }, []);
 
   useEffect(() => {
+    let base = clinics;
     if (activeCategory === "all") {
-      setFilteredClinics(clinics.filter((c) => c.hasDigitalQueue));
+      base = base.filter((c) => c.hasDigitalQueue);
     } else {
-      setFilteredClinics(
-        clinics.filter((clinic) => {
-          const clinicType = clinic.type?.toLowerCase();
-          switch (activeCategory) {
-            case "gp_specialist":
-              return ["gp", "specialist"].includes(clinicType);
-            case "dental":
-              return clinicType === "dental";
-            case "therapy_rehab":
-              return ["physiotherapy", "podiatry", "occupational therapy", "chiropractic", "rehab", "therapy"].includes(clinicType);
-            case "mental_wellness":
-              return ["psychiatrist", "psychologist", "counselling", "mental health"].includes(clinicType);
-            case "traditional_medicine":
-              return ["tcm", "sowa rigpa", "traditional medicine"].includes(clinicType);
-            default:
-              return true;
-          }
-        })
+      base = base.filter((clinic) => {
+        const clinicType = clinic.type?.toLowerCase();
+        switch (activeCategory) {
+          case "gp_specialist":
+            return ["gp", "specialist"].includes(clinicType);
+          case "dental":
+            return clinicType === "dental";
+          case "therapy_rehab":
+            return ["physiotherapy", "podiatry", "occupational therapy", "chiropractic", "rehab", "therapy"].includes(clinicType);
+          case "mental_wellness":
+            return ["psychiatrist", "psychologist", "counselling", "mental health"].includes(clinicType);
+          case "traditional_medicine":
+            return ["tcm", "sowa rigpa", "traditional medicine"].includes(clinicType);
+          default:
+            return true;
+        }
+      });
+    }
+
+    const q = searchText.trim().toLowerCase();
+    if (q) {
+      base = base.filter((c) =>
+        [c.name, c.type, c.address].some((v: string | undefined) =>
+          (v || "").toLowerCase().includes(q)
+        )
       );
     }
+
+    if (location !== "all") {
+      const loc = location.toLowerCase();
+      base = base.filter((c) => (c.address || "").toLowerCase().includes(loc));
+    }
+
+    setFilteredClinics(base);
     setCurrentPage(1);
-  }, [activeCategory, clinics]);
+  }, [activeCategory, clinics, searchText, location]);
+
 
   const fetchClinics = async () => {
     try {
@@ -153,7 +171,22 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             </p>
           </div>
 
-          <SearchFilters defaultCategory={defaultCategory} onCategoryChange={handleCategoryChange} />
+          <SearchFilters
+            defaultCategory={defaultCategory}
+            onCategoryChange={handleCategoryChange}
+            onSearchChange={setSearchText}
+            onLocationChange={setLocation}
+            locations={Array.from(
+              new Set(
+                clinics
+                  .map((c) => {
+                    const parts = (c.address || "").split(",").map((p: string) => p.trim()).filter(Boolean);
+                    return parts[parts.length - 1] || "";
+                  })
+                  .filter((s: string) => s && !/^singapore$/i.test(s) && !/^\d+$/.test(s))
+              )
+            ).sort()}
+          />
 
           {(() => {
             const totalPages = Math.max(1, Math.ceil(filteredClinics.length / clinicsPerPage));
