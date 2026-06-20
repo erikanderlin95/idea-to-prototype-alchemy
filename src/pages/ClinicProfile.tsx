@@ -520,32 +520,26 @@ const ClinicProfile = () => {
           )}
 
           {/* Explore Healthcare — compact category navigator */}
-          {(() => {
-            const visibleChips = EXPLORE_CHIPS.filter((c) => exploreCategories.has(c.key));
-            if (visibleChips.length === 0) return null;
-            return (
-              <section aria-labelledby="explore-healthcare-title" className="-mx-3 sm:mx-0">
-                <div className="flex items-center gap-2 px-3 sm:px-0 mb-2">
-                  <Compass className="h-3.5 w-3.5 text-muted-foreground" />
-                  <h2 id="explore-healthcare-title" className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wide">
-                    Explore Healthcare
-                  </h2>
-                </div>
-                <div className="overflow-x-auto scrollbar-none">
-                  <div className="flex items-center gap-2 px-3 sm:px-0 pb-1">
-                    {visibleChips.map((chip) => (
-                      <ExploreChip
-                        key={chip.key}
-                        chip={chip}
-                        onImpression={() => logExploreEvent("impression", chip.key, chip.category)}
-                        onClick={() => handleExploreClick(chip.key, chip.category)}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </section>
-            );
-          })()}
+          <section aria-labelledby="explore-healthcare-title" className="-mx-3 sm:mx-0">
+            <div className="flex items-center gap-2 px-3 sm:px-0 mb-2">
+              <Compass className="h-3.5 w-3.5 text-muted-foreground" />
+              <h2 id="explore-healthcare-title" className="text-xs sm:text-sm font-semibold text-muted-foreground uppercase tracking-wide">
+                Explore Healthcare
+              </h2>
+            </div>
+            <div className="overflow-x-auto scrollbar-none">
+              <div className="flex items-center gap-2 px-3 sm:px-0 pb-1">
+                {EXPLORE_CHIPS.map((chip) => (
+                  <ExploreChip
+                    key={chip.key}
+                    chip={chip}
+                    onImpression={() => logExploreEvent("impression", chip.key, chip.category)}
+                    onClick={() => handleExploreClick(chip.key, chip.category)}
+                  />
+                ))}
+              </div>
+            </div>
+          </section>
 
 
 
