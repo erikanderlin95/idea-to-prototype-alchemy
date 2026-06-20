@@ -353,10 +353,10 @@ const translations: Record<Language, Record<string, string>> = {
     "marketplace.loadMore": "Load More",
     
     // SearchFilters
-    "search.placeholder": "Search clinic, service or specialty",
+    "search.placeholder": "Search clinic, service, specialty or location",
     "search.location": "All locations",
     "search.filters": "Filters",
-    "search.moreOptions": "More Search Options",
+    "search.moreOptions": "Filter Clinics",
     "search.all": "All",
     "search.gp": "GP",
     "search.tcm": "TCM",
@@ -1292,10 +1292,10 @@ const translations: Record<Language, Record<string, string>> = {
     "marketplace.loadMore": "加载更多",
     
     // SearchFilters
-    "search.placeholder": "搜索诊所、服务或专科",
+    "search.placeholder": "搜索诊所、服务、专科或地区",
     "search.location": "所有地区",
     "search.filters": "筛选",
-    "search.moreOptions": "更多搜索选项",
+    "search.moreOptions": "筛选诊所",
     "search.all": "全部",
     "search.gp": "全科",
     "search.tcm": "中医",

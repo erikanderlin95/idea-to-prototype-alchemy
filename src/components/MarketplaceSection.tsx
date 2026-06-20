@@ -28,7 +28,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
   const [searchText, setSearchText] = useState("");
-  const [location, setLocation] = useState("all");
+  
   const [currentPage, setCurrentPage] = useState(1);
   
   const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
@@ -90,14 +90,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       );
     }
 
-    if (location !== "all") {
-      const loc = location.toLowerCase();
-      base = base.filter((c) => (c.address || "").toLowerCase().includes(loc));
-    }
-
     setFilteredClinics(base);
     setCurrentPage(1);
-  }, [activeCategory, clinics, searchText, location]);
+  }, [activeCategory, clinics, searchText]);
 
 
   const fetchClinics = async () => {
@@ -175,17 +170,6 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             defaultCategory={defaultCategory}
             onCategoryChange={handleCategoryChange}
             onSearchChange={setSearchText}
-            onLocationChange={setLocation}
-            locations={Array.from(
-              new Set(
-                clinics
-                  .map((c) => {
-                    const parts = (c.address || "").split(",").map((p: string) => p.trim()).filter(Boolean);
-                    return parts[parts.length - 1] || "";
-                  })
-                  .filter((s: string) => s && !/^singapore$/i.test(s) && !/^\d+$/.test(s))
-              )
-            ).sort()}
           />
 
           {(() => {
