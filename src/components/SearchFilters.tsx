@@ -13,10 +13,17 @@ interface SearchFiltersProps {
 export const SearchFilters = ({ defaultCategory = "all", onCategoryChange }: SearchFiltersProps) => {
   const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
+  const [searchText, setSearchText] = useState("");
+  const [locationText, setLocationText] = useState("");
 
   useEffect(() => {
     setActiveCategory(defaultCategory);
   }, [defaultCategory]);
+
+  const activeFilterCount =
+    (activeCategory !== "all" ? 1 : 0) +
+    (searchText.trim() ? 1 : 0) +
+    (locationText.trim() ? 1 : 0);
 
   const categories = [
     { key: "all", labelKey: "search.category.all" },
@@ -40,6 +47,8 @@ export const SearchFilters = ({ defaultCategory = "all", onCategoryChange }: Sea
           <Input
             placeholder={t("search.placeholder")}
             className="pl-10 h-12"
+            value={searchText}
+            onChange={(e) => setSearchText(e.target.value)}
           />
         </div>
         <div className="relative md:w-64">
@@ -47,11 +56,15 @@ export const SearchFilters = ({ defaultCategory = "all", onCategoryChange }: Sea
           <Input
             placeholder={t("search.location")}
             className="pl-10 h-12"
+            value={locationText}
+            onChange={(e) => setLocationText(e.target.value)}
           />
         </div>
-        <Button size="lg" variant="outline" className="md:w-auto">
+        <Button size="lg" variant="outline" className="md:w-auto relative">
           <Filter className="mr-2 h-5 w-5" />
-          {t("search.filters")}
+          {activeFilterCount > 0
+            ? `${t("search.filters")} \u2022 ${activeFilterCount}`
+            : t("search.filters")}
         </Button>
       </div>
 
