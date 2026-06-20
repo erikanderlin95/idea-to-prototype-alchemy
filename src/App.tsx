@@ -24,6 +24,7 @@ import TCMClinics from "./pages/TCMClinics";
 import WellnessClinics from "./pages/WellnessClinics";
 import ManagedCareRequest from "./pages/ManagedCareRequest";
 import OrganizationProfile from "./pages/OrganizationProfile";
+import ManagedCare from "./pages/ManagedCare";
 
 import SpeakersTrainers from "./pages/SpeakersTrainers";
 import SpeakerProfile from "./pages/SpeakerProfile";
