@@ -141,9 +141,6 @@ const ClinicProfile = () => {
 
 
   const logExploreEvent = (event: "impression" | "click", chipKey: string, category: string) => {
-
-
-  const logExploreEvent = (event: "impression" | "click", chipKey: string, category: string) => {
     try {
       const payload = {
         event,
