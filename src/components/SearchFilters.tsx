@@ -185,7 +185,7 @@ export const SearchFilters = ({
             className="cursor-pointer px-4 py-2 text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
             onClick={() => handleCategoryClick(category.key)}
           >
-            {t(category.labelKey)}
+            {category.emoji && <span className="mr-1" aria-hidden="true">{category.emoji}</span>}{category.label}
           </Badge>
         ))}
       </div>
