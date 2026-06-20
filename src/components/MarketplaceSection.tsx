@@ -176,6 +176,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             defaultCategory={defaultCategory}
             onCategoryChange={handleCategoryChange}
             onSearchChange={setSearchText}
+            onFiltersChange={setFilters}
           />
 
           {(() => {
