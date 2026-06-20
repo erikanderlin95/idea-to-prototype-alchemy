@@ -466,16 +466,13 @@ const ClinicProfile = () => {
                     {items.map((service: any, index: number) => (
                       <div
                         key={index}
-                        className="flex items-start gap-2.5 p-3 sm:p-3.5 rounded-lg border border-border/60 bg-muted/30 hover:bg-primary/5 hover:border-primary/30 transition-all cursor-default h-full"
+                        className="flex items-center gap-3 p-3.5 sm:p-4 rounded-xl border border-[#D8E4ED] bg-[#F5FAFB] shadow-[0_1px_6px_rgba(18,56,91,0.05)] hover:bg-[#EDF7F8] hover:border-[#18B7C9]/30 hover:shadow-[0_3px_12px_rgba(24,183,201,0.08)] transition-all cursor-default h-full"
                       >
-                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                        <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-[#E6F7FA] flex items-center justify-center shrink-0">
                           <service.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                         </div>
                         <div className="min-w-0 flex-1">
-                          <span className="block text-sm sm:text-base font-semibold text-foreground leading-tight">{service.label}</span>
-                          {service.desc && (
-                            <p className="text-[11px] sm:text-xs text-muted-foreground leading-snug mt-1 line-clamp-2">{service.desc}</p>
-                          )}
+                          <span className="block text-sm sm:text-base font-bold text-foreground leading-snug">{service.label}</span>
                         </div>
                       </div>
                     ))}
