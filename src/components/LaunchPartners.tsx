@@ -49,11 +49,11 @@ export const LaunchPartners = () => {
           </div>
 
           {/* Bottom row — clinic logos tightly grouped */}
-          <div className="flex flex-row flex-nowrap items-center justify-center gap-3 sm:gap-6 md:gap-8">
+          <div className="flex flex-row flex-wrap items-center justify-center gap-x-3 gap-y-3 sm:gap-x-6 md:gap-x-8">
             {clinicLogos.map((logo) => (
               <div
                 key={logo.name}
-                className="flex items-center justify-center h-[50px] sm:h-[58px] md:h-[66px] shrink"
+                className="flex items-center justify-center h-[50px] sm:h-[58px] md:h-[66px] shrink-0"
               >
                 <img
                   src={logo.src}
@@ -61,8 +61,8 @@ export const LaunchPartners = () => {
                   loading="lazy"
                   className={`max-h-full w-auto object-contain ${
                     logo.name === "Be TCM Clinic" || logo.name === "myDNA"
-                      ? "max-w-[88px] sm:max-w-[138px] md:max-w-[176px]"
-                      : "max-w-[76px] sm:max-w-[118px] md:max-w-[150px]"
+                      ? "max-w-[80px] sm:max-w-[138px] md:max-w-[176px]"
+                      : "max-w-[70px] sm:max-w-[118px] md:max-w-[150px]"
                   }`}
                 />
               </div>
