@@ -555,8 +555,8 @@ const ClinicProfile = () => {
                   <ExploreChip
                     key={chip.key}
                     chip={chip}
-                    onImpression={() => logExploreEvent("impression", chip.key, chip.category)}
-                    onClick={() => handleExploreClick(chip.key, chip.category)}
+                    onImpression={() => logExploreEvent("impression", chip.key, chip.key)}
+                    onClick={() => handleExploreClick(chip.key, chip.key)}
                   />
                 ))}
               </div>
