@@ -423,7 +423,10 @@ const ClinicProfile = () => {
                             <img
                               src={photo}
                               alt={`${clinic.name} photo ${index + 1}`}
-                              className="w-full aspect-square object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105"
+                              className={cn(
+                                "w-full object-cover contrast-[1.05] saturate-[1.1] transition-transform group-hover:scale-105",
+                                spanFull && total === 3 ? "aspect-[2/1]" : spanFull ? "aspect-[16/9]" : "aspect-square"
+                              )}
                               loading="lazy"
                               width={640}
                               height={640}
