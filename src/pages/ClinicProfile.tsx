@@ -319,7 +319,6 @@ const ClinicProfile = () => {
                 "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&q=80",
                 "https://images.unsplash.com/photo-1631815588090-d4bfec5b1ccb?w=600&q=80",
                 "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=600&q=80",
-                "https://images.unsplash.com/photo-1583912267550-d6c2a8e5c7a1?w=600&q=80",
               ],
               "Unity Health Clinic": [
                 "https://images.unsplash.com/photo-1666214280557-f1b5022eb634?w=600&q=80",
