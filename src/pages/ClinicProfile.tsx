@@ -133,6 +133,37 @@ const ClinicProfile = () => {
   const [bookingPreferWhatsApp, setBookingPreferWhatsApp] = useState(false);
   const [showAllServices, setShowAllServices] = useState(false);
   const [videoOpen, setVideoOpen] = useState(false);
+  const [videoStarted, setVideoStarted] = useState(false);
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const videoMilestonesRef = useRef<Set<number>>(new Set());
+
+  const logVideoEvent = (event: string, extra: Record<string, unknown> = {}) => {
+    try {
+      const payload = {
+        event: `clinic_video_${event}`,
+        clinicId: clinic?.id,
+        clinicName: clinic?.name,
+        timestamp: new Date().toISOString(),
+        ...extra,
+      };
+      const key = "clynicq_video_events";
+      const existing = JSON.parse(localStorage.getItem(key) || "[]");
+      existing.push(payload);
+      localStorage.setItem(key, JSON.stringify(existing.slice(-200)));
+    } catch {}
+  };
+
+  const handleVideoTimeUpdate = (e: React.SyntheticEvent<HTMLVideoElement>) => {
+    const v = e.currentTarget;
+    if (!v.duration || isNaN(v.duration)) return;
+    const pct = (v.currentTime / v.duration) * 100;
+    [25, 50, 75, 100].forEach((m) => {
+      if (pct >= m && !videoMilestonesRef.current.has(m)) {
+        videoMilestonesRef.current.add(m);
+        logVideoEvent(m === 100 ? "complete" : `progress_${m}`);
+      }
+    });
+  };
 
   const EXPLORE_CHIPS = (() => {
     const currentCategory = mapClinicTypeToCategory(clinic?.type);
