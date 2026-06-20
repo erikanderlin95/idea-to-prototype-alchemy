@@ -1,32 +1,10 @@
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Search, Phone } from "lucide-react";
-import { QueueIcon, AppointmentsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
+import { Search, Building2 } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { toast } from "sonner";
-import { useNavigate } from "react-router-dom";
-import { z } from "zod";
-
-const phoneSchema = z.object({
-  phone: z.string()
-    .trim()
-    .min(8, { message: "Phone number must be at least 8 digits" })
-    .max(15, { message: "Phone number must be less than 15 digits" })
-    .regex(/^[0-9+\-\s()]+$/, { message: "Invalid phone number format" })
-});
 
 export const Hero = () => {
   const { t } = useLanguage();
-  const navigate = useNavigate();
-  const [showQueueFinder, setShowQueueFinder] = useState(false);
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [isSearching, setIsSearching] = useState(false);
-  
+
   return (
     <section className="relative py-16 flex items-center justify-center overflow-hidden bg-white">
       <div className="absolute inset-0 bg-[linear-gradient(105deg,hsl(168,55%,84%)_0%,hsl(175,55%,92%)_22%,hsl(190,50%,97%)_50%,hsl(200,60%,94%)_78%,hsl(210,65%,86%)_100%)]" />
@@ -66,7 +44,7 @@ export const Hero = () => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-2 w-full max-w-[260px] sm:max-w-none sm:w-auto mx-auto mt-1 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 w-full max-w-[260px] sm:max-w-none sm:w-auto mx-auto mt-1 justify-center">
             <Button 
               size="lg" 
               className="text-sm sm:text-base px-6 sm:px-8 py-2.5 sm:py-3 h-10 sm:h-12 shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-1.5 font-bold"
@@ -79,9 +57,10 @@ export const Hero = () => {
               size="lg" 
               variant="outline" 
               className="text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 h-10 sm:h-12 border-2 border-border bg-background text-foreground font-semibold shadow-sm hover:bg-secondary/50 transition-all gap-1.5"
-              onClick={() => setShowQueueFinder(true)}
+              onClick={() => document.getElementById('for-clinics')?.scrollIntoView({ behavior: 'smooth' })}
+              aria-label={t("hero.findMyQueue")}
             >
-              <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+              <Building2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
               {t("hero.findMyQueue")}
             </Button>
           </div>
@@ -92,90 +71,6 @@ export const Hero = () => {
           </div>
         </div>
       </div>
-
-      {/* Find My Queue Modal */}
-      <Dialog open={showQueueFinder} onOpenChange={setShowQueueFinder}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Find My Queue</DialogTitle>
-            <DialogDescription>
-              Enter your mobile number to find your queue session
-            </DialogDescription>
-          </DialogHeader>
-          <div className="space-y-4 py-4">
-            <div className="space-y-2">
-              <Label htmlFor="phone">Mobile Number</Label>
-              <Input
-                id="phone"
-                type="tel"
-                placeholder="+65 1234 5678"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value)}
-                maxLength={15}
-              />
-            </div>
-          </div>
-          <DialogFooter>
-            <Button 
-              variant="outline" 
-              onClick={() => {
-                setShowQueueFinder(false);
-                setPhoneNumber("");
-              }}
-            >
-              Cancel
-            </Button>
-            <Button 
-              onClick={async () => {
-                try {
-                  // Validate phone number
-                  const validation = phoneSchema.safeParse({ phone: phoneNumber });
-                  if (!validation.success) {
-                    toast.error(validation.error.issues[0].message);
-                    return;
-                  }
-
-                  setIsSearching(true);
-                  const sanitizedMobile = phoneNumber.trim().replace(/\s/g, "");
-
-                  // Find active queue entry via edge function (works for zero-auth queue)
-                  const { data, error } = await supabase.functions.invoke("queue-lookup", {
-                    body: {
-                      action: "find_my_queue",
-                      mobile_number: sanitizedMobile,
-                    },
-                  });
-
-                  if (error) throw error;
-                  if (data?.error) throw new Error(data.error);
-
-                  const queueEntry = data?.entry;
-                  if (!queueEntry) {
-                    toast.error("No active queue session found for this mobile number");
-                    return;
-                  }
-
-                  // Persist mobile so Queue page can look up position
-                  localStorage.setItem(`queue_mobile_${queueEntry.clinic_id}`, sanitizedMobile);
-
-                  toast.success(`Found your queue! Position #${queueEntry.queue_number}`);
-                  setShowQueueFinder(false);
-                  setPhoneNumber("");
-                  navigate(`/queue?clinic=${queueEntry.clinic_id}&mobile=${encodeURIComponent(sanitizedMobile)}`);
-                } catch (error: any) {
-                  toast.error(error.message || "Failed to find queue session");
-                } finally {
-                  setIsSearching(false);
-                }
-              }}
-              disabled={isSearching || !phoneNumber.trim()}
-            >
-              {isSearching ? "Searching..." : "Find Queue"}
-            </Button>
-
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </section>
   );
 };
