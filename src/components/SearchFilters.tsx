@@ -72,9 +72,9 @@ export const SearchFilters = ({
     onSearchChange?.(value);
   };
 
-  const openSheet = () => {
-    setDraftFilters(filters);
-    setSheetOpen(true);
+  const handleSheetOpenChange = (open: boolean) => {
+    if (open) setDraftFilters(filters);
+    setSheetOpen(open);
   };
 
   const toggleDraft = (key: keyof ClinicFilters) =>
@@ -86,9 +86,7 @@ export const SearchFilters = ({
   };
 
   const clearFilters = () => {
-    const cleared = { openNow: false, queue: false, booking: false };
-    setDraftFilters(cleared);
-    setFilters(cleared);
+    setDraftFilters({ openNow: false, queue: false, booking: false });
   };
 
   const activeFilterCount = [filters.openNow, filters.queue, filters.booking].filter(Boolean).length;
