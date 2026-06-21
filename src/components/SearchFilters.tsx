@@ -103,7 +103,7 @@ export const SearchFilters = ({
   ];
 
   return (
-    <div className="space-y-3">
+    <div className="space-y-2">
       {/* Primary unified search bar */}
       <div className="relative w-full">
         <Search className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground pointer-events-none" />
@@ -122,20 +122,20 @@ export const SearchFilters = ({
         <SheetTrigger asChild>
           <button
             type="button"
-            className="w-full h-11 flex items-center justify-between px-4 rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/15 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
+            className="w-full h-9 flex items-center justify-between px-3 rounded-full border border-primary/20 bg-primary/10 text-primary hover:bg-primary/15 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background"
             aria-label={t("search.moreOptions")}
           >
-            <span className="flex items-center gap-2 font-medium text-sm">
-              <SlidersHorizontal className="h-4 w-4" />
+            <span className="flex items-center gap-1.5 font-medium text-xs">
+              <SlidersHorizontal className="h-3.5 w-3.5" />
               {t("search.moreOptions")}
             </span>
-            <span className="flex items-center gap-2">
+            <span className="flex items-center gap-1.5">
               {activeFilterCount > 0 && (
-                <span className="inline-flex items-center justify-center h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs font-semibold">
+                <span className="inline-flex items-center justify-center h-4 w-4 rounded-full bg-primary text-primary-foreground text-[10px] font-semibold">
                   {activeFilterCount}
                 </span>
               )}
-              <ChevronRight className="h-4 w-4" />
+              <ChevronRight className="h-3.5 w-3.5" />
             </span>
           </button>
         </SheetTrigger>
