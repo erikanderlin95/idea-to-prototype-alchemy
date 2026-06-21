@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -117,7 +118,42 @@ const PROFILES: Record<BandKey, Profile> = {
 
 type Selections = Record<string, number>; // id -> chip index 0..3
 
+type NextStep = {
+  emoji: string;
+  title: string;
+  description: string;
+  to: string;
+};
+
+const NEXT_STEPS: NextStep[] = [
+  {
+    emoji: "❤️",
+    title: "GP & Health Screening",
+    description: "Explore preventive care and general wellness services.",
+    to: "/gp",
+  },
+  {
+    emoji: "🌿",
+    title: "TCM",
+    description: "Support overall wellness and lifestyle balance.",
+    to: "/tcm",
+  },
+  {
+    emoji: "🧬",
+    title: "DNA & Health",
+    description: "Explore personalised health and wellness insights.",
+    to: "/?category=dna_health",
+  },
+  {
+    emoji: "🧠",
+    title: "Mental Wellness",
+    description: "Support stress management and emotional well-being.",
+    to: "/?category=mental_wellness",
+  },
+];
+
 const SugarHabit = () => {
+  const navigate = useNavigate();
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [drinks, setDrinks] = useState<Selections>({});
   const [snacks, setSnacks] = useState<Selections>({});
@@ -301,6 +337,28 @@ const SugarHabit = () => {
               <Button type="button" variant="outline" className="w-full" onClick={reset}>
                 <RotateCcw className="mr-1 h-4 w-4" /> Check again
               </Button>
+
+              <section className="mt-6">
+                <h2 className="text-lg md:text-xl font-semibold text-foreground mb-4">
+                  Explore next steps
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  {NEXT_STEPS.map((step) => (
+                    <NextStepCard
+                      key={step.title}
+                      step={step}
+                      band={band.key}
+                      onClick={() => {
+                        track("sugar_habit_next_step_clicked", {
+                          card: step.title,
+                          band: band.key,
+                        });
+                        navigate(step.to);
+                      }}
+                    />
+                  ))}
+                </div>
+              </section>
             </div>
           )}
 
@@ -311,6 +369,41 @@ const SugarHabit = () => {
       </main>
       <Footer />
     </div>
+  );
+};
+
+const NextStepCard = ({
+  step,
+  band,
+  onClick,
+}: {
+  step: NextStep;
+  band: BandKey;
+  onClick: () => void;
+}) => {
+  useEffect(() => {
+    track("sugar_habit_next_step_impression", { card: step.title, band });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="text-left rounded-xl border border-border bg-card p-4 md:p-5 transition-all hover:border-primary/50 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.99]"
+    >
+      <div className="flex items-start gap-3">
+        <span className="text-2xl leading-none shrink-0" aria-hidden>
+          {step.emoji}
+        </span>
+        <div className="min-w-0">
+          <h3 className="text-sm md:text-base font-semibold text-foreground">{step.title}</h3>
+          <p className="mt-1 text-xs md:text-sm text-muted-foreground leading-snug">
+            {step.description}
+          </p>
+        </div>
+      </div>
+    </button>
   );
 };
 
