@@ -6,11 +6,12 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const sections = [
-  { id: "marketplace", key: "sidebar.section.browseClinics", icon: Building2, type: "scroll" as const },
-  { id: "managed-care", key: "sidebar.section.managedCare", icon: HeartHandshake, type: "scroll" as const },
-  { id: "wellness-talks", key: "sidebar.section.wellnessTalks", icon: Mic, type: "scroll" as const },
-  { id: "other-providers", key: "sidebar.section.otherProviders", icon: Sparkles, type: "scroll" as const },
-  { id: "for-clinics", key: "sidebar.section.forClinics", icon: Stethoscope, type: "scroll" as const },
+  { id: "marketplace", key: "sidebar.section.browseClinics", icon: Building2, type: "scroll" as const, emoji: null as string | null },
+  { id: "managed-care", key: "sidebar.section.managedCare", icon: HeartHandshake, type: "scroll" as const, emoji: null },
+  { id: "wellness-talks", key: "sidebar.section.wellnessTalks", icon: Mic, type: "scroll" as const, emoji: null },
+  { id: "other-providers", key: "sidebar.section.otherProviders", icon: Sparkles, type: "scroll" as const, emoji: null },
+  { id: "/explore-health/bmi-calculator", key: "sidebar.section.bmiCalculator", icon: Sparkles, type: "route" as const, emoji: "📏" },
+  { id: "for-clinics", key: "sidebar.section.forClinics", icon: Stethoscope, type: "scroll" as const, emoji: null },
 ];
 
 const FIRST_VISIT_KEY = "clynicq_sidebar_hint_shown";
