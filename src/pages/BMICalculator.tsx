@@ -303,6 +303,15 @@ const BMICalculator = () => {
                   </span>
                 </div>
                 <p className="mt-3 text-sm leading-relaxed">{category.description}</p>
+
+                {category.key !== "healthy" && healthyWeightRange && (
+                  <div className="mt-4 rounded-lg bg-white/60 dark:bg-black/20 p-3">
+                    <p className="text-xs opacity-80">Healthy weight range for your height</p>
+                    <p className="text-base font-semibold">
+                      {healthyWeightRange.lower} – {healthyWeightRange.upper} kg
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Recommended next steps */}
