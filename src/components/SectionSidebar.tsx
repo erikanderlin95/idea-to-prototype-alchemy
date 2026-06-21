@@ -10,7 +10,7 @@ const sections = [
   { id: "managed-care", key: "sidebar.section.managedCare", icon: HeartHandshake, type: "scroll" as const, emoji: null, iconColor: "text-rose-500 bg-rose-50" },
   { id: "wellness-talks", key: "sidebar.section.wellnessTalks", icon: Mic, type: "scroll" as const, emoji: null, iconColor: "text-violet-500 bg-violet-50" },
   { id: "other-providers", key: "sidebar.section.otherProviders", icon: Sparkles, type: "scroll" as const, emoji: null, iconColor: "text-amber-500 bg-amber-50" },
-  { id: "/explore-health/bmi-calculator", key: "sidebar.section.bmiCalculator", icon: Sparkles, type: "route" as const, emoji: "📏", iconColor: "text-emerald-500 bg-emerald-50" },
+  { id: "/explore-health", key: "sidebar.section.bmiCalculator", icon: Sparkles, type: "route" as const, emoji: "✨", iconColor: "text-emerald-500 bg-emerald-50" },
   { id: "for-clinics", key: "sidebar.section.forClinics", icon: Stethoscope, type: "scroll" as const, emoji: null, iconColor: "text-teal-600 bg-teal-50" },
 ];
 

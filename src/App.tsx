@@ -33,6 +33,8 @@ import AfterlifeServicesPage from "./pages/AfterlifeServices";
 import AfterlifeProfile from "./pages/AfterlifeProfile";
 import ForClinics from "./pages/ForClinics";
 import BMICalculator from "./pages/BMICalculator";
+import HealthTools from "./pages/HealthTools";
+import SugarHabit from "./pages/SugarHabit";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 import { SectionSidebar } from "@/components/SectionSidebar";
@@ -75,7 +77,9 @@ const App = () => (
             <Route path="/afterlife" element={<AfterlifeServicesPage />} />
             <Route path="/afterlife/nirvana" element={<AfterlifeProfile />} />
             <Route path="/for-clinics" element={<ForClinics />} />
+            <Route path="/explore-health" element={<HealthTools />} />
             <Route path="/explore-health/bmi-calculator" element={<BMICalculator />} />
+            <Route path="/explore-health/sugar-habit" element={<SugarHabit />} />
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
