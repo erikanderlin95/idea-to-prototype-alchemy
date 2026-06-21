@@ -199,6 +199,15 @@ const BMICalculator = () => {
 
   const category = useMemo(() => (bmi != null ? getCategory(bmi) : null), [bmi]);
 
+  const healthyWeightRange = useMemo(() => {
+    const h = parseFloat(height);
+    if (!h || h < 50 || h > 272) return null;
+    const meters = h / 100;
+    const lower = 18.5 * meters * meters;
+    const upper = 24.9 * meters * meters;
+    return { lower: Math.round(lower * 10) / 10, upper: Math.round(upper * 10) / 10 };
+  }, [height]);
+
   const handleCalculate = (e: React.FormEvent) => {
     e.preventDefault();
     const h = parseFloat(height);
@@ -294,6 +303,15 @@ const BMICalculator = () => {
                   </span>
                 </div>
                 <p className="mt-3 text-sm leading-relaxed">{category.description}</p>
+
+                {category.key !== "healthy" && healthyWeightRange && (
+                  <div className="mt-4 rounded-lg bg-white/60 dark:bg-black/20 p-3">
+                    <p className="text-xs opacity-80">Healthy weight range for your height</p>
+                    <p className="text-base font-semibold">
+                      {healthyWeightRange.lower} – {healthyWeightRange.upper} kg
+                    </p>
+                  </div>
+                )}
               </div>
 
               {/* Recommended next steps */}
