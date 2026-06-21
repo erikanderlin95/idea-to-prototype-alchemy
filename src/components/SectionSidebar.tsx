@@ -59,7 +59,7 @@ export const SectionSidebar = () => {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <div className="fixed top-1/2 right-0 z-40 animate-[sidebar-bob_1.5s_ease-in-out_infinite]">
+        <div className="fixed top-1/2 right-0 z-40 animate-[sidebar-bob_3s_ease-in-out_infinite]">
           <button
             aria-label={t("sidebar.explore")}
             className={cn(
