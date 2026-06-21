@@ -48,17 +48,7 @@ export const Hero = () => {
             <Button 
               size="lg" 
               className="text-sm sm:text-base px-5 sm:px-8 py-2.5 sm:py-3 min-h-10 sm:min-h-12 h-auto shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-1.5 font-bold whitespace-normal text-center leading-tight"
-              onClick={() => document.getElementById('marketplace')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              <Search className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
-              <span className="min-w-0 break-words">{t("hero.findClinics")}</span>
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 min-h-10 sm:min-h-12 h-auto border-2 border-border bg-background text-foreground font-semibold shadow-sm hover:bg-secondary/50 transition-all gap-1.5 whitespace-normal text-center leading-tight"
               onClick={() => document.getElementById('for-clinics')?.scrollIntoView({ behavior: 'smooth' })}
-              aria-label={t("hero.findMyQueue")}
             >
               <Building2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
               <span className="min-w-0 break-words">{t("hero.findMyQueue")}</span>
