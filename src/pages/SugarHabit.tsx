@@ -134,20 +134,6 @@ const PROFILES: Record<BandKey, Profile> = {
 
 type Selections = Record<string, number>;
 
-type NextStep = {
-  emoji: string;
-  title: string;
-  description: string;
-  to: string;
-};
-
-const NEXT_STEPS: NextStep[] = [
-  { emoji: "❤️", title: "GP & Health Screening", description: "Explore preventive care and general wellness services.", to: "/gp" },
-  { emoji: "🌿", title: "TCM", description: "Support overall wellness and lifestyle balance.", to: "/tcm" },
-  { emoji: "🧬", title: "DNA & Health", description: "Explore personalised health and wellness insights.", to: "/?category=dna_health" },
-  { emoji: "🧠", title: "Mental Wellness", description: "Support stress management and emotional well-being.", to: "/?category=mental_wellness" },
-];
-
 type StepKey = 1 | 2 | 3 | 4;
 const STEP_LABELS: Record<StepKey, string> = { 1: "Drinks", 2: "Snacks", 3: "Habits", 4: "Result" };
 
