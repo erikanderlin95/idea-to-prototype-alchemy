@@ -1928,7 +1928,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "Mohon Penjagaan Terurus",
     "sidebar.section.wellnessTalks": "Acara Komuniti & Kesejahteraan",
     "sidebar.section.otherProviders": "Penyedia Lain",
-    "sidebar.section.bmiCalculator": "Kalkulator BMI",
+    "sidebar.section.bmiCalculator": "Alat Kesihatan",
     "sidebar.section.forClinics": "Untuk Klinik",
     "continuity.badge": "Kesinambungan & Sokongan",
     "continuity.title": "Melangkaui Klinik",
