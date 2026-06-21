@@ -6,12 +6,12 @@ import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const sections = [
-  { id: "marketplace", key: "sidebar.section.browseClinics", icon: Building2, type: "scroll" as const, emoji: null as string | null },
-  { id: "managed-care", key: "sidebar.section.managedCare", icon: HeartHandshake, type: "scroll" as const, emoji: null },
-  { id: "wellness-talks", key: "sidebar.section.wellnessTalks", icon: Mic, type: "scroll" as const, emoji: null },
-  { id: "other-providers", key: "sidebar.section.otherProviders", icon: Sparkles, type: "scroll" as const, emoji: null },
-  { id: "/explore-health/bmi-calculator", key: "sidebar.section.bmiCalculator", icon: Sparkles, type: "route" as const, emoji: "📏" },
-  { id: "for-clinics", key: "sidebar.section.forClinics", icon: Stethoscope, type: "scroll" as const, emoji: null },
+  { id: "marketplace", key: "sidebar.section.browseClinics", icon: Building2, type: "scroll" as const, emoji: null as string | null, iconColor: "text-sky-600 bg-sky-50" },
+  { id: "managed-care", key: "sidebar.section.managedCare", icon: HeartHandshake, type: "scroll" as const, emoji: null, iconColor: "text-rose-500 bg-rose-50" },
+  { id: "wellness-talks", key: "sidebar.section.wellnessTalks", icon: Mic, type: "scroll" as const, emoji: null, iconColor: "text-violet-500 bg-violet-50" },
+  { id: "other-providers", key: "sidebar.section.otherProviders", icon: Sparkles, type: "scroll" as const, emoji: null, iconColor: "text-amber-500 bg-amber-50" },
+  { id: "/explore-health/bmi-calculator", key: "sidebar.section.bmiCalculator", icon: Sparkles, type: "route" as const, emoji: "📏", iconColor: "text-emerald-500 bg-emerald-50" },
+  { id: "for-clinics", key: "sidebar.section.forClinics", icon: Stethoscope, type: "scroll" as const, emoji: null, iconColor: "text-teal-600 bg-teal-50" },
 ];
 
 const FIRST_VISIT_KEY = "clynicq_sidebar_hint_shown";
