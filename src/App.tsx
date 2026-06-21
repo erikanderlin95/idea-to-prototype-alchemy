@@ -77,7 +77,9 @@ const App = () => (
             <Route path="/afterlife" element={<AfterlifeServicesPage />} />
             <Route path="/afterlife/nirvana" element={<AfterlifeProfile />} />
             <Route path="/for-clinics" element={<ForClinics />} />
+            <Route path="/explore-health" element={<HealthTools />} />
             <Route path="/explore-health/bmi-calculator" element={<BMICalculator />} />
+            <Route path="/explore-health/sugar-habit" element={<SugarHabit />} />
             <Route path="/privacy" element={<Privacy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
