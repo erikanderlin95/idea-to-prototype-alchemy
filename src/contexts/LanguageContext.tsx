@@ -983,7 +983,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "请求管理式医疗",
     "sidebar.section.wellnessTalks": "社区与健康活动",
     "sidebar.section.otherProviders": "其他服务提供者",
-    "sidebar.section.bmiCalculator": "BMI 计算器",
+    "sidebar.section.bmiCalculator": "健康工具",
     "sidebar.section.forClinics": "诊所专区",
 
     
