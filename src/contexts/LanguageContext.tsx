@@ -353,6 +353,7 @@ const translations: Record<Language, Record<string, string>> = {
     "marketplace.subtitle": "See how busy they are or book directly",
     "marketplace.loading": "Loading clinics...",
     "marketplace.loadMore": "Load More",
+    "marketplace.directoryTitle": "24hr Clinics Across Singapore",
     
     // SearchFilters
     "search.placeholder": "Search clinic, service, specialty or area",
@@ -1300,6 +1301,7 @@ const translations: Record<Language, Record<string, string>> = {
     "marketplace.subtitle": "查看忙碌程度或直接预约",
     "marketplace.loading": "加载诊所中...",
     "marketplace.loadMore": "加载更多",
+    "marketplace.directoryTitle": "新加坡24小时诊所",
     
     // SearchFilters
     "search.placeholder": "搜索诊所、服务、专科或地区",
@@ -2211,6 +2213,7 @@ const translations: Record<Language, Record<string, string>> = {
     "marketplace.subtitle": "Lihat betapa sibuknya mereka atau tempah terus",
     "marketplace.loading": "Memuat klinik...",
     "marketplace.loadMore": "Muat Lebih Banyak",
+    "marketplace.directoryTitle": "Klinik 24 Jam di Seluruh Singapura",
     "search.placeholder": "Cari klinik, perkhidmatan, kepakaran atau kawasan",
     "search.location": "Semua lokasi",
     "search.filters": "Penapis",
@@ -3077,6 +3080,7 @@ const translations: Record<Language, Record<string, string>> = {
     "marketplace.subtitle": "அவர்கள் எவ்வளவு பரபரப்பாக இருக்கிறார்கள் என்பதைப் பார்க்கவும் அல்லது நேரடியாகப் பதிவு செய்யவும்",
     "marketplace.loading": "மருத்துவமனைகள் ஏற்றப்படுகின்றன...",
     "marketplace.loadMore": "மேலும் ஏற்றவும்",
+    "marketplace.directoryTitle": "சிங்கப்பூர் முழுவதும் 24 மணி நேர கிளினிக்குகள்",
     "search.placeholder": "மருத்துவமனை, சேவை, சிறப்பு அல்லது பகுதியைத் தேடவும்",
     "search.location": "அனைத்து இடங்கள்",
     "search.filters": "வடிப்பான்கள்",
