@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
 type Category = {
-  key: "underweight" | "healthy" | "overweight" | "obese";
+  key: "underweight" | "healthy" | "overweight" | "obese1" | "obese2" | "obese3";
   label: string;
   description: string;
   className: string;
@@ -37,11 +37,25 @@ function getCategory(bmi: number): Category {
       description: "Your BMI is slightly above the healthy range. A GP or wellness provider can help with preventive health steps.",
       className: "bg-amber-50 border-amber-200 text-amber-900 dark:bg-amber-950/40 dark:border-amber-900 dark:text-amber-100",
     };
+  if (bmi < 35)
+    return {
+      key: "obese1",
+      label: "Obese (Class I)",
+      description: "Your BMI is in the obese range. We recommend consulting a GP for a personalised health assessment and preventive plan.",
+      className: "bg-orange-50 border-orange-200 text-orange-900 dark:bg-orange-950/40 dark:border-orange-900 dark:text-orange-100",
+    };
+  if (bmi < 40)
+    return {
+      key: "obese2",
+      label: "Severely Obese (Class II)",
+      description: "Your BMI indicates severe obesity. A comprehensive medical review is strongly advised to manage associated health risks.",
+      className: "bg-rose-50 border-rose-200 text-rose-900 dark:bg-rose-950/40 dark:border-rose-900 dark:text-rose-100",
+    };
   return {
-    key: "obese",
-    label: "Obese",
-    description: "Your BMI is in the obese range. We recommend consulting a GP for a personalised health assessment.",
-    className: "bg-rose-50 border-rose-200 text-rose-900 dark:bg-rose-950/40 dark:border-rose-900 dark:text-rose-100",
+    key: "obese3",
+    label: "Very Severely Obese (Class III)",
+    description: "Your BMI indicates very severe obesity. Please seek prompt medical guidance for a structured, supervised care plan.",
+    className: "bg-red-50 border-red-300 text-red-900 dark:bg-red-950/40 dark:border-red-800 dark:text-red-100",
   };
 }
 
