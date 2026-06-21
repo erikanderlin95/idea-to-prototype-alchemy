@@ -331,28 +331,30 @@ const BMICalculator = () => {
               </Card>
 
               {/* When to seek medical help */}
-              <Card
-                className={cn(
-                  "p-5 md:p-6 border-l-4",
-                  category.urgency === "urgent"
-                    ? "border-l-destructive bg-destructive/5"
-                    : category.urgency === "advised"
-                      ? "border-l-amber-500 bg-amber-50/50 dark:bg-amber-950/20"
-                      : "border-l-emerald-500 bg-emerald-50/30 dark:bg-emerald-950/20",
-                )}
-              >
-                <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-2">
-                  {category.urgency === "urgent" ? (
-                    <AlertTriangle className="h-4 w-4 text-destructive" />
-                  ) : (
-                    <Stethoscope className="h-4 w-4 text-primary" />
+              {category.key !== "healthy" && (
+                <Card
+                  className={cn(
+                    "p-5 md:p-6 border-l-4",
+                    category.urgency === "urgent"
+                      ? "border-l-destructive bg-destructive/5"
+                      : category.urgency === "advised"
+                        ? "border-l-amber-500 bg-amber-50/50 dark:bg-amber-950/20"
+                        : "border-l-emerald-500 bg-emerald-50/30 dark:bg-emerald-950/20",
                   )}
-                  When to seek medical help
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {category.seekMedicalHelp}
-                </p>
-              </Card>
+                >
+                  <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-2">
+                    {category.urgency === "urgent" ? (
+                      <AlertTriangle className="h-4 w-4 text-destructive" />
+                    ) : (
+                      <Stethoscope className="h-4 w-4 text-primary" />
+                    )}
+                    When to seek medical help
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {category.seekMedicalHelp}
+                  </p>
+                </Card>
+              )}
             </div>
           )}
 
