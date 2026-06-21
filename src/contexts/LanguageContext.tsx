@@ -35,7 +35,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "Request Managed Care",
     "sidebar.section.wellnessTalks": "Community & Wellness Events",
     "sidebar.section.otherProviders": "Other Providers",
-    "sidebar.section.bmiCalculator": "❤️ Quick Health Check",
+    "sidebar.section.bmiCalculator": "Quick Health Check",
     "sidebar.section.forClinics": "For Clinics",
 
     
@@ -983,7 +983,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "请求管理式医疗",
     "sidebar.section.wellnessTalks": "社区与健康活动",
     "sidebar.section.otherProviders": "其他服务提供者",
-    "sidebar.section.bmiCalculator": "❤️ 快速健康检查",
+    "sidebar.section.bmiCalculator": "快速健康检查",
     "sidebar.section.forClinics": "诊所专区",
 
     
@@ -1928,7 +1928,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "Mohon Penjagaan Terurus",
     "sidebar.section.wellnessTalks": "Acara Komuniti & Kesejahteraan",
     "sidebar.section.otherProviders": "Penyedia Lain",
-    "sidebar.section.bmiCalculator": "❤️ Pemeriksaan Kesihatan Pantas",
+    "sidebar.section.bmiCalculator": "Pemeriksaan Kesihatan Pantas",
     "sidebar.section.forClinics": "Untuk Klinik",
     "continuity.badge": "Kesinambungan & Sokongan",
     "continuity.title": "Melangkaui Klinik",
@@ -2795,7 +2795,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "நிர்வகிக்கப்பட்ட சுகாதார சேவைகளைக் கோருங்கள்",
     "sidebar.section.wellnessTalks": "சமூக மற்றும் ஆரோக்கிய நிகழ்வுகள்",
     "sidebar.section.otherProviders": "பிற வழங்குநர்கள்",
-    "sidebar.section.bmiCalculator": "❤️ விரைவான சுகாதாரச் சோதனை",
+    "sidebar.section.bmiCalculator": "விரைவான சுகாதாரச் சோதனை",
     "sidebar.section.forClinics": "மருத்துவமனைகளுக்கு",
     "continuity.badge": "தொடர்ச்சி மற்றும் ஆதரவு",
     "continuity.title": "மருத்துவமனைக்கு அப்பால்",
