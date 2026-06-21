@@ -44,10 +44,10 @@ export const Hero = () => {
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row gap-3 w-full max-w-sm sm:max-w-none sm:w-auto mx-auto mt-1 justify-center px-2">
+          <div className="flex flex-col sm:flex-row gap-3 mx-auto mt-1 justify-center">
             <Button 
               size="lg" 
-              className="text-sm sm:text-base px-5 sm:px-8 py-2.5 sm:py-3 min-h-10 sm:min-h-12 h-auto shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-1.5 font-bold whitespace-normal text-center leading-tight"
+              className="text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 min-h-10 sm:min-h-12 h-auto shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-1.5 font-bold whitespace-normal text-center leading-tight w-auto"
               onClick={() => document.getElementById('for-clinics')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <Building2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
