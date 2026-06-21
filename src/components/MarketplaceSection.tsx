@@ -221,10 +221,10 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   }
 
   return (
-    <section id="marketplace" className="pt-8 pb-8 bg-background onboarding-clinics">
+    <section id="marketplace" className="pt-6 pb-8 bg-background onboarding-clinics">
       <div className="container px-4 md:px-6">
-        <div className="px-2 sm:px-0 space-y-10">
-          <div className="text-center mb-10">
+        <div className="px-2 sm:px-0 space-y-4">
+          <div className="text-center mb-2">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-1">{title || t("marketplace.title")}</h2>
             <p className="text-lg text-foreground/80 font-medium max-w-2xl mx-auto">
               {subtitle || t("marketplace.subtitle")}

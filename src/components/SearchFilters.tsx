@@ -106,11 +106,11 @@ export const SearchFilters = ({
     <div className="space-y-2">
       {/* Primary unified search bar */}
       <div className="relative w-full">
-        <Search className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 h-5 w-5 sm:h-6 sm:w-6 text-muted-foreground pointer-events-none" />
+        <Search className="absolute left-4 sm:left-5 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-muted-foreground pointer-events-none" />
         <Input
           type="search"
           placeholder={t("search.placeholder")}
-          className="h-14 sm:h-16 w-full pl-12 sm:pl-14 pr-4 rounded-full text-base sm:text-lg border border-input bg-background shadow-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className="h-11 sm:h-12 w-full pl-10 sm:pl-12 pr-4 rounded-full text-base sm:text-lg border border-input bg-background shadow-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           value={searchText}
           onChange={handleSearchChange}
           aria-label={t("search.placeholder")}
