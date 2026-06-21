@@ -2795,7 +2795,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "நிர்வகிக்கப்பட்ட சுகாதார சேவைகளைக் கோருங்கள்",
     "sidebar.section.wellnessTalks": "சமூக மற்றும் ஆரோக்கிய நிகழ்வுகள்",
     "sidebar.section.otherProviders": "பிற வழங்குநர்கள்",
-    "sidebar.section.bmiCalculator": "BMI கணிப்பான்",
+    "sidebar.section.bmiCalculator": "சுகாதார கருவிகள்",
     "sidebar.section.forClinics": "மருத்துவமனைகளுக்கு",
     "continuity.badge": "தொடர்ச்சி மற்றும் ஆதரவு",
     "continuity.title": "மருத்துவமனைக்கு அப்பால்",
