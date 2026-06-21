@@ -27,9 +27,9 @@ function getCategory(bmi: number): Category {
       key: "severelyUnderweight",
       label: "Severely Underweight",
       range: "BMI < 16",
-      description: "Your BMI is below the healthy range. A check-in with a healthcare professional can help rule out underlying causes and guide nutrition support.",
+      description: "Your BMI is below the healthy range. A check-in with a healthcare professional can help identify possible underlying causes and guide nutrition support.",
       nextSteps: [
-        "Consider a GP visit to check for underlying conditions such as thyroid or digestive issues",
+        "Consider a GP visit to explore possible underlying conditions",
         "Ask about a dietitian referral for a personalised meal plan",
         "Track your meals, energy levels, and any symptoms to share with your doctor",
         "Include gentle strength activities and nutrient-dense foods in your routine",
@@ -68,7 +68,7 @@ function getCategory(bmi: number): Category {
         "Keep up with routine health screenings",
         "Prioritise sleep and stress management",
       ],
-      seekMedicalHelp: "Continue with routine check-ups. See a GP if you notice sudden weight changes or new symptoms.",
+      seekMedicalHelp: "",
       urgency: "routine",
       className: "bg-emerald-50 border-emerald-200 text-emerald-900 dark:bg-emerald-950/40 dark:border-emerald-900 dark:text-emerald-100",
       badgeClass: "bg-emerald-200/60 text-emerald-900",
@@ -85,7 +85,7 @@ function getCategory(bmi: number): Category {
         "Build up enjoyable movement — aim for 150–300 minutes of moderate activity weekly",
         "Track small wins like energy levels, sleep quality, and stamina",
       ],
-      seekMedicalHelp: "Helpful to check in if you have high blood pressure, high cholesterol, a family history of diabetes, or joint discomfort.",
+      seekMedicalHelp: "Consider a check-in if you have high blood pressure, high cholesterol, a family history of diabetes, or joint discomfort.",
       urgency: "advised",
       className: "bg-amber-50 border-amber-200 text-amber-900 dark:bg-amber-950/40 dark:border-amber-900 dark:text-amber-100",
       badgeClass: "bg-amber-200/60 text-amber-900",
@@ -95,11 +95,11 @@ function getCategory(bmi: number): Category {
       key: "obese1",
       label: "Obese (Class I)",
       range: "BMI 30 – 34.9",
-      description: "Your BMI is above the healthy range. A proactive, supportive health plan can help you move towards a weight that feels right for you.",
+      description: "Your BMI is above the healthy range. A proactive, supportive health plan can help you move towards a healthier weight.",
       nextSteps: [
         "Schedule a routine GP appointment for a general health review",
-        "Ask about referrals to a dietitian or exercise physiologist if available",
-        "Consider screening for blood pressure, cholesterol, and blood sugar as routine prevention",
+        "Ask about referrals to a dietitian or exercise programmes if available",
+        "Discuss routine screening for blood pressure, cholesterol, and blood sugar with your doctor",
         "Set small, realistic goals with your care team and celebrate progress",
       ],
       seekMedicalHelp: "A routine GP visit is a good next step, especially if you experience shortness of breath, loud snoring, or joint stiffness.",
@@ -116,7 +116,7 @@ function getCategory(bmi: number): Category {
       nextSteps: [
         "Book a routine GP appointment for a health review and care plan",
         "Discuss whether dietetics, physiotherapy, or other support services might help",
-        "Ask about routine screenings for diabetes, blood pressure, sleep quality, and liver health",
+        "Ask your doctor about routine screenings for diabetes, blood pressure, sleep quality, and liver health",
         "Look into community programmes or support groups that feel right for you",
       ],
       seekMedicalHelp: "A GP check-in is recommended within the next few weeks. Seek care promptly if you have chest discomfort, significant breathlessness, or leg swelling.",
@@ -132,7 +132,7 @@ function getCategory(bmi: number): Category {
     nextSteps: [
       "Schedule a GP appointment for a full health review and supportive care plan",
       "Ask about comprehensive support: dietetics, physiotherapy, and possible specialist input",
-      "Discuss routine screenings for diabetes, cardiovascular health, sleep quality, and joint comfort",
+      "Discuss routine screenings for diabetes, cardiovascular health, sleep quality, and joint comfort with your doctor",
       "Ask about evidence-based weight-management programmes available in your area",
     ],
     seekMedicalHelp: "A GP visit is recommended soon. If you experience chest tightness, severe shortness of breath, or fainting, seek emergency care.",
@@ -331,28 +331,30 @@ const BMICalculator = () => {
               </Card>
 
               {/* When to seek medical help */}
-              <Card
-                className={cn(
-                  "p-5 md:p-6 border-l-4",
-                  category.urgency === "urgent"
-                    ? "border-l-destructive bg-destructive/5"
-                    : category.urgency === "advised"
-                      ? "border-l-amber-500 bg-amber-50/50 dark:bg-amber-950/20"
-                      : "border-l-emerald-500 bg-emerald-50/30 dark:bg-emerald-950/20",
-                )}
-              >
-                <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-2">
-                  {category.urgency === "urgent" ? (
-                    <AlertTriangle className="h-4 w-4 text-destructive" />
-                  ) : (
-                    <Stethoscope className="h-4 w-4 text-primary" />
+              {category.key !== "healthy" && (
+                <Card
+                  className={cn(
+                    "p-5 md:p-6 border-l-4",
+                    category.urgency === "urgent"
+                      ? "border-l-destructive bg-destructive/5"
+                      : category.urgency === "advised"
+                        ? "border-l-amber-500 bg-amber-50/50 dark:bg-amber-950/20"
+                        : "border-l-emerald-500 bg-emerald-50/30 dark:bg-emerald-950/20",
                   )}
-                  When to seek medical help
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  {category.seekMedicalHelp}
-                </p>
-              </Card>
+                >
+                  <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-2">
+                    {category.urgency === "urgent" ? (
+                      <AlertTriangle className="h-4 w-4 text-destructive" />
+                    ) : (
+                      <Stethoscope className="h-4 w-4 text-primary" />
+                    )}
+                    When to seek medical help
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {category.seekMedicalHelp}
+                  </p>
+                </Card>
+              )}
             </div>
           )}
 
