@@ -63,7 +63,6 @@ export const SectionSidebar = () => {
           aria-label={t("sidebar.explore")}
           className={cn(
             "fixed top-1/2 -translate-y-1/2 right-0 z-40 group",
-            "flex flex-col items-center gap-2",
             "py-4 pl-3 pr-2.5",
             "rounded-l-2xl rounded-r-none",
             "bg-gradient-to-b from-primary to-primary/90 text-primary-foreground",
@@ -78,26 +77,25 @@ export const SectionSidebar = () => {
           {/* Subtle ambient glow — always on, very gentle */}
           <span className="pointer-events-none absolute inset-0 rounded-l-2xl bg-white/10 blur-md animate-[sidebar-glow_3s_ease-in-out_infinite]" />
 
-          {/* Occasional attention pulse — 2 quick blinks then rest */}
-          <span className="pointer-events-none absolute inset-0 rounded-l-2xl bg-primary/30 animate-[sidebar-peek_5s_ease-in-out_infinite]" />
-
-          <Menu className="h-5 w-5 relative z-10" strokeWidth={2.5} />
-          <span
-            className="text-[12px] font-semibold tracking-wider uppercase relative z-10 leading-none max-h-[140px] overflow-hidden text-ellipsis"
-            style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-          >
-            {t("sidebar.explore")}
-          </span>
-          <ChevronLeft className="h-3.5 w-3.5 relative z-10 opacity-80 animate-[sidebar-chevron_2.5s_ease-in-out_infinite]" strokeWidth={2.5} />
+          <div className="relative z-10 flex flex-col items-center gap-2 animate-[sidebar-jump_1.5s_ease-in-out_infinite]">
+            <Menu className="h-5 w-5" strokeWidth={2.5} />
+            <span
+              className="text-[12px] font-semibold tracking-wider uppercase leading-none max-h-[140px] overflow-hidden text-ellipsis"
+              style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+            >
+              {t("sidebar.explore")}
+            </span>
+            <ChevronLeft className="h-3.5 w-3.5 opacity-80 animate-[sidebar-chevron_2.5s_ease-in-out_infinite]" strokeWidth={2.5} />
+          </div>
 
           <style>{`
             @keyframes sidebar-glow {
               0%, 100% { opacity: 0.25; transform: scale(1); }
               50% { opacity: 0.45; transform: scale(1.03); }
             }
-            @keyframes sidebar-peek {
-              0%, 15%, 25%, 100% { opacity: 0; transform: scale(1); }
-              18%, 22% { opacity: 0.25; transform: scale(1.06); }
+            @keyframes sidebar-jump {
+              0%, 100% { transform: translateY(0); }
+              50% { transform: translateY(-5px); }
             }
             @keyframes sidebar-chevron {
               0%, 100% { transform: translateX(0); }
