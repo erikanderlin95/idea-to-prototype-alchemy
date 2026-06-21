@@ -59,50 +59,53 @@ export const SectionSidebar = () => {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <button
-          aria-label={t("sidebar.explore")}
-          className={cn(
-            "fixed top-1/2 -translate-y-1/2 right-0 z-40 group",
-            "py-4 pl-3 pr-2.5",
-            "rounded-l-2xl rounded-r-none",
-            "bg-gradient-to-b from-primary to-primary/90 text-primary-foreground",
-            "shadow-[0_8px_24px_-6px_hsl(var(--primary)/0.55),0_2px_8px_rgba(0,0,0,0.12)]",
-            "ring-1 ring-primary-foreground/15",
-            "transition-all duration-300 ease-out",
-            "hover:pl-4 hover:pr-3 hover:shadow-[0_12px_32px_-6px_hsl(var(--primary)/0.7)]",
-            "active:scale-[0.97]",
-            "min-h-[120px] min-w-[44px]"
-          )}
-        >
-          {/* Subtle ambient glow — always on, very gentle */}
-          <span className="pointer-events-none absolute inset-0 rounded-l-2xl bg-white/10 blur-md animate-[sidebar-glow_3s_ease-in-out_infinite]" />
+        <div className="fixed top-1/2 right-0 z-40 animate-[sidebar-bob_1.5s_ease-in-out_infinite]">
+          <button
+            aria-label={t("sidebar.explore")}
+            className={cn(
+              "group",
+              "flex flex-col items-center gap-2",
+              "py-4 pl-3 pr-2.5",
+              "rounded-l-2xl rounded-r-none",
+              "bg-gradient-to-b from-primary to-primary/90 text-primary-foreground",
+              "shadow-[0_8px_24px_-6px_hsl(var(--primary)/0.55),0_2px_8px_rgba(0,0,0,0.12)]",
+              "ring-1 ring-primary-foreground/15",
+              "transition-all duration-300 ease-out",
+              "hover:pl-4 hover:pr-3 hover:shadow-[0_12px_32px_-6px_hsl(var(--primary)/0.7)]",
+              "active:scale-[0.97]",
+              "min-h-[120px] min-w-[44px]"
+            )}
+          >
+            {/* Subtle ambient glow — always on, very gentle */}
+            <span className="pointer-events-none absolute inset-0 rounded-l-2xl bg-white/10 blur-md animate-[sidebar-glow_3s_ease-in-out_infinite]" />
 
-          <div className="relative z-10 flex flex-col items-center gap-2 animate-[sidebar-jump_1.5s_ease-in-out_infinite]">
-            <Menu className="h-5 w-5" strokeWidth={2.5} />
-            <span
-              className="text-[12px] font-semibold tracking-wider uppercase leading-none max-h-[140px] overflow-hidden text-ellipsis"
-              style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
-            >
-              {t("sidebar.explore")}
-            </span>
-            <ChevronLeft className="h-3.5 w-3.5 opacity-80 animate-[sidebar-chevron_2.5s_ease-in-out_infinite]" strokeWidth={2.5} />
-          </div>
+            <div className="relative z-10 flex flex-col items-center gap-2">
+              <Menu className="h-5 w-5" strokeWidth={2.5} />
+              <span
+                className="text-[12px] font-semibold tracking-wider uppercase leading-none max-h-[140px] overflow-hidden text-ellipsis"
+                style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
+              >
+                {t("sidebar.explore")}
+              </span>
+              <ChevronLeft className="h-3.5 w-3.5 opacity-80 animate-[sidebar-chevron_2.5s_ease-in-out_infinite]" strokeWidth={2.5} />
+            </div>
 
-          <style>{`
-            @keyframes sidebar-glow {
-              0%, 100% { opacity: 0.25; transform: scale(1); }
-              50% { opacity: 0.45; transform: scale(1.03); }
-            }
-            @keyframes sidebar-jump {
-              0%, 100% { transform: translateY(0); }
-              50% { transform: translateY(-5px); }
-            }
-            @keyframes sidebar-chevron {
-              0%, 100% { transform: translateX(0); }
-              50% { transform: translateX(-2px); }
-            }
-          `}</style>
-        </button>
+            <style>{`
+              @keyframes sidebar-glow {
+                0%, 100% { opacity: 0.25; transform: scale(1); }
+                50% { opacity: 0.45; transform: scale(1.03); }
+              }
+              @keyframes sidebar-bob {
+                0%, 100% { transform: translateY(-50%) translateX(0); }
+                50% { transform: translateY(-50%) translateX(-6px); }
+              }
+              @keyframes sidebar-chevron {
+                0%, 100% { transform: translateX(0); }
+                50% { transform: translateX(-2px); }
+              }
+            `}</style>
+          </button>
+        </div>
       </SheetTrigger>
       <SheetContent side="right" className="w-80 p-0 border-l border-border/50">
         <div className="relative flex flex-col h-full overflow-hidden bg-background/95 backdrop-blur-xl">
