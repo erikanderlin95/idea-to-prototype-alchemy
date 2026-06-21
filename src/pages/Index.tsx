@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { Features } from "@/components/Features";
+
 import { WellnessTalks } from "@/components/WellnessTalks";
 import { ClinicConversion } from "@/components/ClinicConversion";
 import { MarketplaceSection } from "@/components/MarketplaceSection";
@@ -25,7 +25,7 @@ const Index = () => {
       <Navbar onRestartTour={startOnboarding} />
       <main>
         <Hero />
-        <Features />
+        
         <MarketplaceSection defaultCategory={defaultCategory} />
         <FeaturedConsultants />
         <LaunchPartners />
