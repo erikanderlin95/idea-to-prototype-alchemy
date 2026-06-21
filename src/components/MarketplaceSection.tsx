@@ -323,6 +323,97 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
               </>
             );
           })()}
+
+          {/* 24hr Clinics Directory Section */}
+          {activeCategory === "all" && (
+            <div className="pt-8 border-t border-border/30 mt-8">
+              <div className="mb-4 text-center">
+                <p className="text-lg sm:text-xl font-bold uppercase tracking-wide text-foreground">
+                  {t("marketplace.directoryTitle")}
+                </p>
+              </div>
+              {(() => {
+                const DIRECTORY_PAGE_SIZE = 6;
+                const totalDirPages = Math.max(1, Math.ceil(TWENTY_FOUR_HR_CLINICS.length / DIRECTORY_PAGE_SIZE));
+                const safeDirPage = Math.min(directoryPage, totalDirPages);
+                const dirVisibleCount = isMobile ? directoryMobileCount : DIRECTORY_PAGE_SIZE;
+                const dirStart = isMobile ? 0 : (safeDirPage - 1) * DIRECTORY_PAGE_SIZE;
+                const dirClinics = isMobile
+                  ? TWENTY_FOUR_HR_CLINICS.slice(0, dirVisibleCount)
+                  : TWENTY_FOUR_HR_CLINICS.slice(dirStart, dirStart + DIRECTORY_PAGE_SIZE);
+                const dirHasMore = isMobile && dirVisibleCount < TWENTY_FOUR_HR_CLINICS.length;
+                return (
+                  <>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm] md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
+                      {dirClinics.map((c) => (
+                        <DirectoryClinicCard
+                          key={c.id}
+                          name={c.name}
+                          type={c.area ? `24HR · ${c.area}` : "24HR"}
+                          address={c.address}
+                          mapsUrl={c.mapsUrl}
+                        />
+                      ))}
+                    </div>
+
+                    {isMobile && dirHasMore && (
+                      <div className="flex justify-center mt-6">
+                        <Button
+                          variant="outline"
+                          className="border border-border/60 text-muted-foreground hover:text-foreground hover:bg-muted bg-muted/30 font-medium px-8 h-10"
+                          onClick={() => setDirectoryMobileCount((p) => p + DIRECTORY_PAGE_SIZE)}
+                        >
+                          {t("marketplace.loadMore")}
+                        </Button>
+                      </div>
+                    )}
+
+                    {!isMobile && TWENTY_FOUR_HR_CLINICS.length > 0 && totalDirPages > 1 && (
+                      <div className="flex items-center justify-center gap-3 mt-8">
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary"
+                          onClick={() => setDirectoryPage((p) => Math.max(1, p - 1))}
+                          disabled={safeDirPage === 1}
+                          aria-label="Previous page"
+                        >
+                          <ChevronLeft className="h-4 w-4" />
+                        </Button>
+                        <div className="flex items-center gap-1.5">
+                          {Array.from({ length: totalDirPages }).map((_, i) => (
+                            <button
+                              key={i}
+                              onClick={() => setDirectoryPage(i + 1)}
+                              aria-label={`Page ${i + 1}`}
+                              className={`h-2.5 rounded-full transition-all ${
+                                safeDirPage === i + 1
+                                  ? "w-6 bg-primary"
+                                  : "w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                        <span className="text-sm text-muted-foreground tabular-nums ml-1">
+                          {safeDirPage} / {totalDirPages}
+                        </span>
+                        <Button
+                          variant="outline"
+                          size="icon"
+                          className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary"
+                          onClick={() => setDirectoryPage((p) => Math.min(totalDirPages, p + 1))}
+                          disabled={safeDirPage === totalDirPages}
+                          aria-label="Next page"
+                        >
+                          <ChevronRight className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    )}
+                  </>
+                );
+              })()}
+            </div>
+          )}
         </div>
       </div>
     </section>
