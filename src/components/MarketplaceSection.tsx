@@ -3,7 +3,6 @@ import { ClinicCard } from "./ClinicCard";
 import { DirectoryClinicCard } from "./DirectoryClinicCard";
 import { TWENTY_FOUR_HR_CLINICS } from "@/data/twentyFourHrClinics";
 import { Button } from "@/components/ui/button";
-import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -27,7 +26,6 @@ interface MarketplaceSectionProps {
 
 export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }: MarketplaceSectionProps) => {
   const { t } = useLanguage();
-  const navigate = useNavigate();
   const isMobile = useIsMobile();
   const [clinics, setClinics] = useState<any[]>([]);
   const [filteredClinics, setFilteredClinics] = useState<any[]>([]);
@@ -35,9 +33,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
   const [searchText, setSearchText] = useState("");
   const [filters, setFilters] = useState<ClinicFilters>({ openNow: false, queue: false, booking: false });
-  
+
   const [currentPage, setCurrentPage] = useState(1);
-  
+
   const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
 
   useEffect(() => {
@@ -67,13 +65,13 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   useEffect(() => {
     let base = clinics;
     if (activeCategory === "all") {
-      base = base.filter((c) => c.hasDigitalQueue);
+      base = base.filter((c) => c.hasDigitalQueue || c.is24Hr);
     } else {
       base = base.filter((clinic) => {
         const clinicType = (clinic.type || "").toLowerCase().trim();
         switch (activeCategory) {
           case "gp":
-            return ["gp", "general practitioner", "family medicine", "family doctor"].includes(clinicType);
+            return ["gp", "general practitioner", "family medicine", "family doctor"].includes(clinicType) || clinic.is24Hr;
           case "specialist":
             return ["specialist", "specialist referral"].includes(clinicType);
           case "dental":
@@ -129,7 +127,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         .order("rating", { ascending: false });
 
       if (error) throw error;
-      
+
       // Use the secure queue_stats_public view for aggregated stats (no personal data exposed)
       const { data: queueStats } = await supabase
         .from("queue_stats_public")
@@ -177,7 +175,30 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         };
       });
 
-      setClinics(clinicsWithQueue);
+      // Normalize 24hr clinics into the same array so they participate in search/filter
+      const normalized24Hr = TWENTY_FOUR_HR_CLINICS.map((c) => ({
+        id: c.id,
+        name: c.name,
+        type: "24HR GP",
+        address: c.address,
+        phone: null,
+        services: [],
+        specialties: [],
+        queueCount: 0,
+        waitTime: "24 Hours",
+        rating: 0,
+        isOpen: true,
+        hasDigitalQueue: false,
+        bookingUrl: null,
+        isNmgAffiliated: false,
+        hasJoinQueue: false,
+        hasOnlineBooking: false,
+        is24Hr: true,
+        mapsUrl: c.mapsUrl,
+        area: c.area,
+      }));
+
+      setClinics([...clinicsWithQueue, ...normalized24Hr]);
     } catch (error) {
       console.error("Error fetching clinics:", error);
     } finally {
@@ -230,7 +251,17 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
               <>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm] mt-8 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
                   {pageClinics.map((clinic, index) => (
-                    <ClinicCard key={clinic.id || index} {...clinic} />
+                    clinic.is24Hr ? (
+                      <DirectoryClinicCard
+                        key={clinic.id}
+                        name={clinic.name}
+                        type={clinic.area ? `24HR · ${clinic.area}` : "24HR"}
+                        address={clinic.address}
+                        mapsUrl={clinic.mapsUrl}
+                      />
+                    ) : (
+                      <ClinicCard key={clinic.id || index} {...clinic} />
+                    )
                   ))}
                 </div>
 
@@ -290,88 +321,8 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
               </>
             );
           })()}
-
-          <DirectorySection isMobile={isMobile} loadMoreLabel={t("marketplace.loadMore") || "Load More"} />
-
-
         </div>
       </div>
     </section>
   );
 };
-
-const DIRECTORY_PAGE_SIZE = 6;
-
-const DirectorySection = ({ isMobile, loadMoreLabel }: { isMobile: boolean; loadMoreLabel: string }) => {
-  const [mobileCount, setMobileCount] = useState(DIRECTORY_PAGE_SIZE);
-  const [page, setPage] = useState(0);
-  const all = TWENTY_FOUR_HR_CLINICS;
-  const totalPages = Math.max(1, Math.ceil(all.length / DIRECTORY_PAGE_SIZE));
-  const desktopStart = page * DIRECTORY_PAGE_SIZE;
-  const visible = isMobile
-    ? all.slice(0, mobileCount)
-    : all.slice(desktopStart, desktopStart + DIRECTORY_PAGE_SIZE);
-  const hasMoreMobile = isMobile && mobileCount < all.length;
-
-  return (
-    <div className="mt-10 pt-6 border-t border-border/50 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
-      <div className="mb-4 text-center">
-        <p className="text-lg sm:text-xl font-bold uppercase tracking-wide text-foreground">
-          24hr Clinics Across Singapore
-        </p>
-      </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm]">
-        {visible.map((c) => (
-          <DirectoryClinicCard
-            key={c.id}
-            name={c.name}
-            type={c.area ? `24HR · ${c.area}` : "24HR"}
-            address={c.address}
-            mapsUrl={c.mapsUrl}
-          />
-        ))}
-      </div>
-
-      {isMobile && hasMoreMobile && (
-        <div className="flex justify-center mt-6">
-          <Button
-            variant="outline"
-            className="border border-border/60 text-muted-foreground hover:text-foreground hover:bg-muted bg-muted/30 font-medium px-8 h-10"
-            onClick={() => setMobileCount((c) => c + DIRECTORY_PAGE_SIZE)}
-          >
-            {loadMoreLabel}
-          </Button>
-        </div>
-      )}
-
-      {!isMobile && totalPages > 1 && (
-        <div className="flex items-center justify-center gap-3 mt-6">
-          <Button
-            variant="outline"
-            size="icon"
-            className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary"
-            onClick={() => setPage((p) => Math.max(0, p - 1))}
-            disabled={page === 0}
-            aria-label="Previous page"
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <span className="text-sm text-muted-foreground tabular-nums">
-            {page + 1} / {totalPages}
-          </span>
-          <Button
-            variant="outline"
-            size="icon"
-            className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary"
-            onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
-            disabled={page === totalPages - 1}
-            aria-label="Next page"
-          >
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-        </div>
-      )}
-    </div>
-  );
-};
-
