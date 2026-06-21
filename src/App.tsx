@@ -33,6 +33,8 @@ import AfterlifeServicesPage from "./pages/AfterlifeServices";
 import AfterlifeProfile from "./pages/AfterlifeProfile";
 import ForClinics from "./pages/ForClinics";
 import BMICalculator from "./pages/BMICalculator";
+import HealthTools from "./pages/HealthTools";
+import SugarHabit from "./pages/SugarHabit";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
 import { SectionSidebar } from "@/components/SectionSidebar";
