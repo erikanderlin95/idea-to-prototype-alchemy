@@ -153,6 +153,7 @@ const NEXT_STEPS: NextStep[] = [
 ];
 
 const SugarHabit = () => {
+  const navigate = useNavigate();
   const [step, setStep] = useState<1 | 2 | 3>(1);
   const [drinks, setDrinks] = useState<Selections>({});
   const [snacks, setSnacks] = useState<Selections>({});
