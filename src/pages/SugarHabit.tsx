@@ -138,7 +138,6 @@ type StepKey = 1 | 2 | 3 | 4;
 const STEP_LABELS: Record<StepKey, string> = { 1: "Drinks", 2: "Snacks", 3: "Habits", 4: "Result" };
 
 const SugarHabit = () => {
-  const navigate = useNavigate();
   const [step, setStep] = useState<StepKey>(1);
   const [drinks, setDrinks] = useState<Selections>({});
   const [snacks, setSnacks] = useState<Selections>({});
@@ -293,25 +292,6 @@ const SugarHabit = () => {
         </ul>
       </Card>
 
-      <Card className="p-6 bg-emerald-50/70 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-900">
-        <h3 className="flex items-center gap-2 text-base font-semibold text-emerald-900 dark:text-emerald-100 mb-2">
-          <Compass className="h-4 w-4" /> Your next steps
-        </h3>
-        <p className="text-sm text-foreground/80 mb-4">
-          Learn more about healthier choices and explore services that support your wellbeing.
-        </p>
-        <Button
-          type="button"
-          variant="outline"
-          className="w-full border-emerald-300 text-emerald-900 hover:bg-emerald-100 dark:text-emerald-100"
-          onClick={() => {
-            track("sugar_habit_sidebar_cta_clicked");
-            navigate("/explore-health");
-          }}
-        >
-          Explore Health Resources <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
-      </Card>
     </>
   );
 
@@ -473,25 +453,6 @@ const SugarHabit = () => {
                     <RotateCcw className="mr-2 h-4 w-4" /> Check again
                   </Button>
 
-                  <section>
-                    <h2 className="text-lg md:text-xl font-semibold text-foreground mb-4">
-                      Explore next steps
-                    </h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {NEXT_STEPS.map((s) => (
-                        <NextStepCard
-                          key={s.title}
-                          step={s}
-                          band={bandKey}
-                          onClick={() => {
-                            track("sugar_habit_next_step_clicked", { card: s.title, band: bandKey });
-                            navigate(s.to);
-                          }}
-                        />
-                      ))}
-                    </div>
-                  </section>
-
                   <p className="text-xs text-muted-foreground leading-relaxed">
                     This quiz is for general awareness only and does not provide medical advice or diagnose any condition. If you have concerns about your health, please consult a healthcare professional.
                   </p>
@@ -526,28 +487,6 @@ const SugarHabit = () => {
                       </ul>
                     </AccordionContent>
                   </AccordionItem>
-
-                  <AccordionItem value="next" className="border border-emerald-200 dark:border-emerald-900 rounded-lg bg-emerald-50/70 dark:bg-emerald-950/20 px-4">
-                    <AccordionTrigger className="text-sm font-semibold text-emerald-900 dark:text-emerald-100 hover:no-underline py-4">
-                      <span className="flex items-center gap-2"><Compass className="h-4 w-4" /> Your next steps</span>
-                    </AccordionTrigger>
-                    <AccordionContent>
-                      <p className="text-sm text-foreground/80 mb-4">
-                        Learn more about healthier choices and explore services that support your wellbeing.
-                      </p>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        className="w-full border-emerald-300 text-emerald-900 hover:bg-emerald-100 dark:text-emerald-100"
-                        onClick={() => {
-                          track("sugar_habit_sidebar_cta_clicked");
-                          navigate("/explore-health");
-                        }}
-                      >
-                        Explore Health Resources <ArrowRight className="ml-2 h-4 w-4" />
-                      </Button>
-                    </AccordionContent>
-                  </AccordionItem>
                 </Accordion>
               </div>
             </div>
@@ -561,41 +500,6 @@ const SugarHabit = () => {
       </main>
       <Footer />
     </div>
-  );
-};
-
-const NextStepCard = ({
-  step,
-  band,
-  onClick,
-}: {
-  step: NextStep;
-  band: BandKey;
-  onClick: () => void;
-}) => {
-  useEffect(() => {
-    track("sugar_habit_next_step_impression", { card: step.title, band });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="text-left rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/50 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.99]"
-    >
-      <div className="flex items-start gap-3">
-        <span className="text-2xl leading-none shrink-0" aria-hidden>
-          {step.emoji}
-        </span>
-        <div className="min-w-0">
-          <h3 className="text-sm md:text-base font-semibold text-foreground">{step.title}</h3>
-          <p className="mt-1 text-xs md:text-sm text-muted-foreground leading-snug">
-            {step.description}
-          </p>
-        </div>
-      </div>
-    </button>
   );
 };
 
