@@ -372,4 +372,39 @@ const SugarHabit = () => {
   );
 };
 
+const NextStepCard = ({
+  step,
+  band,
+  onClick,
+}: {
+  step: NextStep;
+  band: BandKey;
+  onClick: () => void;
+}) => {
+  useEffect(() => {
+    track("sugar_habit_next_step_impression", { card: step.title, band });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className="text-left rounded-xl border border-border bg-card p-4 md:p-5 transition-all hover:border-primary/50 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.99]"
+    >
+      <div className="flex items-start gap-3">
+        <span className="text-2xl leading-none shrink-0" aria-hidden>
+          {step.emoji}
+        </span>
+        <div className="min-w-0">
+          <h3 className="text-sm md:text-base font-semibold text-foreground">{step.title}</h3>
+          <p className="mt-1 text-xs md:text-sm text-muted-foreground leading-snug">
+            {step.description}
+          </p>
+        </div>
+      </div>
+    </button>
+  );
+};
+
 export default SugarHabit;
