@@ -1,13 +1,20 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import { cn } from "@/lib/utils";
 import {
   ArrowRight,
+  ArrowLeft,
   ShieldCheck,
   Lightbulb,
   Sparkles,
@@ -17,10 +24,10 @@ import {
   Apple,
   Boxes,
   RotateCcw,
+  Check,
 } from "lucide-react";
 
-// Inspired by Singapore's healthy eating guidance. This is a lifestyle
-// awareness tool only — not a medical assessment and not a diagnostic tool.
+// Inspired by Singapore's healthy eating guidance. Lifestyle awareness only.
 
 type Item = {
   id: string;
@@ -35,7 +42,7 @@ const DRINKS: Item[] = [
   { id: "kopi_teh_sweet", label: "Kopi / Teh", sublabel: "with sugar & milk", emoji: "☕", sugarPerServing: 18, unitLabels: ["None", "1 cup", "2 cups", "3+ cups"] },
   { id: "bubble_tea", label: "Bubble Tea", emoji: "🧋", sugarPerServing: 35, unitLabels: ["None", "1 cup", "2 cups", "3+ cups"] },
   { id: "soft_drink", label: "Soft Drinks", emoji: "🥤", sugarPerServing: 35, unitLabels: ["None", "1 can", "2 cans", "3+ cans"] },
-  { id: "packet_juice", label: "Sweetened Juice /", sublabel: "Pack Drinks", emoji: "🧃", sugarPerServing: 22, unitLabels: ["None", "1 pack", "2 packs", "3+ packs"] },
+  { id: "packet_juice", label: "Sweetened Juice", sublabel: "Pack Drinks", emoji: "🧃", sugarPerServing: 22, unitLabels: ["None", "1 pack", "2 packs", "3+ packs"] },
   { id: "energy_drink", label: "Energy Drinks", emoji: "⚡", sugarPerServing: 21, unitLabels: ["None", "1 bottle", "2 bottles", "3+ bottles"] },
 ];
 
@@ -143,12 +150,16 @@ const NEXT_STEPS: NextStep[] = [
   { emoji: "🧠", title: "Mental Wellness", description: "Support stress management and emotional well-being.", to: "/?category=mental_wellness" },
 ];
 
+type StepKey = 1 | 2 | 3 | 4;
+const STEP_LABELS: Record<StepKey, string> = { 1: "Drinks", 2: "Snacks", 3: "Habits", 4: "Result" };
+
 const SugarHabit = () => {
   const navigate = useNavigate();
+  const [step, setStep] = useState<StepKey>(1);
   const [drinks, setDrinks] = useState<Selections>({});
   const [snacks, setSnacks] = useState<Selections>({});
   const [habits, setHabits] = useState<Record<string, boolean>>({});
-  const [showResult, setShowResult] = useState(false);
+  const topRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     track("sugar_habit_page_viewed");
@@ -163,43 +174,40 @@ const SugarHabit = () => {
   const bandKey = useMemo(() => getBand(dailySugar), [dailySugar]);
   const profile = PROFILES[bandKey];
 
-  const activeStep: 1 | 2 | 3 = useMemo(() => {
-    const anyDrink = DRINKS.some((d) => (drinks[d.id] ?? 0) > 0);
-    const anySnack = SNACKS.some((s) => (snacks[s.id] ?? 0) > 0);
-    if (!anyDrink) return 1;
-    if (!anySnack) return 2;
-    return 3;
-  }, [drinks, snacks]);
+  const goTo = (next: StepKey) => {
+    setStep(next);
+    setTimeout(() => {
+      topRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+  };
 
   const handleSubmit = () => {
-    setShowResult(true);
     track("sugar_habit_completed", { band: bandKey, profile: profile.title });
-    setTimeout(() => {
-      document.getElementById("sugar-result")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
+    goTo(4);
   };
 
   const reset = () => {
     setDrinks({});
     setSnacks({});
     setHabits({});
-    setShowResult(false);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    goTo(1);
   };
 
-  const renderChips = (it: Item, selections: Selections, setSelections: (s: Selections) => void, activeTint: "teal" | "green") => {
+  const renderItem = (it: Item, selections: Selections, setSelections: (s: Selections) => void, activeTint: "teal" | "green") => {
     const selected = selections[it.id] ?? 0;
     const activeCls = activeTint === "teal"
       ? "bg-primary text-primary-foreground border-primary"
       : "bg-emerald-500 text-white border-emerald-500";
     return (
-      <div key={it.id} className="flex items-center gap-3 py-2.5 border-b border-border/60 last:border-b-0">
-        <span className="text-2xl leading-none w-8 text-center shrink-0" aria-hidden>{it.emoji}</span>
-        <div className="min-w-0 flex-1 sm:w-40 sm:flex-none">
-          <p className="text-sm font-medium text-foreground leading-tight">{it.label}</p>
-          {it.sublabel && <p className="text-xs text-muted-foreground leading-tight">{it.sublabel}</p>}
+      <div key={it.id} className="py-5">
+        <div className="flex items-center gap-3 mb-4">
+          <span className="text-2xl leading-none shrink-0" aria-hidden>{it.emoji}</span>
+          <div className="min-w-0">
+            <p className="text-sm font-semibold text-foreground leading-tight">{it.label}</p>
+            {it.sublabel && <p className="text-xs text-muted-foreground leading-tight mt-0.5">{it.sublabel}</p>}
+          </div>
         </div>
-        <div className="grid grid-cols-4 gap-1.5 flex-1 sm:flex-1">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
           {it.unitLabels.map((lbl, idx) => {
             const isOn = selected === idx;
             return (
@@ -208,7 +216,7 @@ const SugarHabit = () => {
                 type="button"
                 onClick={() => setSelections({ ...selections, [it.id]: idx })}
                 className={cn(
-                  "rounded-md px-1.5 py-1.5 text-[11px] sm:text-xs font-medium border transition-colors whitespace-nowrap",
+                  "rounded-full px-3 py-2.5 text-sm font-medium border transition-colors",
                   isOn ? activeCls : "bg-background text-foreground border-border hover:bg-muted"
                 )}
                 aria-pressed={isOn}
@@ -222,41 +230,113 @@ const SugarHabit = () => {
     );
   };
 
-  const StepDot = ({ n, label, active }: { n: number; label: string; active: boolean }) => (
-    <div className="flex items-center gap-2 min-w-0">
-      <div
-        className={cn(
-          "h-7 w-7 rounded-full flex items-center justify-center text-xs font-semibold shrink-0",
-          active ? "bg-primary text-primary-foreground" : "bg-background border border-border text-muted-foreground"
-        )}
-      >
-        {n}
-      </div>
-      <span className={cn("text-sm font-medium", active ? "text-foreground" : "text-muted-foreground")}>{label}</span>
-    </div>
-  );
-
-  const SectionHeader = ({ n, title, subtitle, emoji, tone }: { n: number; title: string; subtitle: string; emoji: string; tone: "teal" | "green" | "violet" }) => {
-    const toneCls = tone === "teal" ? "bg-primary text-primary-foreground" : tone === "green" ? "bg-emerald-500 text-white" : "bg-violet-500 text-white";
+  const ProgressBar = () => {
+    const steps: StepKey[] = [1, 2, 3];
     return (
-      <div className="flex items-start justify-between gap-3 mb-3">
-        <div className="flex items-start gap-3">
-          <div className={cn("h-9 w-9 rounded-full flex items-center justify-center text-sm font-semibold shrink-0", toneCls)}>{n}</div>
-          <div>
-            <h2 className="text-lg font-semibold text-foreground leading-tight">{title}</h2>
-            <p className="text-xs text-muted-foreground">{subtitle}</p>
-          </div>
-        </div>
-        <span className="text-3xl leading-none" aria-hidden>{emoji}</span>
+      <div className="flex items-center gap-2 md:gap-3">
+        {steps.map((s, i) => {
+          const done = step > s;
+          const active = step === s;
+          return (
+            <div key={s} className="flex items-center gap-2 md:gap-3 flex-1 min-w-0">
+              <div
+                className={cn(
+                  "h-7 w-7 rounded-full flex items-center justify-center text-xs font-semibold shrink-0 transition-colors",
+                  done
+                    ? "bg-emerald-500 text-white"
+                    : active
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-background border border-border text-muted-foreground"
+                )}
+              >
+                {done ? <Check className="h-3.5 w-3.5" /> : s}
+              </div>
+              <span
+                className={cn(
+                  "text-xs md:text-sm font-medium truncate",
+                  active || done ? "text-foreground" : "text-muted-foreground"
+                )}
+              >
+                {STEP_LABELS[s]}
+              </span>
+              {i < steps.length - 1 && <div className="flex-1 h-px bg-border min-w-2" />}
+            </div>
+          );
+        })}
       </div>
     );
   };
+
+  const InfoCards = (
+    <>
+      <Card className="p-6 bg-violet-50/60 border-violet-200 dark:bg-violet-950/20 dark:border-violet-900">
+        <h3 className="flex items-center gap-2 text-base font-semibold text-violet-900 dark:text-violet-100 mb-4">
+          <Lightbulb className="h-4 w-4" /> Why it matters
+        </h3>
+        <ul className="space-y-4">
+          <li className="flex gap-3 text-sm text-foreground/80">
+            <Boxes className="h-4 w-4 mt-0.5 text-violet-600 shrink-0" />
+            <span>Added sugar can add up quickly in our daily diet.</span>
+          </li>
+          <li className="flex gap-3 text-sm text-foreground/80">
+            <GlassWater className="h-4 w-4 mt-0.5 text-violet-600 shrink-0" />
+            <span>Small swaps can help you feel better.</span>
+          </li>
+          <li className="flex gap-3 text-sm text-foreground/80">
+            <ShieldCheck className="h-4 w-4 mt-0.5 text-violet-600 shrink-0" />
+            <span>Inspired by Singapore healthy eating guidance.</span>
+          </li>
+        </ul>
+      </Card>
+
+      <Card className="p-6 bg-amber-50/70 border-amber-200 dark:bg-amber-950/20 dark:border-amber-900">
+        <h3 className="flex items-center gap-2 text-base font-semibold text-amber-900 dark:text-amber-100 mb-4">
+          <Sparkles className="h-4 w-4" /> Quick reminders
+        </h3>
+        <ul className="space-y-4">
+          <li className="flex gap-3 text-sm text-foreground/80">
+            <Droplet className="h-4 w-4 mt-0.5 text-amber-600 shrink-0" />
+            <span>Choose lower-sugar options when you can.</span>
+          </li>
+          <li className="flex gap-3 text-sm text-foreground/80">
+            <GlassWater className="h-4 w-4 mt-0.5 text-amber-600 shrink-0" />
+            <span>Drink more water throughout the day.</span>
+          </li>
+          <li className="flex gap-3 text-sm text-foreground/80">
+            <Apple className="h-4 w-4 mt-0.5 text-amber-600 shrink-0" />
+            <span>Enjoy a balanced diet with wholegrains, vegetables, fruits and lean proteins.</span>
+          </li>
+        </ul>
+      </Card>
+
+      <Card className="p-6 bg-emerald-50/70 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-900">
+        <h3 className="flex items-center gap-2 text-base font-semibold text-emerald-900 dark:text-emerald-100 mb-2">
+          <Compass className="h-4 w-4" /> Your next steps
+        </h3>
+        <p className="text-sm text-foreground/80 mb-4">
+          Learn more about healthier choices and explore services that support your wellbeing.
+        </p>
+        <Button
+          type="button"
+          variant="outline"
+          className="w-full border-emerald-300 text-emerald-900 hover:bg-emerald-100 dark:text-emerald-100"
+          onClick={() => {
+            track("sugar_habit_sidebar_cta_clicked");
+            navigate("/explore-health");
+          }}
+        >
+          Explore Health Resources <ArrowRight className="ml-2 h-4 w-4" />
+        </Button>
+      </Card>
+    </>
+  );
 
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
       <main className="flex-1">
         <section className="container max-w-6xl px-4 py-6 md:py-10">
+          <div ref={topRef} />
           {/* Header */}
           <div className="flex items-start justify-between gap-3 mb-6">
             <div className="flex items-start gap-3">
@@ -265,7 +345,7 @@ const SugarHabit = () => {
                 <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-foreground leading-tight">
                   What's Your Sugar Habit?
                 </h1>
-                <p className="mt-1 text-sm text-muted-foreground max-w-md">
+                <p className="mt-2 text-sm text-muted-foreground max-w-md">
                   A quick check-in on today's sweet habits, inspired by healthy eating guidance.
                 </p>
               </div>
@@ -277,72 +357,109 @@ const SugarHabit = () => {
           </div>
 
           {/* Mobile badge */}
-          <div className="sm:hidden mb-4 flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-3 py-2 text-xs text-foreground">
+          <div className="sm:hidden mb-5 flex items-center gap-2 rounded-lg border border-primary/30 bg-primary/5 px-3 py-2.5 text-xs text-foreground">
             <ShieldCheck className="h-4 w-4 text-primary shrink-0" />
             <span>For awareness, not diagnosis.</span>
           </div>
 
-          {/* Stepper */}
-          <div className="border-t border-border pt-4 mb-5">
-            <div className="flex items-center gap-3 md:gap-4 overflow-x-auto">
-              <StepDot n={1} label="Drinks" active={activeStep >= 1} />
-              <div className="flex-1 h-px bg-border min-w-6" />
-              <StepDot n={2} label="Snacks" active={activeStep >= 2} />
-              <div className="flex-1 h-px bg-border min-w-6" />
-              <StepDot n={3} label="Habits" active={activeStep >= 3} />
+          {/* Progress */}
+          {step < 4 && (
+            <div className="border-t border-border pt-5 mb-8">
+              <ProgressBar />
             </div>
-          </div>
+          )}
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Main column */}
-            <div className="lg:col-span-2 space-y-4">
-              {/* Drinks */}
-              <Card className="p-4 md:p-5">
-                <SectionHeader n={1} title="Drinks today" subtitle="What have you had today?" emoji="🥤" tone="teal" />
-                <div>{DRINKS.map((d) => renderChips(d, drinks, setDrinks, "teal"))}</div>
-              </Card>
+            <div className="lg:col-span-2 space-y-8">
+              {step === 1 && (
+                <Card className="p-6">
+                  <div className="flex items-start justify-between gap-3 mb-5">
+                    <div>
+                      <h2 className="text-lg font-semibold text-foreground leading-tight">Drinks today</h2>
+                      <p className="text-xs text-muted-foreground mt-1">What have you had today?</p>
+                    </div>
+                    <span className="text-3xl leading-none" aria-hidden>🥤</span>
+                  </div>
+                  <div className="divide-y divide-border/60">
+                    {DRINKS.map((d) => renderItem(d, drinks, setDrinks, "teal"))}
+                  </div>
+                  <Button type="button" size="lg" className="w-full mt-6" onClick={() => goTo(2)}>
+                    Continue <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Card>
+              )}
 
-              {/* Snacks */}
-              <Card className="p-4 md:p-5">
-                <SectionHeader n={2} title="Snacks today" subtitle="What have you had today?" emoji="🍪" tone="green" />
-                <div>{SNACKS.map((s) => renderChips(s, snacks, setSnacks, "green"))}</div>
-              </Card>
+              {step === 2 && (
+                <Card className="p-6">
+                  <div className="flex items-start justify-between gap-3 mb-5">
+                    <div>
+                      <h2 className="text-lg font-semibold text-foreground leading-tight">Snacks today</h2>
+                      <p className="text-xs text-muted-foreground mt-1">What have you had today?</p>
+                    </div>
+                    <span className="text-3xl leading-none" aria-hidden>🍪</span>
+                  </div>
+                  <div className="divide-y divide-border/60">
+                    {SNACKS.map((s) => renderItem(s, snacks, setSnacks, "green"))}
+                  </div>
+                  <div className="flex gap-3 mt-6">
+                    <Button type="button" variant="outline" size="lg" className="flex-1" onClick={() => goTo(1)}>
+                      <ArrowLeft className="mr-2 h-4 w-4" /> Back
+                    </Button>
+                    <Button type="button" size="lg" className="flex-1" onClick={() => goTo(3)}>
+                      Continue <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                </Card>
+              )}
 
-              {/* Habits */}
-              <Card className="p-4 md:p-5">
-                <SectionHeader n={3} title="Everyday habits" subtitle="Pick what sounds most like you." emoji="❤️" tone="violet" />
-                <div className="space-y-1">
-                  {HABITS.map((h) => {
-                    const on = !!habits[h.id];
-                    return (
-                      <label
-                        key={h.id}
-                        className="flex items-center gap-3 py-2 px-2 rounded-md hover:bg-muted/50 cursor-pointer border-b border-border/60 last:border-b-0"
-                      >
-                        <Checkbox
-                          checked={on}
-                          onCheckedChange={(v) => setHabits({ ...habits, [h.id]: !!v })}
-                        />
-                        <span className="text-sm text-foreground">{h.label}</span>
-                      </label>
-                    );
-                  })}
-                </div>
-              </Card>
+              {step === 3 && (
+                <Card className="p-6">
+                  <div className="flex items-start justify-between gap-3 mb-5">
+                    <div>
+                      <h2 className="text-lg font-semibold text-foreground leading-tight">Everyday habits</h2>
+                      <p className="text-xs text-muted-foreground mt-1">Pick what sounds most like you.</p>
+                    </div>
+                    <span className="text-3xl leading-none" aria-hidden>❤️</span>
+                  </div>
+                  <div className="space-y-1">
+                    {HABITS.map((h) => {
+                      const on = !!habits[h.id];
+                      return (
+                        <label
+                          key={h.id}
+                          className="flex items-center gap-3 py-3.5 px-2 rounded-md hover:bg-muted/50 cursor-pointer"
+                        >
+                          <Checkbox
+                            checked={on}
+                            onCheckedChange={(v) => setHabits({ ...habits, [h.id]: !!v })}
+                          />
+                          <span className="text-sm text-foreground">{h.label}</span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                  <div className="flex gap-3 mt-6">
+                    <Button type="button" variant="outline" size="lg" className="flex-1" onClick={() => goTo(2)}>
+                      <ArrowLeft className="mr-2 h-4 w-4" /> Back
+                    </Button>
+                    <Button type="button" size="lg" className="flex-1" onClick={handleSubmit}>
+                      See Result <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                </Card>
+              )}
 
-              <Button type="button" size="lg" className="w-full" onClick={handleSubmit}>
-                See My Sugar Habit <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
+              {step < 4 && (
+                <p className="flex items-center gap-2 text-xs text-muted-foreground">
+                  <ShieldCheck className="h-3.5 w-3.5 text-primary" />
+                  Your answers are private and for your awareness only.
+                </p>
+              )}
 
-              <p className="flex items-center gap-2 text-xs text-muted-foreground">
-                <ShieldCheck className="h-3.5 w-3.5 text-primary" />
-                Your answers are private and for your awareness only.
-              </p>
-
-              {/* Result */}
-              {showResult && (
-                <div id="sugar-result" className="space-y-4 pt-2">
-                  <div className={cn("rounded-xl border p-5 md:p-6", profile.cardClass)} role="status" aria-live="polite">
+              {step === 4 && (
+                <div className="space-y-6">
+                  <div className={cn("rounded-xl border p-6", profile.cardClass)} role="status" aria-live="polite">
                     <div className="flex items-center gap-3 mb-3">
                       <span className="text-4xl leading-none" aria-hidden>{profile.emoji}</span>
                       <div>
@@ -353,12 +470,12 @@ const SugarHabit = () => {
                     <p className="text-sm leading-relaxed">{profile.blurb}</p>
                   </div>
 
-                  <Card className="p-5 md:p-6">
-                    <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-3">
+                  <Card className="p-6">
+                    <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-4">
                       <Sparkles className="h-4 w-4 text-primary" />
                       A few simple ideas
                     </h3>
-                    <ul className="space-y-2">
+                    <ul className="space-y-3">
                       {profile.tips.map((t, i) => (
                         <li key={i} className="flex gap-2 text-sm text-muted-foreground leading-relaxed">
                           <span className="text-primary mt-0.5">•</span>
@@ -368,12 +485,12 @@ const SugarHabit = () => {
                     </ul>
                   </Card>
 
-                  <Button type="button" variant="outline" className="w-full" onClick={reset}>
+                  <Button type="button" variant="outline" size="lg" className="w-full" onClick={reset}>
                     <RotateCcw className="mr-2 h-4 w-4" /> Check again
                   </Button>
 
-                  <section className="mt-4">
-                    <h2 className="text-lg md:text-xl font-semibold text-foreground mb-3">
+                  <section>
+                    <h2 className="text-lg md:text-xl font-semibold text-foreground mb-4">
                       Explore next steps
                     </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -391,74 +508,69 @@ const SugarHabit = () => {
                     </div>
                   </section>
 
-                  <p className="text-xs text-muted-foreground leading-relaxed pt-2">
+                  <p className="text-xs text-muted-foreground leading-relaxed">
                     This quiz is for general awareness only and does not provide medical advice or diagnose any condition. If you have concerns about your health, please consult a healthcare professional.
                   </p>
                 </div>
               )}
+
+              {/* Mobile: collapsible info cards below questionnaire */}
+              <div className="lg:hidden pt-2">
+                <Accordion type="single" collapsible className="space-y-3">
+                  <AccordionItem value="why" className="border border-violet-200 dark:border-violet-900 rounded-lg bg-violet-50/60 dark:bg-violet-950/20 px-4">
+                    <AccordionTrigger className="text-sm font-semibold text-violet-900 dark:text-violet-100 hover:no-underline py-4">
+                      <span className="flex items-center gap-2"><Lightbulb className="h-4 w-4" /> Why it matters</span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="space-y-3 pb-2">
+                        <li className="flex gap-3 text-sm text-foreground/80"><Boxes className="h-4 w-4 mt-0.5 text-violet-600 shrink-0" /><span>Added sugar can add up quickly in our daily diet.</span></li>
+                        <li className="flex gap-3 text-sm text-foreground/80"><GlassWater className="h-4 w-4 mt-0.5 text-violet-600 shrink-0" /><span>Small swaps can help you feel better.</span></li>
+                        <li className="flex gap-3 text-sm text-foreground/80"><ShieldCheck className="h-4 w-4 mt-0.5 text-violet-600 shrink-0" /><span>Inspired by Singapore healthy eating guidance.</span></li>
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="reminders" className="border border-amber-200 dark:border-amber-900 rounded-lg bg-amber-50/70 dark:bg-amber-950/20 px-4">
+                    <AccordionTrigger className="text-sm font-semibold text-amber-900 dark:text-amber-100 hover:no-underline py-4">
+                      <span className="flex items-center gap-2"><Sparkles className="h-4 w-4" /> Quick reminders</span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <ul className="space-y-3 pb-2">
+                        <li className="flex gap-3 text-sm text-foreground/80"><Droplet className="h-4 w-4 mt-0.5 text-amber-600 shrink-0" /><span>Choose lower-sugar options when you can.</span></li>
+                        <li className="flex gap-3 text-sm text-foreground/80"><GlassWater className="h-4 w-4 mt-0.5 text-amber-600 shrink-0" /><span>Drink more water throughout the day.</span></li>
+                        <li className="flex gap-3 text-sm text-foreground/80"><Apple className="h-4 w-4 mt-0.5 text-amber-600 shrink-0" /><span>Enjoy a balanced diet with wholegrains, vegetables, fruits and lean proteins.</span></li>
+                      </ul>
+                    </AccordionContent>
+                  </AccordionItem>
+
+                  <AccordionItem value="next" className="border border-emerald-200 dark:border-emerald-900 rounded-lg bg-emerald-50/70 dark:bg-emerald-950/20 px-4">
+                    <AccordionTrigger className="text-sm font-semibold text-emerald-900 dark:text-emerald-100 hover:no-underline py-4">
+                      <span className="flex items-center gap-2"><Compass className="h-4 w-4" /> Your next steps</span>
+                    </AccordionTrigger>
+                    <AccordionContent>
+                      <p className="text-sm text-foreground/80 mb-4">
+                        Learn more about healthier choices and explore services that support your wellbeing.
+                      </p>
+                      <Button
+                        type="button"
+                        variant="outline"
+                        className="w-full border-emerald-300 text-emerald-900 hover:bg-emerald-100 dark:text-emerald-100"
+                        onClick={() => {
+                          track("sugar_habit_sidebar_cta_clicked");
+                          navigate("/explore-health");
+                        }}
+                      >
+                        Explore Health Resources <ArrowRight className="ml-2 h-4 w-4" />
+                      </Button>
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              </div>
             </div>
 
-            {/* Sidebar */}
-            <aside className="space-y-4 lg:sticky lg:top-4 self-start">
-              <Card className="p-5 bg-violet-50/60 border-violet-200 dark:bg-violet-950/20 dark:border-violet-900">
-                <h3 className="flex items-center gap-2 text-base font-semibold text-violet-900 dark:text-violet-100 mb-3">
-                  <Lightbulb className="h-4 w-4" /> Why it matters
-                </h3>
-                <ul className="space-y-3">
-                  <li className="flex gap-3 text-sm text-foreground/80">
-                    <Boxes className="h-4 w-4 mt-0.5 text-violet-600 shrink-0" />
-                    <span>Added sugar can add up quickly in our daily diet.</span>
-                  </li>
-                  <li className="flex gap-3 text-sm text-foreground/80">
-                    <GlassWater className="h-4 w-4 mt-0.5 text-violet-600 shrink-0" />
-                    <span>Small swaps can help you feel better.</span>
-                  </li>
-                  <li className="flex gap-3 text-sm text-foreground/80">
-                    <ShieldCheck className="h-4 w-4 mt-0.5 text-violet-600 shrink-0" />
-                    <span>Inspired by Singapore healthy eating guidance.</span>
-                  </li>
-                </ul>
-              </Card>
-
-              <Card className="p-5 bg-amber-50/70 border-amber-200 dark:bg-amber-950/20 dark:border-amber-900">
-                <h3 className="flex items-center gap-2 text-base font-semibold text-amber-900 dark:text-amber-100 mb-3">
-                  <Sparkles className="h-4 w-4" /> Quick reminders
-                </h3>
-                <ul className="space-y-3">
-                  <li className="flex gap-3 text-sm text-foreground/80">
-                    <Droplet className="h-4 w-4 mt-0.5 text-amber-600 shrink-0" />
-                    <span>Choose lower-sugar options when you can.</span>
-                  </li>
-                  <li className="flex gap-3 text-sm text-foreground/80">
-                    <GlassWater className="h-4 w-4 mt-0.5 text-amber-600 shrink-0" />
-                    <span>Drink more water throughout the day.</span>
-                  </li>
-                  <li className="flex gap-3 text-sm text-foreground/80">
-                    <Apple className="h-4 w-4 mt-0.5 text-amber-600 shrink-0" />
-                    <span>Enjoy a balanced diet with wholegrains, vegetables, fruits and lean proteins.</span>
-                  </li>
-                </ul>
-              </Card>
-
-              <Card className="p-5 bg-emerald-50/70 border-emerald-200 dark:bg-emerald-950/20 dark:border-emerald-900">
-                <h3 className="flex items-center gap-2 text-base font-semibold text-emerald-900 dark:text-emerald-100 mb-2">
-                  <Compass className="h-4 w-4" /> Your next steps
-                </h3>
-                <p className="text-sm text-foreground/80 mb-4">
-                  Learn more about healthier choices and explore services that support your wellbeing.
-                </p>
-                <Button
-                  type="button"
-                  variant="outline"
-                  className="w-full border-emerald-300 text-emerald-900 hover:bg-emerald-100 dark:text-emerald-100"
-                  onClick={() => {
-                    track("sugar_habit_sidebar_cta_clicked");
-                    navigate("/explore-health");
-                  }}
-                >
-                  Explore Health Resources <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Card>
+            {/* Desktop sidebar */}
+            <aside className="hidden lg:block space-y-5 lg:sticky lg:top-4 self-start">
+              {InfoCards}
             </aside>
           </div>
         </section>
@@ -486,7 +598,7 @@ const NextStepCard = ({
     <button
       type="button"
       onClick={onClick}
-      className="text-left rounded-xl border border-border bg-card p-4 md:p-5 transition-all hover:border-primary/50 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.99]"
+      className="text-left rounded-xl border border-border bg-card p-5 transition-all hover:border-primary/50 hover:shadow-md hover:-translate-y-0.5 active:scale-[0.99]"
     >
       <div className="flex items-start gap-3">
         <span className="text-2xl leading-none shrink-0" aria-hidden>
