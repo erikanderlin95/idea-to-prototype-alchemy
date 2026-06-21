@@ -273,24 +273,68 @@ const BMICalculator = () => {
           </Card>
 
           {bmi != null && category && (
-            <div
-              className={cn(
-                "mt-6 rounded-xl border p-5 md:p-6 transition-all",
-                category.className,
-              )}
-              role="status"
-              aria-live="polite"
-            >
-              <div className="flex items-baseline justify-between gap-3">
-                <div>
-                  <p className="text-xs uppercase tracking-wide opacity-80">Your BMI</p>
-                  <p className="text-3xl md:text-4xl font-bold leading-tight">{bmi.toFixed(1)}</p>
+            <div className="mt-6 space-y-4">
+              {/* Main result card */}
+              <div
+                className={cn(
+                  "rounded-xl border p-5 md:p-6 transition-all",
+                  category.className,
+                )}
+                role="status"
+                aria-live="polite"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div>
+                    <p className="text-xs uppercase tracking-wide opacity-80">Your BMI</p>
+                    <p className="text-3xl md:text-4xl font-bold leading-tight">{bmi.toFixed(1)}</p>
+                    <p className="text-xs opacity-70 mt-0.5">{category.range}</p>
+                  </div>
+                  <span className={cn("text-sm font-semibold px-3 py-1.5 rounded-full shrink-0", category.badgeClass)}>
+                    {category.label}
+                  </span>
                 </div>
-                <span className="text-sm font-semibold px-3 py-1 rounded-full bg-white/60 dark:bg-black/20">
-                  {category.label}
-                </span>
+                <p className="mt-3 text-sm leading-relaxed">{category.description}</p>
               </div>
-              <p className="mt-3 text-sm leading-relaxed">{category.description}</p>
+
+              {/* Recommended next steps */}
+              <Card className="p-5 md:p-6">
+                <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-3">
+                  <ArrowRight className="h-4 w-4 text-primary" />
+                  Recommended next steps
+                </h3>
+                <ul className="space-y-2.5">
+                  {category.nextSteps.map((step, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+
+              {/* When to seek medical help */}
+              <Card
+                className={cn(
+                  "p-5 md:p-6 border-l-4",
+                  category.urgency === "urgent"
+                    ? "border-l-destructive bg-destructive/5"
+                    : category.urgency === "advised"
+                      ? "border-l-amber-500 bg-amber-50/50 dark:bg-amber-950/20"
+                      : "border-l-emerald-500 bg-emerald-50/30 dark:bg-emerald-950/20",
+                )}
+              >
+                <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-2">
+                  {category.urgency === "urgent" ? (
+                    <AlertTriangle className="h-4 w-4 text-destructive" />
+                  ) : (
+                    <Stethoscope className="h-4 w-4 text-primary" />
+                  )}
+                  When to seek medical help
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {category.seekMedicalHelp}
+                </p>
+              </Card>
             </div>
           )}
 
