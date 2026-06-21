@@ -64,30 +64,30 @@ export const SectionSidebar = () => {
             aria-label={t("sidebar.explore")}
             className={cn(
               "group",
-              "flex flex-col items-center gap-2",
-              "py-4 pl-3 pr-2.5",
+              "flex flex-col items-center gap-1.5 md:gap-2",
+              "py-3 pl-2.5 pr-1.5 md:py-4 md:pl-3 md:pr-2.5",
               "rounded-l-2xl rounded-r-none",
               "bg-gradient-to-b from-primary to-primary/90 text-primary-foreground",
               "shadow-[0_8px_24px_-6px_hsl(var(--primary)/0.55),0_2px_8px_rgba(0,0,0,0.12)]",
               "ring-1 ring-primary-foreground/15",
               "transition-all duration-300 ease-out",
-              "hover:pl-4 hover:pr-3 hover:shadow-[0_12px_32px_-6px_hsl(var(--primary)/0.7)]",
+              "hover:pl-3 hover:pr-2 md:hover:pl-4 md:hover:pr-3 hover:shadow-[0_12px_32px_-6px_hsl(var(--primary)/0.7)]",
               "active:scale-[0.97]",
-              "min-h-[120px] min-w-[44px]"
+              "min-h-[100px] md:min-h-[120px] min-w-[40px] md:min-w-[44px]"
             )}
           >
             {/* Subtle ambient glow — always on, very gentle */}
             <span className="pointer-events-none absolute inset-0 rounded-l-2xl bg-white/10 blur-md animate-[sidebar-glow_3s_ease-in-out_infinite]" />
 
-            <div className="relative z-10 flex flex-col items-center gap-2">
-              <Menu className="h-5 w-5" strokeWidth={2.5} />
+            <div className="relative z-10 flex flex-col items-center gap-1.5 md:gap-2">
+              <Menu className="h-4 w-4 md:h-5 md:w-5" strokeWidth={2.5} />
               <span
-                className="text-[12px] font-semibold tracking-wider uppercase leading-none max-h-[140px] overflow-hidden text-ellipsis"
+                className="text-[11px] md:text-[12px] font-semibold tracking-wider uppercase leading-none max-h-[120px] md:max-h-[140px] overflow-hidden text-ellipsis"
                 style={{ writingMode: "vertical-rl", transform: "rotate(180deg)" }}
               >
                 {t("sidebar.explore")}
               </span>
-              <ChevronLeft className="h-3.5 w-3.5 opacity-80 animate-[sidebar-chevron_2.5s_ease-in-out_infinite]" strokeWidth={2.5} />
+              <ChevronLeft className="h-3 w-3 md:h-3.5 md:w-3.5 opacity-80 animate-[sidebar-chevron_2.5s_ease-in-out_infinite]" strokeWidth={2.5} />
             </div>
 
             <style>{`
