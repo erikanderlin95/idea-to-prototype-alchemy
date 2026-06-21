@@ -337,6 +337,28 @@ const SugarHabit = () => {
               <Button type="button" variant="outline" className="w-full" onClick={reset}>
                 <RotateCcw className="mr-1 h-4 w-4" /> Check again
               </Button>
+
+              <section className="mt-6">
+                <h2 className="text-lg md:text-xl font-semibold text-foreground mb-4">
+                  Explore next steps
+                </h2>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                  {NEXT_STEPS.map((step) => (
+                    <NextStepCard
+                      key={step.title}
+                      step={step}
+                      band={band.key}
+                      onClick={() => {
+                        track("sugar_habit_next_step_clicked", {
+                          card: step.title,
+                          band: band.key,
+                        });
+                        navigate(step.to);
+                      }}
+                    />
+                  ))}
+                </div>
+              </section>
             </div>
           )}
 
