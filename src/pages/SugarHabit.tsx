@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -18,7 +17,6 @@ import {
   ShieldCheck,
   Lightbulb,
   Sparkles,
-  Compass,
   Droplet,
   GlassWater,
   Apple,
