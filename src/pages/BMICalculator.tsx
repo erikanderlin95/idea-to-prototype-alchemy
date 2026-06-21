@@ -7,55 +7,138 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+import { Stethoscope, AlertTriangle, ArrowRight } from "lucide-react";
 
 type Category = {
-  key: "underweight" | "healthy" | "overweight" | "obese1" | "obese2" | "obese3";
+  key: "severelyUnderweight" | "underweight" | "healthy" | "overweight" | "obese1" | "obese2" | "obese3";
   label: string;
+  range: string;
   description: string;
+  nextSteps: string[];
+  seekMedicalHelp: string;
+  urgency: "urgent" | "advised" | "routine";
   className: string;
+  badgeClass: string;
 };
 
 function getCategory(bmi: number): Category {
+  if (bmi < 16)
+    return {
+      key: "severelyUnderweight",
+      label: "Severely Underweight",
+      range: "BMI < 16",
+      description: "Your BMI is significantly below the healthy range. This may indicate malnutrition or an underlying health condition that needs attention.",
+      nextSteps: [
+        "Consult a GP promptly for a full nutritional and metabolic assessment",
+        "Consider a dietitian referral for a structured meal plan",
+        "Rule out thyroid, digestive, or other underlying conditions",
+        "Track your intake and any symptoms like fatigue or dizziness",
+      ],
+      seekMedicalHelp: "Please see a doctor within 1–2 weeks, or sooner if you feel faint, extremely weak, or have rapid unintentional weight loss.",
+      urgency: "urgent",
+      className: "bg-sky-50 border-sky-200 text-sky-900 dark:bg-sky-950/40 dark:border-sky-900 dark:text-sky-100",
+      badgeClass: "bg-sky-200/60 text-sky-900",
+    };
   if (bmi < 18.5)
     return {
       key: "underweight",
       label: "Underweight",
-      description: "Your BMI is below the healthy range. Consider speaking with a GP about nutrition and overall wellbeing.",
+      range: "BMI 16 – 18.4",
+      description: "Your BMI is below the healthy range. You may benefit from nutritional guidance to reach a safer weight.",
+      nextSteps: [
+        "Speak with a GP to check for underlying causes",
+        "Work with a dietitian on a balanced, calorie-adequate eating plan",
+        "Add strength training to build lean muscle mass safely",
+        "Monitor your energy levels and immune health",
+      ],
+      seekMedicalHelp: "Book a GP appointment if you have ongoing fatigue, hair loss, missed periods, or difficulty gaining weight despite eating well.",
+      urgency: "advised",
       className: "bg-blue-50 border-blue-200 text-blue-900 dark:bg-blue-950/40 dark:border-blue-900 dark:text-blue-100",
+      badgeClass: "bg-blue-200/60 text-blue-900",
     };
   if (bmi < 25)
     return {
       key: "healthy",
-      label: "Healthy",
+      label: "Healthy Weight",
+      range: "BMI 18.5 – 24.9",
       description: "Your BMI is within the healthy range. Keep up your balanced lifestyle with regular activity and good nutrition.",
+      nextSteps: [
+        "Maintain a balanced diet with whole foods and adequate protein",
+        "Stay active with at least 150 minutes of moderate exercise per week",
+        "Keep up with routine health screenings",
+        "Prioritise sleep and stress management",
+      ],
+      seekMedicalHelp: "Continue with routine check-ups. See a GP if you notice sudden weight changes or new symptoms.",
+      urgency: "routine",
       className: "bg-emerald-50 border-emerald-200 text-emerald-900 dark:bg-emerald-950/40 dark:border-emerald-900 dark:text-emerald-100",
+      badgeClass: "bg-emerald-200/60 text-emerald-900",
     };
   if (bmi < 30)
     return {
       key: "overweight",
       label: "Overweight",
-      description: "Your BMI is slightly above the healthy range. A GP or wellness provider can help with preventive health steps.",
+      range: "BMI 25 – 29.9",
+      description: "Your BMI is slightly above the healthy range. Preventive steps now can reduce future health risks.",
+      nextSteps: [
+        "Consider a GP or wellness review for a personalised plan",
+        "Introduce more whole foods and mindful portion sizes",
+        "Build up to 150–300 minutes of moderate activity weekly",
+        "Track progress and celebrate small, consistent wins",
+      ],
+      seekMedicalHelp: "Advised if you have high blood pressure, high cholesterol, a family history of diabetes, or joint discomfort.",
+      urgency: "advised",
       className: "bg-amber-50 border-amber-200 text-amber-900 dark:bg-amber-950/40 dark:border-amber-900 dark:text-amber-100",
+      badgeClass: "bg-amber-200/60 text-amber-900",
     };
   if (bmi < 35)
     return {
       key: "obese1",
       label: "Obese (Class I)",
-      description: "Your BMI is in the obese range. We recommend consulting a GP for a personalised health assessment and preventive plan.",
+      range: "BMI 30 – 34.9",
+      description: "Your BMI is in the obese range. A proactive health plan can help you manage weight and reduce associated risks.",
+      nextSteps: [
+        "Book a GP appointment for a full health screening",
+        "Request referrals to a dietitian and exercise physiologist",
+        "Screen for blood pressure, cholesterol, and blood sugar",
+        "Set realistic, short-term goals with professional support",
+      ],
+      seekMedicalHelp: "Recommended within the next 2–4 weeks, especially if you experience shortness of breath, snoring, or joint pain.",
+      urgency: "advised",
       className: "bg-orange-50 border-orange-200 text-orange-900 dark:bg-orange-950/40 dark:border-orange-900 dark:text-orange-100",
+      badgeClass: "bg-orange-200/60 text-orange-900",
     };
   if (bmi < 40)
     return {
       key: "obese2",
       label: "Severely Obese (Class II)",
-      description: "Your BMI indicates severe obesity. A comprehensive medical review is strongly advised to manage associated health risks.",
+      range: "BMI 35 – 39.9",
+      description: "Your BMI indicates severe obesity. A comprehensive, medically supervised plan is strongly recommended.",
+      nextSteps: [
+        "See a GP urgently for a full assessment and care plan",
+        "Discuss specialist referrals: endocrinology, dietetics, and physical therapy",
+        "Screen for diabetes, hypertension, sleep apnoea, and fatty liver",
+        "Explore structured programmes or support groups for sustained change",
+      ],
+      seekMedicalHelp: "Please book a GP appointment within 1–2 weeks. Seek urgent care for chest pain, severe breathlessness, or swelling in the legs.",
+      urgency: "urgent",
       className: "bg-rose-50 border-rose-200 text-rose-900 dark:bg-rose-950/40 dark:border-rose-900 dark:text-rose-100",
+      badgeClass: "bg-rose-200/60 text-rose-900",
     };
   return {
     key: "obese3",
     label: "Very Severely Obese (Class III)",
-    description: "Your BMI indicates very severe obesity. Please seek prompt medical guidance for a structured, supervised care plan.",
+    range: "BMI ≥ 40",
+    description: "Your BMI indicates very severe obesity. This significantly increases health risks and requires prompt, structured medical intervention.",
+    nextSteps: [
+      "Book an urgent GP appointment for a full medical evaluation",
+      "Discuss comprehensive care: dietetics, physiotherapy, and possible specialist referral",
+      "Screen for diabetes, cardiovascular disease, sleep apnoea, and joint strain",
+      "Ask about evidence-based weight-management programmes available to you",
+    ],
+    seekMedicalHelp: "See a doctor as soon as possible. If you experience chest tightness, severe shortness of breath, or fainting, seek emergency care immediately.",
+    urgency: "urgent",
     className: "bg-red-50 border-red-300 text-red-900 dark:bg-red-950/40 dark:border-red-800 dark:text-red-100",
+    badgeClass: "bg-red-200/60 text-red-900",
   };
 }
 
@@ -190,24 +273,68 @@ const BMICalculator = () => {
           </Card>
 
           {bmi != null && category && (
-            <div
-              className={cn(
-                "mt-6 rounded-xl border p-5 md:p-6 transition-all",
-                category.className,
-              )}
-              role="status"
-              aria-live="polite"
-            >
-              <div className="flex items-baseline justify-between gap-3">
-                <div>
-                  <p className="text-xs uppercase tracking-wide opacity-80">Your BMI</p>
-                  <p className="text-3xl md:text-4xl font-bold leading-tight">{bmi.toFixed(1)}</p>
+            <div className="mt-6 space-y-4">
+              {/* Main result card */}
+              <div
+                className={cn(
+                  "rounded-xl border p-5 md:p-6 transition-all",
+                  category.className,
+                )}
+                role="status"
+                aria-live="polite"
+              >
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div>
+                    <p className="text-xs uppercase tracking-wide opacity-80">Your BMI</p>
+                    <p className="text-3xl md:text-4xl font-bold leading-tight">{bmi.toFixed(1)}</p>
+                    <p className="text-xs opacity-70 mt-0.5">{category.range}</p>
+                  </div>
+                  <span className={cn("text-sm font-semibold px-3 py-1.5 rounded-full shrink-0", category.badgeClass)}>
+                    {category.label}
+                  </span>
                 </div>
-                <span className="text-sm font-semibold px-3 py-1 rounded-full bg-white/60 dark:bg-black/20">
-                  {category.label}
-                </span>
+                <p className="mt-3 text-sm leading-relaxed">{category.description}</p>
               </div>
-              <p className="mt-3 text-sm leading-relaxed">{category.description}</p>
+
+              {/* Recommended next steps */}
+              <Card className="p-5 md:p-6">
+                <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-3">
+                  <ArrowRight className="h-4 w-4 text-primary" />
+                  Recommended next steps
+                </h3>
+                <ul className="space-y-2.5">
+                  {category.nextSteps.map((step, i) => (
+                    <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                      <span className="mt-1.5 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                      <span>{step}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Card>
+
+              {/* When to seek medical help */}
+              <Card
+                className={cn(
+                  "p-5 md:p-6 border-l-4",
+                  category.urgency === "urgent"
+                    ? "border-l-destructive bg-destructive/5"
+                    : category.urgency === "advised"
+                      ? "border-l-amber-500 bg-amber-50/50 dark:bg-amber-950/20"
+                      : "border-l-emerald-500 bg-emerald-50/30 dark:bg-emerald-950/20",
+                )}
+              >
+                <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-2">
+                  {category.urgency === "urgent" ? (
+                    <AlertTriangle className="h-4 w-4 text-destructive" />
+                  ) : (
+                    <Stethoscope className="h-4 w-4 text-primary" />
+                  )}
+                  When to seek medical help
+                </h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {category.seekMedicalHelp}
+                </p>
+              </Card>
             </div>
           )}
 
