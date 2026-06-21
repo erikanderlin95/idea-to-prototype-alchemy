@@ -35,6 +35,8 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const [filters, setFilters] = useState<ClinicFilters>({ openNow: false, queue: false, booking: false });
 
   const [currentPage, setCurrentPage] = useState(1);
+  const [directoryPage, setDirectoryPage] = useState(1);
+  const [directoryMobileCount, setDirectoryMobileCount] = useState(6);
 
   const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
 
