@@ -37,18 +37,18 @@ type Item = {
 };
 
 const DRINKS: Item[] = [
-  { id: "kopi_teh_sweet", label: "Kopi / Teh", sublabel: "with sugar & milk", emoji: "☕", sugarPerServing: 18, unitLabels: ["None", "1 cup", "2 cups", "3+ cups"] },
-  { id: "bubble_tea", label: "Bubble Tea", emoji: "🧋", sugarPerServing: 35, unitLabels: ["None", "1 cup", "2 cups", "3+ cups"] },
-  { id: "soft_drink", label: "Soft Drinks", emoji: "🥤", sugarPerServing: 35, unitLabels: ["None", "1 can", "2 cans", "3+ cans"] },
-  { id: "packet_juice", label: "Sweetened Juice", sublabel: "Pack Drinks", emoji: "🧃", sugarPerServing: 22, unitLabels: ["None", "1 pack", "2 packs", "3+ packs"] },
-  { id: "energy_drink", label: "Energy Drinks", emoji: "⚡", sugarPerServing: 21, unitLabels: ["None", "1 bottle", "2 bottles", "3+ bottles"] },
+  { id: "kopi_teh_sweet", label: "Sweetened Coffee / Tea", sublabel: "≈200ml with sugar and milk", emoji: "☕", sugarPerServing: 18, unitLabels: ["None", "1 cup", "2 cups", "3+ cups"] },
+  { id: "bubble_tea", label: "Bubble Tea", sublabel: "≈500ml regular cup, >20% sugar level", emoji: "🧋", sugarPerServing: 35, unitLabels: ["None", "1 cup", "2 cups", "3+ cups"] },
+  { id: "soft_drink", label: "Soft Drink", sublabel: "≈330ml can", emoji: "🥤", sugarPerServing: 35, unitLabels: ["None", "1 can", "2 cans", "3+ cans"] },
+  { id: "packet_juice", label: "Sweetened Juice / Pack Drink", sublabel: "≈250ml serving", emoji: "🧃", sugarPerServing: 22, unitLabels: ["None", "1 pack", "2 packs", "3+ packs"] },
+  { id: "energy_drink", label: "Energy Drink", sublabel: "≈250ml can", emoji: "⚡", sugarPerServing: 21, unitLabels: ["None", "1 bottle", "2 bottles", "3+ bottles"] },
 ];
 
 const SNACKS: Item[] = [
-  { id: "biscuits", label: "Biscuits / Cookies", emoji: "🍪", sugarPerServing: 6, unitLabels: ["None", "A little", "Some", "A lot"] },
-  { id: "chocolate", label: "Chocolate / Candy", emoji: "🍫", sugarPerServing: 10, unitLabels: ["None", "A little", "Some", "A lot"] },
-  { id: "cake", label: "Cakes / Desserts", emoji: "🍰", sugarPerServing: 18, unitLabels: ["None", "A little", "Some", "A lot"] },
-  { id: "ice_cream", label: "Ice Cream", emoji: "🍦", sugarPerServing: 14, unitLabels: ["None", "A little", "Some", "A lot"] },
+  { id: "biscuits", label: "Biscuits / Cookies", sublabel: "≈2 pieces", emoji: "🍪", sugarPerServing: 6, unitLabels: ["None", "A little", "Some", "A lot"] },
+  { id: "chocolate", label: "Chocolate / Candy", sublabel: "≈2 small portions", emoji: "🍫", sugarPerServing: 10, unitLabels: ["None", "A little", "Some", "A lot"] },
+  { id: "cake", label: "Cakes / Desserts", sublabel: "≈1 serving", emoji: "🍰", sugarPerServing: 18, unitLabels: ["None", "A little", "Some", "A lot"] },
+  { id: "ice_cream", label: "Ice Cream", sublabel: "≈1 scoop", emoji: "🍦", sugarPerServing: 14, unitLabels: ["None", "A little", "Some", "A lot"] },
 ];
 
 const HABITS: { id: string; label: string }[] = [
@@ -72,6 +72,16 @@ function track(event: string, props: Record<string, unknown> = {}) {
 
 type BandKey = "starter" | "balanced" | "explorer" | "treat";
 
+type DetailedProfileKey =
+  | "light"
+  | "balanced"
+  | "dailySips"
+  | "snackLover"
+  | "sweetRegular"
+  | "treatSeeker"
+  | "sugaryHeavy"
+  | "indulgence";
+
 type Profile = {
   emoji: string;
   title: string;
@@ -87,11 +97,28 @@ function getBand(dailySugar: number): BandKey {
   return "treat";
 }
 
-const PROFILES: Record<BandKey, Profile> = {
-  starter: {
+function getDetailedProfile(band: BandKey, drinkSugar: number, snackSugar: number): DetailedProfileKey {
+  if (band === "starter") return drinkSugar >= snackSugar ? "light" : "balanced";
+  if (band === "balanced") return drinkSugar >= snackSugar ? "dailySips" : "snackLover";
+  if (band === "explorer") return drinkSugar >= snackSugar ? "sweetRegular" : "treatSeeker";
+  return drinkSugar >= snackSugar ? "sugaryHeavy" : "indulgence";
+}
+
+function getTeaspoonRange(dailySugar: number): string {
+  if (dailySugar <= 16) return "About 0–4 teaspoons";
+  if (dailySugar <= 32) return "About 4–8 teaspoons";
+  if (dailySugar <= 48) return "About 8–12 teaspoons";
+  if (dailySugar <= 64) return "About 12–16 teaspoons";
+  if (dailySugar <= 80) return "About 16–20 teaspoons";
+  if (dailySugar <= 100) return "About 20–25 teaspoons";
+  return "About 25+ teaspoons";
+}
+
+const PROFILES: Record<DetailedProfileKey, Profile> = {
+  light: {
     emoji: "🌿",
-    title: "Sugar-Smart Starter",
-    blurb: "You kept things light on the sweet side today — a lovely, mindful start.",
+    title: "Light Sweet Habit",
+    blurb: "You kept things light today — a lovely, mindful start with very little added sugar.",
     tips: [
       "Keep water close by throughout the day.",
       "Choose lower-sugar options when you can.",
@@ -100,35 +127,79 @@ const PROFILES: Record<BandKey, Profile> = {
   },
   balanced: {
     emoji: "🍵",
-    title: "Balanced Sipper",
-    blurb: "You enjoyed a few sweet moments today, balanced with simpler choices.",
+    title: "Balanced Choices",
+    blurb: "You enjoyed a small treat today while keeping your overall sugar intake light.",
     tips: [
-      "Try kosong or siew dai for your next kopi or teh.",
-      "Swap one sweet drink for water tomorrow.",
+      "Keep water close by throughout the day.",
+      "Choose lower-sugar options when you can.",
+    ],
+    cardClass: "bg-teal-50 border-teal-200 text-teal-900 dark:bg-teal-950/40 dark:border-teal-900 dark:text-teal-100",
+  },
+  dailySips: {
+    emoji: "☕",
+    title: "Daily Sweet Sips",
+    blurb: "Today, most of your sugar intake came from sweetened beverages.",
+    tips: [
+      "Choose less sugar when ordering drinks.",
+      "Drink more water throughout the day.",
+      "Enjoy sweet treats in moderation.",
     ],
     cardClass: "bg-amber-50 border-amber-200 text-amber-900 dark:bg-amber-950/40 dark:border-amber-900 dark:text-amber-100",
   },
-  explorer: {
+  snackLover: {
     emoji: "🍪",
-    title: "Sweet Explorer",
-    blurb: "You enjoyed a few sweet treats today. Small changes like choosing water or reducing sugary drinks can help support healthier habits.",
+    title: "Snack Lover",
+    blurb: "Today, most of your sugar came from snacks and treats rather than drinks.",
     tips: [
-      "Pick one sweet drink or snack to skip tomorrow.",
+      "Try swapping one sweet snack for fruit.",
+      "Look out for lower-sugar labels on packaged snacks.",
+      "Add an extra glass of water between meals.",
+    ],
+    cardClass: "bg-yellow-50 border-yellow-200 text-yellow-900 dark:bg-yellow-950/40 dark:border-yellow-900 dark:text-yellow-100",
+  },
+  sweetRegular: {
+    emoji: "🧋",
+    title: "Sweet Drink Regular",
+    blurb: "Today included several sweetened drinks. Small changes like choosing water or reducing sugar levels can help support healthier habits.",
+    tips: [
+      "Pick one sweet drink to skip tomorrow.",
       "Look out for lower-sugar labels on packaged drinks.",
       "Add an extra glass of water between meals.",
     ],
     cardClass: "bg-orange-50 border-orange-200 text-orange-900 dark:bg-orange-950/40 dark:border-orange-900 dark:text-orange-100",
   },
-  treat: {
+  treatSeeker: {
+    emoji: "🍰",
+    title: "Sweet Treat Seeker",
+    blurb: "Today included several sweet snacks and desserts. Small swaps can make your day feel just as enjoyable.",
+    tips: [
+      "Try a fruit option in place of one dessert tomorrow.",
+      "Look out for lower-sugar labels on packaged treats.",
+      "Add an extra glass of water between meals.",
+    ],
+    cardClass: "bg-pink-50 border-pink-200 text-pink-900 dark:bg-pink-950/40 dark:border-pink-900 dark:text-pink-100",
+  },
+  sugaryHeavy: {
+    emoji: "🥤",
+    title: "Sugary Drink Heavy Day",
+    blurb: "Today was filled with sweetened beverages. A few small swaps can make your day feel just as refreshing.",
+    tips: [
+      "Choose plain water or unsweetened tea with your next meal.",
+      "Try a fruit option instead of one sweet drink.",
+      "Take a short walk to feel refreshed.",
+    ],
+    cardClass: "bg-rose-50 border-rose-200 text-rose-900 dark:bg-rose-950/40 dark:border-rose-900 dark:text-rose-100",
+  },
+  indulgence: {
     emoji: "🍫",
-    title: "Treat Lover",
+    title: "Indulgence Day",
     blurb: "Today was full of sweet favourites. A few small swaps can make your day feel just as enjoyable.",
     tips: [
       "Choose plain water or unsweetened tea with your next meal.",
       "Try a fruit option in place of one dessert tomorrow.",
       "Take a short walk after sweet treats to feel refreshed.",
     ],
-    cardClass: "bg-rose-50 border-rose-200 text-rose-900 dark:bg-rose-950/40 dark:border-rose-900 dark:text-rose-100",
+    cardClass: "bg-red-50 border-red-200 text-red-900 dark:bg-red-950/40 dark:border-red-900 dark:text-red-100",
   },
 };
 
@@ -148,14 +219,20 @@ const SugarHabit = () => {
     track("sugar_habit_page_viewed");
   }, []);
 
-  const dailySugar = useMemo(() => {
-    const d = DRINKS.reduce((s, it) => s + SERVING_MULTIPLIER[drinks[it.id] ?? 0] * it.sugarPerServing, 0);
-    const sn = SNACKS.reduce((s, it) => s + SERVING_MULTIPLIER[snacks[it.id] ?? 0] * it.sugarPerServing, 0);
-    return d + sn;
-  }, [drinks, snacks]);
+  const drinkSugar = useMemo(() => {
+    return DRINKS.reduce((s, it) => s + SERVING_MULTIPLIER[drinks[it.id] ?? 0] * it.sugarPerServing, 0);
+  }, [drinks]);
+
+  const snackSugar = useMemo(() => {
+    return SNACKS.reduce((s, it) => s + SERVING_MULTIPLIER[snacks[it.id] ?? 0] * it.sugarPerServing, 0);
+  }, [snacks]);
+
+  const dailySugar = useMemo(() => drinkSugar + snackSugar, [drinkSugar, snackSugar]);
 
   const bandKey = useMemo(() => getBand(dailySugar), [dailySugar]);
-  const profile = PROFILES[bandKey];
+  const detailedKey = useMemo(() => getDetailedProfile(bandKey, drinkSugar, snackSugar), [bandKey, drinkSugar, snackSugar]);
+  const profile = PROFILES[detailedKey];
+  const teaspoonRange = useMemo(() => getTeaspoonRange(dailySugar), [dailySugar]);
 
   const goTo = (next: StepKey) => {
     setStep(next);
@@ -415,10 +492,15 @@ const SugarHabit = () => {
               )}
 
               {step < 4 && (
-                <p className="flex items-center gap-2 text-xs text-muted-foreground">
-                  <ShieldCheck className="h-3.5 w-3.5 text-primary" />
-                  Your answers are private and for your awareness only.
-                </p>
+                <div className="space-y-2">
+                  <p className="flex items-center gap-2 text-xs text-muted-foreground">
+                    <ShieldCheck className="h-3.5 w-3.5 text-primary" />
+                    Your answers are private and for your awareness only.
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Actual sugar content varies depending on brand and preparation.
+                  </p>
+                </div>
               )}
 
               {step === 4 && (
@@ -435,9 +517,20 @@ const SugarHabit = () => {
                   </div>
 
                   <Card className="p-6">
+                    <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-3">
+                      <span aria-hidden>🍬</span>
+                      Estimated Added Sugar Today
+                    </h3>
+                    <p className="text-2xl font-bold text-foreground">{teaspoonRange} of sugar</p>
+                    <p className="text-xs text-muted-foreground mt-2">
+                      Estimated values may vary depending on serving size and preparation.
+                    </p>
+                  </Card>
+
+                  <Card className="p-6">
                     <h3 className="text-sm font-semibold text-foreground flex items-center gap-2 mb-4">
                       <Sparkles className="h-4 w-4 text-primary" />
-                      A few simple ideas
+                      Simple ideas
                     </h3>
                     <ul className="space-y-3">
                       {profile.tips.map((t, i) => (
@@ -453,9 +546,12 @@ const SugarHabit = () => {
                     <RotateCcw className="mr-2 h-4 w-4" /> Check again
                   </Button>
 
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    This quiz is for general awareness only and does not provide medical advice or diagnose any condition. If you have concerns about your health, please consult a healthcare professional.
-                  </p>
+                  <Card className="p-6 bg-muted/40 border-muted">
+                    <h3 className="text-sm font-semibold text-foreground mb-2">General disclaimer</h3>
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      This quiz is provided for educational and awareness purposes only and does not provide medical advice, diagnosis or treatment. If you have concerns about your health, please consult a qualified healthcare professional.
+                    </p>
+                  </Card>
                 </div>
               )}
 
