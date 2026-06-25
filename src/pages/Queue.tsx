@@ -451,35 +451,35 @@ export default function Queue() {
                 {/* Check-in Code */}
                 {myQueueEntry.check_in_code && myQueueEntry.status === 'waiting' && (
                   <div className="text-center p-4 sm:p-5 border-2 border-primary/30 rounded-lg bg-primary/5">
-                    <p className="text-xs sm:text-sm text-muted-foreground font-medium uppercase tracking-wide mb-1">Check-in Code</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground font-medium uppercase tracking-wide mb-1">{t("queue.checkInCode")}</p>
                     <p className="text-2xl sm:text-3xl font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</p>
                     <p className="text-xs sm:text-sm text-foreground font-medium mt-2">
-                      Show this code at the clinic counter when you arrive.
+                      {t("queue.showCheckInCode")}
                     </p>
                   </div>
                 )}
 
                 {myQueueEntry.status === 'checked_in' && (
                   <Badge variant="default" className="w-full justify-center py-3 text-sm bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-500">
-                    📅 <a href="/booking" className="underline ml-1">Click here to rebook your next appointment</a>
+                    📅 <a href="/booking" className="underline ml-1">{t("queue.rebookLink")}</a>
                   </Badge>
                 )}
 
                 {myQueueEntry.status === 'waiting' && myPosition === 1 && (
                   <Badge variant="default" className="w-full justify-center py-3 text-sm sm:text-base bg-accent">
-                    🎉 You're next! Please check in when you arrive
+                    {t("queue.youreNext")}
                   </Badge>
                 )}
 
                 {myQueueEntry.status === 'waiting' && myPosition && myPosition > 1 && myPosition <= 3 && (
                   <Badge variant="secondary" className="w-full justify-center py-3 text-sm sm:text-base">
-                    ⏰ Almost your turn! Get ready to head to the clinic
+                    {t("queue.almostYourTurn")}
                   </Badge>
                 )}
 
                 {myQueueEntry.status === 'waiting' && myPosition && myPosition > 3 && (
                   <Badge variant="outline" className="w-full justify-center py-3 text-sm sm:text-base">
-                    📱 We'll notify you when it's almost your turn
+                    {t("queue.notifyAlmost")}
                   </Badge>
                 )}
 
@@ -493,7 +493,7 @@ export default function Queue() {
                         size="lg"
                       >
                         <LogOut className="mr-2 h-5 w-5" />
-                        Leave Queue
+                        {t("queue.leaveQueue")}
                       </Button>
                     </>
 
@@ -503,7 +503,7 @@ export default function Queue() {
                       <div className="flex items-center justify-center gap-2 mb-2">
                         <CheckCircle2 className="h-6 w-6 text-emerald-700 dark:text-emerald-300" />
                         <p className="text-center text-emerald-700 dark:text-emerald-300 font-semibold text-lg">
-                          Checked In
+                          {t("queue.checkedInLabel")}
                         </p>
                       </div>
                       <p className="text-center text-emerald-600 dark:text-emerald-400 text-sm">
@@ -511,6 +511,7 @@ export default function Queue() {
                       </p>
                     </div>
                   )}
+
                 </div>
               </div>
             </CardContent>
