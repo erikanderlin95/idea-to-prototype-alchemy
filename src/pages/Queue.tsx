@@ -614,7 +614,7 @@ export default function Queue() {
           <DialogHeader>
             <DialogTitle>{t("queue.preConsult.title")}</DialogTitle>
             <DialogDescription>
-              Please provide information about your visit
+              {t("queue.preConsult.description")}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 pt-4">
@@ -625,14 +625,15 @@ export default function Queue() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="General Consultation">General Consultation</SelectItem>
-                  <SelectItem value="Follow-up">Follow-up</SelectItem>
-                  <SelectItem value="Acute Condition">Acute Condition</SelectItem>
-                  <SelectItem value="Chronic Condition">Chronic Condition</SelectItem>
-                  <SelectItem value="Health Screening">Health Screening</SelectItem>
+                  <SelectItem value="General Consultation">{t("queue.visitTypeGeneral")}</SelectItem>
+                  <SelectItem value="Follow-up">{t("queue.visitTypeFollowUp")}</SelectItem>
+                  <SelectItem value="Acute Condition">{t("queue.visitTypeAcute")}</SelectItem>
+                  <SelectItem value="Chronic Condition">{t("queue.visitTypeChronic")}</SelectItem>
+                  <SelectItem value="Health Screening">{t("queue.visitTypeScreening")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
+
             <div className="space-y-2">
               <Label htmlFor="visitReason">{t("queue.preConsult.visitReason")}</Label>
               <Textarea
