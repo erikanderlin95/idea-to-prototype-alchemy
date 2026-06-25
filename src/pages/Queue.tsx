@@ -406,18 +406,19 @@ export default function Queue() {
               <>
                 <div className="mt-4 p-3 sm:p-4 bg-destructive/5 border border-destructive/30 rounded-xl">
                   <p className="text-sm sm:text-base text-destructive font-semibold leading-relaxed">
-                    Please stay nearby and keep this page open, when it's your turn, check in at counter within 30 seconds.
+                    {t("queue.stayNearby")}
                   </p>
                 </div>
                 <div className="mt-3 p-3 sm:p-4 bg-muted/50 rounded-lg">
-                  <p className="text-xs sm:text-sm font-semibold text-muted-foreground mb-2">Patient Notice</p>
+                  <p className="text-xs sm:text-sm font-semibold text-muted-foreground mb-2">{t("queue.patientNotice")}</p>
                   <ul className="space-y-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    <li>• Queue order is managed by clinic staff and may change.</li>
-                    <li>• Number of patients ahead is provided for visibility only.</li>
-                    <li>• Urgent cases, walk-ins, and clinic prioritization may affect queue movement.</li>
-                    <li>• ClynicQ does not guarantee exact waiting time.</li>
+                    <li>• {t("queue.disclaimer.bullet1Full")}</li>
+                    <li>• {t("queue.disclaimer.bullet2Full")}</li>
+                    <li>• {t("queue.disclaimer.bullet3Full")}</li>
+                    <li>• {t("queue.disclaimer.bullet4Full")}</li>
                   </ul>
                 </div>
+
               </>
             )}
           </CardContent>
@@ -428,56 +429,57 @@ export default function Queue() {
             <CardHeader className="px-4 sm:px-6 pb-3">
               <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
                 <CheckCircle2 className="h-5 w-5 text-primary" />
-                You're in the queue
+                {t("queue.youreInQueue")}
               </CardTitle>
             </CardHeader>
             <CardContent className="px-4 sm:px-6">
               <div className="space-y-5">
                 <div className="grid grid-cols-2 gap-3 sm:gap-4">
                   <div className="text-center p-3 sm:p-4 rounded-lg bg-background/50">
-                    <p className="text-sm sm:text-base text-muted-foreground mb-1">Queue Number</p>
+                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.queueNumber")}</p>
                     <p className="text-3xl sm:text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
                   </div>
                    <div className="text-center p-3 sm:p-4 rounded-lg bg-background/50">
                     <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
                     <p className="text-2xl sm:text-3xl font-semibold">
-                      {myPosition ? Math.max(0, myPosition - 1) : 0} ahead
+                      {myPosition ? Math.max(0, myPosition - 1) : 0} {t("queue.aheadSuffix")}
                     </p>
                   </div>
+
                 </div>
 
                 {/* Check-in Code */}
                 {myQueueEntry.check_in_code && myQueueEntry.status === 'waiting' && (
                   <div className="text-center p-4 sm:p-5 border-2 border-primary/30 rounded-lg bg-primary/5">
-                    <p className="text-xs sm:text-sm text-muted-foreground font-medium uppercase tracking-wide mb-1">Check-in Code</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground font-medium uppercase tracking-wide mb-1">{t("queue.checkInCode")}</p>
                     <p className="text-2xl sm:text-3xl font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</p>
                     <p className="text-xs sm:text-sm text-foreground font-medium mt-2">
-                      Show this code at the clinic counter when you arrive.
+                      {t("queue.showCheckInCode")}
                     </p>
                   </div>
                 )}
 
                 {myQueueEntry.status === 'checked_in' && (
                   <Badge variant="default" className="w-full justify-center py-3 text-sm bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-500">
-                    📅 <a href="/booking" className="underline ml-1">Click here to rebook your next appointment</a>
+                    📅 <a href="/booking" className="underline ml-1">{t("queue.rebookLink")}</a>
                   </Badge>
                 )}
 
                 {myQueueEntry.status === 'waiting' && myPosition === 1 && (
                   <Badge variant="default" className="w-full justify-center py-3 text-sm sm:text-base bg-accent">
-                    🎉 You're next! Please check in when you arrive
+                    {t("queue.youreNext")}
                   </Badge>
                 )}
 
                 {myQueueEntry.status === 'waiting' && myPosition && myPosition > 1 && myPosition <= 3 && (
                   <Badge variant="secondary" className="w-full justify-center py-3 text-sm sm:text-base">
-                    ⏰ Almost your turn! Get ready to head to the clinic
+                    {t("queue.almostYourTurn")}
                   </Badge>
                 )}
 
                 {myQueueEntry.status === 'waiting' && myPosition && myPosition > 3 && (
                   <Badge variant="outline" className="w-full justify-center py-3 text-sm sm:text-base">
-                    📱 We'll notify you when it's almost your turn
+                    {t("queue.notifyAlmost")}
                   </Badge>
                 )}
 
@@ -491,7 +493,7 @@ export default function Queue() {
                         size="lg"
                       >
                         <LogOut className="mr-2 h-5 w-5" />
-                        Leave Queue
+                        {t("queue.leaveQueue")}
                       </Button>
                     </>
 
@@ -501,7 +503,7 @@ export default function Queue() {
                       <div className="flex items-center justify-center gap-2 mb-2">
                         <CheckCircle2 className="h-6 w-6 text-emerald-700 dark:text-emerald-300" />
                         <p className="text-center text-emerald-700 dark:text-emerald-300 font-semibold text-lg">
-                          Checked In
+                          {t("queue.checkedInLabel")}
                         </p>
                       </div>
                       <p className="text-center text-emerald-600 dark:text-emerald-400 text-sm">
@@ -509,6 +511,7 @@ export default function Queue() {
                       </p>
                     </div>
                   )}
+
                 </div>
               </div>
             </CardContent>
@@ -541,15 +544,15 @@ export default function Queue() {
 
         <Card className="mt-6">
           <CardHeader>
-            <CardTitle>Live Queue</CardTitle>
-            <CardDescription>{queueData.length} people ahead right now</CardDescription>
+            <CardTitle>{t("queue.liveQueue")}</CardTitle>
+            <CardDescription>{t("queue.peopleAheadRightNow").replace("{n}", String(queueData.length))}</CardDescription>
           </CardHeader>
           <CardContent>
             {queueData.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
                 <AlertCircle className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                <p>No one in queue right now</p>
-                <p className="text-sm">Be the first to join!</p>
+                <p>{t("queue.empty")}</p>
+                <p className="text-sm">{t("queue.beFirst")}</p>
               </div>
             ) : (
               <div className="space-y-2">
@@ -567,11 +570,11 @@ export default function Queue() {
                         #{entry.queue_number}
                       </Badge>
                       {entry.id === myQueueEntry?.id && (
-                        <span className="text-sm font-medium text-primary">You</span>
+                        <span className="text-sm font-medium text-primary">{t("queue.you")}</span>
                       )}
                     </div>
                     <span className="text-sm text-muted-foreground">
-                      {index === 0 ? "Now serving" : `${index} people ahead of you`}
+                      {index === 0 ? t("queue.nowServing") : t("queue.peopleAheadOfYou").replace("{n}", String(index))}
                     </span>
                   </div>
                 ))}
@@ -579,6 +582,7 @@ export default function Queue() {
             )}
           </CardContent>
         </Card>
+
       </div>
 
       {/* Disclaimer Dialog */}
@@ -610,7 +614,7 @@ export default function Queue() {
           <DialogHeader>
             <DialogTitle>{t("queue.preConsult.title")}</DialogTitle>
             <DialogDescription>
-              Please provide information about your visit
+              {t("queue.preConsult.description")}
             </DialogDescription>
           </DialogHeader>
           <div className="space-y-4 pt-4">
@@ -621,14 +625,15 @@ export default function Queue() {
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="General Consultation">General Consultation</SelectItem>
-                  <SelectItem value="Follow-up">Follow-up</SelectItem>
-                  <SelectItem value="Acute Condition">Acute Condition</SelectItem>
-                  <SelectItem value="Chronic Condition">Chronic Condition</SelectItem>
-                  <SelectItem value="Health Screening">Health Screening</SelectItem>
+                  <SelectItem value="General Consultation">{t("queue.visitTypeGeneral")}</SelectItem>
+                  <SelectItem value="Follow-up">{t("queue.visitTypeFollowUp")}</SelectItem>
+                  <SelectItem value="Acute Condition">{t("queue.visitTypeAcute")}</SelectItem>
+                  <SelectItem value="Chronic Condition">{t("queue.visitTypeChronic")}</SelectItem>
+                  <SelectItem value="Health Screening">{t("queue.visitTypeScreening")}</SelectItem>
                 </SelectContent>
               </Select>
             </div>
+
             <div className="space-y-2">
               <Label htmlFor="visitReason">{t("queue.preConsult.visitReason")}</Label>
               <Textarea
