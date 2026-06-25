@@ -429,22 +429,23 @@ export default function Queue() {
             <CardHeader className="px-4 sm:px-6 pb-3">
               <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
                 <CheckCircle2 className="h-5 w-5 text-primary" />
-                You're in the queue
+                {t("queue.youreInQueue")}
               </CardTitle>
             </CardHeader>
             <CardContent className="px-4 sm:px-6">
               <div className="space-y-5">
                 <div className="grid grid-cols-2 gap-3 sm:gap-4">
                   <div className="text-center p-3 sm:p-4 rounded-lg bg-background/50">
-                    <p className="text-sm sm:text-base text-muted-foreground mb-1">Queue Number</p>
+                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.queueNumber")}</p>
                     <p className="text-3xl sm:text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
                   </div>
                    <div className="text-center p-3 sm:p-4 rounded-lg bg-background/50">
                     <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
                     <p className="text-2xl sm:text-3xl font-semibold">
-                      {myPosition ? Math.max(0, myPosition - 1) : 0} ahead
+                      {myPosition ? Math.max(0, myPosition - 1) : 0} {t("queue.aheadSuffix")}
                     </p>
                   </div>
+
                 </div>
 
                 {/* Check-in Code */}
