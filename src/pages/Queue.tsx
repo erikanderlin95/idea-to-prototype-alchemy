@@ -544,15 +544,15 @@ export default function Queue() {
 
         <Card className="mt-6">
           <CardHeader>
-            <CardTitle>Live Queue</CardTitle>
-            <CardDescription>{queueData.length} people ahead right now</CardDescription>
+            <CardTitle>{t("queue.liveQueue")}</CardTitle>
+            <CardDescription>{t("queue.peopleAheadRightNow").replace("{n}", String(queueData.length))}</CardDescription>
           </CardHeader>
           <CardContent>
             {queueData.length === 0 ? (
               <div className="text-center py-8 text-muted-foreground">
                 <AlertCircle className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                <p>No one in queue right now</p>
-                <p className="text-sm">Be the first to join!</p>
+                <p>{t("queue.empty")}</p>
+                <p className="text-sm">{t("queue.beFirst")}</p>
               </div>
             ) : (
               <div className="space-y-2">
@@ -570,11 +570,11 @@ export default function Queue() {
                         #{entry.queue_number}
                       </Badge>
                       {entry.id === myQueueEntry?.id && (
-                        <span className="text-sm font-medium text-primary">You</span>
+                        <span className="text-sm font-medium text-primary">{t("queue.you")}</span>
                       )}
                     </div>
                     <span className="text-sm text-muted-foreground">
-                      {index === 0 ? "Now serving" : `${index} people ahead of you`}
+                      {index === 0 ? t("queue.nowServing") : t("queue.peopleAheadOfYou").replace("{n}", String(index))}
                     </span>
                   </div>
                 ))}
@@ -582,6 +582,7 @@ export default function Queue() {
             )}
           </CardContent>
         </Card>
+
       </div>
 
       {/* Disclaimer Dialog */}
