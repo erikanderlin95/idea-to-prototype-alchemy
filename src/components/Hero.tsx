@@ -46,15 +46,15 @@ export const Hero = () => {
 
           <div className="flex flex-col sm:flex-row gap-3 mx-auto mt-1 justify-center">
             <Button 
+              variant="outline"
               size="lg" 
-              className="text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 min-h-10 sm:min-h-12 h-auto shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-1.5 font-bold whitespace-normal text-center leading-tight w-auto"
+              className="text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 min-h-10 sm:min-h-12 h-auto border-primary text-primary hover:bg-primary/5 shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-1.5 font-bold whitespace-normal text-center leading-tight w-auto"
               onClick={() => document.getElementById('for-clinics')?.scrollIntoView({ behavior: 'smooth' })}
             >
               <Building2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
               <span className="min-w-0 break-words">{t("hero.findMyQueue")}</span>
             </Button>
             <Button 
-              variant="outline"
               size="lg" 
               className="text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 min-h-10 sm:min-h-12 h-auto shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-1.5 font-bold whitespace-normal text-center leading-tight w-auto"
               onClick={() => window.dispatchEvent(new CustomEvent('open-explore-sidebar'))}
@@ -64,9 +64,9 @@ export const Hero = () => {
             </Button>
           </div>
 
-          <div className="rounded-lg border border-border/50 bg-card/50 px-4 py-2.5 text-center max-w-xs mt-1">
-            <p className="text-[15px] font-medium text-foreground">{t("hero.activityTitle")}</p>
-            <p className="text-sm text-muted-foreground">{t("hero.activityDesc")}</p>
+          <div className="flex items-center gap-2 text-center">
+            <span className="text-xs font-medium text-foreground/70">{t("hero.activityTitle")}</span>
+            <span className="text-xs text-muted-foreground">{t("hero.activityDesc")}</span>
           </div>
         </div>
       </div>
