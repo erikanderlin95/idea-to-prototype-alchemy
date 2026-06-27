@@ -38,6 +38,12 @@ export const SectionSidebar = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const handler = () => setOpen(true);
+    window.addEventListener("open-explore-sidebar", handler);
+    return () => window.removeEventListener("open-explore-sidebar", handler);
+  }, []);
+
   const handleClick = (item: typeof sections[number]) => {
     setOpen(false);
     if ((item.type as string) === "route") {

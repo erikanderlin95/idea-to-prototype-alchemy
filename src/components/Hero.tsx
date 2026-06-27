@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Search, Building2 } from "lucide-react";
+import { Building2, Compass } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Hero = () => {
@@ -52,6 +52,15 @@ export const Hero = () => {
             >
               <Building2 className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
               <span className="min-w-0 break-words">{t("hero.findMyQueue")}</span>
+            </Button>
+            <Button 
+              variant="outline"
+              size="lg" 
+              className="text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 min-h-10 sm:min-h-12 h-auto shadow-lg hover:shadow-xl transition-all hover:scale-105 gap-1.5 font-bold whitespace-normal text-center leading-tight w-auto"
+              onClick={() => window.dispatchEvent(new CustomEvent('open-explore-sidebar'))}
+            >
+              <Compass className="h-3.5 w-3.5 sm:h-4 sm:w-4 shrink-0" />
+              <span className="min-w-0 break-words">{t("sidebar.explore")}</span>
             </Button>
           </div>
 
