@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Search, Building2 } from "lucide-react";
+import { Building2, Compass } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export const Hero = () => {
