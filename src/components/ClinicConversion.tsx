@@ -15,18 +15,18 @@ export const ClinicConversion = () => {
   const points = [
     {
       icon: Smartphone,
-      title: "Patients check queue on their own phone",
-      desc: "No more calls asking 'how many ahead?'",
+      title: "Reach More Patients",
+      desc: "Expand your clinic's visibility through ClynicQ and help more patients discover your services.",
     },
     {
       icon: MessageSquareOff,
-      title: "Staff stop repeating the same answers",
-      desc: "Front desk handles care, not status updates.",
+      title: "Reduce Front Desk Work",
+      desc: "Reduce repetitive enquiries by allowing patients to access queue, booking and clinic information on their own.",
     },
     {
       icon: Settings2,
-      title: "No change to your current system",
-      desc: "Works alongside how you already operate.",
+      title: "Works With Your Existing System",
+      desc: "No system replacement required. ClynicQ complements your existing workflow with minimal setup.",
     },
   ];
 
