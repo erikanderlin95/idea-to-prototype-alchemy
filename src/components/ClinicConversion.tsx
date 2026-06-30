@@ -66,8 +66,11 @@ export const ClinicConversion = () => {
                   For Clinic Owners
                 </span>
                 <h2 className="text-2xl sm:text-3xl md:text-[34px] font-semibold tracking-tight text-foreground leading-tight">
-                  Less front desk noise.<br className="hidden sm:block" /> Same workflow you already use.
+                  Grow Your Clinic, Not Your Workload
                 </h2>
+                <p className="text-[14px] md:text-[15px] text-muted-foreground mt-2 max-w-xl leading-relaxed">
+                  ClynicQ helps neighbourhood clinics reach more patients, improve patient access and simplify operations — all while working alongside your existing clinic management system.
+                </p>
               </div>
               <Button
                 size="lg"
