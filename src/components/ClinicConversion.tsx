@@ -66,10 +66,10 @@ export const ClinicConversion = () => {
                   FOR CLINIC OWNERS
                 </span>
                 <h2 className="text-2xl sm:text-3xl md:text-[34px] font-semibold tracking-tight text-foreground leading-tight">
-                  Grow Your Clinic, Not Your Workload
+                  Bring More Patients. Keep Your Workflow.
                 </h2>
                 <p className="text-[14px] md:text-[15px] text-muted-foreground mt-2 max-w-xl leading-relaxed">
-                  ClynicQ helps neighbourhood clinics reach more patients, improve patient access and simplify operations — all while working alongside your existing clinic management system.
+                  An additional patient access channel that helps more patients discover and connect with your clinic while continuing to use your existing clinic management system.
                 </p>
               </div>
               <Button
