@@ -111,10 +111,7 @@ export const ClinicConversion = () => {
                     <p className="text-[12.5px] leading-snug text-muted-foreground">
                       {p.desc}
                     </p>
-            </div>
-            <p className="text-[12.5px] text-muted-foreground mt-5 max-w-3xl leading-relaxed">
-              Your existing patients continue contacting you directly. ClynicQ helps you reach and convert new patients who are still deciding where to seek care.
-            </p>
+                  </div>
                 );
               })}
             </div>
