@@ -15,18 +15,18 @@ export const ClinicConversion = () => {
   const points = [
     {
       icon: Smartphone,
-      title: "Patients check queue on their own phone",
-      desc: "No more calls asking 'how many ahead?'",
+      title: "Reach More Patients",
+      desc: "Expand your clinic's visibility through ClynicQ and help more patients discover your services.",
     },
     {
       icon: MessageSquareOff,
-      title: "Staff stop repeating the same answers",
-      desc: "Front desk handles care, not status updates.",
+      title: "Reduce Front Desk Work",
+      desc: "Reduce repetitive enquiries by allowing patients to access queue, booking and clinic information on their own.",
     },
     {
       icon: Settings2,
-      title: "No change to your current system",
-      desc: "Works alongside how you already operate.",
+      title: "Works With Your Existing System",
+      desc: "No system replacement required. ClynicQ complements your existing workflow with minimal setup.",
     },
   ];
 
@@ -66,8 +66,11 @@ export const ClinicConversion = () => {
                   For Clinic Owners
                 </span>
                 <h2 className="text-2xl sm:text-3xl md:text-[34px] font-semibold tracking-tight text-foreground leading-tight">
-                  Less front desk noise.<br className="hidden sm:block" /> Same workflow you already use.
+                  Grow Your Clinic, Not Your Workload
                 </h2>
+                <p className="text-[14px] md:text-[15px] text-muted-foreground mt-2 max-w-xl leading-relaxed">
+                  ClynicQ helps neighbourhood clinics reach more patients, improve patient access and simplify operations — all while working alongside your existing clinic management system.
+                </p>
               </div>
               <Button
                 size="lg"
@@ -112,6 +115,9 @@ export const ClinicConversion = () => {
                 );
               })}
             </div>
+            <p className="text-[12.5px] text-muted-foreground mt-5 max-w-3xl leading-relaxed">
+              Your existing patients continue contacting you directly. ClynicQ helps you reach and convert new patients who are still deciding where to seek care.
+            </p>
           </div>
         </div>
       </div>
