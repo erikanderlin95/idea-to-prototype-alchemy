@@ -16,17 +16,17 @@ export const ClinicConversion = () => {
     {
       icon: Smartphone,
       title: "Reach More Patients",
-      desc: "Expand your clinic's visibility through ClynicQ and help more patients discover your services.",
+      desc: "Help patients discover your clinic when they're deciding where to seek care.",
     },
     {
       icon: MessageSquareOff,
       title: "Reduce Front Desk Work",
-      desc: "Reduce repetitive enquiries by allowing patients to access queue, booking and clinic information on their own.",
+      desc: "Reduce repetitive enquiries by letting patients self-serve queue, booking and clinic information.",
     },
     {
       icon: Settings2,
       title: "Works With Your Existing System",
-      desc: "No system replacement required. ClynicQ complements your existing workflow with minimal setup.",
+      desc: "Continue using your existing clinic management system. No replacement or major workflow changes required.",
     },
   ];
 
@@ -63,13 +63,13 @@ export const ClinicConversion = () => {
                     border: "1px solid rgba(29,78,216,0.30)",
                   }}
                 >
-                  For Clinic Owners
+                  FOR CLINIC OWNERS
                 </span>
                 <h2 className="text-2xl sm:text-3xl md:text-[34px] font-semibold tracking-tight text-foreground leading-tight">
-                  Grow Your Clinic, Not Your Workload
+                  Bring More Patients. Keep Your Workflow.
                 </h2>
                 <p className="text-[14px] md:text-[15px] text-muted-foreground mt-2 max-w-xl leading-relaxed">
-                  ClynicQ helps neighbourhood clinics reach more patients, improve patient access and simplify operations — all while working alongside your existing clinic management system.
+                  An additional patient access channel that helps more patients discover and connect with your clinic while continuing to use your existing clinic management system.
                 </p>
               </div>
               <Button
@@ -81,7 +81,7 @@ export const ClinicConversion = () => {
                 }}
                 onClick={() => navigate("/for-clinics")}
               >
-                List Your Clinic
+                Register Your Clinic
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
@@ -116,7 +116,7 @@ export const ClinicConversion = () => {
               })}
             </div>
             <p className="text-[12.5px] text-muted-foreground mt-5 max-w-3xl leading-relaxed">
-              Your existing patients continue contacting you directly. ClynicQ helps you reach and convert new patients who are still deciding where to seek care.
+              Existing patients continue contacting your clinic directly. ClynicQ helps you reach and convert new patients who are still deciding where to seek care.
             </p>
           </div>
         </div>
