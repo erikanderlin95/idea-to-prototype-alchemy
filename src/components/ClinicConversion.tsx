@@ -63,7 +63,7 @@ export const ClinicConversion = () => {
                     border: "1px solid rgba(29,78,216,0.30)",
                   }}
                 >
-                  For Clinic Owners
+                  FOR CLINIC OWNERS
                 </span>
                 <h2 className="text-2xl sm:text-3xl md:text-[34px] font-semibold tracking-tight text-foreground leading-tight">
                   Grow Your Clinic, Not Your Workload
