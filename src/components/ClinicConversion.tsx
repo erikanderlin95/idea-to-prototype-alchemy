@@ -81,7 +81,7 @@ export const ClinicConversion = () => {
                 }}
                 onClick={() => navigate("/for-clinics")}
               >
-                List Your Clinic
+                Register Your Clinic
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </div>
