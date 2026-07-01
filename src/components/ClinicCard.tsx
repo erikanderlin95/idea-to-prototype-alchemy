@@ -83,6 +83,7 @@ export const ClinicCard = ({
   const [joinLoading, setJoinLoading] = useState(false);
   const [joinError, setJoinError] = useState("");
   const [showLeaveDialog, setShowLeaveDialog] = useState(false);
+  const isNotificationMode = name === "Harmony TCM Centre";
   // Booking lead capture state
   const [showBookingLead, setShowBookingLead] = useState(false);
   const [showBookingConfirm, setShowBookingConfirm] = useState(false);
@@ -452,27 +453,29 @@ export const ClinicCard = ({
         <div className="flex-1 flex flex-col gap-1.5 mt-1.5">
         {hasDigitalQueue && (
           myQueueEntry ? (
-            <div className="flex items-center justify-between gap-2 px-2.5 py-2 rounded-lg cursor-pointer text-xs border-2"
-              style={{ 
-                background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.1), hsl(var(--ai-blue)/0.08))',
-                borderColor: 'hsl(var(--ai-cyan)/0.25)'
-              }}
-              onClick={(e) => {
-                e.stopPropagation();
-                const queueUrl = `${window.location.origin}/queue/${id}`;
-                navigator.clipboard.writeText(queueUrl);
-                toast.success("Queue link copied!");
-              }}
-            >
-              <div className="flex items-center gap-1.5 min-w-0 flex-1">
-                <Copy className="h-4 w-4 text-primary shrink-0" />
-                <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-muted-foreground leading-none mb-0.5">Save your queue link</p>
-                  <p className="text-xs font-mono text-primary leading-tight truncate">{window.location.origin}/queue/{id}</p>
+            !isNotificationMode && (
+              <div className="flex items-center justify-between gap-2 px-2.5 py-2 rounded-lg cursor-pointer text-xs border-2"
+                style={{ 
+                  background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.1), hsl(var(--ai-blue)/0.08))',
+                  borderColor: 'hsl(var(--ai-cyan)/0.25)'
+                }}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  const queueUrl = `${window.location.origin}/queue/${id}`;
+                  navigator.clipboard.writeText(queueUrl);
+                  toast.success("Queue link copied!");
+                }}
+              >
+                <div className="flex items-center gap-1.5 min-w-0 flex-1">
+                  <Copy className="h-4 w-4 text-primary shrink-0" />
+                  <div className="min-w-0 flex-1">
+                    <p className="text-sm font-medium text-muted-foreground leading-none mb-0.5">Save your queue link</p>
+                    <p className="text-xs font-mono text-primary leading-tight truncate">{window.location.origin}/queue/{id}</p>
+                  </div>
                 </div>
+                <Copy className="h-4 w-4 text-primary/60 shrink-0" />
               </div>
-              <Copy className="h-4 w-4 text-primary/60 shrink-0" />
-            </div>
+            )
           ) : (
             <div className="flex items-center gap-2 py-1 px-2 rounded border"
               style={{ 
@@ -522,18 +525,30 @@ export const ClinicCard = ({
         {myQueueEntry ? (
           <div className="flex-1 flex flex-col justify-between gap-1.5" onClick={(e) => e.stopPropagation()}>
             <div className="flex flex-col gap-1.5">
-              <div className="flex items-center justify-between px-2.5 py-2 rounded-lg border-2"
-                style={{ 
-                  background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.12), hsl(var(--ai-blue)/0.1))',
-                  borderColor: 'hsl(var(--ai-purple)/0.3)'
-                }}
-              >
-                <div className="flex items-center gap-1.5">
-                  <Users className="h-4 w-4 text-primary" />
-                  <span className="text-sm font-semibold text-foreground">People Ahead</span>
+              {isNotificationMode ? (
+                <div className="p-2.5 rounded-lg border-2 border-emerald-200/60 bg-emerald-50/40">
+                  <div className="flex items-center gap-1.5 mb-1">
+                    <CheckCircle className="h-4 w-4 text-emerald-600 shrink-0" />
+                    <span className="text-sm font-bold text-foreground">You're in the queue</span>
+                  </div>
+                  <p className="text-xs text-muted-foreground leading-snug">
+                    We'll notify you when it's almost your turn. Please arrive within <span className="font-bold text-red-600">5 minutes</span> after receiving your notification to avoid missing your queue.
+                  </p>
                 </div>
-                <span className="text-2xl font-bold tabular-nums text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
-              </div>
+              ) : (
+                <div className="flex items-center justify-between px-2.5 py-2 rounded-lg border-2"
+                  style={{ 
+                    background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.12), hsl(var(--ai-blue)/0.1))',
+                    borderColor: 'hsl(var(--ai-purple)/0.3)'
+                  }}
+                >
+                  <div className="flex items-center gap-1.5">
+                    <Users className="h-4 w-4 text-primary" />
+                    <span className="text-sm font-semibold text-foreground">People Ahead</span>
+                  </div>
+                  <span className="text-2xl font-bold tabular-nums text-primary leading-none">{Math.max(0, myQueueEntry.queue_number - 1)}</span>
+                </div>
+              )}
 
               {myQueueEntry.check_in_code && (
                 <div className="flex items-center justify-between px-2.5 py-2 bg-muted/50 rounded-lg border border-border/30">
