@@ -933,8 +933,8 @@ export const ClinicCard = ({
                 <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">Check-in Code</p>
                 <p className="text-4xl font-mono font-black tracking-[0.25em] text-primary">{newCheckInCode || "—"}</p>
               </div>
-              <p className="text-xs text-foreground leading-relaxed px-2">
-                You'll be notified when it's almost your turn. Please arrive within <span className="font-semibold">5 minutes</span> after receiving your notification to avoid missing your queue.
+              <p className="text-sm text-foreground leading-relaxed px-2">
+                You'll be notified when it's almost your turn. Please arrive within <span className="font-bold text-red-600">5 minutes</span> after receiving your notification to avoid missing your queue.
               </p>
             </div>
           </>
