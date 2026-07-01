@@ -278,19 +278,27 @@ export const ClinicCard = ({
         },
       });
 
-      if (error) throw error;
-      if (response?.error) {
-        if (response.code === "ALREADY_IN_QUEUE") {
+      // Extract structured error body from non-2xx responses (e.g. 409 ALREADY_IN_QUEUE)
+      let payload: any = response;
+      if (error && (error as any).context?.json) {
+        try { payload = await (error as any).context.json(); } catch { /* ignore */ }
+      } else if (error && (error as any).context?.text) {
+        try { payload = JSON.parse(await (error as any).context.text()); } catch { /* ignore */ }
+      }
+
+      if (payload?.error) {
+        if (payload.code === "ALREADY_IN_QUEUE") {
           setJoinError("You already have an active queue entry at this clinic");
-        } else if (response.code === "COOLDOWN") {
-          setJoinError(response.error);
-        } else if (response.code === "RATE_LIMITED") {
+        } else if (payload.code === "COOLDOWN") {
+          setJoinError(payload.error);
+        } else if (payload.code === "RATE_LIMITED") {
           setJoinError("Too many attempts. Please try again shortly.");
         } else {
-          setJoinError(response.error);
+          setJoinError(payload.error);
         }
         return;
       }
+      if (error) throw error;
 
       const createdEntry = response.entry;
       setNewQueueNumber(createdEntry.queue_number);
