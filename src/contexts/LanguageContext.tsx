@@ -3172,6 +3172,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.leaveQueue": "வரிசையிலிருந்து வெளியேறு",
     "clinicCard.readyToSkip": "வரிசையை சரிபார்க்கவும்",
     "clinicCard.joinVirtual": "தற்போது {count} பேர் முன்னிலையில் உள்ளனர்",
+    "clinicCard.lowWait": "குறைந்த காத்திருப்பு",
     "clinicCard.visitType": "வருகை வகை",
     "clinicCard.generalConsultation": "பொது ஆலோசனை",
     "clinicCard.followUp": "தொடர் விசாரணை",
