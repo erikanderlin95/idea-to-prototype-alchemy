@@ -263,65 +263,91 @@ export const JoinQueueIntakeDialog = ({
       {/* Success card */}
       <Dialog open={showQueueCard} onOpenChange={setShowQueueCard}>
         <DialogContent className="max-w-sm">
-          <DialogHeader>
-            <DialogTitle className="text-base">Your queue number has been confirmed</DialogTitle>
-          </DialogHeader>
-          <div className="space-y-3">
-            <div className="text-center p-5 bg-muted rounded-lg">
-              <p className="text-xs text-muted-foreground mb-1">Queue Number</p>
-              <p className="text-5xl font-bold text-primary">{newQueueNumber}</p>
-              <p className="text-[11px] font-medium text-foreground mt-3">
-                Current position may change based on clinic flow and urgent cases
-              </p>
-            </div>
-
-            {newCheckInCode && (
-              <div className="text-center p-4 border-2 border-primary/30 rounded-lg bg-primary/5">
-                <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide mb-1">Check-in Code</p>
-                <p className="text-2xl font-mono font-black tracking-[0.2em] text-primary">{newCheckInCode}</p>
-                <p className="text-[11px] text-foreground font-medium mt-2">
-                  Show this code at the clinic counter when you arrive.
+          {clinicName === "Harmony TCM Centre" ? (
+            <>
+              <DialogHeader>
+                <DialogTitle className="sr-only">You're in the queue</DialogTitle>
+              </DialogHeader>
+              <div className="flex flex-col items-center text-center space-y-4 py-2">
+                <div className="h-14 w-14 rounded-full bg-emerald-100 flex items-center justify-center">
+                  <CheckCircle className="h-8 w-8 text-emerald-600" />
+                </div>
+                <div className="space-y-1">
+                  <h3 className="text-lg font-bold text-foreground">You're in the queue!</h3>
+                  <p className="text-xs text-muted-foreground">Your spot has been secured successfully.</p>
+                </div>
+                <div className="w-full p-5 rounded-xl border-2 border-primary/30 bg-primary/5">
+                  <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">Check-in Code</p>
+                  <p className="text-4xl font-mono font-black tracking-[0.25em] text-primary">{newCheckInCode || "—"}</p>
+                </div>
+                <p className="text-xs text-foreground leading-relaxed px-2">
+                  You'll be notified when it's almost your turn. Please arrive within <span className="font-semibold">5 minutes</span> after receiving your notification to avoid missing your queue.
                 </p>
               </div>
-            )}
+            </>
+          ) : (
+            <>
+              <DialogHeader>
+                <DialogTitle className="text-base">Your queue number has been confirmed</DialogTitle>
+              </DialogHeader>
+              <div className="space-y-3">
+                <div className="text-center p-5 bg-muted rounded-lg">
+                  <p className="text-xs text-muted-foreground mb-1">Queue Number</p>
+                  <p className="text-5xl font-bold text-primary">{newQueueNumber}</p>
+                  <p className="text-[11px] font-medium text-foreground mt-3">
+                    Current position may change based on clinic flow and urgent cases
+                  </p>
+                </div>
 
-            <div className="p-3 border rounded-md space-y-2">
-              <p className="text-xs font-medium">Save your queue link</p>
-              <Button
-                variant="outline"
-                size="sm"
-                className="w-full text-xs"
-                onClick={() => {
-                  const stored = localStorage.getItem(`queue_mobile_${clinicId}`) || "";
-                  const queueUrl = `${window.location.origin}/queue?clinic=${clinicId}&mobile=${encodeURIComponent(stored)}`;
-                  navigator.clipboard.writeText(queueUrl);
-                  toast.success("Link copied!");
-                }}
-              >
-                <Copy className="mr-1.5 h-3.5 w-3.5" />
-                Copy Link
-              </Button>
-              <p className="text-[11px] font-medium text-foreground">Use this link to return to your queue anytime.</p>
-            </div>
+                {newCheckInCode && (
+                  <div className="text-center p-4 border-2 border-primary/30 rounded-lg bg-primary/5">
+                    <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide mb-1">Check-in Code</p>
+                    <p className="text-2xl font-mono font-black tracking-[0.2em] text-primary">{newCheckInCode}</p>
+                    <p className="text-[11px] text-foreground font-medium mt-2">
+                      Show this code at the clinic counter when you arrive.
+                    </p>
+                  </div>
+                )}
 
-            <Alert className="py-2">
-              <AlertDescription className="text-[11px] text-destructive">
-                Please stay nearby and keep this page open, when it's your turn, check in at counter within 30 seconds.
-              </AlertDescription>
-            </Alert>
-          </div>
-          <DialogFooter>
-            <Button
-              size="sm"
-              onClick={() => {
-                const stored = localStorage.getItem(`queue_mobile_${clinicId}`) || "";
-                setShowQueueCard(false);
-                navigate(`/queue?clinic=${clinicId}&mobile=${encodeURIComponent(stored)}`);
-              }}
-            >
-              View Queue Details
-            </Button>
-          </DialogFooter>
+                <div className="p-3 border rounded-md space-y-2">
+                  <p className="text-xs font-medium">Save your queue link</p>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full text-xs"
+                    onClick={() => {
+                      const stored = localStorage.getItem(`queue_mobile_${clinicId}`) || "";
+                      const queueUrl = `${window.location.origin}/queue?clinic=${clinicId}&mobile=${encodeURIComponent(stored)}`;
+                      navigator.clipboard.writeText(queueUrl);
+                      toast.success("Link copied!");
+                    }}
+                  >
+                    <Copy className="mr-1.5 h-3.5 w-3.5" />
+                    Copy Link
+                  </Button>
+                  <p className="text-[11px] font-medium text-foreground">Use this link to return to your queue anytime.</p>
+                </div>
+
+                <Alert className="py-2">
+                  <AlertDescription className="text-[11px] text-destructive">
+                    Please stay nearby and keep this page open, when it's your turn, check in at counter within 30 seconds.
+                  </AlertDescription>
+                </Alert>
+              </div>
+              <DialogFooter>
+                <Button
+                  size="sm"
+                  onClick={() => {
+                    const stored = localStorage.getItem(`queue_mobile_${clinicId}`) || "";
+                    setShowQueueCard(false);
+                    navigate(`/queue?clinic=${clinicId}&mobile=${encodeURIComponent(stored)}`);
+                  }}
+                >
+                  View Queue Details
+                </Button>
+              </DialogFooter>
+            </>
+          )}
         </DialogContent>
       </Dialog>
     </>
