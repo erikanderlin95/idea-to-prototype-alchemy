@@ -78,7 +78,7 @@ Deno.serve(async (req) => {
       if (existingEntry) {
         return new Response(
           JSON.stringify({ error: "You already have an active queue entry at this clinic", code: "ALREADY_IN_QUEUE" }),
-          { status: 409, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+          { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
 
