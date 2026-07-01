@@ -590,7 +590,7 @@ export const ClinicCard = ({
                   <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20 shrink-0">
                     <Users className="h-3.5 w-3.5 text-primary-foreground" strokeWidth={3} />
                   </div>
-                  <p className="text-[15px] sm:text-base font-bold text-foreground leading-tight">{t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
+                  <p className="text-[15px] sm:text-base font-bold text-foreground leading-tight">{isNotificationMode ? t("clinicCard.lowWait") : t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
                 </div>
                 <p className="text-[12px] text-foreground/80 leading-snug line-clamp-1">
                   <Star className="inline h-3 w-3 text-foreground/70 mr-1 -mt-0.5" />
