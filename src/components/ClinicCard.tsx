@@ -267,38 +267,29 @@ export const ClinicCard = ({
     setJoinError("");
     try {
       const sanitizedMobile = sanitizeMobileNumber(mobileNumber);
-      const { data: response, error } = await supabase.functions.invoke("queue-lookup", {
-        body: {
-          action: "join_queue",
-          clinic_id: id,
-          mobile_number: sanitizedMobile,
-          patient_name: patientName.trim(),
-          estimated_wait_time: parseInt(waitTime) || 15,
-          device_fingerprint: getDeviceFingerprint(),
-        },
+      const { callQueueLookup } = await import("@/lib/queueLookup");
+      const { data: response, error, status } = await callQueueLookup({
+        action: "join_queue",
+        clinic_id: id,
+        mobile_number: sanitizedMobile,
+        patient_name: patientName.trim(),
+        estimated_wait_time: parseInt(waitTime) || 15,
+        device_fingerprint: getDeviceFingerprint(),
       });
 
-      // Extract structured error body from non-2xx responses (e.g. 409 ALREADY_IN_QUEUE)
-      let payload: any = response;
-      if (error && (error as any).context?.json) {
-        try { payload = await (error as any).context.json(); } catch { /* ignore */ }
-      } else if (error && (error as any).context?.text) {
-        try { payload = JSON.parse(await (error as any).context.text()); } catch { /* ignore */ }
-      }
-
-      if (payload?.error) {
-        if (payload.code === "ALREADY_IN_QUEUE") {
+      const payload = response ?? error;
+      if (status !== 200 || payload?.error) {
+        if (payload?.code === "ALREADY_IN_QUEUE") {
           setJoinError("You already have an active queue entry at this clinic");
-        } else if (payload.code === "COOLDOWN") {
+        } else if (payload?.code === "COOLDOWN") {
           setJoinError(payload.error);
-        } else if (payload.code === "RATE_LIMITED") {
+        } else if (payload?.code === "RATE_LIMITED") {
           setJoinError("Too many attempts. Please try again shortly.");
         } else {
-          setJoinError(payload.error);
+          setJoinError(payload?.error || "Failed to join queue");
         }
         return;
       }
-      if (error) throw error;
 
       const createdEntry = response.entry;
       setNewQueueNumber(createdEntry.queue_number);
