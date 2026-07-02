@@ -565,19 +565,6 @@ const ClinicProfile = () => {
                 </button>
               );
             }
-            if (clinic.has_digital_queue) {
-              ctas.push(
-                <div key="ahead" className="w-full flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 rounded-lg border border-accent/40 bg-accent/10">
-                  <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
-                    <Users className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <p className="text-xs sm:text-sm font-bold text-foreground">{t('clinicProfile.currentQueue')}</p>
-                    <p className="font-black text-lg sm:text-xl text-primary">{queue.length} {t('clinicProfile.waiting')}</p>
-                  </div>
-                </div>
-              );
-            }
 
             const cols = ctas.length >= 4 ? 'sm:grid-cols-2 lg:grid-cols-4' : ctas.length === 3 ? 'sm:grid-cols-3' : ctas.length === 2 ? 'sm:grid-cols-2' : 'sm:grid-cols-1';
             return (
