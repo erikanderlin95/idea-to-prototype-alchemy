@@ -19,16 +19,23 @@ const logos = [
   { name: "123 S.G.", src: partner123sg.url },
 ];
 
-const LogoCell = ({ logo }: { logo: { name: string; src: string } }) => (
-  <div className="flex items-center justify-center h-[50px] sm:h-[58px] md:h-[66px]">
-    <img
-      src={logo.src}
-      alt={logo.name}
-      loading="lazy"
-      className="max-h-full w-auto object-contain max-w-[64px] sm:max-w-[100px] md:max-w-[130px]"
-    />
-  </div>
-);
+const LogoCell = ({ logo }: { logo: { name: string; src: string } }) => {
+  const is123 = logo.name === "123 S.G.";
+  return (
+    <div className="flex items-center justify-center h-[50px] sm:h-[58px] md:h-[66px]">
+      <img
+        src={logo.src}
+        alt={logo.name}
+        loading="lazy"
+        className={`max-h-full w-auto object-contain ${
+          is123
+            ? "max-w-[80px] sm:max-w-[120px] md:max-w-[160px]"
+            : "max-w-[64px] sm:max-w-[100px] md:max-w-[130px]"
+        }`}
+      />
+    </div>
+  );
+};
 
 export const LaunchPartners = () => {
   return (
