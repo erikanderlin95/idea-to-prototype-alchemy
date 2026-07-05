@@ -5,17 +5,18 @@ import ihealth from "@/assets/partners/ihealth.jpg";
 import stayingSane from "@/assets/partners/staying-sane.jpg";
 import beTcm from "@/assets/partners/be-tcm.jpg";
 import myDnaAsset from "@/assets/partners/mydna.png.asset.json";
+import partnerTealC from "@/assets/partners/partner-teal-c.jpg.asset.json";
+import partner123sg from "@/assets/partners/partner-123sg.jpg.asset.json";
 
-const row1Logos = [
+const logos = [
   { name: "PanHealth Medical", src: panhealth },
   { name: "Macquarie Chiropractic", src: macquarie },
   { name: "I-Health", src: ihealth },
-];
-
-const row2Logos = [
   { name: "Staying Sane 101", src: stayingSane },
   { name: "Be TCM Clinic", src: beTcm },
   { name: "myDNA", src: myDnaAsset.url },
+  { name: "Partner", src: partnerTealC.url },
+  { name: "123 S.G.", src: partner123sg.url },
 ];
 
 const LogoCell = ({ logo }: { logo: { name: string; src: string } }) => (
@@ -24,8 +25,7 @@ const LogoCell = ({ logo }: { logo: { name: string; src: string } }) => (
       src={logo.src}
       alt={logo.name}
       loading="lazy"
-      className="max-h-full w-auto object-contain max-w-[70px] sm:max-w-[118px] md:max-w-[150px]"
-
+      className="max-h-full w-auto object-contain max-w-[64px] sm:max-w-[100px] md:max-w-[130px]"
     />
   </div>
 );
@@ -63,12 +63,9 @@ export const LaunchPartners = () => {
             </a>
           </div>
 
-          {/* 3×2 grid — clinic logos */}
-          <div className="grid grid-cols-3 gap-x-4 gap-y-5 sm:gap-x-6 sm:gap-y-5 md:gap-x-8 md:gap-y-6 max-w-[270px] sm:max-w-[460px] md:max-w-[560px] mx-auto mt-3">
-            {row1Logos.map((logo) => (
-              <LogoCell key={logo.name} logo={logo} />
-            ))}
-            {row2Logos.map((logo) => (
+          {/* 4×2 grid — clinic logos */}
+          <div className="grid grid-cols-4 gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-5 md:gap-x-6 md:gap-y-6 max-w-[360px] sm:max-w-[600px] md:max-w-[720px] mx-auto mt-3">
+            {logos.map((logo) => (
               <LogoCell key={logo.name} logo={logo} />
             ))}
           </div>
