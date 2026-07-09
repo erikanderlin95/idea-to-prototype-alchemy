@@ -60,7 +60,7 @@ export const LaunchPartners = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit Azaas"
-              className="flex items-center justify-center h-[58px] sm:h-[68px] md:h-[78px] transition-opacity duration-300 hover:opacity-80"
+              className="flex items-center justify-center h-[68px] sm:h-[78px] md:h-[90px] transition-opacity duration-300 hover:opacity-80"
             >
               <img
                 src={azaas}
