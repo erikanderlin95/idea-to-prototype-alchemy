@@ -60,13 +60,13 @@ export const LaunchPartners = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit Azaas"
-              className="block transition-opacity duration-300 hover:opacity-80"
+              className="flex items-center justify-center h-[44px] sm:h-[52px] md:h-[60px] transition-opacity duration-300 hover:opacity-80"
             >
               <img
                 src={azaas}
                 alt="Azaas"
                 loading="lazy"
-                className="h-10 sm:h-12 md:h-14 w-auto object-contain"
+                className="max-h-full w-auto max-w-[64px] sm:max-w-[100px] md:max-w-[130px] object-contain"
               />
             </a>
             <a
@@ -74,13 +74,13 @@ export const LaunchPartners = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit SG iMED"
-              className="block transition-opacity duration-300 hover:opacity-80"
+              className="flex items-center justify-center h-[50px] sm:h-[58px] md:h-[66px] transition-opacity duration-300 hover:opacity-80"
             >
               <img
                 src={sgimed.url}
                 alt="SG iMED"
                 loading="lazy"
-                className="h-10 sm:h-12 md:h-14 w-auto object-contain"
+                className="max-h-full w-auto max-w-[64px] sm:max-w-[100px] md:max-w-[130px] object-contain"
               />
             </a>
           </div>
