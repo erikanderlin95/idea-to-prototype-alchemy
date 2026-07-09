@@ -60,7 +60,7 @@ export const LaunchPartners = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit Azaas"
-              className="flex items-center justify-center h-[44px] sm:h-[52px] md:h-[60px] transition-opacity duration-300 hover:opacity-80"
+              className="flex items-center justify-center h-[54px] sm:h-[64px] md:h-[74px] transition-opacity duration-300 hover:opacity-80"
             >
               <img
                 src={azaas}
@@ -74,7 +74,7 @@ export const LaunchPartners = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit SG iMED"
-              className="flex items-center justify-center h-[50px] sm:h-[58px] md:h-[66px] transition-opacity duration-300 hover:opacity-80"
+              className="flex items-center justify-center h-[58px] sm:h-[68px] md:h-[78px] transition-opacity duration-300 hover:opacity-80"
             >
               <img
                 src={sgimed.url}
