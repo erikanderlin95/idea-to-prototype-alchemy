@@ -102,12 +102,9 @@ export const ClinicConversion = () => {
                     >
                       <Icon className="h-[18px] w-[18px] text-white" strokeWidth={2.25} />
                     </div>
-                    <h3 className="text-[14.5px] font-semibold text-foreground leading-snug mb-1">
+                    <h3 className="text-[14.5px] font-semibold text-foreground leading-snug">
                       {p.title}
                     </h3>
-                    <p className="text-[12.5px] leading-snug text-muted-foreground">
-                      {p.desc}
-                    </p>
                   </div>
                 );
               })}
