@@ -16,17 +16,14 @@ export const ClinicConversion = () => {
     {
       icon: Smartphone,
       title: "Reach More Patients",
-      desc: "Help patients discover your clinic when they're deciding where to seek care.",
     },
     {
       icon: MessageSquareOff,
       title: "Reduce Front Desk Work",
-      desc: "Reduce repetitive enquiries by letting patients self-serve queue, booking and clinic information.",
     },
     {
       icon: Settings2,
       title: "Works With Your Existing System",
-      desc: "Continue using your existing clinic management system. No replacement or major workflow changes required.",
     },
   ];
 
@@ -105,12 +102,9 @@ export const ClinicConversion = () => {
                     >
                       <Icon className="h-[18px] w-[18px] text-white" strokeWidth={2.25} />
                     </div>
-                    <h3 className="text-[14.5px] font-semibold text-foreground leading-snug mb-1">
+                    <h3 className="text-[14.5px] font-semibold text-foreground leading-snug">
                       {p.title}
                     </h3>
-                    <p className="text-[12.5px] leading-snug text-muted-foreground">
-                      {p.desc}
-                    </p>
                   </div>
                 );
               })}
