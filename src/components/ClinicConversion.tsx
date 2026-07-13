@@ -16,17 +16,14 @@ export const ClinicConversion = () => {
     {
       icon: Smartphone,
       title: "Reach More Patients",
-      desc: "Help patients discover your clinic when they're deciding where to seek care.",
     },
     {
       icon: MessageSquareOff,
       title: "Reduce Front Desk Work",
-      desc: "Reduce repetitive enquiries by letting patients self-serve queue, booking and clinic information.",
     },
     {
       icon: Settings2,
       title: "Works With Your Existing System",
-      desc: "Continue using your existing clinic management system. No replacement or major workflow changes required.",
     },
   ];
 
