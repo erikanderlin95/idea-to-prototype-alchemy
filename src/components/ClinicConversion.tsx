@@ -89,22 +89,24 @@ export const ClinicConversion = () => {
                 return (
                   <div
                     key={i}
-                    className="rounded-xl p-4 md:p-5 transition-all duration-300 hover:-translate-y-0.5"
+                    className="rounded-xl p-3 md:p-4 transition-all duration-300 hover:-translate-y-0.5"
                     style={{
                       background: "hsl(var(--background) / 0.7)",
                       border: "1px solid rgba(29,78,216,0.15)",
                       boxShadow: "0 1px 2px rgba(16,24,40,0.04), 0 4px 12px -8px rgba(29,78,216,0.10)",
                     }}
                   >
-                    <div
-                      className="h-9 w-9 rounded-lg flex items-center justify-center mb-3"
-                      style={{ background: iconGradient }}
-                    >
-                      <Icon className="h-[18px] w-[18px] text-white" strokeWidth={2.25} />
+                    <div className="flex items-center gap-3">
+                      <div
+                        className="h-8 w-8 md:h-9 md:w-9 rounded-lg flex items-center justify-center shrink-0"
+                        style={{ background: iconGradient }}
+                      >
+                        <Icon className="h-[16px] w-[16px] md:h-[18px] md:w-[18px] text-white" strokeWidth={2.25} />
+                      </div>
+                      <h3 className="text-[14px] md:text-[14.5px] font-semibold text-foreground leading-snug">
+                        {p.title}
+                      </h3>
                     </div>
-                    <h3 className="text-[14.5px] font-semibold text-foreground leading-snug">
-                      {p.title}
-                    </h3>
                   </div>
                 );
               })}
