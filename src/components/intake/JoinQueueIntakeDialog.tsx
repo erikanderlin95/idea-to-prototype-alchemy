@@ -47,6 +47,7 @@ export const JoinQueueIntakeDialog = ({
 }: JoinQueueIntakeDialogProps) => {
   const navigate = useNavigate();
   const [patientName, setPatientName] = useState("");
+  const [patientNric, setPatientNric] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [visitReason, setVisitReason] = useState("");
   const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
@@ -59,6 +60,7 @@ export const JoinQueueIntakeDialog = ({
 
   const reset = () => {
     setPatientName("");
+    setPatientNric("");
     setMobileNumber("");
     setVisitReason("");
     setDisclaimerAgreed(false);
