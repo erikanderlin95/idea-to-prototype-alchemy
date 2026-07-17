@@ -64,6 +64,7 @@ export const ClinicCard = ({
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [showQueueCard, setShowQueueCard] = useState(false);
   const [patientName, setPatientName] = useState("");
+  const [patientNric, setPatientNric] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [newQueueNumber, setNewQueueNumber] = useState<number | null>(null);
   const [newCheckInCode, setNewCheckInCode] = useState("");
@@ -236,6 +237,7 @@ export const ClinicCard = ({
     e.stopPropagation();
     if (!id) return;
     setShowDisclaimer(true);
+    setPatientNric("");
     setDisclaimerAgreed(false);
     setPdpaConsent(false);
     setJoinError("");
@@ -274,6 +276,7 @@ export const ClinicCard = ({
         clinic_id: id,
         mobile_number: sanitizedMobile,
         patient_name: patientName.trim(),
+        patient_nric: patientNric.trim() || null,
         estimated_wait_time: parseInt(waitTime) || 15,
         device_fingerprint: getDeviceFingerprint(),
       });
@@ -697,6 +700,17 @@ export const ClinicCard = ({
               value={patientName}
               onChange={(e) => setPatientName(e.target.value)}
               placeholder="Enter Patient Full Name"
+              className="mt-1 h-9 text-sm"
+            />
+          </div>
+          <div>
+            <Label htmlFor="q-nric" className="text-xs font-medium">Patient NRIC/FIN <span className="text-muted-foreground font-normal">(if required by clinic)</span></Label>
+            <Input
+              id="q-nric"
+              type="text"
+              value={patientNric}
+              onChange={(e) => setPatientNric(e.target.value)}
+              placeholder="e.g. S1234567A"
               className="mt-1 h-9 text-sm"
             />
           </div>

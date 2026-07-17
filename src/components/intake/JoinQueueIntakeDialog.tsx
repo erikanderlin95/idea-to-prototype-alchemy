@@ -47,6 +47,7 @@ export const JoinQueueIntakeDialog = ({
 }: JoinQueueIntakeDialogProps) => {
   const navigate = useNavigate();
   const [patientName, setPatientName] = useState("");
+  const [patientNric, setPatientNric] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [visitReason, setVisitReason] = useState("");
   const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
@@ -59,6 +60,7 @@ export const JoinQueueIntakeDialog = ({
 
   const reset = () => {
     setPatientName("");
+    setPatientNric("");
     setMobileNumber("");
     setVisitReason("");
     setDisclaimerAgreed(false);
@@ -94,6 +96,7 @@ export const JoinQueueIntakeDialog = ({
         clinic_id: clinicId,
         mobile_number: sanitizedMobile,
         patient_name: patientName.trim(),
+        patient_nric: patientNric.trim() || null,
         estimated_wait_time: estimatedWaitMinutes,
         device_fingerprint: getDeviceFingerprint(),
       });
@@ -155,6 +158,19 @@ export const JoinQueueIntakeDialog = ({
                 value={patientName}
                 onChange={(e) => setPatientName(e.target.value)}
                 placeholder="Enter Patient Full Name"
+                className="mt-1 h-9 text-sm"
+              />
+            </div>
+            <div>
+              <Label htmlFor="q-nric" className="text-xs font-medium">
+                Patient NRIC/FIN <span className="text-muted-foreground font-normal">(if required by clinic)</span>
+              </Label>
+              <Input
+                id="q-nric"
+                type="text"
+                value={patientNric}
+                onChange={(e) => setPatientNric(e.target.value)}
+                placeholder="e.g. S1234567A"
                 className="mt-1 h-9 text-sm"
               />
             </div>
