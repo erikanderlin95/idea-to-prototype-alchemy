@@ -135,12 +135,12 @@ export const ManagedCareModal = ({
                 onCheckedChange={(checked) => setPdpaConsent(checked === true)}
                 className="mt-0.5"
               />
-              <Label htmlFor="mc-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
-                I consent to my personal data being collected and used by ClynicQ to facilitate queue management and appointment coordination, and shared with the selected clinic and partner for my visit. I understand how my data is handled as described in the{" "}
-                <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary" onClick={(e) => e.stopPropagation()}>
-                  Privacy Policy
-                </a>.
-              </Label>
+                <Label htmlFor="mc-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
+                  I consent to ClynicQ collecting, using and disclosing my personal data, including my NRIC/FIN where required by the selected clinic, for the purpose of facilitating my registration, queue management, appointment coordination and visit. I understand that my information may be shared with the selected clinic and authorised service providers where necessary, and will be handled in accordance with the{" "}
+                  <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary" onClick={(e) => e.stopPropagation()}>
+                    Privacy Policy
+                  </a>.
+                </Label>
             </div>
 
             <div className="border-t pt-4">

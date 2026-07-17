@@ -11,7 +11,7 @@ const Privacy = () => {
         <section className="space-y-6 text-foreground text-sm leading-relaxed">
           <div>
             <h2 className="text-lg font-semibold mb-2">1. What We Collect</h2>
-            <p className="mb-2">We collect personal information such as your name, contact details, and submitted information when you:</p>
+            <p className="mb-2">We collect personal information such as your name, NRIC/FIN (where required by the selected clinic), contact details, and other information you submit when you:</p>
             <ul className="list-disc pl-5 space-y-1">
               <li>Join a queue or submit a booking request</li>
               <li>Submit a clinic listing, partnership, or event request</li>
@@ -23,6 +23,7 @@ const Privacy = () => {
             <p className="mb-2">Your information is used to:</p>
             <ul className="list-disc pl-5 space-y-1">
               <li>Facilitate queue management and appointment coordination</li>
+              <li>Facilitate patient identification and pre-registration with your selected clinic, where applicable</li>
               <li>Process clinic listings, partnership requests, and event collaborations</li>
               <li>Communicate with you regarding your submission or request</li>
               <li>Support operational and follow-up purposes</li>
@@ -33,8 +34,9 @@ const Privacy = () => {
             <h2 className="text-lg font-semibold mb-2">3. Who We Share It With</h2>
             <p className="mb-2">Your information may be shared:</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>With the clinic you selected for managing your visit</li>
+              <li>With the clinic you selected, including information required to facilitate your registration, queue management, appointment coordination, or visit.</li>
               <li>Internally for coordination of listings, partnerships, or events</li>
+              <li>With trusted service providers or integration partners only where necessary to support the operation of ClynicQ and your requested healthcare service.</li>
             </ul>
             <p className="mt-2">We do not share your data for unrelated purposes without consent.</p>
           </div>
@@ -51,7 +53,7 @@ const Privacy = () => {
 
           <div>
             <h2 className="text-lg font-semibold mb-2">6. Data Security</h2>
-            <p>We implement reasonable measures to protect your data from unauthorized access.</p>
+            <p>We implement reasonable technical and organisational measures, including encryption where appropriate and access controls, to protect your personal data from unauthorised access, use, disclosure or loss.</p>
           </div>
 
           <div>
