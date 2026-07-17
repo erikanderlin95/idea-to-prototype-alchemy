@@ -704,6 +704,17 @@ export const ClinicCard = ({
             />
           </div>
           <div>
+            <Label htmlFor="q-nric" className="text-xs font-medium">Patient NRIC/FIN <span className="text-muted-foreground font-normal">(if required by clinic)</span></Label>
+            <Input
+              id="q-nric"
+              type="text"
+              value={patientNric}
+              onChange={(e) => setPatientNric(e.target.value)}
+              placeholder="e.g. S1234567A"
+              className="mt-1 h-9 text-sm"
+            />
+          </div>
+          <div>
             <Label htmlFor="q-mobile" className="text-xs font-medium">Mobile Number</Label>
             <Input
               id="q-mobile"
