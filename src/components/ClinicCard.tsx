@@ -64,6 +64,7 @@ export const ClinicCard = ({
   const [showDisclaimer, setShowDisclaimer] = useState(false);
   const [showQueueCard, setShowQueueCard] = useState(false);
   const [patientName, setPatientName] = useState("");
+  const [patientNric, setPatientNric] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
   const [newQueueNumber, setNewQueueNumber] = useState<number | null>(null);
   const [newCheckInCode, setNewCheckInCode] = useState("");
