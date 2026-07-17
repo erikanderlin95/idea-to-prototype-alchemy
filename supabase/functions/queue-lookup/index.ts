@@ -21,7 +21,7 @@ Deno.serve(async (req) => {
 
   try {
     const body = await req.json();
-    const { mobile_number, clinic_id, action, patient_name, visit_type, estimated_wait_time, device_fingerprint } = body;
+    const { mobile_number, clinic_id, action, patient_name, patient_nric, visit_type, estimated_wait_time, device_fingerprint } = body;
 
     const clinicNotRequired = ["find_my_queue"].includes(action);
     if (!clinicNotRequired && (!clinic_id || typeof clinic_id !== "string")) {
