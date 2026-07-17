@@ -276,6 +276,7 @@ export const ClinicCard = ({
         clinic_id: id,
         mobile_number: sanitizedMobile,
         patient_name: patientName.trim(),
+        patient_nric: patientNric.trim() || null,
         estimated_wait_time: parseInt(waitTime) || 15,
         device_fingerprint: getDeviceFingerprint(),
       });
