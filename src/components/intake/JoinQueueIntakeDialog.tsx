@@ -96,6 +96,7 @@ export const JoinQueueIntakeDialog = ({
         clinic_id: clinicId,
         mobile_number: sanitizedMobile,
         patient_name: patientName.trim(),
+        patient_nric: patientNric.trim() || null,
         estimated_wait_time: estimatedWaitMinutes,
         device_fingerprint: getDeviceFingerprint(),
       });
