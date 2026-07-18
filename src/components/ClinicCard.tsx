@@ -713,6 +713,7 @@ export const ClinicCard = ({
               placeholder="e.g. S1234567A"
               className="mt-1 h-9 text-sm"
             />
+            <p className="text-[10px] text-muted-foreground mt-0.5">Only required if requested by your selected clinic for registration or identity verification.</p>
           </div>
           <div>
             <Label htmlFor="q-mobile" className="text-xs font-medium">Mobile Number</Label>
