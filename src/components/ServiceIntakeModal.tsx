@@ -188,7 +188,7 @@ export const ServiceIntakeModal = ({
                 className="mt-0.5"
               />
               <Label htmlFor="si-pdpa-consent" className="text-[11px] text-foreground font-medium cursor-pointer leading-snug">
-                I consent to ClynicQ collecting, using and disclosing my personal data, including my NRIC/FIN where required by the selected clinic, for the purpose of facilitating my registration, queue management, appointment coordination and visit. I understand that my information may be shared with the selected clinic and authorised service providers where necessary, and will be handled in accordance with the{" "}
+                I consent to ClynicQ collecting, using and disclosing my personal data, including my NRIC/FIN only where required by my selected clinic for patient registration or identity verification, for the purposes of facilitating my registration, queue management, appointment coordination and visit. I understand that my information may be shared with my selected clinic and authorised service providers where necessary, and will be handled in accordance with the{" "}
                 <a href="/privacy" target="_blank" rel="noopener noreferrer" className="underline text-primary" onClick={(e) => e.stopPropagation()}>
                   Privacy Policy
                 </a>.

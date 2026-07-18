@@ -11,7 +11,7 @@ const Privacy = () => {
         <section className="space-y-6 text-foreground text-sm leading-relaxed">
           <div>
             <h2 className="text-lg font-semibold mb-2">1. What We Collect</h2>
-            <p className="mb-2">We collect personal information such as your name, NRIC/FIN (where required by the selected clinic), contact details, and other information you submit when you:</p>
+            <p className="mb-2">We collect personal information such as your name, contact details and, only where required by your selected clinic for patient registration or identity verification, your NRIC/FIN. You submit this information when you:</p>
             <ul className="list-disc pl-5 space-y-1">
               <li>Join a queue or submit a booking request</li>
               <li>Submit a clinic listing, partnership, or event request</li>
@@ -23,11 +23,12 @@ const Privacy = () => {
             <p className="mb-2">Your information is used to:</p>
             <ul className="list-disc pl-5 space-y-1">
               <li>Facilitate queue management and appointment coordination</li>
-              <li>Facilitate patient identification and pre-registration with your selected clinic, where applicable</li>
+              <li>Facilitate patient registration, identity verification (where required by your selected clinic), queue management and appointment coordination.</li>
               <li>Process clinic listings, partnership requests, and event collaborations</li>
               <li>Communicate with you regarding your submission or request</li>
               <li>Support operational and follow-up purposes</li>
             </ul>
+            <p className="mb-2">We only collect NRIC/FIN where it is required by your selected clinic for patient registration or identity verification. If your selected clinic does not require it, ClynicQ will not collect your NRIC/FIN.</p>
           </div>
 
           <div>
@@ -48,12 +49,12 @@ const Privacy = () => {
 
           <div>
             <h2 className="text-lg font-semibold mb-2">5. Data Retention</h2>
-            <p>We retain your information for up to 90 days for operational purposes, after which it is securely deleted unless required otherwise.</p>
+            <p>We retain your personal information only for as long as reasonably necessary to provide our services and meet operational or legal requirements. Where applicable, personal data that is no longer required will be securely deleted or anonymised.</p>
           </div>
 
           <div>
             <h2 className="text-lg font-semibold mb-2">6. Data Security</h2>
-            <p>We implement reasonable technical and organisational measures, including encryption where appropriate and access controls, to protect your personal data from unauthorised access, use, disclosure or loss.</p>
+            <p>We implement reasonable technical and organisational measures, including encryption where appropriate and access controls, to protect your personal data from unauthorised access, use, disclosure or loss. Where applicable, sensitive personal data such as NRIC/FIN is protected using appropriate security measures including encryption and access controls.</p>
           </div>
 
           <div>
