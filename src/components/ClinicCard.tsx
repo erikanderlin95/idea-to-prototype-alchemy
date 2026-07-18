@@ -704,7 +704,7 @@ export const ClinicCard = ({
             />
           </div>
           <div>
-            <Label htmlFor="q-nric" className="text-xs font-medium">Patient NRIC/FIN <span className="text-muted-foreground font-normal">(if required by clinic)</span></Label>
+            <Label htmlFor="q-nric" className="text-xs font-medium">Patient NRIC/FIN</Label>
             <Input
               id="q-nric"
               type="text"
