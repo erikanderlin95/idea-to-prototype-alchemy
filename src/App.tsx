@@ -37,6 +37,10 @@ import HealthTools from "./pages/HealthTools";
 import SugarHabit from "./pages/SugarHabit";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
+import WellnessTalksPage from "./pages/WellnessTalksPage";
+import BeyondClinicPage from "./pages/BeyondClinicPage";
+import ClinicOwnersPage from "./pages/ClinicOwnersPage";
+import MyClynicQPage from "./pages/MyClynicQPage";
 import { SectionSidebar } from "@/components/SectionSidebar";
 
 const queryClient = new QueryClient();
@@ -81,6 +85,10 @@ const App = () => (
             <Route path="/explore-health/bmi-calculator" element={<BMICalculator />} />
             <Route path="/explore-health/sugar-habit" element={<SugarHabit />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/wellness-talks" element={<WellnessTalksPage />} />
+            <Route path="/beyond-clinic" element={<BeyondClinicPage />} />
+            <Route path="/clinic-owners" element={<ClinicOwnersPage />} />
+            <Route path="/myclynicq" element={<MyClynicQPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

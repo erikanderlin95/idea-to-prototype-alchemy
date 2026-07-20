@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Building2, Compass } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 export const Hero = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   return (
     <section className="relative py-16 flex items-center justify-center overflow-hidden bg-white">
