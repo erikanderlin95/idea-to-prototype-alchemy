@@ -46,7 +46,7 @@ const HealthTools = () => {
         <section className="container max-w-xl px-4 pt-5 pb-6 md:pt-8 md:pb-10">
           <header className="mb-8">
             <h1 className="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-              Health and Wealth audit
+              Life Guide
             </h1>
             <p className="mt-2.5 text-sm text-muted-foreground leading-relaxed max-w-md">
               A curated set of self-guided check-ins — coming soon.
