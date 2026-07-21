@@ -34,7 +34,7 @@ const Index = () => {
               onClick={() => window.dispatchEvent(new Event("open-explore-sidebar"))}
               className="gap-2"
             >
-              {t("explore.more.title") || "Explore more"}
+              {t("explore.more.title") || "Tap here to explore"}
               <ArrowRight className="h-4 w-4" />
             </Button>
           </div>
