@@ -31,10 +31,8 @@ const Index = () => {
             <Button
               size="lg"
               onClick={() => window.dispatchEvent(new Event("open-explore-sidebar"))}
-              className="gap-2"
             >
-              {t("explore.more.title") || "Tap here to explore"}
-              <ArrowRight className="h-4 w-4" />
+              {t("explore.more.title")}
             </Button>
           </div>
         </section>
