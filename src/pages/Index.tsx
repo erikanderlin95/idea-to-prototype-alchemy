@@ -5,7 +5,6 @@ import { FeaturedConsultants } from "@/components/FeaturedConsultants";
 import { LaunchPartners } from "@/components/LaunchPartners";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
