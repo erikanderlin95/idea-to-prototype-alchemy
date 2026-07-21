@@ -5,7 +5,6 @@ import { FeaturedConsultants } from "@/components/FeaturedConsultants";
 import { LaunchPartners } from "@/components/LaunchPartners";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -32,10 +31,8 @@ const Index = () => {
             <Button
               size="lg"
               onClick={() => window.dispatchEvent(new Event("open-explore-sidebar"))}
-              className="gap-2"
             >
-              {t("explore.more.title") || "Tap here to explore"}
-              <ArrowRight className="h-4 w-4" />
+              {t("explore.more.title")}
             </Button>
           </div>
         </section>
