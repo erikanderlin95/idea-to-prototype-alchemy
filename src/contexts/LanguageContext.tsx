@@ -37,6 +37,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.otherProviders": "Beyond the Clinic",
     "sidebar.section.bmiCalculator": "Life Guide",
     "sidebar.section.forClinics": "For Clinics",
+    "explore.more.title": "Tap here to explore",
 
     
     // Continuity & Support Services
@@ -1015,6 +1016,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.otherProviders": "超越诊所",
     "sidebar.section.bmiCalculator": "生活指南",
     "sidebar.section.forClinics": "诊所专区",
+    "explore.more.title": "点击探索",
 
     
     // Continuity & Support Services
@@ -1990,6 +1992,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.otherProviders": "Melangkaui Klinik",
     "sidebar.section.bmiCalculator": "Panduan Kehidupan",
     "sidebar.section.forClinics": "Untuk Klinik",
+    "explore.more.title": "Ketik di sini untuk meneroka",
     "continuity.badge": "Kesinambungan & Sokongan",
     "continuity.title": "Melangkaui Klinik",
     "continuity.subtitle": "Perkhidmatan yang menyokong setiap peringkat perjalanan penjagaan kesihatan anda.",
@@ -2887,6 +2890,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.otherProviders": "மருத்துவமனைக்கு அப்பால்",
     "sidebar.section.bmiCalculator": "வாழ்க்கை வழிகாட்டி",
     "sidebar.section.forClinics": "மருத்துவமனைகளுக்கு",
+    "explore.more.title": "ஆராய க்ளிக் செய்யவும்",
     "continuity.badge": "தொடர்ச்சி மற்றும் ஆதரவு",
     "continuity.title": "மருத்துவமனைக்கு அப்பால்",
     "continuity.subtitle": "உங்கள் சுகாதாரப் பயணத்தின் ஒவ்வொரு கட்டத்திற்கும் ஆதரவு தரும் சேவைகள்.",
