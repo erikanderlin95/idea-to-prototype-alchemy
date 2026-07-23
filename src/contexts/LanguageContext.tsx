@@ -2900,10 +2900,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "நிர்வகிக்கப்பட்ட சுகாதார சேவைகளைக் கோருங்கள்",
     "sidebar.section.wellnessTalks": "சமூக மற்றும் ஆரோக்கிய நிகழ்வுகள்",
     "sidebar.section.otherProviders": "மருத்துவமனைக்கு அப்பால்",
-    "sidebar.section.bmiCalculator": "வாழ்க்கை வழிகாட்டி",
+    "sidebar.section.bmiCalculator": "மருத்துவரிடம் கேளுங்கள்👨‍⚕️",
     "sidebar.section.forClinics": "மருத்துவமனைகளுக்கு",
     "explore.more.title": "ஆராய க்ளிக் செய்யவும்",
-    "healthTools.title": "வாழ்க்கை வழிகாட்டி",
+    "healthTools.title": "மருத்துவரிடம் கேளுங்கள்👨‍⚕️",
     "healthTools.subtitle": "தன்னார்வ சுகாதார சரிபார்ப்புகளின் தேர்வு — விரைவில் வருகிறது.",
     "healthTools.locked": "விரைவில் வருகிறது",
 
