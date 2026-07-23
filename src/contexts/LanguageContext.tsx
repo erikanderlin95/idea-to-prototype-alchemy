@@ -1018,10 +1018,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "请求管理式医疗",
     "sidebar.section.wellnessTalks": "社区与健康活动",
     "sidebar.section.otherProviders": "超越诊所",
-    "sidebar.section.bmiCalculator": "生活指南",
+    "sidebar.section.bmiCalculator": "问医生👨‍⚕️",
     "sidebar.section.forClinics": "诊所专区",
     "explore.more.title": "点击探索",
-    "healthTools.title": "生活指南",
+    "healthTools.title": "问医生👨‍⚕️",
     "healthTools.subtitle": "精选自助健康检查 — 即将推出。",
     "healthTools.locked": "即将推出",
 
