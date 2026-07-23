@@ -344,7 +344,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
                 const dirHasMore = isMobile && dirVisibleCount < TWENTY_FOUR_HR_CLINICS.length;
                 return (
                   <>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm] md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
                       {dirClinics.map((c) => (
                         <DirectoryClinicCard
                           key={c.id}
