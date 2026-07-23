@@ -326,9 +326,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
 
           {/* 24hr Clinics Directory Section */}
           {activeCategory === "all" && (
-            <div className="pt-8 border-t border-border/30 mt-8">
-              <div className="mb-4 text-center">
-                <p className="text-lg sm:text-xl font-bold uppercase tracking-wide text-foreground">
+            <div className="pt-4 border-t border-border/30 mt-4">
+              <div className="mb-2 text-center">
+                <p className="text-sm sm:text-base font-bold uppercase tracking-wide text-foreground">
                   {t("marketplace.directoryTitle")}
                 </p>
               </div>
@@ -344,7 +344,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
                 const dirHasMore = isMobile && dirVisibleCount < TWENTY_FOUR_HR_CLINICS.length;
                 return (
                   <>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm] md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
                       {dirClinics.map((c) => (
                         <DirectoryClinicCard
                           key={c.id}
