@@ -35,10 +35,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "Request Managed Care",
     "sidebar.section.wellnessTalks": "Community & Wellness Events",
     "sidebar.section.otherProviders": "Beyond the Clinic",
-    "sidebar.section.bmiCalculator": "Life Guide",
+    "sidebar.section.bmiCalculator": "Ask a Doctor👨‍⚕️",
     "sidebar.section.forClinics": "For Clinics",
     "explore.more.title": "Tap here to explore",
-    "healthTools.title": "Life Guide",
+    "healthTools.title": "Ask a Doctor👨‍⚕️",
     "healthTools.subtitle": "A curated set of self-guided check-ins — coming soon.",
     "healthTools.locked": "Coming Soon",
 
