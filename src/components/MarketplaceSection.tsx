@@ -326,9 +326,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
 
           {/* 24hr Clinics Directory Section */}
           {activeCategory === "all" && (
-            <div className="pt-8 border-t border-border/30 mt-8">
-              <div className="mb-4 text-center">
-                <p className="text-lg sm:text-xl font-bold uppercase tracking-wide text-foreground">
+            <div className="pt-4 border-t border-border/30 mt-4">
+              <div className="mb-2 text-center">
+                <p className="text-sm sm:text-base font-bold uppercase tracking-wide text-foreground">
                   {t("marketplace.directoryTitle")}
                 </p>
               </div>
