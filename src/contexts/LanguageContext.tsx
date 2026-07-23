@@ -1998,10 +1998,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "Mohon Penjagaan Terurus",
     "sidebar.section.wellnessTalks": "Acara Komuniti & Kesejahteraan",
     "sidebar.section.otherProviders": "Melangkaui Klinik",
-    "sidebar.section.bmiCalculator": "Panduan Kehidupan",
+    "sidebar.section.bmiCalculator": "Tanya Doktor👨‍⚕️",
     "sidebar.section.forClinics": "Untuk Klinik",
     "explore.more.title": "Ketik di sini untuk meneroka",
-    "healthTools.title": "Panduan Kehidupan",
+    "healthTools.title": "Tanya Doktor👨‍⚕️",
     "healthTools.subtitle": "Satu set pemeriksaan kendiri — akan datang.",
     "healthTools.locked": "Akan Datang",
 
