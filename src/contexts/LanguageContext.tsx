@@ -2903,6 +2903,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.bmiCalculator": "வாழ்க்கை வழிகாட்டி",
     "sidebar.section.forClinics": "மருத்துவமனைகளுக்கு",
     "explore.more.title": "ஆராய க்ளிக் செய்யவும்",
+    "healthTools.title": "வாழ்க்கை வழிகாட்டி",
+    "healthTools.subtitle": "தன்னார்வ சுகாதார சரிபார்ப்புகளின் தேர்வு — விரைவில் வருகிறது.",
+    "healthTools.locked": "விரைவில் வருகிறது",
+
     "continuity.badge": "தொடர்ச்சி மற்றும் ஆதரவு",
     "continuity.title": "மருத்துவமனைக்கு அப்பால்",
     "continuity.subtitle": "உங்கள் சுகாதாரப் பயணத்தின் ஒவ்வொரு கட்டத்திற்கும் ஆதரவு தரும் சேவைகள்.",
