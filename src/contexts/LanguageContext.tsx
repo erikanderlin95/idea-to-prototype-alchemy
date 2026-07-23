@@ -38,6 +38,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.bmiCalculator": "Life Guide",
     "sidebar.section.forClinics": "For Clinics",
     "explore.more.title": "Tap here to explore",
+    "healthTools.title": "Life Guide",
+    "healthTools.subtitle": "A curated set of self-guided check-ins — coming soon.",
+    "healthTools.locked": "Coming Soon",
+
 
     
     // Continuity & Support Services
@@ -1017,6 +1021,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.bmiCalculator": "生活指南",
     "sidebar.section.forClinics": "诊所专区",
     "explore.more.title": "点击探索",
+    "healthTools.title": "生活指南",
+    "healthTools.subtitle": "精选自助健康检查 — 即将推出。",
+    "healthTools.locked": "即将推出",
+
 
     
     // Continuity & Support Services
@@ -1993,6 +2001,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.bmiCalculator": "Panduan Kehidupan",
     "sidebar.section.forClinics": "Untuk Klinik",
     "explore.more.title": "Ketik di sini untuk meneroka",
+    "healthTools.title": "Panduan Kehidupan",
+    "healthTools.subtitle": "Satu set pemeriksaan kendiri — akan datang.",
+    "healthTools.locked": "Akan Datang",
+
     "continuity.badge": "Kesinambungan & Sokongan",
     "continuity.title": "Melangkaui Klinik",
     "continuity.subtitle": "Perkhidmatan yang menyokong setiap peringkat perjalanan penjagaan kesihatan anda.",
@@ -2891,6 +2903,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.bmiCalculator": "வாழ்க்கை வழிகாட்டி",
     "sidebar.section.forClinics": "மருத்துவமனைகளுக்கு",
     "explore.more.title": "ஆராய க்ளிக் செய்யவும்",
+    "healthTools.title": "வாழ்க்கை வழிகாட்டி",
+    "healthTools.subtitle": "தன்னார்வ சுகாதார சரிபார்ப்புகளின் தேர்வு — விரைவில் வருகிறது.",
+    "healthTools.locked": "விரைவில் வருகிறது",
+
     "continuity.badge": "தொடர்ச்சி மற்றும் ஆதரவு",
     "continuity.title": "மருத்துவமனைக்கு அப்பால்",
     "continuity.subtitle": "உங்கள் சுகாதாரப் பயணத்தின் ஒவ்வொரு கட்டத்திற்கும் ஆதரவு தரும் சேவைகள்.",
