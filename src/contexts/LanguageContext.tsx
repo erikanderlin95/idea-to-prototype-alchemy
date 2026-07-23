@@ -38,6 +38,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.bmiCalculator": "Life Guide",
     "sidebar.section.forClinics": "For Clinics",
     "explore.more.title": "Tap here to explore",
+    "healthTools.title": "Life Guide",
+    "healthTools.subtitle": "A curated set of self-guided check-ins — coming soon.",
+    "healthTools.locked": "Coming Soon",
+
 
     
     // Continuity & Support Services
@@ -1017,6 +1021,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.bmiCalculator": "生活指南",
     "sidebar.section.forClinics": "诊所专区",
     "explore.more.title": "点击探索",
+    "healthTools.title": "生活指南",
+    "healthTools.subtitle": "精选自助健康检查 — 即将推出。",
+    "healthTools.locked": "即将推出",
+
 
     
     // Continuity & Support Services
@@ -1993,6 +2001,10 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.bmiCalculator": "Panduan Kehidupan",
     "sidebar.section.forClinics": "Untuk Klinik",
     "explore.more.title": "Ketik di sini untuk meneroka",
+    "healthTools.title": "Panduan Kehidupan",
+    "healthTools.subtitle": "Satu set pemeriksaan kendiri — akan datang.",
+    "healthTools.locked": "Akan Datang",
+
     "continuity.badge": "Kesinambungan & Sokongan",
     "continuity.title": "Melangkaui Klinik",
     "continuity.subtitle": "Perkhidmatan yang menyokong setiap peringkat perjalanan penjagaan kesihatan anda.",
