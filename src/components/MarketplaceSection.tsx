@@ -328,9 +328,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           {activeCategory === "all" && (
             <div className="pt-4 border-t border-border/30 mt-4">
               <div className="mb-2 text-center">
-                <p className="text-sm sm:text-base font-bold uppercase tracking-wide text-foreground">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-1">
                   {t("marketplace.directoryTitle")}
-                </p>
+                </h2>
               </div>
               {(() => {
                 const DIRECTORY_PAGE_SIZE = 6;
