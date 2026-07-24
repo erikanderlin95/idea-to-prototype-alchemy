@@ -139,7 +139,7 @@ export const JoinQueueIntakeDialog = ({
           if (!o) reset();
         }}
       >
-        <DialogContent className="max-w-sm">
+        <DialogContent className="max-w-sm max-h-[85vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-base text-foreground">Join Queue Remotely — {clinicName}</DialogTitle>
             <DialogDescription className="text-xs text-center font-bold text-red-700">
