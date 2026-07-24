@@ -143,3 +143,30 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities {
+  .visible-scrollbar {
+    scrollbar-width: auto;
+    scrollbar-color: hsl(var(--primary)) hsl(var(--muted));
+  }
+
+  .visible-scrollbar::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  .visible-scrollbar::-webkit-scrollbar-track {
+    background: hsl(var(--muted));
+    border-radius: 6px;
+  }
+
+  .visible-scrollbar::-webkit-scrollbar-thumb {
+    background: hsl(var(--primary));
+    border-radius: 6px;
+    border: 2px solid hsl(var(--muted));
+  }
+
+  .visible-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--primary) / 0.85);
+  }
+}
+
