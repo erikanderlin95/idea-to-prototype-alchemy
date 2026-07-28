@@ -496,33 +496,19 @@ export const ClinicCard = ({
           )
         )}
         {!hasDigitalQueue && (
-          <>
-            <div className="flex items-center gap-2 py-1 px-2 rounded border"
-              style={{
-                background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
-                borderColor: 'hsl(var(--ai-cyan)/0.2)'
-              }}
-            >
-              <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
-                <Calendar className="h-3 w-3 text-primary" />
-              </div>
-              <div>
-                <p className="text-base font-bold text-foreground leading-tight">Appointment Only</p>
-              </div>
+          <div className="flex items-center gap-2 py-1 px-2 rounded border"
+            style={{
+              background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
+              borderColor: 'hsl(var(--ai-cyan)/0.2)'
+            }}
+          >
+            <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
+              <Calendar className="h-3 w-3 text-primary" />
             </div>
-            <div className="flex flex-col gap-1.5 py-1.5 px-2 rounded border"
-              style={{
-                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
-                borderColor: 'hsl(var(--ai-purple)/0.2)'
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <p className="text-[12px] text-foreground/80 leading-snug line-clamp-2">
-                <Star className="inline h-3 w-3 text-foreground/70 mr-1 -mt-0.5" />
-                Massage Therapy • Acupuncture • Aromatherapy • Reflexology • Cupping <span className="text-muted-foreground">+3 more</span>
-              </p>
+            <div>
+              <p className="text-base font-bold text-foreground leading-tight">Appointment Only</p>
             </div>
-          </>
+          </div>
         )}
 
         {myQueueEntry ? (
