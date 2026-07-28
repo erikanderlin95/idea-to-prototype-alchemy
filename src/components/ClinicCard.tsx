@@ -496,33 +496,19 @@ export const ClinicCard = ({
           )
         )}
         {!hasDigitalQueue && (
-          <>
-            <div className="flex items-center gap-2 py-1 px-2 rounded border"
-              style={{
-                background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
-                borderColor: 'hsl(var(--ai-cyan)/0.2)'
-              }}
-            >
-              <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
-                <Calendar className="h-3 w-3 text-primary" />
-              </div>
-              <div>
-                <p className="text-base font-bold text-foreground leading-tight">Appointment Only</p>
-              </div>
+          <div className="flex items-center gap-2 py-1 px-2 rounded border"
+            style={{
+              background: 'linear-gradient(135deg, hsl(var(--ai-cyan)/0.08), hsl(var(--ai-blue)/0.08))',
+              borderColor: 'hsl(var(--ai-cyan)/0.2)'
+            }}
+          >
+            <div className="h-6 w-6 rounded bg-primary/20 flex items-center justify-center">
+              <Calendar className="h-3 w-3 text-primary" />
             </div>
-            <div className="flex flex-col gap-1.5 py-1.5 px-2 rounded border"
-              style={{
-                background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
-                borderColor: 'hsl(var(--ai-purple)/0.2)'
-              }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <p className="text-[12px] text-foreground/80 leading-snug line-clamp-2">
-                <Star className="inline h-3 w-3 text-foreground/70 mr-1 -mt-0.5" />
-                Massage Therapy • Acupuncture • Aromatherapy • Reflexology • Cupping <span className="text-muted-foreground">+3 more</span>
-              </p>
+            <div>
+              <p className="text-base font-bold text-foreground leading-tight">Appointment Only</p>
             </div>
-          </>
+          </div>
         )}
 
         {myQueueEntry ? (
@@ -579,8 +565,8 @@ export const ClinicCard = ({
 
           </div>
         ) : (
-          <div className={`flex flex-col justify-between gap-1.5 ${hasDigitalQueue ? 'flex-1' : ''}`}>
-            <div className={`flex flex-col gap-1.5 ${hasDigitalQueue ? 'flex-1' : ''}`}>
+          <div className="flex flex-col justify-between gap-1.5 flex-1">
+            <div className="flex flex-col gap-1.5 flex-1">
             {hasDigitalQueue && (
               <div className="flex flex-col gap-1.5 py-1.5 px-2 rounded border"
                 style={{ 
@@ -601,6 +587,36 @@ export const ClinicCard = ({
                 </p>
               </div>
             )}
+            {!hasDigitalQueue && (() => {
+              // Deterministic earliest availability based on clinic id
+              const seed = (id || name).split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+              const daysAhead = (seed % 3) + 1; // 1-3 days ahead
+              const hourOptions = ["9:00 AM", "10:30 AM", "11:00 AM", "2:00 PM", "3:30 PM"];
+              const time = hourOptions[seed % hourOptions.length];
+              const next = new Date();
+              next.setDate(next.getDate() + daysAhead);
+              const dateLabel = next.toLocaleDateString('en-SG', { weekday: 'short', day: 'numeric', month: 'short' });
+              return (
+                <div className="flex flex-col gap-1.5 py-1.5 px-2 rounded border"
+                  style={{ 
+                    background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.06), hsl(var(--ai-cyan)/0.06))',
+                    borderColor: 'hsl(var(--ai-purple)/0.2)'
+                  }}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20 shrink-0">
+                      <Calendar className="h-3.5 w-3.5 text-primary-foreground" strokeWidth={3} />
+                    </div>
+                    <p className="text-[15px] sm:text-base font-bold text-foreground leading-tight">Next Available: {dateLabel}, {time}</p>
+                  </div>
+                  <p className="text-[12px] text-foreground/80 leading-snug line-clamp-1">
+                    <Star className="inline h-3 w-3 text-foreground/70 mr-1 -mt-0.5" />
+                    Massage Therapy • Acupuncture • Aromatherapy • Reflexology <span className="text-muted-foreground">+3 more</span>
+                  </p>
+                </div>
+              );
+            })()}
             </div>
             
             {/* Buttons — anchored bottom */}
