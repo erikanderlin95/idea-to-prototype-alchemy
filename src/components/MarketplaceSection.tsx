@@ -67,7 +67,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   useEffect(() => {
     let base = clinics;
     if (activeCategory === "all") {
-      base = base.filter((c) => c.hasDigitalQueue || c.is24Hr);
+      base = base.filter((c) => c.hasDigitalQueue || c.is24Hr || c.hasOnlineBooking || c.phone);
     } else {
       base = base.filter((clinic) => {
         const clinicType = (clinic.type || "").toLowerCase().trim();
