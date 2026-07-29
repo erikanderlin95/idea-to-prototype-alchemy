@@ -82,28 +82,7 @@ Deno.serve(async (req) => {
         );
       }
 
-      // Anti-spam: Cooldown - check if they left/cancelled within last 5 minutes
-      const { data: recentEntry } = await supabase
-        .from("queue_entries")
-        .select("id, updated_at")
-        .eq("clinic_id", clinic_id)
-        .eq("mobile_number", normalizedMobile)
-        .in("status", ["cancelled"])
-        .order("updated_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
-
-      if (recentEntry) {
-        const updatedAt = new Date(recentEntry.updated_at);
-        const cooldownMs = 5 * 60 * 1000;
-        if (Date.now() - updatedAt.getTime() < cooldownMs) {
-          const remainingSecs = Math.ceil((cooldownMs - (Date.now() - updatedAt.getTime())) / 1000);
-          return new Response(
-            JSON.stringify({ error: `Please wait ${Math.ceil(remainingSecs / 60)} minute(s) before re-joining`, code: "COOLDOWN" }),
-            { status: 429, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-          );
-        }
-      }
+      // Cooldown removed: patients may re-join immediately after cancelling
 
       // Anti-spam: Rate limit by IP - max 5 queue joins per IP in last 10 minutes
       const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000).toISOString();
