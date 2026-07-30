@@ -1793,7 +1793,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Afterlife Services page
     "afterlife.badge": "身后服务与CCOD（24/7医生）",
-    "afterlife.title": "身后服务与CCOD（24/7医生）",
+    "afterlife.title": "身后服务",
     "afterlife.desc": "为家庭提供有温度的临终规划、纪念服务和丧亲支持。",
     "afterlife.ccod.title": "24/7 CCOD 医生",
     "afterlife.ccod.desc": "家中突发离世？与CCOD医生沟通，获得富有同理心的指导和即时后续步骤。",
