@@ -51,7 +51,7 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.subtitle": "Services that support every stage of your healthcare journey.",
     "continuity.speakers.title": "Corporate & Community Health",
     "continuity.speakers.desc": "Explore corporate wellness, community health initiatives, wellness talks, healthcare education, and support services.",
-    "continuity.afterlife.title": "Afterlife & CCOD (24/7 Doctor)",
+    "continuity.afterlife.title": "Afterlife Services",
     "continuity.afterlife.desc": "Funeral planning, bereavement support, memorial services, and end-of-life resources.",
     "continuity.endOfService.title": "Corporate & Community Health",
     "continuity.endOfService.desc": "Health screenings, workplace wellness, vaccinations, and community healthcare programmes.",
