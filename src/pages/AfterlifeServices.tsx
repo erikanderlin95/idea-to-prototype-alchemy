@@ -12,7 +12,6 @@ const AfterlifeServicesPage = () => {
     {
       slug: "nirvana",
       name: "Nirvana",
-      subtitle: t("afterlife.badge"),
       description: t("afterlife.desc"),
     },
   ];

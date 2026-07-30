@@ -8,7 +8,7 @@ import nirvanaLogo from "@/assets/nirvana-logo.jpg";
 interface AfterlifeCardProps {
   slug: string;
   name: string;
-  subtitle: string;
+  subtitle?: string;
   description: string;
   icon?: React.ReactNode;
 }
@@ -27,9 +27,11 @@ const AfterlifeCard = ({ slug, name, subtitle, description }: AfterlifeCardProps
         <h3 className="text-[17px] font-bold text-[#2D1B4E] mb-0.5">
           {name}
         </h3>
-        <p className="text-[13px] text-[#8A7A9A] mb-2.5">
-          {subtitle}
-        </p>
+        {subtitle && (
+          <p className="text-[13px] text-[#8A7A9A] mb-2.5">
+            {subtitle}
+          </p>
+        )}
 
         <p className="text-[14px] text-[#7A6B8A] leading-snug mb-3">
           {description}
