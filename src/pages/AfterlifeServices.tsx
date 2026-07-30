@@ -72,7 +72,7 @@ const AfterlifeServicesPage = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="min-w-0 flex-1">
+              <div className="min-w-0">
                 <p className="text-[15px] font-semibold text-[#2D1B4E] truncate">
                   {t("afterlife.ccod.doctorName")}
                 </p>
