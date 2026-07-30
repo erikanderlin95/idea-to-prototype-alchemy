@@ -2023,7 +2023,7 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.subtitle": "Perkhidmatan yang menyokong setiap peringkat perjalanan penjagaan kesihatan anda.",
     "continuity.speakers.title": "Kesihatan Korporat & Komuniti",
     "continuity.speakers.desc": "Terokai kesejahteraan korporat, inisiatif kesihatan komuniti, ceramah kesejahteraan, pendidikan penjagaan kesihatan, dan perkhidmatan sokongan.",
-    "continuity.afterlife.title": "Perkhidmatan Selepas Kematian & CCOD (Doktor 24/7)",
+    "continuity.afterlife.title": "Perkhidmatan Selepas Kematian",
     "continuity.afterlife.desc": "Perancangan pengebumian, sokongan kesedihan, perkhidmatan peringatan, dan sumber akhir hayat.",
     "continuity.endOfService.title": "Kesihatan Korporat & Komuniti",
     "continuity.endOfService.desc": "Saringan kesihatan, kesejahteraan tempat kerja, vaksinasi, dan program penjagaan kesihatan komuniti.",
