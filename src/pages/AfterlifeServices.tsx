@@ -4,7 +4,7 @@ import { Footer } from "@/components/Footer";
 import AfterlifeCard from "@/components/AfterlifeCard";
 import { Button } from "@/components/ui/button";
 import PartnerIntakeDialog from "@/components/intake/PartnerIntakeDialog";
-import { Heart, Flower2, Shield, Sparkles, ArrowRight } from "lucide-react";
+import { Heart, Flower2, Shield, Sparkles, ArrowRight, Link as LinkIcon } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const AfterlifeServicesPage = () => {
