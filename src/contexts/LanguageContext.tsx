@@ -2918,7 +2918,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "நிர்வகிக்கப்பட்ட சுகாதார சேவைகளைக் கோருங்கள்",
     "sidebar.section.wellnessTalks": "சமூக மற்றும் ஆரோக்கிய நிகழ்வுகள்",
     "sidebar.section.otherProviders": "மருத்துவமனைக்கு அப்பால்",
-    "sidebar.section.afterlife": "ஆன்ம சேவைகள் & CCOD (24/7 மருத்துவர்)",
+    "sidebar.section.afterlife": "ஆன்ம சேவைகள்",
     "sidebar.section.bmiCalculator": "மருத்துவரிடம் கேளுங்கள்👨‍⚕️",
     "sidebar.section.forClinics": "மருத்துவமனைகளுக்கு",
     "explore.more.title": "ஆராய க்ளிக் செய்யவும்",
