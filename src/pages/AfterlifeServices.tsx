@@ -85,7 +85,7 @@ const AfterlifeServicesPage = () => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={t("afterlife.ccod.whatsappAria")}
-                className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-[#25D366] hover:bg-[#1DA851] text-white transition-all active:scale-[0.97] shadow-[0_2px_8px_rgba(37,211,102,0.25)] shrink-0"
+                className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-[#25D366] hover:bg-[#1DA851] text-white transition-all active:scale-[0.97] shadow-[0_2px_8px_rgba(37,211,102,0.25)] shrink-0 ml-3"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
