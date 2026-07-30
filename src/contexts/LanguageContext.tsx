@@ -2721,7 +2721,7 @@ const translations: Record<Language, Record<string, string>> = {
     "speakerProfile.readyToBookDesc": "Hantar pertanyaan anda dan kami akan menghubungi anda dengan cadangan yang disesuaikan.",
     "speakerProfile.enquireNow": "Pertanyaan Sekarang",
     "afterlife.badge": "Perkhidmatan Selepas Kematian & CCOD (Doktor 24/7)",
-    "afterlife.title": "Perkhidmatan Selepas Kematian & CCOD (Doktor 24/7)",
+    "afterlife.title": "Perkhidmatan Selepas Kematian",
     "afterlife.desc": "Perancangan akhir hayat yang penuh belas kasihan, perkhidmatan peringatan, dan sokongan kesedihan untuk keluarga.",
     "afterlife.ccod.title": "Doktor CCOD 24/7",
     "afterlife.ccod.desc": "Kematian tidak dijangka di rumah? Bercakap dengan doktor CCOD untuk bimbingan penuh belas kasihan dan langkah seterusnya segera.",
