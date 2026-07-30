@@ -8,11 +8,15 @@ import drKhwajaAsif from "@/assets/dr-khwaja-asif.jpg.asset.json";
 const AfterlifeServicesPage = () => {
   const { t } = useLanguage();
 
-  const providers = [
+  const providers: {
+    slug: string;
+    name: string;
+    subtitle?: string;
+    description: string;
+  }[] = [
     {
       slug: "nirvana",
       name: "Nirvana",
-      subtitle: t("afterlife.badge"),
       description: t("afterlife.desc"),
     },
   ];
@@ -110,7 +114,7 @@ const AfterlifeServicesPage = () => {
                 key={provider.slug}
                 slug={provider.slug}
                 name={provider.name}
-                subtitle={provider.subtitle}
+                {...(provider.subtitle ? { subtitle: provider.subtitle } : {})}
                 description={provider.description}
                 icon={
                   <div className="flex flex-col items-center gap-0.5">
