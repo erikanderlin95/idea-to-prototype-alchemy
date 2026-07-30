@@ -22,7 +22,7 @@ const AfterlifeServicesPage = () => {
       <Navbar />
 
       {/* Hero — soft lavender gradient with gentle rays */}
-      <section className="relative pt-28 pb-16 px-4 overflow-hidden">
+      <section className="relative pt-16 pb-8 px-4 overflow-hidden">
         {/* Layered gradient background */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#F5EEF8] via-[#FAF7FC] to-white" />
         {/* Subtle radial glow */}
@@ -31,36 +31,19 @@ const AfterlifeServicesPage = () => {
         <div className="absolute top-12 right-1/4 w-32 h-32 bg-gradient-to-br from-[#D4AF37]/8 to-transparent rounded-full blur-2xl" />
 
         <div className="max-w-3xl mx-auto text-center relative">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F0E6F8]/60 text-[#9B7DB8] mb-6 border border-[#E0D0ED]/50 backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F0E6F8]/60 text-[#9B7DB8] mb-3 border border-[#E0D0ED]/50 backdrop-blur-sm">
             <Sparkles className="h-3.5 w-3.5 text-[#C9A84C]/70" />
             <span className="text-sm font-medium tracking-wide">ClynicQ Partners</span>
           </div>
 
-          <h1 className="text-3xl md:text-4xl font-bold text-[#2D1B4E] mb-4 tracking-tight">
+          <h1 className="text-3xl md:text-4xl font-bold text-[#2D1B4E] mb-2 tracking-tight">
             {t("afterlife.title")}
           </h1>
-          <p className="text-[16px] md:text-lg text-[#7A6B8A] max-w-2xl mx-auto leading-relaxed mb-6">
+          <p className="text-[16px] md:text-lg text-[#7A6B8A] max-w-2xl mx-auto leading-relaxed">
             {t("afterlife.desc")}
           </p>
-          <Button
-            variant="outline"
-            className="gap-2 font-semibold border-[#9B7DB8]/30 text-[#9B7DB8] hover:bg-[#9B7DB8]/10 hover:text-[#9B7DB8]"
-            onClick={() => setPartnerOpen(true)}
-          >
-            For Providers: Partner With Us
-            <ArrowRight className="h-4 w-4" />
-          </Button>
         </div>
       </section>
-
-      <PartnerIntakeDialog
-        open={partnerOpen}
-        onOpenChange={setPartnerOpen}
-        partnerType="afterlife_provider"
-        title="Partner With Us"
-        description="Offer afterlife and pre-planning services through ClynicQ. Share your details and we'll reach out."
-        accentClassName="bg-[#9B7DB8] hover:bg-[#8A6BAA] text-white"
-      />
 
       {/* 24/7 CCOD Doctor — above provider cards */}
       <section className="py-6 px-4">
