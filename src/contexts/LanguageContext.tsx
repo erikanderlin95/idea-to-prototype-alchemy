@@ -804,7 +804,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Afterlife Services page
     "afterlife.badge": "Afterlife & CCOD (24/7 Doctor)",
-    "afterlife.title": "Afterlife & CCOD (24/7 Doctor)",
+    "afterlife.title": "Afterlife Services",
     "afterlife.desc": "Compassionate end-of-life planning, memorial services, and bereavement support for families.",
     "afterlife.ccod.title": "24/7 CCOD Doctor",
     "afterlife.ccod.desc": "Unexpected passing at home? Speak to a CCOD doctor for compassionate guidance and immediate next steps.",
