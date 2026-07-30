@@ -1040,7 +1040,7 @@ const translations: Record<Language, Record<string, string>> = {
     "continuity.subtitle": "支持您医疗旅程每个阶段的服务。",
     "continuity.speakers.title": "企业与社区健康",
     "continuity.speakers.desc": "探索企业健康、社区健康倡议、健康讲座、医疗教育及支持服务。",
-    "continuity.afterlife.title": "身后服务与CCOD（24/7医生）",
+    "continuity.afterlife.title": "身后服务",
     "continuity.afterlife.desc": "丧礼策划、丧亲辅导、纪念服务及临终资源。",
     "continuity.endOfService.title": "企业与社区健康",
     "continuity.endOfService.desc": "健康筛查、职场健康、疫苗接种及社区医疗保健项目。",
