@@ -35,7 +35,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "Request Managed Care",
     "sidebar.section.wellnessTalks": "Community & Wellness Events",
     "sidebar.section.otherProviders": "Beyond the Clinic",
-    "sidebar.section.afterlife": "Afterlife & CCOD (24/7 Doctor)",
+    "sidebar.section.afterlife": "Afterlife Services",
     "sidebar.section.bmiCalculator": "Ask a Doctor👨‍⚕️",
     "sidebar.section.forClinics": "For Clinics",
     "explore.more.title": "Tap here to explore",
