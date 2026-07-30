@@ -109,7 +109,7 @@ const AfterlifeServicesPage = () => {
                 key={provider.slug}
                 slug={provider.slug}
                 name={provider.name}
-                subtitle={provider.subtitle}
+                {...(provider.subtitle ? { subtitle: provider.subtitle } : {})}
                 description={provider.description}
                 icon={
                   <div className="flex flex-col items-center gap-0.5">
