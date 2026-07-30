@@ -8,7 +8,12 @@ import drKhwajaAsif from "@/assets/dr-khwaja-asif.jpg.asset.json";
 const AfterlifeServicesPage = () => {
   const { t } = useLanguage();
 
-  const providers = [
+  const providers: {
+    slug: string;
+    name: string;
+    subtitle?: string;
+    description: string;
+  }[] = [
     {
       slug: "nirvana",
       name: "Nirvana",
