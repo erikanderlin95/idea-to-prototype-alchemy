@@ -1,16 +1,12 @@
-import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import AfterlifeCard from "@/components/AfterlifeCard";
-import { Button } from "@/components/ui/button";
-import PartnerIntakeDialog from "@/components/intake/PartnerIntakeDialog";
-import { Heart, Flower2, Shield, Sparkles, ArrowRight, Link as LinkIcon } from "lucide-react";
+import { Flower2, Sparkles, Link as LinkIcon } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import drKhwajaAsif from "@/assets/dr-khwaja-asif.jpg.asset.json";
 
 const AfterlifeServicesPage = () => {
   const { t } = useLanguage();
-  const [partnerOpen, setPartnerOpen] = useState(false);
 
   const providers = [
     {
