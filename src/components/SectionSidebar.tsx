@@ -9,6 +9,7 @@ const sections = [
   { id: "marketplace", key: "sidebar.section.browseClinics", icon: Building2, type: "scroll" as const, emoji: null as string | null, iconColor: "text-sky-600 bg-sky-50" },
   { id: "/wellness-talks", key: "sidebar.section.wellnessTalks", icon: Mic, type: "route" as const, emoji: null, iconColor: "text-violet-500 bg-violet-50" },
   { id: "/beyond-clinic", key: "sidebar.section.otherProviders", icon: Sparkles, type: "route" as const, emoji: null, iconColor: "text-amber-500 bg-amber-50" },
+  { id: "/afterlife", key: "sidebar.section.afterlife", icon: HeartHandshake, type: "route" as const, emoji: null, iconColor: "text-purple-600 bg-purple-50" },
   { id: "/explore-health", key: "sidebar.section.bmiCalculator", icon: Heart, type: "route" as const, emoji: null, iconColor: "text-rose-500 bg-rose-50" },
   { id: "/clinic-owners", key: "sidebar.section.forClinics", icon: Stethoscope, type: "route" as const, emoji: null, iconColor: "text-teal-600 bg-teal-50" },
 ];
