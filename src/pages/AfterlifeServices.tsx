@@ -64,7 +64,7 @@ const AfterlifeServicesPage = () => {
               {t("afterlife.ccod.desc")}
             </p>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-2">
               <div className="w-14 h-14 rounded-xl overflow-hidden ring-2 ring-[#E8DDF0] shrink-0 bg-[#F5EEF8]">
                 <img
                   src={drKhwajaAsif.url}
