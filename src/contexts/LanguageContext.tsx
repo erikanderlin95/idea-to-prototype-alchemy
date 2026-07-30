@@ -2010,7 +2010,7 @@ const translations: Record<Language, Record<string, string>> = {
     "sidebar.section.managedCare": "Mohon Penjagaan Terurus",
     "sidebar.section.wellnessTalks": "Acara Komuniti & Kesejahteraan",
     "sidebar.section.otherProviders": "Melangkaui Klinik",
-    "sidebar.section.afterlife": "Perkhidmatan Selepas Kematian & CCOD (Doktor 24/7)",
+    "sidebar.section.afterlife": "Perkhidmatan Selepas Kematian",
     "sidebar.section.bmiCalculator": "Tanya Doktor👨‍⚕️",
     "sidebar.section.forClinics": "Untuk Klinik",
     "explore.more.title": "Ketik di sini untuk meneroka",
