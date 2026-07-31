@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Building2, Stethoscope, Mic, Sparkles, Heart, Menu, ChevronLeft, Mail, ChevronRight } from "lucide-react";
+import { Building2, Stethoscope, Mic, Sparkles, Heart, Menu, ChevronLeft, Mail, ChevronRight, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const sections = [
-  { id: "marketplace", key: "sidebar.section.browseClinics", icon: Building2, type: "scroll" as const, emoji: null as string | null, iconColor: "text-sky-600 bg-sky-50" },
-  { id: "/explore-health", key: "sidebar.section.bmiCalculator", icon: Heart, type: "route" as const, emoji: null, iconColor: "text-rose-500 bg-rose-50" },
-  { id: "/wellness-talks", key: "sidebar.section.wellnessTalks", icon: Mic, type: "route" as const, emoji: null, iconColor: "text-violet-500 bg-violet-50" },
-  { id: "/beyond-clinic", key: "sidebar.section.otherProviders", icon: Sparkles, type: "route" as const, emoji: null, iconColor: "text-amber-500 bg-amber-50" },
-  { id: "/afterlife", key: "sidebar.section.afterlife", icon: null as unknown as typeof Building2, type: "route" as const, emoji: "🕊️", iconColor: "text-purple-600 bg-purple-50" },
-  { id: "/clinic-owners", key: "sidebar.section.forClinics", icon: Stethoscope, type: "route" as const, emoji: null, iconColor: "text-teal-600 bg-teal-50" },
+  { id: "marketplace", key: "sidebar.section.browseClinics", icon: Building2, type: "scroll" as const, emoji: null as string | null, iconColor: "text-sky-600 bg-sky-50", disabled: false },
+  { id: "/explore-health", key: "sidebar.section.bmiCalculator", icon: Heart, type: "route" as const, emoji: null, iconColor: "text-rose-500 bg-rose-50", disabled: true },
+  { id: "/wellness-talks", key: "sidebar.section.wellnessTalks", icon: Mic, type: "route" as const, emoji: null, iconColor: "text-violet-500 bg-violet-50", disabled: false },
+  { id: "/beyond-clinic", key: "sidebar.section.otherProviders", icon: Sparkles, type: "route" as const, emoji: null, iconColor: "text-amber-500 bg-amber-50", disabled: false },
+  { id: "/afterlife", key: "sidebar.section.afterlife", icon: null as unknown as typeof Building2, type: "route" as const, emoji: "🕊️", iconColor: "text-purple-600 bg-purple-50", disabled: false },
+  { id: "/clinic-owners", key: "sidebar.section.forClinics", icon: Stethoscope, type: "route" as const, emoji: null, iconColor: "text-teal-600 bg-teal-50", disabled: false },
 ];
 
 const FIRST_VISIT_KEY = "clynicq_sidebar_hint_shown";
@@ -45,6 +45,7 @@ export const SectionSidebar = () => {
   }, []);
 
   const handleClick = (item: typeof sections[number]) => {
+    if (item.disabled) return;
     setOpen(false);
     if ((item.type as string) === "route") {
       navigate(item.id);
@@ -132,17 +133,27 @@ export const SectionSidebar = () => {
                 <button
                   key={s.id}
                   onClick={() => handleClick(s)}
-                  className="group w-full flex items-center justify-between p-4 rounded-2xl bg-muted/40 border border-border/50 text-left transition-all hover:bg-muted/60 active:scale-[0.98]"
+                  disabled={s.disabled}
+                  className={cn(
+                    "group w-full flex items-center justify-between p-4 rounded-2xl border text-left transition-all",
+                    s.disabled
+                      ? "bg-muted/30 border-border/30 opacity-60 cursor-not-allowed"
+                      : "bg-muted/40 border-border/50 hover:bg-muted/60 active:scale-[0.98]"
+                  )}
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                  <span className={cn("flex h-9 w-9 items-center justify-center rounded-xl shrink-0", s.iconColor || "bg-primary/10 text-primary")}>
-                    {s.emoji ? <span className="text-base leading-none">{s.emoji}</span> : <Icon className="h-4 w-4" />}
-                  </span>
-                    <span className="text-sm font-semibold text-foreground/90 group-hover:text-foreground break-words leading-snug">
+                    <span className={cn("flex h-9 w-9 items-center justify-center rounded-xl shrink-0", s.iconColor || "bg-primary/10 text-primary")}>
+                      {s.emoji ? <span className="text-base leading-none">{s.emoji}</span> : <Icon className="h-4 w-4" />}
+                    </span>
+                    <span className={cn("text-sm font-semibold break-words leading-snug", s.disabled ? "text-muted-foreground" : "text-foreground/90 group-hover:text-foreground")}>
                       {t(s.key)}
                     </span>
                   </div>
-                  <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
+                  {s.disabled ? (
+                    <Lock className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                  ) : (
+                    <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
+                  )}
                 </button>
               );
             })}
