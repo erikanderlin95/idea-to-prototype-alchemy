@@ -137,7 +137,7 @@ export const SectionSidebar = () => {
                   className={cn(
                     "group w-full flex items-center justify-between p-4 rounded-2xl border text-left transition-all",
                     s.disabled
-                      ? "bg-muted/30 border-border/30 opacity-60 cursor-not-allowed"
+                      ? "bg-muted/30 border-border/30 cursor-not-allowed"
                       : "bg-muted/40 border-border/50 hover:bg-muted/60 active:scale-[0.98]"
                   )}
                 >
