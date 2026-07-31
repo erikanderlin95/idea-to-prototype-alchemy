@@ -145,12 +145,12 @@ export const SectionSidebar = () => {
                     <span className={cn("flex h-9 w-9 items-center justify-center rounded-xl shrink-0", s.iconColor || "bg-primary/10 text-primary")}>
                       {s.emoji ? <span className="text-base leading-none">{s.emoji}</span> : <Icon className="h-4 w-4" />}
                     </span>
-                    <span className={cn("text-sm font-semibold break-words leading-snug", s.disabled ? "text-muted-foreground" : "text-foreground/90 group-hover:text-foreground")}>
+                    <span className={cn("text-sm font-semibold break-words leading-snug", s.disabled ? "text-foreground" : "text-foreground/90 group-hover:text-foreground")}>
                       {t(s.key)}
                     </span>
                   </div>
                   {s.disabled ? (
-                    <Lock className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                    <Lock className="h-3.5 w-3.5 shrink-0 text-foreground" />
                   ) : (
                     <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
                   )}
