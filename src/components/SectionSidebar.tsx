@@ -133,17 +133,27 @@ export const SectionSidebar = () => {
                 <button
                   key={s.id}
                   onClick={() => handleClick(s)}
-                  className="group w-full flex items-center justify-between p-4 rounded-2xl bg-muted/40 border border-border/50 text-left transition-all hover:bg-muted/60 active:scale-[0.98]"
+                  disabled={s.disabled}
+                  className={cn(
+                    "group w-full flex items-center justify-between p-4 rounded-2xl border text-left transition-all",
+                    s.disabled
+                      ? "bg-muted/30 border-border/30 opacity-60 cursor-not-allowed"
+                      : "bg-muted/40 border-border/50 hover:bg-muted/60 active:scale-[0.98]"
+                  )}
                 >
                   <div className="flex items-center gap-3 min-w-0">
-                  <span className={cn("flex h-9 w-9 items-center justify-center rounded-xl shrink-0", s.iconColor || "bg-primary/10 text-primary")}>
-                    {s.emoji ? <span className="text-base leading-none">{s.emoji}</span> : <Icon className="h-4 w-4" />}
-                  </span>
-                    <span className="text-sm font-semibold text-foreground/90 group-hover:text-foreground break-words leading-snug">
+                    <span className={cn("flex h-9 w-9 items-center justify-center rounded-xl shrink-0", s.iconColor || "bg-primary/10 text-primary")}>
+                      {s.emoji ? <span className="text-base leading-none">{s.emoji}</span> : <Icon className="h-4 w-4" />}
+                    </span>
+                    <span className={cn("text-sm font-semibold break-words leading-snug", s.disabled ? "text-muted-foreground" : "text-foreground/90 group-hover:text-foreground")}>
                       {t(s.key)}
                     </span>
                   </div>
-                  <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
+                  {s.disabled ? (
+                    <Lock className="h-3.5 w-3.5 shrink-0 text-muted-foreground" />
+                  ) : (
+                    <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
+                  )}
                 </button>
               );
             })}
