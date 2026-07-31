@@ -45,6 +45,7 @@ export const SectionSidebar = () => {
   }, []);
 
   const handleClick = (item: typeof sections[number]) => {
+    if (item.disabled) return;
     setOpen(false);
     if ((item.type as string) === "route") {
       navigate(item.id);
