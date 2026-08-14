@@ -7,6 +7,7 @@ import { ManagedCareModal } from "@/components/ManagedCareModal";
 import { Button } from "@/components/ui/button";
 import { MessageCircle } from "lucide-react";
 import aellanPhoto from "@/assets/aellan-photo.jpg";
+import erikaPhotoAsset from "@/assets/erika-photo.jpg.asset.json";
 
 interface Concierge {
   id: string;
@@ -118,8 +119,12 @@ const OrganizationProfile = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              <div className="w-14 h-14 rounded-xl overflow-hidden ring-2 ring-[#D0DCE6] shrink-0 bg-[#F0F5FA] flex items-center justify-center">
-                <span className="text-[#5A7089] text-[13px] font-semibold">EAL</span>
+              <div className="w-14 h-14 rounded-xl overflow-hidden ring-2 ring-[#D0DCE6] shrink-0 bg-[#F0F5FA]">
+                <img
+                  src={erikaPhotoAsset.url}
+                  alt="Erika Ander Lin"
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div className="min-w-0">
                 <p className="text-[15px] font-semibold text-[#0D2E4A] truncate">
