@@ -1,4 +1,3 @@
-import { ArrowRight } from "lucide-react";
 import afterlifeBroLogo from "@/assets/afterlifebro-logo.png";
 
 const BRAND_COLOR = "#4F8669";
@@ -9,7 +8,7 @@ const AfterlifeBroCard = () => {
       href="https://www.afterlifebro.com"
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-center gap-3 rounded-xl border border-[#4F8669]/50 bg-white p-3 shadow-[0_2px_12px_rgba(79,134,105,0.08)] hover:shadow-[0_4px_16px_rgba(79,134,105,0.14)] hover:border-[#4F8669]/70 transition-all duration-300 active:scale-[0.99]"
+      className="group flex items-center gap-3 w-full max-w-[340px] sm:max-w-[360px] mx-auto rounded-lg border border-[#4F8669]/50 bg-white p-3 sm:p-4 shadow-[0_2px_12px_rgba(79,134,105,0.08)] hover:shadow-[0_4px_16px_rgba(79,134,105,0.14)] hover:border-[#4F8669]/70 transition-all duration-300 active:scale-[0.99]"
       aria-label="Visit The Afterlife Bro"
     >
       {/* Logo */}
@@ -29,11 +28,6 @@ const AfterlifeBroCard = () => {
         <p className="text-[12px] sm:text-[13px] text-[#7A6B8A] truncate">
           Independent Afterlife Consultant
         </p>
-      </div>
-
-      {/* Arrow */}
-      <div className="shrink-0 flex items-center justify-center h-8 w-8 rounded-full bg-[#4F8669]/10 text-[#4F8669] group-hover:bg-[#4F8669] group-hover:text-white transition-colors duration-300">
-        <ArrowRight className="h-4 w-4" />
       </div>
     </a>
   );
