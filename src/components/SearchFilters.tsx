@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/sheet";
 import { Search, SlidersHorizontal, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export interface ClinicFilters {
   openNow: boolean;
