@@ -219,11 +219,16 @@ export const SearchFilters = ({
           ))}
         </div>
         {showRightFade && (
-          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center justify-end pr-1 w-16 bg-gradient-to-l from-background via-background/80 to-transparent">
-            <div className="pointer-events-auto flex items-center justify-center h-6 w-6 rounded-full bg-primary/10 text-primary shadow-sm">
+          <button
+            type="button"
+            onClick={() => scrollRef.current?.scrollBy({ left: 160, behavior: "smooth" })}
+            className="absolute inset-y-0 right-0 flex items-center justify-end pr-1 w-16 bg-gradient-to-l from-background via-background/80 to-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-r-md"
+            aria-label="Scroll categories"
+          >
+            <span className="flex items-center justify-center h-6 w-6 rounded-full bg-primary/10 text-primary shadow-sm">
               <ChevronRight className="h-4 w-4" />
-            </div>
-          </div>
+            </span>
+          </button>
         )}
       </div>
     </div>
