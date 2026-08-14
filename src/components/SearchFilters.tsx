@@ -200,7 +200,10 @@ export const SearchFilters = ({
 
       {/* Category chips */}
       <div className="relative">
-        <div className="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 scrollbar-hide">
+        <div
+          ref={scrollRef}
+          className="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 scrollbar-hide"
+        >
           {categories.map((category) => (
             <Badge
               key={category.key}
@@ -215,7 +218,9 @@ export const SearchFilters = ({
             </Badge>
           ))}
         </div>
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background to-transparent" aria-hidden="true" />
+        {showRightFade && (
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background to-transparent" aria-hidden="true" />
+        )}
       </div>
     </div>
   );
