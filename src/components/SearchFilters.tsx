@@ -177,15 +177,18 @@ export const SearchFilters = ({
       </Sheet>
 
       {/* Category chips */}
-      <div className="flex items-center gap-2 flex-wrap pt-1">
+      <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-2 pt-1">
         {categories.map((category) => (
           <Badge
             key={category.key}
             variant={activeCategory === category.key ? "default" : "outline"}
-            className="cursor-pointer px-4 py-2 text-sm hover:bg-primary hover:text-primary-foreground transition-colors"
+            className="cursor-pointer px-2 py-2 text-xs sm:text-sm hover:bg-primary hover:text-primary-foreground transition-colors h-10 flex items-center justify-center text-center"
             onClick={() => handleCategoryClick(category.key)}
           >
-            {category.emoji && <span className="mr-1" aria-hidden="true">{category.emoji}</span>}{category.label}
+            <span className="inline-flex items-center gap-1">
+              {category.emoji && <span aria-hidden="true">{category.emoji}</span>}
+              <span>{category.label}</span>
+            </span>
           </Badge>
         ))}
       </div>
