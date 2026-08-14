@@ -8,7 +8,7 @@ const AfterlifeBroCard = () => {
       href="https://www.afterlifebro.com"
       target="_blank"
       rel="noopener noreferrer"
-      className="group flex items-center gap-3 w-full max-w-[340px] sm:max-w-[360px] mx-auto rounded-lg border border-[#4F8669]/50 bg-white p-3 sm:p-4 shadow-[0_2px_12px_rgba(79,134,105,0.08)] hover:shadow-[0_4px_16px_rgba(79,134,105,0.14)] hover:border-[#4F8669]/70 transition-all duration-300 active:scale-[0.99]"
+      className="group flex items-center gap-3 w-full rounded-lg border border-[#4F8669]/50 bg-white p-3 sm:p-4 shadow-[0_2px_12px_rgba(79,134,105,0.08)] hover:shadow-[0_4px_16px_rgba(79,134,105,0.14)] hover:border-[#4F8669]/70 transition-all duration-300 active:scale-[0.99]"
       aria-label="Visit The Afterlife Bro"
     >
       {/* Logo */}
