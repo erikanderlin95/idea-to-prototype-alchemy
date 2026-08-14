@@ -4,56 +4,108 @@ import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ManagedCareModal } from "@/components/ManagedCareModal";
-import { OrgHero } from "@/components/org/OrgHero";
-import { OrgServicesGrid } from "@/components/org/OrgServicesGrid";
-import { OrgConciergeTeam } from "@/components/org/OrgConciergeTeam";
-
-import { OrgOtherOfferings } from "@/components/org/OrgOtherOfferings";
+import { Button } from "@/components/ui/button";
+import { MessageCircle } from "lucide-react";
+import aellanPhoto from "@/assets/aellan-photo.jpg";
 
 interface Concierge {
   id: string;
   name: string;
   title: string;
-  photo_url: string | null;
-  short_bio: string | null;
 }
 
 const OrganizationProfile = () => {
   const { t } = useLanguage();
-  const [concierges, setConcierges] = useState<Concierge[]>([]);
+  const [concierge, setConcierge] = useState<Concierge | null>(null);
   const [loading, setLoading] = useState(true);
   const [showIntakeModal, setShowIntakeModal] = useState(false);
 
   useEffect(() => {
-    const fetchConcierges = async () => {
+    const fetchConcierge = async () => {
       const { data } = await supabase
         .from("consultants")
-        .select("id, name, title, photo_url, short_bio")
+        .select("id, name, title")
         .eq("is_active", true)
-        .order("name");
-      if (data) setConcierges(data.filter(c => c.name.toLowerCase().includes("aellan")));
+        .ilike("name", "%aellan%")
+        .maybeSingle();
+      setConcierge(
+        data || {
+          id: "aellan",
+          name: "Aellan Choo",
+          title: "Medical Concierge",
+        }
+      );
       setLoading(false);
     };
-    fetchConcierges();
+    fetchConcierge();
   }, []);
 
   return (
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <OrgHero onStartIntake={() => setShowIntakeModal(true)} />
+      <section className="relative pt-20 pb-6 px-4 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-[#EDF3F8] via-white to-white" />
+        <div className="max-w-3xl mx-auto text-center relative">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E6F7FA]/80 text-[#0E9AAB] mb-3 border border-[#D4F1F5] backdrop-blur-sm">
+            <span className="text-sm font-medium tracking-wide">{t("org.subtitle")}</span>
+          </div>
+          <h1 className="text-3xl md:text-4xl font-bold text-[#0D2E4A] tracking-tight">
+            {t("org.name")}
+          </h1>
+        </div>
+      </section>
 
-      <OrgServicesGrid />
+      <section className="py-4 px-4">
+        <div className="max-w-[380px] mx-auto w-full">
+          <div className="rounded-2xl border border-[#D0DCE6] bg-white/90 shadow-[0_4px_20px_rgba(13,46,74,0.06)] p-4 overflow-hidden">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#E6F7FA] text-[#0E9AAB] text-[11px] font-semibold">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#0E9AAB]/70 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#0E9AAB]" />
+                </span>
+                {t("org.active")}
+              </span>
+              <h2 className="text-[17px] font-bold text-[#0D2E4A]">{t("org.hereToHelp")}</h2>
+            </div>
 
-      <OrgConciergeTeam
-        concierges={concierges}
-        loading={loading}
-        onConnect={() => setShowIntakeModal(true)}
-      />
+            <p className="text-[13px] text-[#4A5D6E] leading-snug mb-4">
+              {t("org.helpDesc")}
+            </p>
 
-      <OrgOtherOfferings />
-
-      
+            <div className="flex items-center gap-2">
+              <div className="w-14 h-14 rounded-xl overflow-hidden ring-2 ring-[#D0DCE6] shrink-0 bg-[#F0F5FA]">
+                {loading ? (
+                  <div className="w-full h-full animate-pulse bg-[#D0DCE6]" />
+                ) : (
+                  <img
+                    src={aellanPhoto}
+                    alt={concierge?.name || "Aellan Choo"}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </div>
+              <div className="min-w-0">
+                <p className="text-[15px] font-semibold text-[#0D2E4A] truncate">
+                  {concierge?.name || "Aellan Choo"}
+                </p>
+                <p className="text-[13px] text-[#4A5D6E] truncate">
+                  {concierge?.title || "Medical Concierge"}
+                </p>
+              </div>
+              <Button
+                size="icon"
+                onClick={() => setShowIntakeModal(true)}
+                className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-[#0E9AAB] hover:bg-[#0C8595] text-white transition-all active:scale-[0.97] shadow-[0_2px_8px_rgba(14,154,171,0.25)] shrink-0 ml-3"
+                aria-label={t("org.contactCoordinator")}
+              >
+                <MessageCircle className="h-5 w-5" />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <ManagedCareModal
         open={showIntakeModal}
