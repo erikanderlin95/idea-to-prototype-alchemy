@@ -199,16 +199,16 @@ export const SearchFilters = ({
       </Sheet>
 
       {/* Category chips */}
-      <div className="relative">
+      <div className="relative -mr-4 md:-mr-6">
         <div
           ref={scrollRef}
-          className="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 scrollbar-hide"
+          className="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 pr-10 scrollbar-hide snap-x snap-mandatory scroll-smooth"
         >
           {categories.map((category) => (
             <Badge
               key={category.key}
               variant={activeCategory === category.key ? "default" : "outline"}
-              className="cursor-pointer whitespace-nowrap px-2.5 py-1.5 text-xs hover:bg-primary hover:text-primary-foreground transition-colors h-8 inline-flex items-center justify-center shrink-0"
+              className="cursor-pointer whitespace-nowrap px-2.5 py-1.5 text-xs hover:bg-primary hover:text-primary-foreground transition-colors h-8 inline-flex items-center justify-center shrink-0 snap-start"
               onClick={() => handleCategoryClick(category.key)}
             >
               <span className="inline-flex items-center gap-1">
@@ -219,7 +219,16 @@ export const SearchFilters = ({
           ))}
         </div>
         {showRightFade && (
-          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background to-transparent" aria-hidden="true" />
+          <button
+            type="button"
+            onClick={() => scrollRef.current?.scrollBy({ left: 160, behavior: "smooth" })}
+            className="absolute inset-y-0 right-0 flex items-center justify-end pr-1 w-16 bg-gradient-to-l from-background via-background/80 to-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-r-md"
+            aria-label="Scroll categories"
+          >
+            <span className="flex items-center justify-center h-6 w-6 rounded-full bg-primary/10 text-primary shadow-sm">
+              <ChevronRight className="h-4 w-4" />
+            </span>
+          </button>
         )}
       </div>
     </div>
