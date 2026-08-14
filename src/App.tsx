@@ -41,6 +41,7 @@ import WellnessTalksPage from "./pages/WellnessTalksPage";
 import BeyondClinicPage from "./pages/BeyondClinicPage";
 import ClinicOwnersPage from "./pages/ClinicOwnersPage";
 import MyClynicQPage from "./pages/MyClynicQPage";
+import SeniorDayCare from "./pages/SeniorDayCare";
 import { SectionSidebar } from "@/components/SectionSidebar";
 
 const queryClient = new QueryClient();
