@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import AfterlifeCard from "@/components/AfterlifeCard";
+import AfterlifeBroCard from "@/components/AfterlifeBroCard";
 import { Sparkles, Link as LinkIcon } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import drKhwajaAsif from "@/assets/dr-khwaja-asif.jpg.asset.json";
@@ -108,47 +109,45 @@ const AfterlifeServicesPage = () => {
         </div>
       </section>
 
-      {/* Provider cards */}
+      {/* Provider cards — centered column layout */}
       <section className="py-3 px-4">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {providers.map((provider) => (
-              <AfterlifeCard
-                key={provider.slug}
-                slug={provider.slug}
-                name={provider.name}
-                {...(provider.subtitle ? { subtitle: provider.subtitle } : {})}
-                description={provider.description}
-              />
-            ))}
+        <div className="max-w-[380px] mx-auto w-full space-y-3">
+          {/* Afterlife Bro partner card */}
+          <AfterlifeBroCard />
 
-          </div>
+          {providers.map((provider) => (
+            <AfterlifeCard
+              key={provider.slug}
+              slug={provider.slug}
+              name={provider.name}
+              {...(provider.subtitle ? { subtitle: provider.subtitle } : {})}
+              description={provider.description}
+            />
+          ))}
 
           {/* Compact blog preview — secondary to the provider card */}
-          <div className="max-w-[380px] mx-auto w-full mt-3">
-            <a
-              href="https://www.nirvanalife.com.sg/why-nirvana-partners-with-healthcare-professionals-singapore-2026/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex items-stretch gap-2.5 rounded-lg border border-[#E8DDF0] bg-white/80 p-2 hover:bg-white hover:border-[#DDD0EA] transition-colors"
-            >
-              <img
-                src="https://www.nirvanalife.com.sg/wp-content/uploads/2026/07/Why-Nirvana-Memorial-Garden-Partners-with-Healthcare-Professionals-Singapore-2026.png"
-                alt="Nirvana Memorial Garden partnering with healthcare professionals in Singapore"
-                loading="lazy"
-                className="w-[76px] h-[56px] rounded-md object-cover shrink-0"
-              />
-              <div className="min-w-0 flex flex-col justify-center">
-                <p className="text-[12px] font-semibold text-[#2D1B4E] leading-snug line-clamp-2">
-                  Why Nirvana Memorial Garden Partners With Healthcare Professionals In Singapore (2026)
-                </p>
-                <span className="mt-0.5 inline-flex items-center gap-1 text-[10px] text-[#8A7A9A]">
-                  <LinkIcon className="h-2.5 w-2.5" />
-                  nirvanalife.com.sg
-                </span>
-              </div>
-            </a>
-          </div>
+          <a
+            href="https://www.nirvanalife.com.sg/why-nirvana-partners-with-healthcare-professionals-singapore-2026/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group flex items-stretch gap-2.5 rounded-lg border border-[#E8DDF0] bg-white/80 p-2 hover:bg-white hover:border-[#DDD0EA] transition-colors"
+          >
+            <img
+              src="https://www.nirvanalife.com.sg/wp-content/uploads/2026/07/Why-Nirvana-Memorial-Garden-Partners-with-Healthcare-Professionals-Singapore-2026.png"
+              alt="Nirvana Memorial Garden partnering with healthcare professionals in Singapore"
+              loading="lazy"
+              className="w-[76px] h-[56px] rounded-md object-cover shrink-0"
+            />
+            <div className="min-w-0 flex flex-col justify-center">
+              <p className="text-[12px] font-semibold text-[#2D1B4E] leading-snug line-clamp-2">
+                Why Nirvana Memorial Garden Partners With Healthcare Professionals In Singapore (2026)
+              </p>
+              <span className="mt-0.5 inline-flex items-center gap-1 text-[10px] text-[#8A7A9A]">
+                <LinkIcon className="h-2.5 w-2.5" />
+                nirvanalife.com.sg
+              </span>
+            </div>
+          </a>
         </div>
       </section>
 
