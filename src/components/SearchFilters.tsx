@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/sheet";
 import { Search, SlidersHorizontal, ChevronRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export interface ClinicFilters {
   openNow: boolean;
@@ -43,6 +43,28 @@ export const SearchFilters = ({
     booking: false,
   });
   const [draftFilters, setDraftFilters] = useState<ClinicFilters>(filters);
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [showRightFade, setShowRightFade] = useState(true);
+
+  const checkScroll = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const hasOverflow = el.scrollWidth > el.clientWidth;
+    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
+    setShowRightFade(hasOverflow && !atEnd);
+  };
+
+  useEffect(() => {
+    checkScroll();
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener("scroll", checkScroll);
+    window.addEventListener("resize", checkScroll);
+    return () => {
+      el.removeEventListener("scroll", checkScroll);
+      window.removeEventListener("resize", checkScroll);
+    };
+  }, []);
 
   useEffect(() => {
     setActiveCategory(defaultCategory);
@@ -177,20 +199,28 @@ export const SearchFilters = ({
       </Sheet>
 
       {/* Category chips */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 scrollbar-hide">
-        {categories.map((category) => (
-          <Badge
-            key={category.key}
-            variant={activeCategory === category.key ? "default" : "outline"}
-            className="cursor-pointer whitespace-nowrap px-2.5 py-1.5 text-xs hover:bg-primary hover:text-primary-foreground transition-colors h-8 inline-flex items-center justify-center shrink-0"
-            onClick={() => handleCategoryClick(category.key)}
-          >
-            <span className="inline-flex items-center gap-1">
-              {category.emoji && <span aria-hidden="true">{category.emoji}</span>}
-              <span>{category.label}</span>
-            </span>
-          </Badge>
-        ))}
+      <div className="relative">
+        <div
+          ref={scrollRef}
+          className="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 scrollbar-hide"
+        >
+          {categories.map((category) => (
+            <Badge
+              key={category.key}
+              variant={activeCategory === category.key ? "default" : "outline"}
+              className="cursor-pointer whitespace-nowrap px-2.5 py-1.5 text-xs hover:bg-primary hover:text-primary-foreground transition-colors h-8 inline-flex items-center justify-center shrink-0"
+              onClick={() => handleCategoryClick(category.key)}
+            >
+              <span className="inline-flex items-center gap-1">
+                {category.emoji && <span aria-hidden="true">{category.emoji}</span>}
+                <span>{category.label}</span>
+              </span>
+            </Badge>
+          ))}
+        </div>
+        {showRightFade && (
+          <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background to-transparent" aria-hidden="true" />
+        )}
       </div>
     </div>
   );
