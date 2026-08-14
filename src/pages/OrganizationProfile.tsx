@@ -129,7 +129,7 @@ const OrganizationProfile = () => {
                   {t("org.contact2Title")}
                 </p>
                 <p className="text-[12px] text-[#5A7089] font-medium truncate">
-                  {t("org.name")}
+                  {t("org.contact2Company")}
                 </p>
               </div>
               <a

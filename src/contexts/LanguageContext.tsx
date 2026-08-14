@@ -554,6 +554,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Organization (NYMG)
     "org.name": "Nanyang Medical Group",
+    "org.contact2Company": "ClynicQ",
     "org.subtitle": "Managed Healthcare Provider",
     "org.tagline": "Integrated healthcare network delivering coordinated patient care across multiple disciplines.",
     "org.highlight1": "Multi-Clinic Network",
@@ -1549,6 +1550,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Organization (NYMG)
     "org.name": "南洋医疗集团",
+    "org.contact2Company": "ClynicQ",
     "org.subtitle": "管理式医疗服务提供商",
     "org.tagline": "整合式医疗网络，跨多学科提供协调的患者护理。",
     "org.highlight1": "多诊所网络",
@@ -2491,6 +2493,7 @@ const translations: Record<Language, Record<string, string>> = {
     "admin.consultantUpdated": "Perunding berjaya dikemaskini",
     "admin.consultantCreated": "Perunding berjaya dicipta",
     "org.name": "Nanyang Medical Group",
+    "org.contact2Company": "ClynicQ",
     "org.subtitle": "Penyedia Penjagaan Kesihatan Terurus",
     "org.tagline": "Rangkaian penjagaan kesihatan bersepadu yang menyediakan penjagaan pesakit yang terkoordinasi merentasi pelbagai disiplin.",
     "org.highlight1": "Rangkaian Pelbagai Klinik",
@@ -3405,6 +3408,7 @@ const translations: Record<Language, Record<string, string>> = {
     "admin.consultantUpdated": "ஆலோசகர் வெற்றிகரமாக புதுப்பிக்கப்பட்டார்",
     "admin.consultantCreated": "ஆலோசகர் வெற்றிகரமாக உருவாக்கப்பட்டது",
     "org.name": "நன்யாங் மருத்துவக் குழுமம்",
+    "org.contact2Company": "ClynicQ",
     "org.subtitle": "மேலாண்மை செய்யப்படும் சுகாதார வழங்குநர்",
     "org.tagline": "பல துறைகளில் ஒருங்கிணைந்த நோயாளி பராமரிப்பை வழங்கும் ஒருங்கிணைந்த சுகாதார வலையமைப்பு.",
     "org.highlight1": "பல-கிளினிக் வலையமைப்பு",
