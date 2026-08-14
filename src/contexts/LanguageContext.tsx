@@ -691,6 +691,8 @@ const translations: Record<Language, Record<string, string>> = {
     "org.contactCoordinator": "Contact Coordinator",
     "org.hereToHelp": "🤝 Support When You Need It",
     "org.helpDesc": "Need help navigating care? Connect with our medical concierge for guidance and next steps.",
+    "org.contact2Name": "Erika Ander Lin",
+    "org.contact2Title": "Care & Clinic Relations Lead",
 
     // SHA
     "sha.badge": "Panel of Specialists",
@@ -1684,6 +1686,8 @@ const translations: Record<Language, Record<string, string>> = {
     "org.contactCoordinator": "联系协调员",
     "org.hereToHelp": "🤝 需要时为您提供支持",
     "org.helpDesc": "需要帮助就医？联系我们的医疗礼宾，获取指导和下一步建议。",
+    "org.contact2Name": "Erika Ander Lin",
+    "org.contact2Title": "护理与诊所关系负责人",
 
     // SHA
     "sha.badge": "专科医生团队",
@@ -2624,6 +2628,8 @@ const translations: Record<Language, Record<string, string>> = {
     "org.contactCoordinator": "Hubungi Penyelaras",
     "org.hereToHelp": "🤝 Sokongan Apabila Anda Memerlukannya",
     "org.helpDesc": "Perlukan bantuan menavigasi penjagaan? Hubungi concierge perubatan kami untuk bimbingan dan langkah seterusnya.",
+    "org.contact2Name": "Erika Ander Lin",
+    "org.contact2Title": "Ketua Penjagaan & Hubungan Klinik",
     "sha.badge": "Panel Pakar",
     "sha.name": "Singapore HealthCare Alliance",
     "sha.heroDesc": "Akses panel luas doktor pakar merentasi pelbagai disiplin di Singapura.",
@@ -3536,6 +3542,8 @@ const translations: Record<Language, Record<string, string>> = {
     "org.contactCoordinator": "ஒருங்கிணைப்பாளரைத் தொடர்பு கொள்ளுங்கள்",
     "org.hereToHelp": "🤝 உங்களுக்கு தேவையான போது ஆதரவு",
     "org.helpDesc": "மருத்துவ பராமரிப்பைக் கண்டறிய உதவி வேண்டுமா? வழிகாட்டுதலுக்கும் அடுத்த நடவடிக்கைகளுக்கும் எங்கள் மருத்துவ concierge-ஐ தொடர்புகொள்ளுங்கள்.",
+    "org.contact2Name": "Erika Ander Lin",
+    "org.contact2Title": "பராமரிப்பு & மருத்துவமனை உறவுகள் தலைவர்",
     "sha.badge": "நிபுணர்களின் குழு",
     "sha.name": "சிங்கப்பூர் சுகாதாரக் கூட்டமைப்பு",
     "sha.heroDesc": "சிங்கப்பூரில் பல துறைகளில் உள்ள சிறப்பு மருத்துவர்களின் பரந்த குழுவை அணுகுங்கள்.",
