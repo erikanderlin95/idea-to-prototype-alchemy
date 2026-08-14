@@ -17,9 +17,11 @@ const AfterlifeServicesPage = () => {
     {
       slug: "nirvana",
       name: "Nirvana",
-      description: t("afterlife.desc"),
+      subtitle: t("afterlife.card.subtitle"),
+      description: t("afterlife.card.services"),
     },
   ];
+
 
   return (
     <div className="min-h-screen bg-background">
