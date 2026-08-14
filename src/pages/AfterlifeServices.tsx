@@ -56,7 +56,7 @@ const AfterlifeServicesPage = () => {
       {/* 24/7 CCOD Doctor — above provider cards */}
       <section className="py-3 px-4">
         <div className="max-w-[380px] mx-auto w-full">
-          <div className="rounded-2xl border border-[#E8DDF0] bg-white/90 shadow-[0_4px_20px_rgba(45,27,78,0.06)] p-4 overflow-hidden">
+          <div className="rounded-lg border border-[#E8DDF0] bg-white/90 shadow-[0_4px_20px_rgba(45,27,78,0.06)] p-4 overflow-hidden">
             <div className="flex items-center gap-2 mb-3">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F0E6F8] text-[#7A6093] text-[11px] font-semibold">
                 <span className="relative flex h-2 w-2">
