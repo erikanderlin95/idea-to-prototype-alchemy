@@ -693,7 +693,7 @@ const translations: Record<Language, Record<string, string>> = {
     "org.hereToHelp": "🤝 Support When You Need It",
     "org.helpDesc": "Need help navigating care? Connect with our medical concierge for guidance and next steps.",
     "org.contact2Name": "Erika Ander Lin",
-    "org.contact2Title": "Care & Clinic Relations Lead",
+    "org.contact2Title": "Care & Clinic Relations",
 
     // SHA
     "sha.badge": "Panel of Specialists",
@@ -1689,7 +1689,7 @@ const translations: Record<Language, Record<string, string>> = {
     "org.hereToHelp": "🤝 需要时为您提供支持",
     "org.helpDesc": "需要帮助就医？联系我们的医疗礼宾，获取指导和下一步建议。",
     "org.contact2Name": "Erika Ander Lin",
-    "org.contact2Title": "护理与诊所关系负责人",
+    "org.contact2Title": "护理与诊所关系",
 
     // SHA
     "sha.badge": "专科医生团队",
@@ -2632,7 +2632,7 @@ const translations: Record<Language, Record<string, string>> = {
     "org.hereToHelp": "🤝 Sokongan Apabila Anda Memerlukannya",
     "org.helpDesc": "Perlukan bantuan menavigasi penjagaan? Hubungi concierge perubatan kami untuk bimbingan dan langkah seterusnya.",
     "org.contact2Name": "Erika Ander Lin",
-    "org.contact2Title": "Ketua Penjagaan & Hubungan Klinik",
+    "org.contact2Title": "Penjagaan & Hubungan Klinik",
     "sha.badge": "Panel Pakar",
     "sha.name": "Singapore HealthCare Alliance",
     "sha.heroDesc": "Akses panel luas doktor pakar merentasi pelbagai disiplin di Singapura.",
