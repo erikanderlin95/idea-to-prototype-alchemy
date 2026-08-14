@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import AfterlifeCard from "@/components/AfterlifeCard";
+import AfterlifeBroCard from "@/components/AfterlifeBroCard";
 import { Sparkles, Link as LinkIcon } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import drKhwajaAsif from "@/assets/dr-khwaja-asif.jpg.asset.json";
