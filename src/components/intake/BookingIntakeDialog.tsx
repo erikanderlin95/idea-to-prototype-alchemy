@@ -121,42 +121,25 @@ export const BookingIntakeDialog = ({
       const caseId = response?.case_id || "";
       setBookingCaseId(caseId);
 
-      if (useWhatsApp) {
+      let redirectUrl = "";
+      if (useWhatsApp || (!bookingUrl && clinicPhone)) {
         const message = encodeURIComponent(
           `Hi, I'd like to book an appointment.\nName: ${leadName.trim()}\nCase ID: ${caseId}`,
         );
-        setBookingRedirectUrl(`https://wa.me/${clinicPhone}?text=${message}`);
-        setBookingRedirectType("whatsapp");
+        redirectUrl = `https://wa.me/${clinicPhone}?text=${message}`;
       } else if (bookingUrl) {
         const separator = bookingUrl.includes("?") ? "&" : "?";
-        setBookingRedirectUrl(`${bookingUrl}${separator}case_id=${encodeURIComponent(caseId)}`);
-        setBookingRedirectType("web");
-      } else if (clinicPhone) {
-        const message = encodeURIComponent(
-          `Hi, I'd like to book an appointment.\nName: ${leadName.trim()}\nCase ID: ${caseId}`,
-        );
-        setBookingRedirectUrl(`https://wa.me/${clinicPhone}?text=${message}`);
-        setBookingRedirectType("whatsapp");
-      } else {
-        setBookingRedirectUrl("");
-        setBookingRedirectType("none");
+        redirectUrl = `${bookingUrl}${separator}case_id=${encodeURIComponent(caseId)}`;
       }
 
       onOpenChange(false);
-      setShowBookingConfirm(true);
+      if (redirectUrl) window.open(redirectUrl, "_blank");
     } catch (err) {
       console.error("Lead save error:", err);
       toast.error("Something went wrong. Please try again.");
     } finally {
       setLeadSubmitting(false);
     }
-  };
-
-  const handleBookingRedirect = () => {
-    if (bookingRedirectUrl) {
-      window.open(bookingRedirectUrl, "_blank");
-    }
-    setShowBookingConfirm(false);
   };
 
   return (
@@ -275,64 +258,6 @@ export const BookingIntakeDialog = ({
         </DialogContent>
       </Dialog>
 
-      {/* Confirmation */}
-      <Dialog open={showBookingConfirm} onOpenChange={setShowBookingConfirm}>
-        <DialogContent className="max-w-sm">
-          <DialogHeader>
-            <DialogTitle className="text-base flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-emerald-500" />
-              Redirecting to Clinic Booking
-            </DialogTitle>
-          </DialogHeader>
-          <div className="space-y-3">
-            <div className="text-center p-4 border-2 border-primary/30 rounded-lg bg-primary/5">
-              <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide mb-1">Case ID</p>
-              <p className="text-2xl font-mono font-black tracking-[0.15em] text-primary">{bookingCaseId}</p>
-            </div>
-
-            <div className="space-y-1.5 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Patient</span>
-                <span className="font-medium">{leadName}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Clinic</span>
-                <span className="font-medium">{clinicName}</span>
-              </div>
-            </div>
-
-            <p className="text-xs text-muted-foreground text-center">
-              Your details have been recorded. Continue to complete your booking with the clinic.
-            </p>
-
-            <Button
-              variant="outline"
-              size="sm"
-              className="w-full text-xs"
-              onClick={() => {
-                navigator.clipboard.writeText(bookingCaseId);
-                toast.success("Case ID copied!");
-              }}
-            >
-              <Copy className="mr-1.5 h-3.5 w-3.5" />
-              Copy Case ID
-            </Button>
-
-            <Button
-              className="w-full bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold h-10"
-              onClick={handleBookingRedirect}
-            >
-              {bookingRedirectType === "whatsapp" ? (
-                <><MessageCircle className="mr-1.5 h-4 w-4" />Continue via WhatsApp</>
-              ) : bookingRedirectType === "web" ? (
-                <><Calendar className="mr-1.5 h-4 w-4" />Continue to Booking</>
-              ) : (
-                "Done"
-              )}
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
     </>
   );
 };
