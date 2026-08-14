@@ -1,9 +1,10 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import AfterlifeCard from "@/components/AfterlifeCard";
-import { Flower2, Sparkles, Link as LinkIcon } from "lucide-react";
+import { Sparkles, Link as LinkIcon } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import drKhwajaAsif from "@/assets/dr-khwaja-asif.jpg.asset.json";
+
 
 const AfterlifeServicesPage = () => {
   const { t } = useLanguage();
@@ -17,9 +18,11 @@ const AfterlifeServicesPage = () => {
     {
       slug: "nirvana",
       name: "Nirvana",
-      description: t("afterlife.desc"),
+      subtitle: t("afterlife.card.subtitle"),
+      description: t("afterlife.card.services"),
     },
   ];
+
 
   return (
     <div className="min-h-screen bg-background">
@@ -116,14 +119,9 @@ const AfterlifeServicesPage = () => {
                 name={provider.name}
                 {...(provider.subtitle ? { subtitle: provider.subtitle } : {})}
                 description={provider.description}
-                icon={
-                  <div className="flex flex-col items-center gap-0.5">
-                    <Flower2 className="h-7 w-7 text-[#9B7DB8]" />
-                    <span className="text-[7px] font-bold text-[#9B7DB8] tracking-wider uppercase">NVN</span>
-                  </div>
-                }
               />
             ))}
+
           </div>
 
           {/* Compact blog preview — secondary to the provider card */}
