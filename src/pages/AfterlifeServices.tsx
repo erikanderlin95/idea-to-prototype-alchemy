@@ -118,14 +118,9 @@ const AfterlifeServicesPage = () => {
                 name={provider.name}
                 {...(provider.subtitle ? { subtitle: provider.subtitle } : {})}
                 description={provider.description}
-                icon={
-                  <div className="flex flex-col items-center gap-0.5">
-                    <Flower2 className="h-7 w-7 text-[#9B7DB8]" />
-                    <span className="text-[7px] font-bold text-[#9B7DB8] tracking-wider uppercase">NVN</span>
-                  </div>
-                }
               />
             ))}
+
           </div>
 
           {/* Compact blog preview — secondary to the provider card */}
