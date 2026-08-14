@@ -1,9 +1,10 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import AfterlifeCard from "@/components/AfterlifeCard";
-import { Flower2, Sparkles, Link as LinkIcon } from "lucide-react";
+import { Sparkles, Link as LinkIcon } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import drKhwajaAsif from "@/assets/dr-khwaja-asif.jpg.asset.json";
+
 
 const AfterlifeServicesPage = () => {
   const { t } = useLanguage();
