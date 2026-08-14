@@ -18,7 +18,7 @@ const AfterlifeCard = ({ slug, name, subtitle, description }: AfterlifeCardProps
   const { t } = useLanguage();
 
   return (
-    <Card className="group hover:shadow-[0_10px_28px_rgba(45,27,78,0.10)] hover:-translate-y-0.5 transition-all duration-300 border border-gray-200/80 hover:border-gray-300/80 shadow-[0_2px_12px_rgba(45,27,78,0.04)] bg-white overflow-hidden max-w-[340px] sm:max-w-[360px] mx-auto w-full">
+    <Card className="group hover:shadow-[0_10px_28px_rgba(45,27,78,0.10)] hover:-translate-y-0.5 transition-all duration-300 border border-gray-200/80 hover:border-gray-300/80 shadow-[0_2px_12px_rgba(45,27,78,0.04)] bg-white overflow-hidden w-full">
       <CardContent className="p-3 sm:p-4 flex flex-col items-center justify-center h-full text-center">
         {/* Subtle gold accent ring */}
         <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden mb-1.5 ring-1 ring-[#C9A84C]/20 shadow-[0_2px_8px_rgba(201,168,76,0.08)]">
