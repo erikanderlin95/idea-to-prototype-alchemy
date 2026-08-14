@@ -41,7 +41,7 @@ const AfterlifeCard = ({ slug, name, subtitle, description }: AfterlifeCardProps
         )}
 
         <Button
-          className="w-full h-8 sm:h-9 bg-gradient-to-r from-[#9B7DB8] to-[#8A6BAA] hover:from-[#8A6BAA] hover:to-[#7A5B9A] text-white font-medium text-[13px] sm:text-[14px] shadow-[0_2px_6px_rgba(155,125,184,0.22)] hover:shadow-[0_4px_12px_rgba(155,125,184,0.32)] transition-all group-hover:-translate-y-px active:scale-[0.97]"
+          className="w-1/2 mx-auto h-8 sm:h-9 bg-gradient-to-r from-[#9B7DB8] to-[#8A6BAA] hover:from-[#8A6BAA] hover:to-[#7A5B9A] text-white font-medium text-[13px] sm:text-[14px] shadow-[0_2px_6px_rgba(155,125,184,0.22)] hover:shadow-[0_4px_12px_rgba(155,125,184,0.32)] transition-all group-hover:-translate-y-px active:scale-[0.97]"
           onClick={() => navigate(`/afterlife/${slug}`)}
         >
           {t("afterlife.card.cta")}
