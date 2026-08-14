@@ -177,20 +177,23 @@ export const SearchFilters = ({
       </Sheet>
 
       {/* Category chips */}
-      <div className="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 scrollbar-hide">
-        {categories.map((category) => (
-          <Badge
-            key={category.key}
-            variant={activeCategory === category.key ? "default" : "outline"}
-            className="cursor-pointer whitespace-nowrap px-2.5 py-1.5 text-xs hover:bg-primary hover:text-primary-foreground transition-colors h-8 inline-flex items-center justify-center shrink-0"
-            onClick={() => handleCategoryClick(category.key)}
-          >
-            <span className="inline-flex items-center gap-1">
-              {category.emoji && <span aria-hidden="true">{category.emoji}</span>}
-              <span>{category.label}</span>
-            </span>
-          </Badge>
-        ))}
+      <div className="relative">
+        <div className="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 scrollbar-hide">
+          {categories.map((category) => (
+            <Badge
+              key={category.key}
+              variant={activeCategory === category.key ? "default" : "outline"}
+              className="cursor-pointer whitespace-nowrap px-2.5 py-1.5 text-xs hover:bg-primary hover:text-primary-foreground transition-colors h-8 inline-flex items-center justify-center shrink-0"
+              onClick={() => handleCategoryClick(category.key)}
+            >
+              <span className="inline-flex items-center gap-1">
+                {category.emoji && <span aria-hidden="true">{category.emoji}</span>}
+                <span>{category.label}</span>
+              </span>
+            </Badge>
+          ))}
+        </div>
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-8 bg-gradient-to-l from-background to-transparent" aria-hidden="true" />
       </div>
     </div>
   );
