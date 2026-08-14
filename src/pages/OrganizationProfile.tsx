@@ -96,7 +96,7 @@ const OrganizationProfile = () => {
               <Button
                 size="icon"
                 onClick={() => setShowIntakeModal(true)}
-                className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-[#0E9AAB] hover:bg-[#0C8595] text-white transition-all active:scale-[0.97] shadow-[0_2px_8px_rgba(14,154,171,0.25)] shrink-0 ml-3"
+                className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-[#25D366] hover:bg-[#128C7E] text-white transition-all active:scale-[0.97] shadow-[0_2px_8px_rgba(37,211,102,0.25)] shrink-0 ml-3"
                 aria-label={t("org.contactCoordinator")}
               >
                 <MessageCircle className="h-5 w-5" />
