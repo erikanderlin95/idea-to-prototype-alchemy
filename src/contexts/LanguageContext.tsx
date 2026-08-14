@@ -689,7 +689,7 @@ const translations: Record<Language, Record<string, string>> = {
     "org.offering.space.title": "Event Space",
     "org.offering.space.desc": "Clinic-based spaces for healthcare events and community sessions.",
     "org.contactCoordinator": "Contact Coordinator",
-    "org.hereToHelp": "Here to Help",
+    "org.hereToHelp": "🤝 Support When You Need It",
     "org.helpDesc": "Need help navigating care? Connect with our medical concierge for guidance and next steps.",
 
     // SHA
@@ -1682,7 +1682,7 @@ const translations: Record<Language, Record<string, string>> = {
     "org.offering.space.title": "活动空间",
     "org.offering.space.desc": "可用于医疗活动和社区会议的诊所空间。",
     "org.contactCoordinator": "联系协调员",
-    "org.hereToHelp": "随时为您提供帮助",
+    "org.hereToHelp": "🤝 需要时为您提供支持",
     "org.helpDesc": "需要帮助就医？联系我们的医疗礼宾，获取指导和下一步建议。",
 
     // SHA
@@ -2622,7 +2622,7 @@ const translations: Record<Language, Record<string, string>> = {
     "org.offering.space.title": "Ruang Acara",
     "org.offering.space.desc": "Ruang berasaskan klinik untuk acara penjagaan kesihatan dan sesi komuniti.",
     "org.contactCoordinator": "Hubungi Penyelaras",
-    "org.hereToHelp": "Sedia Membantu",
+    "org.hereToHelp": "🤝 Sokongan Apabila Anda Memerlukannya",
     "org.helpDesc": "Perlukan bantuan menavigasi penjagaan? Hubungi concierge perubatan kami untuk bimbingan dan langkah seterusnya.",
     "sha.badge": "Panel Pakar",
     "sha.name": "Singapore HealthCare Alliance",
@@ -3534,7 +3534,7 @@ const translations: Record<Language, Record<string, string>> = {
     "org.offering.space.title": "நிகழ்வு இடம்",
     "org.offering.space.desc": "சுகாதார நிகழ்வுகள் மற்றும் சமூக அமர்வுகளுக்கான கிளினிக் அடிப்படையிலான இடங்கள்.",
     "org.contactCoordinator": "ஒருங்கிணைப்பாளரைத் தொடர்பு கொள்ளுங்கள்",
-    "org.hereToHelp": "உதவ தயார்",
+    "org.hereToHelp": "🤝 உங்களுக்கு தேவையான போது ஆதரவு",
     "org.helpDesc": "மருத்துவ பராமரிப்பைக் கண்டறிய உதவி வேண்டுமா? வழிகாட்டுதலுக்கும் அடுத்த நடவடிக்கைகளுக்கும் எங்கள் மருத்துவ concierge-ஐ தொடர்புகொள்ளுங்கள்.",
     "sha.badge": "நிபுணர்களின் குழு",
     "sha.name": "சிங்கப்பூர் சுகாதாரக் கூட்டமைப்பு",
