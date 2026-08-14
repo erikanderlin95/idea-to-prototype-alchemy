@@ -358,27 +358,21 @@ export const ClinicCard = ({
 
       const caseId = response?.case_id || "";
       setBookingCaseId(caseId);
-      
-      // Prepare redirect info for confirmation screen
+
+      let redirectUrl = "";
       if (useWhatsApp) {
         const message = encodeURIComponent(`Hi, I'd like to book an appointment.\nName: ${leadName.trim()}\nCase ID: ${caseId}`);
-        setBookingRedirectUrl(`https://wa.me/${clinicPhone}?text=${message}`);
-        setBookingRedirectType("whatsapp");
+        redirectUrl = `https://wa.me/${clinicPhone}?text=${message}`;
       } else if (bookingUrl) {
         const separator = bookingUrl.includes("?") ? "&" : "?";
-        setBookingRedirectUrl(`${bookingUrl}${separator}case_id=${encodeURIComponent(caseId)}`);
-        setBookingRedirectType("web");
+        redirectUrl = `${bookingUrl}${separator}case_id=${encodeURIComponent(caseId)}`;
       } else if (clinicPhone) {
         const message = encodeURIComponent(`Hi, I'd like to book an appointment.\nName: ${leadName.trim()}\nCase ID: ${caseId}`);
-        setBookingRedirectUrl(`https://wa.me/${clinicPhone}?text=${message}`);
-        setBookingRedirectType("whatsapp");
-      } else {
-        setBookingRedirectUrl("");
-        setBookingRedirectType("none");
+        redirectUrl = `https://wa.me/${clinicPhone}?text=${message}`;
       }
 
       setShowBookingLead(false);
-      setShowBookingConfirm(true);
+      if (redirectUrl) window.open(redirectUrl, "_blank");
     } catch (err) {
       console.error("Lead save error:", err);
       toast.error("Something went wrong. Please try again.");
