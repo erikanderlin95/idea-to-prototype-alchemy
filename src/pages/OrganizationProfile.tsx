@@ -47,11 +47,8 @@ const OrganizationProfile = () => {
       <section className="relative pt-20 pb-6 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#EDF3F8] via-white to-white" />
         <div className="max-w-3xl mx-auto text-center relative">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#E6F7FA]/80 text-[#0E9AAB] mb-3 border border-[#D4F1F5] backdrop-blur-sm">
-            <span className="text-sm font-medium tracking-wide">{t("org.subtitle")}</span>
-          </div>
           <h1 className="text-3xl md:text-4xl font-bold text-[#0D2E4A] tracking-tight">
-            {t("org.name")}
+            {t("org.hereToHelp")}
           </h1>
         </div>
       </section>
@@ -67,7 +64,6 @@ const OrganizationProfile = () => {
                 </span>
                 {t("org.active")}
               </span>
-              <h2 className="text-[17px] font-bold text-[#0D2E4A]">{t("org.hereToHelp")}</h2>
             </div>
 
             <p className="text-[13px] text-[#4A5D6E] leading-snug mb-4">
@@ -92,6 +88,9 @@ const OrganizationProfile = () => {
                 </p>
                 <p className="text-[13px] text-[#4A5D6E] truncate">
                   {concierge?.title || "Medical Concierge"}
+                </p>
+                <p className="text-[12px] text-[#5A7089] font-medium truncate">
+                  {t("org.name")}
                 </p>
               </div>
               <Button
