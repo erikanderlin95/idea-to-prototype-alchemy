@@ -12,16 +12,9 @@ export const FeaturedConsultants = () => {
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-5">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary mb-3">
-            <Sparkles className="h-4 w-4" />
-            <span className="text-sm font-medium">{t("featuredConsultants.badge")}</span>
-          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-1">
             {t("featuredConsultants.title")}
           </h2>
-          <p className="text-base sm:text-lg text-foreground/80 font-medium max-w-2xl mx-auto">
-            {t("featuredConsultants.subtitle")}
-          </p>
         </div>
 
         {/* CTA — same styling as NYMG "Request Managed Care" button */}
