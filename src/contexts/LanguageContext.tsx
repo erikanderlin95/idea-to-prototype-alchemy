@@ -222,6 +222,8 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.privacyPolicy": "Privacy Policy",
     "footer.termsOfService": "Terms of Service",
     "footer.copyright": "© 2024 ClynicQ. PDPA Compliant Healthcare Platform.",
+    "footer.needHelpNow": "Need Help Now?",
+    "footer.emergencyLine": "SOS (24/7): 1767 | National Mindline: Call or text 1771 | Emergency: 995",
     
     // Appointments Page
     "appointments.title": "My Appointments",
@@ -687,6 +689,8 @@ const translations: Record<Language, Record<string, string>> = {
     "org.offering.space.title": "Event Space",
     "org.offering.space.desc": "Clinic-based spaces for healthcare events and community sessions.",
     "org.contactCoordinator": "Contact Coordinator",
+    "org.hereToHelp": "Here to Help",
+    "org.helpDesc": "Need help navigating care? Connect with our medical concierge for guidance and next steps.",
 
     // SHA
     "sha.badge": "Panel of Specialists",
@@ -1211,6 +1215,8 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.privacyPolicy": "隐私政策",
     "footer.termsOfService": "服务条款",
     "footer.copyright": "© 2024 ClynicQ. 符合PDPA的医疗保健平台。",
+    "footer.needHelpNow": "需要立即帮助？",
+    "footer.emergencyLine": "SOS（24/7）：1767 | 国家关怀热线：拨打或短信 1771 | 紧急：995",
     
     // Appointments Page
     "appointments.title": "我的预约",
@@ -1676,6 +1682,8 @@ const translations: Record<Language, Record<string, string>> = {
     "org.offering.space.title": "活动空间",
     "org.offering.space.desc": "可用于医疗活动和社区会议的诊所空间。",
     "org.contactCoordinator": "联系协调员",
+    "org.hereToHelp": "随时为您提供帮助",
+    "org.helpDesc": "需要帮助就医？联系我们的医疗礼宾，获取指导和下一步建议。",
 
     // SHA
     "sha.badge": "专科医生团队",
@@ -2182,6 +2190,8 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.privacyPolicy": "Dasar Privasi",
     "footer.termsOfService": "Syarat Perkhidmatan",
     "footer.copyright": "© 2024 ClynicQ. Platform Penjagaan Kesihatan Patuh PDPA.",
+    "footer.needHelpNow": "Perlukan Bantuan Segera?",
+    "footer.emergencyLine": "SOS (24/7): 1767 | Talian Mindline Nasional: Panggil atau teks 1771 | Kecemasan: 995",
     "appointments.title": "Temu Janji Saya",
     "appointments.bookNew": "Tempah Temu Janji Baharu",
     "appointments.reason": "Sebab",
@@ -2612,6 +2622,8 @@ const translations: Record<Language, Record<string, string>> = {
     "org.offering.space.title": "Ruang Acara",
     "org.offering.space.desc": "Ruang berasaskan klinik untuk acara penjagaan kesihatan dan sesi komuniti.",
     "org.contactCoordinator": "Hubungi Penyelaras",
+    "org.hereToHelp": "Sedia Membantu",
+    "org.helpDesc": "Perlukan bantuan menavigasi penjagaan? Hubungi concierge perubatan kami untuk bimbingan dan langkah seterusnya.",
     "sha.badge": "Panel Pakar",
     "sha.name": "Singapore HealthCare Alliance",
     "sha.heroDesc": "Akses panel luas doktor pakar merentasi pelbagai disiplin di Singapura.",
@@ -3090,6 +3102,8 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.privacyPolicy": "தனியுரிமைக் கொள்கை",
     "footer.termsOfService": "சேவை விதிமுறைகள்",
     "footer.copyright": "© 2024 ClynicQ. PDPA இணக்கமான சுகாதாரத் தளம்.",
+    "footer.needHelpNow": "உடனடி உதவி தேவையா?",
+    "footer.emergencyLine": "SOS (24/7): 1767 | தேசிய மன ஆதரவு கோடு: அழைக்கவும் அல்லது SMS 1771 | அவசரம்: 995",
     "appointments.title": "எனது சந்திப்புகள்",
     "appointments.bookNew": "புதிய சந்திப்பை பதிவு செய்யவும்",
     "appointments.reason": "காரணம்",
@@ -3520,6 +3534,8 @@ const translations: Record<Language, Record<string, string>> = {
     "org.offering.space.title": "நிகழ்வு இடம்",
     "org.offering.space.desc": "சுகாதார நிகழ்வுகள் மற்றும் சமூக அமர்வுகளுக்கான கிளினிக் அடிப்படையிலான இடங்கள்.",
     "org.contactCoordinator": "ஒருங்கிணைப்பாளரைத் தொடர்பு கொள்ளுங்கள்",
+    "org.hereToHelp": "உதவ தயார்",
+    "org.helpDesc": "மருத்துவ பராமரிப்பைக் கண்டறிய உதவி வேண்டுமா? வழிகாட்டுதலுக்கும் அடுத்த நடவடிக்கைகளுக்கும் எங்கள் மருத்துவ concierge-ஐ தொடர்புகொள்ளுங்கள்.",
     "sha.badge": "நிபுணர்களின் குழு",
     "sha.name": "சிங்கப்பூர் சுகாதாரக் கூட்டமைப்பு",
     "sha.heroDesc": "சிங்கப்பூரில் பல துறைகளில் உள்ள சிறப்பு மருத்துவர்களின் பரந்த குழுவை அணுகுங்கள்.",
