@@ -41,6 +41,7 @@ import WellnessTalksPage from "./pages/WellnessTalksPage";
 import BeyondClinicPage from "./pages/BeyondClinicPage";
 import ClinicOwnersPage from "./pages/ClinicOwnersPage";
 import MyClynicQPage from "./pages/MyClynicQPage";
+import SeniorDayCare from "./pages/SeniorDayCare";
 import { SectionSidebar } from "@/components/SectionSidebar";
 
 const queryClient = new QueryClient();
@@ -86,6 +87,7 @@ const App = () => (
             <Route path="/explore-health/sugar-habit" element={<SugarHabit />} />
             <Route path="/privacy" element={<Privacy />} />
             <Route path="/wellness-talks" element={<WellnessTalksPage />} />
+            <Route path="/senior-day-care" element={<SeniorDayCare />} />
             <Route path="/beyond-clinic" element={<BeyondClinicPage />} />
             <Route path="/clinic-owners" element={<ClinicOwnersPage />} />
             <Route path="/myclynicq" element={<MyClynicQPage />} />
