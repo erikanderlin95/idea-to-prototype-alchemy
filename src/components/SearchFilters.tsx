@@ -202,13 +202,17 @@ export const SearchFilters = ({
       <div className="relative -mr-4 md:-mr-6">
         <div
           ref={scrollRef}
-          className="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 pr-10 scrollbar-hide snap-x snap-mandatory scroll-smooth"
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          className="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 pr-6 scrollbar-hide cursor-grab active:cursor-grabbing select-none touch-pan-x"
         >
           {categories.map((category) => (
             <Badge
               key={category.key}
               variant={activeCategory === category.key ? "default" : "outline"}
-              className="cursor-pointer whitespace-nowrap px-2.5 py-1.5 text-xs hover:bg-primary hover:text-primary-foreground transition-colors h-8 inline-flex items-center justify-center shrink-0 snap-start"
+              className="cursor-pointer whitespace-nowrap px-2.5 py-1.5 text-xs hover:bg-primary hover:text-primary-foreground transition-colors h-8 inline-flex items-center justify-center shrink-0"
               onClick={() => handleCategoryClick(category.key)}
             >
               <span className="inline-flex items-center gap-1">
@@ -218,19 +222,21 @@ export const SearchFilters = ({
             </Badge>
           ))}
         </div>
-        {showRightFade && (
-          <button
-            type="button"
-            onClick={() => scrollRef.current?.scrollBy({ left: 160, behavior: "smooth" })}
-            className="absolute inset-y-0 right-0 flex items-center justify-end pr-1 w-16 bg-gradient-to-l from-background via-background/80 to-transparent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded-r-md"
-            aria-label="Scroll categories"
-          >
-            <span className="flex items-center justify-center h-6 w-6 rounded-full bg-primary/10 text-primary shadow-sm">
-              <ChevronRight className="h-4 w-4" />
-            </span>
-          </button>
-        )}
       </div>
+
+      {/* Drag to swipe indicator */}
+      <div className="flex items-center gap-2 pr-4 md:pr-6">
+        <div className="relative h-1 flex-1 rounded-full bg-muted overflow-hidden">
+          <div
+            className="absolute top-0 h-full rounded-full bg-primary/60 transition-[left] duration-150"
+            style={{ width: "34%", left: `${scrollProgress * 66}%` }}
+          />
+        </div>
+        <span className="text-[10px] text-muted-foreground whitespace-nowrap">
+          Drag to swipe
+        </span>
+      </div>
+
     </div>
   );
 };
