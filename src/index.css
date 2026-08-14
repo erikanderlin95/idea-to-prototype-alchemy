@@ -168,5 +168,14 @@ All colors MUST be HSL.
   .visible-scrollbar::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--primary) / 0.85);
   }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
 }
 
