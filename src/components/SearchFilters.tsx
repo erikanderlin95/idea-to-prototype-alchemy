@@ -177,7 +177,7 @@ export const SearchFilters = ({
       </Sheet>
 
       {/* Category chips */}
-      <div className="flex items-center gap-1.5 overflow-x-auto visible-scrollbar pt-1 pb-0.5">
+      <div className="flex items-center gap-1.5 overflow-x-auto pt-1 pb-0.5 scrollbar-hide">
         {categories.map((category) => (
           <Badge
             key={category.key}
