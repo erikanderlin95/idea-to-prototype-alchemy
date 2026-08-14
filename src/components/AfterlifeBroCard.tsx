@@ -13,10 +13,7 @@ const AfterlifeBroCard = () => {
       aria-label="Visit The Afterlife Bro"
     >
       {/* Logo */}
-      <div
-        className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl overflow-hidden shrink-0 ring-1 ring-[#4F8669]/25"
-        style={{ ringColor: `${BRAND_COLOR}40` }}
-      >
+      <div className="h-12 w-12 sm:h-14 sm:w-14 rounded-xl overflow-hidden shrink-0 ring-1 ring-[#4F8669]/25">
         <img
           src={afterlifeBroLogo}
           alt="The Afterlife Bro mascot"
