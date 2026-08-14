@@ -111,9 +111,11 @@ export const SearchFilters = ({
   ];
 
   const handleCategoryClick = (key: string) => {
+    if (dragState.current.moved) return;
     setActiveCategory(key);
     onCategoryChange?.(key);
   };
+
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
