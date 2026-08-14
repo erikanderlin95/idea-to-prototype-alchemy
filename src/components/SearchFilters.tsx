@@ -177,12 +177,12 @@ export const SearchFilters = ({
       </Sheet>
 
       {/* Category chips */}
-      <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 gap-2 pt-1">
+      <div className="flex items-center gap-1.5 overflow-x-auto visible-scrollbar pt-1 pb-0.5">
         {categories.map((category) => (
           <Badge
             key={category.key}
             variant={activeCategory === category.key ? "default" : "outline"}
-            className="cursor-pointer px-2 py-2 text-xs sm:text-sm hover:bg-primary hover:text-primary-foreground transition-colors h-10 flex items-center justify-center text-center"
+            className="cursor-pointer whitespace-nowrap px-2.5 py-1.5 text-xs hover:bg-primary hover:text-primary-foreground transition-colors h-8 inline-flex items-center justify-center shrink-0"
             onClick={() => handleCategoryClick(category.key)}
           >
             <span className="inline-flex items-center gap-1">
