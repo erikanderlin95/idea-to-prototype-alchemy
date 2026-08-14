@@ -44,15 +44,39 @@ export const SearchFilters = ({
   });
   const [draftFilters, setDraftFilters] = useState<ClinicFilters>(filters);
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [showRightFade, setShowRightFade] = useState(true);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const dragState = useRef<{ startX: number; startScroll: number; dragging: boolean; moved: boolean }>({
+    startX: 0,
+    startScroll: 0,
+    dragging: false,
+    moved: false,
+  });
 
   const checkScroll = () => {
     const el = scrollRef.current;
     if (!el) return;
-    const hasOverflow = el.scrollWidth > el.clientWidth;
-    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 1;
-    setShowRightFade(hasOverflow && !atEnd);
+    const max = el.scrollWidth - el.clientWidth;
+    setScrollProgress(max > 0 ? Math.min(1, Math.max(0, el.scrollLeft / max)) : 0);
   };
+
+  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    dragState.current = { startX: e.clientX, startScroll: el.scrollLeft, dragging: true, moved: false };
+  };
+
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = scrollRef.current;
+    if (!el || !dragState.current.dragging) return;
+    const dx = e.clientX - dragState.current.startX;
+    if (Math.abs(dx) > 4) dragState.current.moved = true;
+    el.scrollLeft = dragState.current.startScroll - dx;
+  };
+
+  const handlePointerUp = () => {
+    dragState.current.dragging = false;
+  };
+
 
   useEffect(() => {
     checkScroll();
