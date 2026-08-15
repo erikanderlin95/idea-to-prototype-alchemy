@@ -1255,7 +1255,10 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.termsOfService": "服务条款",
     "footer.copyright": "© 2024 ClynicQ. 符合PDPA的医疗保健平台。",
     "footer.needHelpNow": "需要立即帮助？",
-    "footer.emergencyLine": "SOS（24/7）：1767 | 国家关怀热线：拨打或短信 1771 | 紧急：995",
+    "footer.sosLabel": "SOS（24/7）：",
+    "footer.mindlineLabel": "国家关怀热线：拨打或短信",
+    "footer.emergencyLabel": "紧急：",
+    "footer.separator": "|",
     
     // Appointments Page
     "appointments.title": "我的预约",
