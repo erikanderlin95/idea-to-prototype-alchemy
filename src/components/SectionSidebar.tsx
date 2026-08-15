@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Building2, Stethoscope, Mic, Heart, Menu, ChevronLeft, Mail, ChevronRight, Lock, Info } from "lucide-react";
+import { Building2, Stethoscope, Mic, Heart, Menu, ChevronLeft, Mail, ChevronRight, Lock } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -161,25 +161,19 @@ export const SectionSidebar = () => {
 
           {/* Contact footer */}
           <div className="relative z-10 p-6 bg-muted/30 border-t border-border/50 mt-auto">
-            <button
-              onClick={() => {
+            <a
+              href="/about"
+              className="text-lg font-bold text-foreground hover:text-primary transition-colors"
+              onClick={(e) => {
+                e.preventDefault();
                 setOpen(false);
                 navigate("/about");
               }}
-              className="group w-full flex items-center justify-between py-3 px-0 rounded-2xl border bg-muted/50 border-border/50 hover:bg-muted/70 active:scale-[0.98] transition-all"
             >
-              <div className="flex items-center gap-3 min-w-0">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0 bg-[#12B8C4]/10 text-[#12B8C4]">
-                  <Info className="h-4 w-4" />
-                </span>
-                <span className="text-sm font-semibold text-[#102A43] break-words leading-snug group-hover:text-[#102A43]">
-                  {t("sidebar.aboutUs")}
-                </span>
-              </div>
-              <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
-            </button>
+              {t("sidebar.aboutUs")}
+            </a>
 
-            <p className="text-sm font-semibold text-foreground mb-1">
+            <p className="text-sm font-semibold text-foreground mt-4 mb-1">
               {t("sidebar.contactUs")}
             </p>
             <a
