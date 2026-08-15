@@ -163,17 +163,22 @@ export const SectionSidebar = () => {
           <div className="relative z-10 p-6 bg-muted/30 border-t border-border/50 mt-auto">
             <a
               href="/about"
-              className="text-lg font-bold text-foreground hover:text-primary transition-colors"
               onClick={(e) => {
                 e.preventDefault();
                 setOpen(false);
                 navigate("/about");
               }}
+              className="group flex items-center justify-between -mx-6 px-6 py-2.5 font-poppins text-sm font-semibold text-[#102A43] hover:bg-[#12B8C4]/10 active:bg-[#12B8C4]/15 transition-colors"
             >
-              {t("sidebar.aboutUs")}
+              <span className="flex items-center gap-2.5">
+                <Info className="h-4 w-4 text-[#12B8C4]" strokeWidth={2.5} />
+                {t("sidebar.aboutUs")}
+              </span>
+              <ChevronRight className="h-4 w-4 text-[#12B8C4] transition-transform group-hover:translate-x-0.5" strokeWidth={2.5} />
             </a>
 
-            <p className="text-sm font-semibold text-foreground mt-4 mb-1">
+            <p className="text-sm font-semibold text-foreground mt-3 mb-1">
+
               {t("sidebar.contactUs")}
             </p>
             <a
