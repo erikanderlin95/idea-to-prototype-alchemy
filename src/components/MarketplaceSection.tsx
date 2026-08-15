@@ -324,96 +324,37 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             );
           })()}
 
-          {/* 24hr Clinics Directory Section */}
+          {/* 24hr Clinics — compact entry card */}
           {activeCategory === "all" && (
             <div className="pt-4 border-t border-border/30 mt-4">
-              <div className="mb-2 text-center">
-                <p className="text-sm sm:text-base font-bold uppercase tracking-wide text-foreground">
-                  {t("marketplace.directoryTitle")}
-                </p>
-              </div>
-              {(() => {
-                const DIRECTORY_PAGE_SIZE = 6;
-                const totalDirPages = Math.max(1, Math.ceil(TWENTY_FOUR_HR_CLINICS.length / DIRECTORY_PAGE_SIZE));
-                const safeDirPage = Math.min(directoryPage, totalDirPages);
-                const dirVisibleCount = isMobile ? directoryMobileCount : DIRECTORY_PAGE_SIZE;
-                const dirStart = isMobile ? 0 : (safeDirPage - 1) * DIRECTORY_PAGE_SIZE;
-                const dirClinics = isMobile
-                  ? TWENTY_FOUR_HR_CLINICS.slice(0, dirVisibleCount)
-                  : TWENTY_FOUR_HR_CLINICS.slice(dirStart, dirStart + DIRECTORY_PAGE_SIZE);
-                const dirHasMore = isMobile && dirVisibleCount < TWENTY_FOUR_HR_CLINICS.length;
-                return (
-                  <>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
-                      {dirClinics.map((c) => (
-                        <DirectoryClinicCard
-                          key={c.id}
-                          name={c.name}
-                          type={c.area ? `24HR · ${c.area}` : "24HR"}
-                          address={c.address}
-                          mapsUrl={c.mapsUrl}
-                        />
-                      ))}
-                    </div>
-
-                    {isMobile && dirHasMore && (
-                      <div className="flex justify-center mt-6">
-                        <Button
-                          variant="outline"
-                          className="border border-border/60 text-muted-foreground hover:text-foreground hover:bg-muted bg-muted/30 font-medium px-8 h-10"
-                          onClick={() => setDirectoryMobileCount((p) => p + DIRECTORY_PAGE_SIZE)}
-                        >
-                          {t("marketplace.loadMore")}
-                        </Button>
-                      </div>
-                    )}
-
-                    {!isMobile && TWENTY_FOUR_HR_CLINICS.length > 0 && totalDirPages > 1 && (
-                      <div className="flex items-center justify-center gap-3 mt-8">
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary"
-                          onClick={() => setDirectoryPage((p) => Math.max(1, p - 1))}
-                          disabled={safeDirPage === 1}
-                          aria-label="Previous page"
-                        >
-                          <ChevronLeft className="h-4 w-4" />
-                        </Button>
-                        <div className="flex items-center gap-1.5">
-                          {Array.from({ length: totalDirPages }).map((_, i) => (
-                            <button
-                              key={i}
-                              onClick={() => setDirectoryPage(i + 1)}
-                              aria-label={`Page ${i + 1}`}
-                              className={`h-2.5 rounded-full transition-all ${
-                                safeDirPage === i + 1
-                                  ? "w-6 bg-primary"
-                                  : "w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                              }`}
-                            />
-                          ))}
-                        </div>
-                        <span className="text-sm text-muted-foreground tabular-nums ml-1">
-                          {safeDirPage} / {totalDirPages}
-                        </span>
-                        <Button
-                          variant="outline"
-                          size="icon"
-                          className="border-2 border-primary text-primary hover:bg-primary/10 hover:text-primary"
-                          onClick={() => setDirectoryPage((p) => Math.min(totalDirPages, p + 1))}
-                          disabled={safeDirPage === totalDirPages}
-                          aria-label="Next page"
-                        >
-                          <ChevronRight className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    )}
-                  </>
-                );
-              })()}
+              <Link
+                to="/24-hour-clinics-singapore"
+                className="group block w-full max-w-[560px] mx-auto rounded-lg border border-border/70 bg-muted/20 hover:bg-muted/40 hover:border-border transition-colors px-4 py-3"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 text-primary">
+                    <Clock className="h-4.5 w-4.5" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="text-sm sm:text-base font-semibold text-foreground leading-tight">
+                      24-Hour Clinics in Singapore
+                    </h3>
+                    <p className="text-xs sm:text-sm text-muted-foreground leading-snug">
+                      Find clinics open around the clock and get directions.
+                    </p>
+                  </div>
+                  <span className="shrink-0 inline-flex items-center gap-1 text-xs sm:text-sm font-medium text-primary">
+                    View Clinics
+                    <ChevronRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                  </span>
+                </div>
+              </Link>
+              <p className="mt-2 text-center text-[11px] sm:text-xs text-muted-foreground">
+                Operating hours may change. Please confirm with the clinic before visiting.
+              </p>
             </div>
           )}
+
         </div>
       </div>
     </section>
