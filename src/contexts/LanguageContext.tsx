@@ -1014,7 +1014,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.checkInCode": "Check-in Code",
 
     // About Us
-    "sidebar.aboutUs": "About Us",
+    "sidebar.aboutUs": "About ClynicQ",
     "about.title": "About ClynicQ",
     "about.intro.heading": "A More Convenient Way to Access Care",
     "about.intro.body1": "Finding a clinic is easy. Knowing which one can see you sooner often isn’t.",
@@ -2042,7 +2042,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.checkInCode": "签到码",
 
     // About Us
-    "sidebar.aboutUs": "关于我们",
+    "sidebar.aboutUs": "关于 ClynicQ",
     "about.title": "关于 ClynicQ",
     "about.intro.heading": "更便捷的就医方式",
     "about.intro.body1": "找到诊所很容易。但要知道哪家诊所可以更快看诊，往往不容易。",
@@ -2989,7 +2989,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.checkInCode": "Kod Daftar Masuk",
 
     // About Us
-    "sidebar.aboutUs": "Tentang Kami",
+    "sidebar.aboutUs": "Tentang ClynicQ",
     "about.title": "Tentang ClynicQ",
     "about.intro.heading": "Cara Lebih Mudah untuk Mengakses Penjagaan",
     "about.intro.body1": "Mencari klinik adalah mudah. Mengetahui yang mana dapat melihat anda lebih cepat seringkali tidak.",
@@ -3936,7 +3936,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.checkInCode": "செக்-இன் குறியீடு",
 
     // About Us
-    "sidebar.aboutUs": "எங்களை பற்றி",
+    "sidebar.aboutUs": "ClynicQ பற்றி",
     "about.title": "ClynicQ பற்றி",
     "about.intro.heading": "பராமரிப்பை அணுகுவதற்கான எளிதான வழி",
     "about.intro.body1": "மருத்துவமனையைக் கண்டறிவது எளிதானது. ஆனால் எது உங்களை விரைவில் காண முடியும் என்பதை அறிவது அவ்வளவு எளிதல்ல.",

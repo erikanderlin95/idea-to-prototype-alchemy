@@ -166,13 +166,13 @@ export const SectionSidebar = () => {
                 setOpen(false);
                 navigate("/about");
               }}
-              className="group w-full flex items-center justify-between p-4 mb-4 rounded-2xl border bg-muted/50 border-border/50 hover:bg-muted/70 active:scale-[0.98] transition-all"
+              className="group w-full flex items-center justify-between py-3 px-4 rounded-2xl border bg-muted/50 border-border/50 hover:bg-muted/70 active:scale-[0.98] transition-all"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <span className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0 bg-teal-50 text-teal-600">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0 bg-[#12B8C4]/10 text-[#12B8C4]">
                   <Info className="h-4 w-4" />
                 </span>
-                <span className="text-sm font-semibold text-foreground/90 group-hover:text-foreground">
+                <span className="text-sm font-semibold text-[#102A43] break-words leading-snug group-hover:text-[#102A43]">
                   {t("sidebar.aboutUs")}
                 </span>
               </div>
