@@ -2,8 +2,6 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { DirectoryClinicCard } from "@/components/DirectoryClinicCard";
 import { TWENTY_FOUR_HR_CLINICS } from "@/data/twentyFourHrClinics";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { Info } from "lucide-react";
 
 const NOTICE =
@@ -72,11 +70,6 @@ const TwentyFourHourClinics = () => {
           )}
         </div>
 
-        <div className="mt-4 flex justify-center">
-          <Button variant="outline" asChild>
-            <Link to="/">Back to homepage</Link>
-          </Button>
-        </div>
       </main>
       <Footer />
     </div>
