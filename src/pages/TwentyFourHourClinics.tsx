@@ -80,10 +80,6 @@ const TwentyFourHourClinics = () => {
           )}
         </div>
 
-        <div className="mt-5">
-          <Notice />
-        </div>
-
         <div className="mt-4 flex justify-center">
           <Button variant="outline" asChild>
             <Link to="/">Back to homepage</Link>
