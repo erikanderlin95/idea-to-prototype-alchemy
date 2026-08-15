@@ -4,7 +4,7 @@ import { DirectoryClinicCard } from "@/components/DirectoryClinicCard";
 import { TWENTY_FOUR_HR_CLINICS } from "@/data/twentyFourHrClinics";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ChevronLeft, Info } from "lucide-react";
+import { Info } from "lucide-react";
 
 const NOTICE =
   "Operating hours and availability may change. Please confirm directly with the clinic before visiting.";
