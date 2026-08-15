@@ -39,9 +39,6 @@ const TwentyFourHourClinics = () => {
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">
             24-Hour Clinics in Singapore
           </h1>
-          <p className="mt-1 text-sm sm:text-base text-muted-foreground">
-            Find 24-hour clinics across Singapore and get directions without searching one by one.
-          </p>
         </header>
 
         <Notice />
