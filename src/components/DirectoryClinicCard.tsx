@@ -23,19 +23,19 @@ export const DirectoryClinicCard = ({ name, type, address, mapsUrl }: DirectoryC
   };
 
   return (
-    <Card className="group flex flex-col px-2.5 py-2 hover:shadow-sm transition-all duration-300 border border-border/70 hover:border-border bg-muted/20 shadow-none w-full max-w-[360px] md:max-w-[420px] mx-auto h-full">
+    <Card className="group flex flex-col px-2.5 py-2 hover:shadow-sm transition-all duration-300 border border-border hover:border-border/80 bg-muted/30 shadow-none w-full max-w-[360px] md:max-w-[420px] mx-auto h-full">
       <div className="space-y-0.5">
         <div className="flex items-start justify-between gap-2">
           <h3 className="text-sm sm:text-base font-semibold text-foreground leading-tight min-w-0 truncate flex-1">
             {name}
           </h3>
-          <Badge variant="outline" className="text-[10px] font-normal px-1.5 py-0 h-[18px] shrink-0 text-muted-foreground border-border/70">
+          <Badge variant="outline" className="text-[10px] font-normal px-1.5 py-0 h-[18px] shrink-0 text-foreground/80 border-border">
             {type}
           </Badge>
         </div>
 
-        <div className="flex items-center gap-1 text-xs text-muted-foreground">
-          <MapPin className="h-3 w-3 flex-shrink-0" />
+        <div className="flex items-center gap-1 text-xs text-foreground/90">
+          <MapPin className="h-3 w-3 flex-shrink-0 text-primary/80" />
           <span className="line-clamp-1">{address}</span>
         </div>
       </div>
@@ -43,10 +43,10 @@ export const DirectoryClinicCard = ({ name, type, address, mapsUrl }: DirectoryC
       <div className="flex-1 flex flex-col justify-end mt-1.5">
         <Button
           variant="ghost"
-          className="w-full h-8 text-xs font-medium text-foreground/80 hover:text-foreground hover:bg-muted border border-border/70"
+          className="w-full h-8 text-xs font-medium text-foreground hover:text-foreground hover:bg-muted/50 border border-border"
           onClick={handleDirections}
         >
-          <Navigation className="mr-1 h-3 w-3" strokeWidth={2} />
+          <Navigation className="mr-1 h-3 w-3 text-primary/80" strokeWidth={2} />
           Open in Google Maps
         </Button>
       </div>
