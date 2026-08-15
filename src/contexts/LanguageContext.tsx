@@ -224,7 +224,10 @@ const translations: Record<Language, Record<string, string>> = {
     "footer.termsOfService": "Terms of Service",
     "footer.copyright": "© 2024 ClynicQ. PDPA Compliant Healthcare Platform.",
     "footer.needHelpNow": "Need Help Now?",
-    "footer.emergencyLine": "SOS (24/7): 1767 | National Mindline: Call or text 1771 | Emergency: 995",
+    "footer.sosLabel": "SOS (24/7):",
+    "footer.mindlineLabel": "National Mindline: Call or text",
+    "footer.emergencyLabel": "Emergency:",
+    "footer.separator": "|",
     
     // Appointments Page
     "appointments.title": "My Appointments",
