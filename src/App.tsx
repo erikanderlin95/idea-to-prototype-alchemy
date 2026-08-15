@@ -43,6 +43,8 @@ import ClinicOwnersPage from "./pages/ClinicOwnersPage";
 import MyClynicQPage from "./pages/MyClynicQPage";
 import SeniorDayCare from "./pages/SeniorDayCare";
 import About from "./pages/About";
+import TwentyFourHourClinics from "./pages/TwentyFourHourClinics";
+
 import { SectionSidebar } from "@/components/SectionSidebar";
 
 const queryClient = new QueryClient();
