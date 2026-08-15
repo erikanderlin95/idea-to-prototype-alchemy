@@ -5,7 +5,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ManagedCareModal } from "@/components/ManagedCareModal";
 import { Button } from "@/components/ui/button";
-import { MessageCircle } from "lucide-react";
+import { MessageCircle, Info, ChevronRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import aellanPhoto from "@/assets/aellan-photo.jpg";
 import erikaPhotoAsset from "@/assets/erika-photo.jpg.asset.json";
 
