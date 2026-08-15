@@ -4,7 +4,7 @@ import { DirectoryClinicCard } from "@/components/DirectoryClinicCard";
 import { TWENTY_FOUR_HR_CLINICS } from "@/data/twentyFourHrClinics";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { ChevronLeft, Info } from "lucide-react";
+import { Info } from "lucide-react";
 
 const NOTICE =
   "Operating hours and availability may change. Please confirm directly with the clinic before visiting.";
@@ -27,14 +27,6 @@ const TwentyFourHourClinics = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
       <main className="container px-4 md:px-6 py-4 md:py-8 max-w-5xl">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-1 -ml-1 px-2 py-1 mb-3 text-sm font-medium text-primary hover:bg-primary/10 rounded-md transition-colors"
-        >
-          <ChevronLeft className="h-4 w-4" />
-          Back to home
-        </Link>
-
         <header className="mb-3">
           <h1 className="text-2xl sm:text-3xl font-bold text-foreground leading-tight">
             24-Hour Clinics in Singapore
