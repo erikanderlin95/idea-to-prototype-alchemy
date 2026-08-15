@@ -43,6 +43,8 @@ import ClinicOwnersPage from "./pages/ClinicOwnersPage";
 import MyClynicQPage from "./pages/MyClynicQPage";
 import SeniorDayCare from "./pages/SeniorDayCare";
 import About from "./pages/About";
+import TwentyFourHourClinics from "./pages/TwentyFourHourClinics";
+
 import { SectionSidebar } from "@/components/SectionSidebar";
 
 const queryClient = new QueryClient();
@@ -93,6 +95,8 @@ const App = () => (
             <Route path="/clinic-owners" element={<ClinicOwnersPage />} />
             <Route path="/myclynicq" element={<MyClynicQPage />} />
             <Route path="/about" element={<About />} />
+            <Route path="/24-hour-clinics-singapore" element={<TwentyFourHourClinics />} />
+
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
