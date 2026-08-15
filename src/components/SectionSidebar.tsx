@@ -161,9 +161,6 @@ export const SectionSidebar = () => {
 
           {/* Contact footer */}
           <div className="relative z-10 p-6 bg-muted/30 border-t border-border/50 mt-auto">
-            <p className="text-sm font-semibold text-foreground mb-1">
-              {t("sidebar.aboutUs")}
-            </p>
             <a
               href="/about"
               className="text-lg font-bold text-foreground hover:text-primary transition-colors"
