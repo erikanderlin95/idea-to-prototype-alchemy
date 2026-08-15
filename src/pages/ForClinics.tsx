@@ -19,6 +19,7 @@ import { useNavigate } from "react-router-dom";
 
 const ForClinics = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [pdpaConsent, setPdpaConsent] = useState(false);
