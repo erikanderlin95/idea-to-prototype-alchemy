@@ -161,6 +161,24 @@ export const SectionSidebar = () => {
 
           {/* Contact footer */}
           <div className="relative z-10 p-6 bg-muted/30 border-t border-border/50 mt-auto">
+            <button
+              onClick={() => {
+                setOpen(false);
+                navigate("/about");
+              }}
+              className="group w-full flex items-center justify-between p-4 mb-4 rounded-2xl border bg-muted/50 border-border/50 hover:bg-muted/70 active:scale-[0.98] transition-all"
+            >
+              <div className="flex items-center gap-3 min-w-0">
+                <span className="flex h-9 w-9 items-center justify-center rounded-xl shrink-0 bg-teal-50 text-teal-600">
+                  <Info className="h-4 w-4" />
+                </span>
+                <span className="text-sm font-semibold text-foreground/90 group-hover:text-foreground">
+                  {t("sidebar.aboutUs")}
+                </span>
+              </div>
+              <ChevronRight className="h-4 w-4 shrink-0 text-muted-foreground group-hover:text-primary transition-colors" />
+            </button>
+
             <p className="text-sm font-semibold text-foreground mb-1">
               {t("sidebar.contactUs")}
             </p>
