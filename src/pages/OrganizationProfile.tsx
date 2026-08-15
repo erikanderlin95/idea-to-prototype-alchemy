@@ -151,6 +151,23 @@ const OrganizationProfile = () => {
             </div>
           </div>
         </div>
+
+        <div className="max-w-[380px] mx-auto w-full">
+          <a
+            href="/about"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/about");
+            }}
+            className="group flex items-center justify-between py-2.5 px-3 -mx-3 font-poppins text-sm font-semibold text-[#102A43] hover:bg-[#12B8C4]/10 active:bg-[#12B8C4]/15 transition-colors rounded-lg"
+          >
+            <span className="flex items-center gap-2.5">
+              <Info className="h-4 w-4 text-[#12B8C4]" strokeWidth={2.5} />
+              {t("sidebar.aboutUs")}
+            </span>
+            <ChevronRight className="h-4 w-4 text-[#12B8C4] transition-transform group-hover:translate-x-0.5" strokeWidth={2.5} />
+          </a>
+        </div>
       </section>
 
       <ManagedCareModal
