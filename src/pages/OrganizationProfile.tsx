@@ -18,6 +18,7 @@ interface Concierge {
 
 const OrganizationProfile = () => {
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const [concierge, setConcierge] = useState<Concierge | null>(null);
   const [loading, setLoading] = useState(true);
   const [showIntakeModal, setShowIntakeModal] = useState(false);
