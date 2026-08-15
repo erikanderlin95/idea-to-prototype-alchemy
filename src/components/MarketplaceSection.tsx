@@ -7,7 +7,9 @@ import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
+import { Link } from "react-router-dom";
+
 
 const CLINICS_PER_PAGE_MOBILE = 6;
 const CLINICS_PER_PAGE_DESKTOP = 6;
