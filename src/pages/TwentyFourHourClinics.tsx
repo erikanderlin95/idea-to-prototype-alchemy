@@ -8,8 +8,8 @@ const NOTICE =
   "Operating hours and availability may change. Please confirm directly with the clinic before visiting.";
 
 const Notice = () => (
-  <div className="flex items-start gap-2 rounded-md border border-border/70 bg-muted/30 px-3 py-2 text-xs sm:text-sm text-muted-foreground">
-    <Info className="h-4 w-4 shrink-0 mt-0.5" />
+  <div className="flex items-start gap-2 rounded-md border border-border bg-muted/50 px-3 py-2 text-xs sm:text-sm text-foreground/80">
+    <Info className="h-4 w-4 shrink-0 mt-0.5 text-primary/80" />
     <span>{NOTICE}</span>
   </div>
 );
@@ -36,7 +36,7 @@ const TwentyFourHourClinics = () => {
         <div className="mt-4 space-y-5">
           {areas.map((area) => (
             <section key={area}>
-              <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-foreground/80">
+              <h2 className="mb-2 text-sm font-semibold uppercase tracking-wide text-foreground">
                 {area}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-3">
