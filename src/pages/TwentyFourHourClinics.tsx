@@ -72,11 +72,6 @@ const TwentyFourHourClinics = () => {
           )}
         </div>
 
-        <div className="mt-4 flex justify-center">
-          <Button variant="outline" asChild>
-            <Link to="/">Back to homepage</Link>
-          </Button>
-        </div>
       </main>
       <Footer />
     </div>
