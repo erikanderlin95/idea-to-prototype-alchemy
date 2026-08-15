@@ -1,6 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import clynicqLogo from "@/assets/clynicq-logo.png";
 
 export const About = () => {
   const { t } = useLanguage();
@@ -10,6 +11,12 @@ export const About = () => {
     <main className="min-h-screen bg-[#F8FBFC] py-6 md:py-14 px-4 sm:px-6 font-poppins">
       <article className="max-w-3xl mx-auto animate-fade-in">
         <header className="mb-6 md:mb-12">
+          <img
+            src={clynicqLogo}
+            alt="ClynicQ"
+            className="h-9 md:h-10 w-auto mb-4 md:mb-6 cursor-pointer"
+            onClick={() => navigate("/")}
+          />
           <h1 className="text-[24px] md:text-[36px] font-bold leading-tight text-[#102A43]">
             {t("about.title")}
           </h1>
