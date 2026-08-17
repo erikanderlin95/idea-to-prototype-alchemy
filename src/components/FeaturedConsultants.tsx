@@ -25,7 +25,7 @@ export const FeaturedConsultants = () => {
           >
             {/* subtle pulse ring */}
             <span className="pointer-events-none absolute inset-0 rounded-md ring-2 ring-white/30 animate-ping opacity-25" />
-            <HelpCircle className="h-5 w-5 sm:h-5.5 sm:w-5.5 relative z-10" strokeWidth={2.5} />
+            <HelpCircle className="h-5 w-5 relative z-10" strokeWidth={2.5} />
             <span className="relative z-10">{t("featuredConsultants.viewManagedCare") || "I Need Help"}</span>
             <MessageCircle className="h-4 w-4 relative z-10 opacity-90" strokeWidth={2.5} />
           </Button>
