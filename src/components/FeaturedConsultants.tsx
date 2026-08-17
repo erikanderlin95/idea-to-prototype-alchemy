@@ -1,7 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { HelpCircle, MessageCircle } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 
 export const FeaturedConsultants = () => {
   const { t } = useLanguage();
@@ -17,17 +17,14 @@ export const FeaturedConsultants = () => {
           </h2>
         </div>
 
-        {/* CTA — prominent I Need Help button */}
-        <div className="max-w-md mx-auto px-4 sm:px-0 flex justify-center">
+        {/* CTA — I Need Help */}
+        <div className="max-w-md mx-auto px-2 sm:px-0 flex justify-center">
           <Button
-            className="relative w-full sm:w-[85%] h-12 sm:h-14 justify-center gap-2.5 bg-gradient-to-r from-[#0E9AAB] to-[#0C8A99] hover:from-[#0B8797] hover:to-[#097A88] text-white font-bold text-[15px] sm:text-[16px] tracking-wide shadow-[0_4px_18px_rgba(14,154,171,0.45)] hover:shadow-[0_6px_24px_rgba(14,154,171,0.55)] transition-all hover:scale-[1.02] active:scale-[0.97] overflow-hidden"
+            className="w-[80%] sm:w-[70%] h-12 justify-center gap-2 rounded-full bg-gradient-to-r from-[#0E9AAB] via-[#0C8A99] to-[#0E9AAB] hover:from-[#0B8797] hover:via-[#097A88] hover:to-[#0B8797] text-white font-bold text-base tracking-wide shadow-[0_6px_20px_rgba(14,154,171,0.45)] hover:shadow-[0_10px_28px_rgba(14,154,171,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.97] ring-2 ring-white/30"
             onClick={() => navigate("/organization/nymg")}
           >
-            {/* subtle pulse ring */}
-            <span className="pointer-events-none absolute inset-0 rounded-md ring-2 ring-white/30 animate-ping opacity-25" />
-            <HelpCircle className="h-5 w-5 relative z-10" strokeWidth={2.5} />
-            <span className="relative z-10">{t("featuredConsultants.viewManagedCare") || "I Need Help"}</span>
-            <MessageCircle className="h-4 w-4 relative z-10 opacity-90" strokeWidth={2.5} />
+            <HelpCircle className="h-5 w-5 shrink-0" />
+            {t("featuredConsultants.viewManagedCare") || "I Need Help"}
           </Button>
         </div>
       </div>
