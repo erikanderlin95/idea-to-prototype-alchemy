@@ -121,6 +121,10 @@ const OrganizationProfile = () => {
               </span>
             </div>
 
+            <p className="text-[13px] text-[#4A5D6E] leading-snug mb-3">
+              {t("org.contact2Desc")}
+            </p>
+
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 rounded-xl overflow-hidden ring-2 ring-[#D0DCE6] shrink-0 bg-[#F0F5FA]">
                 <img
