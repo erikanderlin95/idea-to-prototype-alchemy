@@ -17,13 +17,14 @@ export const FeaturedConsultants = () => {
           </h2>
         </div>
 
-        {/* CTA — same styling as NYMG "Request Managed Care" button */}
+        {/* CTA — I Need Help */}
         <div className="max-w-md mx-auto px-2 sm:px-0 flex justify-center">
           <Button
-            className="w-[60%] h-9 justify-center bg-gradient-to-r from-[#0E9AAB] to-[#0C8A99] hover:from-[#0B8797] hover:to-[#097A88] text-white font-bold text-[14px] tracking-wide shadow-[0_3px_12px_rgba(14,154,171,0.35)] hover:shadow-[0_5px_18px_rgba(14,154,171,0.45)] transition-all active:scale-[0.97]"
+            className="w-[80%] sm:w-[70%] h-12 justify-center gap-2 rounded-full bg-gradient-to-r from-[#0E9AAB] via-[#0C8A99] to-[#0E9AAB] hover:from-[#0B8797] hover:via-[#097A88] hover:to-[#0B8797] text-white font-bold text-base tracking-wide shadow-[0_6px_20px_rgba(14,154,171,0.45)] hover:shadow-[0_10px_28px_rgba(14,154,171,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.97] ring-2 ring-white/30"
             onClick={() => navigate("/organization/nymg")}
           >
-            {t("featuredConsultants.viewManagedCare") || "View Managed Care"}
+            <HelpCircle className="h-5 w-5 shrink-0" />
+            {t("featuredConsultants.viewManagedCare") || "I Need Help"}
           </Button>
         </div>
       </div>
