@@ -152,8 +152,9 @@ const OrganizationProfile = () => {
             </div>
           </div>
         </div>
+      </div>
 
-        <div className="max-w-[380px] mx-auto w-full">
+      <div className="max-w-[380px] mx-auto w-full">
           <div className="rounded-2xl border border-[#D0DCE6] bg-white/90 shadow-[0_4px_20px_rgba(13,46,74,0.06)] p-4 overflow-hidden">
             <div className="flex items-center gap-2 mb-3">
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#E6F7FA] text-[#0E9AAB] text-[11px] font-semibold">
