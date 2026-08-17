@@ -1,6 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
+import { HelpCircle, MessageCircle } from "lucide-react";
 
 export const FeaturedConsultants = () => {
   const { t } = useLanguage();
