@@ -698,10 +698,10 @@ const translations: Record<Language, Record<string, string>> = {
     "org.helpDesc": "Need help navigating care? Connect with our medical concierge for guidance and next steps.",
     "org.contact2Name": "Erika Ander Lin",
     "org.contact2Title": "Care & Clinic Relations",
-    "org.contact3Desc": "Insurance Education & Navigation",
+    "org.contact3Desc": "Health decisions don't stop at the clinic. Financial clarity matters too.",
     "org.contact3Name": "Aayden Ng",
     "org.contact3Title": "ClynicQ Advisor",
-    "org.contact3Company": "ClynicQ",
+    "org.contact3Company": "Insurance Education & Navigation",
     "org.contact3Disclaimer": "Provides general insurance information only. ClynicQ does not provide financial advice or recommend insurance products.",
 
     // SHA
