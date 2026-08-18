@@ -2201,7 +2201,7 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.visitType": "Jenis Kunjungan",
     "queue.peopleAhead": "Orang di Hadapan",
     "queue.generalConsultation": "Konsultasi Umum",
-    "queue.notifiedWhenTurn": "Kami akan memberitahu anda apabila giliran anda hampir tiba",
+    "queue.notifiedWhenTurn": "Sertai barisan untuk melihat berapa pesakit di hadapan dan semak semula bila-bila masa.",
     "queue.leaveQueue": "Tinggalkan Giliran",
     "queue.checkIn": "Daftar Masuk",
     "queue.joinQueue": "Sertai Giliran",
