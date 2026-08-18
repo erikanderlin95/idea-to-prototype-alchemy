@@ -508,7 +508,7 @@ export const ClinicCard = ({
                     <span className="text-sm font-bold text-foreground">You're in the queue</span>
                   </div>
                   <p className="text-xs text-muted-foreground leading-snug">
-                    We'll notify you when it's almost your turn. Please arrive within <span className="font-bold text-red-600">5 minutes</span> after receiving your notification to avoid missing your queue.
+                    {t("queue.successMessage")}
                   </p>
                 </div>
               ) : (
