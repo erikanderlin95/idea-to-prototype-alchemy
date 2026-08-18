@@ -2173,6 +2173,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Queue Re-entry
     "queue.reentry.title": "Cari Giliran Saya",
     "queue.reentry.description": "Masukkan nombor telefon bimbit yang anda gunakan untuk menyertai giliran.",
+    "queue.reentry.invalidMobile": "Sila masukkan nombor telefon bimbit yang sah (8-15 digit).",
     "queue.reentry.mobileLabel": "Nombor telefon bimbit",
     "queue.reentry.mobilePlaceholder": "+65 XXXX XXXX",
     "queue.reentry.findButton": "Cari Giliran Saya",
