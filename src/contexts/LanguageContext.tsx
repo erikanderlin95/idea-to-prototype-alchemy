@@ -127,7 +127,7 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.visitType": "Visit Type",
     "queue.peopleAhead": "People Ahead",
     "queue.generalConsultation": "General Consultation",
-    "queue.notifiedWhenTurn": "We'll notify you when it's nearly your turn",
+    "queue.notifiedWhenTurn": "Join the queue to see how many patients are ahead and check back anytime.",
     "queue.leaveQueue": "Leave Queue",
     "queue.checkIn": "Check In",
     "queue.joinQueue": "Join Queue",
