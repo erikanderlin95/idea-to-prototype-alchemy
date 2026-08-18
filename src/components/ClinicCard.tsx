@@ -84,7 +84,9 @@ export const ClinicCard = ({
   const [joinLoading, setJoinLoading] = useState(false);
   const [joinError, setJoinError] = useState("");
   const [showLeaveDialog, setShowLeaveDialog] = useState(false);
-  const isNotificationMode = name === "Harmony TCM Centre";
+  const isHarmony = name === "Harmony TCM Centre";
+  // Standardized post-join experience across all queue clinics (Harmony TCM format)
+  const isNotificationMode = true;
   // Booking lead capture state
   const [showBookingLead, setShowBookingLead] = useState(false);
   const [showBookingConfirm, setShowBookingConfirm] = useState(false);
@@ -621,7 +623,7 @@ export const ClinicCard = ({
                   <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center shadow-sm shadow-primary/20 shrink-0">
                     <Users className="h-3.5 w-3.5 text-primary-foreground" strokeWidth={3} />
                   </div>
-                  <p className="text-[15px] sm:text-base font-bold text-foreground leading-tight">{isNotificationMode ? t("clinicCard.lowWait") : t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
+                  <p className="text-[15px] sm:text-base font-bold text-foreground leading-tight">{isHarmony ? t("clinicCard.lowWait") : t("clinicCard.joinVirtual").replace("{count}", String(queueCount))}</p>
                 </div>
                 <p className="text-[12px] text-foreground/80 leading-snug line-clamp-1">
                   <Star className="inline h-3 w-3 text-foreground/70 mr-1 -mt-0.5" />
@@ -945,7 +947,7 @@ export const ClinicCard = ({
     {/* Queue Success Card Dialog */}
     <Dialog open={showQueueCard} onOpenChange={setShowQueueCard}>
       <DialogContent className="max-w-sm">
-        {name === "Harmony TCM Centre" ? (
+        
           <>
             <DialogHeader>
               <DialogTitle className="sr-only">You're in the queue</DialogTitle>
@@ -999,60 +1001,6 @@ export const ClinicCard = ({
             </div>
 
           </>
-        ) : (
-          <>
-            <DialogHeader>
-              <DialogTitle className="text-base">Your queue number has been confirmed</DialogTitle>
-            </DialogHeader>
-            <div className="space-y-3">
-              <div className="text-center p-5 bg-muted rounded-lg">
-                <p className="text-xs text-muted-foreground mb-1">Active Patients Ahead</p>
-                <p className="text-5xl font-bold text-primary">{newQueueNumber}</p>
-                <p className="text-[11px] font-medium text-foreground mt-3">
-                  Current position may change based on clinic flow and urgent cases
-                </p>
-              </div>
-
-                {newCheckInCode && (
-                  <div className="text-center p-4 border-2 border-primary/30 rounded-lg bg-primary/5">
-                    <p className="text-sm font-medium text-primary">{t("queue.checkInCode")}</p>
-                  </div>
-                )}
-
-              <div className="p-3 border rounded-md space-y-2">
-                <p className="text-xs font-medium">Save your queue link</p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full text-xs"
-                  onClick={() => {
-                    const queueUrl = `${window.location.origin}/queue?clinic=${id}&mobile=${encodeURIComponent(mobileNumber)}`;
-                    navigator.clipboard.writeText(queueUrl);
-                    toast.success("Link copied!");
-                  }}
-                >
-                  <Copy className="mr-1.5 h-3.5 w-3.5" />
-                  Copy Link
-                </Button>
-                <p className="text-[11px] font-medium text-foreground">Use this link to return to your queue anytime.</p>
-              </div>
-
-              <Alert className="py-2">
-                <AlertDescription className="text-[11px] text-destructive">
-                  {t("queue.notice.absent")}
-                </AlertDescription>
-              </Alert>
-            </div>
-            <DialogFooter>
-              <Button size="sm" onClick={() => {
-                setShowQueueCard(false);
-                navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(mobileNumber)}`);
-              }}>
-                View Queue Details
-              </Button>
-            </DialogFooter>
-          </>
-        )}
       </DialogContent>
     </Dialog>
 
