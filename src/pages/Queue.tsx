@@ -385,14 +385,24 @@ export default function Queue() {
             </CardHeader>
             <CardContent className="px-4 sm:px-6">
               <div className="space-y-5">
-                {/* People Ahead — main information */}
-                <div className="text-center p-4 sm:p-5 rounded-lg bg-background/50">
-                  <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
-                  <p className="text-4xl sm:text-5xl font-bold text-primary">
-                    {myPosition ? Math.max(0, myPosition - 1) : 0}
-                  </p>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">{t("queue.aheadSuffix")}</p>
+                <div className="grid grid-cols-2 gap-3">
+                  {/* Queue Number */}
+                  <div className="text-center p-4 sm:p-5 rounded-lg bg-background/50">
+                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.queueNumber")}</p>
+                    <p className="text-4xl sm:text-5xl font-bold text-primary">
+                      {myQueueEntry.queue_number}
+                    </p>
+                  </div>
+                  {/* People Ahead — main information */}
+                  <div className="text-center p-4 sm:p-5 rounded-lg bg-background/50">
+                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
+                    <p className="text-4xl sm:text-5xl font-bold text-primary">
+                      {myPosition ? Math.max(0, myPosition - 1) : 0}
+                    </p>
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-1">{t("queue.aheadSuffix")}</p>
+                  </div>
                 </div>
+
 
                 {/* Dynamic instruction based on people ahead */}
                 <div className="p-3 sm:p-4 bg-primary/10 border border-primary/20 rounded-lg">
