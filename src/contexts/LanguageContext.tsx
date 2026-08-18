@@ -175,6 +175,13 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.visitTypeAcute": "Acute Condition",
     "queue.visitTypeChronic": "Chronic Condition",
     "queue.visitTypeScreening": "Health Screening",
+    "queue.instruction.moreThan4": "Check this page regularly for updates. Please return to the clinic when 3–4 patients are ahead.",
+    "queue.instruction.threeToFour": "Please make your way to the clinic now.",
+    "queue.instruction.zeroToTwo": "Your turn may be approaching. Please be at the clinic and inform the counter when you arrive.",
+    "queue.notice.refresh": "The number ahead is based on active patients who checked in before you and refreshes every minute.",
+    "queue.notice.order": "Queue order is managed by clinic staff and may change.",
+    "queue.notice.absent": "If you are absent when called, the clinic will attend to the next patient. Inform the counter when you return.",
+    "queue.notice.noGuarantee": "ClynicQ does not guarantee an exact waiting time.",
 
     
     // Staff Dashboard
