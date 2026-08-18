@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { MapPin, Clock, Users, Star, CheckCircle, Phone, AlertTriangle, Copy, Calendar, Shield, MessageCircle, ExternalLink } from "lucide-react";
+import { MapPin, Clock, Users, Star, CheckCircle, Phone, AlertTriangle, Calendar, Shield, MessageCircle, ExternalLink } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
