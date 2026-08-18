@@ -537,28 +537,17 @@ export const ClinicCard = ({
         {myQueueEntry ? (
           <div className="flex-1 flex flex-col justify-between gap-1.5" onClick={(e) => e.stopPropagation()}>
             <div className="flex flex-col gap-1.5">
-              {/* Save your queue link */}
               <button
                 type="button"
                 onClick={(e) => {
                   e.stopPropagation();
                   const mob = myQueueEntry.mobile_number || mobileNumber || "";
-                  const queueUrl = `${window.location.origin}/queue?clinic=${id}&mobile=${encodeURIComponent(mob)}`;
-                  navigator.clipboard.writeText(queueUrl);
-                  toast.success("Link copied!");
+                  setShowQueueCard(false);
+                  navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(mob)}`);
                 }}
-                className="flex items-center justify-between gap-2 px-2.5 py-2 rounded-lg border border-primary/25 bg-primary/5 text-left"
+                className="flex items-center justify-center gap-2 px-2.5 py-2 rounded-lg border border-primary/25 bg-primary/5 text-left w-full"
               >
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <Copy className="h-3.5 w-3.5 text-primary shrink-0" />
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-foreground leading-tight">{t("clinicCard.saveQueueLink")}</p>
-                    <p className="text-[11px] font-mono text-primary truncate">
-                      {`${window.location.origin}/queue?...`}
-                    </p>
-                  </div>
-                </div>
-                <Copy className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
+                <span className="text-sm font-semibold text-foreground leading-tight">View My Queue Status</span>
               </button>
 
               {isNotificationMode ? (
@@ -969,23 +958,6 @@ export const ClinicCard = ({
                 <p className="text-sm font-medium text-ai-indigo text-center">{t("queue.checkInCode")}</p>
               </div>
 
-              <div className="w-full p-3 border rounded-md space-y-2">
-                <p className="text-xs font-medium">Save your queue link</p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full text-xs"
-                  onClick={() => {
-                    const queueUrl = `${window.location.origin}/queue?clinic=${id}&mobile=${encodeURIComponent(mobileNumber)}`;
-                    navigator.clipboard.writeText(queueUrl);
-                    toast.success("Link copied!");
-                  }}
-                >
-                  <Copy className="mr-1.5 h-3.5 w-3.5" />
-                  Copy Link
-                </Button>
-                <p className="text-[11px] font-medium text-foreground">Use this link to return to your queue anytime.</p>
-              </div>
               <p className="text-sm text-foreground leading-relaxed px-2">
                 {t("queue.successMessage")}
               </p>
