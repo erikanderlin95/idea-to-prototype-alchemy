@@ -427,6 +427,30 @@ export default function Queue() {
                   </div>
                 )}
 
+                {/* Save queue link */}
+                {myQueueEntry.status === 'waiting' && (
+                  <div className="p-3 border rounded-md space-y-2">
+                    <p className="text-xs font-medium">{t("clinicCard.saveQueueLink")}</p>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full text-xs"
+                      onClick={() => {
+                        const mob = myQueueEntry.mobile_number || mobileNumber || "";
+                        const queueUrl = `${window.location.origin}/queue?clinic=${clinicId}&mobile=${encodeURIComponent(mob)}`;
+                        navigator.clipboard.writeText(queueUrl);
+                        toast.success("Link copied!");
+                      }}
+                    >
+                      <Copy className="mr-1.5 h-3.5 w-3.5" />
+                      Copy Link
+                    </Button>
+                    <p className="text-[11px] font-medium text-foreground">Use this link to return to your queue anytime.</p>
+                  </div>
+                )}
+
+
+
                 {myQueueEntry.status === 'checked_in' && (
                   <Badge variant="default" className="w-full justify-center py-3 text-sm bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-500">
                     📅 <a href="/booking" className="underline ml-1">{t("queue.rebookLink")}</a>
