@@ -1219,6 +1219,13 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.visitTypeAcute": "急性病症",
     "queue.visitTypeChronic": "慢性病症",
     "queue.visitTypeScreening": "健康检查",
+    "queue.instruction.moreThan4": "请定期查看此页面了解更新。当前方还有3-4位患者时，请返回诊所。",
+    "queue.instruction.threeToFour": "请现在前往诊所。",
+    "queue.instruction.zeroToTwo": "您的就诊时间可能快到了。请到达诊所并在到达时告知柜台。",
+    "queue.notice.refresh": "前方人数基于比您先签到的在诊患者，每分钟刷新。",
+    "queue.notice.order": "排队顺序由诊所工作人员管理，可能会发生变化。",
+    "queue.notice.absent": "如果您在叫到您时不在场，诊所将接诊下一位患者。返回时请告知柜台。",
+    "queue.notice.noGuarantee": "ClynicQ 不保证确切的等待时间。",
 
     
     // Staff Dashboard
