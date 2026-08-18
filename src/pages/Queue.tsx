@@ -358,46 +358,44 @@ export default function Queue() {
     <div className="min-h-screen bg-background">
       <Navbar />
       
-      <div className="container mx-auto px-4 py-8 max-w-4xl">
+      <div className="container mx-auto px-4 py-4 max-w-4xl">
         {/* Staff Notifications */}
-        <div className="mb-6">
+        <div className="mb-3">
           <StaffNotifications />
         </div>
 
-        <Card className="mb-6 bg-gradient-to-r from-card to-primary/5">
-          <CardHeader className="px-4 sm:px-6 pb-3">
+        <Card className="mb-3 bg-gradient-to-r from-card to-primary/5">
+          <CardHeader className="px-4 sm:px-6 pb-2">
             <div className="flex items-start justify-between">
               <div>
-                <CardTitle className="text-xl sm:text-2xl">{clinic?.name}</CardTitle>
-                <CardDescription className="mt-1 text-sm">{clinic?.address}</CardDescription>
+                <CardTitle className="text-lg sm:text-xl">{clinic?.name}</CardTitle>
+                <CardDescription className="mt-0.5 text-sm">{clinic?.address}</CardDescription>
               </div>
             </div>
           </CardHeader>
         </Card>
 
         {myQueueEntry ? (
-          <Card className="mb-6 border-primary bg-gradient-to-br from-primary/5 to-accent/5">
-            <CardHeader className="px-4 sm:px-6 pb-3">
-              <CardTitle className="flex items-center gap-2 text-lg sm:text-xl">
+          <Card className="mb-3 border-primary bg-gradient-to-br from-primary/5 to-accent/5">
+            <CardHeader className="px-4 sm:px-6 pb-2">
+              <CardTitle className="flex items-center gap-2 text-base sm:text-lg">
                 <CheckCircle2 className="h-5 w-5 text-primary" />
                 {t("queue.youreInQueue")}
               </CardTitle>
             </CardHeader>
             <CardContent className="px-4 sm:px-6">
-              <div className="space-y-5">
+              <div className="space-y-3">
                 {/* People Ahead — main information */}
-                <div className="text-center p-5 sm:p-6 rounded-xl border-2 border-primary/30 bg-primary/5">
+                <div className="text-center p-4 sm:p-5 rounded-xl border-2 border-primary/40 bg-primary/10">
                   <p className="text-sm sm:text-base font-semibold text-foreground mb-1">{t("queue.peopleAhead")}</p>
                   <p className="text-5xl sm:text-6xl font-bold text-primary leading-none">
                     {myPosition ? Math.max(0, myPosition - 1) : 0}
                   </p>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-2">{t("queue.aheadSuffix")}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">{t("queue.aheadSuffix")}</p>
                 </div>
 
-
-
                 {/* Dynamic instruction based on people ahead */}
-                <div className="p-3 sm:p-4 bg-primary/10 border border-primary/20 rounded-lg">
+                <div className="p-3 sm:p-4 bg-primary/15 border border-primary/30 rounded-lg">
                   <p className="text-sm sm:text-base text-foreground font-medium leading-relaxed">
                     {(() => {
                       const ahead = myPosition ? Math.max(0, myPosition - 1) : 0;
@@ -410,10 +408,10 @@ export default function Queue() {
 
                 {/* Check-in Code */}
                 {myQueueEntry.check_in_code && myQueueEntry.status === 'waiting' && (
-                  <div className="text-center p-4 sm:p-5 border-2 border-primary/30 rounded-lg bg-primary/5">
+                  <div className="text-center p-3 sm:p-4 border-2 border-primary/40 rounded-lg bg-primary/10">
                     <p className="text-xs sm:text-sm text-muted-foreground font-medium uppercase tracking-wide mb-1">{t("queue.checkInCode")}</p>
                     <p className="text-2xl sm:text-3xl font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</p>
-                    <p className="text-xs sm:text-sm text-foreground font-medium mt-2">
+                    <p className="text-xs sm:text-sm text-foreground font-medium mt-1">
                       {t("queue.showCheckInCode")}
                     </p>
                   </div>
@@ -421,12 +419,12 @@ export default function Queue() {
 
                 {/* Save queue link */}
                 {myQueueEntry.status === 'waiting' && (
-                  <div className="p-3 border rounded-md space-y-2">
+                  <div className="p-2.5 border border-primary/30 rounded-md space-y-1.5 bg-primary/5">
                     <p className="text-xs font-medium">{t("clinicCard.saveQueueLink")}</p>
                     <Button
                       variant="outline"
                       size="sm"
-                      className="w-full text-xs"
+                      className="w-full text-xs border-primary/40 hover:bg-primary/10"
                       onClick={() => {
                         const mob = myQueueEntry.mobile_number || mobileNumber || "";
                         const queueUrl = `${window.location.origin}/queue?clinic=${clinicId}&mobile=${encodeURIComponent(mob)}`;
@@ -441,8 +439,6 @@ export default function Queue() {
                   </div>
                 )}
 
-
-
                 {myQueueEntry.status === 'checked_in' && (
                   <Badge variant="default" className="w-full justify-center py-3 text-sm bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-500">
                     📅 <a href="/booking" className="underline ml-1">{t("queue.rebookLink")}</a>
@@ -451,14 +447,15 @@ export default function Queue() {
 
                 {/* Patient notice */}
                 <div className="p-3 sm:p-4 bg-muted rounded-lg border border-border">
-                  <p className="text-sm sm:text-base font-semibold text-foreground mb-2">{t("queue.patientNotice")}</p>
-                  <ul className="space-y-2 text-sm sm:text-base text-foreground leading-relaxed">
+                  <p className="text-sm sm:text-base font-semibold text-foreground mb-1.5">{t("queue.patientNotice")}</p>
+                  <ul className="space-y-1.5 text-sm sm:text-base text-foreground leading-relaxed">
                     <li>• {t("queue.notice.refresh")}</li>
                     <li>• {t("queue.notice.order")}</li>
                     <li>• {t("queue.notice.absent")}</li>
                     <li>• {t("queue.notice.noGuarantee")}</li>
                   </ul>
                 </div>
+
 
 
                 <div className="flex gap-3 pt-2">
