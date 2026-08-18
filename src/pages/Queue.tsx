@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Clock, Users, AlertCircle, CheckCircle2, LogOut, Star, AlertTriangle, Copy } from "lucide-react";
+import { CheckCircle2, LogOut, AlertTriangle, Copy } from "lucide-react";
 import { format } from "date-fns";
 
 export default function Queue() {
@@ -395,8 +395,8 @@ export default function Queue() {
                 </div>
 
                 {/* Dynamic instruction based on people ahead */}
-                <div className="p-3 sm:p-4 bg-primary/15 border border-primary/30 rounded-lg">
-                  <p className="text-sm sm:text-base text-foreground font-medium leading-relaxed">
+                <div className="p-3 sm:p-4 bg-destructive/10 border border-destructive/30 rounded-lg">
+                  <p className="text-sm sm:text-base text-destructive font-semibold leading-relaxed">
                     {(() => {
                       const ahead = myPosition ? Math.max(0, myPosition - 1) : 0;
                       if (ahead > 4) return t("queue.instruction.moreThan4");
@@ -514,46 +514,6 @@ export default function Queue() {
           </Alert>
         )}
 
-        <Card className="mt-6">
-          <CardHeader>
-            <CardTitle>{t("queue.liveQueue")}</CardTitle>
-            <CardDescription>{t("queue.peopleAheadRightNow").replace("{n}", String(queueData.length))}</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {queueData.length === 0 ? (
-              <div className="text-center py-8 text-muted-foreground">
-                <AlertCircle className="h-12 w-12 mx-auto mb-2 opacity-50" />
-                <p>{t("queue.empty")}</p>
-                <p className="text-sm">{t("queue.beFirst")}</p>
-              </div>
-            ) : (
-              <div className="space-y-2">
-                {queueData.slice(0, 10).map((entry, index) => (
-                  <div
-                    key={entry.id}
-                    className={`flex items-center justify-between p-3 rounded-lg ${
-                      entry.id === myQueueEntry?.id
-                        ? "bg-primary/10 border-2 border-primary"
-                        : "bg-muted"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Badge variant={index === 0 ? "default" : "secondary"}>
-                        #{entry.queue_number}
-                      </Badge>
-                      {entry.id === myQueueEntry?.id && (
-                        <span className="text-sm font-medium text-primary">{t("queue.you")}</span>
-                      )}
-                    </div>
-                    <span className="text-sm text-muted-foreground">
-                      {index === 0 ? t("queue.nowServing") : t("queue.peopleAheadOfYou").replace("{n}", String(index))}
-                    </span>
-                  </div>
-                ))}
-              </div>
-            )}
-          </CardContent>
-        </Card>
 
       </div>
 
