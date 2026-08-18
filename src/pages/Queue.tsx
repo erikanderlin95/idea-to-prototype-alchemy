@@ -362,7 +362,7 @@ export default function Queue() {
                   </p>
                 </div>
 
-                {/* Check-in Code */}
+                {/* Verify with patient NRIC upon arrival */}
                 {myQueueEntry.check_in_code && myQueueEntry.status === 'waiting' && (
                   <div className="text-center p-3 sm:p-4 border-2 border-primary/40 rounded-lg bg-primary/10">
                     <p className="text-sm sm:text-base font-medium text-primary">{t("queue.checkInCode")}</p>
