@@ -32,7 +32,8 @@ Deno.serve(async (req) => {
     }
 
 
-    const needsMobile = !["get_public_queue_list"].includes(action);
+    const mobileOptional = action === "check_active_entry" && patient_nric;
+    const needsMobile = !["get_public_queue_list"].includes(action) && !mobileOptional;
     if (needsMobile) {
       if (!mobile_number || typeof mobile_number !== "string") {
         return new Response(
@@ -40,6 +41,8 @@ Deno.serve(async (req) => {
           { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
+    }
+    if (mobile_number && typeof mobile_number === "string") {
       const mobileRegex = /^\+?[0-9]{8,15}$/;
       if (!mobileRegex.test(mobile_number.replace(/\s/g, ""))) {
         return new Response(
@@ -48,6 +51,7 @@ Deno.serve(async (req) => {
         );
       }
     }
+
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
