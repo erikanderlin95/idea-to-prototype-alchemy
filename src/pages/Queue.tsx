@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-import { useQueueNotifications } from "@/hooks/useQueueNotifications";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { StaffNotifications } from "@/components/StaffNotifications";
 import { LeaveQueueDialog } from "@/components/LeaveQueueDialog";
@@ -17,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Clock, Users, AlertCircle, CheckCircle2, LogOut, Bell, BellOff, Star, AlertTriangle } from "lucide-react";
+import { Clock, Users, AlertCircle, CheckCircle2, LogOut, Star, AlertTriangle } from "lucide-react";
 import { format } from "date-fns";
 
 export default function Queue() {
@@ -53,12 +52,6 @@ export default function Queue() {
     return () => window.clearInterval(interval);
   }, [myQueueEntry?.id, myQueueEntry?.status]);
 
-  // Initialize queue notifications
-  const { notificationPermission, requestNotificationPermission } = useQueueNotifications({
-    clinicId,
-    userId: user?.id || null,
-    clinicName: clinic?.name,
-  });
 
   useEffect(() => {
     if (!clinicId) {
@@ -378,50 +371,8 @@ export default function Queue() {
                 <CardTitle className="text-xl sm:text-2xl">{clinic?.name}</CardTitle>
                 <CardDescription className="mt-1 text-sm">{clinic?.address}</CardDescription>
               </div>
-              {myQueueEntry && (
-                <Button
-                  variant={notificationPermission === "granted" ? "outline" : "default"}
-                  size="sm"
-                  onClick={requestNotificationPermission}
-                  className={notificationPermission === "granted" ? "border-accent text-accent" : ""}
-                >
-                  {notificationPermission === "granted" ? (
-                    <>
-                      <Bell className="h-4 w-4 mr-2" />
-                      {t("queue.notificationsOn")}
-                    </>
-                  ) : (
-                    <>
-                      <BellOff className="h-4 w-4 mr-2" />
-                      {t("queue.enableAlerts")}
-                    </>
-                  )}
-                </Button>
-              )}
             </div>
           </CardHeader>
-          <CardContent className="px-4 sm:px-6">
-            
-            {myQueueEntry && notificationPermission !== "granted" && (
-              <>
-                <div className="mt-4 p-3 sm:p-4 bg-destructive/5 border border-destructive/30 rounded-xl">
-                  <p className="text-sm sm:text-base text-destructive font-semibold leading-relaxed">
-                    {t("queue.stayNearby")}
-                  </p>
-                </div>
-                <div className="mt-3 p-3 sm:p-4 bg-muted/50 rounded-lg">
-                  <p className="text-xs sm:text-sm font-semibold text-muted-foreground mb-2">{t("queue.patientNotice")}</p>
-                  <ul className="space-y-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    <li>• {t("queue.disclaimer.bullet1Full")}</li>
-                    <li>• {t("queue.disclaimer.bullet2Full")}</li>
-                    <li>• {t("queue.disclaimer.bullet3Full")}</li>
-                    <li>• {t("queue.disclaimer.bullet4Full")}</li>
-                  </ul>
-                </div>
-
-              </>
-            )}
-          </CardContent>
         </Card>
 
         {myQueueEntry ? (
@@ -434,18 +385,25 @@ export default function Queue() {
             </CardHeader>
             <CardContent className="px-4 sm:px-6">
               <div className="space-y-5">
-                <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                  <div className="text-center p-3 sm:p-4 rounded-lg bg-background/50">
-                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.queueNumber")}</p>
-                    <p className="text-3xl sm:text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
-                  </div>
-                   <div className="text-center p-3 sm:p-4 rounded-lg bg-background/50">
-                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
-                    <p className="text-2xl sm:text-3xl font-semibold">
-                      {myPosition ? Math.max(0, myPosition - 1) : 0} {t("queue.aheadSuffix")}
-                    </p>
-                  </div>
+                {/* People Ahead — main information */}
+                <div className="text-center p-4 sm:p-5 rounded-lg bg-background/50">
+                  <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
+                  <p className="text-4xl sm:text-5xl font-bold text-primary">
+                    {myPosition ? Math.max(0, myPosition - 1) : 0}
+                  </p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">{t("queue.aheadSuffix")}</p>
+                </div>
 
+                {/* Dynamic instruction based on people ahead */}
+                <div className="p-3 sm:p-4 bg-primary/10 border border-primary/20 rounded-lg">
+                  <p className="text-sm sm:text-base text-foreground font-medium leading-relaxed">
+                    {(() => {
+                      const ahead = myPosition ? Math.max(0, myPosition - 1) : 0;
+                      if (ahead > 4) return t("queue.instruction.moreThan4");
+                      if (ahead >= 3 && ahead <= 4) return t("queue.instruction.threeToFour");
+                      return t("queue.instruction.zeroToTwo");
+                    })()}
+                  </p>
                 </div>
 
                 {/* Check-in Code */}
@@ -465,38 +423,27 @@ export default function Queue() {
                   </Badge>
                 )}
 
-                {myQueueEntry.status === 'waiting' && myPosition === 1 && (
-                  <Badge variant="default" className="w-full justify-center py-3 text-sm sm:text-base bg-accent">
-                    {t("queue.youreNext")}
-                  </Badge>
-                )}
-
-                {myQueueEntry.status === 'waiting' && myPosition && myPosition > 1 && myPosition <= 3 && (
-                  <Badge variant="secondary" className="w-full justify-center py-3 text-sm sm:text-base">
-                    {t("queue.almostYourTurn")}
-                  </Badge>
-                )}
-
-                {myQueueEntry.status === 'waiting' && myPosition && myPosition > 3 && (
-                  <Badge variant="outline" className="w-full justify-center py-3 text-sm sm:text-base">
-                    {t("queue.notifyAlmost")}
-                  </Badge>
-                )}
+                {/* Patient notice */}
+                <div className="p-3 sm:p-4 bg-muted/50 rounded-lg">
+                  <ul className="space-y-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    <li>• {t("queue.notice.refresh")}</li>
+                    <li>• {t("queue.notice.order")}</li>
+                    <li>• {t("queue.notice.absent")}</li>
+                    <li>• {t("queue.notice.noGuarantee")}</li>
+                  </ul>
+                </div>
 
                 <div className="flex gap-3 pt-2">
                   {myQueueEntry.status === 'waiting' && (
-                    <>
-                      <Button 
-                        onClick={cancelQueue} 
-                        variant="outline"
-                        className="flex-1 border-destructive text-destructive hover:bg-destructive/10 text-sm sm:text-base"
-                        size="lg"
-                      >
-                        <LogOut className="mr-2 h-5 w-5" />
-                        {t("queue.leaveQueue")}
-                      </Button>
-                    </>
-
+                    <Button 
+                      onClick={cancelQueue} 
+                      variant="outline"
+                      className="flex-1 border-destructive text-destructive hover:bg-destructive/10 text-sm sm:text-base"
+                      size="lg"
+                    >
+                      <LogOut className="mr-2 h-5 w-5" />
+                      {t("queue.leaveQueue")}
+                    </Button>
                   )}
                   {myQueueEntry.status === 'checked_in' && (
                     <div className="w-full p-5 sm:p-6 bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 rounded-lg">

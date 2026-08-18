@@ -508,7 +508,7 @@ export const ClinicCard = ({
                     <span className="text-sm font-bold text-foreground">You're in the queue</span>
                   </div>
                   <p className="text-xs text-muted-foreground leading-snug">
-                    We'll notify you when it's almost your turn. Please arrive within <span className="font-bold text-red-600">5 minutes</span> after receiving your notification to avoid missing your queue.
+                    {t("queue.successMessage")}
                   </p>
                 </div>
               ) : (
@@ -925,7 +925,7 @@ export const ClinicCard = ({
                 <p className="text-[11px] font-medium text-foreground">Use this link to return to your queue anytime.</p>
               </div>
               <p className="text-sm text-foreground leading-relaxed px-2">
-                You'll be notified when it's almost your turn. Please arrive within <span className="font-bold text-red-600">5 minutes</span> after receiving your notification to avoid missing your queue.
+                {t("queue.successMessage")}
               </p>
             </div>
           </>
@@ -973,7 +973,7 @@ export const ClinicCard = ({
 
               <Alert className="py-2">
                 <AlertDescription className="text-[11px] text-destructive">
-                  Please stay nearby and keep this page open, when it's your turn, check in at counter within 30 seconds.
+                  {t("queue.notice.absent")}
                 </AlertDescription>
               </Alert>
             </div>
