@@ -284,7 +284,20 @@ export const ClinicCard = ({
       const payload = response ?? error;
       if (status !== 200 || payload?.error) {
         if (payload?.code === "ALREADY_IN_QUEUE") {
-          setJoinError("You already have an active queue entry at this clinic");
+          // Restore the existing active queue state instead of just erroring
+          localStorage.setItem(`queue_mobile_${id}`, sanitizedMobile);
+          setMobileNumber(sanitizedMobile);
+          if (payload.entry) {
+            setMyQueueEntry(payload.entry);
+            setNewQueueNumber(payload.entry.queue_number);
+            setNewCheckInCode(payload.entry.check_in_code || "");
+            setShowDisclaimer(false);
+            setShowQueueCard(true);
+            toast.info("You are already in the queue at this clinic");
+          } else {
+            setJoinError("You already have an active queue entry at this clinic");
+          }
+          checkQueueStatus();
         } else if (payload?.code === "COOLDOWN") {
           setJoinError(payload.error);
         } else if (payload?.code === "RATE_LIMITED") {
@@ -294,6 +307,7 @@ export const ClinicCard = ({
         }
         return;
       }
+
 
       const createdEntry = response.entry;
       setNewQueueNumber(createdEntry.queue_number);
