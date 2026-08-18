@@ -2249,6 +2249,13 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.visitTypeAcute": "Keadaan Akut",
     "queue.visitTypeChronic": "Keadaan Kronik",
     "queue.visitTypeScreening": "Saringan Kesihatan",
+    "queue.instruction.moreThan4": "Semak halaman ini secara kerap untuk kemas kini. Sila kembali ke klinik apabila 3-4 pesakit di hadapan.",
+    "queue.instruction.threeToFour": "Sila ke klinik sekarang.",
+    "queue.instruction.zeroToTwo": "Giliran anda mungkin hampir tiba. Sila berada di klinik dan maklumkan kaunter apabila anda tiba.",
+    "queue.notice.refresh": "Bilangan di hadapan adalah berdasarkan pesakit aktif yang mendaftar masuk sebelum anda dan disegarkan semula setiap minit.",
+    "queue.notice.order": "Susunan giliran diuruskan oleh staf klinik dan mungkin berubah.",
+    "queue.notice.absent": "Jika anda tidak hadir apabila dipanggil, klinik akan melayan pesakit seterusnya. Maklumkan kaunter apabila anda kembali.",
+    "queue.notice.noGuarantee": "ClynicQ tidak menjamin masa menunggu yang tepat.",
 
     "staff.title": "Papan Pemuka Kakitangan",
     "staff.loading": "Memuatkan papan pemuka kakitangan...",
