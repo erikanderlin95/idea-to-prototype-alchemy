@@ -188,18 +188,32 @@ export const ClinicCard = ({
   const checkQueueStatus = async () => {
     if (!id) return;
     const storedMobile = localStorage.getItem(`queue_mobile_${id}`);
-    if (!storedMobile) { setMyQueueEntry(null); return; }
+    const storedNric = localStorage.getItem(`queue_nric_${id}`);
+    if (!storedMobile && !storedNric) { setMyQueueEntry(null); return; }
     try {
       const { data: response, error } = await supabase.functions.invoke("queue-lookup", {
-        body: { action: "check_active_entry", clinic_id: id, mobile_number: storedMobile },
+        body: {
+          action: "check_active_entry",
+          clinic_id: id,
+          mobile_number: storedMobile || undefined,
+          patient_nric: storedNric || undefined,
+        },
       });
       if (error) { console.warn("checkQueueStatus error", error); return; }
       const entry = response?.entry || null;
       setMyQueueEntry(entry);
-      if (entry) { setMobileNumber(storedMobile); } 
-      else { localStorage.removeItem(`queue_mobile_${id}`); }
+      if (entry) {
+        const mob = storedMobile || entry.mobile_number || "";
+        if (mob) { localStorage.setItem(`queue_mobile_${id}`, mob); setMobileNumber(mob); }
+        setNewQueueNumber(entry.queue_number);
+        setNewCheckInCode(entry.check_in_code || "");
+      } else {
+        localStorage.removeItem(`queue_mobile_${id}`);
+        localStorage.removeItem(`queue_nric_${id}`);
+      }
     } catch (err) { console.warn("checkQueueStatus exception", err); }
   };
+
 
   const handleCancelQueue = (e: React.MouseEvent) => {
     e.stopPropagation();
