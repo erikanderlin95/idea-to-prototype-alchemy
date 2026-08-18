@@ -593,7 +593,8 @@ export const ClinicCard = ({
             <div className="flex gap-1.5">
               <Button
                 asChild
-                className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-10 text-sm"
+                variant="outline"
+                className="flex-1 bg-white hover:bg-emerald-50 text-emerald-700 border-2 border-emerald-600 font-bold h-10 text-sm"
                 onClick={(e) => e.stopPropagation()}
               >
                 <a href={clinicPhone ? `tel:${clinicPhone}` : undefined}>
