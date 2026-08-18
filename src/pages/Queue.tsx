@@ -373,7 +373,6 @@ export default function Queue() {
               </div>
             </div>
           </CardHeader>
-          </CardContent>
         </Card>
 
         {myQueueEntry ? (
