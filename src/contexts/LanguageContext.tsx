@@ -149,8 +149,8 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.smsConfirmation": "Save your queue link to check back anytime",
     "queue.youreInQueue": "You're in the queue",
     "queue.aheadSuffix": "ahead",
-    "queue.checkInCode": "Check-in Code",
-    "queue.showCheckInCode": "Show this code at the clinic counter when you arrive.",
+    "queue.checkInCode": "Verify with patient NRIC upon arrival",
+    "queue.showCheckInCode": "Verify with patient NRIC upon arrival.",
     "queue.youreNext": "🎉 You're next! Please check in when you arrive",
     "queue.almostYourTurn": "⏰ Almost your turn! Get ready to head to the clinic",
     "queue.notifyAlmost": "📱 We'll notify you when it's almost your turn",
@@ -1028,7 +1028,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.saveQueueLink": "Save your queue link",
     "clinicCard.queueLinkCopied": "Queue link copied!",
     "clinicCard.peopleAhead": "People Ahead",
-    "clinicCard.checkInCode": "Check-in Code",
+    "clinicCard.checkInCode": "Verify with patient NRIC upon arrival",
 
     // About Us
     "sidebar.aboutUs": "About ClynicQ",
@@ -1194,8 +1194,8 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.smsConfirmation": "保存排队链接，随时查看最新状态",
     "queue.youreInQueue": "您已加入排队",
     "queue.aheadSuffix": "人在前",
-    "queue.checkInCode": "登记码",
-    "queue.showCheckInCode": "到达诊所柜台时出示此代码。",
+    "queue.checkInCode": "Verify with patient NRIC upon arrival",
+    "queue.showCheckInCode": "Verify with patient NRIC upon arrival.",
     "queue.youreNext": "🎉 轮到您了！到达后请登记",
     "queue.almostYourTurn": "⏰ 快轮到您了！请准备前往诊所",
     "queue.notifyAlmost": "📱 快轮到您时我们会通知您",
@@ -2073,7 +2073,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.saveQueueLink": "保存排队链接",
     "clinicCard.queueLinkCopied": "排队链接已复制！",
     "clinicCard.peopleAhead": "前面的人数",
-    "clinicCard.checkInCode": "签到码",
+    "clinicCard.checkInCode": "Verify with patient NRIC upon arrival",
 
     // About Us
     "sidebar.aboutUs": "关于 ClynicQ",
@@ -2225,8 +2225,8 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.smsConfirmation": "Simpan pautan giliran anda untuk menyemak semula bila-bila masa",
     "queue.youreInQueue": "Anda berada dalam giliran",
     "queue.aheadSuffix": "di hadapan",
-    "queue.checkInCode": "Kod Daftar Masuk",
-    "queue.showCheckInCode": "Tunjukkan kod ini di kaunter klinik apabila anda tiba.",
+    "queue.checkInCode": "Verify with patient NRIC upon arrival",
+    "queue.showCheckInCode": "Verify with patient NRIC upon arrival.",
     "queue.youreNext": "🎉 Giliran anda seterusnya! Sila daftar masuk apabila tiba",
     "queue.almostYourTurn": "⏰ Hampir giliran anda! Bersiap untuk ke klinik",
     "queue.notifyAlmost": "📱 Kami akan memberitahu anda apabila hampir giliran anda",
@@ -3037,7 +3037,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.saveQueueLink": "Simpan pautan giliran anda",
     "clinicCard.queueLinkCopied": "Pautan giliran disalin!",
     "clinicCard.peopleAhead": "Orang di Hadapan",
-    "clinicCard.checkInCode": "Kod Daftar Masuk",
+    "clinicCard.checkInCode": "Verify with patient NRIC upon arrival",
 
     // About Us
     "sidebar.aboutUs": "Tentang ClynicQ",
@@ -3189,8 +3189,8 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.smsConfirmation": "எந்த நேரத்திலும் சரிபார்க்க உங்கள் வரிசை இணைப்பைச் சேமிக்கவும்",
     "queue.youreInQueue": "நீங்கள் வரிசையில் உள்ளீர்கள்",
     "queue.aheadSuffix": "முன்னால்",
-    "queue.checkInCode": "செக்-இன் குறியீடு",
-    "queue.showCheckInCode": "நீங்கள் வந்தவுடன் கிளினிக் கவுண்டரில் இந்த குறியீட்டைக் காட்டுங்கள்.",
+    "queue.checkInCode": "Verify with patient NRIC upon arrival",
+    "queue.showCheckInCode": "Verify with patient NRIC upon arrival.",
     "queue.youreNext": "🎉 உங்கள் முறை அடுத்தது! வந்தவுடன் செக்-இன் செய்யவும்",
     "queue.almostYourTurn": "⏰ உங்கள் முறை நெருங்குகிறது! கிளினிக்குச் செல்லத் தயாராகுங்கள்",
     "queue.notifyAlmost": "📱 உங்கள் முறை நெருங்கும்போது அறிவிக்கப்படும்",
@@ -4001,7 +4001,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.saveQueueLink": "உங்கள் வரிசை இணைப்பைச் சேமிக்கவும்",
     "clinicCard.queueLinkCopied": "வரிசை இணைப்பு நகலெடுக்கப்பட்டது!",
     "clinicCard.peopleAhead": "முன்னோக்கு நபர்கள்",
-    "clinicCard.checkInCode": "செக்-இன் குறியீடு",
+    "clinicCard.checkInCode": "Verify with patient NRIC upon arrival",
 
     // About Us
     "sidebar.aboutUs": "ClynicQ பற்றி",
