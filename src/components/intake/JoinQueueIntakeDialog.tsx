@@ -289,6 +289,24 @@ export const JoinQueueIntakeDialog = ({
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">Check-in Code</p>
                   <p className="text-4xl font-mono font-black tracking-[0.25em] text-primary">{newCheckInCode || "—"}</p>
                 </div>
+                <div className="w-full p-3 border rounded-md space-y-2">
+                  <p className="text-xs font-medium">Save your queue link</p>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full text-xs"
+                    onClick={() => {
+                      const stored = localStorage.getItem(`queue_mobile_${clinicId}`) || "";
+                      const queueUrl = `${window.location.origin}/queue?clinic=${clinicId}&mobile=${encodeURIComponent(stored)}`;
+                      navigator.clipboard.writeText(queueUrl);
+                      toast.success("Link copied!");
+                    }}
+                  >
+                    <Copy className="mr-1.5 h-3.5 w-3.5" />
+                    Copy Link
+                  </Button>
+                  <p className="text-[11px] font-medium text-foreground">Use this link to return to your queue anytime.</p>
+                </div>
                 <p className="text-sm text-foreground leading-relaxed px-2">
                   You'll be notified when it's almost your turn. Please arrive within <span className="font-bold text-red-600">5 minutes</span> after receiving your notification to avoid missing your queue.
                 </p>
