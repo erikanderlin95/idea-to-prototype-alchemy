@@ -1171,7 +1171,7 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.visitType": "就诊类型",
     "queue.peopleAhead": "前面的人数",
     "queue.generalConsultation": "一般咨询",
-    "queue.notifiedWhenTurn": "快轮到您时我们会通知您",
+    "queue.notifiedWhenTurn": "加入排队，查看前方患者人数，并随时回来查看。",
     "queue.leaveQueue": "离开排队",
     "queue.checkIn": "签到",
     "queue.joinQueue": "加入排队",
