@@ -304,8 +304,8 @@ export const JoinQueueIntakeDialog = ({
                   <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Active Patients Ahead</p>
                   <p className="text-4xl font-bold text-primary">{newQueueNumber}</p>
                 </div>
-                <div className="w-full p-5 rounded-xl border-2 border-primary/30 bg-primary/5">
-                  <p className="text-sm font-medium text-primary text-center">{t("queue.checkInCode")}</p>
+                <div className="w-full p-5 rounded-xl border-2 border-ai-indigo/30 bg-ai-indigo/5">
+                  <p className="text-sm font-medium text-ai-indigo text-center">{t("queue.checkInCode")}</p>
                 </div>
 
                 <div className="w-full p-3 border rounded-md space-y-2">

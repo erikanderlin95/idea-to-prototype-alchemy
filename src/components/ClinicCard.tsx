@@ -584,10 +584,10 @@ export const ClinicCard = ({
               )}
 
               {myQueueEntry.check_in_code && (
-                <div className="flex items-center px-2.5 py-2 bg-emerald-50 rounded-lg border border-emerald-300">
+                <div className="flex items-center px-2.5 py-2 bg-ai-indigo/10 rounded-lg border border-ai-indigo/30">
                   <div className="flex items-center gap-1.5">
-                    <Shield className="h-3.5 w-3.5 text-emerald-600" />
-                    <span className="text-sm font-semibold text-emerald-800">{t("clinicCard.checkInCode")}</span>
+                    <Shield className="h-3.5 w-3.5 text-ai-indigo" />
+                    <span className="text-sm font-semibold text-ai-indigo">{t("clinicCard.checkInCode")}</span>
                   </div>
                 </div>
               )}
@@ -965,8 +965,8 @@ export const ClinicCard = ({
                 <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Active Patients Ahead</p>
                 <p className="text-4xl font-bold text-primary">{newQueueNumber}</p>
               </div>
-              <div className="w-full p-5 rounded-xl border-2 border-primary/30 bg-primary/5">
-                <p className="text-sm font-medium text-primary text-center">{t("queue.checkInCode")}</p>
+              <div className="w-full p-5 rounded-xl border-2 border-ai-indigo/30 bg-ai-indigo/5">
+                <p className="text-sm font-medium text-ai-indigo text-center">{t("queue.checkInCode")}</p>
               </div>
 
               <div className="w-full p-3 border rounded-md space-y-2">
