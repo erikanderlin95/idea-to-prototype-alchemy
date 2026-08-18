@@ -385,23 +385,15 @@ export default function Queue() {
             </CardHeader>
             <CardContent className="px-4 sm:px-6">
               <div className="space-y-5">
-                <div className="grid grid-cols-2 gap-3">
-                  {/* Queue Number */}
-                  <div className="text-center p-4 sm:p-5 rounded-lg bg-background/50">
-                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.queueNumber")}</p>
-                    <p className="text-4xl sm:text-5xl font-bold text-primary">
-                      {myQueueEntry.queue_number}
-                    </p>
-                  </div>
-                  {/* People Ahead — main information */}
-                  <div className="text-center p-4 sm:p-5 rounded-lg bg-background/50">
-                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
-                    <p className="text-4xl sm:text-5xl font-bold text-primary">
-                      {myPosition ? Math.max(0, myPosition - 1) : 0}
-                    </p>
-                    <p className="text-xs sm:text-sm text-muted-foreground mt-1">{t("queue.aheadSuffix")}</p>
-                  </div>
+                {/* People Ahead — main information */}
+                <div className="text-center p-5 sm:p-6 rounded-xl border-2 border-primary/30 bg-primary/5">
+                  <p className="text-sm sm:text-base font-semibold text-foreground mb-1">{t("queue.peopleAhead")}</p>
+                  <p className="text-5xl sm:text-6xl font-bold text-primary leading-none">
+                    {myPosition ? Math.max(0, myPosition - 1) : 0}
+                  </p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-2">{t("queue.aheadSuffix")}</p>
                 </div>
+
 
 
                 {/* Dynamic instruction based on people ahead */}
@@ -458,14 +450,16 @@ export default function Queue() {
                 )}
 
                 {/* Patient notice */}
-                <div className="p-3 sm:p-4 bg-muted/50 rounded-lg">
-                  <ul className="space-y-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                <div className="p-3 sm:p-4 bg-muted rounded-lg border border-border">
+                  <p className="text-sm sm:text-base font-semibold text-foreground mb-2">{t("queue.patientNotice")}</p>
+                  <ul className="space-y-2 text-sm sm:text-base text-foreground leading-relaxed">
                     <li>• {t("queue.notice.refresh")}</li>
                     <li>• {t("queue.notice.order")}</li>
                     <li>• {t("queue.notice.absent")}</li>
                     <li>• {t("queue.notice.noGuarantee")}</li>
                   </ul>
                 </div>
+
 
                 <div className="flex gap-3 pt-2">
                   {myQueueEntry.status === 'waiting' && (
