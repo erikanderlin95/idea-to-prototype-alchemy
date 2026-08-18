@@ -3164,7 +3164,7 @@ const translations: Record<Language, Record<string, string>> = {
     "queue.visitType": "வருகை வகை",
     "queue.peopleAhead": "உங்களுக்கு முன் உள்ளவர்கள்",
     "queue.generalConsultation": "பொது ஆலோசனை",
-    "queue.notifiedWhenTurn": "உங்கள் முறை வரும்போது நாங்கள் உங்களுக்குத் தெரிவிப்போம்",
+    "queue.notifiedWhenTurn": "வரிசையில் சேர்ந்து முன்னால் எத்தனை நோயாளிகள் உள்ளனர் என்று பார்த்து, எந்நேரமும் மீண்டும் சரிபார்க்கவும்.",
     "queue.leaveQueue": "வரிசையிலிருந்து வெளியேறு",
     "queue.checkIn": "பதிவு செய்க",
     "queue.joinQueue": "வரிசையில் சேர்",
