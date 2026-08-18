@@ -564,14 +564,15 @@ export const ClinicCard = ({
             
             {/* Action buttons — anchored bottom */}
             <div className="flex gap-1.5">
-              <Button 
-                variant="outline"
-                className="flex-1 border border-destructive/30 text-destructive hover:bg-destructive/10 font-bold h-10 text-sm" 
-                disabled={isLoading}
-                onClick={handleCancelQueue}
+              <Button
+                asChild
+                className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold h-10 text-sm"
+                onClick={(e) => e.stopPropagation()}
               >
-                <XCircle className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
-                {t("clinicCard.leaveQueue")}
+                <a href={clinicPhone ? `tel:${clinicPhone}` : undefined}>
+                  <Phone className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
+                  Call Clinic
+                </a>
               </Button>
             </div>
 
