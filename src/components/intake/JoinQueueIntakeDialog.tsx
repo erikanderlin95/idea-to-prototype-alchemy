@@ -108,6 +108,7 @@ export const JoinQueueIntakeDialog = ({
         if (payload?.code === "ALREADY_IN_QUEUE") {
           if (payload.entry) {
             localStorage.setItem(`queue_mobile_${clinicId}`, sanitizedMobile);
+      if (patientNric.trim()) localStorage.setItem(`queue_nric_${clinicId}`, patientNric.trim().toUpperCase());
             setNewQueueNumber(payload.entry.queue_number);
             setNewCheckInCode(payload.entry.check_in_code || "");
             toast.info("You are already in the queue at this clinic");
@@ -132,6 +133,7 @@ export const JoinQueueIntakeDialog = ({
       setNewQueueNumber(createdEntry.queue_number);
       setNewCheckInCode(createdEntry.check_in_code || "");
       localStorage.setItem(`queue_mobile_${clinicId}`, sanitizedMobile);
+      if (patientNric.trim()) localStorage.setItem(`queue_nric_${clinicId}`, patientNric.trim().toUpperCase());
       toast.success("You've joined the queue");
       onOpenChange(false);
       setShowQueueCard(true);

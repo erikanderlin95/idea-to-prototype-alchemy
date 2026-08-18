@@ -236,7 +236,7 @@ export const ClinicCard = ({
         const { error } = await supabase.from("queue_entries").delete().eq("id", myQueueEntry.id);
         if (error) throw error;
       }
-      if (id) localStorage.removeItem(`queue_mobile_${id}`);
+      if (id) { localStorage.removeItem(`queue_mobile_${id}`); localStorage.removeItem(`queue_nric_${id}`); }
       setMyQueueEntry(null);
     } catch (error: any) {
       toast.error(error.message || t("clinicCard.failedToLeave"));
@@ -300,6 +300,7 @@ export const ClinicCard = ({
         if (payload?.code === "ALREADY_IN_QUEUE") {
           // Restore the existing active queue state instead of just erroring
           localStorage.setItem(`queue_mobile_${id}`, sanitizedMobile);
+          if (patientNric.trim()) localStorage.setItem(`queue_nric_${id}`, patientNric.trim().toUpperCase());
           setMobileNumber(sanitizedMobile);
           if (payload.entry) {
             setMyQueueEntry(payload.entry);
@@ -327,6 +328,7 @@ export const ClinicCard = ({
       setNewQueueNumber(createdEntry.queue_number);
       setNewCheckInCode(createdEntry.check_in_code || "");
       localStorage.setItem(`queue_mobile_${id}`, sanitizedMobile);
+      if (patientNric.trim()) localStorage.setItem(`queue_nric_${id}`, patientNric.trim().toUpperCase());
       setMobileNumber(sanitizedMobile);
       setMyQueueEntry(createdEntry);
       toast.success(t("clinicCard.joinedQueue"));
