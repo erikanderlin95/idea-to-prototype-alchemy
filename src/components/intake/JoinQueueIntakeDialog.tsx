@@ -6,7 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
-import { Copy, CheckCircle } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -308,24 +308,6 @@ export const JoinQueueIntakeDialog = ({
                   <p className="text-sm font-medium text-ai-indigo text-center">{t("queue.checkInCode")}</p>
                 </div>
 
-                <div className="w-full p-3 border rounded-md space-y-2">
-                  <p className="text-xs font-medium">Save your queue link</p>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full text-xs"
-                    onClick={() => {
-                      const stored = localStorage.getItem(`queue_mobile_${clinicId}`) || "";
-                      const queueUrl = `${window.location.origin}/queue?clinic=${clinicId}&mobile=${encodeURIComponent(stored)}`;
-                      navigator.clipboard.writeText(queueUrl);
-                      toast.success("Link copied!");
-                    }}
-                  >
-                    <Copy className="mr-1.5 h-3.5 w-3.5" />
-                    Copy Link
-                  </Button>
-                  <p className="text-[11px] font-medium text-foreground">Use this link to return to your queue anytime.</p>
-                </div>
                 <p className="text-sm text-foreground leading-relaxed px-2">
                   {t("queue.successMessage")}
                 </p>

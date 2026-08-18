@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { CheckCircle2, AlertTriangle, Copy, Phone, MessageCircle } from "lucide-react";
+import { CheckCircle2, AlertTriangle, Phone, MessageCircle } from "lucide-react";
 import { format } from "date-fns";
 
 export default function Queue() {
@@ -369,27 +369,6 @@ export default function Queue() {
                   </div>
                 )}
 
-                {/* Save queue link */}
-                {myQueueEntry.status === 'waiting' && (
-                  <div className="p-2.5 border border-primary/30 rounded-md space-y-1.5 bg-primary/5">
-                    <p className="text-xs font-medium">{t("clinicCard.saveQueueLink")}</p>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="w-full text-xs border-primary/40 hover:bg-primary/10"
-                      onClick={() => {
-                        const mob = myQueueEntry.mobile_number || mobileNumber || "";
-                        const queueUrl = `${window.location.origin}/queue?clinic=${clinicId}&mobile=${encodeURIComponent(mob)}`;
-                        navigator.clipboard.writeText(queueUrl);
-                        toast.success("Link copied!");
-                      }}
-                    >
-                      <Copy className="mr-1.5 h-3.5 w-3.5" />
-                      Copy Link
-                    </Button>
-                    <p className="text-[11px] font-medium text-foreground">Use this link to return to your queue anytime.</p>
-                  </div>
-                )}
 
                 {myQueueEntry.status === 'checked_in' && (
                   <Badge variant="default" className="w-full justify-center py-3 text-sm bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-500">
