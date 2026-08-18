@@ -559,7 +559,7 @@ export const ClinicCard = ({
 
               {isNotificationMode ? (
 
-                <div className="p-2.5 rounded-lg border-2 border-emerald-200/60 bg-emerald-50/40">
+                <div className="p-2.5 rounded-lg border-2 border-emerald-300 bg-emerald-50">
                   <div className="flex items-center gap-1.5 mb-1">
                     <CheckCircle className="h-4 w-4 text-emerald-600 shrink-0" />
                     <span className="text-sm font-bold text-foreground">You're in the queue</span>
@@ -569,11 +569,7 @@ export const ClinicCard = ({
                   </p>
                 </div>
               ) : (
-                <div className="flex items-center justify-between px-2.5 py-2 rounded-lg border-2"
-                  style={{ 
-                    background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.12), hsl(var(--ai-blue)/0.1))',
-                    borderColor: 'hsl(var(--ai-purple)/0.6)'
-                  }}
+                <div className="flex items-center justify-between px-2.5 py-2 rounded-lg border-2 border-emerald-300 bg-emerald-50"
                 >
                   <div className="flex items-center gap-1.5">
                     <Users className="h-4 w-4 text-primary" />
@@ -584,10 +580,10 @@ export const ClinicCard = ({
               )}
 
               {myQueueEntry.check_in_code && (
-                <div className="flex items-center px-2.5 py-2 bg-muted/50 rounded-lg border border-border/30">
+                <div className="flex items-center px-2.5 py-2 bg-emerald-50 rounded-lg border border-emerald-300">
                   <div className="flex items-center gap-1.5">
-                    <Shield className="h-3.5 w-3.5 text-primary" />
-                    <span className="text-sm font-medium text-muted-foreground">{t("clinicCard.checkInCode")}</span>
+                    <Shield className="h-3.5 w-3.5 text-emerald-600" />
+                    <span className="text-sm font-semibold text-emerald-800">{t("clinicCard.checkInCode")}</span>
                   </div>
                 </div>
               )}
