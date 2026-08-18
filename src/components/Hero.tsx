@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Building2, Compass } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
+import { QueueReEntryDialog } from "@/components/QueueReEntryDialog";
 
 export const Hero = () => {
   const { t } = useLanguage();
