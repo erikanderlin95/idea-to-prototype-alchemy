@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { Clock, Users, AlertCircle, CheckCircle2, LogOut, Star, AlertTriangle } from "lucide-react";
+import { Clock, Users, AlertCircle, CheckCircle2, LogOut, Star, AlertTriangle, Copy } from "lucide-react";
 import { format } from "date-fns";
 
 export default function Queue() {
@@ -385,14 +385,24 @@ export default function Queue() {
             </CardHeader>
             <CardContent className="px-4 sm:px-6">
               <div className="space-y-5">
-                {/* People Ahead — main information */}
-                <div className="text-center p-4 sm:p-5 rounded-lg bg-background/50">
-                  <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
-                  <p className="text-4xl sm:text-5xl font-bold text-primary">
-                    {myPosition ? Math.max(0, myPosition - 1) : 0}
-                  </p>
-                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">{t("queue.aheadSuffix")}</p>
+                <div className="grid grid-cols-2 gap-3">
+                  {/* Queue Number */}
+                  <div className="text-center p-4 sm:p-5 rounded-lg bg-background/50">
+                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.queueNumber")}</p>
+                    <p className="text-4xl sm:text-5xl font-bold text-primary">
+                      {myQueueEntry.queue_number}
+                    </p>
+                  </div>
+                  {/* People Ahead — main information */}
+                  <div className="text-center p-4 sm:p-5 rounded-lg bg-background/50">
+                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
+                    <p className="text-4xl sm:text-5xl font-bold text-primary">
+                      {myPosition ? Math.max(0, myPosition - 1) : 0}
+                    </p>
+                    <p className="text-xs sm:text-sm text-muted-foreground mt-1">{t("queue.aheadSuffix")}</p>
+                  </div>
                 </div>
+
 
                 {/* Dynamic instruction based on people ahead */}
                 <div className="p-3 sm:p-4 bg-primary/10 border border-primary/20 rounded-lg">
@@ -416,6 +426,30 @@ export default function Queue() {
                     </p>
                   </div>
                 )}
+
+                {/* Save queue link */}
+                {myQueueEntry.status === 'waiting' && (
+                  <div className="p-3 border rounded-md space-y-2">
+                    <p className="text-xs font-medium">{t("clinicCard.saveQueueLink")}</p>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full text-xs"
+                      onClick={() => {
+                        const mob = myQueueEntry.mobile_number || mobileNumber || "";
+                        const queueUrl = `${window.location.origin}/queue?clinic=${clinicId}&mobile=${encodeURIComponent(mob)}`;
+                        navigator.clipboard.writeText(queueUrl);
+                        toast.success("Link copied!");
+                      }}
+                    >
+                      <Copy className="mr-1.5 h-3.5 w-3.5" />
+                      Copy Link
+                    </Button>
+                    <p className="text-[11px] font-medium text-foreground">Use this link to return to your queue anytime.</p>
+                  </div>
+                )}
+
+
 
                 {myQueueEntry.status === 'checked_in' && (
                   <Badge variant="default" className="w-full justify-center py-3 text-sm bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 border-emerald-500">
