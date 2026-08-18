@@ -317,7 +317,19 @@ export const JoinQueueIntakeDialog = ({
                 <p className="text-sm text-foreground leading-relaxed px-2">
                   {t("queue.successMessage")}
                 </p>
+                <Button
+                  size="sm"
+                  className="w-full"
+                  onClick={() => {
+                    const stored = localStorage.getItem(`queue_mobile_${clinicId}`) || "";
+                    setShowQueueCard(false);
+                    navigate(`/queue?clinic=${clinicId}&mobile=${encodeURIComponent(stored)}`);
+                  }}
+                >
+                  View Queue Status
+                </Button>
               </div>
+
             </>
           ) : (
             <>
