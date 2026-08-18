@@ -4,7 +4,6 @@ import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { StaffNotifications } from "@/components/StaffNotifications";
-import { LeaveQueueDialog } from "@/components/LeaveQueueDialog";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -44,7 +43,6 @@ export default function Queue() {
   const [showQueueShiftAlert, setShowQueueShiftAlert] = useState(false);
   
   const [now, setNow] = useState(() => Date.now());
-  const [showLeaveDialog, setShowLeaveDialog] = useState(false);
 
   useEffect(() => {
     if (!myQueueEntry || myQueueEntry.status !== "waiting") return;
@@ -274,48 +272,6 @@ export default function Queue() {
     setShowPreConsultDialog(true);
   };
 
-  const cancelQueue = () => {
-    if (!myQueueEntry) return;
-    setShowLeaveDialog(true);
-  };
-
-  const performCancelQueue = async () => {
-    if (!myQueueEntry) return;
-
-    try {
-      // Use edge function for anonymous users (bypasses RLS)
-      if (mobileNumber) {
-        const { data, error } = await supabase.functions.invoke("queue-lookup", {
-          body: {
-            action: "cancel_queue",
-            clinic_id: clinicId,
-            mobile_number: mobileNumber,
-          },
-        });
-
-        if (error) throw error;
-        if (data?.error) throw new Error(data.error);
-      } else {
-        // Fallback to direct delete for authenticated users
-        const { error } = await supabase
-          .from("queue_entries")
-          .delete()
-          .eq("id", myQueueEntry.id);
-
-        if (error) throw error;
-      }
-
-      // Clear stored mobile number
-      if (clinicId) {
-        localStorage.removeItem(`queue_mobile_${clinicId}`);
-      }
-
-      setMyQueueEntry(null);
-    } catch (error: any) {
-      toast.error(error.message || "Failed to cancel queue");
-      throw error;
-    }
-  };
 
 
 
@@ -592,18 +548,6 @@ export default function Queue() {
           </div>
         </DialogContent>
       </Dialog>
-
-      <LeaveQueueDialog
-        open={showLeaveDialog}
-        onOpenChange={setShowLeaveDialog}
-        onConfirm={performCancelQueue}
-        patientName={myQueueEntry?.patient_name}
-        mobileNumber={myQueueEntry?.mobile_number || mobileNumber || undefined}
-        clinicId={clinicId || undefined}
-        clinicName={clinic?.name}
-        queueEntryId={myQueueEntry?.id}
-        queueNumber={myQueueEntry?.queue_number}
-      />
 
       <Footer />
     </div>
