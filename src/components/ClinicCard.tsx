@@ -960,7 +960,7 @@ export const ClinicCard = ({
                 <p className="text-xs text-muted-foreground">Your spot has been secured successfully.</p>
               </div>
               <div className="w-full text-center p-4 rounded-xl bg-muted">
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Queue Number</p>
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Active Patients Ahead</p>
                 <p className="text-4xl font-bold text-primary">{newQueueNumber}</p>
               </div>
               <div className="w-full p-5 rounded-xl border-2 border-primary/30 bg-primary/5">
@@ -1008,7 +1008,7 @@ export const ClinicCard = ({
             </DialogHeader>
             <div className="space-y-3">
               <div className="text-center p-5 bg-muted rounded-lg">
-                <p className="text-xs text-muted-foreground mb-1">Queue Number</p>
+                <p className="text-xs text-muted-foreground mb-1">Active Patients Ahead</p>
                 <p className="text-5xl font-bold text-primary">{newQueueNumber}</p>
                 <p className="text-[11px] font-medium text-foreground mt-3">
                   Current position may change based on clinic flow and urgent cases
