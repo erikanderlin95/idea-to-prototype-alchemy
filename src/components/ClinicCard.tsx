@@ -165,7 +165,10 @@ export const ClinicCard = ({
 
   useEffect(() => {
     if (id) {
-      checkQueueStatus();
+      // On a fresh page load, cards always start in their default (not-joined) state.
+      localStorage.removeItem(`queue_mobile_${id}`);
+      localStorage.removeItem(`queue_nric_${id}`);
+      setMyQueueEntry(null);
       const channel = supabase
         .channel(`queue-${id}`)
         .on(
@@ -177,6 +180,7 @@ export const ClinicCard = ({
       return () => { supabase.removeChannel(channel); };
     }
   }, [id]);
+
 
   useEffect(() => {
     if (id) {
