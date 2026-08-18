@@ -451,7 +451,7 @@ export default function Queue() {
 
                 {/* Patient notice */}
                 <div className="p-3 sm:p-4 bg-muted rounded-lg border border-border">
-                  <p className="text-sm sm:text-base font-semibold text-foreground mb-2">{t("queue.patientNotice") !== "queue.patientNotice" ? t("queue.patientNotice") : "Patient Notice"}</p>
+                  <p className="text-sm sm:text-base font-semibold text-foreground mb-2">{t("queue.patientNotice")}</p>
                   <ul className="space-y-2 text-sm sm:text-base text-foreground leading-relaxed">
                     <li>• {t("queue.notice.refresh")}</li>
                     <li>• {t("queue.notice.order")}</li>
