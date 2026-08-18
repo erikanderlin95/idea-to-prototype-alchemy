@@ -365,11 +365,7 @@ export default function Queue() {
                 {/* Check-in Code */}
                 {myQueueEntry.check_in_code && myQueueEntry.status === 'waiting' && (
                   <div className="text-center p-3 sm:p-4 border-2 border-primary/40 rounded-lg bg-primary/10">
-                    <p className="text-xs sm:text-sm text-muted-foreground font-medium uppercase tracking-wide mb-1">{t("queue.checkInCode")}</p>
-                    <p className="text-2xl sm:text-3xl font-mono font-black tracking-[0.2em] text-primary">{myQueueEntry.check_in_code}</p>
-                    <p className="text-xs sm:text-sm text-foreground font-medium mt-1">
-                      {t("queue.showCheckInCode")}
-                    </p>
+                    <p className="text-sm sm:text-base font-medium text-primary">{t("queue.checkInCode")}</p>
                   </div>
                 )}
 

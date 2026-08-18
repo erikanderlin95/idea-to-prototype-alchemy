@@ -582,12 +582,11 @@ export const ClinicCard = ({
               )}
 
               {myQueueEntry.check_in_code && (
-                <div className="flex items-center justify-between px-2.5 py-2 bg-muted/50 rounded-lg border border-border/30">
+                <div className="flex items-center px-2.5 py-2 bg-muted/50 rounded-lg border border-border/30">
                   <div className="flex items-center gap-1.5">
                     <Shield className="h-3.5 w-3.5 text-primary" />
-                    <span className="text-sm font-medium text-muted-foreground">Check-in Code</span>
+                    <span className="text-sm font-medium text-muted-foreground">{t("clinicCard.checkInCode")}</span>
                   </div>
-                  <span className="text-lg font-mono font-bold tracking-[0.15em] text-primary">{myQueueEntry.check_in_code}</span>
                 </div>
               )}
             </div>
@@ -964,8 +963,7 @@ export const ClinicCard = ({
                 <p className="text-4xl font-bold text-primary">{newQueueNumber}</p>
               </div>
               <div className="w-full p-5 rounded-xl border-2 border-primary/30 bg-primary/5">
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">Check-in Code</p>
-                <p className="text-4xl font-mono font-black tracking-[0.25em] text-primary">{newCheckInCode || "—"}</p>
+                <p className="text-sm font-medium text-primary text-center">{t("queue.checkInCode")}</p>
               </div>
 
               <div className="w-full p-3 border rounded-md space-y-2">
@@ -1015,15 +1013,11 @@ export const ClinicCard = ({
                 </p>
               </div>
 
-              {newCheckInCode && (
-                <div className="text-center p-4 border-2 border-primary/30 rounded-lg bg-primary/5">
-                  <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-wide mb-1">Check-in Code</p>
-                  <p className="text-2xl font-mono font-black tracking-[0.2em] text-primary">{newCheckInCode}</p>
-                  <p className="text-[11px] text-foreground font-medium mt-2">
-                    Show this code at the clinic counter when you arrive.
-                  </p>
-                </div>
-              )}
+                {newCheckInCode && (
+                  <div className="text-center p-4 border-2 border-primary/30 rounded-lg bg-primary/5">
+                    <p className="text-sm font-medium text-primary">{t("queue.checkInCode")}</p>
+                  </div>
+                )}
 
               <div className="p-3 border rounded-md space-y-2">
                 <p className="text-xs font-medium">Save your queue link</p>
