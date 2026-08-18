@@ -1135,6 +1135,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Queue Re-entry
     "queue.reentry.title": "查找我的排队",
     "queue.reentry.description": "请输入您加入排队时使用的手机号码。",
+    "queue.reentry.invalidMobile": "请输入有效的手机号码（8-15位数字）。",
     "queue.reentry.mobileLabel": "手机号码",
     "queue.reentry.mobilePlaceholder": "+65 XXXX XXXX",
     "queue.reentry.findButton": "查找我的排队",
