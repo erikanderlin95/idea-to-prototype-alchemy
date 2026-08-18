@@ -450,14 +450,16 @@ export default function Queue() {
                 )}
 
                 {/* Patient notice */}
-                <div className="p-3 sm:p-4 bg-muted/50 rounded-lg">
-                  <ul className="space-y-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                <div className="p-3 sm:p-4 bg-muted rounded-lg border border-border">
+                  <p className="text-sm sm:text-base font-semibold text-foreground mb-2">{t("queue.patientNotice") !== "queue.patientNotice" ? t("queue.patientNotice") : "Patient Notice"}</p>
+                  <ul className="space-y-2 text-sm sm:text-base text-foreground leading-relaxed">
                     <li>• {t("queue.notice.refresh")}</li>
                     <li>• {t("queue.notice.order")}</li>
                     <li>• {t("queue.notice.absent")}</li>
                     <li>• {t("queue.notice.noGuarantee")}</li>
                   </ul>
                 </div>
+
 
                 <div className="flex gap-3 pt-2">
                   {myQueueEntry.status === 'waiting' && (
