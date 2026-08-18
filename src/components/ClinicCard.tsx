@@ -537,29 +537,20 @@ export const ClinicCard = ({
         {myQueueEntry ? (
           <div className="flex-1 flex flex-col justify-between gap-1.5" onClick={(e) => e.stopPropagation()}>
             <div className="flex flex-col gap-1.5">
-              {/* Save your queue link */}
-              <button
-                type="button"
+              {/* View My Queue Status */}
+              <Button
+                variant="outline"
+                size="sm"
+                className="w-full justify-center text-sm font-semibold border-2 border-primary/40 bg-primary/5 hover:bg-primary/10 text-foreground h-10"
                 onClick={(e) => {
                   e.stopPropagation();
                   const mob = myQueueEntry.mobile_number || mobileNumber || "";
-                  const queueUrl = `${window.location.origin}/queue?clinic=${id}&mobile=${encodeURIComponent(mob)}`;
-                  navigator.clipboard.writeText(queueUrl);
-                  toast.success("Link copied!");
+                  navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(mob)}`);
                 }}
-                className="flex items-center justify-between gap-2 px-2.5 py-2 rounded-lg border border-primary/25 bg-primary/5 text-left"
               >
-                <div className="flex items-center gap-1.5 min-w-0">
-                  <Copy className="h-3.5 w-3.5 text-primary shrink-0" />
-                  <div className="min-w-0">
-                    <p className="text-sm font-semibold text-foreground leading-tight">{t("clinicCard.saveQueueLink")}</p>
-                    <p className="text-[11px] font-mono text-primary truncate">
-                      {`${window.location.origin}/queue?...`}
-                    </p>
-                  </div>
-                </div>
-                <Copy className="h-3.5 w-3.5 text-muted-foreground shrink-0" />
-              </button>
+                <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
+                View My Queue Status
+              </Button>
 
               {isNotificationMode ? (
 
