@@ -32,7 +32,8 @@ Deno.serve(async (req) => {
     }
 
 
-    const needsMobile = !["get_public_queue_list"].includes(action);
+    const mobileOptional = action === "check_active_entry" && patient_nric;
+    const needsMobile = !["get_public_queue_list"].includes(action) && !mobileOptional;
     if (needsMobile) {
       if (!mobile_number || typeof mobile_number !== "string") {
         return new Response(
@@ -40,6 +41,8 @@ Deno.serve(async (req) => {
           { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
+    }
+    if (mobile_number && typeof mobile_number === "string") {
       const mobileRegex = /^\+?[0-9]{8,15}$/;
       if (!mobileRegex.test(mobile_number.replace(/\s/g, ""))) {
         return new Response(
@@ -48,6 +51,7 @@ Deno.serve(async (req) => {
         );
       }
     }
+
 
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -290,16 +294,37 @@ Deno.serve(async (req) => {
 
     // ─── CHECK ACTIVE ENTRY ───
     if (action === "check_active_entry") {
-      const { data, error } = await supabase
+      const activeStatuses = ["waiting", "checked_in", "serving"];
+      let query = supabase
         .from("queue_entries")
-        .select("id, queue_number, status, patient_name, visit_type, check_in_code")
+        .select("id, queue_number, status, patient_name, visit_type, check_in_code, mobile_number")
         .eq("clinic_id", clinic_id)
-        .eq("mobile_number", normalizedMobile)
-        .in("status", ["waiting", "checked_in", "serving"])
+        .in("status", activeStatuses)
         .order("created_at", { ascending: false })
-        .limit(1)
-        .maybeSingle();
+        .limit(1);
 
+      if (normalizedMobile) {
+        query = query.eq("mobile_number", normalizedMobile);
+      } else {
+        query = query.eq("patient_nric", String(patient_nric).trim().toUpperCase());
+      }
+
+      let { data, error } = await query.maybeSingle();
+
+      // Fallback: if nothing matched by mobile, try NRIC
+      if (!error && !data && normalizedMobile && patient_nric) {
+        const res = await supabase
+          .from("queue_entries")
+          .select("id, queue_number, status, patient_name, visit_type, check_in_code, mobile_number")
+          .eq("clinic_id", clinic_id)
+          .eq("patient_nric", String(patient_nric).trim().toUpperCase())
+          .in("status", activeStatuses)
+          .order("created_at", { ascending: false })
+          .limit(1)
+          .maybeSingle();
+        data = res.data;
+        error = res.error;
+      }
 
       if (error) {
         console.error("Error checking queue entry:", error);
@@ -314,6 +339,8 @@ Deno.serve(async (req) => {
         { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
+
+
 
     // ─── GET PUBLIC QUEUE LIST ───
     if (action === "get_public_queue_list") {
