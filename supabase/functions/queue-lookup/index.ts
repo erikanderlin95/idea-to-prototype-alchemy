@@ -340,7 +340,7 @@ Deno.serve(async (req) => {
       );
     }
 
-    }
+
 
     // ─── GET PUBLIC QUEUE LIST ───
     if (action === "get_public_queue_list") {
