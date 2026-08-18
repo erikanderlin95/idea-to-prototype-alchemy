@@ -46,6 +46,7 @@ export const JoinQueueIntakeDialog = ({
   estimatedWaitMinutes = 15,
   onJoined,
 }: JoinQueueIntakeDialogProps) => {
+  const { t } = useLanguage();
   const navigate = useNavigate();
   const [patientName, setPatientName] = useState("");
   const [patientNric, setPatientNric] = useState("");
