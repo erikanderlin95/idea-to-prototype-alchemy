@@ -903,10 +903,15 @@ export const ClinicCard = ({
                 <h3 className="text-lg font-bold text-foreground">You're in the queue!</h3>
                 <p className="text-xs text-muted-foreground">Your spot has been secured successfully.</p>
               </div>
+              <div className="w-full text-center p-4 rounded-xl bg-muted">
+                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Queue Number</p>
+                <p className="text-4xl font-bold text-primary">{newQueueNumber}</p>
+              </div>
               <div className="w-full p-5 rounded-xl border-2 border-primary/30 bg-primary/5">
                 <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-2">Check-in Code</p>
                 <p className="text-4xl font-mono font-black tracking-[0.25em] text-primary">{newCheckInCode || "—"}</p>
               </div>
+
               <div className="w-full p-3 border rounded-md space-y-2">
                 <p className="text-xs font-medium">Save your queue link</p>
                 <Button
