@@ -957,7 +957,18 @@ export const ClinicCard = ({
               <p className="text-sm text-foreground leading-relaxed px-2">
                 {t("queue.successMessage")}
               </p>
+              <Button
+                size="sm"
+                className="w-full"
+                onClick={() => {
+                  setShowQueueCard(false);
+                  navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(mobileNumber)}`);
+                }}
+              >
+                View Queue Status
+              </Button>
             </div>
+
           </>
         ) : (
           <>
