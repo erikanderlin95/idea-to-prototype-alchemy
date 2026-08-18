@@ -385,18 +385,25 @@ export default function Queue() {
             </CardHeader>
             <CardContent className="px-4 sm:px-6">
               <div className="space-y-5">
-                <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                  <div className="text-center p-3 sm:p-4 rounded-lg bg-background/50">
-                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.queueNumber")}</p>
-                    <p className="text-3xl sm:text-4xl font-bold text-primary">{myQueueEntry.queue_number}</p>
-                  </div>
-                   <div className="text-center p-3 sm:p-4 rounded-lg bg-background/50">
-                    <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
-                    <p className="text-2xl sm:text-3xl font-semibold">
-                      {myPosition ? Math.max(0, myPosition - 1) : 0} {t("queue.aheadSuffix")}
-                    </p>
-                  </div>
+                {/* People Ahead — main information */}
+                <div className="text-center p-4 sm:p-5 rounded-lg bg-background/50">
+                  <p className="text-sm sm:text-base text-muted-foreground mb-1">{t("queue.peopleAhead")}</p>
+                  <p className="text-4xl sm:text-5xl font-bold text-primary">
+                    {myPosition ? Math.max(0, myPosition - 1) : 0}
+                  </p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mt-1">{t("queue.aheadSuffix")}</p>
+                </div>
 
+                {/* Dynamic instruction based on people ahead */}
+                <div className="p-3 sm:p-4 bg-primary/10 border border-primary/20 rounded-lg">
+                  <p className="text-sm sm:text-base text-foreground font-medium leading-relaxed">
+                    {(() => {
+                      const ahead = myPosition ? Math.max(0, myPosition - 1) : 0;
+                      if (ahead > 4) return t("queue.instruction.moreThan4");
+                      if (ahead >= 3 && ahead <= 4) return t("queue.instruction.threeToFour");
+                      return t("queue.instruction.zeroToTwo");
+                    })()}
+                  </p>
                 </div>
 
                 {/* Check-in Code */}
@@ -416,38 +423,27 @@ export default function Queue() {
                   </Badge>
                 )}
 
-                {myQueueEntry.status === 'waiting' && myPosition === 1 && (
-                  <Badge variant="default" className="w-full justify-center py-3 text-sm sm:text-base bg-accent">
-                    {t("queue.youreNext")}
-                  </Badge>
-                )}
-
-                {myQueueEntry.status === 'waiting' && myPosition && myPosition > 1 && myPosition <= 3 && (
-                  <Badge variant="secondary" className="w-full justify-center py-3 text-sm sm:text-base">
-                    {t("queue.almostYourTurn")}
-                  </Badge>
-                )}
-
-                {myQueueEntry.status === 'waiting' && myPosition && myPosition > 3 && (
-                  <Badge variant="outline" className="w-full justify-center py-3 text-sm sm:text-base">
-                    {t("queue.notifyAlmost")}
-                  </Badge>
-                )}
+                {/* Patient notice */}
+                <div className="p-3 sm:p-4 bg-muted/50 rounded-lg">
+                  <ul className="space-y-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
+                    <li>• {t("queue.notice.refresh")}</li>
+                    <li>• {t("queue.notice.order")}</li>
+                    <li>• {t("queue.notice.absent")}</li>
+                    <li>• {t("queue.notice.noGuarantee")}</li>
+                  </ul>
+                </div>
 
                 <div className="flex gap-3 pt-2">
                   {myQueueEntry.status === 'waiting' && (
-                    <>
-                      <Button 
-                        onClick={cancelQueue} 
-                        variant="outline"
-                        className="flex-1 border-destructive text-destructive hover:bg-destructive/10 text-sm sm:text-base"
-                        size="lg"
-                      >
-                        <LogOut className="mr-2 h-5 w-5" />
-                        {t("queue.leaveQueue")}
-                      </Button>
-                    </>
-
+                    <Button 
+                      onClick={cancelQueue} 
+                      variant="outline"
+                      className="flex-1 border-destructive text-destructive hover:bg-destructive/10 text-sm sm:text-base"
+                      size="lg"
+                    >
+                      <LogOut className="mr-2 h-5 w-5" />
+                      {t("queue.leaveQueue")}
+                    </Button>
                   )}
                   {myQueueEntry.status === 'checked_in' && (
                     <div className="w-full p-5 sm:p-6 bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 rounded-lg">
