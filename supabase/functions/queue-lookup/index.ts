@@ -295,10 +295,11 @@ Deno.serve(async (req) => {
         .select("id, queue_number, status, patient_name, visit_type, check_in_code")
         .eq("clinic_id", clinic_id)
         .eq("mobile_number", normalizedMobile)
-        .eq("status", "waiting")
+        .in("status", ["waiting", "checked_in", "serving"])
         .order("created_at", { ascending: false })
         .limit(1)
         .maybeSingle();
+
 
       if (error) {
         console.error("Error checking queue entry:", error);
