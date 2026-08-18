@@ -973,7 +973,7 @@ export const ClinicCard = ({
 
               <Alert className="py-2">
                 <AlertDescription className="text-[11px] text-destructive">
-                  Please stay nearby and keep this page open, when it's your turn, check in at counter within 30 seconds.
+                  {t("queue.notice.absent")}
                 </AlertDescription>
               </Alert>
             </div>
