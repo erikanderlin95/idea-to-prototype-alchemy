@@ -422,7 +422,7 @@ export default function Queue() {
                         className="flex-1 inline-flex items-center justify-center gap-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white text-sm sm:text-base font-semibold h-11 px-4 py-2 transition-colors"
                       >
                         <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
-                        Call Clinic
+                        Contact Clinic
                       </a>
                       <a
                         href={`https://wa.me/${clinic.phone.replace(/\D/g, '')}`}

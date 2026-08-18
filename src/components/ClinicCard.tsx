@@ -540,7 +540,7 @@ export const ClinicCard = ({
                 <div className="flex items-center justify-between px-2.5 py-2 rounded-lg border-2"
                   style={{ 
                     background: 'linear-gradient(135deg, hsl(var(--ai-purple)/0.12), hsl(var(--ai-blue)/0.1))',
-                    borderColor: 'hsl(var(--ai-purple)/0.3)'
+                    borderColor: 'hsl(var(--ai-purple)/0.6)'
                   }}
                 >
                   <div className="flex items-center gap-1.5">
@@ -571,7 +571,7 @@ export const ClinicCard = ({
               >
                 <a href={clinicPhone ? `tel:${clinicPhone}` : undefined}>
                   <Phone className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
-                  Call Clinic
+                  Contact Clinic
                 </a>
               </Button>
             </div>
