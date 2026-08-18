@@ -65,22 +65,45 @@ Deno.serve(async (req) => {
         );
       }
 
-      // Anti-spam: Check for existing active queue entry
+      const ACTIVE_STATUSES = ["waiting", "checked_in", "serving"];
+
+      // Anti-spam: Check for existing active queue entry (by mobile)
       const { data: existingEntry } = await supabase
         .from("queue_entries")
         .select("id, queue_number, check_in_code")
         .eq("clinic_id", clinic_id)
         .eq("mobile_number", normalizedMobile)
-        .eq("status", "waiting")
+        .in("status", ACTIVE_STATUSES)
         .limit(1)
         .maybeSingle();
 
-      if (existingEntry) {
+      // Also check by NRIC (same patient re-registering with a different mobile)
+      let nricEntry = null;
+      const normalizedNric = patient_nric ? patient_nric.trim().toUpperCase() : "";
+      if (!existingEntry && normalizedNric) {
+        const { data } = await supabase
+          .from("queue_entries")
+          .select("id, queue_number, check_in_code")
+          .eq("clinic_id", clinic_id)
+          .eq("patient_nric", normalizedNric)
+          .in("status", ACTIVE_STATUSES)
+          .limit(1)
+          .maybeSingle();
+        nricEntry = data;
+      }
+
+      const activeEntry = existingEntry || nricEntry;
+      if (activeEntry) {
         return new Response(
-          JSON.stringify({ error: "You already have an active queue entry at this clinic", code: "ALREADY_IN_QUEUE" }),
+          JSON.stringify({
+            error: "You already have an active queue entry at this clinic",
+            code: "ALREADY_IN_QUEUE",
+            entry: activeEntry,
+          }),
           { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
         );
       }
+
 
       // Cooldown removed: patients may re-join immediately after cancelling
 
