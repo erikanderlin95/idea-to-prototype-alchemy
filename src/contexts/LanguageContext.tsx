@@ -87,6 +87,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Queue Re-entry
     "queue.reentry.title": "Find My Queue",
     "queue.reentry.description": "Enter the mobile number you used to join the queue.",
+    "queue.reentry.invalidMobile": "Please enter a valid mobile number (8-15 digits).",
     "queue.reentry.mobileLabel": "Mobile number",
     "queue.reentry.mobilePlaceholder": "+65 XXXX XXXX",
     "queue.reentry.findButton": "Find My Queue",
