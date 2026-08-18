@@ -106,7 +106,17 @@ export const JoinQueueIntakeDialog = ({
       const payload = response ?? error;
       if (status !== 200 || payload?.error) {
         if (payload?.code === "ALREADY_IN_QUEUE") {
-          setJoinError("You already have an active queue entry at this clinic");
+          if (payload.entry) {
+            localStorage.setItem(`queue_mobile_${clinicId}`, sanitizedMobile);
+            setNewQueueNumber(payload.entry.queue_number);
+            setNewCheckInCode(payload.entry.check_in_code || "");
+            toast.info("You are already in the queue at this clinic");
+            onOpenChange(false);
+            setShowQueueCard(true);
+            onJoined?.(payload.entry);
+          } else {
+            setJoinError("You already have an active queue entry at this clinic");
+          }
         } else if (payload?.code === "COOLDOWN") {
           setJoinError(payload.error);
         } else if (payload?.code === "RATE_LIMITED") {
@@ -116,6 +126,7 @@ export const JoinQueueIntakeDialog = ({
         }
         return;
       }
+
 
       const createdEntry = response.entry;
       setNewQueueNumber(createdEntry.queue_number);
