@@ -16,7 +16,7 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { CheckCircle2, LogOut, AlertTriangle, Copy } from "lucide-react";
+import { CheckCircle2, AlertTriangle, Copy, Phone, MessageCircle } from "lucide-react";
 import { format } from "date-fns";
 
 export default function Queue() {
@@ -459,16 +459,25 @@ export default function Queue() {
 
 
                 <div className="flex gap-3 pt-2">
-                  {myQueueEntry.status === 'waiting' && (
-                    <Button 
-                      onClick={cancelQueue} 
-                      variant="outline"
-                      className="flex-1 border-destructive text-destructive hover:bg-destructive/10 text-sm sm:text-base"
-                      size="lg"
-                    >
-                      <LogOut className="mr-2 h-5 w-5" />
-                      {t("queue.leaveQueue")}
-                    </Button>
+                  {myQueueEntry.status === 'waiting' && clinic?.phone && (
+                    <>
+                      <a
+                        href={`tel:${clinic.phone}`}
+                        className="flex-1 inline-flex items-center justify-center gap-2 rounded-md border border-primary/40 bg-primary/10 hover:bg-primary/20 text-foreground text-sm sm:text-base font-medium h-11 px-4 py-2 transition-colors"
+                      >
+                        <Phone className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
+                        Call
+                      </a>
+                      <a
+                        href={`https://wa.me/${clinic.phone.replace(/\D/g, '')}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex-1 inline-flex items-center justify-center gap-2 rounded-md border border-emerald-500/40 bg-emerald-50 hover:bg-emerald-100 dark:bg-emerald-950/20 dark:hover:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 text-sm sm:text-base font-medium h-11 px-4 py-2 transition-colors"
+                      >
+                        <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5" />
+                        WhatsApp
+                      </a>
+                    </>
                   )}
                   {myQueueEntry.status === 'checked_in' && (
                     <div className="w-full p-5 sm:p-6 bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 rounded-lg">
