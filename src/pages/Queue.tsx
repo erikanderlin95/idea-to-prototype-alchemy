@@ -52,12 +52,6 @@ export default function Queue() {
     return () => window.clearInterval(interval);
   }, [myQueueEntry?.id, myQueueEntry?.status]);
 
-  // Initialize queue notifications
-  const { notificationPermission, requestNotificationPermission } = useQueueNotifications({
-    clinicId,
-    userId: user?.id || null,
-    clinicName: clinic?.name,
-  });
 
   useEffect(() => {
     if (!clinicId) {
