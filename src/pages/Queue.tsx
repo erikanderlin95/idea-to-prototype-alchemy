@@ -371,26 +371,6 @@ export default function Queue() {
                 <CardTitle className="text-xl sm:text-2xl">{clinic?.name}</CardTitle>
                 <CardDescription className="mt-1 text-sm">{clinic?.address}</CardDescription>
               </div>
-              {myQueueEntry && (
-                <Button
-                  variant={notificationPermission === "granted" ? "outline" : "default"}
-                  size="sm"
-                  onClick={requestNotificationPermission}
-                  className={notificationPermission === "granted" ? "border-accent text-accent" : ""}
-                >
-                  {notificationPermission === "granted" ? (
-                    <>
-                      <Bell className="h-4 w-4 mr-2" />
-                      {t("queue.notificationsOn")}
-                    </>
-                  ) : (
-                    <>
-                      <BellOff className="h-4 w-4 mr-2" />
-                      {t("queue.enableAlerts")}
-                    </>
-                  )}
-                </Button>
-              )}
             </div>
           </CardHeader>
           <CardContent className="px-4 sm:px-6">
