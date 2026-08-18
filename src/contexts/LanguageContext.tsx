@@ -3140,6 +3140,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Queue Re-entry
     "queue.reentry.title": "என் வரிசையைக் கண்டறியவும்",
     "queue.reentry.description": "வரிசையில் சேர பயன்படுத்திய கைபேசி எண்ணை உள்ளிடவும்.",
+    "queue.reentry.invalidMobile": "சரியான கைபேசி எண்ணை உள்ளிடவும் (8-15 இலக்கங்கள்).",
     "queue.reentry.mobileLabel": "கைபேசி எண்",
     "queue.reentry.mobilePlaceholder": "+65 XXXX XXXX",
     "queue.reentry.findButton": "என் வரிசையைக் கண்டறியவும்",
