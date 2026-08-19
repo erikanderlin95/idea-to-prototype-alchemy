@@ -325,8 +325,6 @@ export const ClinicCard = ({
 
 
       const createdEntry = response.entry;
-      setNewQueueNumber(createdEntry.queue_number);
-      setNewCheckInCode(createdEntry.check_in_code || "");
       localStorage.setItem(`queue_mobile_${id}`, sanitizedMobile);
       if (patientNric.trim()) localStorage.setItem(`queue_nric_${id}`, patientNric.trim().toUpperCase());
       setMobileNumber(sanitizedMobile);
