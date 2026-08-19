@@ -15,7 +15,7 @@ import { Label } from "@/components/ui/label";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
-import { CheckCircle2, AlertTriangle, Copy, Phone, MessageCircle } from "lucide-react";
+import { CheckCircle2, AlertTriangle, Copy, Phone } from "lucide-react";
 import { format } from "date-fns";
 
 export default function Queue() {
