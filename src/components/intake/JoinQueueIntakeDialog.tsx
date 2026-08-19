@@ -55,9 +55,6 @@ export const JoinQueueIntakeDialog = ({
   const [pdpaConsent, setPdpaConsent] = useState(false);
   const [joinError, setJoinError] = useState("");
   const [joinLoading, setJoinLoading] = useState(false);
-  const [showQueueCard, setShowQueueCard] = useState(false);
-  const [newQueueNumber, setNewQueueNumber] = useState<number | null>(null);
-  const [newCheckInCode, setNewCheckInCode] = useState("");
 
   const reset = () => {
     setPatientName("");
