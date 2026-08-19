@@ -306,8 +306,6 @@ export const ClinicCard = ({
           setMobileNumber(sanitizedMobile);
           if (payload.entry) {
             setMyQueueEntry(payload.entry);
-            setNewQueueNumber(payload.entry.queue_number);
-            setNewCheckInCode(payload.entry.check_in_code || "");
             setShowDisclaimer(false);
             toast.info("You are already in the queue at this clinic");
             navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(sanitizedMobile)}`);
