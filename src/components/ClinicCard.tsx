@@ -209,8 +209,6 @@ export const ClinicCard = ({
       if (entry) {
         const mob = storedMobile || entry.mobile_number || "";
         if (mob) { localStorage.setItem(`queue_mobile_${id}`, mob); setMobileNumber(mob); }
-        setNewQueueNumber(entry.queue_number);
-        setNewCheckInCode(entry.check_in_code || "");
       } else {
         localStorage.removeItem(`queue_mobile_${id}`);
         localStorage.removeItem(`queue_nric_${id}`);
