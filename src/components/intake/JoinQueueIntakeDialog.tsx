@@ -109,12 +109,10 @@ export const JoinQueueIntakeDialog = ({
           if (payload.entry) {
             localStorage.setItem(`queue_mobile_${clinicId}`, sanitizedMobile);
       if (patientNric.trim()) localStorage.setItem(`queue_nric_${clinicId}`, patientNric.trim().toUpperCase());
-            setNewQueueNumber(payload.entry.queue_number);
-            setNewCheckInCode(payload.entry.check_in_code || "");
             toast.info("You are already in the queue at this clinic");
             onOpenChange(false);
-            setShowQueueCard(true);
             onJoined?.(payload.entry);
+            navigate(`/queue?clinic=${clinicId}&mobile=${encodeURIComponent(sanitizedMobile)}`);
           } else {
             setJoinError("You already have an active queue entry at this clinic");
           }
@@ -130,14 +128,12 @@ export const JoinQueueIntakeDialog = ({
 
 
       const createdEntry = response.entry;
-      setNewQueueNumber(createdEntry.queue_number);
-      setNewCheckInCode(createdEntry.check_in_code || "");
       localStorage.setItem(`queue_mobile_${clinicId}`, sanitizedMobile);
       if (patientNric.trim()) localStorage.setItem(`queue_nric_${clinicId}`, patientNric.trim().toUpperCase());
       toast.success("You've joined the queue");
       onOpenChange(false);
-      setShowQueueCard(true);
       onJoined?.(createdEntry);
+      navigate(`/queue?clinic=${clinicId}&mobile=${encodeURIComponent(sanitizedMobile)}`);
     } catch (err: any) {
       setJoinError(err.message || "Failed to join queue");
     } finally {
