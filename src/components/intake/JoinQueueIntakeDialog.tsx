@@ -222,7 +222,7 @@ export const JoinQueueIntakeDialog = ({
                 <li>Queue order is managed by the clinic and may change.</li>
                 <li>Check your queue status using the link provided.</li>
                 <li>Please return when 3–4 patients are ahead.</li>
-                <li>If you are not present when called, the clinic will attend to the next patient. Inform the counter when you return.</li>
+                <li>The number ahead is based on active patients who checked in before you and refreshes every minute.</li>
               </ul>
             </div>
 
