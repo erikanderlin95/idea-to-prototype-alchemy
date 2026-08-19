@@ -66,8 +66,6 @@ export const ClinicCard = ({
   const [patientName, setPatientName] = useState("");
   const [patientNric, setPatientNric] = useState("");
   const [mobileNumber, setMobileNumber] = useState("");
-  const [newQueueNumber, setNewQueueNumber] = useState<number | null>(null);
-  const [newCheckInCode, setNewCheckInCode] = useState("");
   const [disclaimerAgreed, setDisclaimerAgreed] = useState(false);
   const [pdpaConsent, setPdpaConsent] = useState(false);
   const [showManagedCareModal, setShowManagedCareModal] = useState(false);
@@ -211,8 +209,6 @@ export const ClinicCard = ({
       if (entry) {
         const mob = storedMobile || entry.mobile_number || "";
         if (mob) { localStorage.setItem(`queue_mobile_${id}`, mob); setMobileNumber(mob); }
-        setNewQueueNumber(entry.queue_number);
-        setNewCheckInCode(entry.check_in_code || "");
       } else {
         localStorage.removeItem(`queue_mobile_${id}`);
         localStorage.removeItem(`queue_nric_${id}`);
@@ -310,11 +306,9 @@ export const ClinicCard = ({
           setMobileNumber(sanitizedMobile);
           if (payload.entry) {
             setMyQueueEntry(payload.entry);
-            setNewQueueNumber(payload.entry.queue_number);
-            setNewCheckInCode(payload.entry.check_in_code || "");
             setShowDisclaimer(false);
-            setShowQueueCard(true);
             toast.info("You are already in the queue at this clinic");
+            navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(sanitizedMobile)}`);
           } else {
             setJoinError("You already have an active queue entry at this clinic");
           }
@@ -331,16 +325,14 @@ export const ClinicCard = ({
 
 
       const createdEntry = response.entry;
-      setNewQueueNumber(createdEntry.queue_number);
-      setNewCheckInCode(createdEntry.check_in_code || "");
       localStorage.setItem(`queue_mobile_${id}`, sanitizedMobile);
       if (patientNric.trim()) localStorage.setItem(`queue_nric_${id}`, patientNric.trim().toUpperCase());
       setMobileNumber(sanitizedMobile);
       setMyQueueEntry(createdEntry);
       toast.success(t("clinicCard.joinedQueue"));
       setShowDisclaimer(false);
-      setShowQueueCard(true);
       setTimeout(() => checkQueueStatus(), 500);
+      navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(sanitizedMobile)}`);
     } catch (err: any) {
       setJoinError(err.message || "Failed to join queue");
     } finally {
@@ -933,66 +925,6 @@ export const ClinicCard = ({
             {leadSubmitting ? "Processing..." : "Proceed to Booking"}
           </Button>
         </DialogFooter>
-      </DialogContent>
-    </Dialog>
-
-    {/* Queue Success Card Dialog */}
-    <Dialog open={showQueueCard} onOpenChange={setShowQueueCard}>
-      <DialogContent className="max-w-sm">
-        
-          <>
-            <DialogHeader>
-              <DialogTitle className="sr-only">You're in the queue</DialogTitle>
-            </DialogHeader>
-            <div className="flex flex-col items-center text-center space-y-4 py-2">
-              <div className="h-14 w-14 rounded-full bg-emerald-100 flex items-center justify-center">
-                <CheckCircle className="h-8 w-8 text-emerald-600" />
-              </div>
-              <div className="space-y-1">
-                <h3 className="text-lg font-bold text-foreground">You're in the queue!</h3>
-                <p className="text-xs text-muted-foreground">Your spot has been secured successfully.</p>
-              </div>
-              <div className="w-full text-center p-4 rounded-xl bg-muted">
-                <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Active Patients Ahead</p>
-                <p className="text-4xl font-bold text-primary">{newQueueNumber}</p>
-              </div>
-              <div className="w-full p-5 rounded-xl border-2 border-ai-indigo/30 bg-ai-indigo/5">
-                <p className="text-sm font-medium text-ai-indigo text-center">{t("queue.checkInCode")}</p>
-              </div>
-
-              <div className="w-full p-3 border rounded-md space-y-2">
-                <p className="text-xs font-medium">Save your queue link</p>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full text-xs"
-                  onClick={() => {
-                    const queueUrl = `${window.location.origin}/queue?clinic=${id}&mobile=${encodeURIComponent(mobileNumber)}`;
-                    navigator.clipboard.writeText(queueUrl);
-                    toast.success("Link copied!");
-                  }}
-                >
-                  <Copy className="mr-1.5 h-3.5 w-3.5" />
-                  Copy Link
-                </Button>
-                <p className="text-[11px] font-medium text-foreground">Use this link to return to your queue anytime.</p>
-              </div>
-              <p className="text-sm text-foreground leading-relaxed px-2">
-                {t("queue.successMessage")}
-              </p>
-              <Button
-                size="sm"
-                className="w-full"
-                onClick={() => {
-                  setShowQueueCard(false);
-                  navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(mobileNumber)}`);
-                }}
-              >
-                View Queue Status
-              </Button>
-            </div>
-
-          </>
       </DialogContent>
     </Dialog>
 
