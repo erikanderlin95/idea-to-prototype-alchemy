@@ -313,8 +313,8 @@ export const ClinicCard = ({
             setNewQueueNumber(payload.entry.queue_number);
             setNewCheckInCode(payload.entry.check_in_code || "");
             setShowDisclaimer(false);
-            setShowQueueCard(true);
             toast.info("You are already in the queue at this clinic");
+            navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(sanitizedMobile)}`);
           } else {
             setJoinError("You already have an active queue entry at this clinic");
           }
@@ -339,8 +339,8 @@ export const ClinicCard = ({
       setMyQueueEntry(createdEntry);
       toast.success(t("clinicCard.joinedQueue"));
       setShowDisclaimer(false);
-      setShowQueueCard(true);
       setTimeout(() => checkQueueStatus(), 500);
+      navigate(`/queue?clinic=${id}&mobile=${encodeURIComponent(sanitizedMobile)}`);
     } catch (err: any) {
       setJoinError(err.message || "Failed to join queue");
     } finally {
