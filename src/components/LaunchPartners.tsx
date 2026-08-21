@@ -105,9 +105,16 @@ export const LaunchPartners = () => {
             </a>
           </div>
 
-          {/* 4×2 grid — clinic logos */}
+          {/* 5-logo row — PanHealth + Hovi Care + original first row */}
+          <div className="grid grid-cols-5 gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-5 md:gap-x-6 md:gap-y-6 max-w-[420px] sm:max-w-[720px] md:max-w-[880px] mx-auto mt-3">
+            {firstRowLogos.map((logo) => (
+              <LogoCell key={logo.name} logo={logo} />
+            ))}
+          </div>
+
+          {/* 4-logo row — original second row */}
           <div className="grid grid-cols-4 gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-5 md:gap-x-6 md:gap-y-6 max-w-[360px] sm:max-w-[600px] md:max-w-[720px] mx-auto mt-3">
-            {logos.map((logo) => (
+            {secondRowLogos.map((logo) => (
               <LogoCell key={logo.name} logo={logo} />
             ))}
           </div>
