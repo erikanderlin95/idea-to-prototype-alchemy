@@ -10,13 +10,16 @@ import partnerTealC from "@/assets/partners/partner-teal-c.jpg.asset.json";
 import partner123sg from "@/assets/partners/partner-123sg.jpg.asset.json";
 import hovicareAsset from "@/assets/partners/hovicare-logo.jpg.asset.json";
 
-const logos = [
+const firstRowLogos = [
   { name: "PanHealth Medical", src: panhealth },
+  { name: "Hovi Care", src: hovicareAsset.url, href: "https://hovicare.sg/elderly-care-services/home-care-services/?gad_source=1&gad_campaignid=23448463320&gbraid=0AAAAADJrQKbzI7c5qY_RBIgbo5sx6CxVZ&gclid=CjwKCAjw7p_UBhBlEiwAhpIs7-jRY2A8gzezdp9urdeC9pThYmHdAvvXzu80y6VfFjMnnQ45e31TeBoCgtAQAvD_BwE" },
   { name: "Macquarie Chiropractic", src: macquarie },
   { name: "I-Health", src: ihealth },
   { name: "Staying Sane 101", src: stayingSane },
+];
+
+const secondRowLogos = [
   { name: "Be TCM Clinic", src: beTcm },
-  { name: "Hovi Care", src: hovicareAsset.url, href: "https://hovicare.sg/elderly-care-services/home-care-services/?gad_source=1&gad_campaignid=23448463320&gbraid=0AAAAADJrQKbzI7c5qY_RBIgbo5sx6CxVZ&gclid=CjwKCAjw7p_UBhBlEiwAhpIs7-jRY2A8gzezdp9urdeC9pThYmHdAvvXzu80y6VfFjMnnQ45e31TeBoCgtAQAvD_BwE" },
   { name: "myDNA", src: myDnaAsset.url },
   { name: "Partner", src: partnerTealC.url },
   { name: "123 S.G.", src: partner123sg.url },
