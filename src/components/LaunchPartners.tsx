@@ -10,13 +10,16 @@ import partnerTealC from "@/assets/partners/partner-teal-c.jpg.asset.json";
 import partner123sg from "@/assets/partners/partner-123sg.jpg.asset.json";
 import hovicareAsset from "@/assets/partners/hovicare-logo.jpg.asset.json";
 
-const logos = [
+const firstRowLogos = [
   { name: "PanHealth Medical", src: panhealth },
+  { name: "Hovi Care", src: hovicareAsset.url, href: "https://hovicare.sg/elderly-care-services/home-care-services/?gad_source=1&gad_campaignid=23448463320&gbraid=0AAAAADJrQKbzI7c5qY_RBIgbo5sx6CxVZ&gclid=CjwKCAjw7p_UBhBlEiwAhpIs7-jRY2A8gzezdp9urdeC9pThYmHdAvvXzu80y6VfFjMnnQ45e31TeBoCgtAQAvD_BwE" },
   { name: "Macquarie Chiropractic", src: macquarie },
   { name: "I-Health", src: ihealth },
   { name: "Staying Sane 101", src: stayingSane },
+];
+
+const secondRowLogos = [
   { name: "Be TCM Clinic", src: beTcm },
-  { name: "Hovi Care", src: hovicareAsset.url, href: "https://hovicare.sg/elderly-care-services/home-care-services/?gad_source=1&gad_campaignid=23448463320&gbraid=0AAAAADJrQKbzI7c5qY_RBIgbo5sx6CxVZ&gclid=CjwKCAjw7p_UBhBlEiwAhpIs7-jRY2A8gzezdp9urdeC9pThYmHdAvvXzu80y6VfFjMnnQ45e31TeBoCgtAQAvD_BwE" },
   { name: "myDNA", src: myDnaAsset.url },
   { name: "Partner", src: partnerTealC.url },
   { name: "123 S.G.", src: partner123sg.url },
@@ -102,9 +105,16 @@ export const LaunchPartners = () => {
             </a>
           </div>
 
-          {/* 4×2 grid — clinic logos */}
+          {/* 5-logo row — PanHealth + Hovi Care + original first row */}
+          <div className="grid grid-cols-5 gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-5 md:gap-x-6 md:gap-y-6 max-w-[420px] sm:max-w-[720px] md:max-w-[880px] mx-auto mt-3">
+            {firstRowLogos.map((logo) => (
+              <LogoCell key={logo.name} logo={logo} />
+            ))}
+          </div>
+
+          {/* 4-logo row — original second row */}
           <div className="grid grid-cols-4 gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-5 md:gap-x-6 md:gap-y-6 max-w-[360px] sm:max-w-[600px] md:max-w-[720px] mx-auto mt-3">
-            {logos.map((logo) => (
+            {secondRowLogos.map((logo) => (
               <LogoCell key={logo.name} logo={logo} />
             ))}
           </div>
