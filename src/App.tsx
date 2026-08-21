@@ -41,7 +41,6 @@ import WellnessTalksPage from "./pages/WellnessTalksPage";
 import BeyondClinicPage from "./pages/BeyondClinicPage";
 import ClinicOwnersPage from "./pages/ClinicOwnersPage";
 import MyClynicQPage from "./pages/MyClynicQPage";
-import SeniorDayCare from "./pages/SeniorDayCare";
 import HoviCare from "./pages/HoviCare";
 import About from "./pages/About";
 import TwentyFourHourClinics from "./pages/TwentyFourHourClinics";
