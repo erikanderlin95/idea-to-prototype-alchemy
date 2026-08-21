@@ -8,6 +8,7 @@ import beTcm from "@/assets/partners/be-tcm.jpg";
 import myDnaAsset from "@/assets/partners/mydna.png.asset.json";
 import partnerTealC from "@/assets/partners/partner-teal-c.jpg.asset.json";
 import partner123sg from "@/assets/partners/partner-123sg.jpg.asset.json";
+import hovicareAsset from "@/assets/partners/hovicare-logo.jpg.asset.json";
 
 const logos = [
   { name: "PanHealth Medical", src: panhealth },
@@ -15,25 +16,41 @@ const logos = [
   { name: "I-Health", src: ihealth },
   { name: "Staying Sane 101", src: stayingSane },
   { name: "Be TCM Clinic", src: beTcm },
+  { name: "Hovi Care", src: hovicareAsset.url, href: "https://hovicare.sg/elderly-care-services/home-care-services/?gad_source=1&gad_campaignid=23448463320&gbraid=0AAAAADJrQKbzI7c5qY_RBIgbo5sx6CxVZ&gclid=CjwKCAjw7p_UBhBlEiwAhpIs7-jRY2A8gzezdp9urdeC9pThYmHdAvvXzu80y6VfFjMnnQ45e31TeBoCgtAQAvD_BwE" },
   { name: "myDNA", src: myDnaAsset.url },
   { name: "Partner", src: partnerTealC.url },
   { name: "123 S.G.", src: partner123sg.url },
 ];
 
-const LogoCell = ({ logo }: { logo: { name: string; src: string } }) => {
+const LogoCell = ({ logo }: { logo: { name: string; src: string; href?: string } }) => {
   const is123 = logo.name === "123 S.G.";
+  const img = (
+    <img
+      src={logo.src}
+      alt={logo.name}
+      loading="lazy"
+      className={`max-h-full w-auto object-contain ${
+        is123
+          ? "max-w-[80px] sm:max-w-[120px] md:max-w-[160px]"
+          : "max-w-[64px] sm:max-w-[100px] md:max-w-[130px]"
+      }`}
+    />
+  );
   return (
     <div className="flex items-center justify-center h-[50px] sm:h-[58px] md:h-[66px]">
-      <img
-        src={logo.src}
-        alt={logo.name}
-        loading="lazy"
-        className={`max-h-full w-auto object-contain ${
-          is123
-            ? "max-w-[80px] sm:max-w-[120px] md:max-w-[160px]"
-            : "max-w-[64px] sm:max-w-[100px] md:max-w-[130px]"
-        }`}
-      />
+      {logo.href ? (
+        <a
+          href={logo.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`Visit ${logo.name}`}
+          className="flex items-center justify-center h-full transition-opacity duration-300 hover:opacity-80"
+        >
+          {img}
+        </a>
+      ) : (
+        img
+      )}
     </div>
   );
 };
