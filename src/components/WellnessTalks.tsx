@@ -295,14 +295,19 @@ export const WellnessTalks = () => {
 
         <div className="max-w-2xl mx-auto mt-6 flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center justify-center">
           <Button
-            variant="outline"
-            className="gap-2 font-semibold shadow-sm hover:shadow-md transition-all bg-white border-[hsl(var(--ai-cyan)/0.4)] text-foreground hover:bg-white/90"
-            onClick={() =>
-              document.getElementById("continuity")?.scrollIntoView({ behavior: "smooth" })
-            }
+            asChild
+            className="gap-2 font-semibold shadow-sm hover:shadow-md transition-all"
+            style={{ background: "#25D366", color: "#fff", borderColor: "#25D366" }}
           >
-            Explore Partners
-            <ArrowRight className="h-4 w-4" />
+            <a
+              href="https://wa.me/6592206418"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Enquire on WhatsApp"
+            >
+              Enquire
+              <WhatsAppIcon className="h-4 w-4" />
+            </a>
           </Button>
           <Button
             className="font-semibold shadow-sm hover:shadow-md transition-all"
