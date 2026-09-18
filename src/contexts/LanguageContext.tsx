@@ -1113,6 +1113,7 @@ const translations: Record<Language, Record<string, string>> = {
     // Hero
     "hero.badge": "查看排队 • 预约 • 连接",
     "hero.title1": "获取医疗保健",
+    "hero.title2": "在一处",
     "hero.subtitle": "需要看医生？👨‍⚕️ 从我们开始。\n探索您附近的诊所、日间照护和临终服务。",
     "hero.trustLine": "",
     "hero.findClinics": "浏览诊所",
