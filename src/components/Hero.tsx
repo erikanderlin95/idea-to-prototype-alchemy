@@ -41,9 +41,19 @@ export const Hero = () => {
                 {t("hero.title2")}
               </span>
             </h1>
-            <p className="text-base sm:text-base md:text-lg text-foreground/80 whitespace-pre-line leading-snug pt-2">
-              {t("hero.subtitle")}
-            </p>
+            {(() => {
+              const [line1, line2] = t("hero.subtitle").split("\n");
+              return (
+                <div className="space-y-1 pt-2">
+                  <p className="text-base sm:text-base md:text-lg text-foreground/80 leading-snug">
+                    {line1}
+                  </p>
+                  <p className="text-xs sm:text-sm md:text-base text-foreground/80 whitespace-nowrap leading-snug">
+                    {line2 || ""}
+                  </p>
+                </div>
+              );
+            })()}
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 mx-auto mt-1 justify-center">
