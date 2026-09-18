@@ -41,6 +41,9 @@ export const Hero = () => {
                 {t("hero.title2")}
               </span>
             </h1>
+            <p className="text-sm sm:text-base md:text-lg text-foreground/80 whitespace-pre-line leading-snug pt-2">
+              {t("hero.subtitle")}
+            </p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3 mx-auto mt-1 justify-center">
