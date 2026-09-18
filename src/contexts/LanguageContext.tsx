@@ -69,7 +69,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.badge": "Check Queue • Book • Connect",
     "hero.title1": "Access Healthcare",
     "hero.title2": "In One Place",
-    "hero.subtitle": "",
+    "hero.subtitle": "Need to see a doctor?👨‍⚕️ Start with us.\nExplore clinics, senior daycare and end of life services near you.",
     "hero.trustLine": "",
     "hero.findClinics": "Explore Clinics",
     "hero.findMyQueue": "List Your Clinic",
