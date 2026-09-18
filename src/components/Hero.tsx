@@ -35,13 +35,13 @@ export const Hero = () => {
       <div className="container px-4 md:px-6 relative z-10">
         <div className="flex flex-col items-center text-center space-y-6 max-w-4xl mx-auto">
           <div className="space-y-3 pt-4">
-            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold">
               {t("hero.title1")}
               <span className="block mt-2 bg-gradient-to-r from-[hsl(220,90%,58%)] via-[hsl(215,90%,55%)] to-[hsl(210,90%,55%)] bg-clip-text text-transparent">
                 {t("hero.title2")}
               </span>
             </h1>
-            <p className="text-sm sm:text-base md:text-lg text-foreground/80 whitespace-pre-line leading-snug pt-2">
+            <p className="text-base sm:text-lg md:text-xl text-foreground/80 whitespace-pre-line leading-snug pt-2">
               {t("hero.subtitle")}
             </p>
           </div>
