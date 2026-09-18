@@ -2149,7 +2149,7 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.badge": "Semak Giliran • Tempah • Sambung",
     "hero.title1": "Akses Kesihatan",
     "hero.title2": "Di Satu Tempat",
-    "hero.subtitle": "",
+    "hero.subtitle": "Perlu jumpa doktor?👨‍⚕️ Mulakan dengan kami.\nTerokai klinik, penjagaan siang warga emas dan perkhidmatan akhir hayat berdekatan anda.",
     "hero.trustLine": "",
     "hero.findClinics": "Teroka Klinik",
     "hero.findMyQueue": "Senaraikan Klinik Anda",
