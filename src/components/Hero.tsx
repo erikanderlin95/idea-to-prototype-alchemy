@@ -45,10 +45,10 @@ export const Hero = () => {
               const [line1, line2] = t("hero.subtitle").split("\n");
               return (
                 <div className="space-y-1 pt-2">
-                  <p className="text-xs sm:text-base md:text-lg text-foreground/80 leading-snug">
+                  <p className="text-sm sm:text-base md:text-lg text-foreground/80 leading-snug">
                     {line1}
                   </p>
-                  <p className="text-xs sm:text-base md:text-lg text-foreground/80 whitespace-nowrap leading-snug">
+                  <p className="text-sm sm:text-base md:text-lg text-foreground/80 whitespace-nowrap leading-snug">
                     {line2 || ""}
                   </p>
                 </div>
