@@ -44,7 +44,7 @@ const AfterlifeProfile = () => {
                 <span className="text-[9px] md:text-[11px] font-semibold text-[#8A7A9A] uppercase tracking-widest">{t("afterlife.badge")}</span>
               </div>
 
-              <div className="flex items-center gap-2">
+              <div className="flex flex-col items-start gap-1">
                 <img src={nirvanaLogoAsset.url} alt="Nirvana Joyful Life logo" className="w-32 md:w-40 lg:w-44 aspect-[139/55] object-contain shrink-0" />
                 <h1 className="text-[1.6rem] md:text-[2.4rem] lg:text-[2.7rem] font-bold text-[#2D1B4E] leading-[1.1] tracking-tight">
                   Nirvana Joyful Life
