@@ -37,15 +37,15 @@ const AfterlifeProfile = () => {
         <div className="max-w-5xl mx-auto relative">
           <div className="grid grid-cols-1 lg:grid-cols-5 gap-6 items-center">
             <div className="lg:col-span-3 space-y-3">
-              <div className="inline-flex items-center gap-2.5 bg-white/70 backdrop-blur-sm rounded-full pl-1.5 pr-4 py-1 shadow-sm ring-1 ring-[#DDD0EA]">
-                <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#B8A0CE] to-[#9B7DB8] flex items-center justify-center shadow-sm">
-                  <Heart className="h-3.5 w-3.5 text-white" />
+              <div className="inline-flex items-center gap-2 bg-white/70 backdrop-blur-sm rounded-full pl-1 pr-3 py-0.5 shadow-sm ring-1 ring-[#DDD0EA]">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#B8A0CE] to-[#9B7DB8] flex items-center justify-center shadow-sm">
+                  <Heart className="h-3 w-3 text-white" />
                 </div>
-                <span className="text-[11px] md:text-[15px] font-semibold text-[#8A7A9A] uppercase tracking-widest">{t("afterlife.badge")}</span>
+                <span className="text-[9px] md:text-[11px] font-semibold text-[#8A7A9A] uppercase tracking-widest">{t("afterlife.badge")}</span>
               </div>
 
-              <div className="flex items-center gap-3">
-                <img src={nirvanaLogoAsset.url} alt="Nirvana Joyful Life logo" className="w-14 h-14 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-xl object-contain bg-white shadow-sm ring-1 ring-[#C9A84C]/20" />
+              <div className="flex items-center gap-2">
+                <img src={nirvanaLogoAsset.url} alt="Nirvana Joyful Life logo" className="w-28 md:w-36 lg:w-40 aspect-[174/78] object-contain shrink-0" />
                 <h1 className="text-[1.6rem] md:text-[2.4rem] lg:text-[2.7rem] font-bold text-[#2D1B4E] leading-[1.1] tracking-tight">
                   Nirvana Joyful Life
                 </h1>
