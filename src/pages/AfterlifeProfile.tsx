@@ -45,8 +45,8 @@ const AfterlifeProfile = () => {
               </div>
 
               <div className="flex items-center gap-3">
-                <img src={nirvanaLogo} alt="Nirvana Joyful Life logo" className="w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 rounded-xl object-cover shadow-sm ring-1 ring-[#C9A84C]/20" />
-                <h1 className="text-[2rem] md:text-[3.1rem] lg:text-[3.4rem] font-bold text-[#2D1B4E] leading-[1.1] tracking-tight">
+                <img src={nirvanaLogo} alt="Nirvana Joyful Life logo" className="w-14 h-14 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-xl object-cover shadow-sm ring-1 ring-[#C9A84C]/20" />
+                <h1 className="text-[1.6rem] md:text-[2.4rem] lg:text-[2.7rem] font-bold text-[#2D1B4E] leading-[1.1] tracking-tight">
                   Nirvana Joyful Life
                 </h1>
               </div>
