@@ -1,7 +1,7 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import clynicqLogo from "@/assets/clynicq-logo.png";
+import clynicqLogoAsset from "@/assets/clynicq-logo.jpg.asset.json";
 
 export const About = () => {
   const { t } = useLanguage();
@@ -12,7 +12,7 @@ export const About = () => {
       <article className="max-w-3xl mx-auto animate-fade-in">
         <header className="mb-6 md:mb-12">
           <img
-            src={clynicqLogo}
+            src={clynicqLogoAsset.url}
             alt="ClynicQ"
             className="h-9 md:h-10 w-auto mb-4 md:mb-6 cursor-pointer"
             onClick={() => navigate("/")}

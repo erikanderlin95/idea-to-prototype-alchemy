@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/sheet";
 import { QueueIcon, AppointmentsIcon, AnalyticsIcon, ChatbotIcon } from "@/components/icons/FeatureIcons";
 import { Heart } from "lucide-react";
-import clynicqLogo from "@/assets/clynicq-logo.png";
+import clynicqLogoAsset from "@/assets/clynicq-logo.jpg.asset.json";
 
 interface NavbarProps {
   onRestartTour?: () => void;
@@ -81,7 +81,7 @@ export const Navbar = ({ onRestartTour }: NavbarProps = {}) => {
             </button>
           )}
           <div className="flex items-center cursor-pointer shrink-0" onClick={() => navigate("/")}>
-            <img src={clynicqLogo} alt="ClynicQ - Queue · Book · Connect" className="h-9 md:h-10 w-auto object-contain" />
+            <img src={clynicqLogoAsset.url} alt="ClynicQ - Queue · Book · Connect" className="h-9 md:h-10 w-auto object-contain" />
           </div>
         </div>
 
