@@ -14,7 +14,7 @@ import nvLegacyImg from "@/assets/nv-legacy-pkg.jpg";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-import nirvanaLogo from "@/assets/nirvana-logo.jpg";
+import nirvanaLogoAsset from "@/assets/nirvana-logo.png.asset.json";
 import nirvanaFuneral from "@/assets/nirvana-funeral.jpg";
 import nirvanaPedestals from "@/assets/nirvana-pedestals.jpg";
 import nirvanaLegacy from "@/assets/nirvana-legacy.jpg";
