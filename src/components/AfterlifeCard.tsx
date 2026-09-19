@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
-import nirvanaLogo from "@/assets/nirvana-logo.jpg";
+import nirvanaLogoAsset from "@/assets/nirvana-logo.png.asset.json";
 
 interface AfterlifeCardProps {
   slug: string;
@@ -22,7 +22,7 @@ const AfterlifeCard = ({ slug, name, subtitle, description }: AfterlifeCardProps
       <CardContent className="p-3 sm:p-4 flex flex-col items-center justify-center h-full text-center">
         {/* Subtle gold accent ring */}
         <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-xl overflow-hidden mb-1.5 ring-1 ring-[#C9A84C]/20 shadow-[0_2px_8px_rgba(201,168,76,0.08)]">
-          <img src={nirvanaLogo} alt="Nirvana Joyful Life logo" className="w-full h-full object-cover" />
+          <img src={nirvanaLogoAsset.url} alt="Nirvana Joyful Life logo" className="w-full h-full object-contain bg-white" />
         </div>
 
         <h3 className="text-base sm:text-[17px] font-bold text-[#2D1B4E] mb-0">
