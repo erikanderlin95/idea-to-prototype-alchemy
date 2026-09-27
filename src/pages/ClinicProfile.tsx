@@ -116,7 +116,13 @@ const ClinicProfile = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
-  const [clinic, setClinic] = useState<any>(null);
+  const [clinic, setClinic] = useState<any>(() => {
+    try {
+      return JSON.parse(sessionStorage.getItem(`clynicq_clinic_cache_${id}`) || "null");
+    } catch {
+      return null;
+    }
+  });
   const [doctors, setDoctors] = useState<any[]>([]);
   const [reviews, setReviews] = useState<any[]>([]);
   const [queue, setQueue] = useState<any[]>([]);
@@ -209,7 +215,12 @@ const ClinicProfile = () => {
         supabase.from("queue_stats_public").select("queue_count").eq("clinic_id", id).maybeSingle(),
       ]);
 
-      if (clinicData.data) setClinic(clinicData.data);
+      if (clinicData.data) {
+        setClinic(clinicData.data);
+        try {
+          sessionStorage.setItem(`clynicq_clinic_cache_${id}`, JSON.stringify(clinicData.data));
+        } catch {}
+      }
       if (doctorsData.data) setDoctors(doctorsData.data);
       if (reviewsData.data) setReviews(reviewsData.data);
       // Set queue as count only (no personal data exposed)
