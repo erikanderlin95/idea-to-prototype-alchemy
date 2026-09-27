@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -116,7 +116,16 @@ const ClinicProfile = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
-  const [clinic, setClinic] = useState<any>(null);
+  const location = useLocation();
+  const [clinic, setClinic] = useState<any>(() => {
+    const preview = (location.state as any)?.clinicPreview;
+    if (preview && preview.id === id) return preview;
+    try {
+      return JSON.parse(sessionStorage.getItem(`clynicq_clinic_cache_${id}`) || "null");
+    } catch {
+      return null;
+    }
+  });
   const [doctors, setDoctors] = useState<any[]>([]);
   const [reviews, setReviews] = useState<any[]>([]);
   const [queue, setQueue] = useState<any[]>([]);
@@ -209,7 +218,12 @@ const ClinicProfile = () => {
         supabase.from("queue_stats_public").select("queue_count").eq("clinic_id", id).maybeSingle(),
       ]);
 
-      if (clinicData.data) setClinic(clinicData.data);
+      if (clinicData.data) {
+        setClinic(clinicData.data);
+        try {
+          sessionStorage.setItem(`clynicq_clinic_cache_${id}`, JSON.stringify(clinicData.data));
+        } catch {}
+      }
       if (doctorsData.data) setDoctors(doctorsData.data);
       if (reviewsData.data) setReviews(reviewsData.data);
       // Set queue as count only (no personal data exposed)

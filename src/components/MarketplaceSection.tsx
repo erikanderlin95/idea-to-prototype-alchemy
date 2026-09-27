@@ -29,7 +29,13 @@ interface MarketplaceSectionProps {
 export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }: MarketplaceSectionProps) => {
   const { t } = useLanguage();
   const isMobile = useIsMobile();
-  const [clinics, setClinics] = useState<any[]>([]);
+  const [clinics, setClinics] = useState<any[]>(() => {
+    try {
+      return JSON.parse(sessionStorage.getItem("clynicq_clinics_cache") || "[]");
+    } catch {
+      return [];
+    }
+  });
   const [filteredClinics, setFilteredClinics] = useState<any[]>([]);
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
   const [searchText, setSearchText] = useState("");
@@ -201,7 +207,11 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         area: c.area,
       }));
 
-      setClinics([...clinicsWithQueue, ...normalized24Hr]);
+      const allClinics = [...clinicsWithQueue, ...normalized24Hr];
+      setClinics(allClinics);
+      try {
+        sessionStorage.setItem("clynicq_clinics_cache", JSON.stringify(allClinics));
+      } catch {}
     } catch (error) {
       console.error("Error fetching clinics:", error);
     }
