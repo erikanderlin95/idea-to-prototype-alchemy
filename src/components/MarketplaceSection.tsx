@@ -31,7 +31,6 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const isMobile = useIsMobile();
   const [clinics, setClinics] = useState<any[]>([]);
   const [filteredClinics, setFilteredClinics] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
   const [searchText, setSearchText] = useState("");
   const [filters, setFilters] = useState<ClinicFilters>({ openNow: false, queue: false, booking: false });
@@ -205,24 +204,12 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       setClinics([...clinicsWithQueue, ...normalized24Hr]);
     } catch (error) {
       console.error("Error fetching clinics:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
   const handleCategoryChange = (category: string) => {
     setActiveCategory(category);
   };
-
-  if (loading) {
-    return (
-      <section className="py-20">
-        <div className="container px-4 md:px-6">
-          <div className="text-center">{t("marketplace.loading")}</div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="marketplace" className="pt-6 pb-8 bg-background onboarding-clinics">
