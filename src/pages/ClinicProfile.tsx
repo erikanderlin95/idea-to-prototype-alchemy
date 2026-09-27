@@ -273,8 +273,13 @@ const ClinicProfile = () => {
     ? reviews
     : (clinic ? (DEMO_REVIEWS[clinic.name] || []) : []);
 
-  if (loading || !clinic) {
-    return <div className="min-h-screen flex items-center justify-center">{t('clinicProfile.loading')}</div>;
+  if (!clinic) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <main className="container px-3 md:px-6 py-4 sm:py-8" />
+      </div>
+    );
   }
 
   return (
