@@ -429,7 +429,7 @@ export const ClinicCard = ({
 
   return (
     <>
-      <Card className="group flex flex-col px-3 py-2.5 sm:px-3.5 sm:py-3 hover:shadow-lg transition-all duration-300 border border-emerald-300/70 hover:border-emerald-400 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue w-full max-w-[360px] md:max-w-[420px] mx-auto h-full" onClick={() => id && navigate(`/clinic/${id}`)}>
+      <Card className="group flex flex-col px-3 py-2.5 sm:px-3.5 sm:py-3 hover:shadow-lg transition-all duration-300 border border-emerald-300/70 hover:border-emerald-400 cursor-pointer bg-gradient-to-br from-card to-primary/5 onboarding-join-queue w-full max-w-[360px] md:max-w-[420px] mx-auto h-full" onClick={() => id && navigate(`/clinic/${id}`, { state: { clinicPreview: { id, name, type, address, rating, is_open: isOpen } } })}>
         {/* === TOP SECTION (fixed) === */}
         <div className="space-y-1">
         {/* Row 1: Name + rating */}
@@ -715,7 +715,7 @@ export const ClinicCard = ({
             <Button 
               variant="outline"
               className="w-full text-sm font-bold h-9 bg-white text-emerald-700 border-2 border-emerald-600 hover:bg-emerald-50 hover:border-emerald-700"
-              onClick={(e) => { e.stopPropagation(); id && navigate(`/clinic/${id}`); }}
+              onClick={(e) => { e.stopPropagation(); id && navigate(`/clinic/${id}`, { state: { clinicPreview: { id, name, type, address, rating, is_open: isOpen } } }); }}
             >
               {t("clinicCard.viewDetails")}
             </Button>

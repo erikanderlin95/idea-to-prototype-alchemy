@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -116,7 +116,10 @@ const ClinicProfile = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
+  const location = useLocation();
   const [clinic, setClinic] = useState<any>(() => {
+    const preview = (location.state as any)?.clinicPreview;
+    if (preview && preview.id === id) return preview;
     try {
       return JSON.parse(sessionStorage.getItem(`clynicq_clinic_cache_${id}`) || "null");
     } catch {
