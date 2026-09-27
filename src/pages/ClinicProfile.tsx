@@ -120,7 +120,6 @@ const ClinicProfile = () => {
   const [doctors, setDoctors] = useState<any[]>([]);
   const [reviews, setReviews] = useState<any[]>([]);
   const [queue, setQueue] = useState<any[]>([]);
-  const [loading, setLoading] = useState(true);
   const [showManagedCareModal, setShowManagedCareModal] = useState(false);
   const [managedCareSubmitted, setManagedCareSubmitted] = useState(false);
   const [mcName, setMcName] = useState("");
@@ -220,7 +219,6 @@ const ClinicProfile = () => {
       console.error("Error fetching clinic data:", error);
       toast.error(t('clinicProfile.failedToLoad'));
     } finally {
-      setLoading(false);
     }
   };
 
