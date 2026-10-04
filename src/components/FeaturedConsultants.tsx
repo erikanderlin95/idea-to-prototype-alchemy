@@ -20,7 +20,7 @@ export const FeaturedConsultants = () => {
         {/* CTA — I Need Help */}
         <div className="flex justify-center">
           <Button
-            className="h-10 px-6 justify-center gap-2 rounded-full bg-gradient-to-r from-[#F97316] to-[#EA580C] hover:from-[#EA580C] hover:to-[#DC5A0A] text-white font-semibold text-sm tracking-wide shadow-[0_4px_14px_rgba(249,115,22,0.4)] hover:shadow-[0_6px_18px_rgba(249,115,22,0.5)] transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.97]"
+            className="h-10 px-6 justify-center gap-2 rounded-full bg-gradient-to-r from-[#FDBA74] to-[#FB923C] hover:from-[#FB923C] hover:to-[#F97316] text-white font-semibold text-sm tracking-wide shadow-[0_4px_14px_rgba(251,146,60,0.4)] hover:shadow-[0_6px_18px_rgba(251,146,60,0.5)] transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.97]"
             onClick={() => navigate("/organization/nymg")}
           >
             <HelpCircle className="h-4 w-4 shrink-0" />
