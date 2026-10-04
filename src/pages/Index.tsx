@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
 import { MarketplaceSection } from "@/components/MarketplaceSection";
+import { ConnectVia } from "@/components/ConnectVia";
 import { FeaturedConsultants } from "@/components/FeaturedConsultants";
 import { LaunchPartners } from "@/components/LaunchPartners";
 import { Footer } from "@/components/Footer";
@@ -36,6 +37,8 @@ const Index = () => {
             </Button>
           </div>
         </section>
+
+        <ConnectVia />
       </main>
       <Footer />
 

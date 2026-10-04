@@ -1,5 +1,4 @@
 import azaas from "@/assets/partners/azaas.jpg";
-import sgimed from "@/assets/partners/sgimed.jpg.asset.json";
 import panhealth from "@/assets/partners/panhealth.jpg";
 import macquarie from "@/assets/partners/macquarie.jpg";
 import ihealth from "@/assets/partners/ihealth.jpg";
@@ -73,7 +72,7 @@ export const LaunchPartners = () => {
             Early clinics and partners supporting ClynicQ.
           </p>
 
-          {/* Top row — Azaas + SG iMED */}
+          {/* Top row — Azaas */}
           <div className="flex items-center justify-center gap-6 sm:gap-10 md:gap-14 mb-2 md:mb-3">
             <a
               href="https://www.azaas.com/"
@@ -87,20 +86,6 @@ export const LaunchPartners = () => {
                 alt="Azaas"
                 loading="lazy"
                 className="max-h-full w-auto max-w-[88px] sm:max-w-[140px] md:max-w-[180px] object-contain"
-              />
-            </a>
-            <a
-              href="https://sgimed.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Visit SG iMED"
-              className="flex items-center justify-center h-[58px] sm:h-[68px] md:h-[78px] transition-opacity duration-300 hover:opacity-80"
-            >
-              <img
-                src={sgimed.url}
-                alt="SG iMED"
-                loading="lazy"
-                className="max-h-full w-auto max-w-[64px] sm:max-w-[100px] md:max-w-[130px] object-contain"
               />
             </a>
           </div>
