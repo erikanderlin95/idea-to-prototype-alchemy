@@ -170,7 +170,7 @@ export const ManagedCareModal = ({
                 window.open(`https://wa.me/?text=${message}`, "_blank");
               }}
             >
-              <WhatsAppIcon className="mr-2 h-4 w-4" />
+              <WhatsAppIcon className="mr-2 h-4 w-4 text-primary-foreground" />
               Chat with Care Coordinator
             </Button>
             <p className="text-xs text-muted-foreground">{NMG_ATTRIBUTION_TAG}</p>

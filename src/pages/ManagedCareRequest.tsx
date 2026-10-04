@@ -180,7 +180,7 @@ const ManagedCareRequest = () => {
                   window.open(`https://wa.me/?text=${message}`, "_blank");
                 }}
               >
-                <WhatsAppIcon className="mr-2 h-5 w-5" />
+                <WhatsAppIcon className="mr-2 h-5 w-5 text-primary-foreground" />
                 Chat with Care Coordinator
               </Button>
               <p className="text-xs text-muted-foreground pt-2">{NMG_ATTRIBUTION_TAG}</p>

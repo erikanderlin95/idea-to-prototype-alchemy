@@ -247,7 +247,7 @@ export const ServiceIntakeModal = ({
               className="w-full bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold h-10"
               onClick={handleWhatsApp}
             >
-              <WhatsAppIcon className="mr-1.5 h-4 w-4" />
+              <WhatsAppIcon className="mr-1.5 h-4 w-4 text-primary-foreground" />
               Continue via WhatsApp
             </Button>
           </div>

@@ -593,7 +593,7 @@ export default function StaffDashboard() {
                               size="sm"
                               onClick={() => setSelectedPatient(entry)}
                             >
-                              <WhatsAppIcon className="h-4 w-4 mr-2" />
+                              <WhatsAppIcon className="h-4 w-4 mr-2 text-primary-foreground" />
                               Notify
                             </Button>
                           </DialogTrigger>
