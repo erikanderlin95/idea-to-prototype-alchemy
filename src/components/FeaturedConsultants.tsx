@@ -8,7 +8,7 @@ export const FeaturedConsultants = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="managed-care" className="py-2 px-4 bg-white">
+    <section id="managed-care" className="py-6 md:py-8 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
         {/* CTA — I Need Help */}
         <div className="flex justify-center">
