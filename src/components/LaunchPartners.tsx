@@ -26,24 +26,31 @@ const secondRowLogos = [
 
 const LogoCell = ({ logo }: { logo: { name: string; src: string; href?: string; size?: "small" | "large" } }) => {
   const is123 = logo.name === "123 S.G.";
-  const sizeClass =
-    logo.size === "small"
-      ? "max-w-[44px] sm:max-w-[68px] md:max-w-[88px]"
-      : logo.size === "large"
-      ? "max-w-[64px] sm:max-w-[100px] md:max-w-[128px]"
-      : is123
-      ? "max-w-[68px] sm:max-w-[100px] md:max-w-[132px]"
-      : "max-w-[54px] sm:max-w-[84px] md:max-w-[108px]";
+  const small = logo.size === "small";
+  const large = logo.size === "large";
+  const widthClass = large
+    ? ""
+    : small
+    ? "max-w-[44px] sm:max-w-[68px] md:max-w-[88px]"
+    : is123
+    ? "max-w-[68px] sm:max-w-[100px] md:max-w-[132px]"
+    : "max-w-[54px] sm:max-w-[84px] md:max-w-[108px]";
+  const heightClass = large
+    ? "h-[46px] sm:h-[54px] md:h-[62px]"
+    : small
+    ? "h-[36px] sm:h-[40px] md:h-[44px]"
+    : "";
+  const cellHeight = large ? "h-[46px] sm:h-[54px] md:h-[62px]" : "h-[40px] sm:h-[46px] md:h-[52px]";
   const img = (
     <img
       src={logo.src}
       alt={logo.name}
       loading="lazy"
-      className={`max-h-full w-auto object-contain ${sizeClass}`}
+      className={`w-auto object-contain ${widthClass} ${heightClass ? `${heightClass} max-h-none` : "max-h-full"}`}
     />
   );
   return (
-    <div className="flex items-center justify-center h-[40px] sm:h-[46px] md:h-[52px]">
+    <div className={`flex items-center justify-center ${cellHeight}`}>
       {logo.href ? (
         <a
           href={logo.href}
