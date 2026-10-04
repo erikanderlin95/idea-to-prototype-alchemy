@@ -222,7 +222,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   };
 
   return (
-    <section id="marketplace" className="pt-6 pb-8 bg-background onboarding-clinics">
+    <section id="marketplace" className="py-6 md:py-8 bg-background onboarding-clinics">
       <div className="container px-4 md:px-6">
         <div className="px-2 sm:px-0 space-y-4">
           <div className="text-center mb-2">
@@ -325,7 +325,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
 
           {/* 24hr Clinics — compact entry card */}
           {activeCategory === "all" && (
-            <div className="pt-4 border-t border-border/30 mt-4">
+            <div className="pt-2 mt-2">
               <Link
                 to="/24-hour-clinics-singapore"
                 className="group block w-full max-w-[560px] mx-auto rounded-lg border border-border/80 bg-muted/30 hover:bg-muted/50 hover:border-border transition-colors px-4 py-3"

@@ -10,9 +10,9 @@ export const ConnectVia = () => {
   const { t } = useLanguage();
 
   return (
-    <section className="pt-4 pb-10 md:pt-6 md:pb-14 bg-background">
+    <section className="py-6 md:py-8 bg-background">
       <div className="container px-4 md:px-6">
-        <div className="max-w-5xl mx-auto h-px bg-border/40 mb-5 md:mb-6" />
+
         <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 md:mb-5">
           {t("connectVia.title")}
         </h2>

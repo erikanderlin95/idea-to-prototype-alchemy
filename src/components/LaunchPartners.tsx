@@ -72,10 +72,9 @@ const LogoCell = ({ logo }: { logo: PartnerLogo }) => {
 
 export const LaunchPartners = () => {
   return (
-    <section className="pt-6 pb-6 md:pt-8 md:pb-8 bg-background">
+    <section className="py-6 md:py-8 bg-background">
       <div className="container px-4 md:px-6">
-        {/* Soft divider above */}
-        <div className="max-w-5xl mx-auto h-px bg-border/40 mb-5 md:mb-6" />
+
 
         <div className="max-w-3xl mx-auto">
           <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2">
