@@ -11,31 +11,35 @@ import hovicare from "@/assets/partners/hovicare-logo.jpg";
 
 const firstRowLogos = [
   { name: "Hovi Care", src: hovicare, href: "https://hovicare.sg/elderly-care-services/home-care-services/?gad_source=1&gad_campaignid=23448463320&gbraid=0AAAAADJrQKbzI7c5qY_RBIgbo5sx6CxVZ&gclid=CjwKCAjw7p_UBhBlEiwAhpIs7-jRY2A8gzezdp9urdeC9pThYmHdAvvXzu80y6VfFjMnnQ45e31TeBoCgtAQAvD_BwE" },
-  { name: "Everest Clinic", src: everest },
+  { name: "Everest Clinic", src: everest, size: "small" },
   { name: "Macquarie Chiropractic", src: macquarie },
-  { name: "I-Health", src: ihealth },
+  { name: "I-Health", src: ihealth, size: "large" },
   { name: "Staying Sane 101", src: stayingSane },
 ];
 
 const secondRowLogos = [
-  { name: "Be TCM Clinic", src: beTcm },
+  { name: "Be TCM Clinic", src: beTcm, size: "small" },
   { name: "myDNA", src: myDna },
   { name: "Partner", src: partnerTealC },
   { name: "123 S.G.", src: partner123sg },
 ];
 
-const LogoCell = ({ logo }: { logo: { name: string; src: string; href?: string } }) => {
+const LogoCell = ({ logo }: { logo: { name: string; src: string; href?: string; size?: "small" | "large" } }) => {
   const is123 = logo.name === "123 S.G.";
+  const sizeClass =
+    logo.size === "small"
+      ? "max-w-[44px] sm:max-w-[68px] md:max-w-[88px]"
+      : logo.size === "large"
+      ? "max-w-[64px] sm:max-w-[100px] md:max-w-[128px]"
+      : is123
+      ? "max-w-[68px] sm:max-w-[100px] md:max-w-[132px]"
+      : "max-w-[54px] sm:max-w-[84px] md:max-w-[108px]";
   const img = (
     <img
       src={logo.src}
       alt={logo.name}
       loading="lazy"
-      className={`max-h-full w-auto object-contain ${
-        is123
-          ? "max-w-[68px] sm:max-w-[100px] md:max-w-[132px]"
-          : "max-w-[54px] sm:max-w-[84px] md:max-w-[108px]"
-      }`}
+      className={`max-h-full w-auto object-contain ${sizeClass}`}
     />
   );
   return (
