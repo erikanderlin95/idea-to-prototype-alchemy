@@ -1,5 +1,4 @@
 import azaas from "@/assets/partners/azaas.jpg";
-import sgimed from "@/assets/partners/sgimed.jpg.asset.json";
 import panhealth from "@/assets/partners/panhealth.jpg";
 import macquarie from "@/assets/partners/macquarie.jpg";
 import ihealth from "@/assets/partners/ihealth.jpg";
