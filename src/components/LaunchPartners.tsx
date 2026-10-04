@@ -4,13 +4,13 @@ import macquarie from "@/assets/partners/macquarie.jpg";
 import ihealth from "@/assets/partners/ihealth.jpg";
 import stayingSane from "@/assets/partners/staying-sane.jpg";
 import beTcm from "@/assets/partners/be-tcm.jpg";
-import myDnaAsset from "@/assets/partners/mydna.png.asset.json";
-import partnerTealC from "@/assets/partners/partner-teal-c.jpg.asset.json";
-import partner123sg from "@/assets/partners/partner-123sg.jpg.asset.json";
-import hovicareAsset from "@/assets/partners/hovicare-logo.jpg.asset.json";
+import myDna from "@/assets/partners/mydna.png";
+import partnerTealC from "@/assets/partners/partner-teal-c.jpg";
+import partner123sg from "@/assets/partners/partner-123sg.jpg";
+import hovicare from "@/assets/partners/hovicare-logo.jpg";
 
 const firstRowLogos = [
-  { name: "Hovi Care", src: hovicareAsset.url, href: "https://hovicare.sg/elderly-care-services/home-care-services/?gad_source=1&gad_campaignid=23448463320&gbraid=0AAAAADJrQKbzI7c5qY_RBIgbo5sx6CxVZ&gclid=CjwKCAjw7p_UBhBlEiwAhpIs7-jRY2A8gzezdp9urdeC9pThYmHdAvvXzu80y6VfFjMnnQ45e31TeBoCgtAQAvD_BwE" },
+  { name: "Hovi Care", src: hovicare, href: "https://hovicare.sg/elderly-care-services/home-care-services/?gad_source=1&gad_campaignid=23448463320&gbraid=0AAAAADJrQKbzI7c5qY_RBIgbo5sx6CxVZ&gclid=CjwKCAjw7p_UBhBlEiwAhpIs7-jRY2A8gzezdp9urdeC9pThYmHdAvvXzu80y6VfFjMnnQ45e31TeBoCgtAQAvD_BwE" },
   { name: "Everest Clinic", src: everest },
   { name: "Macquarie Chiropractic", src: macquarie },
   { name: "I-Health", src: ihealth },
@@ -19,9 +19,9 @@ const firstRowLogos = [
 
 const secondRowLogos = [
   { name: "Be TCM Clinic", src: beTcm },
-  { name: "myDNA", src: myDnaAsset.url },
-  { name: "Partner", src: partnerTealC.url },
-  { name: "123 S.G.", src: partner123sg.url },
+  { name: "myDNA", src: myDna },
+  { name: "Partner", src: partnerTealC },
+  { name: "123 S.G.", src: partner123sg },
 ];
 
 const LogoCell = ({ logo }: { logo: { name: string; src: string; href?: string } }) => {
