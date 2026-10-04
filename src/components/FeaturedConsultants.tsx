@@ -18,12 +18,12 @@ export const FeaturedConsultants = () => {
         </div>
 
         {/* CTA — I Need Help */}
-        <div className="max-w-md mx-auto px-2 sm:px-0 flex justify-center">
+        <div className="flex justify-center">
           <Button
-            className="w-[80%] sm:w-[70%] h-12 justify-center gap-2 rounded-full bg-gradient-to-r from-[#0E9AAB] via-[#0C8A99] to-[#0E9AAB] hover:from-[#0B8797] hover:via-[#097A88] hover:to-[#0B8797] text-white font-bold text-base tracking-wide shadow-[0_6px_20px_rgba(14,154,171,0.45)] hover:shadow-[0_10px_28px_rgba(14,154,171,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.02] active:scale-[0.97] ring-2 ring-white/30"
+            className="h-10 px-6 justify-center gap-2 rounded-full bg-gradient-to-r from-[#F97316] to-[#EA580C] hover:from-[#EA580C] hover:to-[#DC5A0A] text-white font-semibold text-sm tracking-wide shadow-[0_4px_14px_rgba(249,115,22,0.4)] hover:shadow-[0_6px_18px_rgba(249,115,22,0.5)] transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.97]"
             onClick={() => navigate("/organization/nymg")}
           >
-            <HelpCircle className="h-5 w-5 shrink-0" />
+            <HelpCircle className="h-4 w-4 shrink-0" />
             {t("featuredConsultants.viewManagedCare") || "I Need Help"}
           </Button>
         </div>
