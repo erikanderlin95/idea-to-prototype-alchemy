@@ -23,8 +23,11 @@ const Index = () => {
       <Navbar onRestartTour={startOnboarding} />
       <main>
         <Hero />
+        <div className="border-t border-border/60" />
         <MarketplaceSection defaultCategory={defaultCategory} />
+        <div className="border-t border-border/60" />
         <FeaturedConsultants />
+        <div className="border-t border-border/60" />
         <LaunchPartners />
 
         <section className="container px-4 md:px-6 pt-4 pb-10 md:pb-14">

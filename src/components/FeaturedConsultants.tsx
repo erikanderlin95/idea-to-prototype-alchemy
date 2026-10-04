@@ -8,15 +8,15 @@ export const FeaturedConsultants = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="managed-care" className="py-2 px-4 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+    <section id="managed-care" className="py-2 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
         {/* CTA — I Need Help */}
         <div className="flex justify-center">
           <Button
-            className="h-10 px-6 justify-center gap-2 rounded-full bg-[#C65D16] hover:bg-[#B04F0F] text-white font-semibold text-sm tracking-wide shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-all duration-300 active:scale-[0.97]"
+            className="h-10 px-6 justify-center gap-2 rounded-lg bg-[#F59E0B] hover:bg-[#E08E09] text-[#1F2937] font-semibold text-sm tracking-wide shadow-[0_1px_4px_rgba(0,0,0,0.12)] transition-all duration-300 active:scale-[0.97]"
             onClick={() => navigate("/organization/nymg")}
           >
-            <HelpCircle className="h-4 w-4 shrink-0 text-white" />
+            <HelpCircle className="h-4 w-4 shrink-0 text-[#1F2937]" />
             {t("featuredConsultants.viewManagedCare") || "I Need Help"}
           </Button>
         </div>
