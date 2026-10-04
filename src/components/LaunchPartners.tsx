@@ -9,7 +9,9 @@ import partnerTealC from "@/assets/partners/partner-teal-c.jpg";
 import partner123sg from "@/assets/partners/partner-123sg.jpg";
 import hovicare from "@/assets/partners/hovicare-logo.jpg";
 
-const firstRowLogos = [
+type PartnerLogo = { name: string; src: string; href?: string; size?: "small" | "large" };
+
+const firstRowLogos: PartnerLogo[] = [
   { name: "Hovi Care", src: hovicare, href: "https://hovicare.sg/elderly-care-services/home-care-services/?gad_source=1&gad_campaignid=23448463320&gbraid=0AAAAADJrQKbzI7c5qY_RBIgbo5sx6CxVZ&gclid=CjwKCAjw7p_UBhBlEiwAhpIs7-jRY2A8gzezdp9urdeC9pThYmHdAvvXzu80y6VfFjMnnQ45e31TeBoCgtAQAvD_BwE" },
   { name: "Everest Clinic", src: everest, size: "small" },
   { name: "Macquarie Chiropractic", src: macquarie },
