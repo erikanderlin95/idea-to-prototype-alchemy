@@ -30,8 +30,7 @@ const Index = () => {
         <section className="container px-4 md:px-6 py-6 md:py-8">
           <div className="flex justify-center">
             <Button
-              size="lg"
-              className="bg-primary/90 hover:bg-primary/80 shadow-[0_1px_5px_rgba(0,0,0,0.08)]"
+              className="h-10 w-56 justify-center rounded-lg bg-primary/90 hover:bg-primary/80 text-sm font-semibold tracking-wide shadow-[0_1px_4px_rgba(0,0,0,0.12)] transition-all duration-300 active:scale-[0.97]"
               onClick={() => window.dispatchEvent(new Event("open-explore-sidebar"))}
             >
               {t("explore.more.title")}
