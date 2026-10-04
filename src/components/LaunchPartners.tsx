@@ -9,37 +9,50 @@ import partnerTealC from "@/assets/partners/partner-teal-c.jpg";
 import partner123sg from "@/assets/partners/partner-123sg.jpg";
 import hovicare from "@/assets/partners/hovicare-logo.jpg";
 
-const firstRowLogos = [
+type PartnerLogo = { name: string; src: string; href?: string; size?: "small" | "large" };
+
+const firstRowLogos: PartnerLogo[] = [
   { name: "Hovi Care", src: hovicare, href: "https://hovicare.sg/elderly-care-services/home-care-services/?gad_source=1&gad_campaignid=23448463320&gbraid=0AAAAADJrQKbzI7c5qY_RBIgbo5sx6CxVZ&gclid=CjwKCAjw7p_UBhBlEiwAhpIs7-jRY2A8gzezdp9urdeC9pThYmHdAvvXzu80y6VfFjMnnQ45e31TeBoCgtAQAvD_BwE" },
-  { name: "Everest Clinic", src: everest },
+  { name: "Everest Clinic", src: everest, size: "small" },
   { name: "Macquarie Chiropractic", src: macquarie },
-  { name: "I-Health", src: ihealth },
+  { name: "I-Health", src: ihealth, size: "large" },
   { name: "Staying Sane 101", src: stayingSane },
 ];
 
-const secondRowLogos = [
-  { name: "Be TCM Clinic", src: beTcm },
+const secondRowLogos: PartnerLogo[] = [
+  { name: "Be TCM Clinic", src: beTcm, size: "small" },
   { name: "myDNA", src: myDna },
   { name: "Partner", src: partnerTealC },
   { name: "123 S.G.", src: partner123sg },
 ];
 
-const LogoCell = ({ logo }: { logo: { name: string; src: string; href?: string } }) => {
+const LogoCell = ({ logo }: { logo: PartnerLogo }) => {
   const is123 = logo.name === "123 S.G.";
+  const small = logo.size === "small";
+  const large = logo.size === "large";
+  const widthClass = large
+    ? ""
+    : small
+    ? "max-w-[44px] sm:max-w-[68px] md:max-w-[88px]"
+    : is123
+    ? "max-w-[68px] sm:max-w-[100px] md:max-w-[132px]"
+    : "max-w-[54px] sm:max-w-[84px] md:max-w-[108px]";
+  const heightClass = large
+    ? "h-[46px] sm:h-[54px] md:h-[62px]"
+    : small
+    ? "h-[36px] sm:h-[40px] md:h-[44px]"
+    : "";
+  const cellHeight = large ? "h-[46px] sm:h-[54px] md:h-[62px]" : "h-[40px] sm:h-[46px] md:h-[52px]";
   const img = (
     <img
       src={logo.src}
       alt={logo.name}
       loading="lazy"
-      className={`max-h-full w-auto object-contain ${
-        is123
-          ? "max-w-[68px] sm:max-w-[100px] md:max-w-[132px]"
-          : "max-w-[54px] sm:max-w-[84px] md:max-w-[108px]"
-      }`}
+      className={`w-auto object-contain ${widthClass} ${heightClass ? `${heightClass} max-h-none` : "max-h-full"}`}
     />
   );
   return (
-    <div className="flex items-center justify-center h-[40px] sm:h-[46px] md:h-[52px]">
+    <div className={`flex items-center justify-center ${cellHeight}`}>
       {logo.href ? (
         <a
           href={logo.href}
