@@ -28,7 +28,7 @@ export const ConnectVia = () => {
               src={sgimed}
               alt="SGiMED"
               loading="lazy"
-              className="h-11 sm:h-13 md:h-14 w-auto object-contain rounded-md"
+              className="h-11 sm:h-12 md:h-14 w-auto object-contain rounded-md"
             />
           </a>
           <Dot />
