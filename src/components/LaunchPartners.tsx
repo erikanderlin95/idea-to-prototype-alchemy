@@ -1,7 +1,7 @@
 import azaas from "@/assets/partners/azaas.jpg";
 import everest from "@/assets/partners/everest-clinic.jpg";
-import macquarie from "@/assets/partners/macquarie.jpg";
-import ihealth from "@/assets/partners/ihealth.jpg";
+import macquarie from "@/assets/partners/macquarie.png";
+import ihealth from "@/assets/partners/ihealth.png";
 import stayingSane from "@/assets/partners/staying-sane.jpg";
 import beTcm from "@/assets/partners/be-tcm.jpg";
 import myDna from "@/assets/partners/mydna.png";
@@ -33,13 +33,13 @@ const LogoCell = ({ logo }: { logo: { name: string; src: string; href?: string }
       loading="lazy"
       className={`max-h-full w-auto object-contain ${
         is123
-          ? "max-w-[80px] sm:max-w-[120px] md:max-w-[160px]"
-          : "max-w-[64px] sm:max-w-[100px] md:max-w-[130px]"
+          ? "max-w-[68px] sm:max-w-[100px] md:max-w-[132px]"
+          : "max-w-[54px] sm:max-w-[84px] md:max-w-[108px]"
       }`}
     />
   );
   return (
-    <div className="flex items-center justify-center h-[50px] sm:h-[58px] md:h-[66px]">
+    <div className="flex items-center justify-center h-[40px] sm:h-[46px] md:h-[52px]">
       {logo.href ? (
         <a
           href={logo.href}
