@@ -8,22 +8,15 @@ export const FeaturedConsultants = () => {
   const navigate = useNavigate();
 
   return (
-    <section id="managed-care" className="py-6 px-4 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
+    <section id="managed-care" className="py-2 px-4 bg-gradient-to-br from-primary/5 via-background to-secondary/5">
       <div className="max-w-6xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-5">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-1">
-            {t("featuredConsultants.title")}
-          </h2>
-        </div>
-
         {/* CTA — I Need Help */}
         <div className="flex justify-center">
           <Button
-            className="h-10 px-6 justify-center gap-2 rounded-full bg-gradient-to-r from-[#FDBA74] to-[#FB923C] hover:from-[#FB923C] hover:to-[#F97316] text-white font-semibold text-sm tracking-wide shadow-[0_4px_14px_rgba(251,146,60,0.4)] hover:shadow-[0_6px_18px_rgba(251,146,60,0.5)] transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.97]"
+            className="h-10 px-6 justify-center gap-2 rounded-full bg-[#C65D16] hover:bg-[#B04F0F] text-white font-semibold text-sm tracking-wide shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition-all duration-300 active:scale-[0.97]"
             onClick={() => navigate("/organization/nymg")}
           >
-            <HelpCircle className="h-4 w-4 shrink-0" />
+            <HelpCircle className="h-4 w-4 shrink-0 text-white" />
             {t("featuredConsultants.viewManagedCare") || "I Need Help"}
           </Button>
         </div>
