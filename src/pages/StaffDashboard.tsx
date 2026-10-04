@@ -12,19 +12,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { toast } from "sonner";
-import { 
-  Users, 
-  Clock, 
-  CheckCircle2, 
-  UserCheck, 
-  Bell, 
-  TrendingUp,
-  Activity,
-  PhoneCall,
-  MessageSquare,
-  XCircle,
-  Trash2
-} from "lucide-react";
+import { Users, Clock, CheckCircle2, UserCheck, Bell, TrendingUp, Activity, PhoneCall, XCircle, Trash2 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 interface QueueEntry {
   id: string;
@@ -604,7 +593,7 @@ export default function StaffDashboard() {
                               size="sm"
                               onClick={() => setSelectedPatient(entry)}
                             >
-                              <MessageSquare className="h-4 w-4 mr-2" />
+                              <WhatsAppIcon className="h-4 w-4 mr-2 text-primary-foreground" />
                               Notify
                             </Button>
                           </DialogTrigger>

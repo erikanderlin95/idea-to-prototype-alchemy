@@ -1,7 +1,8 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MessageSquare, Calendar, Bell, BarChart3, MessageCircle, Zap, Database, Webhook, Shield, Settings } from "lucide-react";
+import { Calendar, Bell, BarChart3, Zap, Database, Webhook, Shield, Settings } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { ChatbotIcon } from "@/components/icons/FeatureIcons";
 
 export const MyClynicQStaffPanel = () => {
@@ -56,7 +57,7 @@ export const MyClynicQStaffPanel = () => {
                 description="Post-booking, pre-visit, and follow-up messages"
               />
               <CapabilityItem
-                icon={<MessageSquare className="h-4 w-4" />}
+                icon={<WhatsAppIcon className="h-4 w-4" />}
                 title="24/7 Chat Support"
                 description="Instant responses via WhatsApp, SMS, or web"
               />
@@ -106,7 +107,7 @@ export const MyClynicQStaffPanel = () => {
           <div className="p-4 rounded-lg bg-gradient-to-br from-[#25D366]/5 to-background border border-[#25D366]/20 shadow-sm hover:shadow-md transition-shadow group">
             <div className="flex items-center gap-2 mb-2">
               <div className="h-5 w-5 rounded-md bg-[#25D366]/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                <MessageCircle className="h-3 w-3 text-[#25D366]" />
+                <WhatsAppIcon className="h-3 w-3 text-[#25D366]" />
               </div>
               <h5 className="font-semibold text-sm">Channels</h5>
             </div>

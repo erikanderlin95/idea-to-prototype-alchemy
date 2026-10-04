@@ -5,7 +5,8 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ManagedCareModal } from "@/components/ManagedCareModal";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, Info, ChevronRight } from "lucide-react";
+import { Info, ChevronRight } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { useNavigate } from "react-router-dom";
 import aellanPhoto from "@/assets/aellan-photo.jpg";
 import erikaPhotoAsset from "@/assets/erika-photo.jpg.asset.json";
@@ -103,7 +104,7 @@ const OrganizationProfile = () => {
                 className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-[#25D366] hover:bg-[#128C7E] text-white transition-all active:scale-[0.97] shadow-[0_2px_8px_rgba(37,211,102,0.25)] shrink-0"
                 aria-label={t("org.contactCoordinator")}
               >
-                <MessageCircle className="h-5 w-5" />
+                <WhatsAppIcon className="text-white h-5 w-5" />
               </Button>
             </div>
           </div>
@@ -151,7 +152,7 @@ const OrganizationProfile = () => {
                 className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-[#25D366] hover:bg-[#128C7E] text-white transition-all active:scale-[0.97] shadow-[0_2px_8px_rgba(37,211,102,0.25)] shrink-0"
                 aria-label="WhatsApp Erika"
               >
-                <MessageCircle className="h-5 w-5" />
+                <WhatsAppIcon className="text-white h-5 w-5" />
               </a>
             </div>
           </div>
@@ -199,7 +200,7 @@ const OrganizationProfile = () => {
                 className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-[#25D366] hover:bg-[#128C7E] text-white transition-all active:scale-[0.97] shadow-[0_2px_8px_rgba(37,211,102,0.25)] shrink-0"
                 aria-label="WhatsApp Aayden Ng"
               >
-                <MessageCircle className="h-5 w-5" />
+                <WhatsAppIcon className="text-white h-5 w-5" />
               </a>
             </div>
 

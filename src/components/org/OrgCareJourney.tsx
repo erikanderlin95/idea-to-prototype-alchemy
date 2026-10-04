@@ -1,4 +1,5 @@
-import { ClipboardList, UserCheck, MessageCircle, Clock } from "lucide-react";
+import { ClipboardList, UserCheck, Clock } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export const OrgCareJourney = () => {
@@ -21,7 +22,7 @@ export const OrgCareJourney = () => {
             <div className="space-y-2.5">
               <JourneyStep icon={<ClipboardList className="h-4 w-4" />} text={t("org.intakeStep1")} />
               <JourneyStep icon={<UserCheck className="h-4 w-4" />} text={t("org.intakeStep2")} />
-              <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text={t("org.intakeStep3")} />
+              <JourneyStep icon={<WhatsAppIcon className="h-4 w-4" />} text={t("org.intakeStep3")} />
             </div>
 
             <p className="mt-2 text-[15px] leading-relaxed text-[#4A5D6E]">

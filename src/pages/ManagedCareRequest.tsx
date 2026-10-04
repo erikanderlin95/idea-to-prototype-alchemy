@@ -10,7 +10,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Shield, ArrowLeft, CheckCircle2, MessageCircle } from "lucide-react";
+import { Shield, ArrowLeft, CheckCircle2 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
 import { toast } from "sonner";
 
@@ -179,7 +180,7 @@ const ManagedCareRequest = () => {
                   window.open(`https://wa.me/?text=${message}`, "_blank");
                 }}
               >
-                <MessageCircle className="mr-2 h-5 w-5" />
+                <WhatsAppIcon className="mr-2 h-5 w-5 text-primary-foreground" />
                 Chat with Care Coordinator
               </Button>
               <p className="text-xs text-muted-foreground pt-2">{NMG_ATTRIBUTION_TAG}</p>

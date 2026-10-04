@@ -7,18 +7,8 @@ import { Footer } from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  User,
-  ArrowLeft,
-  MessageCircle,
-  Briefcase,
-  Users,
-  Building2,
-  CheckCircle,
-  Star,
-  MapPin,
-  Shield,
-} from "lucide-react";
+import { User, ArrowLeft, Briefcase, Users, Building2, CheckCircle, Star, MapPin, Shield } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { ManagedCareModal } from "@/components/ManagedCareModal";
 
 interface Consultant {

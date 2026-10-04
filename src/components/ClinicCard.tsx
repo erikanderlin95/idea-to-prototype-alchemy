@@ -7,7 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
-import { MapPin, Clock, Users, Star, CheckCircle, Phone, AlertTriangle, Copy, Calendar, Shield, MessageCircle, ExternalLink } from "lucide-react";
+import { MapPin, Clock, Users, Star, CheckCircle, Phone, AlertTriangle, Copy, Calendar, Shield, ExternalLink } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
@@ -179,7 +180,6 @@ export const ClinicCard = ({
     }
   }, [id]);
 
-
   useEffect(() => {
     if (id) {
       supabase.from("clinics").select("booking_url, phone").eq("id", id).single().then(({ data }) => {
@@ -216,7 +216,6 @@ export const ClinicCard = ({
     } catch (err) { console.warn("checkQueueStatus exception", err); }
   };
 
-
   const handleCancelQueue = (e: React.MouseEvent) => {
     e.stopPropagation();
     if (!myQueueEntry) return;
@@ -245,9 +244,6 @@ export const ClinicCard = ({
       throw error;
     } finally { setIsLoading(false); }
   };
-
-
-
 
   const handleJoinQueue = async (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -322,7 +318,6 @@ export const ClinicCard = ({
         }
         return;
       }
-
 
       const createdEntry = response.entry;
       localStorage.setItem(`queue_mobile_${id}`, sanitizedMobile);
@@ -675,7 +670,7 @@ export const ClinicCard = ({
                   <>
                     {clinicPhone && name !== "Harmony TCM Centre" && (
                       <Button variant={bookingBtnVariant} className={bookingBtnClass} disabled={!isOpen} onClick={(e) => openLead(e, true)}>
-                        <MessageCircle className="mr-1.5 h-3.5 w-3.5" strokeWidth={3} />
+                        <WhatsAppIcon className="mr-1.5 h-3.5 w-3.5" />
                         {t("clinicCard.bookWhatsApp")}
                       </Button>
                     )}
@@ -991,7 +986,7 @@ export const ClinicCard = ({
                 window.open(`https://wa.me/?text=${message}`, "_blank");
               }}
             >
-              <MessageCircle className="mr-2 h-4 w-4" />
+              <WhatsAppIcon className="mr-2 h-4 w-4 text-primary-foreground" />
               Chat with Care Coordinator
             </Button>
             <p className="text-xs text-muted-foreground">{NMG_ATTRIBUTION_TAG}</p>

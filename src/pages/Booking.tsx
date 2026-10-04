@@ -4,7 +4,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { Calendar, MessageCircle, Copy, ArrowLeft } from "lucide-react";
+import { Calendar, Copy, ArrowLeft } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { isManagedCareType } from "@/lib/pathwayUtils";
 import { toast } from "sonner";
 
@@ -108,7 +109,7 @@ const Booking = () => {
 
             {clinic.phone && (
               <Button onClick={handleContactClinic} variant="outline" size="lg" className="w-full text-sm h-12">
-                <MessageCircle className="mr-2 h-5 w-5" />
+                <WhatsAppIcon className="mr-2 h-5 w-5" />
                 Contact via WhatsApp
               </Button>
             )}

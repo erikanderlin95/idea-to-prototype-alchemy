@@ -6,7 +6,8 @@ import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Shield, CheckCircle2, MessageCircle } from "lucide-react";
+import { Shield, CheckCircle2 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
@@ -169,7 +170,7 @@ export const ManagedCareModal = ({
                 window.open(`https://wa.me/?text=${message}`, "_blank");
               }}
             >
-              <MessageCircle className="mr-2 h-4 w-4" />
+              <WhatsAppIcon className="mr-2 h-4 w-4 text-primary-foreground" />
               Chat with Care Coordinator
             </Button>
             <p className="text-xs text-muted-foreground">{NMG_ATTRIBUTION_TAG}</p>

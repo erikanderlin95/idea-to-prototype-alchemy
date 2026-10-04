@@ -1,4 +1,5 @@
-import { ClipboardList, UserCheck, MessageCircle } from "lucide-react";
+import { ClipboardList, UserCheck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -23,7 +24,7 @@ export const SHACareJourney = ({ onStartIntake }: SHACareJourneyProps) => {
 
             <div className="space-y-2.5">
               <JourneyStep icon={<ClipboardList className="h-4 w-4" />} text={t("sha.journeyStep1")} />
-              <JourneyStep icon={<MessageCircle className="h-4 w-4" />} text={t("sha.journeyStep2")} />
+              <JourneyStep icon={<WhatsAppIcon className="h-4 w-4" />} text={t("sha.journeyStep2")} />
               <JourneyStep icon={<UserCheck className="h-4 w-4" />} text={t("sha.journeyStep3")} />
             </div>
 

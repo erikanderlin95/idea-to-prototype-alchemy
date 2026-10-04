@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
-import { CheckCircle, MessageCircle, Copy, ClipboardList } from "lucide-react";
+import { CheckCircle, Copy, ClipboardList } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 
@@ -246,7 +247,7 @@ export const ServiceIntakeModal = ({
               className="w-full bg-gradient-to-r from-primary to-accent text-primary-foreground font-bold h-10"
               onClick={handleWhatsApp}
             >
-              <MessageCircle className="mr-1.5 h-4 w-4" />
+              <WhatsAppIcon className="mr-1.5 h-4 w-4 text-primary-foreground" />
               Continue via WhatsApp
             </Button>
           </div>

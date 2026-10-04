@@ -1,5 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Building2, ClipboardList, UserCheck, MessageCircle, ChevronRight } from "lucide-react";
+import { Building2, ClipboardList, UserCheck, ChevronRight } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import healthcareConsultation from "@/assets/nymg-photo1.jpg";
 import healthcareClinic from "@/assets/nymg-photo2.jpg";
 import healthcareCoordination from "@/assets/nymg-photo3.jpg";
@@ -55,7 +56,7 @@ export const OrgHero = ({ onStartIntake }: OrgHeroProps) => {
             <ChevronRight className="h-3.5 w-3.5 md:h-4 md:w-4 text-[#0E9AAB]/50 mx-0.5 md:mx-1 flex-shrink-0" />
             <div className="flex items-center gap-1.5 rounded-lg bg-[#E6F7FA] px-2.5 py-1.5 md:px-3 md:py-2 hover:bg-[#D4F1F5] transition-colors duration-200">
               <div className="w-5 h-5 md:w-6 md:h-6 rounded-full bg-[#18B7C9]/25 flex items-center justify-center text-[#0E9AAB]">
-                <MessageCircle className="h-2.5 w-2.5 md:h-3 md:w-3" />
+                <WhatsAppIcon className="h-2.5 w-2.5 md:h-3 md:w-3" />
               </div>
               <span className="text-[13px] md:text-[15px] font-bold text-[#0D2E4A]">{t("org.weFollowUp")}</span>
             </div>
