@@ -19,14 +19,14 @@ const firstRowLogos: PartnerLogo[] = [
   { name: "Staying Sane 101", src: stayingSane },
 ];
 
-const secondRowLogos = [
+const secondRowLogos: PartnerLogo[] = [
   { name: "Be TCM Clinic", src: beTcm, size: "small" },
   { name: "myDNA", src: myDna },
   { name: "Partner", src: partnerTealC },
   { name: "123 S.G.", src: partner123sg },
 ];
 
-const LogoCell = ({ logo }: { logo: { name: string; src: string; href?: string; size?: "small" | "large" } }) => {
+const LogoCell = ({ logo }: { logo: PartnerLogo }) => {
   const is123 = logo.name === "123 S.G.";
   const small = logo.size === "small";
   const large = logo.size === "large";
