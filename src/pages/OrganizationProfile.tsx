@@ -52,7 +52,7 @@ const OrganizationProfile = () => {
       <section className="relative pt-20 pb-6 px-4 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-[#EDF3F8] via-white to-white" />
         <div className="max-w-3xl mx-auto text-center relative">
-          <h1 className="text-3xl md:text-4xl font-bold text-[#0D2E4A] tracking-tight">
+          <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-[#0D2E4A] tracking-tight">
             {t("org.hereToHelp")}
           </h1>
         </div>
