@@ -1,4 +1,5 @@
-import { ClipboardList, UserCheck, MessageCircle } from "lucide-react";
+import { ClipboardList, UserCheck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 export const OrgHowItWorks = () => {
@@ -7,7 +8,7 @@ export const OrgHowItWorks = () => {
   const STEPS = [
     { icon: ClipboardList, titleKey: "org.howStep1", descKey: "org.howStep1Desc" },
     { icon: UserCheck, titleKey: "org.howStep2", descKey: "org.howStep2Desc" },
-    { icon: MessageCircle, titleKey: "org.howStep3", descKey: "org.howStep3Desc" },
+    { icon: WhatsAppIcon, titleKey: "org.howStep3", descKey: "org.howStep3Desc" },
   ];
 
   return (

@@ -2,10 +2,8 @@ import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ServiceIntakeModal } from "@/components/ServiceIntakeModal";
-import {
-  Heart, Flower2, Shield, Users, ClipboardList, UserCheck, MessageCircle,
-  ChevronRight, MapPin, Clock, Phone, User, Sparkles, HandHeart, Target
-} from "lucide-react";
+import { Heart, Flower2, Shield, Users, ClipboardList, UserCheck, ChevronRight, MapPin, Clock, Phone, User, Sparkles, HandHeart, Target } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 import nvGraceImg from "@/assets/nv-grace.jpg";
 import nvLongevityImg from "@/assets/nv-longevity.jpg";

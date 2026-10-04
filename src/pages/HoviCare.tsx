@@ -1,7 +1,8 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { MessageCircle, HeartHandshake, Users, Sparkles } from "lucide-react";
+import { HeartHandshake, Users, Sparkles } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 import hovicareLogo from "@/assets/partners/hovicare-logo.jpg.asset.json";
 import photoHero from "@/assets/hovicare/hovicare-1.jpg.asset.json";
@@ -51,7 +52,7 @@ const HoviCare = () => {
                 className="rounded-full px-7 bg-[#2B7BB0] hover:bg-[#24688f] text-white shadow-md hover:shadow-lg transition-all gap-2"
               >
                 <a href={WHATSAPP} target="_blank" rel="noopener noreferrer">
-                  <MessageCircle className="h-4 w-4" />
+                  <WhatsAppIcon className="text-white h-4 w-4" />
                   Contact Hovi Care
                 </a>
               </Button>
@@ -160,7 +161,7 @@ const HoviCare = () => {
             className="rounded-full px-7 bg-[#2B7BB0] hover:bg-[#24688f] text-white shadow-md hover:shadow-lg transition-all gap-2"
           >
             <a href={WHATSAPP} target="_blank" rel="noopener noreferrer">
-              <MessageCircle className="h-4 w-4" />
+              <WhatsAppIcon className="text-white h-4 w-4" />
               Contact Hovi Care on WhatsApp
             </a>
           </Button>

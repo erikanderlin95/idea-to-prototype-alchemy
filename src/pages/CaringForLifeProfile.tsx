@@ -1,9 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import {
-  Users, MessageCircle,
-  ChevronRight, Heart, Lightbulb, HandHeart, ShieldCheck, BookOpen, Phone,
-} from "lucide-react";
+import { Users, ChevronRight, Heart, Lightbulb, HandHeart, ShieldCheck, BookOpen, Phone } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 
 import cflLogo from "@/assets/caring-for-life-logo.jpg";
 import alexYeo from "@/assets/alex-yeo.jpg";
@@ -125,8 +123,6 @@ const CaringForLifeProfile = () => {
         </div>
       </section>
 
-
-
       {/* What We Offer */}
       <section className="py-6 px-3" style={{ background: CFL.bgSofter }}>
         <div className="max-w-6xl mx-auto space-y-6">
@@ -204,7 +200,7 @@ const CaringForLifeProfile = () => {
                 className="mt-3 inline-flex items-center h-9 px-6 text-[15px] rounded-full text-white active:scale-[0.96] transition-all shadow-md gap-2 font-semibold"
                 style={{ background: `linear-gradient(to right, ${CFL.primary}, ${CFL.primaryDark})`, boxShadow: `0 4px 12px ${CFL.primary}4d` }}
               >
-                <MessageCircle className="h-4 w-4" />
+                <WhatsAppIcon className="text-white h-4 w-4" />
                 WhatsApp Alex
               </a>
 

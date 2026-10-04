@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { User, MessageCircle } from "lucide-react";
+import { User } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { useLanguage } from "@/contexts/LanguageContext";
 import aellanPhoto from "@/assets/aellan-photo.jpg";
 
@@ -81,7 +82,7 @@ export const OrgConciergeTeam = ({ concierges, loading, onConnect }: Props) => {
                       className="h-7 px-3.5 text-[14px] rounded-full bg-[#0E9AAB] hover:bg-[#0C8595] text-white active:scale-[0.96] transition-all shadow-sm gap-1"
                       onClick={onConnect}
                     >
-                      <MessageCircle className="h-3 w-3" />
+                      <WhatsAppIcon className="text-white h-3 w-3" />
                       {t("org.start")}
                     </Button>
                   </div>

@@ -2,10 +2,8 @@ import { useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ServiceIntakeModal } from "@/components/ServiceIntakeModal";
-import {
-  Mic, Presentation, Award, Users, ClipboardList, UserCheck, MessageCircle,
-  ChevronRight, Heart, Lightbulb, Target, Sparkles, HandHeart, Clock
-} from "lucide-react";
+import { Mic, Presentation, Award, Users, ClipboardList, UserCheck, ChevronRight, Heart, Lightbulb, Target, Sparkles, HandHeart, Clock } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -43,7 +41,6 @@ const SpeakerProfile = () => {
                   Ouch Pte Ltd
                 </h1>
               </div>
-
 
               <div className="flex items-center gap-0 pt-1 flex-wrap gap-y-1.5">
                 <div className="flex items-center gap-1.5 rounded-lg bg-[#FFF3E0] px-2.5 py-1.5 md:px-3 md:py-2">
@@ -176,7 +173,7 @@ const SpeakerProfile = () => {
                   className="h-7 px-3.5 text-[14px] rounded-full bg-[#F57C00] hover:bg-[#E65100] text-white active:scale-[0.96] transition-all shadow-sm gap-1"
                   onClick={() => setShowIntakeModal(true)}
                 >
-                  <MessageCircle className="h-3 w-3" />
+                  <WhatsAppIcon className="text-white h-3 w-3" />
                   Connect
                 </Button>
               </div>

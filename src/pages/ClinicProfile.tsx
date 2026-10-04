@@ -11,7 +11,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill, ExternalLink, MessageCircle, Play, Smile, Leaf, Compass } from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Star, Users, Calendar, User, Shield, CheckCircle2, FileImage, ChevronDown, ChevronUp, Stethoscope, Syringe, HeartPulse, Brain, Activity, Scan, Baby, Pill, ExternalLink, Play, Smile, Leaf, Compass } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { cn } from "@/lib/utils";
 
 const DEMO_CLINIC_VIDEO = "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4";
@@ -178,7 +179,6 @@ const ClinicProfile = () => {
     const currentCategory = mapClinicTypeToCategory(clinic?.type);
     return CLYNICQ_CLINIC_TYPES.filter((c) => c.key !== currentCategory);
   })();
-
 
   const logExploreEvent = (event: "impression" | "click", chipKey: string, category: string) => {
     try {
@@ -548,7 +548,7 @@ const ClinicProfile = () => {
                   onClick={() => handleBookAppointment(true)}
                 >
                   <div className="p-2 sm:p-2.5 bg-gradient-to-br from-primary to-accent rounded-lg shadow-sm shrink-0">
-                    <MessageCircle className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
+                    <WhatsAppIcon className="h-4 w-4 sm:h-5 sm:w-5 text-primary-foreground" />
                   </div>
                   <span className="text-sm sm:text-base font-bold text-foreground">{t('clinicProfile.bookWhatsApp')}</span>
                 </button>
@@ -615,8 +615,6 @@ const ClinicProfile = () => {
               </div>
             </div>
           </section>
-
-
 
           {/* Tabs */}
           <Tabs defaultValue="doctors" className="w-full">

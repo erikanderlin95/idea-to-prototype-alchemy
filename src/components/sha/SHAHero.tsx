@@ -1,4 +1,5 @@
-import { Building2, Network, Stethoscope, Shield, ClipboardList, UserCheck, MessageCircle, ChevronRight, MapPin } from "lucide-react";
+import { Building2, Network, Stethoscope, Shield, ClipboardList, UserCheck, ChevronRight, MapPin } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { HeartPulse } from "lucide-react";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -43,7 +44,7 @@ export const SHAHero = () => {
               <ChevronRight className="h-4 w-4 text-[#4A7FC1]/40 mx-1 flex-shrink-0" />
               <div className="flex items-center gap-2 rounded-lg bg-[#E8EFF8] px-3 py-2">
                 <div className="w-6 h-6 rounded-full bg-[#4A7FC1]/20 flex items-center justify-center text-[#4A7FC1]">
-                  <MessageCircle className="h-3 w-3" />
+                  <WhatsAppIcon className="h-3 w-3" />
                 </div>
                 <span className="text-[15px] font-bold text-[#12385B]">{t("sha.whatsappContact")}</span>
               </div>
