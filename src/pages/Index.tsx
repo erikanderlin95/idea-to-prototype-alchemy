@@ -31,6 +31,7 @@ const Index = () => {
           <div className="flex justify-center">
             <Button
               size="lg"
+              className="bg-primary/90 hover:bg-primary/80 shadow-[0_1px_5px_rgba(0,0,0,0.08)]"
               onClick={() => window.dispatchEvent(new Event("open-explore-sidebar"))}
             >
               {t("explore.more.title")}
