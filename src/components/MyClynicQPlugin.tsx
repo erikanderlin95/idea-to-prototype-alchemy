@@ -1,5 +1,6 @@
 import { Badge } from "@/components/ui/badge";
-import { Bell, MessageSquare, CheckCircle, Sparkles, Radio, CalendarCheck } from "lucide-react";
+import { Bell, CheckCircle, Sparkles, Radio, CalendarCheck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { MyClynicQIcon } from "@/components/icons/MyClynicQIcon";
 
 export const MyClynicQPlugin = () => {
@@ -47,7 +48,7 @@ export const MyClynicQPlugin = () => {
                 desc="Receive confirmations and reminders for upcoming visits."
               />
               <FeatureBlock
-                icon={<MessageSquare className="h-4 w-4" />}
+                icon={<WhatsAppIcon className="h-4 w-4" />}
                 title="Simple Actions via Chat"
                 desc="Check-in, cancel, or contact the clinic directly through WhatsApp."
               />
