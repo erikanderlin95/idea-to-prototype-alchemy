@@ -9,7 +9,11 @@ interface LanguageContextType {
   t: (key: string) => string;
 }
 
-const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
+// Keep a single context instance across hot reloads to avoid "must be used within a LanguageProvider" errors
+const globalCtx = globalThis as unknown as { __clynicqLanguageContext?: React.Context<LanguageContextType | undefined> };
+const LanguageContext =
+  globalCtx.__clynicqLanguageContext ??
+  (globalCtx.__clynicqLanguageContext = createContext<LanguageContextType | undefined>(undefined));
 
 const translations: Record<Language, Record<string, string>> = {
   en: {
