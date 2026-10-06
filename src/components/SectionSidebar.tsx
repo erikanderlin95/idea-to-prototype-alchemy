@@ -65,8 +65,9 @@ export const SectionSidebar = () => {
 
   return (
     <Sheet open={open} onOpenChange={setOpen}>
-      <SheetTrigger asChild>
-        <div className="fixed top-1/2 right-0 z-40 animate-[sidebar-bob_3s_ease-in-out_infinite]">
+      {location.pathname !== "/" && location.pathname !== "/index" && (
+        <SheetTrigger asChild>
+          <div className="fixed top-1/2 right-0 z-40 animate-[sidebar-bob_3s_ease-in-out_infinite]">
           <button
             aria-label={t("sidebar.explore")}
             className={cn(
@@ -112,8 +113,9 @@ export const SectionSidebar = () => {
               }
             `}</style>
           </button>
-        </div>
-      </SheetTrigger>
+          </div>
+        </SheetTrigger>
+      )}
       <SheetContent side="right" className="w-80 p-0 border-l border-border/50">
         <div className="relative flex flex-col h-full overflow-hidden bg-background/95 backdrop-blur-xl">
           {/* Decorative glow */}
