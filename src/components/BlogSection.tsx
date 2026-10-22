@@ -108,14 +108,14 @@ export const BlogSection = () => {
             const open = openId === p.id;
             return (
               <article key={p.id} className="rounded-2xl border border-border bg-card overflow-hidden shadow-sm">
-                {!open && <img src={p.cover} alt={p.title} className="w-full aspect-[16/9] object-cover" loading="lazy" />}
-                <div className="p-4 md:p-6">
-                  <span className="inline-block text-[10.5px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2">
+                {!open && <img src={p.cover} alt={p.title} width={1200} height={640} className="w-full aspect-[16/9] object-cover object-center" loading="lazy" />}
+                <div className="p-3.5 md:p-6 space-y-1.5 md:space-y-0">
+                  <span className="inline-block text-[10.5px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary md:mb-2">
                     {t(`blog.cat.${p.category}`)}
                   </span>
-                  <h3 className="text-lg md:text-xl font-semibold text-foreground leading-snug mb-1">{p.title}</h3>
-                  <p className="text-xs text-muted-foreground mb-3">{p.author}</p>
-                  {!open && <p className="text-sm text-muted-foreground mb-3">{p.excerpt}</p>}
+                  <h3 className="text-base md:text-xl font-semibold text-foreground leading-snug line-clamp-2 md:line-clamp-none">{p.title}</h3>
+                  <p className="text-xs md:text-xs text-muted-foreground">{p.author}</p>
+                  {!open && <p className="text-sm text-muted-foreground line-clamp-2 md:line-clamp-none">{p.excerpt}</p>}
                   {open && (
                     <div
                       className="blog-prose text-sm md:text-[15px] text-foreground/90 leading-relaxed"
