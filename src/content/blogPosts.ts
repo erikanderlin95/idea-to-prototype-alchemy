@@ -158,7 +158,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt:
       "Looking for a walk-in clinic? Learn what to check before heading down, how clinic queues work and how to plan your visit.",
     image: walkInClinic,
-    imageAlt: "Patient checking queue information on a smartphone while seated in a bright clinic waiting area",
+    imageAlt: "Glass storefront of a medical clinic with an OPEN sign and the clinic's heart logo etched on the door",
     intro: [
       "Feeling unwell and thinking of visiting a clinic?",
       "Sometimes, making an appointment isn't practical. You might wake up with a fever, develop a sudden cough or simply need to see a doctor without planning days ahead.",
