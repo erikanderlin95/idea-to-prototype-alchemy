@@ -24,35 +24,37 @@ type BlogCardProps = {
 const BlogCard = ({ to, image, imageAlt, categoryKey, title, excerpt, imagePosition }: BlogCardProps) => {
   const { t } = useLanguage();
   return (
-  <Link
-    to={to}
-    className="group flex md:block rounded-xl md:rounded-2xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-md hover:border-primary/40 transition"
-  >
-    <img
-      src={image}
-      alt={imageAlt}
-      width={1200}
-      height={640}
-      loading="lazy"
-      className={cn(
-        "w-28 sm:w-32 md:w-full shrink-0 aspect-[4/3] md:aspect-[16/9] object-cover self-stretch md:self-auto",
-        imagePosition ?? "object-center"
-      )}
-    />
-    <div className="flex-1 min-w-0 p-2.5 md:p-5 flex flex-col gap-1 md:gap-1.5">
-      <span className="inline-block self-start text-[9.5px] md:text-[10.5px] font-bold uppercase tracking-wider px-1.5 md:px-2 py-0.5 rounded-full bg-primary/10 text-primary">
-        {categoryKey}
-      </span>
-      <h3 className="text-[13.5px] md:text-xl font-semibold text-foreground leading-snug line-clamp-2 md:line-clamp-none group-hover:text-primary transition-colors">
-        {title}
-      </h3>
-      <p className="text-xs md:text-sm text-muted-foreground line-clamp-2 md:line-clamp-none">{excerpt}</p>
-      <span className="inline-flex items-center gap-1 text-xs md:text-sm font-semibold text-primary mt-auto pt-0.5 md:pt-0">
-        {readLabel} <ArrowRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
-      </span>
-    </div>
-  </Link>
-);
+  return (
+    <Link
+      to={to}
+      className="group flex md:block rounded-xl md:rounded-2xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-md hover:border-primary/40 transition"
+    >
+      <img
+        src={image}
+        alt={imageAlt}
+        width={1200}
+        height={640}
+        loading="lazy"
+        className={cn(
+          "w-28 sm:w-32 md:w-full shrink-0 aspect-[4/3] md:aspect-[16/9] object-cover self-stretch md:self-auto",
+          imagePosition ?? "object-center"
+        )}
+      />
+      <div className="flex-1 min-w-0 p-2.5 md:p-5 flex flex-col gap-1 md:gap-1.5">
+        <span className="inline-block self-start text-[9.5px] md:text-[10.5px] font-bold uppercase tracking-wider px-1.5 md:px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+          {categoryKey}
+        </span>
+        <h3 className="text-[13.5px] md:text-xl font-semibold text-foreground leading-snug line-clamp-2 md:line-clamp-none group-hover:text-primary transition-colors">
+          {title}
+        </h3>
+        <p className="text-xs md:text-sm text-muted-foreground line-clamp-2 md:line-clamp-none">{excerpt}</p>
+        <span className="inline-flex items-center gap-1 text-xs md:text-sm font-semibold text-primary mt-auto pt-0.5 md:pt-0">
+          {t("blog.readArticle")} <ArrowRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
+        </span>
+      </div>
+    </Link>
+  );
+};
 
 export const BlogSection = () => {
   const { t, language } = useLanguage();
