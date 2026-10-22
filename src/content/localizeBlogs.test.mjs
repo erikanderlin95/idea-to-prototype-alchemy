@@ -1,6 +1,6 @@
 import { describe, expect, test } from "bun:test";
 import { blogArticles } from "./blogPosts.ts";
-import { localizeBlogArticle } from "./localizeBlogs.ts";
+import { localizeBlogArticle, localizeEyecare } from "./localizeBlogs.ts";
 import english from "./blogTranslations.en.json" with { type: "json" };
 import { blogTranslations } from "./blogTranslations.ts";
 
@@ -11,6 +11,13 @@ describe("Blog language selection", () => {
   });
 
   for (const language of ["en", "zh", "ms", "ta"]) {
+    test(`${language} eyecare articles never link to OneVision and resolve the internal eye-check reference`, () => {
+      const html = localizeEyecare((key) => blogTranslations[language][key] ?? key, {});
+      const destinations = [...html.matchAll(/href="([^"]+)"/g)].map((match) => match[1]);
+      expect(destinations.some((href) => new URL(href, "https://idea-to-prototype-alchemy.lovable.app").hostname.endsWith("onevision.com.sg"))).toBe(false);
+      expect(destinations).toContain("/blog/eye-health-guide-dr-philemon-huang#eye-check");
+      expect(html).toContain('id="eye-check"');
+    });
     test(`${language} includes every full-blog translation entry`, () => {
       const dictionary = blogTranslations[language];
       expect(Object.keys(dictionary).sort()).toEqual(Object.keys(english).sort());
