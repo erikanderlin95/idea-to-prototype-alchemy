@@ -56,7 +56,7 @@ export const BlogSection = () => {
     <section id="blog" className="py-8 md:py-12 border-t border-border/30">
       <div className="container px-4 md:px-6 max-w-3xl">
         <div className="text-center mb-4">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1" style={{ color: "hsl(180 60% 20%)" }}>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1" style={{ color: "#000000" }}>
             {t("blog.title")}
           </h2>
           <p className="text-sm text-muted-foreground">{t("blog.subtitle")}</p>
