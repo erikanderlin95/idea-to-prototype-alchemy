@@ -18,6 +18,7 @@ export type BlogArticle = {
   excerpt: string;
   image: string;
   imageAlt: string;
+  imagePosition?: string; // Tailwind object-position class, e.g. "object-[center_35%]" for portrait covers
   intro: string[];
   sections: ArticleSection[];
   cta: { text: string[]; button: string; href: string };
@@ -39,6 +40,7 @@ export const blogArticles: BlogArticle[] = [
       "From choosing the right type of care to checking clinic credentials, costs and appointment options, here's what to consider before your next visit.",
     image: chooseClinic,
     imageAlt: "Mother and daughter at home looking up clinic options on a mobile phone",
+    imagePosition: "object-[center_35%]",
     intro: [
       "Finding the right care shouldn't be complicated.",
       "When you're feeling unwell, dealing with an injury or looking for ongoing treatment, choosing a clinic isn't always as simple as picking the nearest one.",

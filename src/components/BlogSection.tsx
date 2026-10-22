@@ -90,12 +90,12 @@ export const BlogSection = () => {
                 to={`/blog/${a.slug}`}
                 className="block rounded-2xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-md hover:border-primary/40 transition"
               >
-                <img src={a.image} alt={a.imageAlt} width={1200} height={640} loading="lazy" className="w-full aspect-[16/9] object-cover object-center" />
-                <div className="p-3.5 md:p-6 space-y-1.5 md:space-y-0">
+                <img src={a.image} alt={a.imageAlt} width={1200} height={640} loading="lazy" className={cn("w-full aspect-[16/9] object-cover", a.imagePosition ?? "object-center")} />
+                <div className="p-3 md:p-6 space-y-1.5 md:space-y-0">
                   <span className="inline-block text-[10.5px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary md:mb-2">
                     {t(`blog.cat.${a.categoryKey}`)}
                   </span>
-                  <h3 className="text-base md:text-xl font-semibold text-foreground leading-snug line-clamp-2 md:line-clamp-none">{a.title}</h3>
+                  <h3 className="text-base md:text-xl font-semibold text-foreground leading-snug">{a.title}</h3>
                   <p className="text-sm text-muted-foreground line-clamp-2 md:line-clamp-none">{a.excerpt}</p>
                   <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary pt-1 md:pt-0">
                     {t("blog.readArticle")} <ArrowRight className="h-4 w-4" />
@@ -109,11 +109,11 @@ export const BlogSection = () => {
             return (
               <article key={p.id} className="rounded-2xl border border-border bg-card overflow-hidden shadow-sm">
                 {!open && <img src={p.cover} alt={p.title} width={1200} height={640} className="w-full aspect-[16/9] object-cover object-center" loading="lazy" />}
-                <div className="p-3.5 md:p-6 space-y-1.5 md:space-y-0">
+                <div className="p-3 md:p-6 space-y-1.5 md:space-y-0">
                   <span className="inline-block text-[10.5px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary md:mb-2">
                     {t(`blog.cat.${p.category}`)}
                   </span>
-                  <h3 className="text-base md:text-xl font-semibold text-foreground leading-snug line-clamp-2 md:line-clamp-none">{p.title}</h3>
+                  <h3 className="text-base md:text-xl font-semibold text-foreground leading-snug">{p.title}</h3>
                   <p className="text-xs text-muted-foreground">{p.author}</p>
                   {!open && <p className="text-sm text-muted-foreground line-clamp-2 md:line-clamp-none">{p.excerpt}</p>}
                   {open && (
