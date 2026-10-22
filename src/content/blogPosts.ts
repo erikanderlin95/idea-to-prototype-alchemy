@@ -28,7 +28,7 @@ const p = (text: string): ArticleBlock => ({ type: "p", text });
 export const blogArticles: BlogArticle[] = [
   {
     slug: "how-to-choose-a-clinic-singapore",
-    categoryKey: "guide",
+    categoryKey: "visit",
     title: "How to Choose the Right Clinic in Singapore: 7 Things to Consider",
     seoTitle: "How to Choose the Right Clinic in Singapore | ClynicQ",
     metaDescription:
