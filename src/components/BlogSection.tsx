@@ -11,6 +11,50 @@ type Category = "eyecare" | "guide" | "visit" | "tcm";
 
 const categories: ("all" | Category)[] = ["all", "visit", "tcm", "eyecare"];
 
+type BlogCardProps = {
+  to: string;
+  image: string;
+  imageAlt: string;
+  categoryKey: string;
+  title: string;
+  excerpt: string;
+  imagePosition?: string;
+};
+
+const BlogCard = ({ to, image, imageAlt, categoryKey, title, excerpt, imagePosition }: BlogCardProps) => {
+  const { t } = useLanguage();
+  return (
+    <Link
+      to={to}
+      className="group flex md:block rounded-xl md:rounded-2xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-md hover:border-primary/40 transition"
+    >
+      <img
+        src={image}
+        alt={imageAlt}
+        width={1200}
+        height={640}
+        loading="lazy"
+        className={cn(
+          "w-28 sm:w-32 md:w-full shrink-0 aspect-[4/3] md:aspect-[16/9] object-cover self-stretch md:self-auto",
+          imagePosition ?? "object-center"
+        )}
+      />
+      <div className="flex-1 min-w-0 p-2.5 md:p-5 flex flex-col gap-1 md:gap-1.5">
+        <span className="inline-block self-start text-[9.5px] md:text-[10.5px] font-bold uppercase tracking-wider px-1.5 md:px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+          {categoryKey}
+        </span>
+        <h3 className="text-[13.5px] md:text-xl font-semibold text-foreground leading-snug line-clamp-2 md:line-clamp-none group-hover:text-primary transition-colors">
+          {title}
+        </h3>
+        <p className="text-xs md:text-sm text-muted-foreground line-clamp-2 md:line-clamp-none">{excerpt}</p>
+        <span className="inline-flex items-center gap-1 text-xs md:text-sm font-semibold text-primary mt-auto pt-0.5 md:pt-0">
+          {t("blog.readArticle")} <ArrowRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
+        </span>
+      </div>
+    </Link>
+  );
+};
+
 export const BlogSection = () => {
   const { t, language } = useLanguage();
   const [cat, setCat] = useState<"all" | Category>("all");
@@ -44,46 +88,31 @@ export const BlogSection = () => {
           ))}
         </div>
 
-        <div className="space-y-3 md:space-y-4">
+        <div className="space-y-2.5 md:space-y-4">
           {list.map((source) => {
             const a = localizeBlogArticle(source, t);
             return (
-              <Link
+              <BlogCard
                 key={a.slug}
                 to={`/blog/${a.slug}`}
-                className="block rounded-2xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-md hover:border-primary/40 transition"
-              >
-                <img src={a.image} alt={a.imageAlt} width={1200} height={640} loading="lazy" className={cn("w-full aspect-[16/9] object-cover", a.imagePosition ?? "object-center")} />
-                <div className="p-3 md:p-6 space-y-1.5 md:space-y-0">
-                  <span className="inline-block text-[10.5px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary md:mb-2">
-                    {t(`blog.cat.${a.categoryKey}`)}
-                  </span>
-                  <h3 className="text-base md:text-xl font-semibold text-foreground leading-snug">{a.title}</h3>
-                  <p className="text-sm text-muted-foreground line-clamp-2 md:line-clamp-none">{a.excerpt}</p>
-                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary pt-1 md:pt-0">
-                    {t("blog.readArticle")} <ArrowRight className="h-4 w-4" />
-                  </span>
-                </div>
-              </Link>
+                image={a.image}
+                imageAlt={a.imageAlt}
+                categoryKey={t(`blog.cat.${a.categoryKey}`)}
+                title={a.title}
+                excerpt={a.excerpt}
+                imagePosition={a.imagePosition}
+              />
             );
           })}
           {showEyecare && (
-            <Link
+            <BlogCard
               to="/blog/eye-health-guide-dr-philemon-huang"
-              className="block rounded-2xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-md hover:border-primary/40 transition"
-            >
-              <img src={imgChoosing} alt={t("blog.eyecare.title")} width={1200} height={640} loading="lazy" className="w-full aspect-[16/9] object-cover object-center" />
-              <div className="p-3 md:p-6 space-y-1.5 md:space-y-0">
-                <span className="inline-block text-[10.5px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary md:mb-2">
-                  {t("blog.cat.eyecare")}
-                </span>
-                <h3 className="text-base md:text-xl font-semibold text-foreground leading-snug">{t("blog.eyecare.title")}</h3>
-                <p className="text-sm text-muted-foreground line-clamp-2 md:line-clamp-none">{t("blog.eyecare.excerpt")}</p>
-                <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary pt-1 md:pt-0">
-                  {t("blog.readArticle")} <ArrowRight className="h-4 w-4" />
-                </span>
-              </div>
-            </Link>
+              image={imgChoosing}
+              imageAlt={t("blog.eyecare.title")}
+              categoryKey={t("blog.cat.eyecare")}
+              title={t("blog.eyecare.title")}
+              excerpt={t("blog.eyecare.excerpt")}
+            />
           )}
         </div>
       </div>
