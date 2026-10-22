@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { BlogSection } from "@/components/BlogSection";
 import { WellnessTalks } from "@/components/WellnessTalks";
 
 const WellnessTalksPage = () => (
@@ -7,6 +8,7 @@ const WellnessTalksPage = () => (
     <Navbar />
     <main className="flex-1">
       <WellnessTalks />
+      <BlogSection />
     </main>
     <Footer />
   </div>
