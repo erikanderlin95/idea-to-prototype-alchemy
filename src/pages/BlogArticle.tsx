@@ -4,6 +4,7 @@ import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { getBlogArticle, blogArticles } from "@/content/blogPosts";
+import { localizeBlogArticle } from "@/content/localizeBlogs";
 import { useLanguage } from "@/contexts/LanguageContext";
 import NotFound from "./NotFound";
 
@@ -19,14 +20,16 @@ const setMeta = (attr: "name" | "property", key: string, content: string) => {
   }
   const prev = el.content;
   el.content = content;
-  return () => (created ? el!.remove() : (el!.content = prev));
+  const element = el;
+  return () => (created ? element.remove() : (element.content = prev));
 };
 
 const BlogArticlePage = () => {
   const { slug } = useParams();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const navigate = useNavigate();
-  const article = getBlogArticle(slug);
+  const source = getBlogArticle(slug);
+  const article = source ? localizeBlogArticle(source, t) : undefined;
 
   useEffect(() => {
     if (!article) return;
@@ -57,6 +60,7 @@ const BlogArticlePage = () => {
       "@type": "Article",
       headline: article.title,
       description: article.metaDescription,
+      inLanguage: language === "zh" ? "zh-Hans" : language,
       image: [image],
       mainEntityOfPage: url,
       author: { "@type": "Organization", name: "ClynicQ", url: SITE },
@@ -74,7 +78,7 @@ const BlogArticlePage = () => {
       canonical.remove();
       ld.remove();
     };
-  }, [article]);
+  }, [slug, language]);
 
   if (!article) return <NotFound />;
 
@@ -82,7 +86,7 @@ const BlogArticlePage = () => {
     <div className="min-h-screen bg-background flex flex-col">
       <Navbar />
       <main className="flex-1">
-        <article className="container px-4 md:px-6 max-w-2xl py-6 md:py-10">
+        <article lang={language === "zh" ? "zh-Hans" : language} className="container px-4 md:px-6 max-w-2xl py-6 md:py-10">
           <span className="block text-[11px] font-bold uppercase tracking-wider text-primary mb-2">
             {t(`blog.cat.${article.categoryKey}`)} · ClynicQ
           </span>
@@ -131,7 +135,7 @@ const BlogArticlePage = () => {
             {article.cta.text.map((x, i) => (
               <p key={x} className={i === 0 ? "font-semibold text-foreground mb-1" : "text-sm text-muted-foreground mb-4"}>{x}</p>
             ))}
-            <Button asChild>
+            <Button asChild className="h-auto min-h-10 max-w-full whitespace-normal break-words py-2">
               <Link
                 to={article.cta.href}
                 onClick={(e) => {
@@ -146,11 +150,12 @@ const BlogArticlePage = () => {
             </aside>
 
           {article.related && article.related.length > 0 && (
-            <nav aria-label="Related reads" className="mt-8">
-              <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-2">Related Reads</h2>
+            <nav aria-label={t("blog.related")} className="mt-8">
+              <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-2">{t("blog.related")}</h2>
               <ul className="space-y-2">
                 {article.related.map((rs) => {
-                  const r = blogArticles.find((a) => a.slug === rs);
+                  const relatedSource = blogArticles.find((a) => a.slug === rs);
+                  const r = relatedSource ? localizeBlogArticle(relatedSource, t) : undefined;
                   return r ? (
                     <li key={rs}>
                       <Link to={`/blog/${r.slug}`} className="text-primary font-medium hover:underline">{r.title}</Link>

@@ -1,5 +1,6 @@
 // Language context with translations - v2
 import React, { createContext, useContext, useState, useEffect } from "react";
+import { blogTranslations } from "@/content/blogTranslations";
 
 export type Language = "en" | "zh" | "ms" | "ta";
 
@@ -4092,7 +4093,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   };
 
   const t = (key: string): string => {
-    return translations[language][key] || translations["en"][key] || key;
+    return translations[language][key] || blogTranslations[language][key] || translations["en"][key] || blogTranslations.en[key] || key;
   };
 
   return (

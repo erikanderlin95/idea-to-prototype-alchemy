@@ -8,6 +8,7 @@ import myDna from "@/assets/partners/mydna.png";
 import partnerTealC from "@/assets/partners/partner-teal-c.jpg";
 import partner123sg from "@/assets/partners/partner-123sg.jpg";
 import hovicare from "@/assets/partners/hovicare-logo.jpg";
+import newPartner from "@/assets/partners/launch-partner-new.jpg.asset.json";
 
 type PartnerLogo = { name: string; src: string; href?: string; size?: "small" | "large" };
 
@@ -22,6 +23,7 @@ const firstRowLogos: PartnerLogo[] = [
 const secondRowLogos: PartnerLogo[] = [
   { name: "Be TCM Clinic", src: beTcm, size: "small" },
   { name: "myDNA", src: myDna },
+  { name: "Launch partner", src: newPartner.url },
   { name: "Partner", src: partnerTealC },
   { name: "123 S.G.", src: partner123sg },
 ];
@@ -109,8 +111,8 @@ export const LaunchPartners = () => {
             ))}
           </div>
 
-          {/* 4-logo row — original second row */}
-          <div className="grid grid-cols-4 gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-5 md:gap-x-6 md:gap-y-6 max-w-[360px] sm:max-w-[600px] md:max-w-[720px] mx-auto mt-3">
+          {/* Second partner row — same five-column spacing as the row above */}
+          <div className="grid grid-cols-5 gap-x-3 gap-y-5 sm:gap-x-5 sm:gap-y-5 md:gap-x-6 md:gap-y-6 max-w-[420px] sm:max-w-[720px] md:max-w-[880px] mx-auto mt-3">
             {secondRowLogos.map((logo) => (
               <LogoCell key={logo.name} logo={logo} />
             ))}

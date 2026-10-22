@@ -4,9 +4,9 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { blogArticles } from "@/content/blogPosts";
+import { localizeBlogArticle, localizeEyecare } from "@/content/localizeBlogs";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
-import { eyecareArticleHtml } from "@/content/eyecareArticle";
 import imgChoosing from "@/assets/blog/choosing_the_right_vision_correction_method.jpg";
 import imgLasik from "@/assets/blog/lasik_fixed_eyes_still_healthy.jpg";
 import imgNerve from "@/assets/blog/a3-03-glaucoma-optic-nerve-comparison.jpg";
@@ -40,20 +40,20 @@ const posts: BlogPost[] = [
     excerpt:
       "LASIK, SMILE Pro, TransPRK or ICL? An eye surgeon who had TransPRK himself explains how to choose, the myths he hears after surgery, and the eye check he recommends at 40.",
     cover: imgChoosing,
-    html: eyecareArticleHtml.replace(/__IMG_([a-z0-9_-]+)__/g, (_, k) => imageMap[k] ?? ""),
+    html: "",
   },
 ];
 
 const categories: ("all" | Category)[] = ["all", "visit", "tcm", "eyecare"];
 
 export const BlogSection = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [cat, setCat] = useState<"all" | Category>("all");
   const [openId, setOpenId] = useState<string | null>(null);
   const list = useMemo(() => posts.filter((p) => cat === "all" || p.category === cat), [cat]);
 
   return (
-    <section id="blog" className="py-8 md:py-12 border-t border-border/30">
+    <section id="blog" lang={language === "zh" ? "zh-Hans" : language} className="py-8 md:py-12 border-t border-border/30">
       <div className="container px-4 md:px-6 max-w-3xl">
         <div className="text-center mb-4">
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-1" style={{ color: "#000000" }}>
@@ -62,7 +62,7 @@ export const BlogSection = () => {
           <p className="text-sm text-muted-foreground">{t("blog.subtitle")}</p>
         </div>
 
-        <div className="flex justify-center gap-2 mb-5">
+        <div className="flex flex-wrap justify-center gap-2 mb-5">
           {categories.map((c) => (
             <button
               key={c}
@@ -82,7 +82,9 @@ export const BlogSection = () => {
         <div className="space-y-4">
           {blogArticles
             .filter((a) => cat === "all" || a.categoryKey === cat)
-            .map((a) => (
+            .map((source) => {
+              const a = localizeBlogArticle(source, t);
+              return (
               <Link
                 key={a.slug}
                 to={`/blog/${a.slug}`}
@@ -96,12 +98,13 @@ export const BlogSection = () => {
                   <h3 className="text-lg md:text-xl font-semibold text-foreground leading-snug mb-2">{a.title}</h3>
                   <p className="text-sm text-muted-foreground mb-3">{a.excerpt}</p>
                   <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary">
-                    Read Article <ArrowRight className="h-4 w-4" />
+                    {t("blog.readArticle")} <ArrowRight className="h-4 w-4" />
                   </span>
                 </div>
               </Link>
-            ))}
-          {list.map((p) => {
+            );})}
+          {list.map((source) => {
+            const p = { ...source, title: t("blog.eyecare.title"), author: t("blog.eyecare.author"), excerpt: t("blog.eyecare.excerpt"), html: localizeEyecare(t, imageMap) };
             const open = openId === p.id;
             return (
               <article key={p.id} className="rounded-2xl border border-border bg-card overflow-hidden shadow-sm">
