@@ -105,6 +105,12 @@ const BlogArticlePage = () => {
                   {s.blocks.map((b, i) =>
                     b.type === "p" ? (
                       <p key={i}>{b.text}</p>
+                    ) : b.type === "pLink" ? (
+                      <p key={i}>
+                        {b.pre}
+                        <Link to={b.href} className="text-primary font-medium hover:underline">{b.label}</Link>
+                        {b.post}
+                      </p>
                     ) : (
                       <ul key={i} className="list-disc pl-5 space-y-1.5">
                         {b.items.map((it) => (
