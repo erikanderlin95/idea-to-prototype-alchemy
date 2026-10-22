@@ -61,7 +61,6 @@ export const BlogSection = () => {
   const [cat, setCat] = useState<"all" | Category>("all");
   const list = useMemo(() => blogArticles.filter((a) => cat === "all" || a.categoryKey === cat), [cat]);
   const showEyecare = cat === "all" || cat === "eyecare";
-  const readLabel = t("blog.readArticle");
 
   return (
     <section id="blog" lang={language === "zh" ? "zh-Hans" : language} className="py-6 md:py-10 border-t border-border/30">
