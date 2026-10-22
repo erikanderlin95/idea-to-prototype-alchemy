@@ -8,5 +8,5 @@
 - [x] Enlarge the social icons and apply their brand colours.
 
 ## OneVision backlink cleanup
-- [ ] Remove OneVision website links and link-dependent wording from all three eyecare articles in four languages.
-- [ ] Verify attribution, clinical content, research references and existing navigation are preserved.
+- [x] Remove OneVision website links and link-dependent wording from all three eyecare articles in four languages.
+- [x] Verify attribution, clinical content, research references and existing navigation are preserved.
