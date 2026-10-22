@@ -269,7 +269,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt:
       "Thinking of trying TCM? Learn what happens at a first consultation, which treatments may be offered, how to check practitioner registration and what to consider before your visit.",
     image: tcmClinic,
-    imageAlt: "Traditional Chinese medicine clinic with a wooden herbal medicine cabinet, glass jars of dried herbs and acupuncture needles",
+    imageAlt: "Storefront of BE TCM Clinic with its logo and signboard on the wall, and the glass door lettered with physician Khor Tze Hsin's MOH-registered TCM credentials",
     intro: [
       "Thinking of trying Traditional Chinese Medicine (TCM) but not sure what to expect?",
       "Whether you're exploring TCM for general wellness or seeking advice about a particular health concern, visiting a TCM clinic for the first time can raise plenty of questions.",
