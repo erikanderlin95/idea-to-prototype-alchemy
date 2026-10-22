@@ -37,6 +37,7 @@ import HealthTools from "./pages/HealthTools";
 import SugarHabit from "./pages/SugarHabit";
 import Privacy from "./pages/Privacy";
 import NotFound from "./pages/NotFound";
+import BlogArticle from "./pages/BlogArticle";
 import WellnessTalksPage from "./pages/WellnessTalksPage";
 import BeyondClinicPage from "./pages/BeyondClinicPage";
 import ClinicOwnersPage from "./pages/ClinicOwnersPage";
@@ -97,6 +98,8 @@ const App = () => (
             <Route path="/myclynicq" element={<MyClynicQPage />} />
             <Route path="/about" element={<About />} />
             <Route path="/24-hour-clinics-singapore" element={<TwentyFourHourClinics />} />
+
+            <Route path="/blog/:slug" element={<BlogArticle />} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

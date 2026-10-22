@@ -12,3 +12,5 @@ Allow: /
 
 User-agent: *
 Allow: /
+
+Sitemap: https://idea-to-prototype-alchemy.lovable.app/sitemap.xml
