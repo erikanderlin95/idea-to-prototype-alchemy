@@ -12,7 +12,7 @@ import imgLasik from "@/assets/blog/lasik_fixed_eyes_still_healthy.jpg";
 import imgNerve from "@/assets/blog/a3-03-glaucoma-optic-nerve-comparison.jpg";
 import imgVision from "@/assets/blog/clear_view_vs_peripheral_vision_loss.jpg";
 
-type Category = "eyecare" | "guide";
+type Category = "eyecare" | "guide" | "visit";
 
 type BlogPost = {
   id: string;
@@ -44,7 +44,7 @@ const posts: BlogPost[] = [
   },
 ];
 
-const categories: ("all" | Category)[] = ["all", "guide", "eyecare"];
+const categories: ("all" | Category)[] = ["all", "guide", "visit", "eyecare"];
 
 export const BlogSection = () => {
   const { t } = useLanguage();

@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
-import { getBlogArticle } from "@/content/blogPosts";
+import { getBlogArticle, blogArticles } from "@/content/blogPosts";
 import { useLanguage } from "@/contexts/LanguageContext";
 import NotFound from "./NotFound";
 
@@ -142,6 +142,22 @@ const BlogArticlePage = () => {
               </Link>
             </Button>
             </aside>
+
+          {article.related && article.related.length > 0 && (
+            <nav aria-label="Related reads" className="mt-8">
+              <h2 className="text-sm font-bold uppercase tracking-wider text-muted-foreground mb-2">Related Reads</h2>
+              <ul className="space-y-2">
+                {article.related.map((rs) => {
+                  const r = blogArticles.find((a) => a.slug === rs);
+                  return r ? (
+                    <li key={rs}>
+                      <Link to={`/blog/${r.slug}`} className="text-primary font-medium hover:underline">{r.title}</Link>
+                    </li>
+                  ) : null;
+                })}
+              </ul>
+            </nav>
+          )}
 
           <p className="mt-6 text-xs text-muted-foreground italic leading-relaxed">{article.disclaimer}</p>
         </article>
