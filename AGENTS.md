@@ -1,0 +1,2 @@
+# Project rules
+- Keep static blog translations in a dedicated content dictionary consumed by LanguageContext.t(), preserving article structure, images and URLs across languages; this avoids runtime translation requests and keeps language selection consistent.

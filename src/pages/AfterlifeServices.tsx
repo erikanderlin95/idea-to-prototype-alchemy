@@ -134,13 +134,13 @@ const AfterlifeServicesPage = () => {
           >
             <img
               src="https://www.nirvanalife.com.sg/wp-content/uploads/2026/07/Why-Nirvana-Memorial-Garden-Partners-with-Healthcare-Professionals-Singapore-2026.png"
-              alt="Nirvana Memorial Garden partnering with healthcare professionals in Singapore"
+              alt={t("blog.nirvana.imageAlt")}
               loading="lazy"
               className="w-[76px] h-[56px] rounded-md object-cover shrink-0"
             />
             <div className="min-w-0 flex flex-col justify-center">
               <p className="text-[12px] font-semibold text-[#2D1B4E] leading-snug line-clamp-2">
-                Why Nirvana Memorial Garden Partners With Healthcare Professionals In Singapore (2026)
+                {t("blog.nirvana.title")}
               </p>
               <span className="mt-0.5 inline-flex items-center gap-1 text-[10px] text-[#8A7A9A]">
                 <LinkIcon className="h-2.5 w-2.5" />

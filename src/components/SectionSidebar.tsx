@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Building2, Stethoscope, Mic, Heart, Menu, ChevronLeft, Mail, ChevronRight, Lock, Info } from "lucide-react";
+import { Building2, Stethoscope, Mic, Heart, Menu, ChevronLeft, Mail, ChevronRight, Lock, Info, Facebook, Instagram, Youtube } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
 
@@ -179,10 +180,22 @@ export const SectionSidebar = () => {
               <ChevronRight className="h-4 w-4 text-[#12B8C4] transition-transform group-hover:translate-x-0.5" strokeWidth={2.5} />
             </a>
 
-            <p className="text-sm font-semibold text-foreground mt-3 mb-1">
-
-              {t("sidebar.contactUs")}
-            </p>
+            <div className="flex items-center justify-between gap-2 mt-3 mb-1">
+              <p className="text-sm font-semibold text-foreground">{t("sidebar.contactUs")}</p>
+              <div className="flex items-center gap-1 shrink-0">
+                {[
+                  { name: "Facebook", href: "https://www.facebook.com/share/1bMEZjJhMS/", Icon: Facebook },
+                  { name: "Instagram", href: "https://www.instagram.com/getclynicq?xtok=MWdpZXFsOHJtbHpiZQ==", Icon: Instagram },
+                  { name: "YouTube", href: "https://youtube.com/@clynicq?si=KxUz-MsTbxSAeJ06", Icon: Youtube },
+                ].map(({ name, href, Icon }) => (
+                  <Button key={name} asChild variant="ghost" size="icon" className="h-7 w-7 text-foreground hover:text-primary">
+                    <a href={href} target="_blank" rel="noopener noreferrer" aria-label={name} title={name}>
+                      <Icon className="h-4 w-4" />
+                    </a>
+                  </Button>
+                ))}
+              </div>
+            </div>
             <a
               href="mailto:hello@ealvon.com"
               className="text-lg font-bold text-foreground hover:text-primary transition-colors"
