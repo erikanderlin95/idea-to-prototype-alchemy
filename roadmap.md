@@ -5,3 +5,4 @@
 - [x] Add the supplied logo to launch-partner row two, keeping current sizing and spacing.
 - [ ] Move the new logo to the centre of row two.
 - [ ] Add Facebook, Instagram and YouTube icons beside sidebar Contact us with the supplied links.
+- [ ] Enlarge the social icons and apply their brand colours.

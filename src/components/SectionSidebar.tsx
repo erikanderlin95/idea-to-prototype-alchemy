@@ -184,13 +184,13 @@ export const SectionSidebar = () => {
               <p className="text-sm font-semibold text-foreground">{t("sidebar.contactUs")}</p>
               <div className="flex items-center gap-1 shrink-0">
                 {[
-                  { name: "Facebook", href: "https://www.facebook.com/share/1bMEZjJhMS/", Icon: Facebook },
-                  { name: "Instagram", href: "https://www.instagram.com/getclynicq?xtok=MWdpZXFsOHJtbHpiZQ==", Icon: Instagram },
-                  { name: "YouTube", href: "https://youtube.com/@clynicq?si=KxUz-MsTbxSAeJ06", Icon: Youtube },
-                ].map(({ name, href, Icon }) => (
-                  <Button key={name} asChild variant="ghost" size="icon" className="h-7 w-7 text-foreground hover:text-primary">
+                  { name: "Facebook", href: "https://www.facebook.com/share/1bMEZjJhMS/", Icon: Facebook, colour: "text-[hsl(var(--social-facebook))]" },
+                  { name: "Instagram", href: "https://www.instagram.com/getclynicq?xtok=MWdpZXFsOHJtbHpiZQ==", Icon: Instagram, colour: "text-[hsl(var(--social-instagram))]" },
+                  { name: "YouTube", href: "https://youtube.com/@clynicq?si=KxUz-MsTbxSAeJ06", Icon: Youtube, colour: "text-[hsl(var(--social-youtube))]" },
+                ].map(({ name, href, Icon, colour }) => (
+                  <Button key={name} asChild variant="ghost" size="icon" className={cn("h-9 w-9 hover:opacity-80", colour)}>
                     <a href={href} target="_blank" rel="noopener noreferrer" aria-label={name} title={name}>
-                      <Icon className="h-4 w-4" />
+                      <Icon className="!h-6 !w-6" />
                     </a>
                   </Button>
                 ))}
