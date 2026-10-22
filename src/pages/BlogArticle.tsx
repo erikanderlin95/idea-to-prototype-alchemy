@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
@@ -26,6 +26,7 @@ const setMeta = (attr: "name" | "property", key: string, content: string) => {
 const BlogArticlePage = () => {
   const { slug } = useParams();
   const { t } = useLanguage();
+  const navigate = useNavigate();
   const article = getBlogArticle(slug);
 
   useEffect(() => {
@@ -129,7 +130,16 @@ const BlogArticlePage = () => {
               <p key={x} className={i === 0 ? "font-semibold text-foreground mb-1" : "text-sm text-muted-foreground mb-4"}>{x}</p>
             ))}
             <Button asChild>
-              <Link to={article.cta.href}>{article.cta.button}</Link>
+              <Link
+                to={article.cta.href}
+                onClick={(e) => {
+                  e.preventDefault();
+                  navigate("/");
+                  setTimeout(() => document.getElementById("marketplace")?.scrollIntoView({ behavior: "smooth" }), 400);
+                }}
+              >
+                {article.cta.button}
+              </Link>
             </Button>
             <p className="text-xs text-muted-foreground mt-4">
               Browse by type: <Link to="/gp" className="text-primary underline">GP clinics</Link> ·{" "}

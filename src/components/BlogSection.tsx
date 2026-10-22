@@ -1,6 +1,9 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
+import { blogArticles } from "@/content/blogPosts";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 import { eyecareArticleHtml } from "@/content/eyecareArticle";
@@ -9,7 +12,7 @@ import imgLasik from "@/assets/blog/lasik_fixed_eyes_still_healthy.jpg";
 import imgNerve from "@/assets/blog/a3-03-glaucoma-optic-nerve-comparison.jpg";
 import imgVision from "@/assets/blog/clear_view_vs_peripheral_vision_loss.jpg";
 
-type Category = "eyecare";
+type Category = "eyecare" | "guide";
 
 type BlogPost = {
   id: string;
@@ -41,7 +44,7 @@ const posts: BlogPost[] = [
   },
 ];
 
-const categories: ("all" | Category)[] = ["all", "eyecare"];
+const categories: ("all" | Category)[] = ["all", "guide", "eyecare"];
 
 export const BlogSection = () => {
   const { t } = useLanguage();
@@ -77,6 +80,27 @@ export const BlogSection = () => {
         </div>
 
         <div className="space-y-4">
+          {blogArticles
+            .filter((a) => cat === "all" || a.categoryKey === cat)
+            .map((a) => (
+              <Link
+                key={a.slug}
+                to={`/blog/${a.slug}`}
+                className="block rounded-2xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-md hover:border-primary/40 transition"
+              >
+                <img src={a.image} alt={a.imageAlt} width={1200} height={640} loading="lazy" className="w-full aspect-[16/9] object-cover" />
+                <div className="p-4 md:p-6">
+                  <span className="inline-block text-[10.5px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-primary/10 text-primary mb-2">
+                    {t(`blog.cat.${a.categoryKey}`)}
+                  </span>
+                  <h3 className="text-lg md:text-xl font-semibold text-foreground leading-snug mb-2">{a.title}</h3>
+                  <p className="text-sm text-muted-foreground mb-3">{a.excerpt}</p>
+                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                    Read Article <ArrowRight className="h-4 w-4" />
+                  </span>
+                </div>
+              </Link>
+            ))}
           {list.map((p) => {
             const open = openId === p.id;
             return (
