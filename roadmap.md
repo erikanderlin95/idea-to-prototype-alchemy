@@ -6,3 +6,7 @@
 - [x] Move the new logo to the centre of row two.
 - [x] Add Facebook, Instagram and YouTube icons beside sidebar Contact us with the supplied links.
 - [x] Enlarge the social icons and apply their brand colours.
+
+## OneVision backlink cleanup
+- [x] Remove OneVision website links and link-dependent wording from all three eyecare articles in four languages.
+- [x] Verify attribution, clinical content, research references and existing navigation are preserved.
