@@ -79,7 +79,7 @@ export const BlogSection = () => {
           ))}
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-3 md:space-y-4">
           {blogArticles
             .filter((a) => cat === "all" || a.categoryKey === cat)
             .map((source) => {
@@ -114,7 +114,7 @@ export const BlogSection = () => {
                     {t(`blog.cat.${p.category}`)}
                   </span>
                   <h3 className="text-base md:text-xl font-semibold text-foreground leading-snug line-clamp-2 md:line-clamp-none">{p.title}</h3>
-                  <p className="text-xs md:text-xs text-muted-foreground">{p.author}</p>
+                  <p className="text-xs text-muted-foreground">{p.author}</p>
                   {!open && <p className="text-sm text-muted-foreground line-clamp-2 md:line-clamp-none">{p.excerpt}</p>}
                   {open && (
                     <div
@@ -125,7 +125,7 @@ export const BlogSection = () => {
                   <Button
                     variant={open ? "outline" : "default"}
                     size="sm"
-                    className="mt-3 gap-1"
+                    className="mt-1 md:mt-3 gap-1"
                     onClick={() => {
                       setOpenId(open ? null : p.id);
                       if (open) document.getElementById("blog")?.scrollIntoView({ behavior: "smooth" });
