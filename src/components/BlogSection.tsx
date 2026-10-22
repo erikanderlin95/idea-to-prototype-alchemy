@@ -21,7 +21,9 @@ type BlogCardProps = {
   imagePosition?: string;
 };
 
-const BlogCard = ({ to, image, imageAlt, categoryKey, title, excerpt, imagePosition }: BlogCardProps) => (
+const BlogCard = ({ to, image, imageAlt, categoryKey, title, excerpt, imagePosition }: BlogCardProps) => {
+  const { t } = useLanguage();
+  return (
   <Link
     to={to}
     className="group flex md:block rounded-xl md:rounded-2xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-md hover:border-primary/40 transition"
