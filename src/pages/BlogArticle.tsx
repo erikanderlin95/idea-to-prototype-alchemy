@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft } from "lucide-react";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -84,9 +83,6 @@ const BlogArticlePage = () => {
       <Navbar />
       <main className="flex-1">
         <article className="container px-4 md:px-6 max-w-2xl py-6 md:py-10">
-          <Link to="/wellness-talks" className="inline-flex items-center gap-1.5 text-sm text-primary hover:underline mb-4">
-            <ArrowLeft className="h-4 w-4" /> Back to Featured Wellness
-          </Link>
           <span className="block text-[11px] font-bold uppercase tracking-wider text-primary mb-2">
             {t(`blog.cat.${article.categoryKey}`)} · ClynicQ
           </span>

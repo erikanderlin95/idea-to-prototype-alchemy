@@ -44,7 +44,7 @@ const posts: BlogPost[] = [
   },
 ];
 
-const categories: ("all" | Category)[] = ["all", "guide", "visit", "eyecare"];
+const categories: ("all" | Category)[] = ["all", "visit", "eyecare"];
 
 export const BlogSection = () => {
   const { t } = useLanguage();
