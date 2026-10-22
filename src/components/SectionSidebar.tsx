@@ -2,9 +2,11 @@ import { useState, useEffect } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useNavigate, useLocation } from "react-router-dom";
 import { Building2, Stethoscope, Mic, Heart, Menu, ChevronLeft, Mail, ChevronRight, Lock, Info, Facebook, Instagram, Youtube } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useLanguage } from "@/contexts/LanguageContext";
+
 
 const sections = [
   { id: "marketplace", key: "sidebar.section.browseClinics", icon: Building2, type: "scroll" as const, emoji: null as string | null, iconColor: "text-sky-600 bg-sky-50", disabled: false },
@@ -183,6 +185,11 @@ export const SectionSidebar = () => {
             <div className="flex items-center justify-between gap-2 mt-3 mb-1">
               <p className="text-sm font-semibold text-foreground">{t("sidebar.contactUs")}</p>
               <div className="flex items-center gap-1 shrink-0">
+                <Button asChild variant="ghost" size="icon" className="h-9 w-9 hover:opacity-80 text-[#25D366]">
+                  <a href="https://wa.me/6592206418" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" title="WhatsApp">
+                    <WhatsAppIcon className="!h-6 !w-6" />
+                  </a>
+                </Button>
                 {[
                   { name: "Facebook", href: "https://www.facebook.com/share/1bMEZjJhMS/", Icon: Facebook, colour: "text-[hsl(var(--social-facebook))]" },
                   { name: "Instagram", href: "https://www.instagram.com/getclynicq?xtok=MWdpZXFsOHJtbHpiZQ==", Icon: Instagram, colour: "text-[hsl(var(--social-instagram))]" },
@@ -196,6 +203,7 @@ export const SectionSidebar = () => {
                 ))}
               </div>
             </div>
+
             <a
               href="mailto:hello@ealvon.com"
               className="text-lg font-bold text-foreground hover:text-primary transition-colors"
