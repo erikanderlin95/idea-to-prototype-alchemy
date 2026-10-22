@@ -34,7 +34,7 @@ export const blogArticles: BlogArticle[] = [
     excerpt:
       "From choosing the right type of care to checking clinic credentials, costs and appointment options, here's what to consider before your next visit.",
     image: chooseClinic,
-    imageAlt: "Patient checking clinic information on her phone outside a neighbourhood clinic",
+    imageAlt: "Mother and daughter at home looking up clinic options on a mobile phone",
     intro: [
       "Finding the right care shouldn't be complicated.",
       "When you're feeling unwell, dealing with an injury or looking for ongoing treatment, choosing a clinic isn't always as simple as picking the nearest one.",
