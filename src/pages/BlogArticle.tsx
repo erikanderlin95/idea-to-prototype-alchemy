@@ -141,13 +141,7 @@ const BlogArticlePage = () => {
                 {article.cta.button}
               </Link>
             </Button>
-            <p className="text-xs text-muted-foreground mt-4">
-              Browse by type: <Link to="/gp" className="text-primary underline">GP clinics</Link> ·{" "}
-              <Link to="/tcm" className="text-primary underline">TCM clinics</Link> ·{" "}
-              <Link to="/wellness" className="text-primary underline">Wellness clinics</Link> ·{" "}
-              <Link to="/24-hour-clinics-singapore" className="text-primary underline">24-hour clinics</Link>
-            </p>
-          </aside>
+            </aside>
 
           <p className="mt-6 text-xs text-muted-foreground italic leading-relaxed">{article.disclaimer}</p>
         </article>
