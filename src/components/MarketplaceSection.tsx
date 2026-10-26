@@ -3,12 +3,12 @@ import { ClinicCard } from "./ClinicCard";
 import { DirectoryClinicCard } from "./DirectoryClinicCard";
 import { TWENTY_FOUR_HR_CLINICS } from "@/data/twentyFourHrClinics";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigationType } from "react-router-dom";
 
 
 const CLINICS_PER_PAGE_MOBILE = 6;
@@ -29,6 +29,16 @@ interface MarketplaceSectionProps {
 export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }: MarketplaceSectionProps) => {
   const { t } = useLanguage();
   const isMobile = useIsMobile();
+  const location = useLocation();
+  const navType = useNavigationType();
+  const stateKey = `clynicq_listing_${location.pathname}_${defaultCategory}`;
+  const [saved] = useState<any>(() => {
+    try {
+      return JSON.parse(sessionStorage.getItem(stateKey) || "null");
+    } catch {
+      return null;
+    }
+  });
   const [clinics, setClinics] = useState<any[]>(() => {
     try {
       return JSON.parse(sessionStorage.getItem("clynicq_clinics_cache") || "[]");
@@ -37,15 +47,66 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
     }
   });
   const [filteredClinics, setFilteredClinics] = useState<any[]>([]);
-  const [activeCategory, setActiveCategory] = useState(defaultCategory);
-  const [searchText, setSearchText] = useState("");
-  const [filters, setFilters] = useState<ClinicFilters>({ openNow: false, queue: false, booking: false });
+  const [activeCategory, setActiveCategory] = useState(saved?.category ?? defaultCategory);
+  const [searchText, setSearchText] = useState<string>(saved?.search ?? "");
+  const [filters, setFilters] = useState<ClinicFilters>(saved?.filters ?? { openNow: false, queue: false, booking: false });
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const [directoryPage, setDirectoryPage] = useState(1);
-  const [directoryMobileCount, setDirectoryMobileCount] = useState(6);
+  const [currentPage, setCurrentPage] = useState<number>(saved?.page ?? 1);
+  const scrollYRef = useRef<number>(saved?.scrollY ?? 0);
+  const restoringRef = useRef<boolean>(navType === "POP" && (saved?.scrollY ?? 0) > 0);
+  const filterKeyRef = useRef<string | null>(null);
 
   const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
+
+  // Persist listing state (filters, search, page, scroll) for back navigation
+  useEffect(() => {
+    try {
+      sessionStorage.setItem(
+        stateKey,
+        JSON.stringify({ category: activeCategory, search: searchText, filters, page: currentPage, scrollY: scrollYRef.current })
+      );
+    } catch {}
+  }, [stateKey, activeCategory, searchText, filters, currentPage]);
+
+  useEffect(() => {
+    const save = () => {
+      if (restoringRef.current) return;
+      scrollYRef.current = window.scrollY;
+      try {
+        const cur = JSON.parse(sessionStorage.getItem(stateKey) || "{}");
+        sessionStorage.setItem(stateKey, JSON.stringify({ ...cur, scrollY: window.scrollY }));
+      } catch {}
+    };
+    let timer: number | undefined;
+    const onScroll = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(save, 100);
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.clearTimeout(timer);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [stateKey]);
+
+  // Restore scroll position when returning via back navigation
+  useEffect(() => {
+    if (!restoringRef.current) return;
+    const target = scrollYRef.current;
+    const started = Date.now();
+    let raf = 0;
+    const tryScroll = () => {
+      const maxY = document.documentElement.scrollHeight - window.innerHeight;
+      if (maxY >= target || Date.now() - started > 2000) {
+        window.scrollTo(0, Math.min(target, Math.max(0, maxY)));
+        restoringRef.current = false;
+        return;
+      }
+      raf = requestAnimationFrame(tryScroll);
+    };
+    raf = requestAnimationFrame(tryScroll);
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   useEffect(() => {
     fetchClinics();
