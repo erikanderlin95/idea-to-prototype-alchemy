@@ -154,13 +154,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       }
       return targetY;
     };
-    let ticks = 0;
     const tryScroll = () => {
       const maxY = document.documentElement.scrollHeight - window.innerHeight;
       const want = desiredY();
-      if ((window as any).__scrollDebug && ticks++ < 30) {
-        console.log("[scroll-debug] tick", { scrollY: window.scrollY, want, maxY, anchorIndex, anchorTop });
-      }
       if (want != null && maxY > 0) {
         const to = Math.max(0, Math.min(want, maxY));
         if (Math.abs(window.scrollY - to) > 2) {
