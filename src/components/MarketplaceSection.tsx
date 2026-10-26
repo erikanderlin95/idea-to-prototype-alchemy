@@ -111,8 +111,8 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
     if (!restoringRef.current) return;
     const target = scrollYRef.current;
     const started = Date.now();
-    const finish = (y: number) => {
-      window.scrollTo(0, y);
+    let reachedAt = 0;
+    const stop = () => {
       restoringRef.current = false;
       window.clearInterval(iv);
       ro.disconnect();
@@ -120,9 +120,17 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
     const tryScroll = () => {
       const maxY = document.documentElement.scrollHeight - window.innerHeight;
       if (maxY >= target) {
-        finish(target);
-      } else if (Date.now() - started > 6000) {
-        finish(Math.max(0, maxY));
+        // Re-apply while content keeps growing so late-loading images don't shift us off target
+        if (Math.abs(window.scrollY - target) > 2) {
+          window.scrollTo(0, target);
+          reachedAt = Date.now();
+        } else if (reachedAt && Date.now() - reachedAt > 600) {
+          stop();
+        }
+      }
+      if (Date.now() - started > 6000) {
+        window.scrollTo(0, Math.min(target, Math.max(0, maxY)));
+        stop();
       }
     };
     const iv = window.setInterval(tryScroll, 100);
