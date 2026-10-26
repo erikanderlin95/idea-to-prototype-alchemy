@@ -370,8 +370,8 @@ export const blogArticles: BlogArticle[] = [
           p("Finding a suitable clinic is one part of the process. Planning your visit is another."),
           p("ClynicQ connects patients with participating healthcare providers, including appointment-based clinics."),
           p("BeTCM is one of the TCM clinics participating on ClynicQ."),
-          { type: "pLink", pre: "You can explore BeTCM's clinic information and check the available visit arrangements through ", label: "its ClynicQ landing page", href: "/tcm", post: "." },
-          { type: "pLink", pre: "You can also browse other participating clinics under the ", label: "TCM category on ClynicQ", href: "/tcm", post: "." },
+          p("You can explore BeTCM's clinic information and check the available visit arrangements through its ClynicQ landing page."),
+          p("You can also browse other participating clinics under the TCM category on ClynicQ."),
         ],
       },
       {
