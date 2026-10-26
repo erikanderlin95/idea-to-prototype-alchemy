@@ -199,12 +199,6 @@
   "blog.content.tcm-singapore-first-visit.sections.7.blocks.0.text": "Mencari klinik yang sesuai ialah satu bahagian daripada proses ini. Merancang kunjungan anda ialah satu lagi.",
   "blog.content.tcm-singapore-first-visit.sections.7.blocks.1.text": "ClynicQ menghubungkan pesakit dengan penyedia penjagaan kesihatan yang mengambil bahagian, termasuk klinik yang beroperasi berdasarkan janji temu.",
   "blog.content.tcm-singapore-first-visit.sections.7.blocks.2.text": "BeTCM ialah salah satu klinik TCM yang menyertai ClynicQ.",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.pre": "Anda boleh meneroka maklumat klinik BeTCM dan menyemak pilihan kunjungan yang tersedia melalui ",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.label": "halaman khususnya di ClynicQ",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.post": ".",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.pre": "Anda juga boleh menelusuri klinik lain yang mengambil bahagian di bawah ",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.label": "kategori TCM di ClynicQ",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.post": ".",
   "blog.content.tcm-singapore-first-visit.sections.8.heading": "Kunjungan TCM Pertama Anda Bermula dengan Pilihan Berdasarkan Maklumat",
   "blog.content.tcm-singapore-first-visit.sections.8.blocks.0.text": "Mencuba perkhidmatan penjagaan kesihatan baharu tidak semestinya mengelirukan.",
   "blog.content.tcm-singapore-first-visit.sections.8.blocks.1.text": "Luangkan masa untuk memahami kelayakan pengamal, rawatan yang ditawarkan, potensi risikonya dan anggaran kos.",
@@ -516,5 +510,7 @@
   "blog.readArticle": "Baca Artikel",
   "blog.related": "Bacaan Berkaitan",
   "blog.nirvana.title": "Mengapa Nirvana Memorial Garden Bekerjasama dengan Profesional Penjagaan Kesihatan di Singapura (2026)",
-  "blog.nirvana.imageAlt": "Nirvana Memorial Garden bekerjasama dengan profesional penjagaan kesihatan di Singapura"
+  "blog.nirvana.imageAlt": "Nirvana Memorial Garden bekerjasama dengan profesional penjagaan kesihatan di Singapura",
+  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.text": "Anda boleh meneroka maklumat klinik BeTCM dan menyemak pilihan kunjungan yang tersedia melalui halaman khususnya di ClynicQ.",
+  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.text": "Anda juga boleh menelusuri klinik lain yang mengambil bahagian di bawah kategori TCM di ClynicQ."
 }

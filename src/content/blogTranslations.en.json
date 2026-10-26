@@ -199,12 +199,6 @@
   "blog.content.tcm-singapore-first-visit.sections.7.blocks.0.text": "Finding a suitable clinic is one part of the process. Planning your visit is another.",
   "blog.content.tcm-singapore-first-visit.sections.7.blocks.1.text": "ClynicQ connects patients with participating healthcare providers, including appointment-based clinics.",
   "blog.content.tcm-singapore-first-visit.sections.7.blocks.2.text": "BeTCM is one of the TCM clinics participating on ClynicQ.",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.pre": "You can explore BeTCM's clinic information and check the available visit arrangements through ",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.label": "its ClynicQ landing page",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.post": ".",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.pre": "You can also browse other participating clinics under the ",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.label": "TCM category on ClynicQ",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.post": ".",
   "blog.content.tcm-singapore-first-visit.sections.8.heading": "Your First TCM Visit Starts with an Informed Choice",
   "blog.content.tcm-singapore-first-visit.sections.8.blocks.0.text": "Trying a new healthcare service doesn't have to be confusing.",
   "blog.content.tcm-singapore-first-visit.sections.8.blocks.1.text": "Take time to understand the practitioner's qualifications, the treatments offered, their potential risks and the expected costs.",
@@ -516,5 +510,7 @@
   "blog.readArticle": "Read Article",
   "blog.related": "Related Reads",
   "blog.nirvana.title": "Why Nirvana Memorial Garden Partners With Healthcare Professionals In Singapore (2026)",
-  "blog.nirvana.imageAlt": "Nirvana Memorial Garden partnering with healthcare professionals in Singapore"
+  "blog.nirvana.imageAlt": "Nirvana Memorial Garden partnering with healthcare professionals in Singapore",
+  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.text": "You can explore BeTCM's clinic information and check the available visit arrangements through its ClynicQ landing page.",
+  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.text": "You can also browse other participating clinics under the TCM category on ClynicQ."
 }

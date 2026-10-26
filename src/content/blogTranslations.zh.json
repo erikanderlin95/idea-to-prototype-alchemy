@@ -199,12 +199,6 @@
   "blog.content.tcm-singapore-first-visit.sections.7.blocks.0.text": "找到合适的诊所是其中一步，安排就诊则是另一步。",
   "blog.content.tcm-singapore-first-visit.sections.7.blocks.1.text": "ClynicQ 帮助患者联系加入平台的医疗服务提供者，其中包括采用预约制的诊所。",
   "blog.content.tcm-singapore-first-visit.sections.7.blocks.2.text": "BeTCM 是加入 ClynicQ 平台的中医诊所之一。",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.pre": "如需了解 BeTCM 的诊所资料及可选的就诊安排，您可以浏览 ",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.label": "其 ClynicQ 专属页面",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.post": "。",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.pre": "如需浏览其他加入平台的诊所，您也可以查看 ",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.label": "ClynicQ 的中医类别",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.post": "。",
   "blog.content.tcm-singapore-first-visit.sections.8.heading": "第一次看中医，从充分了解后作出选择开始",
   "blog.content.tcm-singapore-first-visit.sections.8.blocks.0.text": "尝试新的医疗服务，不一定会让人感到无所适从。",
   "blog.content.tcm-singapore-first-visit.sections.8.blocks.1.text": "花些时间了解中医师的资历、所提供的治疗、潜在风险及预计费用。",
@@ -516,5 +510,7 @@
   "blog.readArticle": "阅读全文",
   "blog.related": "相关阅读",
   "blog.nirvana.title": "为什么 Nirvana Memorial Garden 与新加坡医疗专业人员合作（2026年）",
-  "blog.nirvana.imageAlt": "Nirvana Memorial Garden 与新加坡医疗专业人员合作"
+  "blog.nirvana.imageAlt": "Nirvana Memorial Garden 与新加坡医疗专业人员合作",
+  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.text": "如需了解 BeTCM 的诊所资料及可选的就诊安排，您可以浏览其 ClynicQ 专属页面。",
+  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.text": "如需浏览其他加入平台的诊所，您也可以查看 ClynicQ 的中医类别。"
 }
