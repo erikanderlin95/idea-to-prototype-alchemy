@@ -54,9 +54,6 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const [currentPage, setCurrentPage] = useState<number>(saved?.page ?? 1);
   const scrollYRef = useRef<number>(saved?.scrollY ?? 0);
   const restoringRef = useRef<boolean>(navType === "POP" && (saved?.scrollY ?? 0) > 0);
-  if (typeof window !== "undefined" && (window as any).__scrollDebug) {
-    console.log("[scroll-debug] mount", { navType, saved, restoring: restoringRef.current });
-  }
   const filterKeyRef = useRef<string | null>(null);
 
   const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
@@ -129,13 +126,19 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
     const anchorIndex: number = saved?.anchorIndex ?? -1;
     const anchorTop: number = saved?.anchorTop ?? 0;
     const started = Date.now();
-    const stop = () => {
-      restoringRef.current = false;
+    let iv = 0;
+    let ro: ResizeObserver | null = null;
+    // Teardown only; must NOT clear restoringRef (StrictMode runs cleanup once before the real effect)
+    const teardown = () => {
       window.clearInterval(iv);
-      ro.disconnect();
-      window.removeEventListener("wheel", stop);
-      window.removeEventListener("touchstart", stop);
-      window.removeEventListener("pointerdown", stop);
+      ro?.disconnect();
+      window.removeEventListener("wheel", finish);
+      window.removeEventListener("touchstart", finish);
+      window.removeEventListener("pointerdown", finish);
+    };
+    const finish = () => {
+      restoringRef.current = false;
+      teardown();
     };
     // Prefer anchoring to the same clinic card; fall back to raw scroll offset
     const desiredY = (): number | null => {
@@ -158,19 +161,17 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           window.scrollTo(0, to);
         }
       }
-      if (Date.now() - started > 6000) stop();
+      if (Date.now() - started > 6000) finish();
     };
     // Keep re-applying as layout shifts; stop as soon as the user starts scrolling
-    window.addEventListener("wheel", stop, { passive: true });
-    window.addEventListener("touchstart", stop, { passive: true });
-    window.addEventListener("pointerdown", stop);
-    const iv = window.setInterval(tryScroll, 100);
-    const ro = new ResizeObserver(tryScroll);
+    window.addEventListener("wheel", finish, { passive: true });
+    window.addEventListener("touchstart", finish, { passive: true });
+    window.addEventListener("pointerdown", finish);
+    iv = window.setInterval(tryScroll, 100);
+    ro = new ResizeObserver(tryScroll);
     ro.observe(document.documentElement);
     tryScroll();
-    return () => {
-      stop();
-    };
+    return teardown;
   }, []);
 
   useEffect(() => {
