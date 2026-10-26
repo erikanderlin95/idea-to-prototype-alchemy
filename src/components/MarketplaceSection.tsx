@@ -69,43 +69,70 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   }, [stateKey, activeCategory, searchText, filters, currentPage]);
 
   useEffect(() => {
-    const save = () => {
-      if (restoringRef.current) return;
-      scrollYRef.current = window.scrollY;
+    const persist = (y: number) => {
+      scrollYRef.current = y;
       try {
         const cur = JSON.parse(sessionStorage.getItem(stateKey) || "{}");
-        sessionStorage.setItem(stateKey, JSON.stringify({ ...cur, scrollY: window.scrollY }));
+        sessionStorage.setItem(stateKey, JSON.stringify({ ...cur, scrollY: y }));
       } catch {}
     };
-    let timer: number | undefined;
-    const onScroll = () => {
-      window.clearTimeout(timer);
-      timer = window.setTimeout(save, 100);
+    let raf = 0;
+    const save = () => {
+      if (restoringRef.current || raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        persist(window.scrollY);
+      });
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
+    // Flush immediately so taps that navigate away right after scrolling don't lose the position
+    const flush = () => {
+      if (restoringRef.current) return;
+      if (raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+      persist(window.scrollY);
+    };
+    window.addEventListener("scroll", save, { passive: true });
+    window.addEventListener("pagehide", flush);
+    document.addEventListener("visibilitychange", flush);
+    document.addEventListener("click", flush, true);
     return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener("scroll", onScroll);
+      flush();
+      window.removeEventListener("scroll", save);
+      window.removeEventListener("pagehide", flush);
+      document.removeEventListener("visibilitychange", flush);
+      document.removeEventListener("click", flush, true);
     };
   }, [stateKey]);
 
-  // Restore scroll position when returning via back navigation
+  // Restore scroll position when returning via back navigation; keep retrying as content grows
   useEffect(() => {
     if (!restoringRef.current) return;
     const target = scrollYRef.current;
     const started = Date.now();
-    let raf = 0;
+    const finish = (y: number) => {
+      window.scrollTo(0, y);
+      restoringRef.current = false;
+      window.clearInterval(iv);
+      ro.disconnect();
+    };
     const tryScroll = () => {
       const maxY = document.documentElement.scrollHeight - window.innerHeight;
-      if (maxY >= target || Date.now() - started > 2000) {
-        window.scrollTo(0, Math.min(target, Math.max(0, maxY)));
-        restoringRef.current = false;
-        return;
+      if (maxY >= target) {
+        finish(target);
+      } else if (Date.now() - started > 6000) {
+        finish(Math.max(0, maxY));
       }
-      raf = requestAnimationFrame(tryScroll);
     };
-    raf = requestAnimationFrame(tryScroll);
-    return () => cancelAnimationFrame(raf);
+    const iv = window.setInterval(tryScroll, 100);
+    const ro = new ResizeObserver(tryScroll);
+    ro.observe(document.documentElement);
+    tryScroll();
+    return () => {
+      window.clearInterval(iv);
+      ro.disconnect();
+    };
   }, []);
 
   useEffect(() => {
