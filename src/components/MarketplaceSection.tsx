@@ -126,11 +126,13 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
     const anchorIndex: number = saved?.anchorIndex ?? -1;
     const anchorTop: number = saved?.anchorTop ?? 0;
     const started = Date.now();
-    let reachedAt = 0;
     const stop = () => {
       restoringRef.current = false;
       window.clearInterval(iv);
       ro.disconnect();
+      window.removeEventListener("wheel", stop);
+      window.removeEventListener("touchstart", stop);
+      window.removeEventListener("pointerdown", stop);
     };
     // Prefer anchoring to the same clinic card; fall back to raw scroll offset
     const desiredY = (): number | null => {
@@ -151,10 +153,6 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         const to = Math.max(0, Math.min(want, maxY));
         if (Math.abs(window.scrollY - to) > 2) {
           window.scrollTo(0, to);
-          reachedAt = Date.now();
-        } else {
-          if (!reachedAt) reachedAt = Date.now();
-          else if (Date.now() - reachedAt > 600) stop();
         }
       }
       if (Date.now() - started > 6000) stop();
