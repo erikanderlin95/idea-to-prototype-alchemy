@@ -61,9 +61,10 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   // Persist listing state (filters, search, page, scroll) for back navigation
   useEffect(() => {
     try {
+      const cur = JSON.parse(sessionStorage.getItem(stateKey) || "{}");
       sessionStorage.setItem(
         stateKey,
-        JSON.stringify({ category: activeCategory, search: searchText, filters, page: currentPage, scrollY: scrollYRef.current })
+        JSON.stringify({ ...cur, category: activeCategory, search: searchText, filters, page: currentPage, scrollY: scrollYRef.current })
       );
     } catch {}
   }, [stateKey, activeCategory, searchText, filters, currentPage]);
