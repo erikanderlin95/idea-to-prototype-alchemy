@@ -157,13 +157,16 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       }
       if (Date.now() - started > 6000) stop();
     };
+    // Keep re-applying as layout shifts; stop as soon as the user starts scrolling
+    window.addEventListener("wheel", stop, { passive: true });
+    window.addEventListener("touchstart", stop, { passive: true });
+    window.addEventListener("pointerdown", stop);
     const iv = window.setInterval(tryScroll, 100);
     const ro = new ResizeObserver(tryScroll);
     ro.observe(document.documentElement);
     tryScroll();
     return () => {
-      window.clearInterval(iv);
-      ro.disconnect();
+      stop();
     };
   }, []);
 
