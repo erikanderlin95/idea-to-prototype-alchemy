@@ -71,9 +71,21 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   useEffect(() => {
     const persist = (y: number) => {
       scrollYRef.current = y;
+      // Anchor to the first visible clinic card so restore survives late-loading content above
+      let anchorIndex = -1;
+      let anchorTop = 0;
+      const cards = document.querySelectorAll(".onboarding-join-queue");
+      for (let i = 0; i < cards.length; i++) {
+        const r = cards[i].getBoundingClientRect();
+        if (r.bottom > 0) {
+          anchorIndex = i;
+          anchorTop = r.top;
+          break;
+        }
+      }
       try {
         const cur = JSON.parse(sessionStorage.getItem(stateKey) || "{}");
-        sessionStorage.setItem(stateKey, JSON.stringify({ ...cur, scrollY: y }));
+        sessionStorage.setItem(stateKey, JSON.stringify({ ...cur, scrollY: y, anchorIndex, anchorTop }));
       } catch {}
     };
     let raf = 0;
@@ -109,7 +121,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   // Restore scroll position when returning via back navigation; keep retrying as content grows
   useEffect(() => {
     if (!restoringRef.current) return;
-    const target = scrollYRef.current;
+    const targetY = scrollYRef.current;
+    const anchorIndex: number = saved?.anchorIndex ?? -1;
+    const anchorTop: number = saved?.anchorTop ?? 0;
     const started = Date.now();
     let reachedAt = 0;
     const stop = () => {
@@ -117,22 +131,32 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       window.clearInterval(iv);
       ro.disconnect();
     };
+    // Prefer anchoring to the same clinic card; fall back to raw scroll offset
+    const desiredY = (): number | null => {
+      if (anchorIndex >= 0) {
+        const cards = document.querySelectorAll(".onboarding-join-queue");
+        if (cards.length > anchorIndex) {
+          const r = cards[anchorIndex].getBoundingClientRect();
+          return window.scrollY + r.top - anchorTop;
+        }
+        return null;
+      }
+      return targetY;
+    };
     const tryScroll = () => {
       const maxY = document.documentElement.scrollHeight - window.innerHeight;
-      if (maxY >= target) {
-        // Re-apply while content keeps growing so late-loading images don't shift us off target
-        if (Math.abs(window.scrollY - target) > 2) {
-          window.scrollTo(0, target);
+      const want = desiredY();
+      if (want != null && maxY > 0) {
+        const to = Math.max(0, Math.min(want, maxY));
+        if (Math.abs(window.scrollY - to) > 2) {
+          window.scrollTo(0, to);
           reachedAt = Date.now();
         } else {
           if (!reachedAt) reachedAt = Date.now();
           else if (Date.now() - reachedAt > 600) stop();
         }
       }
-      if (Date.now() - started > 6000) {
-        window.scrollTo(0, Math.min(target, Math.max(0, maxY)));
-        stop();
-      }
+      if (Date.now() - started > 6000) stop();
     };
     const iv = window.setInterval(tryScroll, 100);
     const ro = new ResizeObserver(tryScroll);
