@@ -111,7 +111,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
     document.addEventListener("visibilitychange", flush);
     document.addEventListener("click", flush, true);
     return () => {
-      flush();
+      // Do NOT flush here: on route change the browser may already have clamped
+      // the scroll to the shorter next page, which would overwrite the real position.
+      if (raf) cancelAnimationFrame(raf);
       window.removeEventListener("scroll", save);
       window.removeEventListener("pagehide", flush);
       document.removeEventListener("visibilitychange", flush);
