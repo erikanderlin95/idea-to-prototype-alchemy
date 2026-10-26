@@ -1,12 +1,9 @@
-## Blog translations
-- [x] Translate all three clinic articles and the complete eyecare post into Chinese, Malay and Tamil.
-- [x] Connect blog cards, articles, descriptions and related reads to the existing language selector.
-- [x] Verify language switching, article links and mobile readability.
-- [x] Add the supplied logo to launch-partner row two, keeping current sizing and spacing.
-- [x] Move the new logo to the centre of row two.
-- [x] Add Facebook, Instagram and YouTube icons beside sidebar Contact us with the supplied links.
-- [x] Enlarge the social icons and apply their brand colours.
+# ClynicQ roadmap
 
-## OneVision backlink cleanup
-- [x] Remove OneVision website links and link-dependent wording from all three eyecare articles in four languages.
-- [x] Verify attribution, clinical content, research references and existing navigation are preserved.
+## Dark mode compatibility
+- [x] Stop phone dark mode from auto-inverting the UI (declare light color-scheme in HTML and CSS).
+- [ ] Verify key pages render readable with the phone in dark mode.
+
+## Clinic listing scroll restore
+- [x] Harden scroll save: flush on tap, page hide and unmount; retry restore as content grows (up to 6s).
+- [ ] Verify scroll-and-back again on mobile preview.
