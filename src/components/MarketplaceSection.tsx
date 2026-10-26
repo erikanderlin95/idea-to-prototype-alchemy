@@ -54,6 +54,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const [currentPage, setCurrentPage] = useState<number>(saved?.page ?? 1);
   const scrollYRef = useRef<number>(saved?.scrollY ?? 0);
   const restoringRef = useRef<boolean>(navType === "POP" && (saved?.scrollY ?? 0) > 0);
+  if (typeof window !== "undefined" && (window as any).__scrollDebug) {
+    console.log("[scroll-debug] mount", { navType, saved, restoring: restoringRef.current });
+  }
   const filterKeyRef = useRef<string | null>(null);
 
   const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
