@@ -185,7 +185,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
     if (filters.booking) base = base.filter((c) => c.hasOnlineBooking === true);
 
     setFilteredClinics(base);
-    setCurrentPage(1);
+    const key = JSON.stringify([activeCategory, searchText, filters]);
+    if (filterKeyRef.current !== null && filterKeyRef.current !== key) setCurrentPage(1);
+    filterKeyRef.current = key;
   }, [activeCategory, clinics, searchText, filters]);
 
 
@@ -294,7 +296,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           </div>
 
           <SearchFilters
-            defaultCategory={defaultCategory}
+            defaultCategory={activeCategory}
+            initialSearch={searchText}
+            initialFilters={filters}
             onCategoryChange={handleCategoryChange}
             onSearchChange={setSearchText}
             onFiltersChange={setFilters}
