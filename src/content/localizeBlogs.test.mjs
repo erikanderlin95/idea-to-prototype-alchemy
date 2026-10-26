@@ -39,7 +39,9 @@ describe("Blog language selection", () => {
       expect(result.image).toBe(article.image);
       expect(result.cta.href).toBe("/#marketplace");
       expect(result.sections).toHaveLength(9);
-      expect(result.sections[7].blocks.filter((b) => b.type === "pLink").map((b) => b.type === "pLink" ? b.href : "")).toEqual(["/tcm", "/tcm"]);
+      const sectionBlocks = result.sections[7].blocks.map((b) => b.type);
+      expect(sectionBlocks).not.toContain("pLink");
+      expect(result.sections[7].blocks.at(-1).text).toBe(`${language}:blog.content.tcm-singapore-first-visit.sections.7.blocks.4.text`);
       expect(result.related).toEqual(article.related);
     });
   }

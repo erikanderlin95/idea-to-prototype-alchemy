@@ -199,12 +199,6 @@
   "blog.content.tcm-singapore-first-visit.sections.7.blocks.0.text": "பொருத்தமான மருத்துவமனையைக் கண்டறிவது செயல்முறையின் ஒரு பகுதி. உங்கள் வருகையைத் திட்டமிடுவது மற்றொரு பகுதி.",
   "blog.content.tcm-singapore-first-visit.sections.7.blocks.1.text": "முன்பதிவு அடிப்படையில் செயல்படும் மருத்துவமனைகள் உட்பட, பங்கேற்கும் சுகாதாரச் சேவை வழங்குநர்களுடன் நோயாளிகளை ClynicQ இணைக்கிறது.",
   "blog.content.tcm-singapore-first-visit.sections.7.blocks.2.text": "ClynicQ-இல் பங்கேற்கும் பாரம்பரிய சீன மருத்துவமனைகளில் BeTCM-உம் ஒன்று.",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.pre": "BeTCM மருத்துவமனையின் தகவல்களையும் அங்கு செல்வதற்கான ஏற்பாடுகளையும் அறிந்துகொள்ள, நீங்கள் பார்க்கக்கூடியது ",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.label": "அதன் ClynicQ அறிமுகப் பக்கம்",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.post": ".",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.pre": "பங்கேற்கும் மற்ற மருத்துவமனைகளையும் நீங்கள் உலாவிப் பார்க்கக்கூடிய பகுதி, ",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.label": "ClynicQ-இல் உள்ள பாரம்பரிய சீன மருத்துவப் பிரிவு",
-  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.post": ".",
   "blog.content.tcm-singapore-first-visit.sections.8.heading": "உங்கள் முதல் பாரம்பரிய சீன மருத்துவ வருகை, தகவலறிந்த தேர்வுடன் தொடங்குகிறது",
   "blog.content.tcm-singapore-first-visit.sections.8.blocks.0.text": "புதிய சுகாதாரச் சேவையை நாடுவது குழப்பமான அனுபவமாக இருக்க வேண்டியதில்லை.",
   "blog.content.tcm-singapore-first-visit.sections.8.blocks.1.text": "மருத்துவரின் தகுதிகள், வழங்கப்படும் சிகிச்சைகள், அவற்றின் சாத்தியமான அபாயங்கள் மற்றும் எதிர்பார்க்கப்படும் செலவுகள் ஆகியவற்றைப் புரிந்துகொள்ள நேரம் ஒதுக்குங்கள்.",
@@ -516,5 +510,7 @@
   "blog.readArticle": "கட்டுரையைப் படிக்கவும்",
   "blog.related": "தொடர்புடைய கட்டுரைகள்",
   "blog.nirvana.title": "Nirvana Memorial Garden சிங்கப்பூரில் சுகாதாரத் துறை நிபுணர்களுடன் இணைந்து செயல்படுவது ஏன் (2026)",
-  "blog.nirvana.imageAlt": "சிங்கப்பூரில் சுகாதாரத் துறை நிபுணர்களுடன் இணைந்து செயல்படும் Nirvana Memorial Garden"
+  "blog.nirvana.imageAlt": "சிங்கப்பூரில் சுகாதாரத் துறை நிபுணர்களுடன் இணைந்து செயல்படும் Nirvana Memorial Garden",
+  "blog.content.tcm-singapore-first-visit.sections.7.blocks.3.text": "BeTCM மருத்துவமனையின் தகவல்களையும் அங்கு செல்வதற்கான ஏற்பாடுகளையும் அறிந்துகொள்ள, நீங்கள் அதன் ClynicQ அறிமுகப் பக்கத்தைப் பார்க்கலாம்.",
+  "blog.content.tcm-singapore-first-visit.sections.7.blocks.4.text": "பங்கேற்கும் மற்ற மருத்துவமனைகளையும் நீங்கள் ClynicQ-இல் உள்ள பாரம்பரிய சீன மருத்துவப் பிரிவின் கீழ் உலாவிப் பார்க்கலாம்."
 }

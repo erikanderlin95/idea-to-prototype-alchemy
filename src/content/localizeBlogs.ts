@@ -9,7 +9,7 @@ export function localizeBlogArticle(article: BlogArticle, t: Translate): BlogArt
     if (Array.isArray(value)) return value.map((item, i) => translateValue(item, `${path}.${i}`));
     if (value && typeof value === "object") {
       return Object.fromEntries(Object.entries(value).map(([key, item]) => [key,
-        ["slug", "categoryKey", "image", "href", "related", "type"].includes(key)
+        ["slug", "categoryKey", "image", "imagePosition", "href", "related", "type"].includes(key)
           ? item : translateValue(item, `${path}.${key}`),
       ]));
     }
