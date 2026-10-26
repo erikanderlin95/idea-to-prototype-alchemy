@@ -8,3 +8,7 @@
 - [x] Fix scroll save overwriting real position during route change (removed unmount flush).
 - [x] Anchor restore to the top visible clinic card; keep re-applying while layout settles; stop on user touch.
 - [x] Verify back navigation returns to the same clinic card at two scroll depths on mobile viewport.
+
+## Clinic details opening position
+- [x] Reproduce browser-history clinic details reopening at the bottom.
+- [ ] Reset every clinic detail entry to the top without overriding listing restoration; verify mobile tap, in-app back and browser history.
