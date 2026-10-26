@@ -48,6 +48,7 @@ import About from "./pages/About";
 import TwentyFourHourClinics from "./pages/TwentyFourHourClinics";
 
 import { SectionSidebar } from "@/components/SectionSidebar";
+import { ScrollToTop } from "@/components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -58,6 +59,7 @@ const App = () => (
         <Toaster />
         <Sonner />
         <BrowserRouter>
+          <ScrollToTop />
           <SectionSidebar />
           <Routes>
             <Route path="/" element={<Index />} />
