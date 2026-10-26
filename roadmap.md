@@ -14,4 +14,4 @@
 - [x] Reset every clinic detail entry to the top without overriding listing restoration; verify mobile tap, in-app back and browser history.
 
 ## 24-hour clinic listing placement
-- [ ] Keep 24-hour directory clinic listings exclusively on the dedicated 24-hour clinics page.
+- [x] Keep 24-hour directory clinic listings exclusively on the dedicated 24-hour clinics page; verify old caches are excluded and all 11 directory cards remain.
