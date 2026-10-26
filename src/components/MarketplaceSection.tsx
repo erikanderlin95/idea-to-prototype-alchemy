@@ -124,8 +124,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         if (Math.abs(window.scrollY - target) > 2) {
           window.scrollTo(0, target);
           reachedAt = Date.now();
-        } else if (reachedAt && Date.now() - reachedAt > 600) {
-          stop();
+        } else {
+          if (!reachedAt) reachedAt = Date.now();
+          else if (Date.now() - reachedAt > 600) stop();
         }
       }
       if (Date.now() - started > 6000) {
