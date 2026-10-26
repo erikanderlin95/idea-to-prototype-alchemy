@@ -138,6 +138,12 @@ All colors MUST be HSL.
 }
 
 @layer base {
+  /* Always render the designed light theme so phones in dark mode
+     don't auto-invert colours and break readability. */
+  html {
+    color-scheme: light;
+  }
+
   * {
     @apply border-border;
   }

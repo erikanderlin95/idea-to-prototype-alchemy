@@ -61,51 +61,119 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   // Persist listing state (filters, search, page, scroll) for back navigation
   useEffect(() => {
     try {
+      const cur = JSON.parse(sessionStorage.getItem(stateKey) || "{}");
       sessionStorage.setItem(
         stateKey,
-        JSON.stringify({ category: activeCategory, search: searchText, filters, page: currentPage, scrollY: scrollYRef.current })
+        JSON.stringify({ ...cur, category: activeCategory, search: searchText, filters, page: currentPage, scrollY: scrollYRef.current })
       );
     } catch {}
   }, [stateKey, activeCategory, searchText, filters, currentPage]);
 
   useEffect(() => {
-    const save = () => {
-      if (restoringRef.current) return;
-      scrollYRef.current = window.scrollY;
+    const persist = (y: number) => {
+      scrollYRef.current = y;
+      // Anchor to the first visible clinic card so restore survives late-loading content above
+      let anchorIndex = -1;
+      let anchorTop = 0;
+      const cards = document.querySelectorAll(".onboarding-join-queue");
+      for (let i = 0; i < cards.length; i++) {
+        const r = cards[i].getBoundingClientRect();
+        if (r.bottom > 0) {
+          anchorIndex = i;
+          anchorTop = r.top;
+          break;
+        }
+      }
       try {
         const cur = JSON.parse(sessionStorage.getItem(stateKey) || "{}");
-        sessionStorage.setItem(stateKey, JSON.stringify({ ...cur, scrollY: window.scrollY }));
+        sessionStorage.setItem(stateKey, JSON.stringify({ ...cur, scrollY: y, anchorIndex, anchorTop }));
       } catch {}
     };
-    let timer: number | undefined;
-    const onScroll = () => {
-      window.clearTimeout(timer);
-      timer = window.setTimeout(save, 100);
+    let raf = 0;
+    const save = () => {
+      if (restoringRef.current || raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        persist(window.scrollY);
+      });
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
+    // Flush immediately so taps that navigate away right after scrolling don't lose the position
+    const flush = () => {
+      if (restoringRef.current) return;
+      if (raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+      persist(window.scrollY);
+    };
+    window.addEventListener("scroll", save, { passive: true });
+    window.addEventListener("pagehide", flush);
+    document.addEventListener("visibilitychange", flush);
+    document.addEventListener("click", flush, true);
     return () => {
-      window.clearTimeout(timer);
-      window.removeEventListener("scroll", onScroll);
+      // Do NOT flush here: on route change the browser may already have clamped
+      // the scroll to the shorter next page, which would overwrite the real position.
+      if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", save);
+      window.removeEventListener("pagehide", flush);
+      document.removeEventListener("visibilitychange", flush);
+      document.removeEventListener("click", flush, true);
     };
   }, [stateKey]);
 
-  // Restore scroll position when returning via back navigation
+  // Restore scroll position when returning via back navigation; keep retrying as content grows
   useEffect(() => {
     if (!restoringRef.current) return;
-    const target = scrollYRef.current;
+    const targetY = scrollYRef.current;
+    const anchorIndex: number = saved?.anchorIndex ?? -1;
+    const anchorTop: number = saved?.anchorTop ?? 0;
     const started = Date.now();
-    let raf = 0;
+    let iv = 0;
+    let ro: ResizeObserver | null = null;
+    // Teardown only; must NOT clear restoringRef (StrictMode runs cleanup once before the real effect)
+    const teardown = () => {
+      window.clearInterval(iv);
+      ro?.disconnect();
+      window.removeEventListener("wheel", finish);
+      window.removeEventListener("touchstart", finish);
+      window.removeEventListener("pointerdown", finish);
+    };
+    const finish = () => {
+      restoringRef.current = false;
+      teardown();
+    };
+    // Prefer anchoring to the same clinic card; fall back to raw scroll offset
+    const desiredY = (): number | null => {
+      if (anchorIndex >= 0) {
+        const cards = document.querySelectorAll(".onboarding-join-queue");
+        if (cards.length > anchorIndex) {
+          const r = cards[anchorIndex].getBoundingClientRect();
+          return window.scrollY + r.top - anchorTop;
+        }
+        return null;
+      }
+      return targetY;
+    };
     const tryScroll = () => {
       const maxY = document.documentElement.scrollHeight - window.innerHeight;
-      if (maxY >= target || Date.now() - started > 2000) {
-        window.scrollTo(0, Math.min(target, Math.max(0, maxY)));
-        restoringRef.current = false;
-        return;
+      const want = desiredY();
+      if (want != null && maxY > 0) {
+        const to = Math.max(0, Math.min(want, maxY));
+        if (Math.abs(window.scrollY - to) > 2) {
+          window.scrollTo(0, to);
+        }
       }
-      raf = requestAnimationFrame(tryScroll);
+      if (Date.now() - started > 6000) finish();
     };
-    raf = requestAnimationFrame(tryScroll);
-    return () => cancelAnimationFrame(raf);
+    // Keep re-applying as layout shifts; stop as soon as the user starts scrolling
+    window.addEventListener("wheel", finish, { passive: true });
+    window.addEventListener("touchstart", finish, { passive: true });
+    window.addEventListener("pointerdown", finish);
+    iv = window.setInterval(tryScroll, 100);
+    ro = new ResizeObserver(tryScroll);
+    ro.observe(document.documentElement);
+    tryScroll();
+    return teardown;
   }, []);
 
   useEffect(() => {
