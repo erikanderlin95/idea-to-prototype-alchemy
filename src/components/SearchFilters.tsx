@@ -25,6 +25,8 @@ interface SearchFiltersProps {
   onCategoryChange?: (category: string) => void;
   onSearchChange?: (text: string) => void;
   onFiltersChange?: (filters: ClinicFilters) => void;
+  initialSearch?: string;
+  initialFilters?: ClinicFilters;
 }
 
 export const SearchFilters = ({
@@ -32,16 +34,16 @@ export const SearchFilters = ({
   onCategoryChange,
   onSearchChange,
   onFiltersChange,
+  initialSearch = "",
+  initialFilters,
 }: SearchFiltersProps) => {
   const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState(defaultCategory);
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState(initialSearch);
   const [sheetOpen, setSheetOpen] = useState(false);
-  const [filters, setFilters] = useState<ClinicFilters>({
-    openNow: false,
-    queue: false,
-    booking: false,
-  });
+  const [filters, setFilters] = useState<ClinicFilters>(
+    initialFilters ?? { openNow: false, queue: false, booking: false }
+  );
   const [draftFilters, setDraftFilters] = useState<ClinicFilters>(filters);
   const scrollRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
