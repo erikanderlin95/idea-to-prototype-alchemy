@@ -1,7 +1,6 @@
 import { SearchFilters, type ClinicFilters } from "./SearchFilters";
 import { ClinicCard } from "./ClinicCard";
-import { DirectoryClinicCard } from "./DirectoryClinicCard";
-import { TWENTY_FOUR_HR_CLINICS } from "@/data/twentyFourHrClinics";
+import { participatingClinicsOnly } from "@/lib/clinicListing";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -41,7 +40,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   });
   const [clinics, setClinics] = useState<any[]>(() => {
     try {
-      return JSON.parse(sessionStorage.getItem("clynicq_clinics_cache") || "[]");
+      return participatingClinicsOnly(JSON.parse(sessionStorage.getItem("clynicq_clinics_cache") || "[]"));
     } catch {
       return [];
     }
@@ -201,15 +200,15 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   }, []);
 
   useEffect(() => {
-    let base = clinics;
+    let base = participatingClinicsOnly(clinics);
     if (activeCategory === "all") {
-      base = base.filter((c) => c.hasDigitalQueue || c.is24Hr || c.hasOnlineBooking || c.phone);
+      base = base.filter((c) => c.hasDigitalQueue || c.hasOnlineBooking || c.phone);
     } else {
       base = base.filter((clinic) => {
         const clinicType = (clinic.type || "").toLowerCase().trim();
         switch (activeCategory) {
           case "gp":
-            return ["gp", "general practitioner", "family medicine", "family doctor"].includes(clinicType) || clinic.is24Hr;
+            return ["gp", "general practitioner", "family medicine", "family doctor"].includes(clinicType);
           case "specialist":
             return ["specialist", "specialist referral"].includes(clinicType);
           case "dental":
@@ -315,33 +314,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         };
       });
 
-      // Normalize 24hr clinics into the same array so they participate in search/filter
-      const normalized24Hr = TWENTY_FOUR_HR_CLINICS.map((c) => ({
-        id: c.id,
-        name: c.name,
-        type: "24HR GP",
-        address: c.address,
-        phone: null,
-        services: [],
-        specialties: [],
-        queueCount: 0,
-        waitTime: "24 Hours",
-        rating: 0,
-        isOpen: true,
-        hasDigitalQueue: false,
-        bookingUrl: null,
-        isNmgAffiliated: false,
-        hasJoinQueue: false,
-        hasOnlineBooking: false,
-        is24Hr: true,
-        mapsUrl: c.mapsUrl,
-        area: c.area,
-      }));
-
-      const allClinics = [...clinicsWithQueue, ...normalized24Hr];
-      setClinics(allClinics);
+      setClinics(clinicsWithQueue);
       try {
-        sessionStorage.setItem("clynicq_clinics_cache", JSON.stringify(allClinics));
+        sessionStorage.setItem("clynicq_clinics_cache", JSON.stringify(clinicsWithQueue));
       } catch {}
     } catch (error) {
       console.error("Error fetching clinics:", error);
@@ -385,17 +360,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
               <>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-[0.4cm] mt-8 md:max-w-[calc(1260px+0.8cm)] md:mx-auto">
                   {pageClinics.map((clinic, index) => (
-                    clinic.is24Hr ? (
-                      <DirectoryClinicCard
-                        key={clinic.id}
-                        name={clinic.name}
-                        type={clinic.area ? `24HR · ${clinic.area}` : "24HR"}
-                        address={clinic.address}
-                        mapsUrl={clinic.mapsUrl}
-                      />
-                    ) : (
-                      <ClinicCard key={clinic.id || index} {...clinic} />
-                    )
+                    <ClinicCard key={clinic.id || index} {...clinic} />
                   ))}
                 </div>
 
