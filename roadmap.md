@@ -11,4 +11,7 @@
 
 ## Clinic details opening position
 - [x] Reproduce browser-history clinic details reopening at the bottom.
-- [ ] Reset every clinic detail entry to the top without overriding listing restoration; verify mobile tap, in-app back and browser history.
+- [x] Reset every clinic detail entry to the top without overriding listing restoration; verify mobile tap, in-app back and browser history.
+
+## 24-hour clinic listing placement
+- [ ] Keep 24-hour directory clinic listings exclusively on the dedicated 24-hour clinics page.
