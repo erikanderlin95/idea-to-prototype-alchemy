@@ -8,7 +8,7 @@ shared.__clynicqArticleTranslations = dictionaries;
 
 export function registerArticleTranslations(values: Dictionaries) {
   for (const language of ["en", "zh", "ms", "ta"] as const) {
-    if (values[language]) dictionaries[language] = values[language];
+    if (values[language]) dictionaries[language] = { ...dictionaries[language], ...values[language] };
   }
 }
 
