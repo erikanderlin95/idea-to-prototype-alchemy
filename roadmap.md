@@ -1,5 +1,10 @@
 # ClynicQ roadmap
 
+## Dr Chung knee osteoarthritis draft
+- [ ] Extract and inspect original cover, knee diagram, exercise illustrations, clinic photo and identified doctor portrait.
+- [ ] Add the supplied article, author, references, category and four-language content using the existing blog layout.
+- [ ] Keep the article unpublished and verify category filtering, clinic links, images and mobile reading.
+
 ## Dark mode compatibility
 - [x] Stop phone dark mode from auto-inverting the UI (declare light color-scheme in HTML and CSS).
 - [x] Verify homepage renders white/dark-text with an emulated dark-mode phone.
