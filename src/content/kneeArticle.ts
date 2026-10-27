@@ -10,7 +10,7 @@ const p = (text: string) => ({ type: 'p' as const, text });
 const h = (text: string) => ({ type: 'h3' as const, text });
 const ul = (...text: string[]) => ({ type: 'ul' as const, items: text.map(text => ({text})) });
 export const kneeArticle: BlogArticle = {
- slug: 'knee-osteoarthritis-symptoms-treatment', categoryKey: 'musculoskeletal-health', status: 'draft',
+ slug: 'knee-osteoarthritis-symptoms-treatment', categoryKey: 'musculoskeletal-health',
  title: 'Knee Osteoarthritis: Symptoms, Exercise and Treatment Options',
  seoTitle: 'Knee Osteoarthritis: Symptoms & Treatment | ClynicQ',
  metaDescription: 'Learn about knee osteoarthritis symptoms, exercise and treatment options, plus when to seek medical advice for knee pain in Singapore.',

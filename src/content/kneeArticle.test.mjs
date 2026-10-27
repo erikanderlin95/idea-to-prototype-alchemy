@@ -6,9 +6,9 @@ test("Dr Chung assessment button opens the supplied clinic page", () => {
   expect(kneeArticle.cta.href).toBe("https://www.clynicq.com/?clinic=agksee4qjo");
 });
 
-test("Dr Chung article remains a draft excluded from production but available for preview review", () => {
-  expect(kneeArticle.status).toBe("draft");
-  expect(visibleBlogArticles(false).some(a => a.slug === "knee-osteoarthritis-symptoms-treatment")).toBe(false);
+test("Dr Chung article is published and visible in production", () => {
+  expect(kneeArticle.status).toBeUndefined();
+  expect(visibleBlogArticles(false).some(a => a.slug === "knee-osteoarthritis-symptoms-treatment")).toBe(true);
   expect(visibleBlogArticles(true).some(a => a.slug === "knee-osteoarthritis-symptoms-treatment")).toBe(true);
 });
 test("Musculoskeletal Health category and article are registered once", () => {
