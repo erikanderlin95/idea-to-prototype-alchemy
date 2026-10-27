@@ -6,6 +6,7 @@
 - ScrollToTop owns browser scroll restoration: clinic detail entries always reset to the top, while listing POP entries defer to MarketplaceSection's saved-card restoration to avoid competing browser scroll writes.
 - MarketplaceSection uses participatingClinicsOnly to exclude dedicated directory entries from both restored caches and filtered results; the dedicated 24-hour page owns the static directory data.
 - Keep primary clinic browsing and queue routes eager; load secondary routes on demand so unrelated screens do not delay first paint or clinic navigation.
+- Use router transition scheduling to retain the current page while lazy routes load; keep ScrollToTop inside the route Suspense boundary so scrolling changes only when the destination commits, and use a translated initial-loading status instead of an empty fallback.
 - Serialize listing refreshes with coalescedRefresh, reuse clinic metadata between queue events, and always reread public queue stats; this prevents overlapping requests without caching live counts.
 - Clinic cards consume supplied booking/contact fields and only fetch missing fields; this avoids per-card duplicate reads while retaining standalone compatibility.
 - Register article dictionaries through the lightweight translation registry from blog localization and other article-text consumers, not from LanguageContext; lazy pages load their existing translations before rendering without making all pages download article content.

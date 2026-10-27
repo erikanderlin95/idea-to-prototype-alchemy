@@ -1,5 +1,10 @@
 # ClynicQ roadmap
 
+## Blank route transitions
+- [x] Replace blank lazy-route fallback and retain the existing page during navigation.
+- [x] Keep scroll reset aligned with the destination page becoming ready.
+- [x] Test delayed lazy-page navigation and direct loading on mobile and desktop.
+
 ## Safe mobile and desktop performance
 - [x] Remove unused per-card account checks and redundant listing renders.
 - [x] Reduce partner-logo downloads without changing appearance or proportions.

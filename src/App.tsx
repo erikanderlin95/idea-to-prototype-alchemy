@@ -50,6 +50,7 @@ const TwentyFourHourClinics = lazy(() => import("./pages/TwentyFourHourClinics")
 
 import { SectionSidebar } from "@/components/SectionSidebar";
 import { ScrollToTop } from "@/components/ScrollToTop";
+import { RouteLoading } from "@/components/RouteLoading";
 
 const queryClient = new QueryClient();
 
@@ -59,10 +60,10 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter>
-          <ScrollToTop />
+        <BrowserRouter future={{ v7_startTransition: true }}>
           <SectionSidebar />
-          <Suspense fallback={<div className="min-h-screen bg-background" aria-busy="true" />} >
+          <Suspense fallback={<RouteLoading />} >
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
