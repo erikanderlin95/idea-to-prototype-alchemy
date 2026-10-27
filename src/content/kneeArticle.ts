@@ -1,5 +1,6 @@
 import type { BlogArticle } from './blogPosts';
 import cover from '@/assets/blog/knee/cover.asset.json';
+import card from '@/assets/blog/knee/card.asset.json';
 import xray from '@/assets/blog/knee/xray.asset.json';
 import balance from '@/assets/blog/knee/balance.asset.json';
 import walking from '@/assets/blog/knee/walking.asset.json';
@@ -15,6 +16,7 @@ export const kneeArticle: BlogArticle = {
  metaDescription: 'Learn about knee osteoarthritis symptoms, exercise and treatment options, plus when to seek medical advice for knee pain in Singapore.',
  excerpt: 'Learn about knee osteoarthritis symptoms, exercise and treatment options, plus when to seek medical advice for knee pain in Singapore.',
  image: cover.url, imageAlt: 'Dr Chung Wing Hong, Family Physician at Chung & Ee Medical Clinic — caring for families from childhood to joint health', imageFit: 'contain',
+ cardImage: { image: card.url, imageAlt: 'Illustration of hands holding a knee with the painful area highlighted in red', caption: 'Knee-pain illustration reproduced from the supplied presentation.' },
  tags: ['Knee Osteoarthritis', 'Knee Pain', 'Joint Health', 'Exercise', 'Healthy Ageing'],
  author: { name: 'Dr Chung Wing Hong', byline: 'By Dr Chung Wing Hong', designation: 'Family Physician, Chung & Ee Medical Clinic', qualifications: 'MBBS (Singapore), MRCP (United Kingdom), M Med Internal Medicine (Singapore), GDFM (Singapore)', clinicName: 'Chung & Ee Medical Clinic', href: 'https://www.clynicq.com/?clinic=agksee4qjo', address: 'Clinic: 10 Telok Blangah Crescent, #01-151, Singapore 090010', image: doctor.url, imageAlt: 'Dr Chung Wing Hong in a blue checked suit', clinicImage: clinic.url, clinicImageAlt: 'Chung & Ee Medical Clinic storefront with its signboard and glass entrance', note: 'This article is based on Dr Chung’s knee osteoarthritis presentation, with supporting references.' },
  intro: [

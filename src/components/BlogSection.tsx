@@ -97,13 +97,13 @@ export const BlogSection = () => {
               <BlogCard
                 key={a.slug}
                 to={`/blog/${a.slug}`}
-                image={a.image}
-                imageAlt={a.imageAlt}
+                image={a.cardImage?.image ?? a.image}
+                imageAlt={a.cardImage?.imageAlt ?? a.imageAlt}
                 categoryKey={t(`blog.cat.${a.categoryKey}`)}
                 title={a.title}
                 excerpt={a.excerpt}
                 imagePosition={a.imagePosition}
-                imageFit={a.imageFit}
+                imageFit={a.cardImage ? undefined : a.imageFit}
               />
             );
           })}
