@@ -29,6 +29,7 @@ export type BlogArticle = {
   related?: string[];
   status?: "draft";
   imageFit?: "contain";
+  cardImage?: ArticleImage;
   tags?: string[];
   author?: { name: string; byline: string; designation: string; qualifications: string; clinicName: string; href: string; address: string; image: string; imageAlt: string; clinicImage: string; clinicImageAlt: string; note: string };
   references?: { label: string; href: string }[];
