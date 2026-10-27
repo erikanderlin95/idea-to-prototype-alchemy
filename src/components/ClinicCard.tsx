@@ -41,6 +41,8 @@ interface ClinicCardProps {
   isOpen: boolean;
   hasDigitalQueue?: boolean;
   isNmgAffiliated?: boolean;
+  bookingUrl?: string | null;
+  phone?: string | null;
 }
 
 export const ClinicCard = ({
@@ -54,6 +56,8 @@ export const ClinicCard = ({
   isOpen,
   hasDigitalQueue = true,
   isNmgAffiliated = false,
+  bookingUrl: suppliedBookingUrl,
+  phone: suppliedPhone,
 }: ClinicCardProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -101,8 +105,8 @@ export const ClinicCard = ({
   const [bookingRedirectUrl, setBookingRedirectUrl] = useState("");
   const [bookingRedirectType, setBookingRedirectType] = useState("");
   const [bookingPreferWhatsApp, setBookingPreferWhatsApp] = useState(false);
-  const [bookingUrl, setBookingUrl] = useState<string | null>(null);
-  const [clinicPhone, setClinicPhone] = useState<string>("");
+  const [bookingUrl, setBookingUrl] = useState<string | null>(suppliedBookingUrl ?? null);
+  const [clinicPhone, setClinicPhone] = useState<string>(suppliedPhone?.replace(/\D/g, '') ?? "");
 
   const generateCaseId = () => {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -181,13 +185,18 @@ export const ClinicCard = ({
   }, [id]);
 
   useEffect(() => {
+    if (suppliedBookingUrl !== undefined && suppliedPhone !== undefined) {
+      setBookingUrl(suppliedBookingUrl);
+      setClinicPhone(suppliedPhone?.replace(/\D/g, '') ?? "");
+      return;
+    }
     if (id) {
       supabase.from("clinics").select("booking_url, phone").eq("id", id).single().then(({ data }) => {
         setBookingUrl(data?.booking_url || null);
         setClinicPhone(data?.phone?.replace(/\D/g, '') || "");
       });
     }
-  }, [id]);
+  }, [id, suppliedBookingUrl, suppliedPhone]);
 
   const checkQueueStatus = async () => {
     if (!id) return;

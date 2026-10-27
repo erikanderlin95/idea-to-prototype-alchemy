@@ -1,6 +1,7 @@
 import { SearchFilters, type ClinicFilters } from "./SearchFilters";
 import { ClinicCard } from "./ClinicCard";
 import { participatingClinicsOnly } from "@/lib/clinicListing";
+import { coalescedRefresh } from "@/lib/coalescedRefresh";
 import { Button } from "@/components/ui/button";
 import { useEffect, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -54,6 +55,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   const scrollYRef = useRef<number>(saved?.scrollY ?? 0);
   const restoringRef = useRef<boolean>(navType === "POP" && (saved?.scrollY ?? 0) > 0);
   const filterKeyRef = useRef<string | null>(null);
+  const clinicRowsRef = useRef<any[] | null>(null);
 
   const clinicsPerPage = isMobile ? CLINICS_PER_PAGE_MOBILE : CLINICS_PER_PAGE_DESKTOP;
 
@@ -176,7 +178,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   }, []);
 
   useEffect(() => {
-    fetchClinics();
+    let active = true;
+    const loader = coalescedRefresh(() => fetchClinics(() => active));
+    void loader.refresh();
 
     // Subscribe to real-time queue changes to update counts
     const channel = supabase
@@ -189,12 +193,18 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           table: 'queue_entries',
         },
         () => {
-          fetchClinics();
+          void loader.refresh();
         }
       )
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'clinics' }, () => {
+        clinicRowsRef.current = null;
+        void loader.refresh();
+      })
       .subscribe();
 
     return () => {
+      active = false;
+      loader.dispose();
       supabase.removeChannel(channel);
     };
   }, []);
@@ -258,19 +268,22 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
   }, [activeCategory, clinics, searchText, filters]);
 
 
-  const fetchClinics = async () => {
+  const fetchClinics = async (isActive: () => boolean) => {
     try {
-      const { data, error } = await supabase
-        .from("clinics")
-        .select("*")
-        .order("rating", { ascending: false });
-
-      if (error) throw error;
-
-      // Use the secure queue_stats_public view for aggregated stats (no personal data exposed)
-      const { data: queueStats } = await supabase
-        .from("queue_stats_public")
-        .select("clinic_id, queue_count, estimated_wait_minutes");
+      const cachedRows = clinicRowsRef.current;
+      // Independent reads run together; queue events reuse metadata, never cached counts.
+      const [clinicResult, statsResult] = await Promise.all([
+        cachedRows ? Promise.resolve({ data: cachedRows, error: null }) : supabase
+          .from("clinics").select("*").order("rating", { ascending: false }),
+        supabase.from("queue_stats_public").select("clinic_id, queue_count, estimated_wait_minutes"),
+      ]);
+      if (!isActive()) return;
+      if (clinicResult.error) throw clinicResult.error;
+      if (statsResult.error) throw statsResult.error;
+      const data = clinicResult.data;
+      const queueStats = statsResult.data;
+      // Do not overwrite an invalidation received while this request was running.
+      if (clinicRowsRef.current === cachedRows) clinicRowsRef.current = data;
 
       // Create a map for quick lookup
       const statsMap = new Map(
