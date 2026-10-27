@@ -149,7 +149,9 @@ const BlogArticlePage = () => {
               <p key={x} className={i === 0 ? "font-semibold text-foreground mb-1" : "text-sm text-muted-foreground mb-4"}>{x}</p>
             ))}
             <Button asChild className="h-auto min-h-10 max-w-full whitespace-normal break-words py-2">
-              <Link
+              {/^https?:\/\//.test(article.cta.href) ? (
+                <a href={article.cta.href}>{article.cta.button}</a>
+              ) : <Link
                 to={article.cta.href}
                 onClick={(e) => {
                   e.preventDefault();
@@ -158,7 +160,7 @@ const BlogArticlePage = () => {
                 }}
               >
                 {article.cta.button}
-              </Link>
+              </Link>}
             </Button>
             </aside>
 
