@@ -6,7 +6,10 @@ import kneeEn from "./kneeTranslations.en.json";
 import kneeZh from "./kneeTranslations.zh.json";
 import kneeMs from "./kneeTranslations.ms.json";
 import kneeTa from "./kneeTranslations.ta.json";
+import { registerArticleTranslations } from "./translationRegistry";
 
 export const blogTranslations: Record<"en" | "zh" | "ms" | "ta", Record<string, string>> = {
   en: { ...en, ...kneeEn }, zh: { ...zh, ...kneeZh }, ms: { ...ms, ...kneeMs }, ta: { ...ta, ...kneeTa },
 };
+
+registerArticleTranslations(blogTranslations);

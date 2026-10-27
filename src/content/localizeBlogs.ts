@@ -1,4 +1,5 @@
 import type { BlogArticle } from "./blogPosts";
+import "./blogTranslations";
 import { eyecareTemplate } from "./eyecareTemplate";
 
 export type Translate = (key: string) => string;

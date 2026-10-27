@@ -8,3 +8,4 @@
 - Keep primary clinic browsing and queue routes eager; load secondary routes on demand so unrelated screens do not delay first paint or clinic navigation.
 - Serialize listing refreshes with coalescedRefresh, reuse clinic metadata between queue events, and always reread public queue stats; this prevents overlapping requests without caching live counts.
 - Clinic cards consume supplied booking/contact fields and only fetch missing fields; this avoids per-card duplicate reads while retaining standalone compatibility.
+- Register article dictionaries through the lightweight translation registry from blog localization and other article-text consumers, not from LanguageContext; lazy pages load their existing translations before rendering without making all pages download article content.

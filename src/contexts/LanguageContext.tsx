@@ -1,6 +1,6 @@
 // Language context with translations - v2
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo } from "react";
-import { blogTranslations } from "@/content/blogTranslations";
+import { articleTranslation } from "@/content/translationRegistry";
 
 export type Language = "en" | "zh" | "ms" | "ta";
 
@@ -4093,7 +4093,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   const t = useCallback((key: string): string => {
-    return translations[language][key] || blogTranslations[language][key] || translations["en"][key] || blogTranslations.en[key] || key;
+    return translations[language][key] || articleTranslation(language, key) || translations["en"][key] || articleTranslation("en", key) || key;
   }, [language]);
   const value = useMemo(() => ({ language, setLanguage, t }), [language, setLanguage, t]);
 
