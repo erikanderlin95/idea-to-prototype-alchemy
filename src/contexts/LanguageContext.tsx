@@ -4093,7 +4093,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }, []);
 
   const t = useCallback((key: string): string => {
-    return translations[language][key] || articleTranslation(language, key) || translations["en"][key] || key;
+    return translations[language][key] || articleTranslation(language, key) || translations["en"][key] || articleTranslation("en", key) || key;
   }, [language]);
   const value = useMemo(() => ({ language, setLanguage, t }), [language, setLanguage, t]);
 

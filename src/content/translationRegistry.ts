@@ -13,5 +13,5 @@ export function registerArticleTranslations(values: Dictionaries) {
 }
 
 export function articleTranslation(language: Language, key: string): string | undefined {
-  return dictionaries[language]?.[key] || dictionaries.en?.[key];
+  return dictionaries[language]?.[key];
 }
