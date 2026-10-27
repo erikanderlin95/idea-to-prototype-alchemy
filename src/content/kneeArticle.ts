@@ -81,7 +81,7 @@ export const kneeArticle: BlogArticle = {
  h('Does knee osteoarthritis always require surgery?'), p('No. Treatment often begins with exercise, practical lifestyle measures and suitable pain relief. Surgery may be considered when symptoms substantially affect daily life despite non-surgical care.') ]},
  {heading: 'Get support for persistent knee pain', blocks: [p('A painful knee does not have to mean giving up movement. Understanding your symptoms and finding a manageable treatment plan can help improve comfort, strength and confidence.') ]}
  ],
- cta: {text: ['Persistent knee pain affecting your daily activities? Find a healthcare provider on ClynicQ for an assessment.'], button: 'Explore Clinics on ClynicQ', href: '/#marketplace'},
+ cta: {text: ['Persistent knee pain affecting your daily activities?'], button: 'Find Dr Chung here', href: 'https://www.clynicq.com/?clinic=agksee4qjo'},
  disclaimer: 'This article provides general health information and does not replace an individual medical assessment.',
  references: [
  {label: 'HealthHub / Khoo Teck Puat Hospital: Knee Osteoarthritis—Causes and Treatment Options', href: 'https://www.healthhub.sg/health-conditions/knee-osteoarthritis'},
