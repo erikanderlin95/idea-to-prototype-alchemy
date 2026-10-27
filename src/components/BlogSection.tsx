@@ -5,11 +5,10 @@ import { blogArticles } from "@/content/blogPosts";
 import { localizeBlogArticle } from "@/content/localizeBlogs";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
-import imgChoosing from "@/assets/blog/choosing_the_right_vision_correction_method.jpg";
 
-type Category = "eyecare" | "guide" | "visit" | "tcm";
+type Category = "guide" | "visit" | "tcm";
 
-const categories: ("all" | Category)[] = ["all", "visit", "tcm", "eyecare"];
+const categories: ("all" | Category)[] = ["all", "visit", "tcm"];
 
 type BlogCardProps = {
   to: string;
@@ -59,7 +58,6 @@ export const BlogSection = () => {
   const { t, language } = useLanguage();
   const [cat, setCat] = useState<"all" | Category>("all");
   const list = useMemo(() => blogArticles.filter((a) => cat === "all" || a.categoryKey === cat), [cat]);
-  const showEyecare = cat === "all" || cat === "eyecare";
 
   return (
     <section id="blog" lang={language === "zh" ? "zh-Hans" : language} className="py-6 md:py-10 border-t border-border/30">
@@ -104,16 +102,6 @@ export const BlogSection = () => {
               />
             );
           })}
-          {showEyecare && (
-            <BlogCard
-              to="/blog/eye-health-guide-dr-philemon-huang"
-              image={imgChoosing}
-              imageAlt={t("blog.eyecare.title")}
-              categoryKey={t("blog.cat.eyecare")}
-              title={t("blog.eyecare.title")}
-              excerpt={t("blog.eyecare.excerpt")}
-            />
-          )}
         </div>
       </div>
     </section>
