@@ -1,8 +1,8 @@
 import { describe, expect, test } from "bun:test";
 import { blogArticles } from "./blogPosts.ts";
 import { localizeBlogArticle, localizeEyecare } from "./localizeBlogs.ts";
-import english from "./blogTranslations.en.json" with { type: "json" };
 import { blogTranslations } from "./blogTranslations.ts";
+const english = blogTranslations.en;
 
 describe("Blog language selection", () => {
   test("English lookup preserves every original article and its navigation", () => {
