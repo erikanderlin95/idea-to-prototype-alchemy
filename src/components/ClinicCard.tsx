@@ -11,7 +11,6 @@ import { MapPin, Clock, Users, Star, CheckCircle, Phone, AlertTriangle, Copy, Ca
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
@@ -60,7 +59,6 @@ export const ClinicCard = ({
   phone: suppliedPhone,
 }: ClinicCardProps) => {
   const navigate = useNavigate();
-  const { user } = useAuth();
   const { t } = useLanguage();
   const [isJoining, setIsJoining] = useState(false);
   const [myQueueEntry, setMyQueueEntry] = useState<any>(null);

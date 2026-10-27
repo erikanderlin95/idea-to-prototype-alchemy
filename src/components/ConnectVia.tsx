@@ -1,6 +1,6 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
-import sgimed from "@/assets/partners/sgimed.jpg";
+import sgimed from "@/assets/partners/sgimed.jpg?w=600&format=webp&quality=90";
 
 const Dot = () => (
   <span className="text-muted-foreground/50 select-none text-sm md:text-base">·</span>

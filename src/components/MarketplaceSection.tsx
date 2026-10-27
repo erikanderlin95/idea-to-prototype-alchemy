@@ -3,7 +3,7 @@ import { ClinicCard } from "./ClinicCard";
 import { participatingClinicsOnly } from "@/lib/clinicListing";
 import { coalescedRefresh } from "@/lib/coalescedRefresh";
 import { Button } from "@/components/ui/button";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -46,7 +46,6 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
       return [];
     }
   });
-  const [filteredClinics, setFilteredClinics] = useState<any[]>([]);
   const [activeCategory, setActiveCategory] = useState(saved?.category ?? defaultCategory);
   const [searchText, setSearchText] = useState<string>(saved?.search ?? "");
   const [filters, setFilters] = useState<ClinicFilters>(saved?.filters ?? { openNow: false, queue: false, booking: false });
@@ -209,7 +208,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
     };
   }, []);
 
-  useEffect(() => {
+  const filteredClinics = useMemo(() => {
     let base = participatingClinicsOnly(clinics);
     if (activeCategory === "all") {
       base = base.filter((c) => c.hasDigitalQueue || c.hasOnlineBooking || c.phone);
@@ -261,11 +260,14 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
     if (filters.queue) base = base.filter((c) => c.hasJoinQueue === true);
     if (filters.booking) base = base.filter((c) => c.hasOnlineBooking === true);
 
-    setFilteredClinics(base);
+    return base;
+  }, [activeCategory, clinics, searchText, filters]);
+
+  useEffect(() => {
     const key = JSON.stringify([activeCategory, searchText, filters]);
     if (filterKeyRef.current !== null && filterKeyRef.current !== key) setCurrentPage(1);
     filterKeyRef.current = key;
-  }, [activeCategory, clinics, searchText, filters]);
+  }, [activeCategory, searchText, filters]);
 
 
   const fetchClinics = async (isActive: () => boolean) => {
@@ -355,7 +357,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
             defaultCategory={activeCategory}
             initialSearch={searchText}
             initialFilters={filters}
-            onCategoryChange={handleCategoryChange}
+            onCategoryChange={setActiveCategory}
             onSearchChange={setSearchText}
             onFiltersChange={setFilters}
           />
