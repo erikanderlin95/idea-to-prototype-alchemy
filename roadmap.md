@@ -1,9 +1,9 @@
 # ClynicQ roadmap
 
 ## Safe mobile and desktop performance
-- [ ] Remove unused per-card account checks and redundant listing renders.
-- [ ] Reduce partner-logo downloads without changing appearance or proportions.
-- [ ] Verify refresh, filters, intake and detail/back navigation on mobile and desktop.
+- [x] Remove unused per-card account checks and redundant listing renders.
+- [x] Reduce partner-logo downloads without changing appearance or proportions.
+- [x] Verify refresh, filters, intake and detail/back navigation on mobile and desktop.
 
 ## Refresh speed only
 - [x] Measure shared page downloads and check query timings without changing data or functionality.
