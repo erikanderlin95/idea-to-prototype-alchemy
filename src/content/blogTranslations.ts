@@ -2,5 +2,6 @@ import en from "./blogTranslations.en.json";
 import zh from "./blogTranslations.zh.json";
 import ms from "./blogTranslations.ms.json";
 import ta from "./blogTranslations.ta.json";
+import kneeEn from "./kneeTranslations.en.json";
 
-export const blogTranslations: Record<"en" | "zh" | "ms" | "ta", Record<string, string>> = { en, zh, ms, ta };
+export const blogTranslations: Record<"en" | "zh" | "ms" | "ta", Record<string, string>> = { en: { ...en, ...kneeEn }, zh, ms, ta };
