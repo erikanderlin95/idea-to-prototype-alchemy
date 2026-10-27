@@ -96,7 +96,6 @@ const BlogArticlePage = () => {
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground leading-tight mb-5">
             {article.title}
           </h1>
-          {article.status === "draft" && <p className="text-xs font-semibold text-primary mb-2">{t("blog.draft")}</p>}
           {article.author && <div className="text-sm text-muted-foreground mb-4"><p>{article.author.byline}</p><p>{article.author.designation}</p></div>}
           <img
             src={article.image}
