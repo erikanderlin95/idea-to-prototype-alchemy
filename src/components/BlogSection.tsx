@@ -1,14 +1,15 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { blogArticles } from "@/content/blogPosts";
+import { blogCategories, visibleBlogArticles } from "@/content/blogPosts";
+import { Button } from "@/components/ui/button";
 import { localizeBlogArticle } from "@/content/localizeBlogs";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 
-type Category = "guide" | "visit" | "tcm";
+type Category = "visit" | "tcm" | "musculoskeletal-health";
 
-const categories: ("all" | Category)[] = ["all", "visit", "tcm"];
+const categories = blogCategories;
 
 type BlogCardProps = {
   to: string;
@@ -18,9 +19,10 @@ type BlogCardProps = {
   title: string;
   excerpt: string;
   imagePosition?: string;
+  imageFit?: "contain";
 };
 
-const BlogCard = ({ to, image, imageAlt, categoryKey, title, excerpt, imagePosition }: BlogCardProps) => {
+const BlogCard = ({ to, image, imageAlt, categoryKey, title, excerpt, imagePosition, imageFit }: BlogCardProps) => {
   const { t } = useLanguage();
   return (
     <Link
@@ -36,6 +38,7 @@ const BlogCard = ({ to, image, imageAlt, categoryKey, title, excerpt, imagePosit
         className={cn(
           "w-28 sm:w-32 md:w-full shrink-0 aspect-[4/3] md:aspect-[16/9] object-cover self-stretch md:self-auto",
           imagePosition ?? "object-center"
+          , imageFit === "contain" && "object-contain"
         )}
       />
       <div className="flex-1 min-w-0 p-2.5 md:p-5 flex flex-col gap-1 md:gap-1.5">
@@ -57,7 +60,7 @@ const BlogCard = ({ to, image, imageAlt, categoryKey, title, excerpt, imagePosit
 export const BlogSection = () => {
   const { t, language } = useLanguage();
   const [cat, setCat] = useState<"all" | Category>("all");
-  const list = useMemo(() => blogArticles.filter((a) => cat === "all" || a.categoryKey === cat), [cat]);
+  const list = useMemo(() => visibleBlogArticles().filter((a) => cat === "all" || a.categoryKey === cat), [cat]);
 
   return (
     <section id="blog" lang={language === "zh" ? "zh-Hans" : language} className="py-6 md:py-10 border-t border-border/30">
@@ -71,7 +74,8 @@ export const BlogSection = () => {
 
         <div className="flex gap-2 mb-3 md:mb-4 overflow-x-auto scrollbar-hide -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap md:justify-center md:overflow-visible">
           {categories.map((c) => (
-            <button
+            <Button
+              variant="outline"
               key={c}
               onClick={() => setCat(c)}
               className={cn(
@@ -82,7 +86,7 @@ export const BlogSection = () => {
               )}
             >
               {t(`blog.cat.${c}`)}
-            </button>
+            </Button>
           ))}
         </div>
 
@@ -99,6 +103,7 @@ export const BlogSection = () => {
                 title={a.title}
                 excerpt={a.excerpt}
                 imagePosition={a.imagePosition}
+                imageFit={a.imageFit}
               />
             );
           })}

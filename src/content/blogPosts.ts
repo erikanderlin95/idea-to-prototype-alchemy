@@ -1,13 +1,16 @@
 import chooseClinic from "@/assets/blog/choose-clinic.jpg";
 import walkInClinic from "@/assets/blog/walk-in-clinic.jpg";
 import tcmClinic from "@/assets/blog/tcm-clinic.jpg";
+import { kneeArticle } from "./kneeArticle";
 
 export type ArticleBlock =
   | { type: "p"; text: string }
+  | { type: "h3"; text: string }
   | { type: "ul"; items: { label?: string; text: string }[] }
   | { type: "pLink"; pre: string; label: string; href: string; post?: string };
 
-export type ArticleSection = { heading: string; blocks: ArticleBlock[] };
+export type ArticleImage = { image: string; imageAlt: string; caption: string };
+export type ArticleSection = { heading: string; blocks: ArticleBlock[]; images?: ArticleImage[] };
 
 export type BlogArticle = {
   slug: string;
@@ -24,6 +27,11 @@ export type BlogArticle = {
   cta: { text: string[]; button: string; href: string };
   disclaimer: string;
   related?: string[];
+  status?: "draft";
+  imageFit?: "contain";
+  tags?: string[];
+  author?: { name: string; byline: string; designation: string; qualifications: string; clinicName: string; href: string; address: string; image: string; imageAlt: string; clinicImage: string; clinicImageAlt: string; note: string };
+  references?: { label: string; href: string }[];
 };
 
 const p = (text: string): ArticleBlock => ({ type: "p", text });
@@ -395,6 +403,9 @@ export const blogArticles: BlogArticle[] = [
       "This article is intended for general educational purposes and does not constitute medical advice. TCM treatments may not be suitable for everyone. Consult an appropriately qualified healthcare professional about your individual circumstances. Do not discontinue prescribed medication or delay necessary medical care without professional advice.",
     related: ["how-to-choose-a-clinic-singapore", "walk-in-clinics-singapore"],
   },
+  kneeArticle,
 ];
 
-export const getBlogArticle = (slug?: string) => blogArticles.find((a) => a.slug === slug);
+export const visibleBlogArticles = (preview = import.meta.env?.DEV ?? false) => blogArticles.filter(a => a.status !== "draft" || preview);
+export const blogCategories = ["all", "visit", "tcm", "musculoskeletal-health"] as const;
+export const getBlogArticle = (slug?: string) => visibleBlogArticles().find((a) => a.slug === slug);
