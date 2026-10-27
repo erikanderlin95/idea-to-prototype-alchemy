@@ -1,9 +1,9 @@
 # ClynicQ roadmap
 
 ## Page loading and refresh performance
-- [ ] Identify page-loading and refresh bottlenecks without changing queue behaviour.
-- [ ] Reduce unnecessary initial downloads and repeated requests while preserving navigation and translations.
-- [ ] Verify page opening, refreshes and clinic browsing; leave production unchanged.
+- [x] Identify page-loading and refresh bottlenecks without changing queue behaviour.
+- [x] Reduce unnecessary initial downloads and repeated requests while preserving navigation and translations.
+- [x] Verify page opening, refreshes and clinic browsing; leave production unchanged.
 
 ## Dr Chung knee osteoarthritis draft
 - [x] Extract and inspect original cover, knee diagram, exercise illustrations, clinic photo and identified doctor portrait.
