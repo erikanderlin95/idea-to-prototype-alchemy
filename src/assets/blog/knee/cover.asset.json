@@ -1,11 +1,11 @@
 {
   "version": 1,
-  "asset_id": "63df7f8e-84eb-440c-be9d-e7f0d188d8f0",
+  "asset_id": "cbb553a2-ec24-4b36-a73e-e13b9a7745e6",
   "project_id": "819d6307-a88b-4110-8547-b8ff24ea6b41",
-  "url": "/__l5e/assets-v1/63df7f8e-84eb-440c-be9d-e7f0d188d8f0/knee-pain.png",
-  "r2_key": "a/v1/819d6307-a88b-4110-8547-b8ff24ea6b41/63df7f8e-84eb-440c-be9d-e7f0d188d8f0/knee-pain.png",
-  "original_filename": "knee-pain.png",
-  "size": 600421,
-  "content_type": "image/png",
-  "created_at": "2026-10-27T06:01:42Z"
+  "url": "/__l5e/assets-v1/cbb553a2-ec24-4b36-a73e-e13b9a7745e6/cover.jpg",
+  "r2_key": "a/v1/819d6307-a88b-4110-8547-b8ff24ea6b41/cbb553a2-ec24-4b36-a73e-e13b9a7745e6/cover.jpg",
+  "original_filename": "cover.jpg",
+  "size": 208661,
+  "content_type": "image/jpeg",
+  "created_at": "2026-10-27T06:08:58Z"
 }
