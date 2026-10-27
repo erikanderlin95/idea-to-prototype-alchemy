@@ -3,7 +3,7 @@
 ## Refresh speed only
 - [x] Measure shared page downloads and check query timings without changing data or functionality.
 - [x] Defer article dictionaries to the pages that use them, preserving all four languages.
-- [ ] Verify refreshes, blog translations and existing navigation; do not publish.
+- [x] Verify refreshes, blog translations and existing navigation; do not publish.
 
 ## Page loading and refresh performance
 - [x] Identify page-loading and refresh bottlenecks without changing queue behaviour.
