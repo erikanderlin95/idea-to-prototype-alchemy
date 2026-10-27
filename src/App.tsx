@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -5,47 +6,47 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
-import Auth from "./pages/Auth";
+const Auth = lazy(() => import("./pages/Auth"));
 import ClinicProfile from "./pages/ClinicProfile";
-import Booking from "./pages/Booking";
-import BookingTriage from "./pages/BookingTriage";
-import Appointments from "./pages/Appointments";
-import Dashboard from "./pages/Dashboard";
-import Chatbot from "./pages/Chatbot";
+const Booking = lazy(() => import("./pages/Booking"));
+const BookingTriage = lazy(() => import("./pages/BookingTriage"));
+const Appointments = lazy(() => import("./pages/Appointments"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+const Chatbot = lazy(() => import("./pages/Chatbot"));
 import Queue from "./pages/Queue";
-import DoctorProfile from "./pages/DoctorProfile";
-import Analytics from "./pages/Analytics";
-import StaffDashboard from "./pages/StaffDashboard";
-import Consultants from "./pages/Consultants";
-import ConsultantProfile from "./pages/ConsultantProfile";
-import AdminConsultants from "./pages/AdminConsultants";
+const DoctorProfile = lazy(() => import("./pages/DoctorProfile"));
+const Analytics = lazy(() => import("./pages/Analytics"));
+const StaffDashboard = lazy(() => import("./pages/StaffDashboard"));
+const Consultants = lazy(() => import("./pages/Consultants"));
+const ConsultantProfile = lazy(() => import("./pages/ConsultantProfile"));
+const AdminConsultants = lazy(() => import("./pages/AdminConsultants"));
 import GPClinics from "./pages/GPClinics";
 import TCMClinics from "./pages/TCMClinics";
 import WellnessClinics from "./pages/WellnessClinics";
-import ManagedCareRequest from "./pages/ManagedCareRequest";
-import OrganizationProfile from "./pages/OrganizationProfile";
+const ManagedCareRequest = lazy(() => import("./pages/ManagedCareRequest"));
+const OrganizationProfile = lazy(() => import("./pages/OrganizationProfile"));
 
 
-import SpeakersTrainers from "./pages/SpeakersTrainers";
-import SpeakerProfile from "./pages/SpeakerProfile";
-import CaringForLifeProfile from "./pages/CaringForLifeProfile";
-import AfterlifeServicesPage from "./pages/AfterlifeServices";
-import AfterlifeProfile from "./pages/AfterlifeProfile";
-import ForClinics from "./pages/ForClinics";
-import BMICalculator from "./pages/BMICalculator";
-import HealthTools from "./pages/HealthTools";
-import SugarHabit from "./pages/SugarHabit";
-import Privacy from "./pages/Privacy";
+const SpeakersTrainers = lazy(() => import("./pages/SpeakersTrainers"));
+const SpeakerProfile = lazy(() => import("./pages/SpeakerProfile"));
+const CaringForLifeProfile = lazy(() => import("./pages/CaringForLifeProfile"));
+const AfterlifeServicesPage = lazy(() => import("./pages/AfterlifeServices"));
+const AfterlifeProfile = lazy(() => import("./pages/AfterlifeProfile"));
+const ForClinics = lazy(() => import("./pages/ForClinics"));
+const BMICalculator = lazy(() => import("./pages/BMICalculator"));
+const HealthTools = lazy(() => import("./pages/HealthTools"));
+const SugarHabit = lazy(() => import("./pages/SugarHabit"));
+const Privacy = lazy(() => import("./pages/Privacy"));
 import NotFound from "./pages/NotFound";
-import BlogArticle from "./pages/BlogArticle";
-import BlogEyecare from "./pages/BlogEyecare";
-import WellnessTalksPage from "./pages/WellnessTalksPage";
-import BeyondClinicPage from "./pages/BeyondClinicPage";
-import ClinicOwnersPage from "./pages/ClinicOwnersPage";
-import MyClynicQPage from "./pages/MyClynicQPage";
-import HoviCare from "./pages/HoviCare";
-import About from "./pages/About";
-import TwentyFourHourClinics from "./pages/TwentyFourHourClinics";
+const BlogArticle = lazy(() => import("./pages/BlogArticle"));
+const BlogEyecare = lazy(() => import("./pages/BlogEyecare"));
+const WellnessTalksPage = lazy(() => import("./pages/WellnessTalksPage"));
+const BeyondClinicPage = lazy(() => import("./pages/BeyondClinicPage"));
+const ClinicOwnersPage = lazy(() => import("./pages/ClinicOwnersPage"));
+const MyClynicQPage = lazy(() => import("./pages/MyClynicQPage"));
+const HoviCare = lazy(() => import("./pages/HoviCare"));
+const About = lazy(() => import("./pages/About"));
+const TwentyFourHourClinics = lazy(() => import("./pages/TwentyFourHourClinics"));
 
 import { SectionSidebar } from "@/components/SectionSidebar";
 import { ScrollToTop } from "@/components/ScrollToTop";
@@ -61,6 +62,7 @@ const App = () => (
         <BrowserRouter>
           <ScrollToTop />
           <SectionSidebar />
+          <Suspense fallback={<div className="min-h-screen bg-background" aria-busy="true" />} >
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/auth" element={<Auth />} />
@@ -108,6 +110,7 @@ const App = () => (
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
+          </Suspense>
         </BrowserRouter>
       </TooltipProvider>
     </LanguageProvider>
