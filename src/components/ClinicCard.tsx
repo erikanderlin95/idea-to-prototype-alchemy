@@ -167,11 +167,6 @@ export const ClinicCard = ({
   };
 
   useEffect(() => {
-    if (suppliedBookingUrl !== undefined && suppliedPhone !== undefined) {
-      setBookingUrl(suppliedBookingUrl);
-      setClinicPhone(suppliedPhone?.replace(/\D/g, '') ?? "");
-      return;
-    }
     if (id) {
       // On a fresh page load, cards always start in their default (not-joined) state.
       localStorage.removeItem(`queue_mobile_${id}`);
@@ -187,16 +182,21 @@ export const ClinicCard = ({
         .subscribe();
       return () => { supabase.removeChannel(channel); };
     }
-  }, [id, suppliedBookingUrl, suppliedPhone]);
+  }, [id]);
 
   useEffect(() => {
+    if (suppliedBookingUrl !== undefined && suppliedPhone !== undefined) {
+      setBookingUrl(suppliedBookingUrl);
+      setClinicPhone(suppliedPhone?.replace(/\D/g, '') ?? "");
+      return;
+    }
     if (id) {
       supabase.from("clinics").select("booking_url, phone").eq("id", id).single().then(({ data }) => {
         setBookingUrl(data?.booking_url || null);
         setClinicPhone(data?.phone?.replace(/\D/g, '') || "");
       });
     }
-  }, [id]);
+  }, [id, suppliedBookingUrl, suppliedPhone]);
 
   const checkQueueStatus = async () => {
     if (!id) return;
