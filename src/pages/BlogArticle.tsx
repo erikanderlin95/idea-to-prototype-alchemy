@@ -57,13 +57,14 @@ const BlogArticlePage = () => {
     ld.type = "application/ld+json";
     ld.text = JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "Article",
+       "@type": article.author ? "BlogPosting" : "Article",
       headline: article.title,
       description: article.metaDescription,
       inLanguage: language === "zh" ? "zh-Hans" : language,
       image: [image],
       mainEntityOfPage: url,
-      author: { "@type": "Organization", name: "ClynicQ", url: SITE },
+      author: article.author ? { "@type": "Person", name: article.author.name, jobTitle: article.author.designation, worksFor: { "@type": "MedicalClinic", name: article.author.clinicName, url: article.author.href } } : { "@type": "Organization", name: "ClynicQ", url: SITE },
+      ...(article.tags ? { keywords: article.tags.join(", ") } : {}),
       publisher: {
         "@type": "Organization",
         name: "ClynicQ",
@@ -72,11 +73,13 @@ const BlogArticlePage = () => {
       },
     });
     document.head.appendChild(ld);
+    const undoRobots = article.status === "draft" ? setMeta("name", "robots", "noindex, nofollow") : undefined;
     return () => {
       document.title = prevTitle;
       undo.forEach((u) => u());
       canonical.remove();
       ld.remove();
+      undoRobots?.();
     };
   }, [slug, language]);
 
@@ -93,22 +96,32 @@ const BlogArticlePage = () => {
           <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold tracking-tight text-foreground leading-tight mb-5">
             {article.title}
           </h1>
+          {article.status === "draft" && <p className="text-xs font-semibold text-primary mb-2">{t("blog.draft")}</p>}
+          {article.author && <div className="text-sm text-muted-foreground mb-4"><p>{article.author.byline}</p><p>{article.author.designation}</p></div>}
           <img
             src={article.image}
             alt={article.imageAlt}
             width={1200}
             height={640}
-            className="w-full rounded-2xl border border-border mb-6 aspect-[15/8] object-cover"
+            className={article.imageFit === "contain" ? "w-full max-h-96 rounded-2xl border border-border mb-6 object-contain" : "w-full rounded-2xl border border-border mb-6 aspect-[15/8] object-cover"}
           />
           <div className="text-[15px] md:text-base text-foreground/90 leading-relaxed space-y-4">
             {article.intro.map((x) => <p key={x}>{x}</p>)}
             {article.sections.map((s) => (
               <section key={s.heading} className="pt-3">
                 <h2 className="text-xl md:text-2xl font-semibold text-foreground mb-3 leading-snug">{s.heading}</h2>
+                {s.images && <div className={s.images.length > 1 ? "grid grid-cols-2 gap-3 mb-4" : "mb-4"}>
+                  {s.images.map(figure => <figure key={figure.image} className="min-w-0">
+                    <img src={figure.image} alt={figure.imageAlt} loading="lazy" className="w-full max-h-72 object-contain rounded-lg" />
+                    <figcaption className="text-xs text-muted-foreground mt-1 leading-relaxed">{figure.caption}</figcaption>
+                  </figure>)}
+                </div>}
                 <div className="space-y-3">
                   {s.blocks.map((b, i) =>
                     b.type === "p" ? (
                       <p key={i}>{b.text}</p>
+                    ) : b.type === "h3" ? (
+                      <h3 key={i} className="text-lg font-semibold text-foreground pt-2">{b.text}</h3>
                     ) : b.type === "pLink" ? (
                       <p key={i}>
                         {b.pre}
@@ -166,7 +179,28 @@ const BlogArticlePage = () => {
             </nav>
           )}
 
+          {article.author && <section className="mt-6 border-t border-border pt-4">
+            <h2 className="text-xl font-semibold mb-3">{t("blog.aboutAuthor")}</h2>
+            <div className="flex items-start gap-3">
+              <img src={article.author.image} alt={article.author.imageAlt} loading="lazy" className="w-20 h-auto rounded-lg shrink-0" />
+              <div className="min-w-0 text-sm space-y-1">
+                <h3 className="font-semibold">{article.author.name}</h3>
+                <p>{article.author.designation}</p>
+                <p>{article.author.qualifications}</p>
+              </div>
+            </div>
+            <a href={article.author.href} className="inline-block text-primary font-medium hover:underline mt-3">{article.author.clinicName}</a>
+            <p className="text-sm mt-1">{article.author.address}</p>
+            <img src={article.author.clinicImage} alt={article.author.clinicImageAlt} loading="lazy" className="w-full h-auto rounded-lg mt-3" />
+            <p className="text-sm text-muted-foreground mt-3">{article.author.note}</p>
+          </section>}
           <p className="mt-6 text-xs text-muted-foreground italic leading-relaxed">{article.disclaimer}</p>
+          {article.references && <section className="mt-4 border-t border-border pt-3">
+            <h2 className="text-sm font-semibold mb-2">{t("blog.singaporeReferences")}</h2>
+            <ol className="list-decimal pl-5 text-xs leading-relaxed space-y-2">
+              {article.references.map(reference => <li key={reference.href}><a href={reference.href} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">{reference.label}</a></li>)}
+            </ol>
+          </section>}
         </article>
       </main>
       <Footer />
