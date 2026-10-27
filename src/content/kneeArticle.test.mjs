@@ -12,7 +12,7 @@ test("Musculoskeletal Health category and article are registered once", () => {
   expect(blogArticles.filter(a => a.slug === "knee-osteoarthritis-symptoms-treatment")).toHaveLength(1);
   expect(kneeArticle.categoryKey).toBe("musculoskeletal-health");
 });
-test("Dr Chung authorship and supporting Singapore references stay separate", () => {
+test("Dr Chung authorship and supporting references stay separate", () => {
   expect(kneeArticle.author.name).toBe("Dr Chung Wing Hong");
   expect(kneeArticle.author.href).toBe("https://www.clynicq.com/?clinic=agksee4qjo");
   expect(kneeArticle.references.map(r => new URL(r.href).hostname)).toEqual(["www.healthhub.sg", "www.ace-hta.gov.sg", "www.moh.gov.sg"]);
