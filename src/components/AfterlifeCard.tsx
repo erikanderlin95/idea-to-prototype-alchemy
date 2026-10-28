@@ -20,16 +20,8 @@ const AfterlifeCard = ({ slug, name, subtitle, description }: AfterlifeCardProps
   return (
     <Card className="group hover:shadow-[0_10px_28px_rgba(45,27,78,0.10)] hover:-translate-y-0.5 transition-all duration-300 border border-gray-200/80 hover:border-gray-300/80 shadow-[0_2px_12px_rgba(45,27,78,0.04)] bg-white overflow-hidden w-full">
       <CardContent className="p-3 sm:p-4 flex flex-col gap-2 sm:gap-2.5">
-        {/* Logo left, text right — same row layout as the other partner cards */}
+        {/* Text left, logo right */}
         <div className="flex items-center gap-3 sm:gap-4">
-          <div className="h-16 w-16 sm:h-[72px] sm:w-[72px] rounded-xl overflow-hidden shrink-0 ring-1 ring-[#C9A84C]/25 shadow-[0_2px_8px_rgba(201,168,76,0.10)] bg-white">
-            <img
-              src={nirvanaLogoAsset.url}
-              alt="Nirvana Joyful Life logo"
-              className="w-full h-full object-contain bg-white"
-            />
-          </div>
-
           <div className="min-w-0 flex-1">
             <h3 className="text-[15px] sm:text-base font-bold text-[#2D1B4E]">
               {name}
@@ -42,6 +34,14 @@ const AfterlifeCard = ({ slug, name, subtitle, description }: AfterlifeCardProps
                 {description}
               </p>
             )}
+          </div>
+
+          <div className="h-16 w-16 sm:h-[72px] sm:w-[72px] rounded-xl overflow-hidden shrink-0 ring-1 ring-[#C9A84C]/25 shadow-[0_2px_8px_rgba(201,168,76,0.10)] bg-white">
+            <img
+              src={nirvanaLogoAsset.url}
+              alt="Nirvana Joyful Life logo"
+              className="w-full h-full object-contain bg-white"
+            />
           </div>
         </div>
 
