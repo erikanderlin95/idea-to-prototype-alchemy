@@ -348,7 +348,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         <div className="px-2 sm:px-0 space-y-4">
           <div className="text-center mb-2">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-1">{title || t("marketplace.title")}</h2>
-            <p className="-mx-2 text-[clamp(12.5px,4vw,18px)] leading-snug whitespace-nowrap sm:text-xl sm:whitespace-normal text-foreground/80 font-medium">
+            <p className="-mx-2 text-[clamp(13px,4.15vw,19px)] leading-snug whitespace-nowrap sm:max-w-2xl sm:mx-auto sm:text-xl sm:whitespace-normal text-foreground/80 font-medium">
               {subtitle || t("marketplace.subtitle")}
             </p>
           </div>
