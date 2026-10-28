@@ -202,3 +202,22 @@ All colors MUST be HSL.
 .blog-prose table { @apply w-full text-xs border-collapse my-4 block overflow-x-auto; }
 .blog-prose th, .blog-prose td { @apply border border-border p-2 align-top text-left; }
 .blog-prose th { @apply bg-muted font-semibold; }
+
+/* Browse Clinics subheader: the full sentence must stay on one row on phones,
+   while desktop keeps the previous size and normal wrapping. */
+#marketplace .marketplace-subtitle {
+  white-space: nowrap;
+  font-size: clamp(10px, 3.2vw, 19px);
+}
+
+#marketplace .marketplace-subtitle[data-lang="zh"] {
+  font-size: clamp(13px, 4.1vw, 19px);
+}
+
+@media (min-width: 640px) {
+  #marketplace .marketplace-subtitle,
+  #marketplace .marketplace-subtitle[data-lang="zh"] {
+    white-space: normal;
+    font-size: 1.25rem;
+  }
+}
