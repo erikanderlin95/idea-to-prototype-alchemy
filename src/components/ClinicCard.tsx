@@ -64,6 +64,13 @@ export const ClinicCard = ({
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [isJoining, setIsJoining] = useState(false);
+  // Recompute the closing window once a minute while the card is on screen.
+  const [, setClosingClock] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => setClosingClock((n) => n + 1), 60000);
+    return () => window.clearInterval(id);
+  }, []);
+  const closingSoon = clinicClosingStatus(operatingHours) === "closingSoon";
   const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [visitReason, setVisitReason] = useState("");
