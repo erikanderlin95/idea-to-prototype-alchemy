@@ -31,14 +31,14 @@ const AfterlifeCard = ({ slug, name, subtitle, description }: AfterlifeCardProps
           </div>
 
           <div className="min-w-0 flex-1">
-            <h3 className="text-[15px] sm:text-base font-bold text-[#2D1B4E] truncate">
+            <h3 className="text-[15px] sm:text-base font-bold text-[#2D1B4E]">
               {name}
             </h3>
             {subtitle && (
-              <p className="text-[12px] sm:text-[13px] text-[#8A7A9A] truncate">{subtitle}</p>
+              <p className="text-[12px] sm:text-[13px] text-[#8A7A9A]">{subtitle}</p>
             )}
             {description && (
-              <p className="text-[12px] sm:text-[13px] text-[#7A6B8A] leading-snug line-clamp-2">
+              <p className="mt-0.5 text-[12px] sm:text-[13px] text-[#7A6B8A] leading-snug">
                 {description}
               </p>
             )}
