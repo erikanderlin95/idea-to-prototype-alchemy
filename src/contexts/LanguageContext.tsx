@@ -415,7 +415,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // MarketplaceSection
     "marketplace.title": "Browse Clinics",
-    "marketplace.subtitle": "Join the live queue. We'll send your queue link via WhatsApp.",
+    "marketplace.subtitle": "Join the live queue and we'll send your queue link via WhatsApp.",
     "marketplace.loading": "Loading clinics...",
     "marketplace.loadMore": "Load More",
     "marketplace.directoryTitle": "24hr Clinics Across Singapore",
@@ -2489,7 +2489,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.bookAppointment": "Tempah",
     "clinicCard.appointmentHandledByClinic": "Temu janji dikendalikan terus oleh klinik",
     "marketplace.title": "Cari Klinik",
-    "marketplace.subtitle": "Sertai queue langsung. Kami akan hantar pautan queue anda melalui WhatsApp.",
+    "marketplace.subtitle": "Sertai queue langsung dan kami akan hantar pautan queue anda melalui WhatsApp.",
     "marketplace.loading": "Memuat klinik...",
     "marketplace.loadMore": "Muat Lebih Banyak",
     "marketplace.directoryTitle": "Klinik 24 Jam di Seluruh Singapura",
@@ -3463,7 +3463,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.bookAppointment": "பதிவு செய்க",
     "clinicCard.appointmentHandledByClinic": "நியமனம் நேரடியாக கிளினிக்கால் கையாளப்படும்",
     "marketplace.title": "கிளினிக்குகளை உலாவவும்",
-    "marketplace.subtitle": "நேரடி வரிசையில் சேரவும். உங்கள்த வரிசை இணைப்பை WhatsApp மூலம் அனபபுவம்.",
+    "marketplace.subtitle": "நேரடி வரிசையில் சேரவும், உங்கள்த வரிசை இணைப்பை WhatsApp மூலம் அனபபுவம்.",
     "marketplace.loading": "மருத்துவமனைகள் ஏற்றப்படுகின்றன...",
     "marketplace.loadMore": "மேலும் ஏற்றவும்",
     "marketplace.directoryTitle": "சிங்கப்பூர் முழுவதும் 24 மணி நேர கிளினிக்குகள்",
