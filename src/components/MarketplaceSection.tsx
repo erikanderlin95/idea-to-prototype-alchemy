@@ -317,6 +317,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           waitTime: queueCount === 0 ? "Walk-in" : `${estimatedWait}-${estimatedWait + 15} min`,
           rating: clinic.rating,
           isOpen,
+          operatingHours,
           id: clinic.id,
           hasDigitalQueue,
           bookingUrl,
