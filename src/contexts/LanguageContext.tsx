@@ -2489,7 +2489,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.bookAppointment": "Tempah",
     "clinicCard.appointmentHandledByClinic": "Temu janji dikendalikan terus oleh klinik",
     "marketplace.title": "Cari Klinik",
-    "marketplace.subtitle": "Sertai queue langsung. Pautan WhatsApp anda akan dihantar.",
+    "marketplace.subtitle": "Sertai queue langsung. Pautan WhatsApp akan dihantar.",
     "marketplace.loading": "Memuat klinik...",
     "marketplace.loadMore": "Muat Lebih Banyak",
     "marketplace.directoryTitle": "Klinik 24 Jam di Seluruh Singapura",
