@@ -215,7 +215,8 @@ All colors MUST be HSL.
 }
 
 @media (min-width: 640px) {
-  #marketplace .marketplace-subtitle {
+  #marketplace .marketplace-subtitle,
+  #marketplace .marketplace-subtitle[data-lang="zh"] {
     white-space: normal;
     font-size: 1.25rem;
   }

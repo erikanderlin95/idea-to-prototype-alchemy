@@ -3463,7 +3463,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.bookAppointment": "பதிவு செய்க",
     "clinicCard.appointmentHandledByClinic": "நியமனம் நேரடியாக கிளினிக்கால் கையாளப்படும்",
     "marketplace.title": "கிளினிக்குகளை உலாவவும்",
-    "marketplace.subtitle": "நேரடி வரிசை; இணைப்பு WhatsApp வழியாக அனுப்பப்படும்.",
+    "marketplace.subtitle": "நேரடி வரிசை; WhatsApp இணைப்பு அனபபபடும்.",
     "marketplace.loading": "மருத்துவமனைகள் ஏற்றப்படுகின்றன...",
     "marketplace.loadMore": "மேலும் ஏற்றவும்",
     "marketplace.directoryTitle": "சிங்கப்பூர் முழுவதும் 24 மணி நேர கிளினிக்குகள்",
