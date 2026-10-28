@@ -415,7 +415,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // MarketplaceSection
     "marketplace.title": "Browse Clinics",
-    "marketplace.subtitle": "See how busy they are or book directly",
+    "marketplace.subtitle": "Join queue online → get a WhatsApp link",
     "marketplace.loading": "Loading clinics...",
     "marketplace.loadMore": "Load More",
     "marketplace.directoryTitle": "24hr Clinics Across Singapore",
@@ -1470,7 +1470,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // MarketplaceSection
     "marketplace.title": "浏览诊所",
-    "marketplace.subtitle": "查看忙碌程度或直接预约",
+    "marketplace.subtitle": "在线排队 → 获取 WhatsApp 链接",
     "marketplace.loading": "加载诊所中...",
     "marketplace.loadMore": "加载更多",
     "marketplace.directoryTitle": "新加坡24小时诊所",
@@ -2489,7 +2489,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.bookAppointment": "Tempah",
     "clinicCard.appointmentHandledByClinic": "Temu janji dikendalikan terus oleh klinik",
     "marketplace.title": "Cari Klinik",
-    "marketplace.subtitle": "Lihat betapa sibuknya mereka atau tempah terus",
+    "marketplace.subtitle": "Join queue dalam talian → dapatkan pautan WhatsApp",
     "marketplace.loading": "Memuat klinik...",
     "marketplace.loadMore": "Muat Lebih Banyak",
     "marketplace.directoryTitle": "Klinik 24 Jam di Seluruh Singapura",
@@ -3463,7 +3463,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.bookAppointment": "பதிவு செய்க",
     "clinicCard.appointmentHandledByClinic": "நியமனம் நேரடியாக கிளினிக்கால் கையாளப்படும்",
     "marketplace.title": "கிளினிக்குகளை உலாவவும்",
-    "marketplace.subtitle": "அவர்கள் எவ்வளவு பரபரப்பாக இருக்கிறார்கள் என்பதைப் பார்க்கவும் அல்லது நேரடியாகப் பதிவு செய்யவும்",
+    "marketplace.subtitle": "ஆன்லைனில் வரிசையில் சேரவும் → WhatsApp இணைப்பைப் பெறவும்",
     "marketplace.loading": "மருத்துவமனைகள் ஏற்றப்படுகின்றன...",
     "marketplace.loadMore": "மேலும் ஏற்றவும்",
     "marketplace.directoryTitle": "சிங்கப்பூர் முழுவதும் 24 மணி நேர கிளினிக்குகள்",
