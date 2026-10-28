@@ -298,6 +298,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         const estimatedWait = Number(stats?.estimated_wait_minutes) || 0;
 
         const isOpen = clinic.is_open === true;
+        const operatingHours = clinic.operating_hours ?? null;
         const hasDigitalQueue = clinic.has_digital_queue === true;
         const bookingUrl = typeof clinic.booking_url === "string" && clinic.booking_url.trim().length > 0
           ? clinic.booking_url.trim()
@@ -316,6 +317,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
           waitTime: queueCount === 0 ? "Walk-in" : `${estimatedWait}-${estimatedWait + 15} min`,
           rating: clinic.rating,
           isOpen,
+          operatingHours,
           id: clinic.id,
           hasDigitalQueue,
           bookingUrl,

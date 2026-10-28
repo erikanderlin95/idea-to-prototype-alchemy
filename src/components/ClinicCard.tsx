@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
+import { clinicClosingStatus } from "@/lib/clinicStatus";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getBookingRoute, isManagedCareType, NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
 import { LeaveQueueDialog } from "@/components/LeaveQueueDialog";
@@ -38,6 +39,7 @@ interface ClinicCardProps {
   waitTime: string;
   rating: number;
   isOpen: boolean;
+  operatingHours?: unknown;
   hasDigitalQueue?: boolean;
   isNmgAffiliated?: boolean;
   bookingUrl?: string | null;
@@ -53,6 +55,7 @@ export const ClinicCard = ({
   waitTime,
   rating,
   isOpen,
+  operatingHours,
   hasDigitalQueue = true,
   isNmgAffiliated = false,
   bookingUrl: suppliedBookingUrl,
@@ -61,6 +64,13 @@ export const ClinicCard = ({
   const navigate = useNavigate();
   const { t } = useLanguage();
   const [isJoining, setIsJoining] = useState(false);
+  // Recompute the closing window once a minute while the card is on screen.
+  const [, setClosingClock] = useState(0);
+  useEffect(() => {
+    const id = window.setInterval(() => setClosingClock((n) => n + 1), 60000);
+    return () => window.clearInterval(id);
+  }, []);
+  const closingSoon = clinicClosingStatus(operatingHours) === "closingSoon";
   const [myQueueEntry, setMyQueueEntry] = useState<any>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [visitReason, setVisitReason] = useState("");
@@ -449,7 +459,12 @@ export const ClinicCard = ({
             <Badge variant="secondary" className="text-xs font-medium px-1.5 py-0 h-[20px] shrink-0">
               {type}
             </Badge>
-            {isOpen ? (
+            {closingSoon ? (
+              <Badge className="text-xs font-semibold bg-orange-100 text-orange-700 border-orange-300 px-2 py-0 h-[22px] shrink-0 flex items-center gap-1">
+                <span className="w-1.5 h-1.5 rounded-full bg-orange-500 animate-pulse" />
+                {t("clinicCard.closingSoon")}
+              </Badge>
+            ) : isOpen ? (
               <Badge className="text-xs font-semibold bg-emerald-100 text-emerald-700 border-emerald-300 px-2 py-0 h-[22px] shrink-0 flex items-center gap-1">
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 {t("clinicCard.open")}
