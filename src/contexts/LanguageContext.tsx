@@ -377,6 +377,7 @@ const translations: Record<Language, Record<string, string>> = {
     // ClinicCard
     "clinicCard.open": "Open",
     "clinicCard.closed": "Closed",
+    "clinicCard.closingSoon": "Closing Soon",
     "clinicCard.inQueue": "In Queue",
     "clinicCard.people": "people",
     "clinicCard.estWait": "Est. Wait",
@@ -1432,6 +1433,7 @@ const translations: Record<Language, Record<string, string>> = {
     // ClinicCard
     "clinicCard.open": "开放",
     "clinicCard.closed": "关闭",
+    "clinicCard.closingSoon": "即将关门",
     "clinicCard.inQueue": "排队中",
     "clinicCard.people": "人",
     "clinicCard.estWait": "预计等待",
@@ -2453,6 +2455,7 @@ const translations: Record<Language, Record<string, string>> = {
     "notFound.returnHome": "Kembali ke Laman Utama",
     "clinicCard.open": "Buka",
     "clinicCard.closed": "Tutup",
+    "clinicCard.closingSoon": "Hampir Tutup",
     "clinicCard.inQueue": "Dalam Barisan",
     "clinicCard.people": "orang",
     "clinicCard.estWait": "Anggaran Masa Menunggu",
@@ -3427,6 +3430,7 @@ const translations: Record<Language, Record<string, string>> = {
     "notFound.returnHome": "முகப்புக்குத் திரும்பு",
     "clinicCard.open": "திறந்தவை",
     "clinicCard.closed": "மூடப்பட்டவை",
+    "clinicCard.closingSoon": "விரைவில் மூடப்படும்",
     "clinicCard.inQueue": "வரிசையில்",
     "clinicCard.people": "நபர்கள்",
     "clinicCard.estWait": "மதிப்பிடப்பட்ட காத்திருப்பு",
