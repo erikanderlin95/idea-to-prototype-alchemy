@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "sonner";
 import { useState, useEffect } from "react";
+import { clinicClosingStatus } from "@/lib/clinicStatus";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getBookingRoute, isManagedCareType, NMG_ATTRIBUTION_TAG } from "@/lib/pathwayUtils";
 import { LeaveQueueDialog } from "@/components/LeaveQueueDialog";
