@@ -415,7 +415,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // MarketplaceSection
     "marketplace.title": "Browse Clinics",
-    "marketplace.subtitle": "Join the live queue. We’ll send your queue link via WhatsApp.",
+    "marketplace.subtitle": "Join the live queue, we’ll send your queue link via WhatsApp.",
     "marketplace.loading": "Loading clinics...",
     "marketplace.loadMore": "Load More",
     "marketplace.directoryTitle": "24hr Clinics Across Singapore",
