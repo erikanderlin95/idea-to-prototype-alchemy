@@ -207,11 +207,11 @@ All colors MUST be HSL.
    while desktop keeps the previous size and normal wrapping. */
 #marketplace .marketplace-subtitle {
   white-space: nowrap;
-  font-size: clamp(9.5px, 3vw, 19px);
+  font-size: clamp(10px, 3.2vw, 19px);
 }
 
 #marketplace .marketplace-subtitle[data-lang="zh"] {
-  font-size: clamp(12.5px, 3.9vw, 19px);
+  font-size: clamp(13px, 4.1vw, 19px);
 }
 
 @media (min-width: 640px) {
