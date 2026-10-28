@@ -1,5 +1,10 @@
 # ClynicQ roadmap
 
+## Subheader size and Nirvana card layout
+- [ ] Make the Browse Clinics subheader a bit bigger while keeping it on one row in all four languages.
+- [ ] Give the Nirvana card the same layout as the other Afterlife cards, logo on the left and slightly bigger.
+
+
 ## Nirvana post placement
 - [x] Move the Nirvana article off the Afterlife page into the ClynicQ Blog under a new Afterlife category.
 - [x] Verify the category filter, outbound link, four languages and the Afterlife page; do not publish.
