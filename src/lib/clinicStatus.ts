@@ -73,7 +73,7 @@ export function clinicClosingStatus(
   if (key === undefined) return "unknown"; // missing day entry: fall back to the static badge
   const day = parseDayValue(hours[key]);
   if (day === null || day === "closed") return "unknown";
-  if (minutes < day.open) return "unknown";
-  if (minutes >= day.close - 30 && minutes < day.close) return "closingSoon";
+  if (minutes < day.open || minutes >= day.close) return "unknown";
+  if (minutes >= day.close - 30) return "closingSoon";
   return "open";
 }
