@@ -4,6 +4,7 @@ import { participatingClinicsOnly } from "@/lib/clinicListing";
 import { coalescedRefresh } from "@/lib/coalescedRefresh";
 import { Button } from "@/components/ui/button";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { clinicClosingStatus } from "@/lib/clinicStatus";
 import { supabase } from "@/integrations/supabase/client";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -260,7 +261,9 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
     if (filters.queue) base = base.filter((c) => c.hasJoinQueue === true);
     if (filters.booking) base = base.filter((c) => c.hasOnlineBooking === true);
 
-    return base;
+    const now = new Date();
+    const soon = (c: any) => clinicClosingStatus(c.operatingHours ?? c.operating_hours ?? null, now) === "closingSoon";
+    return [...base.filter(soon), ...base.filter((c) => !soon(c))];
   }, [activeCategory, clinics, searchText, filters]);
 
   useEffect(() => {
