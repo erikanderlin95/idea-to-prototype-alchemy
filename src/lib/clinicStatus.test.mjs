@@ -3,7 +3,7 @@ import { clinicClosingStatus } from "./clinicStatus.ts";
 
 // Singapore is UTC+8 with no daylight saving, so a UTC instant maps directly.
 // 2026-01-16 is a Friday.
-const sgt = (utcHour: number, utcMinute: number) =>
+const sgt = (utcHour, utcMinute) =>
   new Date(Date.UTC(2026, 0, 16, utcHour, utcMinute));
 
 const LOWERCASE_HOURS = {
