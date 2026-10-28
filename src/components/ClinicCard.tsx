@@ -38,6 +38,7 @@ interface ClinicCardProps {
   waitTime: string;
   rating: number;
   isOpen: boolean;
+  operatingHours?: unknown;
   hasDigitalQueue?: boolean;
   isNmgAffiliated?: boolean;
   bookingUrl?: string | null;
@@ -53,6 +54,7 @@ export const ClinicCard = ({
   waitTime,
   rating,
   isOpen,
+  operatingHours,
   hasDigitalQueue = true,
   isNmgAffiliated = false,
   bookingUrl: suppliedBookingUrl,
