@@ -27,7 +27,7 @@ interface MarketplaceSectionProps {
 }
 
 export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }: MarketplaceSectionProps) => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const isMobile = useIsMobile();
   const location = useLocation();
   const navType = useNavigationType();
@@ -348,7 +348,15 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         <div className="px-2 sm:px-0 space-y-4">
           <div className="text-center mb-2">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-1">{title || t("marketplace.title")}</h2>
-            <p className="-mx-2 text-[clamp(13px,4.15vw,19px)] leading-snug whitespace-nowrap sm:max-w-2xl sm:mx-auto sm:text-xl sm:whitespace-normal text-foreground/80 font-medium">
+            <p
+              className={
+                "-mx-2 leading-snug text-foreground/80 font-medium sm:max-w-2xl sm:mx-auto " +
+                (subtitle
+                  ? "text-[clamp(13px,4.15vw,19px)] whitespace-nowrap sm:text-xl sm:whitespace-normal"
+                  : "marketplace-subtitle")
+              }
+              {...(subtitle ? {} : { "data-lang": language })}
+            >
               {subtitle || t("marketplace.subtitle")}
             </p>
           </div>
