@@ -415,7 +415,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // MarketplaceSection
     "marketplace.title": "Browse Clinics",
-    "marketplace.subtitle": "Join the live queue and get your link on WhatsApp.",
+    "marketplace.subtitle": "Join the live queue, get your WhatsApp link.",
     "marketplace.loading": "Loading clinics...",
     "marketplace.loadMore": "Load More",
     "marketplace.directoryTitle": "24hr Clinics Across Singapore",
@@ -1470,7 +1470,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // MarketplaceSection
     "marketplace.title": "浏览诊所",
-    "marketplace.subtitle": "加入实时队列，获取 WhatsApp 排队链接。",
+    "marketplace.subtitle": "加入实时队列，获取 WhatsApp 链接。",
     "marketplace.loading": "加载诊所中...",
     "marketplace.loadMore": "加载更多",
     "marketplace.directoryTitle": "新加坡24小时诊所",
@@ -2489,7 +2489,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.bookAppointment": "Tempah",
     "clinicCard.appointmentHandledByClinic": "Temu janji dikendalikan terus oleh klinik",
     "marketplace.title": "Cari Klinik",
-    "marketplace.subtitle": "Sertai queue langsung, pautan WhatsApp anda.",
+    "marketplace.subtitle": "Sertai queue langsung, pautan WhatsApp.",
     "marketplace.loading": "Memuat klinik...",
     "marketplace.loadMore": "Muat Lebih Banyak",
     "marketplace.directoryTitle": "Klinik 24 Jam di Seluruh Singapura",
