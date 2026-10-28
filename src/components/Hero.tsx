@@ -75,11 +75,6 @@ export const Hero = () => {
               <ChevronRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
             </Button>
           </div>
-
-          <div className="flex items-center gap-2 text-center">
-            <span className="text-xs font-medium text-foreground/70">{t("hero.activityTitle")}</span>
-            <span className="text-xs text-muted-foreground">{t("hero.activityDesc")}</span>
-          </div>
         </div>
       </div>
     </section>
