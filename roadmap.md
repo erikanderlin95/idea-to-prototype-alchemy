@@ -1,5 +1,10 @@
 # ClynicQ roadmap
 
+## Nirvana post placement
+- [x] Move the Nirvana article off the Afterlife page into the ClynicQ Blog under a new Afterlife category.
+- [x] Verify the category filter, outbound link, four languages and the Afterlife page; do not publish.
+
+
 ## Blank route transitions
 - [x] Replace blank lazy-route fallback and retain the existing page during navigation.
 - [x] Keep scroll reset aligned with the destination page becoming ready.

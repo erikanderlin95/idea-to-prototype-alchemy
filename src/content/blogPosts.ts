@@ -408,5 +408,27 @@ export const blogArticles: BlogArticle[] = [
 ];
 
 export const visibleBlogArticles = (preview = import.meta.env?.DEV ?? false) => blogArticles.filter(a => a.status !== "draft" || preview);
-export const blogCategories = ["all", "visit", "tcm", "musculoskeletal-health"] as const;
+
+/** A post that stays on its owner's website: the blog list shows a card that opens the original article. */
+export type ExternalBlogArticle = {
+  slug: string;
+  categoryKey: string;
+  keys: string; // translation key prefix: <keys>.title / .excerpt / .imageAlt
+  image: string;
+  href: string;
+  source: string;
+};
+
+export const externalBlogArticles: ExternalBlogArticle[] = [
+  {
+    slug: "nirvana",
+    categoryKey: "afterlife",
+    keys: "blog.nirvana",
+    image: "https://www.nirvanalife.com.sg/wp-content/uploads/2026/07/Why-Nirvana-Memorial-Garden-Partners-with-Healthcare-Professionals-Singapore-2026.png",
+    href: "https://www.nirvanalife.com.sg/why-nirvana-partners-with-healthcare-professionals-singapore-2026/",
+    source: "nirvanalife.com.sg",
+  },
+];
+
+export const blogCategories = ["all", "visit", "tcm", "musculoskeletal-health", "afterlife"] as const;
 export const getBlogArticle = (slug?: string) => visibleBlogArticles().find((a) => a.slug === slug);

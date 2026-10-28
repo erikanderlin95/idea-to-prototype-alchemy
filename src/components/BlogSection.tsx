@@ -1,18 +1,21 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { blogCategories, visibleBlogArticles } from "@/content/blogPosts";
+import { blogCategories, externalBlogArticles, visibleBlogArticles } from "@/content/blogPosts";
 import { Button } from "@/components/ui/button";
 import { localizeBlogArticle } from "@/content/localizeBlogs";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { cn } from "@/lib/utils";
 
-type Category = "visit" | "tcm" | "musculoskeletal-health";
+type Category = "visit" | "tcm" | "musculoskeletal-health" | "afterlife";
 
 const categories = blogCategories;
 
-type BlogCardProps = {
+type CardVM = {
+  slug: string;
   to: string;
+  href?: string;
+  source?: string;
   image: string;
   imageAlt: string;
   categoryKey: string;
@@ -22,13 +25,24 @@ type BlogCardProps = {
   imageFit?: "contain";
 };
 
-const BlogCard = ({ to, image, imageAlt, categoryKey, title, excerpt, imagePosition, imageFit }: BlogCardProps) => {
+type BlogCardProps = {
+  to: string;
+  href?: string;
+  source?: string;
+  image: string;
+  imageAlt: string;
+  categoryKey: string;
+  title: string;
+  excerpt: string;
+  imagePosition?: string;
+  imageFit?: "contain";
+};
+
+const BlogCard = ({ to, href, source, image, imageAlt, categoryKey, title, excerpt, imagePosition, imageFit }: BlogCardProps) => {
   const { t } = useLanguage();
-  return (
-    <Link
-      to={to}
-      className="group flex md:block rounded-xl md:rounded-2xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-md hover:border-primary/40 transition"
-    >
+  const cardClassName = "group flex md:block rounded-xl md:rounded-2xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-md hover:border-primary/40 transition";
+  const inner = (
+    <>
       <img
         src={image}
         alt={imageAlt}
@@ -51,8 +65,18 @@ const BlogCard = ({ to, image, imageAlt, categoryKey, title, excerpt, imagePosit
         <p className="text-xs md:text-sm text-muted-foreground line-clamp-2 md:line-clamp-none">{excerpt}</p>
         <span className="inline-flex items-center gap-1 text-xs md:text-sm font-semibold text-primary mt-auto pt-0.5 md:pt-0">
           {t("blog.readArticle")} <ArrowRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
+          {source && <span className="min-w-0 truncate font-normal text-[10px] md:text-xs text-muted-foreground">· {source}</span>}
         </span>
       </div>
+    </>
+  );
+  return href ? (
+    <a href={href} target="_blank" rel="noopener noreferrer" className={cardClassName}>
+      {inner}
+    </a>
+  ) : (
+    <Link to={to} className={cardClassName}>
+      {inner}
     </Link>
   );
 };
@@ -60,7 +84,40 @@ const BlogCard = ({ to, image, imageAlt, categoryKey, title, excerpt, imagePosit
 export const BlogSection = () => {
   const { t, language } = useLanguage();
   const [cat, setCat] = useState<"all" | Category>("all");
-  const list = useMemo(() => visibleBlogArticles().filter((a) => cat === "all" || a.categoryKey === cat), [cat]);
+
+  const list = useMemo<CardVM[]>(() => {
+    const matches = (key: string) => cat === "all" || key === cat;
+    const own: CardVM[] = visibleBlogArticles()
+      .filter((source) => matches(source.categoryKey))
+      .map((source) => {
+        const a = localizeBlogArticle(source, t);
+        return {
+          slug: a.slug,
+          to: `/blog/${a.slug}`,
+          image: a.cardImage?.image ?? a.image,
+          imageAlt: a.cardImage?.imageAlt ?? a.imageAlt,
+          categoryKey: t(`blog.cat.${a.categoryKey}`),
+          title: a.title,
+          excerpt: a.excerpt,
+          imagePosition: a.imagePosition,
+          imageFit: a.cardImage ? undefined : a.imageFit,
+        };
+      });
+    const hosted: CardVM[] = externalBlogArticles
+      .filter((source) => matches(source.categoryKey))
+      .map((source) => ({
+        slug: source.slug,
+        to: `/blog/${source.slug}`,
+        href: source.href,
+        source: source.source,
+        image: source.image,
+        imageAlt: t(`${source.keys}.imageAlt`),
+        categoryKey: t(`blog.cat.${source.categoryKey}`),
+        title: t(`${source.keys}.title`),
+        excerpt: t(`${source.keys}.excerpt`),
+      }));
+    return [...own, ...hosted];
+  }, [cat, t]);
 
   return (
     <section id="blog" lang={language === "zh" ? "zh-Hans" : language} className="py-6 md:py-10 border-t border-border/30">
@@ -91,22 +148,20 @@ export const BlogSection = () => {
         </div>
 
         <div className="space-y-2.5 md:space-y-4">
-          {list.map((source) => {
-            const a = localizeBlogArticle(source, t);
-            return (
-              <BlogCard
-                key={a.slug}
-                to={`/blog/${a.slug}`}
-                image={a.cardImage?.image ?? a.image}
-                imageAlt={a.cardImage?.imageAlt ?? a.imageAlt}
-                categoryKey={t(`blog.cat.${a.categoryKey}`)}
-                title={a.title}
-                excerpt={a.excerpt}
-                imagePosition={a.imagePosition}
-                imageFit={a.cardImage ? undefined : a.imageFit}
-              />
-            );
-          })}
+          {list.map((a) => (
+            <BlogCard
+              key={a.slug}
+              to={a.to}
+              {...(a.href ? { href: a.href, source: a.source } : {})}
+              image={a.image}
+              imageAlt={a.imageAlt}
+              categoryKey={a.categoryKey}
+              title={a.title}
+              excerpt={a.excerpt}
+              imagePosition={a.imagePosition}
+              imageFit={a.imageFit}
+            />
+          ))}
         </div>
       </div>
     </section>
