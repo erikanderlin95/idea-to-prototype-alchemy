@@ -209,6 +209,12 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
     };
   }, []);
 
+  const [minuteTick, setMinuteTick] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => setMinuteTick((n) => n + 1), 60_000);
+    return () => clearInterval(id);
+  }, []);
+
   const filteredClinics = useMemo(() => {
     let base = participatingClinicsOnly(clinics);
     if (activeCategory === "all") {
@@ -264,7 +270,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
     const now = new Date();
     const soon = (c: any) => clinicClosingStatus(c.operatingHours ?? c.operating_hours ?? null, now) === "closingSoon";
     return [...base.filter(soon), ...base.filter((c) => !soon(c))];
-  }, [activeCategory, clinics, searchText, filters]);
+  }, [activeCategory, clinics, searchText, filters, minuteTick]);
 
   useEffect(() => {
     const key = JSON.stringify([activeCategory, searchText, filters]);

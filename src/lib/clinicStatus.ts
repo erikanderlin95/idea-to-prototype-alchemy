@@ -28,17 +28,27 @@ function parseTime(value: string): number | null {
   return toMinutes(matches[matches.length - 1]);
 }
 
-function parseDayValue(raw: unknown): { close: number; open: number } | "closed" | null {
+type Session = { open: number; close: number };
+
+// A day may hold several sessions separated by "," or ";" (e.g. morning and evening).
+function parseDayValue(raw: unknown): Session[] | "closed" | null {
   if (typeof raw !== "string") return null;
+  const lowered = raw.trim().toLowerCase();
+  if (CLOSED_WORDS.has(lowered)) return "closed";
+  const sessions = raw.split(/\s*[,;]\s*/).map(parseSession).filter((s): s is Session => s !== null);
+  return sessions.length ? sessions : null;
+}
+
+function parseSession(raw: string): Session | null {
   const text = raw.trim();
   const lowered = text.toLowerCase();
-  if (CLOSED_WORDS.has(lowered)) return "closed";
   if (ALL_DAY_WORDS.has(lowered)) return null;
   const [startRaw, endRaw] = text.split(/\s*[–—-]\s*/);
   if (!endRaw) return null;
   const open = parseTime(startRaw);
-  const close = parseTime(endRaw);
+  let close = parseTime(endRaw);
   if (open === null || close === null) return null;
+  if (close === 0 && open > 0) close = 24 * 60; // closes at midnight
   if (close <= open) return null; // overnight hours are not supported for the closing window
   return { open, close };
 }
@@ -73,7 +83,7 @@ export function clinicClosingStatus(
   if (key === undefined) return "unknown"; // missing day entry: fall back to the static badge
   const day = parseDayValue(hours[key]);
   if (day === null || day === "closed") return "unknown";
-  if (minutes < day.open || minutes >= day.close) return "unknown";
-  if (minutes >= day.close - 30) return "closingSoon";
-  return "open";
+  const session = day.find((s) => minutes >= s.open && minutes < s.close);
+  if (!session) return "unknown";
+  return minutes >= session.close - 30 ? "closingSoon" : "open";
 }
