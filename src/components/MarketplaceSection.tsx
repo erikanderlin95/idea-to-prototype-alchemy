@@ -298,6 +298,7 @@ export const MarketplaceSection = ({ defaultCategory = "all", title, subtitle }:
         const estimatedWait = Number(stats?.estimated_wait_minutes) || 0;
 
         const isOpen = clinic.is_open === true;
+        const operatingHours = clinic.operating_hours ?? null;
         const hasDigitalQueue = clinic.has_digital_queue === true;
         const bookingUrl = typeof clinic.booking_url === "string" && clinic.booking_url.trim().length > 0
           ? clinic.booking_url.trim()
