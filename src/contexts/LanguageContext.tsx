@@ -1470,7 +1470,7 @@ const translations: Record<Language, Record<string, string>> = {
     
     // MarketplaceSection
     "marketplace.title": "浏览诊所",
-    "marketplace.subtitle": "加入实时队列，获取 WhatsApp 链接。",
+    "marketplace.subtitle": "加入实时队列，获取 WhatsApp 链接",
     "marketplace.loading": "加载诊所中...",
     "marketplace.loadMore": "加载更多",
     "marketplace.directoryTitle": "新加坡24小时诊所",
@@ -3463,7 +3463,7 @@ const translations: Record<Language, Record<string, string>> = {
     "clinicCard.bookAppointment": "பதிவு செய்க",
     "clinicCard.appointmentHandledByClinic": "நியமனம் நேரடியாக கிளினிக்கால் கையாளப்படும்",
     "marketplace.title": "கிளினிக்குகளை உலாவவும்",
-    "marketplace.subtitle": "நேரடி வரிசை — WhatsApp இணைப்பு.",
+    "marketplace.subtitle": "நேரடி வரிசை — WhatsApp இணைப்பு",
     "marketplace.loading": "மருத்துவமனைகள் ஏற்றப்படுகின்றன...",
     "marketplace.loadMore": "மேலும் ஏற்றவும்",
     "marketplace.directoryTitle": "சிங்கப்பூர் முழுவதும் 24 மணி நேர கிளினிக்குகள்",
