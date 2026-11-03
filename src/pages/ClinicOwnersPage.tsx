@@ -15,6 +15,7 @@ const ClinicOwnersPage = () => {
       <Navbar />
       <main className="flex-1">
         <ClinicConversion />
+        <ClynicQPlusFlyer />
         <section className="px-4 pb-6 md:pb-8">
           <div className="max-w-5xl mx-auto">
             <a
@@ -33,7 +34,6 @@ const ClinicOwnersPage = () => {
             </a>
           </div>
         </section>
-        <ClynicQPlusFlyer />
       </main>
       <Footer />
     </div>
