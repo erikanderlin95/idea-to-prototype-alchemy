@@ -1,6 +1,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ClinicConversion } from "@/components/ClinicConversion";
+import { ClynicQPlusFlyer } from "@/components/ClynicQPlusFlyer";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useNavigate } from "react-router-dom";
 import { Info, ChevronRight } from "lucide-react";
@@ -32,6 +33,7 @@ const ClinicOwnersPage = () => {
             </a>
           </div>
         </section>
+        <ClynicQPlusFlyer />
       </main>
       <Footer />
     </div>
