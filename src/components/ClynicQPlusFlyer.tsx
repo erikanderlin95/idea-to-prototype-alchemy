@@ -1,4 +1,4 @@
-import flyer from "@/assets/clynicq-plus-flyer.jpg.asset.json";
+import flyer from "@/assets/clynicq-plus-flyer-v2.jpg.asset.json";
 
 export const ClynicQPlusFlyer = () => {
   return (
@@ -13,7 +13,7 @@ export const ClynicQPlusFlyer = () => {
         >
           <img
             src={flyer.url}
-            alt="ClynicQ+ — clinic visibility, smarter bookings, less admin. S$99/month per clinic with 24/7 WhatsApp appointment assistant; optional Smart Waitlist add-on."
+            alt="ClynicQ+ — clinic visibility, smarter bookings, less admin. S$99/month per clinic with a 24/7 WhatsApp appointment assistant; one-time S$150 listing fee waived for GP clinics; optional Smart Waitlist add-on."
             loading="lazy"
             className="w-full h-auto"
           />
