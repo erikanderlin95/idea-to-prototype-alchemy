@@ -42,6 +42,7 @@ const Index = () => {
         </section>
 
         <ConnectVia />
+        <ClynicQPlusFlyer />
       </main>
       <Footer />
 

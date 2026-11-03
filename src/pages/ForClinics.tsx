@@ -186,6 +186,8 @@ const ForClinics = () => {
               <ChevronRight className="h-4 w-4 text-[#12B8C4] transition-transform group-hover:translate-x-0.5" strokeWidth={2.5} />
             </a>
           </div>
+
+          <ClynicQPlusFlyer />
         </div>
       </main>
       <Footer />
