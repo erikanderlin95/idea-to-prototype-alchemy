@@ -28,14 +28,9 @@ test("walk-in notice first line matches the approved wording", () => {
   expect(source).toContain(`"queue.notice.walkIn": "${EN_WALK_IN}"`);
 });
 
-test("walk-in notice also appears in the join-queue intake form", () => {
-  const intake = readFileSync(
-    new URL("../components/ClinicCard.tsx", import.meta.url),
-  );
-  expect(intake).toContain('t("queue.notice.walkIn")');
-  const intakeDialog = readFileSync(
-    new URL("../components/intake/JoinQueueIntakeDialog.tsx", import.meta.url),
-    "utf8",
-  );
-  expect(intake).toContain('t("queue.notice.walkIn")');
+test("walk-in notice also appears in the join-queue intake forms", () => {
+  for (const file of ["../components/ClinicCard.tsx", "../components/intake/JoinQueueIntakeDialog.tsx"]) {
+    const intake = readFileSync(new URL(file, import.meta.url), "utf8");
+    expect(intake).toContain('t("queue.notice.walkIn")');
+  }
 });
