@@ -16,7 +16,15 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "sonner";
 import { CheckCircle2, AlertTriangle, Copy, Phone } from "lucide-react";
+import { WhatsAppIcon } from "@/components/icons/WhatsAppIcon";
 import { format } from "date-fns";
+
+// Singapore WhatsApp number: digits only, defaulting to +65 for local 8-digit numbers.
+const toWhatsAppNumber = (phone: string): string => {
+  const digits = (phone || "").replace(/\D/g, "");
+  if (!digits) return "";
+  return digits.startsWith("65") ? digits : `65${digits}`;
+};
 
 export default function Queue() {
   const [searchParams] = useSearchParams();
