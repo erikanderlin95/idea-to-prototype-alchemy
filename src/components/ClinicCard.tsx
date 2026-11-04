@@ -821,6 +821,7 @@ export const ClinicCard = ({
           <div className="p-2.5 rounded-md bg-muted/50 border border-border/40 space-y-1.5">
             <p className="text-[10px] font-semibold text-muted-foreground uppercase tracking-wide">Please Note</p>
             <ul className="space-y-1.5 text-xs text-foreground font-medium list-disc pl-3.5">
+              <li>{t("queue.notice.walkIn")}</li>
               <li>Queue order is managed by the clinic and may change.</li>
               <li>Check your queue status using the link provided.</li>
               <li>Please return when 3–4 patients are ahead.</li>
