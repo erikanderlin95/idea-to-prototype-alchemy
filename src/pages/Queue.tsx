@@ -413,13 +413,24 @@ export default function Queue() {
 
                 <div className="pt-2">
                   {myQueueEntry.status === 'waiting' && clinic?.phone && (
-                    <a
-                      href={`tel:${clinic.phone}`}
-                      className="w-full inline-flex items-center justify-center gap-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white text-sm sm:text-base font-semibold h-11 px-4 py-2 transition-colors"
-                    >
-                      <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
-                      Contact Clinic
-                    </a>
+                    <div className="grid grid-cols-2 gap-2">
+                      <a
+                        href={`https://wa.me/${toWhatsAppNumber(clinic.phone)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="w-full inline-flex items-center justify-center gap-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold h-11 px-2 py-2 transition-colors"
+                      >
+                        <WhatsAppIcon className="h-4 w-4 sm:h-5 sm:w-5 text-white" />
+                        {t("queue.contactWhatsApp")}
+                      </a>
+                      <a
+                        href={`tel:${clinic.phone}`}
+                        className="w-full inline-flex items-center justify-center gap-2 rounded-md bg-emerald-600 hover:bg-emerald-700 text-white text-xs sm:text-sm font-semibold h-11 px-2 py-2 transition-colors"
+                      >
+                        <Phone className="h-4 w-4 sm:h-5 sm:w-5" />
+                        {t("queue.contactCall")}
+                      </a>
+                    </div>
                   )}
                   {myQueueEntry.status === 'checked_in' && (
                     <div className="w-full p-5 sm:p-6 bg-emerald-50 dark:bg-emerald-950/20 border-2 border-emerald-500 rounded-lg">
