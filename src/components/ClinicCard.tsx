@@ -595,17 +595,32 @@ export const ClinicCard = ({
             
             {/* Action buttons — anchored bottom */}
             <div className="flex gap-1.5">
-              <Button
-                asChild
-                variant="outline"
-                className="flex-1 bg-white hover:bg-emerald-50 text-emerald-700 border-2 border-emerald-600 font-bold h-10 text-sm"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <a href={clinicPhone ? `tel:${clinicPhone}` : undefined}>
-                  <Phone className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
-                  Contact Clinic
-                </a>
-              </Button>
+              {clinicPhone && (
+                <>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="flex-1 bg-white hover:bg-emerald-50 text-emerald-700 border-2 border-emerald-600 font-bold h-10 text-xs px-1"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <a href={`https://wa.me/${clinicPhone.startsWith("65") ? clinicPhone : `65${clinicPhone}`}`} target="_blank" rel="noopener noreferrer">
+                      <WhatsAppIcon className="mr-1 h-3.5 w-3.5" />
+                      {t("queue.contactWhatsApp")}
+                    </a>
+                  </Button>
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="flex-1 bg-white hover:bg-emerald-50 text-emerald-700 border-2 border-emerald-600 font-bold h-10 text-xs px-1"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <a href={`tel:${clinicPhone}`}>
+                      <Phone className="mr-1 h-3.5 w-3.5" strokeWidth={2.5} />
+                      {t("queue.contactCall")}
+                    </a>
+                  </Button>
+                </>
+              )}
             </div>
 
           </div>
