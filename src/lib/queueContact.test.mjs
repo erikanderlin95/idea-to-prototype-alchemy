@@ -27,3 +27,11 @@ test("walk-in notice and contact options exist in all four languages", () => {
 test("walk-in notice first line matches the approved wording", () => {
   expect(source).toContain(`"queue.notice.walkIn": "${EN_WALK_IN}"`);
 });
+
+test("walk-in notice also appears in the join-queue intake form", () => {
+  const intake = readFileSync(
+    new URL("../components/intake/JoinQueueIntakeDialog.tsx", import.meta.url),
+    "utf8",
+  );
+  expect(intake).toContain('t("queue.notice.walkIn")');
+});
