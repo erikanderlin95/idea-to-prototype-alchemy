@@ -1,4 +1,4 @@
-import flyer from "@/assets/clynicq-plus-poster-nov6-1256.jpg.asset.json";
+import flyer from "@/assets/clynicq-plus-poster-nov6-1402.jpeg.asset.json";
 
 export const ClynicQPlusFlyer = () => {
   return (
