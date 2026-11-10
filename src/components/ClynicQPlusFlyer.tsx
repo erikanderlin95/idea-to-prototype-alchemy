@@ -1,4 +1,4 @@
-import flyer from "@/assets/clynicq-plus-poster-nov6-1402.jpeg.asset.json";
+import flyer from "@/assets/clynicq-plus-poster.jpg.asset.json";
 
 export const ClynicQPlusFlyer = () => {
   return (
@@ -13,7 +13,7 @@ export const ClynicQPlusFlyer = () => {
         >
           <img
             src={flyer.url}
-            alt="ClynicQ+ — Less Admin. Smarter Bookings. Proposed S$99/month per clinic, with a one-time S$150 listing fee waived for GP clinics. Includes a 24/7 WhatsApp enquiry assistant, appointment booking, confirmations and reminders, with an optional S$30/month Smart Waitlist and Cancellation Backfilling add-on. Scan the QR code to enquire about early access."
+            alt="ClynicQ+ — Less Admin. More Time for Patients. WhatsApp AI, CMS integration and patient discovery. Proposed S$99/month per clinic, one-time S$150 setup fee waived for GP clinics. Includes a 24/7 WhatsApp enquiry assistant, WhatsApp booking with CMS integration, automated confirmations and reminders, plus an optional S$30/month Smart Waitlist and Cancellation Backfilling add-on. Scan the QR code to enquire about early access."
             loading="lazy"
             className="w-full h-auto"
           />
